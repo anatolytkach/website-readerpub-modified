@@ -1,0 +1,16 @@
+---
+interface Props {
+	class?: string;
+	mediaFirst?: boolean;
+}
+
+const { class: className = "", mediaFirst = false } = Astro.props;
+---
+
+<section class:list={["proof-section", "section--white", "section--with-media", className]}>
+	{mediaFirst && <slot name="media" />}
+	<div class="proof-copy">
+		<slot />
+	</div>
+	{!mediaFirst && <slot name="media" />}
+</section>

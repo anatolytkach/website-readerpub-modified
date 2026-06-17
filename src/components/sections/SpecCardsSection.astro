@@ -1,0 +1,16 @@
+---
+import Section from "./Section.astro";
+import type { SectionTone } from "../../data/pages";
+
+interface Props {
+	id?: string;
+	tone?: SectionTone;
+	class?: string;
+}
+
+const { id, tone = "white", class: className = "" } = Astro.props;
+---
+
+<Section id={id} tone={tone} class={["spec-cards-section", className].filter(Boolean).join(" ")}>
+	<slot />
+</Section>

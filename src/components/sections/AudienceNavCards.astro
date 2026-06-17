@@ -1,0 +1,35 @@
+---
+const cards = [
+	{
+		href: "/weread",
+		title: "For Readers",
+		body: "Books open instantly in the browser and stay connected to notes, discovery and community.",
+	},
+	{
+		href: "/authors",
+		title: "For Authors & Publishers",
+		body: "Publishing becomes a direct web presence with lower marketplace dependency.",
+	},
+	{
+		href: "/institutions",
+		title: "For Institutions",
+		body: "Libraries, universities and public organizations can publish readable web collections.",
+	},
+	{
+		href: "/webuzz",
+		title: "For Discussion",
+		body: "Reader communities stay attached to books, authors, fragments and ideas.",
+	},
+];
+---
+
+<div class="card-grid card-grid--4 audience-nav-grid">
+	{cards.map((card) => (
+		<a class="card card--link audience-nav-card" href={card.href}>
+			<div class="card-copy">
+				<h3>{card.title}</h3>
+				<p>{card.body}</p>
+			</div>
+		</a>
+	))}
+</div>

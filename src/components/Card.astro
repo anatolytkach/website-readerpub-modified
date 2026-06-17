@@ -1,0 +1,30 @@
+---
+import SectionIcon from "./SectionIcon.astro";
+import type { PageCard } from "../data/pages";
+
+interface Props extends PageCard {
+	class?: string;
+}
+
+const { title, body, icon, href, class: className = "" } = Astro.props;
+---
+
+{
+	href ? (
+		<a class:list={["card", "card--link", className]} href={href}>
+			{icon && <SectionIcon type={icon} title={`${title} icon`} />}
+			<div class="card-copy">
+				<h3>{title}</h3>
+				<p>{body}</p>
+			</div>
+		</a>
+	) : (
+		<article class:list={["card", className]}>
+			{icon && <SectionIcon type={icon} title={`${title} icon`} />}
+			<div class="card-copy">
+				<h3>{title}</h3>
+				<p>{body}</p>
+			</div>
+		</article>
+	)
+}

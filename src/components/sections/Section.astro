@@ -1,0 +1,36 @@
+---
+import type { SectionTone } from "../../data/pages";
+
+interface Props {
+	id?: string;
+	tone?: SectionTone;
+	kicker?: string;
+	title?: string;
+	body?: string;
+	hasMedia?: boolean;
+	class?: string;
+}
+
+const {
+	id,
+	tone = "white",
+	kicker,
+	title,
+	body,
+	hasMedia = false,
+	class: className = "",
+} = Astro.props;
+const resolvedTone = hasMedia ? "white" : tone;
+const hasBodySlot = Astro.slots.has("body");
+---
+
+<section id={id} class:list={["section", `section--${resolvedTone}`, hasMedia && "section--with-media", className]}>
+	{(kicker || title || body || hasBodySlot) && (
+		<header class="section-header">
+			{kicker && <p class="section-kicker">{kicker}</p>}
+			{title && <h2>{title}</h2>}
+			{hasBodySlot ? <p class="section-lead"><slot name="body" /></p> : body && <p class="section-lead">{body}</p>}
+		</header>
+	)}
+	<slot />
+</section>

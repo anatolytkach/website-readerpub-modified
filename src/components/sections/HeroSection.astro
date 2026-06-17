@@ -1,0 +1,120 @@
+---
+import ActionLink from "../ActionLink.astro";
+import type { PageAction } from "../../data/pages";
+
+interface Props {
+	eyebrow?: string;
+	title: string;
+	lead: string;
+	body?: string;
+	image?: string;
+	imageAlt?: string;
+	actions?: PageAction[];
+	spacerBackgroundPositionY?: string;
+	class?: string;
+}
+
+const {
+	eyebrow,
+	title,
+	lead,
+	body,
+	image,
+	imageAlt = "",
+	actions = [],
+	spacerBackgroundPositionY,
+	class: className = "",
+} = Astro.props;
+
+const spacerStyle = spacerBackgroundPositionY
+	? `--hero-background-spacer-position-y: ${spacerBackgroundPositionY};`
+	: undefined;
+const hasBodySlot = Astro.slots.has("body");
+---
+
+<section class:list={["hero-section", "section--white", image && "section--with-media", className]}>
+	<div class="hero-copy">
+		{eyebrow && <p class="section-kicker">{eyebrow}</p>}
+		<h1>{title}</h1>
+		<slot name="tagline" />
+		<p class="hero-lead">{lead}</p>
+		{hasBodySlot ? <p class="hero-body"><slot name="body" /></p> : body && <p class="hero-body">{body}</p>}
+		<slot />
+		{actions.length > 0 && (
+			<div class="cta-row">
+				{actions.map((action) => <ActionLink {...action} />)}
+			</div>
+		)}
+	</div>
+	{image && (
+		<div class="hero-media">
+			<img
+				class="image-block hero-image"
+				src={image}
+				alt={imageAlt}
+				loading="eager"
+				decoding="async"
+				width="1024"
+				height="900"
+			/>
+		</div>
+	)}
+</section>
+
+<section class="hero-background-spacer" aria-hidden="true" style={spacerStyle}></section>
+
+<script>
+	let heroBackgroundSpacerObserver;
+
+	const syncHeroBackgroundSpacer = (hero) => {
+		const spacer = hero.nextElementSibling;
+
+		if (!spacer?.classList.contains("hero-background-spacer")) {
+			return;
+		}
+
+		const heroImage = hero.querySelector(".hero-image");
+		const referenceHeight =
+			heroImage?.getBoundingClientRect().height || hero.getBoundingClientRect().height;
+
+		if (referenceHeight > 0) {
+			spacer.style.setProperty("--hero-background-spacer-height", `${Math.round(referenceHeight * 0.3)}px`);
+		}
+	};
+
+	const syncHeroBackgroundSpacers = () => {
+		const heroes = document.querySelectorAll(".hero-section");
+
+		if (heroBackgroundSpacerObserver) {
+			heroBackgroundSpacerObserver.disconnect();
+		}
+
+		if ("ResizeObserver" in window) {
+			heroBackgroundSpacerObserver = new ResizeObserver((entries) => {
+				for (const entry of entries) {
+					const hero = entry.target.classList.contains("hero-section")
+						? entry.target
+						: entry.target.closest(".hero-section");
+
+					if (hero) {
+						syncHeroBackgroundSpacer(hero);
+					}
+				}
+			});
+		}
+
+		for (const hero of heroes) {
+			const heroImage = hero.querySelector(".hero-image");
+
+			syncHeroBackgroundSpacer(hero);
+			heroBackgroundSpacerObserver?.observe(hero);
+			heroImage && heroBackgroundSpacerObserver?.observe(heroImage);
+			heroImage?.addEventListener("load", () => syncHeroBackgroundSpacer(hero), { once: true });
+		}
+	};
+
+	document.addEventListener("astro:page-load", syncHeroBackgroundSpacers);
+	window.addEventListener("load", syncHeroBackgroundSpacers, { once: true });
+	window.addEventListener("resize", syncHeroBackgroundSpacers, { passive: true });
+	syncHeroBackgroundSpacers();
+</script>

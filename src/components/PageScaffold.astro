@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+import ActionLink from "./ActionLink.astro";
+import Card from "./Card.astro";
+import CardGrid from "./CardGrid.astro";
+import CtaBlock from "./sections/CtaBlock.astro";
+import HeroSection from "./sections/HeroSection.astro";
+import Section from "./sections/Section.astro";
+import type { PageBlueprint } from "../data/pages";
+
+interface Props {
+	page: PageBlueprint;
+}
+
+const { page } = Astro.props;
+const heroTaglineParts = page.heroTagline?.split(" | ") ?? [];
+---
+
+<Base title={page.metaTitle} description={page.description}>
+	<HeroSection
+		eyebrow={page.eyebrow}
+		title={page.heroTitle}
+		lead={page.heroLead}
+		body={page.heroBody}
+		image={page.image}
+		imageAlt={page.imageAlt}
+		actions={page.actions}
+		spacerBackgroundPositionY={page.heroSpacerBackgroundPositionY}
+	>
+		{page.heroTagline && (
+			<p slot="tagline" class="hero-tagline" aria-label={page.heroTagline.replaceAll(" | ", ", ").toLowerCase()}>
+				{heroTaglineParts.map((part, index) => (
+					<>
+						{index > 0 && <span aria-hidden="true">&bull;</span>}
+						{part}
+					</>
+				))}
+			</p>
+		)}
+	</HeroSection>
+
+	{page.sections.map((section) => (
+		<Section tone={section.tone} kicker={section.kicker} title={section.title} body={section.body}>
+			{section.cards && (
+				<CardGrid columns={section.columns}>
+					{section.cards.map((card) => <Card {...card} />)}
+				</CardGrid>
+			)}
+			{section.actions && (
+				<div class="cta-row">
+					{section.actions.map((action) => <ActionLink {...action} />)}
+				</div>
+			)}
+		</Section>
+	))}
+
+	{page.cta && <CtaBlock {...page.cta} />}
+</Base>

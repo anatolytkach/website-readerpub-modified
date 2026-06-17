@@ -1,0 +1,200 @@
+---
+import ActionLink from "../components/ActionLink.astro";
+import Base from "../layouts/Base.astro";
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Section from "../components/sections/Section.astro";
+import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
+
+const heroTagline = "READ INSTANTLY • PUBLISH SECURELY • DISTRIBUTE STRATEGICALLY";
+---
+
+<Base
+	title={`Transforming the world of books. | ${SITE_NAME}`}
+	description="ReaderPub turns books and knowledge publications into living web assets that remain connected to readers, discussion, discovery and audience activity after publication."
+>
+	<HeroSection
+		class="home-hero"
+		eyebrow={heroTagline}
+		title="Transforming the world of books."
+		lead="Books are still distributed as isolated digital files. Once downloaded, they become disconnected from discussion, discovery, communities, authors and publishers."
+		image="/images/chain1.webp"
+		imageAlt=""
+		actions={[
+			{ label: "Explore the solution", href: "/platform" },
+			{ label: "Read 60K+ books in WeRead", href: BOOKS_URL, external: true, variant: "secondary" },
+		]}
+		spacerBackgroundPositionY="0%"
+	>
+		<Fragment slot="body">
+			ReaderPub turns books and knowledge publications into <strong>living web assets</strong> that remain connected to readers, discussion, discovery and audience activity after publication.
+		</Fragment>
+	</HeroSection>
+
+	<Section tone="white" title="What changes when a book becomes a living web asset?">
+		<div class="home-comparison-grid">
+			<article class="card home-comparison-card">
+				<div class="card-copy">
+					<h3>Traditional publishing</h3>
+					<p class="home-flow">Publish → Download → Relationship ends</p>
+					<p>The old model delivers a file and loses the reader relationship after access begins.</p>
+				</div>
+			</article>
+			<article class="card home-comparison-card">
+				<div class="card-copy">
+					<h3><span class="home-title-accent">ReaderPub</span> publishing</h3>
+					<p class="home-flow">Publish → Read → Discuss → Discover → Follow → Relationship continues</p>
+					<p>ReaderPub keeps the publication alive on the web, connected to readers, discussion and long-term discovery.</p>
+				</div>
+			</article>
+		</div>
+	</Section>
+
+	<Section
+		id="solution"
+		tone="green"
+		title="How ReaderPub creates living publications"
+		body="ReaderPub combines web reading, secure publishing, public discussion and structured knowledge tools so books and publications remain alive after launch."
+	>
+		<CardGrid columns="4" class="home-product-grid">
+			<Card title="WeRead" body="Books open instantly in the browser instead of being trapped inside apps or files." />
+			<Card title="WePub" body="Authors and publishers release secure web-native publications while keeping audience relationships." />
+			<Card title="WeBuzz" body="Discussion stays connected to books, authors, fragments and ideas." />
+			<Card title="BookTree" body="Serious readers connect books, notes and projects into durable knowledge structures." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="gray"
+		title="The problem we are solving"
+		body="Digital publishing made distribution easier, but it did not keep books connected to readers, discussion or long-term discovery."
+	>
+		<CardGrid columns="3">
+			<Card title="Readers" body="Reading is digital, but discussion and discovery are fragmented across apps, stores and social networks." />
+			<Card title="Authors" body="Authors publish books, but marketplaces often control visibility, readers and the customer relationship." />
+			<Card title="Institutions" body="Libraries, universities and public organizations publish knowledge that remains hard to find, read and discuss." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		title="The file-first model breaks the relationship"
+		body="The old publishing model ends when a file is delivered. ReaderPub helps publications remain alive and connected after delivery."
+	>
+		<div class="home-comparison-grid">
+			<article class="card home-list-card">
+				<div class="card-copy">
+					<h3>Old model</h3>
+					<ul class="home-model-list">
+						<li>File uploaded</li>
+						<li>Reader downloads</li>
+						<li>Discussion moves elsewhere</li>
+						<li>Audience becomes invisible</li>
+						<li>Relationship ends</li>
+					</ul>
+				</div>
+			</article>
+			<article class="card home-list-card">
+				<div class="card-copy">
+					<h3><span class="home-title-accent">ReaderPub</span> model</h3>
+					<ul class="home-model-list">
+						<li>Publication goes live</li>
+						<li>Reader opens instantly</li>
+						<li>Comments stay connected</li>
+						<li>Audience remains visible</li>
+						<li>Relationship continues</li>
+					</ul>
+				</div>
+			</article>
+		</div>
+	</Section>
+
+	<Section
+		tone="green"
+		title="ReaderPub is not another ebook platform"
+	>
+		<Fragment slot="body">
+			ReaderPub is a web-native publishing network where books and knowledge publications become <strong>living web assets</strong>.
+		</Fragment>
+		<CardGrid columns="4">
+			<Card title="Readable" body="Readers open publications instantly in the browser." />
+			<Card title="Discoverable" body="Books and publications have web presence, metadata and shareable URLs." />
+			<Card title="Discussable" body="Conversation stays attached to books, authors, fragments and ideas." />
+			<Card title="Connected" body="Authors, publishers and institutions can see and engage with their reading audience." />
+		</CardGrid>
+	</Section>
+
+	<Section tone="gray" title="Who benefits from living publications?">
+		<CardGrid columns="4">
+			<Card title="Readers" body="They get instant access, context, discussion and better discovery." />
+			<Card title="Authors" body="They keep more revenue, more audience visibility and more long-term reader connection." />
+			<Card title="Publishers" body="They launch books as active web assets, not isolated product files." />
+			<Card title="Institutions" body="They turn collections and research into visible public knowledge infrastructure." />
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="Books should not disappear after download."
+		actions={[
+			{ label: "Start reading", href: BOOKS_URL, external: true },
+			{ label: "Publish with ReaderPub", href: PUBLISH_URL, external: true, variant: "secondary" },
+		]}
+	>
+		<Fragment slot="body">
+			ReaderPub helps books and knowledge publications remain <strong>living web assets</strong> — readable, searchable, shareable, discussable and connected.
+		</Fragment>
+	</CtaBlock>
+</Base>
+
+<style>
+	:global(.home-hero .hero-copy > .section-kicker) {
+		display: inline-flex;
+	}
+
+	.home-comparison-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.home-comparison-card,
+	.home-list-card {
+		min-height: 0;
+	}
+
+	.home-flow {
+		color: var(--accent-dark);
+		font-weight: 700;
+	}
+
+	.home-title-accent,
+	:global(.home-product-grid .card h3) {
+		color: var(--accent-dark);
+	}
+
+	.home-model-list {
+		display: grid;
+		gap: 10px;
+		padding-left: 1.15rem;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.home-model-list li::marker {
+		color: var(--accent);
+	}
+
+	@media (max-width: 900px) {
+		.home-comparison-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.home-model-list {
+			text-align: left;
+		}
+	}
+</style>

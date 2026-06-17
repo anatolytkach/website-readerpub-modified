@@ -1,0 +1,40 @@
+---
+import "../styles/global.css";
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
+import { SITE_DOMAIN, SITE_NAME } from "../consts";
+import { ViewTransitions } from "astro:transitions";
+
+const {
+	title = `${SITE_NAME} - Web-Native Publishing Network`,
+	description = `${SITE_NAME} is a web-native publishing network for readers, authors, publishers and institutions.`,
+} = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="application-name" content={SITE_NAME} />
+		<meta name="author" content={SITE_NAME} />
+		<meta name="hostname" content={SITE_DOMAIN} />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+		/>
+		<ViewTransitions />
+	</head>
+	<body>
+		<div class="page">
+			<Nav />
+			<main class="content">
+				<slot />
+			</main>
+			<Footer />
+		</div>
+	</body>
+</html>

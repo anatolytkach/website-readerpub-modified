@@ -1,0 +1,15 @@
+---
+import Section from "./Section.astro";
+import type { SectionTone } from "../../data/pages";
+
+interface Props {
+	tone?: SectionTone;
+	class?: string;
+}
+
+const { tone = "white", class: className = "" } = Astro.props;
+---
+
+<Section tone={tone} class={["text-first-section", className].filter(Boolean).join(" ")}>
+	<slot />
+</Section>

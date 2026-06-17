@@ -1,0 +1,24 @@
+---
+import type { PageAction } from "../data/pages";
+
+interface Props extends PageAction {
+	class?: string;
+}
+
+const {
+	href,
+	label,
+	variant = "primary",
+	external = false,
+	class: className = "",
+} = Astro.props;
+---
+
+<a
+	class:list={["button", variant === "secondary" && "button--secondary", className]}
+	href={href}
+	target={external ? "_blank" : undefined}
+	rel={external ? "noopener noreferrer" : undefined}
+>
+	{label}
+</a>
