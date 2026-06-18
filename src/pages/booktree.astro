@@ -221,9 +221,12 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	}
 
 	:global(.booktree-benefits-section .card.icon-grid-card) {
+		--card-heading-font-size: clamp(24px, 2vw, 34px);
+		--card-heading-line-height: 1.12;
+		--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
 		display: grid !important;
-		grid-template-columns: 56px minmax(0, 1fr) !important;
-		column-gap: 14px !important;
+		grid-template-columns: var(--card-icon-column) minmax(0, 1fr) !important;
+		column-gap: var(--card-icon-gap) !important;
 		row-gap: 18px !important;
 		align-items: flex-start;
 		width: 100%;
@@ -237,8 +240,8 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		grid-column: 1;
 		grid-row: 1;
 		align-self: center;
-		width: 56px;
-		height: 56px;
+		width: var(--card-inline-icon-size) !important;
+		height: var(--card-inline-icon-size) !important;
 	}
 
 	:global(.booktree-benefits-section .icon-grid-card .icon-grid-card-copy > h3) {
@@ -246,8 +249,8 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		grid-row: 1;
 		align-self: center;
 		margin: 0;
-		font-size: clamp(24px, 2vw, 34px);
-		line-height: 1.12;
+		font-size: var(--card-heading-font-size);
+		line-height: var(--card-heading-line-height);
 	}
 
 	:global(.booktree-benefits-section .icon-grid-card .icon-grid-card-copy > p) {

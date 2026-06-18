@@ -439,6 +439,8 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	}
 
 	.webuzz-overview-card-heading {
+		--inline-heading-font-size: clamp(19.2px, 2.4vw, 27.2px);
+		--inline-icon-size: calc(var(--inline-heading-font-size) * 1.7);
 		display: flex !important;
 		align-items: center !important;
 		gap: 18px;
@@ -446,14 +448,14 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 
 	.webuzz-overview-card-heading h2 {
 		margin: 0 !important;
-		font-size: clamp(19.2px, 2.4vw, 27.2px);
+		font-size: var(--inline-heading-font-size);
 	}
 
 	:global(.webuzz-overview-card-heading .section-icon) {
 		display: block;
 		flex: 0 0 auto;
-		width: 56px;
-		height: 56px;
+		width: var(--inline-icon-size) !important;
+		height: var(--inline-icon-size) !important;
 	}
 
 	.webuzz-legacy-list {
@@ -541,10 +543,13 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	}
 
 	:global(.webuzz-benefits-section .card.icon-grid-card) {
+		--card-heading-font-size: clamp(19px, 1.62vw, 26px);
+		--card-heading-line-height: 1.15;
+		--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
 		display: grid !important;
-		grid-template-columns: 56px minmax(0, 1fr) !important;
-		grid-template-rows: 56px auto;
-		column-gap: 14px !important;
+		grid-template-columns: var(--card-icon-column) minmax(0, 1fr) !important;
+		grid-template-rows: var(--card-inline-icon-size) auto;
+		column-gap: var(--card-icon-gap) !important;
 		row-gap: 16px !important;
 		align-items: flex-start;
 		width: 100%;
@@ -558,8 +563,8 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		grid-column: 1;
 		grid-row: 1;
 		align-self: flex-start;
-		width: 56px;
-		height: 56px;
+		width: var(--card-inline-icon-size) !important;
+		height: var(--card-inline-icon-size) !important;
 	}
 
 	:global(.webuzz-benefits-section .icon-grid-card .icon-grid-card-copy > h3) {
@@ -575,8 +580,8 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	}
 
 	:global(.webuzz-benefits-section .card h3) {
-		font-size: clamp(19px, 1.62vw, 26px);
-		line-height: 1.15;
+		font-size: var(--card-heading-font-size);
+		line-height: var(--card-heading-line-height);
 	}
 
 	:global(.webuzz-benefits-section .card p) {

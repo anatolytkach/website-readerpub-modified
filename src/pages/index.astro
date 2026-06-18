@@ -11,12 +11,12 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 <Base
 	title={`Transforming the world of books. | ${SITE_NAME}`}
-	description="We turn books into living web assets, so they remain connected. No apps, downloads, or platform lock-in."
+	description="We make books readable online and keep readers around. No apps, downloads, or platform lock-in."
 >
 	<HeroSection
 		class="home-hero"
 		title="Transforming the world of books."
-		lead="eBooks still come as files – isolated from discussion, discovery, communities, authors and publishers."
+		lead="E-books are still delivered as files detached from authors, publishers, discussions, and communities."
 		image="/images/chain1.webp"
 		imageAlt=""
 		actions={[
@@ -25,20 +25,20 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		]}
 		spacerBackgroundPositionY="0%"
 	>
-		<Fragment slot="eyebrow">
-			READ INSTANTLY <span class="home-hero-kicker-dot" style="color: var(--text);">•</span> PUBLISH SECURELY <span class="home-hero-kicker-dot" style="color: var(--text);">•</span> DISTRIBUTE STRATEGICALLY
-		</Fragment>
 		<p class="home-hero-statement hero-body">
-			We turn books into living web assets, so they remain connected.
+			We make books readable online and keep readers around.
 		</p>
-		<p class="hero-body">
+		<p class="home-hero-strategy">
+			Read instantly. Publish securely. Distribute strategically.
+		</p>
+		<p class="home-hero-lockin hero-lead">
 			No apps, downloads, or platform lock-in.
 		</p>
 	</HeroSection>
 
 	<Section
 		tone="gray"
-		title="The problem we are solving"
+		title="The challenge:"
 		body="Digital publishing made distribution easier, but it did not keep books connected to readers, discussion or long-term discovery."
 	>
 		<CardGrid columns="3" class="home-problem-grid">
@@ -94,19 +94,22 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		</div>
 	</Section>
 
-	<Section tone="white" title="What changes when a book becomes a living web asset?">
+	<Section tone="white" class="home-web-asset-section" title="What changes when a book becomes a living web asset?">
 		<div class="home-comparison-grid">
 			<article class="card home-comparison-card">
 				<div class="card-copy">
 					<h3>Traditional publishing</h3>
-					<p class="home-flow">Publish → Download → Relationship ends</p>
+					<p class="home-flow home-flow--dark">Publish → Download → Relationship ends</p>
 					<p>The old model delivers a file and loses the reader relationship after access begins.</p>
 				</div>
 			</article>
 			<article class="card home-comparison-card">
 				<div class="card-copy">
 					<h3><span class="home-title-accent">ReaderPub</span> publishing</h3>
-					<p class="home-flow">Publish → Read → Discuss → Discover → Follow → Relationship continues</p>
+					<p class="home-flow">
+						Publish <span class="home-flow-arrow">→</span> Read <span class="home-flow-arrow">→</span> Discuss <span class="home-flow-arrow">→</span>
+						Discover <span class="home-flow-arrow">→</span> Follow <span class="home-flow-arrow">→</span> Relationship continues
+					</p>
 					<p>ReaderPub keeps the publication alive on the web, connected to readers, discussion and long-term discovery.</p>
 				</div>
 			</article>
@@ -165,14 +168,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 </Base>
 
 <style>
-	:global(.home-hero .hero-copy > .section-kicker) {
-		display: inline-flex;
-	}
-
-	:global(.home-hero .home-hero-kicker-dot) {
-		color: var(--text) !important;
-	}
-
 	.home-hero-statement {
 		max-width: 720px;
 		color: var(--accent) !important;
@@ -180,6 +175,18 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		font-size: clamp(22.1px, 2.72vw, 32.3px) !important;
 		font-weight: 700 !important;
 		line-height: 1.12 !important;
+	}
+
+	.home-hero-strategy {
+		max-width: 720px;
+		color: var(--accent);
+		font-size: var(--hero-solution-copy-size);
+		line-height: 1.45;
+	}
+
+	.home-hero-lockin {
+		max-width: 720px;
+		color: var(--text);
 	}
 
 	.home-comparison-grid {
@@ -199,6 +206,11 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		font-weight: 700;
 	}
 
+	.home-flow--dark,
+	.home-flow-arrow {
+		color: var(--text);
+	}
+
 	.home-title-accent,
 	:global(.home-product-grid .card h3) {
 		color: var(--accent);
@@ -206,6 +218,25 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	:global(.home-file-model-section .card) {
 		--card-tint: #fbfaf8;
+	}
+
+	:global(.home-file-model-section) {
+		padding-bottom: calc(var(--section-padding) * 0.6667);
+	}
+
+	:global(.home-web-asset-section) {
+		padding-top: calc(var(--section-padding) * 0.6667);
+	}
+
+	:global(.home-web-asset-section .section-header),
+	:global(.home-web-asset-section .section-header h2) {
+		max-width: none;
+	}
+
+	@media (min-width: 901px) {
+		:global(.home-web-asset-section .section-header h2) {
+			white-space: nowrap;
+		}
 	}
 
 	.home-model-list {

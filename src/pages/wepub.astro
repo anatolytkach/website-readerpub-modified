@@ -184,8 +184,8 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 	:global(.wepub-source-icon-grid .card.icon-grid-card) {
 		display: grid !important;
-		grid-template-columns: 56px minmax(0, 1fr) !important;
-		column-gap: 14px !important;
+		grid-template-columns: var(--card-icon-column) minmax(0, 1fr) !important;
+		column-gap: var(--card-icon-gap) !important;
 		row-gap: 16px !important;
 		align-items: flex-start;
 		width: 100%;
@@ -199,8 +199,8 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		grid-column: 1;
 		grid-row: 1;
 		align-self: center;
-		width: 56px;
-		height: 56px;
+		width: var(--card-inline-icon-size) !important;
+		height: var(--card-inline-icon-size) !important;
 	}
 
 	:global(.wepub-source-icon-grid .icon-grid-card .icon-grid-card-copy > h3) {

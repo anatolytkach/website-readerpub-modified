@@ -25,9 +25,32 @@ interface Props {
 }
 
 const { type, title } = Astro.props;
+
+const iconViewBoxes: Record<Props["type"], string> = {
+	publisher: "6 7 36 34",
+	library: "5 7 38 34",
+	university: "5 8 38 33",
+	government: "7 11 34 30",
+	public: "10 8 28 31",
+	reader: "7 5 34 38",
+	webReader: "7 6 35 36",
+	epubFile: "7 5 34 38",
+	readerBook: "9 6 30 33",
+	author: "6 4 38 42",
+	research: "11 11 26 26",
+	program: "7 9 34 30",
+	sale: "8 8 26 26",
+	rental: "9 9 30 30",
+	charity: "8 12 32 25",
+	coins: "9 14 30 21",
+	dollars: "7 13 33 23",
+	fan: "11 8 26 36",
+	security: "9 13 34 31",
+	access: "9 10 32 25",
+};
 ---
 
-<svg class="section-icon" viewBox="0 0 48 48" role="img" aria-label={title}>
+<svg class="section-icon" viewBox={iconViewBoxes[type]} role="img" aria-label={title}>
 	{type === "publisher" && (
 		<>
 			<rect x="7" y="8" width="34" height="32" rx="4"></rect>
