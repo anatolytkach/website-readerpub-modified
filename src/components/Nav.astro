@@ -17,7 +17,8 @@ const primaryLinks = [
 	{ href: "/security", label: "Security" },
 	{ href: "/pricing", label: "Pricing" },
 ];
-const isSolutionActive = solutionLinks.some((link) => isActive(link.href));
+const hasActivePrimaryLink = primaryLinks.some((link) => isActive(link.href));
+const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => isActive(link.href));
 ---
 
 <nav class="nav" aria-label="Primary">
@@ -101,6 +102,17 @@ const isSolutionActive = solutionLinks.some((link) => isActive(link.href));
 		const close = document.querySelector(".nav-close");
 		const dropdownToggle = document.querySelector(".nav-dropdown-toggle");
 		const dropdown = document.querySelector(".nav-dropdown");
+		const normalizePath = (path) => path.replace(/\/+$/, "") || "/";
+		const closeDropdown = () => {
+			dropdown?.classList.remove("nav-dropdown--open");
+			dropdownToggle?.setAttribute("aria-expanded", "false");
+		};
+		const dismissDropdown = () => {
+			closeDropdown();
+			dropdown?.classList.add("nav-dropdown--dismissed");
+			const activeElement = document.activeElement;
+			if (activeElement instanceof HTMLElement) activeElement.blur();
+		};
 
 		const closeMenu = () => {
 			overlay?.classList.remove("nav-overlay--open");
@@ -121,25 +133,70 @@ const isSolutionActive = solutionLinks.some((link) => isActive(link.href));
 			if (event.target instanceof Element && event.target.closest("a")) closeMenu();
 		});
 
+		const updateActiveLink = () => {
+			const currentPath = normalizePath(window.location.pathname);
+			const hasActivePrimaryLink = Array.from(document.querySelectorAll(".nav-links > li > a")).some((link) => {
+				const href = link.getAttribute("href");
+				return href && !href.startsWith("http") && normalizePath(href) === currentPath;
+			});
+
+			document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
+				dropdown.classList.remove("nav-dropdown--active");
+				dropdown.querySelector(".nav-dropdown-toggle")?.removeAttribute("aria-current");
+			});
+
+			document.querySelectorAll(".nav a, .nav-overlay a").forEach((link) => {
+				link.classList.remove("is-active");
+				link.removeAttribute("aria-current");
+
+				const href = link.getAttribute("href");
+				if (!href || href.startsWith("http")) return;
+
+				if (normalizePath(href) === currentPath) {
+					link.classList.add("is-active");
+					link.setAttribute("aria-current", "page");
+
+					const dropdown = link.closest(".nav-dropdown");
+					if (dropdown && !hasActivePrimaryLink) {
+						dropdown.classList.add("nav-dropdown--active");
+						dropdown.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-current", "page");
+					}
+				}
+			});
+		};
+
 		dropdownToggle?.addEventListener("click", () => {
+			dropdown?.classList.remove("nav-dropdown--dismissed");
 			const isOpen = dropdown?.classList.toggle("nav-dropdown--open");
 			dropdownToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
 		});
 
 		document.addEventListener("click", (event) => {
 			if (!(event.target instanceof Element)) return;
+			if (event.target.closest(".nav-dropdown-menu a")) {
+				dismissDropdown();
+				return;
+			}
 			if (!event.target.closest(".nav-dropdown")) {
-				dropdown?.classList.remove("nav-dropdown--open");
-				dropdownToggle?.setAttribute("aria-expanded", "false");
+				closeDropdown();
+			}
+		});
+
+		document.addEventListener("pointerover", (event) => {
+			if (!(event.target instanceof Element)) return;
+			if (event.target.closest(".nav-dropdown-toggle")) {
+				dropdown?.classList.remove("nav-dropdown--dismissed");
 			}
 		});
 
 		document.addEventListener("keydown", (event) => {
 			if (event.key === "Escape") {
 				closeMenu();
-				dropdown?.classList.remove("nav-dropdown--open");
-				dropdownToggle?.setAttribute("aria-expanded", "false");
+				closeDropdown();
 			}
 		});
+
+		document.addEventListener("astro:page-load", updateActiveLink);
+		updateActiveLink();
 	})();
 </script>

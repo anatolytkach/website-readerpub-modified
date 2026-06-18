@@ -4,7 +4,7 @@ import type { PageAction } from "../../data/pages";
 
 interface Props {
 	eyebrow?: string;
-	title: string;
+	title?: string;
 	lead: string;
 	body?: string;
 	image?: string;
@@ -29,13 +29,19 @@ const {
 const spacerStyle = spacerBackgroundPositionY
 	? `--hero-background-spacer-position-y: ${spacerBackgroundPositionY};`
 	: undefined;
+const hasEyebrowSlot = Astro.slots.has("eyebrow");
+const hasTitleSlot = Astro.slots.has("title");
 const hasBodySlot = Astro.slots.has("body");
 ---
 
 <section class:list={["hero-section", "section--white", image && "section--with-media", className]}>
 	<div class="hero-copy">
-		{eyebrow && <p class="section-kicker">{eyebrow}</p>}
-		<h1>{title}</h1>
+		{(eyebrow || hasEyebrowSlot) && (
+			<p class="section-kicker">
+				{hasEyebrowSlot ? <slot name="eyebrow" /> : eyebrow}
+			</p>
+		)}
+		{(title || hasTitleSlot) && <h1>{hasTitleSlot ? <slot name="title" /> : title}</h1>}
 		<slot name="tagline" />
 		<p class="hero-lead">{lead}</p>
 		{hasBodySlot ? <p class="hero-body"><slot name="body" /></p> : body && <p class="hero-body">{body}</p>}

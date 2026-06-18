@@ -1,10 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
-import ActionLink from "../components/ActionLink.astro";
 import Card from "../components/Card.astro";
 import CardGrid from "../components/CardGrid.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
+import SectionIcon from "../components/SectionIcon.astro";
 import { PUBLISH_URL, SITE_NAME } from "../consts";
 
 const publishAction = { label: "Publish with WePub", href: PUBLISH_URL, external: true };
@@ -15,116 +16,110 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 	title={`WePub | ${SITE_NAME}`}
 	description="WePub helps authors and publishers create living publications that remain connected to readers, discussion and discovery after release."
 >
-	<section class="hero-section section--white section--with-media">
-		<div class="hero-copy">
-			<h1><span style="color: var(--accent-dark);">WePub:</span> Publish to readers, you never lose.</h1>
-			<p class="hero-lead">Most publishing systems are built to distribute files.</p>
-			<p class="hero-body">
-				ReaderPub helps authors and publishers create living publications that remain connected to readers, discussion and discovery long after release.
-			</p>
-			<div class="cta-row">
-				<ActionLink {...publishAction} />
-				<ActionLink {...pricingAction} />
-			</div>
-		</div>
-		<div class="hero-media">
-			<img
-				class="image-block hero-image"
-				src="/images/publish.webp"
-				alt="Publishing a book as a web-native ReaderPub asset"
-				loading="eager"
-				decoding="async"
-				width="1024"
-				height="900"
-			/>
-		</div>
-	</section>
-
-	<section class="hero-background-spacer" aria-hidden="true" style="--hero-background-spacer-position-y: 18%;"></section>
+	<HeroSection
+		lead="Most publishing systems are built to distribute files through marketplaces, surrendering the book audience to the marketplace."
+		image="/images/publish.webp"
+		imageAlt="Publishing a book as a web-native ReaderPub asset"
+		actions={[publishAction, pricingAction]}
+		spacerBackgroundPositionY="18%"
+	>
+		<Fragment slot="title"><span style="color: var(--accent);">WePub:</span><br />Publish to readers, you never lose.</Fragment>
+		<Fragment slot="body">ReaderPub turns books into living web assets: readable, searchable, discussable and connected, so authors and publishers achieve strategic distribution.</Fragment>
+	</HeroSection>
 
 	<Section
 		tone="gray"
-		title="The publishing industry still thinks in files"
-		body="Digital publishing solved distribution, but it did not solve what happens after publication. Once a file is delivered, reader relationships, discussion and long-term engagement often become disconnected from the publication itself."
+		title="The old model sells files"
+		body="A file-based model can distribute a book, but it usually separates the author from the reader."
 	>
-		<CardGrid columns="4">
+		<CardGrid columns="2">
 			<Card
-				title="The relationship weakens"
-				body="After a reader downloads a book, the connection between reader, publisher and publication often becomes harder to maintain."
+				title="Problem"
+				body="Books are packaged as files and handed to marketplaces that own discovery, customer access and most of the data."
 			/>
 			<Card
-				title="Discussion fragments"
-				body="Conversations move into reviews, social media, forums and private groups instead of remaining attached to the publication."
-			/>
-			<Card
-				title="Audience visibility disappears"
-				body="Publishers and authors often lose visibility into how readers engage after access begins."
-			/>
-			<Card
-				title="Books become static products"
-				body="Most digital books are treated as files to deliver rather than living assets that continue generating engagement."
+				title="Why it fails"
+				body="The sale ends the relationship. The author gets distribution, but the platform keeps the audience."
 			/>
 		</CardGrid>
 	</Section>
 
 	<Section
 		tone="white"
-		title="Traditional platforms optimize for delivery"
-		body="Most publishing systems are designed around transactions, downloads and file distribution. They are not designed to keep publications alive after release."
+		title="The new model builds direct web presence"
+		body="WePub treats a book as a web publication that can be read, found, discussed and connected to the author over time."
 	>
+		<CardGrid columns="3" class="wepub-source-icon-grid">
+			<article class="card icon-grid-card">
+				<SectionIcon type="publisher" title="Web-native book pages" />
+				<div class="icon-grid-card-copy">
+					<h3>Web-native book pages</h3>
+					<p>Each title can live as a readable web asset, not only as a downloadable package.</p>
+				</div>
+			</article>
+			<article class="card icon-grid-card">
+				<SectionIcon type="author" title="Author-centered publishing" />
+				<div class="icon-grid-card-copy">
+					<h3>Author-centered publishing</h3>
+					<p>The author's presence stays connected to the work and to the people reading it.</p>
+				</div>
+			</article>
+			<article class="card icon-grid-card">
+				<SectionIcon type="fan" title="Reader connection" />
+				<div class="icon-grid-card-copy">
+					<h3>Reader connection</h3>
+					<p>Discussion and activity remain attached to books and authors after publication.</p>
+				</div>
+			</article>
+		</CardGrid>
+	</Section>
+
+	<Section tone="green" title="What changes when you publish on ReaderPub">
 		<div class="wepub-comparison-grid">
 			<article class="card wepub-list-card">
 				<div class="card-copy">
-					<h3>File-first publishing</h3>
+					<h3>Old publishing path</h3>
 					<ul class="wepub-model-list">
-						<li>Create file</li>
-						<li>Upload file</li>
-						<li>Deliver file</li>
-						<li>Reader disappears</li>
-						<li>Discussion fragments</li>
-						<li>Relationship fades</li>
+						<li>Prepare a file</li>
+						<li>Upload to a marketplace</li>
+						<li>Let the platform own discovery and customer access</li>
+						<li>Watch reader activity disappear after purchase</li>
 					</ul>
 				</div>
 			</article>
 			<article class="card wepub-list-card">
 				<div class="card-copy">
-					<h3>Living publication</h3>
+					<h3>ReaderPub path</h3>
 					<ul class="wepub-model-list">
-						<li>Publish online</li>
-						<li>Read instantly</li>
-						<li>Discussion stays connected</li>
-						<li>Audience remains visible</li>
-						<li>Discovery continues</li>
-						<li>Relationship grows</li>
+						<li>Create a browser-readable publication</li>
+						<li>Build an author-centered web presence</li>
+						<li>Keep reader relationships connected</li>
+						<li>Support discussion and future work around the book</li>
 					</ul>
 				</div>
 			</article>
 		</div>
 	</Section>
 
-	<Section
-		tone="green"
-		title="WePub creates living publications"
-	>
-		<Fragment slot="body">
-			A <strong>Living Publication</strong> remains active after release. Readers can continue discovering it, discussing it, sharing it and engaging with it over time.
-		</Fragment>
-		<p class="wepub-supporting-text">
-			Instead of ending with file delivery, publication becomes an ongoing relationship between content, readers and publishers.
-		</p>
-		<CardGrid columns="4">
-			<Card title="Readable" body="Accessible directly on the web." />
-			<Card title="Discoverable" body="Continues attracting new readers after launch." />
-			<Card title="Discussable" body="Discussion remains connected to the publication." />
-			<Card title="Connected" body="Connected to readers, audience activity and future engagement." />
+	<Section tone="white" title="Lower commission, better reader connection, longer book lifecycle">
+		<CardGrid columns="3">
+			<Card title="Lower commission" body="ReaderPub uses a 5% platform commission for direct sales." />
+			<Card
+				title="Better reader connection"
+				body="Reader relationships stay connected to the author instead of disappearing into a marketplace account."
+			/>
+			<Card
+				title="Longer book lifecycle"
+				body="Books remain active as web assets through discovery, discussion and future author activity."
+			/>
 		</CardGrid>
 	</Section>
 
-      <Section
-        tone="white"
-        title="Publishing infrastructure built for the web"
-        body="WePub combines secure publishing, browser delivery, direct sales and audience visibility inside a single publishing workflow."
-      >
+	<Section
+		tone="white"
+		title="Publishing infrastructure built for the web"
+		body="WePub combines secure publishing, browser delivery, direct sales and audience visibility inside a single publishing workflow."
+	>
 		<CardGrid columns="3">
 			<Card title="Web-native publishing" body="Publish books as web destinations rather than isolated downloads." />
 			<Card title="Reader visibility" body="Maintain visibility into publication activity after release." />
@@ -182,9 +177,41 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 	.wepub-supporting-text {
 		max-width: 760px;
-		color: var(--accent-dark);
+		color: var(--accent);
 		font-size: 1.125rem;
 		line-height: 1.45;
+	}
+
+	:global(.wepub-source-icon-grid .card.icon-grid-card) {
+		display: grid !important;
+		grid-template-columns: 56px minmax(0, 1fr) !important;
+		column-gap: 14px !important;
+		row-gap: 16px !important;
+		align-items: flex-start;
+		width: 100%;
+	}
+
+	:global(.wepub-source-icon-grid .icon-grid-card-copy) {
+		display: contents;
+	}
+
+	:global(.wepub-source-icon-grid .icon-grid-card > .section-icon) {
+		grid-column: 1;
+		grid-row: 1;
+		align-self: center;
+		width: 56px;
+		height: 56px;
+	}
+
+	:global(.wepub-source-icon-grid .icon-grid-card .icon-grid-card-copy > h3) {
+		grid-column: 2;
+		grid-row: 1;
+		align-self: center;
+		margin: 0;
+	}
+
+	:global(.wepub-source-icon-grid .icon-grid-card .icon-grid-card-copy > p) {
+		grid-column: 1 / -1;
 	}
 
 	@media (max-width: 900px) {
@@ -195,28 +222,10 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		.wepub-model-list {
 			text-align: left;
 		}
+
+		:global(.wepub-source-icon-grid .icon-grid-card-copy) {
+			display: grid;
+			gap: 10px;
+		}
 	}
 </style>
-
-<script>
-	const syncWePubHeroBackgroundSpacer = () => {
-		const hero = document.querySelector(".hero-section");
-		const spacer = hero?.nextElementSibling;
-
-		if (!hero || !spacer?.classList.contains("hero-background-spacer")) {
-			return;
-		}
-
-		const heroImage = hero.querySelector(".hero-image");
-		const referenceHeight = heroImage?.getBoundingClientRect().height || hero.getBoundingClientRect().height;
-
-		if (referenceHeight > 0) {
-			spacer.style.setProperty("--hero-background-spacer-height", `${Math.round(referenceHeight * 0.3)}px`);
-		}
-	};
-
-	document.addEventListener("astro:page-load", syncWePubHeroBackgroundSpacer);
-	window.addEventListener("load", syncWePubHeroBackgroundSpacer, { once: true });
-	window.addEventListener("resize", syncWePubHeroBackgroundSpacer, { passive: true });
-	syncWePubHeroBackgroundSpacer();
-</script>

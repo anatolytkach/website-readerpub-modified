@@ -1,6 +1,274 @@
 ---
-import PageScaffold from "../components/PageScaffold.astro";
-import { pages } from "../data/pages";
+import Base from "../layouts/Base.astro";
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Section from "../components/sections/Section.astro";
+import SectionIcon from "../components/SectionIcon.astro";
+import { BOOKS_URL, SITE_NAME } from "../consts";
+
+const tryBookTreeAction = { label: "Try BookTree on any book", href: BOOKS_URL, external: true };
+const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL, external: true };
 ---
 
-<PageScaffold page={pages.booktree} />
+<Base
+	title={`BookTree | ${SITE_NAME}`}
+	description="BookTree helps Living Publications preserve the relationships between publications, notes, references and long-term work."
+>
+	<HeroSection
+		class="booktree-hero"
+		title="BookTree keeps track of what you are trying to learn."
+		lead="Knowledge breaks when context is lost. Books, notes and research materials often become disconnected over time."
+		body="BookTree gives long-form readers, researchers, students and authors a way to keep context alive across everything they read."
+		image="/images/booktree.webp"
+		imageAlt="BookTree interface showing manuscripts, source books and notes connected in a structured reading tree."
+		actions={[tryBookTreeAction]}
+		spacerBackgroundPositionY="36%"
+	>
+		<Fragment slot="title"><span class="booktree-hero-product" style="color: var(--accent);">BookTree</span> keeps track of what you are trying to learn.</Fragment>
+	</HeroSection>
+
+	<Section
+		tone="gray"
+		title="Books are organized. Knowledge is not."
+		body="People may keep their books organized, but the ideas they collect often become scattered across files, notes and projects."
+	>
+		<CardGrid columns="4">
+			<Card title="Ideas scatter" body="Important insights become distributed across many books and sources." />
+			<Card title="Context disappears" body="Notes lose meaning when separated from the publications they came from." />
+			<Card title="Projects outgrow books" body="Research and writing often require connections across many sources." />
+			<Card
+				title="Structure becomes manual"
+				body="People create folders, documents and spreadsheets just to preserve relationships between ideas."
+			/>
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		title="Highlights do not preserve knowledge"
+		body="Most reading systems help readers save passages and notes. They rarely help readers preserve the structure connecting those ideas."
+	>
+		<div class="booktree-comparison-grid">
+			<article class="card booktree-list-card">
+				<div class="card-copy">
+					<h3>Fragmented knowledge</h3>
+					<ul class="booktree-model-list">
+						<li>Book</li>
+						<li>Highlight</li>
+						<li>Note</li>
+						<li>Folder</li>
+						<li>Document</li>
+						<li>Lost context</li>
+					</ul>
+				</div>
+			</article>
+			<article class="card booktree-list-card booktree-structured-card">
+				<div class="card-copy">
+					<h3>Structured knowledge</h3>
+					<ul class="booktree-model-list">
+						<li>Publication</li>
+						<li>Reference</li>
+						<li>Note</li>
+						<li>Project</li>
+						<li>Connection</li>
+						<li>Preserved context</li>
+					</ul>
+				</div>
+			</article>
+		</div>
+	</Section>
+
+	<Section
+		tone="green"
+		title="Knowledge should remain connected"
+		body="Living Publications create living knowledge. The relationships between books, references and ideas should remain visible over time."
+	>
+		<CardGrid columns="4">
+			<Card title="Context" body="Ideas remain connected to their sources." />
+			<Card title="Continuity" body="Knowledge accumulates instead of fragmenting." />
+			<Card title="Structure" body="Projects retain relationships across many publications." />
+			<Card title="Traceability" body="References remain connected to the work they support." />
+		</CardGrid>
+	</Section>
+
+	<Section id="booktree-works" tone="green" title="How BookTree supports living knowledge">
+		<CardGrid columns="3">
+			<Card title="Projects" body="Organize reading around long-term goals and work." />
+			<Card title="Source publications" body="Keep publications connected to the projects where they matter." />
+			<Card title="Excerpts" body="Preserve important passages as part of larger knowledge structures." />
+			<Card title="Notes" body="Attach thinking to the correct publication and context." />
+			<Card title="References" body="Maintain traceable supporting material." />
+			<Card title="Knowledge maps" body="Build structures that reflect how ideas develop over time." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		title="Knowledge compounds through relationships"
+		body="The value of reading rarely comes from a single publication. It comes from the connections built across many publications over time."
+	>
+		<CardGrid columns="4">
+			<Card title="Research" body="Connect evidence across many sources." />
+			<Card title="Writing" body="Preserve references while developing manuscripts." />
+			<Card title="Study" body="Build durable learning structures." />
+			<Card title="Discovery" body="Reveal relationships between ideas that would otherwise be lost." />
+		</CardGrid>
+	</Section>
+
+	<Section tone="green" class="booktree-benefits-section" title="Who benefits from structured knowledge?">
+		<CardGrid columns="3" class="booktree-use-grid">
+			<div class="card icon-grid-card">
+				<SectionIcon type="author" title="Authors" />
+				<div class="icon-grid-card-copy">
+					<h3>Authors</h3>
+					<p>Connect source books, excerpts and notes while working on a manuscript.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="research" title="Researchers" />
+				<div class="icon-grid-card-copy">
+					<h3>Researchers</h3>
+					<p>Keep evidence, references and observations organized across many texts.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="university" title="Students" />
+				<div class="icon-grid-card-copy">
+					<h3>Students</h3>
+					<p>Build study structures that survive beyond one class, book or exam.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="library" title="Academics" />
+				<div class="icon-grid-card-copy">
+					<h3>Academics</h3>
+					<p>Maintain context across courses, papers, citations and long-term projects.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="reader" title="Journalists" />
+				<div class="icon-grid-card-copy">
+					<h3>Journalists</h3>
+					<p>Track source material and notes across investigations and background reading.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="readerBook" title="Lifelong readers" />
+				<div class="icon-grid-card-copy">
+					<h3>Lifelong readers</h3>
+					<p>Turn serious reading into a personal knowledge structure that grows over time.</p>
+				</div>
+			</div>
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="Reading should create knowledge, not fragmentation."
+		body="BookTree helps Living Publications become part of a larger, structured knowledge system."
+		actions={[useBookTreeAction]}
+	/>
+</Base>
+
+<style>
+	:global(.booktree-hero .hero-image) {
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		background: #ffffff;
+	}
+
+	:global(.booktree-hero .booktree-hero-product) {
+		color: var(--accent) !important;
+	}
+
+	.booktree-comparison-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.booktree-list-card {
+		min-height: 0;
+	}
+
+	.booktree-structured-card {
+		border-color: var(--accent);
+	}
+
+	.booktree-model-list {
+		display: grid;
+		gap: 10px;
+		padding-left: 1.15rem;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.booktree-model-list li::marker {
+		color: var(--accent);
+	}
+
+	.booktree-structured-card .booktree-model-list {
+		color: var(--accent);
+	}
+
+	:global(.booktree-benefits-section .card) {
+		gap: 16px;
+		min-height: 154px;
+		padding: 22px;
+	}
+
+	:global(.booktree-benefits-section .card.icon-grid-card) {
+		display: grid !important;
+		grid-template-columns: 56px minmax(0, 1fr) !important;
+		column-gap: 14px !important;
+		row-gap: 18px !important;
+		align-items: flex-start;
+		width: 100%;
+	}
+
+	:global(.booktree-benefits-section .icon-grid-card-copy) {
+		display: contents;
+	}
+
+	:global(.booktree-benefits-section .icon-grid-card > .section-icon) {
+		grid-column: 1;
+		grid-row: 1;
+		align-self: center;
+		width: 56px;
+		height: 56px;
+	}
+
+	:global(.booktree-benefits-section .icon-grid-card .icon-grid-card-copy > h3) {
+		grid-column: 2;
+		grid-row: 1;
+		align-self: center;
+		margin: 0;
+		font-size: clamp(24px, 2vw, 34px);
+		line-height: 1.12;
+	}
+
+	:global(.booktree-benefits-section .icon-grid-card .icon-grid-card-copy > p) {
+		grid-column: 1 / -1;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.35;
+	}
+
+	@media (max-width: 900px) {
+		.booktree-comparison-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.booktree-model-list {
+			text-align: left;
+		}
+
+		:global(.booktree-benefits-section .icon-grid-card-copy) {
+			display: grid;
+			gap: 12px;
+		}
+	}
+</style>

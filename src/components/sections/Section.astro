@@ -21,14 +21,15 @@ const {
 	class: className = "",
 } = Astro.props;
 const resolvedTone = hasMedia ? "white" : tone;
+const hasTitleSlot = Astro.slots.has("title");
 const hasBodySlot = Astro.slots.has("body");
 ---
 
 <section id={id} class:list={["section", `section--${resolvedTone}`, hasMedia && "section--with-media", className]}>
-	{(kicker || title || body || hasBodySlot) && (
+	{(kicker || title || hasTitleSlot || body || hasBodySlot) && (
 		<header class="section-header">
 			{kicker && <p class="section-kicker">{kicker}</p>}
-			{title && <h2>{title}</h2>}
+			{(title || hasTitleSlot) && <h2>{hasTitleSlot ? <slot name="title" /> : title}</h2>}
 			{hasBodySlot ? <p class="section-lead"><slot name="body" /></p> : body && <p class="section-lead">{body}</p>}
 		</header>
 	)}

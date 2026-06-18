@@ -1,6 +1,171 @@
 ---
-import PageScaffold from "../components/PageScaffold.astro";
-import { pages } from "../data/pages";
+import Base from "../layouts/Base.astro";
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Section from "../components/sections/Section.astro";
+import { SITE_NAME } from "../consts";
+
+const startPublishingAction = { label: "Start publishing", href: "/wepub" };
+const pricingAction = { label: "See pricing", href: "/pricing", variant: "secondary" as const };
+const pageActions = [startPublishingAction, pricingAction];
 ---
 
-<PageScaffold page={pages.authors} />
+<Base
+	title={`${SITE_NAME} for Authors`}
+	description="ReaderPub helps authors create Living Publications that preserve long-term reader relationships."
+>
+	<HeroSection
+		class="authors-hero"
+		title="Authors create audiences. Marketplaces own them."
+		lead="Most publishing platforms help authors distribute books, but the long-term relationship with readers often remains controlled by marketplaces and intermediaries."
+		body="ReaderPub helps authors publish Living Publications that remain connected to readers after release."
+		image="/images/author1.webp"
+		imageAlt="Author publishing on the web and staying connected to readers"
+		actions={pageActions}
+		spacerBackgroundPositionY="54%"
+	/>
+
+	<Section
+		tone="gray"
+		title="Authors lose the relationship they create"
+		body="Authors invest time building audiences, but many publishing systems are designed around transactions rather than long-term relationships."
+	>
+		<CardGrid columns="4">
+			<Card title="Audience ownership" body="Readers often become customers of the platform rather than followers of the author." />
+			<Card title="Reader visibility" body="Authors frequently have limited visibility into reader engagement after publication." />
+			<Card title="Discussion fragmentation" body="Reader conversations move into reviews, social media and private groups." />
+			<Card title="Marketplace dependency" body="Discovery, visibility and access are often controlled by third-party platforms." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		title="Most publishing platforms optimize for distribution"
+		body="The industry became extremely efficient at delivering files. It became far less effective at preserving long-term relationships between authors and readers."
+	>
+		<div class="authors-comparison-grid">
+			<article class="card authors-list-card">
+				<div class="card-copy">
+					<h3>Marketplace publishing</h3>
+					<ul class="authors-model-list">
+						<li>Sell book</li>
+						<li>Deliver file</li>
+						<li>Reader disappears</li>
+						<li>Discussion fragments</li>
+						<li>Platform owns relationship</li>
+					</ul>
+				</div>
+			</article>
+			<article class="card authors-list-card authors-living-card">
+				<div class="card-copy">
+					<h3>Living publication model</h3>
+					<ul class="authors-model-list">
+						<li>Publish online</li>
+						<li>Read instantly</li>
+						<li>Discussion stays connected</li>
+						<li>Audience remains visible</li>
+						<li>Relationship continues</li>
+					</ul>
+				</div>
+			</article>
+		</div>
+	</Section>
+
+	<Section
+		tone="green"
+		title="Living publications create lasting relationships"
+		body="A Living Publication continues generating discovery, engagement and discussion after release. The publication remains part of an ongoing relationship rather than becoming a completed transaction."
+	>
+		<CardGrid columns="4">
+			<Card title="Visibility" body="Reader activity remains visible." />
+			<Card title="Engagement" body="Discussion continues after publication." />
+			<Card title="Discovery" body="New readers continue finding the work." />
+			<Card title="Continuity" body="The publication remains active over time." />
+		</CardGrid>
+	</Section>
+
+	<Section tone="green" title="How ReaderPub supports authors">
+		<CardGrid columns="3">
+			<Card title="WePub" body="Create Living Publications instead of distributing isolated files." />
+			<Card title="WeRead" body="Support browser-native reading experiences." />
+			<Card title="WeBuzz" body="Keep discussion connected to books and authors." />
+			<Card title="BookTree" body="Preserve knowledge and references around long-term work." />
+			<Card title="Direct sales" body="Build direct commercial relationships with readers." />
+			<Card title="Secure publishing" body="Protect access through controlled web delivery." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		title="Publishing should not end with delivery"
+		body="The value of a publication continues after release. Reader relationships, discovery and discussion can create long-term value when they remain connected to the publication."
+	>
+		<CardGrid columns="4">
+			<Card title="Readers" body="Stay engaged beyond the initial purchase." />
+			<Card title="Authors" body="Build stronger long-term audiences." />
+			<Card title="Publishers" body="Retain more visibility into engagement." />
+			<Card title="Institutions" body="Support sustainable publishing ecosystems." />
+		</CardGrid>
+	</Section>
+
+	<Section tone="green" title="Who benefits from living publications?">
+		<CardGrid columns="4">
+			<Card title="Authors" body="Maintain stronger relationships with readers." />
+			<Card title="Readers" body="Stay connected to authors and discussion." />
+			<Card title="Publishers" body="Create publications that remain active after release." />
+			<Card title="Institutions" body="Support publishing models built around long-term engagement." />
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="Build relationships, not just downloads."
+		body="ReaderPub helps authors create Living Publications that remain active long after release."
+		actions={pageActions}
+	/>
+</Base>
+
+<style>
+	.authors-comparison-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.authors-list-card {
+		min-height: 0;
+	}
+
+	.authors-living-card {
+		border-color: var(--accent);
+	}
+
+	.authors-model-list {
+		display: grid;
+		gap: 10px;
+		padding-left: 1.15rem;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.authors-model-list li::marker {
+		color: var(--accent);
+	}
+
+	.authors-living-card .authors-model-list {
+		color: var(--accent);
+	}
+
+	@media (max-width: 900px) {
+		.authors-comparison-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.authors-model-list {
+			text-align: left;
+		}
+	}
+</style>

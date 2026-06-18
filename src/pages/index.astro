@@ -7,19 +7,16 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
-
-const heroTagline = "READ INSTANTLY • PUBLISH SECURELY • DISTRIBUTE STRATEGICALLY";
 ---
 
 <Base
 	title={`Transforming the world of books. | ${SITE_NAME}`}
-	description="ReaderPub turns books and knowledge publications into living web assets that remain connected to readers, discussion, discovery and audience activity after publication."
+	description="We turn books into living web assets, so they remain connected. No apps, downloads, or platform lock-in."
 >
 	<HeroSection
 		class="home-hero"
-		eyebrow={heroTagline}
 		title="Transforming the world of books."
-		lead="Books are still distributed as isolated digital files. Once downloaded, they become disconnected from discussion, discovery, communities, authors and publishers."
+		lead="eBooks still come as files – isolated from discussion, discovery, communities, authors and publishers."
 		image="/images/chain1.webp"
 		imageAlt=""
 		actions={[
@@ -28,10 +25,74 @@ const heroTagline = "READ INSTANTLY • PUBLISH SECURELY • DISTRIBUTE STRATEGI
 		]}
 		spacerBackgroundPositionY="0%"
 	>
-		<Fragment slot="body">
-			ReaderPub turns books and knowledge publications into <strong>living web assets</strong> that remain connected to readers, discussion, discovery and audience activity after publication.
+		<Fragment slot="eyebrow">
+			READ INSTANTLY <span class="home-hero-kicker-dot" style="color: var(--text);">•</span> PUBLISH SECURELY <span class="home-hero-kicker-dot" style="color: var(--text);">•</span> DISTRIBUTE STRATEGICALLY
 		</Fragment>
+		<p class="home-hero-statement hero-body">
+			We turn books into living web assets, so they remain connected.
+		</p>
+		<p class="hero-body">
+			No apps, downloads, or platform lock-in.
+		</p>
 	</HeroSection>
+
+	<Section
+		tone="gray"
+		title="The problem we are solving"
+		body="Digital publishing made distribution easier, but it did not keep books connected to readers, discussion or long-term discovery."
+	>
+		<CardGrid columns="3" class="home-problem-grid">
+			<Card
+				icon="readerBook"
+				title="Readers"
+				body="Reading is digital, but discussion and discovery are fragmented across apps, stores and social networks."
+			/>
+			<Card
+				icon="author"
+				title="Authors & Publishers"
+				body="Authors publish books, but marketplaces often control visibility, readers and the customer relationship."
+			/>
+			<Card
+				icon="library"
+				title="Institutions"
+				body="Libraries, universities and public organizations publish knowledge that remains hard to find, read and discuss."
+			/>
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		class="home-file-model-section"
+		title="The file-first model breaks the relationship"
+		body="The old publishing model ends when a file is delivered. ReaderPub helps publications remain alive and connected after delivery."
+	>
+		<div class="home-comparison-grid">
+			<article class="card home-list-card">
+				<div class="card-copy">
+					<h3>Old model</h3>
+					<ul class="home-model-list">
+						<li>File uploaded</li>
+						<li>Reader downloads</li>
+						<li>Discussion moves elsewhere</li>
+						<li>Audience becomes invisible</li>
+						<li>Relationship ends</li>
+					</ul>
+				</div>
+			</article>
+			<article class="card home-list-card">
+				<div class="card-copy">
+					<h3><span class="home-title-accent">ReaderPub</span> model</h3>
+					<ul class="home-model-list">
+						<li>Publication goes live</li>
+						<li>Reader opens instantly</li>
+						<li>Comments stay connected</li>
+						<li>Audience remains visible</li>
+						<li>Relationship continues</li>
+					</ul>
+				</div>
+			</article>
+		</div>
+	</Section>
 
 	<Section tone="white" title="What changes when a book becomes a living web asset?">
 		<div class="home-comparison-grid">
@@ -67,53 +128,8 @@ const heroTagline = "READ INSTANTLY • PUBLISH SECURELY • DISTRIBUTE STRATEGI
 	</Section>
 
 	<Section
-		tone="gray"
-		title="The problem we are solving"
-		body="Digital publishing made distribution easier, but it did not keep books connected to readers, discussion or long-term discovery."
-	>
-		<CardGrid columns="3">
-			<Card title="Readers" body="Reading is digital, but discussion and discovery are fragmented across apps, stores and social networks." />
-			<Card title="Authors" body="Authors publish books, but marketplaces often control visibility, readers and the customer relationship." />
-			<Card title="Institutions" body="Libraries, universities and public organizations publish knowledge that remains hard to find, read and discuss." />
-		</CardGrid>
-	</Section>
-
-	<Section
 		tone="white"
-		title="The file-first model breaks the relationship"
-		body="The old publishing model ends when a file is delivered. ReaderPub helps publications remain alive and connected after delivery."
-	>
-		<div class="home-comparison-grid">
-			<article class="card home-list-card">
-				<div class="card-copy">
-					<h3>Old model</h3>
-					<ul class="home-model-list">
-						<li>File uploaded</li>
-						<li>Reader downloads</li>
-						<li>Discussion moves elsewhere</li>
-						<li>Audience becomes invisible</li>
-						<li>Relationship ends</li>
-					</ul>
-				</div>
-			</article>
-			<article class="card home-list-card">
-				<div class="card-copy">
-					<h3><span class="home-title-accent">ReaderPub</span> model</h3>
-					<ul class="home-model-list">
-						<li>Publication goes live</li>
-						<li>Reader opens instantly</li>
-						<li>Comments stay connected</li>
-						<li>Audience remains visible</li>
-						<li>Relationship continues</li>
-					</ul>
-				</div>
-			</article>
-		</div>
-	</Section>
-
-	<Section
-		tone="green"
-		title="ReaderPub is not another ebook platform"
+		title="ReaderPub is not yet another ebook platform"
 	>
 		<Fragment slot="body">
 			ReaderPub is a web-native publishing network where books and knowledge publications become <strong>living web assets</strong>.
@@ -126,20 +142,20 @@ const heroTagline = "READ INSTANTLY • PUBLISH SECURELY • DISTRIBUTE STRATEGI
 		</CardGrid>
 	</Section>
 
-	<Section tone="gray" title="Who benefits from living publications?">
+	<Section tone="green" title="Who benefits from living publications?">
 		<CardGrid columns="4">
-			<Card title="Readers" body="They get instant access, context, discussion and better discovery." />
-			<Card title="Authors" body="They keep more revenue, more audience visibility and more long-term reader connection." />
-			<Card title="Publishers" body="They launch books as active web assets, not isolated product files." />
-			<Card title="Institutions" body="They turn collections and research into visible public knowledge infrastructure." />
+			<Card icon="readerBook" title="Readers" body="They get instant access, context, discussion and better discovery." />
+			<Card icon="author" title="Authors" body="They keep more revenue, more audience visibility and more long-term reader connection." />
+			<Card icon="publisher" title="Publishers" body="They launch books as active web assets, not isolated product files." />
+			<Card icon="library" title="Institutions" body="They turn collections and research into visible public knowledge infrastructure." />
 		</CardGrid>
 	</Section>
 
 	<CtaBlock
-		title="Books should not disappear after download."
+		title="Books should live on the web."
 		actions={[
-			{ label: "Start reading", href: BOOKS_URL, external: true },
-			{ label: "Publish with ReaderPub", href: PUBLISH_URL, external: true, variant: "secondary" },
+			{ label: "Publish with WePub", href: PUBLISH_URL, external: true },
+			{ label: "60K+ books in Catalog", href: BOOKS_URL, external: true, variant: "secondary" },
 		]}
 	>
 		<Fragment slot="body">
@@ -151,6 +167,19 @@ const heroTagline = "READ INSTANTLY • PUBLISH SECURELY • DISTRIBUTE STRATEGI
 <style>
 	:global(.home-hero .hero-copy > .section-kicker) {
 		display: inline-flex;
+	}
+
+	:global(.home-hero .home-hero-kicker-dot) {
+		color: var(--text) !important;
+	}
+
+	.home-hero-statement {
+		max-width: 720px;
+		color: var(--accent) !important;
+		font-family: var(--font-display) !important;
+		font-size: clamp(22.1px, 2.72vw, 32.3px) !important;
+		font-weight: 700 !important;
+		line-height: 1.12 !important;
 	}
 
 	.home-comparison-grid {
@@ -166,13 +195,17 @@ const heroTagline = "READ INSTANTLY • PUBLISH SECURELY • DISTRIBUTE STRATEGI
 	}
 
 	.home-flow {
-		color: var(--accent-dark);
+		color: var(--accent);
 		font-weight: 700;
 	}
 
 	.home-title-accent,
 	:global(.home-product-grid .card h3) {
-		color: var(--accent-dark);
+		color: var(--accent);
+	}
+
+	:global(.home-file-model-section .card) {
+		--card-tint: #fbfaf8;
 	}
 
 	.home-model-list {

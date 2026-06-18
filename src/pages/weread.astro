@@ -1,6 +1,494 @@
 ---
-import PageScaffold from "../components/PageScaffold.astro";
-import { pages } from "../data/pages";
+import Base from "../layouts/Base.astro";
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Section from "../components/sections/Section.astro";
+import SectionIcon from "../components/SectionIcon.astro";
+import { BOOKS_URL, SITE_NAME } from "../consts";
+
+const startReadingAction = { label: "Start reading", href: BOOKS_URL, external: true };
+const readLibraryAction = { label: "Read 60K+ books in WeRead", href: BOOKS_URL, external: true };
+const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", variant: "secondary" as const };
 ---
 
-<PageScaffold page={pages.weread} />
+<Base
+	title={`WeRead | ${SITE_NAME}`}
+	description="WeRead is the browser-native reading layer for Living Publications on ReaderPub."
+>
+	<HeroSection
+		class="weread-source-hero"
+		eyebrow="READERS"
+		lead="Books, discussions, notes and recommendations are scattered across disconnected platforms."
+		image="/images/readers2.webp"
+		imageAlt="ReaderPub browser reading and book discovery"
+		actions={[readLibraryAction]}
+		spacerBackgroundPositionY="9%"
+		>
+			<Fragment slot="title">
+				<span class="readers-hero-product" style="color: var(--accent);">WeRead:</span><br />
+				<span class="readers-hero-title-small">Genuine eReader.<br />Right in your browser.</span>
+			</Fragment>
+			<Fragment slot="body">We bring all around books together.</Fragment>
+		</HeroSection>
+
+	<Section
+		tone="gray"
+		title="Why readers abandon books"
+		body="The problem is not access. Readers already have access to more books than they can finish. The problem is isolation."
+	>
+		<CardGrid columns="4" class="weread-source-icon-grid">
+			<article class="card icon-grid-card">
+				<SectionIcon type="readerBook" title="Reading is isolated" />
+				<div class="icon-grid-card-copy">
+					<h3>Reading is isolated</h3>
+					<p>Most reading platforms stop at access. They give readers a file, not a living reading environment.</p>
+				</div>
+			</article>
+			<article class="card icon-grid-card">
+				<SectionIcon type="research" title="Discovery is broken" />
+				<div class="icon-grid-card-copy">
+					<h3>Discovery is broken</h3>
+					<p>Recommendations are driven by marketplaces and algorithms, not by real literary communities.</p>
+				</div>
+			</article>
+			<article class="card icon-grid-card">
+				<SectionIcon type="fan" title="Discussions disappear" />
+				<div class="icon-grid-card-copy">
+					<h3>Discussions disappear</h3>
+					<p>Important conversations happen on Reddit, Facebook, Discord and private groups, disconnected from the books themselves.</p>
+				</div>
+			</article>
+			<article class="card icon-grid-card">
+				<SectionIcon type="reader" title="Notes stay private" />
+				<div class="icon-grid-card-copy">
+					<h3>Notes stay private</h3>
+					<p>A reader's thoughts often remain trapped in one device or app instead of becoming part of a larger literary context.</p>
+				</div>
+			</article>
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="gray"
+		title="The problem with app-based reading"
+		body="App-based reading gave books digital access, but it kept reading isolated from the web."
+	>
+		<CardGrid columns="3">
+			<Card title="Problem" body="Readers move between apps, stores, social networks and private notes with no shared context." />
+			<Card title="Why it fails" body="The book becomes a closed object. Discovery, discussion and long-term engagement happen somewhere else." />
+			<Card title="Outcome" body="Reading becomes easier to start but harder to connect to people, ideas and future books." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		title="ReaderPub reconnects reading"
+		body="WeRead turns books into browser-native reading experiences connected to notes, discussion, discovery and community."
+	>
+		<CardGrid columns="4">
+			<Card title="Read in the browser" body="Open books instantly without installing another isolated app." />
+			<Card title="Discuss around books" body="Join conversations connected to books, authors, fragments and ideas." />
+			<Card title="Discover through people" body="Find books through communities and readers, not just bestseller lists." />
+			<Card title="Keep context alive" body="Notes, comments and discussions stay connected to the work." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="green"
+		title="Browser-native reading"
+		body="WeRead makes the browser the reading environment, so a book can open from a link and remain part of the public web."
+	>
+		<CardGrid columns="3" class="weread-source-icon-grid">
+			<article class="card icon-grid-card">
+				<SectionIcon type="readerBook" title="Open from a link" />
+				<div class="icon-grid-card-copy">
+					<h3>Open from a link</h3>
+					<p>Readers can start without installing another isolated app.</p>
+				</div>
+			</article>
+			<article class="card icon-grid-card">
+				<SectionIcon type="research" title="Searchable context" />
+				<div class="icon-grid-card-copy">
+					<h3>Searchable context</h3>
+					<p>Books become easier to find, return to and connect with related work.</p>
+				</div>
+			</article>
+			<article class="card icon-grid-card">
+				<SectionIcon type="fan" title="Attached discussion" />
+				<div class="icon-grid-card-copy">
+					<h3>Attached discussion</h3>
+					<p>Conversation can stay connected to the book, author, fragment and idea.</p>
+				</div>
+			</article>
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		title="Why web reading wins"
+		body="The fastest way to start reading, with a full reader experience - no downloads required."
+	>
+		<ul class="weread-source-bullets">
+			<li>Most major book libraries still don't offer a true web reader that matches the quality of native apps.</li>
+			<li>Many readers don't want to install another app or struggle with device-specific readers.</li>
+			<li>With WeRead, a simple link is enough - click and start reading instantly.</li>
+			<li>You get the same long-form reading comfort without setup or friction.</li>
+		</ul>
+		<CardGrid columns="3" class="weread-feature-cards">
+			<article class="card">
+				<h3><span class="weread-card-product">WeRead:</span><br />Reader benefits</h3>
+				<p>A personal reading space built for discovery and continuity.</p>
+				<ul class="weread-source-bullets">
+					<li>Curated shelves, reading plans, and discovery lists.</li>
+					<li>One library across personal, academic, and professional reading.</li>
+					<li>Follow authors, series, and institutions in one feed.</li>
+					<li>Add private or shared notes while reading.</li>
+					<li>Send a book with your notes to another reader or directly to the author.</li>
+					<li>Switch to read-aloud instantly with voices available on your device.</li>
+				</ul>
+				<div class="cta-row">
+					<a class="button button--secondary" href="https://reader.pub/books/protected/?id=90000074" target="_blank" rel="noopener noreferrer">Read sample book with WeRead</a>
+				</div>
+			</article>
+			<article class="card">
+				<h3><span class="weread-card-product">WeBuzz:</span><br />Reading is better together.</h3>
+				<p>Books become more meaningful when they are discussed.</p>
+				<p>With WeBuzz, readers can talk about books, authors, and specific passages. Follow readers whose insights you value and discover new books through conversation.</p>
+				<ul class="weread-source-bullets">
+					<li>Discuss books and authors</li>
+					<li>Comment on specific passages</li>
+					<li>Follow other readers</li>
+					<li>Discover books through discussion</li>
+					<li>Join literary communities</li>
+				</ul>
+				<div class="cta-row">
+					<a class="button" href="/webuzz">Join the Conversation</a>
+				</div>
+			</article>
+			<article class="card">
+				<h3><span class="weread-card-product">BookTree:</span><br />Built for serious reading</h3>
+				<p>Structure, focus, and long-term work with texts.</p>
+				<ul class="weread-source-bullets">
+					<li>Organize books, excerpts, and references across projects.</li>
+					<li>Keep context while reading long and complex materials.</li>
+					<li>Build personal knowledge maps from what you read.</li>
+					<li>Consolidate your notes from multiple books while working on your own manuscript.</li>
+					<li>Designed for sustained attention, not endless scrolling.</li>
+				</ul>
+				<div class="cta-row">
+					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
+				</div>
+			</article>
+		</CardGrid>
+	</Section>
+
+	<Section
+		body="Notes, comments, recommendations and discussions become part of the reading environment instead of disappearing into separate products."
+		class="weread-network-section"
+		tone="green"
+	>
+		<Fragment slot="title">
+			<span class="weread-card-product">WeRead:</span><br />
+			<span class="weread-network-title-line">Reading as part of a network, with connected context</span>
+		</Fragment>
+		<CardGrid columns="3">
+			<Card title="Books connect to readers" body="Reading activity can point people toward communities and conversations around the work." />
+			<Card title="Readers connect to books" body="Discovery can come through people and communities, not only store rankings." />
+			<Card title="Books connect to future work" body="A title can remain active on the web after the first sale or download." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="green"
+		title="Who benefits from living publication reading?"
+	>
+		<CardGrid columns="4" class="weread-benefits-icon-grid">
+			<article class="card weread-benefit-card">
+				<div class="weread-benefit-card-heading">
+					<SectionIcon type="readerBook" title="Readers" />
+					<h3>Readers</h3>
+				</div>
+				<p>Gain immediate access without installation or platform lock-in.</p>
+			</article>
+			<article class="card weread-benefit-card">
+				<div class="weread-benefit-card-heading">
+					<SectionIcon type="author" title="Authors" />
+					<h3>Authors</h3>
+				</div>
+				<p>Maintain stronger visibility into reader engagement.</p>
+			</article>
+			<article class="card weread-benefit-card">
+				<div class="weread-benefit-card-heading">
+					<SectionIcon type="publisher" title="Publishers" />
+					<h3>Publishers</h3>
+				</div>
+				<p>Support modern reading experiences without relying on file delivery.</p>
+			</article>
+			<article class="card weread-benefit-card">
+				<div class="weread-benefit-card-heading">
+					<SectionIcon type="library" title="Institutions" />
+					<h3>Institutions</h3>
+				</div>
+				<p>Provide collections that are easier to access and use.</p>
+			</article>
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="Reading should not begin with a download."
+		body="WeRead helps Living Publications stay accessible, discoverable and active after release."
+		actions={[startReadingAction, exploreReaderPubAction]}
+	/>
+</Base>
+
+<style>
+	.weread-source-hero .hero-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.weread-source-hero .hero-copy > * {
+		margin: 0;
+	}
+
+	.weread-source-hero .section-kicker {
+		display: none;
+	}
+
+	.weread-source-hero h1 {
+		font-size: clamp(36px, 5vw, 56px);
+		line-height: 1.1;
+	}
+
+	.weread-source-hero .readers-hero-product {
+		color: var(--accent);
+	}
+
+	.weread-source-hero .readers-hero-title-small {
+		display: block;
+		color: var(--text);
+	}
+
+	:global(.weread-source-hero .hero-lead) {
+		max-width: 760px;
+		color: var(--text) !important;
+		font-size: 19.5px !important;
+		line-height: 1.45 !important;
+	}
+
+	:global(.weread-source-hero .hero-body) {
+		max-width: 720px;
+		color: var(--accent) !important;
+		font-family: var(--font-display) !important;
+		font-size: clamp(22.1px, 2.72vw, 32.3px) !important;
+		font-weight: 700 !important;
+		line-height: 1.12 !important;
+	}
+
+	.weread-source-hero .hero-image {
+		align-self: center;
+	}
+
+	.weread-comparison-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.weread-list-card {
+		min-height: 0;
+	}
+
+	.weread-model-list {
+		display: grid;
+		gap: 10px;
+		padding-left: 1.15rem;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.weread-model-list li::marker {
+		color: var(--accent);
+	}
+
+	.weread-source-bullets {
+		display: grid;
+		gap: 8px;
+		padding-left: 1.15rem;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.weread-source-bullets li::marker {
+		color: var(--accent);
+	}
+
+	.weread-card-product {
+		color: var(--accent);
+	}
+
+	.weread-network-title-line {
+		display: inline-block;
+	}
+
+	:global(.weread-network-section .section-header) {
+		max-width: 1080px;
+	}
+
+	:global(.weread-network-section .section-header h2) {
+		max-width: 1080px;
+	}
+
+	@media (min-width: 901px) {
+		.weread-network-title-line {
+			white-space: nowrap;
+		}
+	}
+
+	:global(.weread-source-icon-grid .card.icon-grid-card) {
+		display: grid !important;
+		grid-template-columns: 56px minmax(0, 1fr) !important;
+		column-gap: 14px !important;
+		row-gap: 16px !important;
+		align-items: flex-start;
+		width: 100%;
+	}
+
+	:global(.weread-source-icon-grid .icon-grid-card-copy) {
+		display: contents;
+	}
+
+	:global(.weread-source-icon-grid .icon-grid-card > .section-icon) {
+		grid-column: 1;
+		grid-row: 1;
+		align-self: center;
+		width: 56px;
+		height: 56px;
+	}
+
+	:global(.weread-source-icon-grid .icon-grid-card .icon-grid-card-copy > h3) {
+		grid-column: 2;
+		grid-row: 1;
+		align-self: center;
+		margin: 0;
+	}
+
+	:global(.weread-source-icon-grid .icon-grid-card .icon-grid-card-copy > p) {
+		grid-column: 1 / -1;
+	}
+
+	:global(.weread-benefits-icon-grid .weread-benefit-card) {
+		display: grid;
+		grid-template-rows: auto 1fr;
+		gap: 22px;
+		align-content: flex-start;
+		width: 100%;
+	}
+
+	:global(.weread-benefits-icon-grid .weread-benefit-card-heading) {
+		display: grid;
+		grid-template-columns: 50.4px minmax(0, 1fr);
+		column-gap: 16.2px;
+		align-items: flex-start;
+		min-height: 50.4px;
+	}
+
+	:global(.weread-benefits-icon-grid .weread-benefit-card-heading > .section-icon) {
+		align-self: flex-start;
+		width: 50.4px;
+		height: 50.4px;
+	}
+
+	:global(.weread-benefits-icon-grid .weread-benefit-card-heading > h3) {
+		align-self: flex-start;
+		margin: 0;
+		padding-top: 10px;
+		font-size: clamp(1.305rem, 1.8vw, 1.62rem);
+		line-height: 1;
+		white-space: nowrap;
+	}
+
+	:global(.weread-benefits-icon-grid .weread-benefit-card > p) {
+		margin: 0;
+	}
+
+	:global(.weread-feature-cards .card) {
+		--card-bg: #ffffff;
+		--card-tint: #fbfaf8;
+		gap: 14px;
+		min-height: 0;
+	}
+
+	:global(.weread-feature-cards .card h3) {
+		font-size: clamp(1.35rem, 2vw, 1.75rem);
+		line-height: 1.12;
+	}
+
+	:global(.weread-feature-cards .cta-row) {
+		margin-top: auto;
+	}
+
+	@media (max-width: 900px) {
+		.weread-source-hero .hero-copy {
+			align-items: center;
+			text-align: center;
+		}
+
+		:global(.weread-source-hero .hero-lead) {
+			font-size: 15.6px !important;
+		}
+
+		.weread-comparison-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.weread-model-list {
+			text-align: left;
+		}
+
+		.weread-source-bullets {
+			text-align: left;
+		}
+
+		:global(.weread-source-icon-grid .icon-grid-card-copy) {
+			display: grid;
+			gap: 10px;
+		}
+
+		:global(.weread-benefits-icon-grid .icon-grid-card-copy) {
+			display: grid;
+			gap: 10px;
+		}
+	}
+
+	@media (orientation: portrait) {
+		.weread-source-hero .hero-copy {
+			display: contents;
+		}
+
+		.weread-source-hero .section-kicker {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			margin: 0 0 6px;
+			color: var(--accent);
+			font-size: clamp(13px, 2.8vw, 15px);
+			font-weight: 400;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+		}
+
+		.weread-source-hero h1,
+		:global(.weread-source-hero .hero-lead),
+		:global(.weread-source-hero .hero-body) {
+			justify-self: center;
+			text-align: center;
+		}
+	}
+</style>

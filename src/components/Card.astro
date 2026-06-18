@@ -11,7 +11,7 @@ const { title, body, icon, href, class: className = "" } = Astro.props;
 
 {
 	href ? (
-		<a class:list={["card", "card--link", className]} href={href}>
+		<a class:list={["card", "card--link", icon && "card--with-icon", className]} href={href}>
 			{icon && <SectionIcon type={icon} title={`${title} icon`} />}
 			<div class="card-copy">
 				<h3>{title}</h3>
@@ -19,7 +19,7 @@ const { title, body, icon, href, class: className = "" } = Astro.props;
 			</div>
 		</a>
 	) : (
-		<article class:list={["card", className]}>
+		<article class:list={["card", icon && "card--with-icon", className]}>
 			{icon && <SectionIcon type={icon} title={`${title} icon`} />}
 			<div class="card-copy">
 				<h3>{title}</h3>
