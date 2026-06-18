@@ -468,8 +468,8 @@ p {
 		circle at var(--section-green-circle-center),
 		var(--surface-green) 0,
 		var(--surface-green) 36px,
-		var(--surface) 36px,
-		var(--surface) 44px
+		#f1f7f6 36px,
+		#f1f7f6 44px
 	);
 }
 
