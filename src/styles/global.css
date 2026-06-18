@@ -101,8 +101,7 @@ p {
 }
 
 .content {
-	display: grid;
-	gap: 0;
+	display: block;
 }
 
 .nav {
@@ -412,15 +411,29 @@ p {
 .cta-block {
 	position: relative;
 	padding: var(--section-padding) 0;
+	background: transparent;
+	isolation: isolate;
+}
+
+.section::before,
+.hero-section::before,
+.proof-section::before,
+.cta-block::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: calc(50% - 50vw);
+	width: 100vw;
 	background: var(--section-bg, var(--surface));
-	box-shadow: 0 0 0 100vmax var(--section-bg, var(--surface));
-	clip-path: inset(0 -100vmax);
+	z-index: -1;
+	pointer-events: none;
 }
 
 .section--white,
 .section--with-media {
 	--section-bg: var(--surface);
-	--card-tint: #effffc;
+	--card-tint: #eef6f5;
 }
 
 .section--gray {
@@ -480,7 +493,7 @@ p {
 	grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
 	gap: 40px;
 	align-items: center;
-	padding-top: 54px;
+	padding-top: 70px;
 }
 
 .hero-background-spacer {
@@ -499,6 +512,7 @@ p {
 .hero-copy {
 	display: grid;
 	gap: var(--section-gap);
+	align-self: center;
 	min-width: 0;
 }
 
@@ -545,6 +559,8 @@ p {
 
 .hero-media {
 	display: flex;
+	align-items: center;
+	align-self: stretch;
 	justify-content: flex-end;
 	min-width: 0;
 }
@@ -789,7 +805,7 @@ p {
 	}
 
 	.hero-section {
-		padding-top: 18px;
+		padding-top: 23px;
 	}
 
 	.hero-copy > .section-kicker {

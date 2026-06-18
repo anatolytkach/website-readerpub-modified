@@ -1,6 +1,851 @@
 ---
-import PageScaffold from "../components/PageScaffold.astro";
-import { pages } from "../data/pages";
+import Base from "../layouts/Base.astro";
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import SectionIcon from "../components/SectionIcon.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import Section from "../components/sections/Section.astro";
+import { SITE_NAME } from "../consts";
+
+const exploreWeBuzzAction = { label: "Explore WeBuzz", href: "#how-webuzz-works" };
+const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", variant: "secondary" as const };
 ---
 
-<PageScaffold page={pages.webuzz} />
+<Base
+	title={`WeBuzz | ${SITE_NAME}`}
+	description="WeBuzz is the discussion layer for Living Publications on ReaderPub."
+>
+	<section class="network-hero webuzz-legacy-hero">
+		<div class="network-hero-copy">
+			<div class="menu-eyebrow">WEBUZZ</div>
+			<h1 class="network-hero-title"><span class="webuzz-legacy-product">WeBuzz:</span><br />The missing layer of the book industry</h1>
+			<p class="webuzz-legacy-hero-problem">
+				Every major form of media has a social network. Books largely do not. WeBuzz fills that gap.
+			</p>
+			<p class="webuzz-legacy-hero-body">
+				WeBuzz is ReaderPub's integrated literary social network, connecting readers, authors, and publishers through discussions, reactions, and shared reading experiences around every book.
+			</p>
+			<div class="cta-row">
+				<a class="button" href="/wetalk/" target="_blank" rel="noreferrer">Join the conversation in WeBuzz</a>
+			</div>
+		</div>
+		<img
+			class="image-block image-large network-hero-image"
+			src="/images/webuzz.webp"
+			alt="Readers discussing books, authors, and highlighted passages inside a modern literary social network"
+			loading="eager"
+			decoding="async"
+			width="794"
+			height="847"
+		/>
+	</section>
+
+	<section class="hero-background-spacer" aria-hidden="true" style="--hero-background-spacer-position-y: 27%;"></section>
+
+	<section class="section section--gray spec-cards-section webuzz-problem-section section-continuation section-continue-next">
+		<h2>Books are the last major medium without a native social layer</h2>
+		<div class="card-grid webuzz-comparison-grid">
+			<div class="card webuzz-check-card">
+				<h3>Video</h3>
+				<p>YouTube, TikTok and creator communities</p>
+			</div>
+			<div class="card webuzz-check-card">
+				<h3>Music</h3>
+				<p>Spotify, playlists and social sharing</p>
+			</div>
+			<div class="card webuzz-check-card">
+				<h3>Gaming</h3>
+				<p>Twitch, Discord and live communities</p>
+			</div>
+			<div class="card webuzz-books-card">
+				<h3>Books</h3>
+				<p>Fragmented discussions across Reddit, Facebook, Discord, reviews and private groups</p>
+			</div>
+		</div>
+	</section>
+
+	<Section
+		tone="gray"
+		title="Book discussions are fragmented"
+		body="Most conversations about books happen away from the book itself. Discussions become scattered across platforms, communities and private spaces."
+	>
+		<CardGrid columns="4">
+			<Card title="Reviews are too limited" body="Ratings and reviews rarely capture the depth of real discussion." />
+			<Card
+				title="Communities are disconnected"
+				body="Readers gather in many places, but the publication itself is often absent from the conversation."
+			/>
+			<Card title="Authors lose visibility" body="Reader reactions frequently happen outside the author's reach." />
+			<Card title="Discovery becomes fragmented" body="Valuable conversations are difficult for new readers to find." />
+		</CardGrid>
+	</Section>
+
+	<section class="section section--white spec-cards-section webuzz-solution-section section-continuation section-continue-next">
+		<div class="webuzz-legacy-overview-grid">
+			<div class="webuzz-legacy-copy">
+				<h2>Reading does not end on the last page.</h2>
+				<p class="lede">
+					Current platforms separate reading from discussion. Readers talk about books on social networks, forums and messaging platforms, while the publication itself remains disconnected from the conversation.
+				</p>
+				<p>
+					ReaderPub combines publishing, reading, discovery, and discussion in one ecosystem. Through WeBuzz, readers can discuss books, follow thoughtful readers, engage with authors, and participate in literary communities.
+				</p>
+			</div>
+			<div class="card webuzz-overview-card">
+				<div class="webuzz-overview-card-heading">
+					<SectionIcon type="fan" title="Three ways to join the conversation" />
+					<h2>Three ways to join the conversation:</h2>
+				</div>
+				<ul class="bullets webuzz-legacy-list">
+					<li>
+						<strong>Book Discussions</strong>
+						<span>Talk about complete books and reading experiences.</span>
+					</li>
+					<li>
+						<strong>Author Discussions</strong>
+						<span>Discuss authors, ideas, and literary influence.</span>
+					</li>
+					<li>
+						<strong>Passage Discussions</strong>
+						<span>Start conversations around specific excerpts and quotations.</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<Section
+		tone="green"
+		title="Living publications need living discussion"
+		body="A Living Publication remains active after release. Discussion should remain active as well."
+	>
+		<p class="webuzz-supporting-text">
+			As a Living Web Asset, the publication stays connected to readers, discussion, discovery and audience activity. WeBuzz is not another social network; it is the discussion layer for Living Publications.
+		</p>
+		<CardGrid columns="4">
+			<Card title="Discussion" body="Conversation remains connected to the publication." />
+			<Card title="Discovery" body="Readers find books through readers." />
+			<Card title="Community" body="Books become gathering points for ongoing engagement." />
+			<Card title="Visibility" body="Publishers and authors can see activity around their publications." />
+		</CardGrid>
+	</Section>
+
+	<Section id="how-webuzz-works" tone="green" title="How WeBuzz supports living publications">
+		<CardGrid columns="3">
+			<Card title="Book discussions" body="Readers discuss complete works in context." />
+			<Card title="Author discussions" body="Communities can gather around authors and their work." />
+			<Card title="Text fragment discussions" body="Readers can discuss specific passages and ideas." />
+			<Card title="Reader recommendations" body="Discovery can come from readers rather than algorithms." />
+			<Card title="Literary topics" body="Communities can explore broader themes and questions." />
+			<Card
+				title="Institutional communities"
+				body="Universities, libraries and organizations can support discussion around collections and publications."
+			/>
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		title="Discussion extends the life of a publication"
+		body="A publication becomes more valuable when readers continue engaging with it after release."
+	>
+		<CardGrid columns="4">
+			<Card title="Readers" body="Gain places to discuss ideas and recommendations." />
+			<Card title="Authors" body="Maintain visibility into audience engagement." />
+			<Card title="Publishers" body="Keep books active beyond launch." />
+			<Card title="Institutions" body="Support learning and discussion around collections." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		hasMedia
+		class="webuzz-image-section webuzz-readers-section"
+		title="Readers need discussion that stays with the book"
+		body="WeBuzz gives readers a place to discuss books, passages, recommendations and ideas without sending the publication out of view."
+	>
+		<div class="webuzz-image-split">
+			<CardGrid columns="2" class="webuzz-image-cards">
+				<Card title="Book discussion" body="Readers can respond to the complete work in one shared context." />
+				<Card title="Passage discussion" body="Specific ideas and fragments can start focused conversations." />
+				<Card title="Recommendations" body="Readers can discover books through people and communities." />
+				<Card title="Community activity" body="Discussion becomes part of the publication's visible life." />
+			</CardGrid>
+			<img
+				class="image-block webuzz-section-image"
+				src="/images/readers_webuzz.webp"
+				alt="Readers discussing the same book while highlighting passages"
+				loading="lazy"
+				decoding="async"
+				width="950"
+				height="791"
+			/>
+		</div>
+	</Section>
+
+	<Section
+		tone="white"
+		hasMedia
+		class="webuzz-image-section"
+		title="Authors need visibility into real reader response"
+		body="Reviews are only one signal. WeBuzz helps authors see discussion around books, scenes, ideas and passages after publication."
+	>
+		<div class="webuzz-image-split">
+			<CardGrid columns="2" class="webuzz-image-cards">
+				<Card title="Reader reactions" body="Audience response remains connected to the work that sparked it." />
+				<Card title="Questions and context" body="Authors can understand what readers are asking and debating." />
+				<Card title="Ongoing presence" body="The author remains visible after the launch window closes." />
+				<Card title="Deeper engagement" body="Conversation can move beyond ratings into meaning and interpretation." />
+			</CardGrid>
+			<img
+				class="image-block webuzz-section-image"
+				src="/images/author_webuzz.webp"
+				alt="Author participating in a discussion with readers around a book"
+				loading="lazy"
+				decoding="async"
+				width="1024"
+				height="841"
+			/>
+		</div>
+	</Section>
+
+	<Section
+		tone="white"
+		hasMedia
+		class="webuzz-image-section"
+		title="Publishers need books to remain active"
+		body="WeBuzz keeps conversation, discovery and audience activity attached to titles instead of scattering them across separate channels."
+	>
+		<div class="webuzz-image-split">
+			<CardGrid columns="2" class="webuzz-image-cards">
+				<Card title="Beyond launch" body="Books can keep accumulating reader activity after release." />
+				<Card title="Community discovery" body="New readers can find titles through discussion and recommendation." />
+				<Card title="Portfolio visibility" body="Publishers can see where attention is forming around publications." />
+				<Card title="Long-term engagement" body="Discussion helps publications stay useful and visible over time." />
+			</CardGrid>
+			<img
+				class="image-block webuzz-section-image"
+				src="/images/publisher_webuzz.webp"
+				alt="Publisher observing active discussions around multiple books"
+				loading="lazy"
+				decoding="async"
+				width="950"
+				height="791"
+			/>
+		</div>
+	</Section>
+
+	<Section
+		tone="white"
+		hasMedia
+		class="webuzz-image-section webuzz-libraries-section"
+		title="Institutions need shared spaces around knowledge"
+		body="Universities, libraries and organizations can use WeBuzz to support learning, programs and community discussion around collections."
+	>
+		<div class="webuzz-image-split">
+			<CardGrid columns="2" class="webuzz-image-cards">
+				<Card title="Courses" body="Discussion can continue around assigned texts and research materials." />
+				<Card title="Library programs" body="Collections can become active places for engagement." />
+				<Card title="Book clubs" body="Groups can gather around Living Publications instead of separate tools." />
+				<Card title="Knowledge communities" body="Readers can explore ideas together around durable publications." />
+			</CardGrid>
+			<img
+				class="image-block webuzz-section-image"
+				src="/images/libraries_webuzz.webp"
+				alt="University students discussing books in a collaborative reading environment"
+				loading="lazy"
+				decoding="async"
+				width="950"
+				height="769"
+			/>
+		</div>
+	</Section>
+
+	<Section tone="green" class="webuzz-benefits-section" title="Who benefits from living discussion?">
+		<CardGrid columns="4" class="webuzz-matters-grid">
+			<div class="card icon-grid-card">
+				<SectionIcon type="readerBook" title="For readers" />
+				<div class="icon-grid-card-copy">
+					<h3>For readers</h3>
+					<p>Discovery becomes social and discussion stays attached to books.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="author" title="For authors" />
+				<div class="icon-grid-card-copy">
+					<h3>For authors &amp; publishers</h3>
+					<p>Audience activity no longer disappears after the sale. Books gain a longer public life after launch.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="library" title="For institutions" />
+				<div class="icon-grid-card-copy">
+					<h3>For institutions</h3>
+					<p>Collections become part of active literary and educational communities.</p>
+				</div>
+			</div>
+			<div class="card webuzz-readerpub-card">
+				<h3>WeBuzz</h3>
+				<p>WeBuzz connects books, authors, readers, fragments and literary ideas in one network.</p>
+			</div>
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="Books deserve more than reviews."
+		body="WeBuzz helps Living Publications keep discussion, discovery and community connected."
+		actions={[exploreWeBuzzAction, exploreReaderPubAction]}
+	/>
+</Base>
+
+<style>
+	.network-hero {
+		--link: var(--accent);
+		--section-flow-gap: 16px;
+		display: grid;
+		grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+		gap: 32px;
+		align-items: start;
+		padding-top: 70px;
+		padding-bottom: 58px;
+		position: relative;
+		background: transparent;
+		isolation: isolate;
+	}
+
+	.network-hero::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: calc(50% - 50vw);
+		width: 100vw;
+		background: var(--surface);
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.network-hero > * {
+		min-width: 0;
+	}
+
+	.network-hero-copy {
+		display: flex;
+		flex-direction: column;
+		gap: var(--section-flow-gap);
+	}
+
+	.network-hero-copy > * {
+		margin: 0;
+	}
+
+	.menu-eyebrow {
+		display: none;
+	}
+
+	.network-hero-title {
+		font-size: clamp(36px, 5vw, 56px);
+		line-height: 1.1;
+	}
+
+	.network-hero-image {
+		width: 100%;
+		max-width: 540px !important;
+		justify-self: end;
+		margin: 0;
+	}
+
+	.webuzz-legacy-product {
+		color: var(--link);
+	}
+
+	.webuzz-legacy-hero-problem,
+	.webuzz-legacy-hero-body {
+		max-width: 720px;
+		line-height: 1.45;
+	}
+
+	.webuzz-legacy-hero-problem {
+		color: var(--text);
+		font-size: 17.55px;
+	}
+
+	.webuzz-legacy-hero-body {
+		color: var(--link);
+		font-size: 19.5px;
+	}
+
+	.webuzz-legacy-hero .network-hero-image {
+		max-width: 459px !important;
+	}
+
+	.webuzz-problem-section {
+		--link: var(--accent);
+		--card: #fcfaf8;
+		--section-flow-gap: 16px;
+		--section-block-gap-adjust: 12px;
+		display: flex;
+		flex-direction: column;
+		gap: var(--section-flow-gap);
+		align-items: stretch;
+		position: relative;
+		margin-top: 0 !important;
+		padding-top: 58px !important;
+		padding-bottom: 23px !important;
+	}
+
+	.webuzz-problem-section > * {
+		margin: 0 !important;
+	}
+
+	.webuzz-problem-section > .card-grid {
+		margin-top: var(--section-block-gap-adjust) !important;
+	}
+
+	.webuzz-problem-section h2 {
+		max-width: none;
+		font-size: clamp(24px, 3vw, 34px);
+		line-height: 1.12;
+	}
+
+	.webuzz-problem-section .webuzz-comparison-grid {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: var(--section-flow-gap);
+	}
+
+	.webuzz-problem-section .card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: var(--section-flow-gap);
+		height: 100%;
+		min-height: 130px;
+		padding: 18px;
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		background: linear-gradient(135deg, var(--card) 0%, var(--card) 15%, #ffffff 100%);
+	}
+
+	.webuzz-problem-section .card h3 {
+		padding-right: 54px;
+		font-size: clamp(19px, 1.62vw, 26px);
+		line-height: 1.15;
+	}
+
+	.webuzz-problem-section .card p {
+		max-width: 680px;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.28;
+	}
+
+	.webuzz-problem-section .card:not(.webuzz-books-card) h3 {
+		color: var(--link);
+	}
+
+	.webuzz-problem-section .webuzz-books-card::after,
+	.webuzz-problem-section .card:not(.webuzz-books-card)::after {
+		position: absolute;
+		top: 20px;
+		right: 22px;
+		font-family: "Nunito Sans", sans-serif;
+		font-size: 30px;
+		font-weight: 800;
+		line-height: 1;
+	}
+
+	.webuzz-problem-section .webuzz-books-card::after {
+		content: "?";
+		color: var(--text);
+	}
+
+	.webuzz-problem-section .card:not(.webuzz-books-card)::after {
+		content: "\2713";
+		color: var(--link);
+	}
+
+	.webuzz-solution-section {
+		--link: var(--accent);
+		--section-flow-gap: 16px;
+		display: flex;
+		flex-direction: column;
+		gap: var(--section-flow-gap);
+		align-items: stretch;
+		position: relative;
+		margin-top: 0 !important;
+		padding-top: 58px !important;
+		padding-bottom: 58px !important;
+	}
+
+	.webuzz-solution-section > * {
+		margin: 0 !important;
+	}
+
+	.webuzz-legacy-overview-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+		gap: 32px;
+		align-items: start;
+	}
+
+	.webuzz-legacy-copy {
+		display: flex;
+		flex-direction: column;
+		gap: var(--section-flow-gap);
+		min-width: 0;
+	}
+
+	.webuzz-legacy-copy > * {
+		margin: 0 !important;
+	}
+
+	.webuzz-legacy-copy h2,
+	.webuzz-overview-card-heading h2 {
+		font-size: clamp(24px, 3vw, 34px);
+		line-height: 1.12;
+	}
+
+	.webuzz-legacy-copy > p {
+		max-width: 760px;
+		font-size: 18px;
+		line-height: 1.45;
+	}
+
+	.webuzz-legacy-copy > p.lede {
+		color: var(--text);
+	}
+
+	.webuzz-legacy-copy > p:not(.lede) {
+		color: var(--link);
+	}
+
+	.webuzz-overview-card {
+		min-height: 130px;
+		padding: 18px;
+		border-radius: 10px;
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+	}
+
+	.webuzz-overview-card-heading {
+		display: flex !important;
+		align-items: center !important;
+		gap: 18px;
+	}
+
+	.webuzz-overview-card-heading h2 {
+		margin: 0 !important;
+		font-size: clamp(19.2px, 2.4vw, 27.2px);
+	}
+
+	:global(.webuzz-overview-card-heading .section-icon) {
+		display: block;
+		flex: 0 0 auto;
+		width: 56px;
+		height: 56px;
+	}
+
+	.webuzz-legacy-list {
+		display: grid;
+		gap: var(--section-flow-gap);
+		max-width: none;
+		padding-left: 18px;
+	}
+
+	.webuzz-legacy-list li {
+		display: grid;
+		gap: 6px;
+		padding: 0;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.25;
+		list-style: disc;
+	}
+
+	.webuzz-legacy-list li::marker {
+		color: var(--accent);
+	}
+
+	.webuzz-legacy-list strong {
+		color: var(--link);
+		font-family: "Playfair Display", serif;
+		font-size: 20px;
+		line-height: 1.12;
+	}
+
+	.webuzz-legacy-list span {
+		color: var(--muted);
+	}
+
+	.webuzz-comparison-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.webuzz-list-card {
+		min-height: 0;
+	}
+
+	.webuzz-living-card {
+		border-color: var(--accent);
+	}
+
+	.webuzz-model-list {
+		display: grid;
+		gap: 10px;
+		padding-left: 1.15rem;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.webuzz-model-list li::marker {
+		color: var(--accent);
+	}
+
+	.webuzz-living-card .webuzz-model-list {
+		color: var(--accent-dark);
+	}
+
+	.webuzz-supporting-text {
+		max-width: 760px;
+		color: var(--accent-dark);
+		font-size: 1.125rem;
+		line-height: 1.45;
+	}
+
+	:global(.webuzz-benefits-section .webuzz-matters-grid) {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	:global(.webuzz-benefits-section .card) {
+		gap: 16px;
+		min-height: 130px;
+		padding: 18px;
+		border-radius: 10px;
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+	}
+
+	:global(.webuzz-benefits-section .card.icon-grid-card) {
+		display: grid !important;
+		grid-template-columns: 56px minmax(0, 1fr) !important;
+		column-gap: 14px !important;
+		row-gap: 16px !important;
+		align-items: flex-start;
+		width: 100%;
+	}
+
+	:global(.webuzz-benefits-section .icon-grid-card-copy) {
+		display: contents;
+	}
+
+	:global(.webuzz-benefits-section .icon-grid-card > .section-icon) {
+		grid-column: 1;
+		grid-row: 1;
+		align-self: center;
+		width: 56px;
+		height: 56px;
+	}
+
+	:global(.webuzz-benefits-section .icon-grid-card .icon-grid-card-copy > h3) {
+		grid-column: 2;
+		grid-row: 1;
+		align-self: center;
+		margin: 0;
+	}
+
+	:global(.webuzz-benefits-section .icon-grid-card .icon-grid-card-copy > p) {
+		grid-column: 1 / -1;
+	}
+
+	:global(.webuzz-benefits-section .card h3) {
+		font-size: clamp(19px, 1.62vw, 26px);
+		line-height: 1.15;
+	}
+
+	:global(.webuzz-benefits-section .card p) {
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.28;
+	}
+
+	:global(.webuzz-benefits-section .webuzz-readerpub-card) {
+		position: relative;
+		border-color: var(--accent);
+	}
+
+	:global(.webuzz-benefits-section .webuzz-readerpub-card h3) {
+		padding-right: 54px;
+		color: var(--accent);
+	}
+
+	:global(.webuzz-benefits-section .webuzz-readerpub-card p) {
+		color: var(--accent);
+	}
+
+	:global(.webuzz-benefits-section .webuzz-readerpub-card::after) {
+		content: "\2713";
+		position: absolute;
+		top: 20px;
+		right: 22px;
+		color: var(--accent);
+		font-family: "Nunito Sans", sans-serif;
+		font-size: 30px;
+		font-weight: 800;
+		line-height: 1;
+	}
+
+	.webuzz-image-section {
+		align-items: start;
+	}
+
+	:global(.webuzz-image-section .section-header) {
+		width: 100%;
+		max-width: none;
+	}
+
+	:global(.webuzz-image-section .section-header h2) {
+		max-width: none;
+	}
+
+	.webuzz-image-split {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(280px, 36%);
+		gap: 32px;
+		align-items: stretch;
+		width: 100%;
+	}
+
+	.webuzz-image-cards {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.webuzz-section-image {
+		justify-self: end;
+		align-self: center;
+		width: 100%;
+		max-width: 420px;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	@media (max-width: 1180px) {
+		.webuzz-problem-section .webuzz-comparison-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.webuzz-legacy-overview-grid {
+			grid-template-columns: 1fr;
+		}
+
+		:global(.webuzz-benefits-section .webuzz-matters-grid) {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.webuzz-image-split {
+			grid-template-columns: 1fr;
+		}
+
+		.webuzz-section-image {
+			justify-self: center;
+			height: auto;
+		}
+	}
+
+	@media (min-width: 901px) {
+		:global(.webuzz-image-section .section-header h2) {
+			white-space: nowrap;
+		}
+	}
+
+	@media (max-width: 1100px) {
+		.network-hero {
+			padding-top: 23px;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.network-hero {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			padding-bottom: 29px;
+			text-align: center;
+		}
+
+		.network-hero-copy {
+			align-items: center;
+			text-align: center;
+		}
+
+		.network-hero-image {
+			justify-self: center;
+			max-width: min(100%, 520px) !important;
+			margin-inline: auto;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.webuzz-problem-section .webuzz-comparison-grid,
+		:global(.webuzz-benefits-section .webuzz-matters-grid),
+		.webuzz-comparison-grid,
+		.webuzz-image-cards {
+			grid-template-columns: 1fr;
+		}
+
+		.webuzz-model-list {
+			text-align: left;
+		}
+	}
+
+	@media (orientation: portrait) {
+		.menu-eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			width: 100%;
+			margin: 0 0 6px;
+			color: var(--link);
+			font-size: clamp(13px, 2.8vw, 15px);
+			font-weight: 400;
+			letter-spacing: 0.06em;
+			text-align: left;
+			text-transform: uppercase;
+		}
+	}
+
+	@media (orientation: landscape) and (max-width: 900px) {
+		.menu-eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			margin: 0 0 4px;
+			font-size: 12px;
+			letter-spacing: 0.06em;
+		}
+	}
+</style>
+
+<script>
+	const syncWeBuzzHeroBackgroundSpacer = () => {
+		const hero = document.querySelector(".webuzz-legacy-hero");
+		const spacer = hero?.nextElementSibling;
+
+		if (!hero || !spacer?.classList.contains("hero-background-spacer")) {
+			return;
+		}
+
+		const heroImage = hero.querySelector(".network-hero-image");
+		const referenceHeight = heroImage?.getBoundingClientRect().height || hero.getBoundingClientRect().height;
+
+		if (referenceHeight > 0) {
+			spacer.style.setProperty("--hero-background-spacer-height", `${Math.round(referenceHeight * 0.3)}px`);
+		}
+	};
+
+	document.addEventListener("astro:page-load", syncWeBuzzHeroBackgroundSpacer);
+	window.addEventListener("load", syncWeBuzzHeroBackgroundSpacer, { once: true });
+	window.addEventListener("resize", syncWeBuzzHeroBackgroundSpacer, { passive: true });
+	syncWeBuzzHeroBackgroundSpacer();
+</script>
