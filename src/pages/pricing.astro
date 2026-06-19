@@ -1,6 +1,468 @@
 ---
-import PageScaffold from "../components/PageScaffold.astro";
-import { pages } from "../data/pages";
+import Base from "../layouts/Base.astro";
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Section from "../components/sections/Section.astro";
+import { BOOKS_URL, SITE_NAME } from "../consts";
+
+const heroActions = [
+	{ label: "Contact us", href: "/contact" },
+	{ label: "Open catalog", href: BOOKS_URL, external: true, variant: "secondary" as const },
+];
+
+const ctaActions = [
+	{ label: "Publish with ReaderPub", href: "/wepub" },
+	{ label: "Contact us", href: "/contact", variant: "secondary" as const },
+];
 ---
 
-<PageScaffold page={pages.pricing} />
+<Base
+	title={`Pricing | ${SITE_NAME}`}
+	description="ReaderPub pricing supports readers, authors, publishers and institutions."
+>
+	<HeroSection
+		class="pricing-hero"
+		eyebrow="Pricing"
+		lead="Effective Industry pricing should combine room for aggressive creator economics and fairness for unbound institutional publishing."
+		image="/images/pricing.webp"
+		imageAlt="ReaderPub pricing and publishing plans"
+		actions={heroActions}
+		spacerBackgroundPositionY="81%"
+	>
+		<Fragment slot="title">Free for indies.<br />Fair for everyone else.</Fragment>
+		<Fragment slot="body">ReaderPub matches both paths:</Fragment>
+		<ul class="pricing-hero-paths-list">
+			<li>Authors and publishers sell directly to readers with low commission.</li>
+			<li>Institutions maintain collections with adjustable storage fees.</li>
+		</ul>
+	</HeroSection>
+
+	<Section tone="gray" class="pricing-problem-section">
+		<Fragment slot="title">
+			<span class="pricing-problem-title-nowrap">Publishing pricing no longer matches the market</span>
+		</Fragment>
+		<div class="pricing-copy-stack">
+			<p>Different types of publishers use digital publishing platforms in very different ways.</p>
+			<p>Authors and publishers need efficient sales economics.</p>
+			<p>Universities, libraries and organizations need long-term infrastructure, storage and collection management.</p>
+			<p class="pricing-problem-emphasis"><strong>A single pricing model does not fit both.</strong></p>
+		</div>
+	</Section>
+
+	<section class="pricing-source-section pricing-source-model-change-section">
+		<h2>The pricing model change that matters</h2>
+		<div class="model-grid">
+			<div class="card pricing-marketplace-model-card">
+				<h3>Marketplace economics</h3>
+				<ul class="comparison-list">
+					<li>High commission</li>
+					<li>Platform owns the customer</li>
+					<li>Discovery controlled by marketplace ranking</li>
+					<li>Relationship ends after purchase</li>
+				</ul>
+			</div>
+			<div class="card pricing-readerpub-model-card">
+				<h3><span class="pricing-readerpub-word">ReaderPub</span> economics</h3>
+				<ul class="comparison-list">
+					<li>5% platform commission for direct sales</li>
+					<li>Reader relationship stays connected</li>
+					<li>Books remain active as web assets</li>
+					<li>Institutions budget for visible public infrastructure</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<Section tone="green" class="pricing-solution-section" title="Suitable pricing for all industry players">
+		<div class="pricing-copy-stack pricing-solution-copy">
+			<p>ReaderPub separates publishing economics from infrastructure economics.</p>
+			<p>Authors and publishers can use plans designed around publishing and sales activity.</p>
+			<p>Institutions can use plans designed around long-term collections, access management and infrastructure needs.</p>
+		</div>
+	</Section>
+
+	<div class="pricing-source-sections">
+		<section class="pricing-source-section pricing-source-author-plans-section">
+			<h2>For authors and publishers</h2>
+			<p class="lede pricing-author-lede-lines">
+				<span>The old model charges high commissions while breaking the customer connection.</span>
+				<span>ReaderPub keeps the fee low and maintains the reader relationship with the author.</span>
+			</p>
+			<div class="card-grid creator-plan-grid">
+				<div class="card creator-plan-card">
+					<h3>Free Indie</h3>
+					<p class="plan-price">$0 <span>/ month</span></p>
+					<ul class="bullets">
+						<li>Up to 5 active titles</li>
+						<li>5% platform commission on sales</li>
+						<li>Direct web publication</li>
+						<li>Basic reader activity view</li>
+					</ul>
+				</div>
+				<div class="card creator-plan-card">
+					<h3>Creator</h3>
+					<p class="plan-price">$9 <span>/ month</span></p>
+					<ul class="bullets">
+						<li>Up to 50 active titles</li>
+						<li>Expanded publication management</li>
+						<li>Reader relationship tools</li>
+						<li>Everything in Free Indie</li>
+					</ul>
+				</div>
+				<div class="card creator-plan-card">
+					<h3>Publisher</h3>
+					<p class="plan-price">$49 <span>/ month</span></p>
+					<ul class="bullets">
+						<li>Up to 500 active titles</li>
+						<li>Catalog management</li>
+						<li>Advanced publishing workflow</li>
+						<li>Priority onboarding</li>
+					</ul>
+				</div>
+				<div class="card creator-plan-card">
+					<h3>Studio</h3>
+					<p class="plan-price">$199 <span>/ month</span></p>
+					<ul class="bullets">
+						<li>Up to 5,000 active titles</li>
+						<li>Large-scale catalog support</li>
+						<li>API ingest support</li>
+						<li>Advanced reporting</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<Section
+		tone="white"
+		class="pricing-institution-plans-section"
+		title="For institutions"
+		body="Institutions need more than storage. They need collections that can be found, read, searched and discussed on the web."
+	>
+		<div class="card-grid institution-plan-grid">
+			<article class="card">
+				<h3>Starter</h3>
+				<p class="plan-price">$499 <span>/ month</span></p>
+				<ul class="pricing-bullets">
+					<li>For pilots and small collections</li>
+					<li>Up to 5,000 titles</li>
+					<li>Up to 200 GB storage</li>
+					<li>ReaderPub subdomain</li>
+				</ul>
+			</article>
+			<article class="card">
+				<h3>Standard</h3>
+				<p class="plan-price">$1,499 <span>/ month</span></p>
+				<ul class="pricing-bullets">
+					<li>For libraries and departments</li>
+					<li>Up to 50,000 titles</li>
+					<li>Up to 1 TB storage</li>
+					<li>Custom subdomain option</li>
+				</ul>
+			</article>
+			<article class="card">
+				<h3>Enterprise</h3>
+				<a class="button button--secondary pricing-enterprise-contact-button" href="/contact">Talk to us</a>
+				<ul class="pricing-bullets">
+					<li>For university systems and public agencies</li>
+					<li>100,000+ titles</li>
+					<li>SSO/SAML options</li>
+					<li>Dedicated onboarding</li>
+				</ul>
+			</article>
+		</div>
+	</Section>
+
+	<Section tone="green" class="pricing-benefits-section" title="How our pricing model works?">
+		<CardGrid columns="2" class="pricing-benefits-grid">
+			<Card icon="author" title="For authors" body="Keep more revenue from publishing activity." />
+			<Card icon="publisher" title="For publishers" body="Scale catalogs without depending on marketplace economics." />
+			<Card icon="library" title="For institutions" body="Get predictable costs for long-term collections and infrastructure." />
+			<Card icon="readerBook" title="For readers" body="Interacting with authors and predictably lower book prices." />
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="Choose the model that keeps the relationship."
+		body="ReaderPub pricing is built for direct publishing, connected reading and institutional knowledge on the web."
+		actions={ctaActions}
+	/>
+</Base>
+
+<style>
+	.pricing-copy-stack {
+		display: grid;
+		gap: 14px;
+		max-width: 780px;
+	}
+
+	:global(.pricing-hero .hero-body) {
+		max-width: 720px;
+		color: var(--accent);
+		font-family: var(--font-display);
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
+		font-weight: 700;
+		line-height: 1.12;
+	}
+
+	.pricing-hero-paths-list {
+		display: grid;
+		gap: 8px;
+		margin: 0;
+		padding-left: 1.1rem;
+		color: var(--text);
+		font-size: calc(var(--hero-problem-copy-size) * 0.85) !important;
+		line-height: 1.45;
+	}
+
+	.pricing-hero-paths-list li::marker {
+		color: var(--accent);
+	}
+
+	.pricing-copy-stack p {
+		margin: 0;
+		color: var(--muted);
+		font-size: 1.125rem;
+		line-height: 1.45;
+	}
+
+	.pricing-problem-emphasis {
+		color: var(--text) !important;
+		font-weight: 700;
+	}
+
+	.pricing-problem-emphasis strong {
+		font-weight: 700;
+	}
+
+	:global(.pricing-problem-section .section-header),
+	:global(.pricing-problem-section .section-header h2) {
+		max-width: none;
+	}
+
+	.pricing-problem-title-nowrap {
+		white-space: nowrap;
+	}
+
+	.pricing-source-sections {
+		display: grid;
+		gap: 58px;
+		padding: 58px 0;
+		background: transparent;
+	}
+
+	:global(.pricing-source-sections + .pricing-institution-plans-section) {
+		padding-top: 0;
+	}
+
+	.pricing-source-section {
+		display: grid;
+		gap: 28px;
+		background: transparent;
+		border: 0;
+		box-shadow: none;
+	}
+
+	.pricing-source-model-change-section {
+		margin-top: var(--section-padding);
+	}
+
+	:global(.pricing-source-model-change-section + .pricing-solution-section) {
+		margin-top: var(--section-padding);
+	}
+
+	.pricing-source-section > * {
+		margin: 0;
+	}
+
+	.pricing-source-section h2 {
+		max-width: 760px;
+	}
+
+	.pricing-source-section p {
+		max-width: 760px;
+		color: var(--muted);
+		font-size: 1.125rem;
+		line-height: 1.45;
+	}
+
+	.pricing-source-section > .lede {
+		color: var(--accent);
+	}
+
+	.pricing-author-lede-lines {
+		display: grid;
+		gap: 4px;
+		max-width: none !important;
+		color: var(--accent);
+		font-size: min(1.125rem, 2.15vw) !important;
+		line-height: 1.45;
+	}
+
+	.pricing-author-lede-lines > span {
+		white-space: nowrap;
+	}
+
+	.pricing-readerpub-word {
+		color: var(--accent);
+		font-weight: 700;
+	}
+
+	.pricing-source-sections .bullets {
+		display: grid;
+		gap: 9px;
+		padding-left: 1.1rem;
+		color: var(--muted);
+		line-height: 1.45;
+	}
+
+	.pricing-source-sections .bullets li::marker {
+		color: var(--accent);
+	}
+
+	.model-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.comparison-list {
+		display: grid;
+		gap: 10px;
+		padding: 0;
+		list-style: none;
+		color: var(--muted);
+		line-height: 1.45;
+	}
+
+	.comparison-list li {
+		position: relative;
+		padding-left: 24px;
+	}
+
+	.comparison-list li::before {
+		content: "";
+		position: absolute;
+		top: 0.7em;
+		left: 0;
+		width: 8px;
+		height: 8px;
+		border-radius: 999px;
+		background: var(--accent);
+		transform: translateY(-50%);
+	}
+
+	.pricing-marketplace-model-card .comparison-list li::before {
+		background: var(--text);
+	}
+
+	.pricing-readerpub-model-card {
+		--card-tint: #eef6f5;
+		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
+	}
+
+	.pricing-solution-copy p {
+		color: var(--accent) !important;
+		font-size: calc(1.125rem * 1.1) !important;
+	}
+
+	:global(.pricing-benefits-grid) {
+		align-items: stretch;
+	}
+
+	.creator-plan-grid {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.institution-plan-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.creator-plan-card {
+		min-height: 310px;
+	}
+
+	.plan-price {
+		font-family: var(--font-display);
+		font-size: clamp(28px, 3vw, 40px) !important;
+		line-height: 1.05 !important;
+		color: var(--text) !important;
+		font-weight: 700;
+	}
+
+	.plan-price span {
+		font-family: inherit;
+		font-size: 16px;
+		color: var(--muted);
+		font-weight: 400;
+	}
+
+	.pricing-enterprise-contact-button {
+		width: fit-content;
+		align-self: start;
+	}
+
+	.pricing-bullets {
+		display: grid;
+		gap: 9px;
+		padding-left: 1.1rem;
+		color: var(--muted);
+		line-height: 1.45;
+	}
+
+	.pricing-bullets li::marker {
+		color: var(--accent);
+	}
+
+	@media (max-width: 1120px) {
+		.creator-plan-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 900px) {
+		.creator-plan-grid,
+		.institution-plan-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.creator-plan-card {
+			min-height: 0;
+		}
+
+		.pricing-copy-stack p {
+			font-size: 1rem;
+		}
+
+		.pricing-solution-copy p {
+			font-size: calc(1rem * 1.1) !important;
+		}
+
+		.pricing-problem-title-nowrap {
+			white-space: normal;
+		}
+
+		.pricing-source-sections {
+			gap: 42px;
+			padding: 42px 0;
+		}
+
+		.model-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.pricing-source-section {
+			justify-items: center;
+			text-align: center;
+		}
+
+		.pricing-source-sections .bullets,
+		.comparison-list {
+			text-align: left;
+		}
+	}
+</style>
