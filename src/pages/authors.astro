@@ -5,9 +5,11 @@ import CardGrid from "../components/CardGrid.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
+import SpecCardsSection from "../components/sections/SpecCardsSection.astro";
+import SectionIcon from "../components/SectionIcon.astro";
 import { SITE_NAME } from "../consts";
 
-const startPublishingAction = { label: "Start publishing", href: "/wepub" };
+const startPublishingAction = { label: "Start publishing with WePub", href: "/wepub" };
 const pricingAction = { label: "See pricing", href: "/pricing", variant: "secondary" as const };
 const pageActions = [startPublishingAction, pricingAction];
 ---
@@ -18,65 +20,157 @@ const pageActions = [startPublishingAction, pricingAction];
 >
 	<HeroSection
 		class="authors-hero"
-		title="Authors create audiences. Marketplaces own them."
-		lead="Most publishing platforms help authors distribute books, but the long-term relationship with readers often remains controlled by marketplaces and intermediaries."
-		body="ReaderPub helps authors publish Living Publications that remain connected to readers after release."
 		image="/images/author1.webp"
 		imageAlt="Author publishing on the web and staying connected to readers"
-		actions={pageActions}
 		spacerBackgroundPositionY="54%"
-	/>
+	>
+		<Fragment slot="title">Your readers belong to Amazon. They should belong to you.</Fragment>
+		<Fragment slot="lead">
+			Authors create audiences. Marketplaces own them, and charge up to <strong>35%</strong> platform tax.
+		</Fragment>
+		<Fragment slot="body">ReaderPub builds your direct, long-term relationships with readers...</Fragment>
+		<p class="authors-hero-fee-line">...while charging you just <strong class="authors-hero-fee">5%</strong> sales commission.</p>
+		<div class="cta-row">
+			<a class="button" href="/wepub">Start publishing</a>
+			<a class="button button--secondary" href="/pricing">See pricing</a>
+			<a class="button button--secondary author-protection-button" href="/security#control-who-reads">
+				<span class="author-protection-button-label">We protect your book</span>
+				<span class="author-protection-icon" aria-hidden="true">
+					<SectionIcon type="security" title="Protection icon" />
+				</span>
+			</a>
+		</div>
+	</HeroSection>
 
 	<Section
 		tone="gray"
-		title="Authors lose the relationship they create"
-		body="Authors invest time building audiences, but many publishing systems are designed around transactions rather than long-term relationships."
+		class="authors-loss-section"
+		title="What authors lose today"
+		body="The dominant publishing model gives authors distribution, but takes away the relationship."
 	>
-		<CardGrid columns="4">
-			<Card title="Audience ownership" body="Readers often become customers of the platform rather than followers of the author." />
-			<Card title="Reader visibility" body="Authors frequently have limited visibility into reader engagement after publication." />
-			<Card title="Discussion fragmentation" body="Reader conversations move into reviews, social media and private groups." />
-			<Card title="Marketplace dependency" body="Discovery, visibility and access are often controlled by third-party platforms." />
-		</CardGrid>
-	</Section>
-
-	<Section
-		tone="white"
-		title="Most publishing platforms optimize for distribution"
-		body="The industry became extremely efficient at delivering files. It became far less effective at preserving long-term relationships between authors and readers."
-	>
-		<div class="authors-comparison-grid">
-			<article class="card authors-list-card">
-				<div class="card-copy">
-					<h3>Marketplace publishing</h3>
-					<ul class="authors-model-list">
-						<li>Sell book</li>
-						<li>Deliver file</li>
-						<li>Reader disappears</li>
-						<li>Discussion fragments</li>
-						<li>Platform owns relationship</li>
-					</ul>
-				</div>
-			</article>
-			<article class="card authors-list-card authors-living-card">
-				<div class="card-copy">
-					<h3>Living publication model</h3>
-					<ul class="authors-model-list">
-						<li>Publish online</li>
-						<li>Read instantly</li>
-						<li>Discussion stays connected</li>
-						<li>Audience remains visible</li>
-						<li>Relationship continues</li>
-					</ul>
-				</div>
-			</article>
+		<div class="card-grid authors-loss-grid">
+			<div class="card">
+				<h3>Audience ownership</h3>
+				<p>You sell books. The platform owns the customer.</p>
+			</div>
+			<div class="card">
+				<h3>Reader relationships</h3>
+				<p>You rarely know who your readers are, what they finish, what they discuss or what brings them back.</p>
+			</div>
+			<div class="card">
+				<h3>Community</h3>
+				<p>Discussion happens somewhere else, disconnected from your book and your author presence.</p>
+			</div>
+			<div class="card">
+				<h3>Economics</h3>
+				<p>High commissions and marketplace dependency reduce author control.</p>
+			</div>
+			<div class="card">
+				<h3>Context</h3>
+				<p>Reader reactions disappear into reviews, star ratings and external social feeds.</p>
+			</div>
 		</div>
 	</Section>
 
-	<Section
-		tone="green"
+	<SpecCardsSection class="authors-source-section authors-model-section section-continuation section-continue-next">
+		<h2>ReaderPub changes the author model</h2>
+		<div class="model-grid">
+			<div class="card model-card marketplace-model-card">
+				<h3>Marketplace publishing</h3>
+				<ul class="comparison-list">
+					<li>High commission</li>
+					<li>Platform owns the customer</li>
+					<li>Reviews replace conversation</li>
+					<li>Discovery is controlled by marketplace algorithms</li>
+					<li>Readers leave after purchase</li>
+				</ul>
+			</div>
+			<div class="card model-card readerpub-model-card">
+				<h3><span>ReaderPub</span> publishing</h3>
+				<ul class="comparison-list">
+					<li>5% platform commission</li>
+					<li>Author-centered web presence</li>
+					<li>Reader relationships stay connected</li>
+					<li>Discussion stays attached to books and authors</li>
+					<li>Books remain active after publication</li>
+				</ul>
+			</div>
+		</div>
+	</SpecCardsSection>
+
+	<SpecCardsSection class="authors-source-section authors-benefits-section section-continuation">
+		<div class="authors-living-layout">
+			<div class="authors-living-copy">
+				<h2>From one-time sale to living audience</h2>
+				<p class="lede">
+					ReaderPub helps authors treat every book as a long-term web asset: readable, searchable, discussable and connected to future work.
+				</p>
+			</div>
+			<div class="card-grid authors-living-grid">
+				<div class="card icon-grid-card author-benefit-card">
+					<SectionIcon type="dollars" title="Monetize your catalog" />
+					<div class="icon-grid-card-copy">
+						<h2>Monetize your catalog</h2>
+						<p class="author-benefit-lede">Publish on the web - with optional EPUB output when you need it.</p>
+						<ul class="bullets">
+							<li>Direct sales</li>
+							<li>Bundles and promotions (optional)</li>
+							<li>Fan clubs and memberships</li>
+							<li>Web edition plus optional production-ready EPUB delivery.</li>
+						</ul>
+						<p class="author-benefit-note">
+							Save on <strong class="author-save-highlight">5%</strong> commission versus Amazon's 35%. Use your freed-up resources to promote your books on ReaderPub.
+						</p>
+					</div>
+				</div>
+				<div class="card icon-grid-card author-benefit-card">
+					<SectionIcon type="readerBook" title="Sell directly to your readers" />
+					<div class="icon-grid-card-copy">
+						<h2>Sell directly and communicate with your readers.</h2>
+						<p class="author-benefit-lede">Keep your audience, keep your data, and keep more of each sale.</p>
+						<ul class="bullets">
+							<li>Sell web editions and ebooks directly on ReaderPub.</li>
+							<li>5% sales commission, far below Amazon's take.</li>
+							<li>See sales and reader engagement analytics in one place.</li>
+							<li>Receive context-rich reader notes attached to exact passages - not generic comments.</li>
+						</ul>
+					</div>
+				</div>
+				<div class="card icon-grid-card author-benefit-card">
+					<SectionIcon type="author" title="Author benefits" />
+					<div class="icon-grid-card-copy">
+						<h2>Author benefits</h2>
+						<p class="author-benefit-lede">Everything you need to publish, manage, and grow your work.</p>
+						<ul class="bullets">
+							<li>Organize sources, annotations, and drafts in one place.</li>
+							<li>Publish to a public audience or private collaborators.</li>
+							<li>Build authority with transparent references and updates.</li>
+							<li>Keep work structured across projects and editions.</li>
+						</ul>
+					</div>
+				</div>
+				<div class="card icon-grid-card author-benefit-card">
+					<SectionIcon type="research" title="Make your research legible" />
+					<div class="icon-grid-card-copy">
+						<h2>Make your research legible</h2>
+						<p class="author-benefit-lede">Show readers where ideas come from and where they lead.</p>
+						<ul class="bullets">
+							<li>Show sources, references, and context alongside your texts.</li>
+							<li>Present evolving ideas transparently, not as static PDFs.</li>
+							<li>Invite readers, collaborators, and institutions into your work.</li>
+							<li>Turn research and writing into a readable public record.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</SpecCardsSection>
+
+		<Section
+			tone="green"
+			class="authors-relationship-section"
 		title="Living publications create lasting relationships"
-		body="A Living Publication continues generating discovery, engagement and discussion after release. The publication remains part of an ongoing relationship rather than becoming a completed transaction."
+		body="A web-native publication continues generating discovery, engagement and discussion after release. It remains part of an ongoing relationship rather than becoming a completed transaction."
 	>
 		<CardGrid columns="4">
 			<Card title="Visibility" body="Reader activity remains visible." />
@@ -84,54 +178,260 @@ const pageActions = [startPublishingAction, pricingAction];
 			<Card title="Discovery" body="New readers continue finding the work." />
 			<Card title="Continuity" body="The publication remains active over time." />
 		</CardGrid>
-	</Section>
+			<div class="authors-beneficiaries-block">
+					<h2>Who benefits from web-native publishing?</h2>
+				<CardGrid columns="4">
+					<Card icon="author" title="Authors" body="Maintain stronger relationships with readers." />
+					<Card icon="readerBook" title="Readers" body="Stay connected to authors and discussion." />
+					<Card icon="publisher" title="Publishers" body="Create publications that remain active after release." />
+					<Card icon="library" title="Institutions" body="Support publishing models built around long-term engagement." />
+				</CardGrid>
+			</div>
+		</Section>
 
-	<Section tone="green" title="How ReaderPub supports authors">
-		<CardGrid columns="3">
-			<Card title="WePub" body="Create Living Publications instead of distributing isolated files." />
-			<Card title="WeRead" body="Support browser-native reading experiences." />
-			<Card title="WeBuzz" body="Keep discussion connected to books and authors." />
-			<Card title="BookTree" body="Preserve knowledge and references around long-term work." />
-			<Card title="Direct sales" body="Build direct commercial relationships with readers." />
-			<Card title="Secure publishing" body="Protect access through controlled web delivery." />
-		</CardGrid>
-	</Section>
-
-	<Section
-		tone="white"
-		title="Publishing should not end with delivery"
-		body="The value of a publication continues after release. Reader relationships, discovery and discussion can create long-term value when they remain connected to the publication."
-	>
-		<CardGrid columns="4">
-			<Card title="Readers" body="Stay engaged beyond the initial purchase." />
-			<Card title="Authors" body="Build stronger long-term audiences." />
-			<Card title="Publishers" body="Retain more visibility into engagement." />
-			<Card title="Institutions" body="Support sustainable publishing ecosystems." />
-		</CardGrid>
-	</Section>
-
-	<Section tone="green" title="Who benefits from living publications?">
-		<CardGrid columns="4">
-			<Card title="Authors" body="Maintain stronger relationships with readers." />
-			<Card title="Readers" body="Stay connected to authors and discussion." />
-			<Card title="Publishers" body="Create publications that remain active after release." />
-			<Card title="Institutions" body="Support publishing models built around long-term engagement." />
-		</CardGrid>
-	</Section>
-
-	<CtaBlock
-		title="Build relationships, not just downloads."
-		body="ReaderPub helps authors create Living Publications that remain active long after release."
-		actions={pageActions}
-	/>
+		<CtaBlock
+			class="authors-final-cta"
+			title={"Stop renting your audience\nPublish on ReaderPub"}
+			body="Publish and sell your books accessible instantly and keep the reader relationship attached to your work."
+			actions={pageActions}
+		/>
 </Base>
 
 <style>
+	:global(.authors-source-section.section--white) {
+		--card-bg: #ffffff;
+		--card-tint: #fcfaf8;
+		--section-bg: transparent;
+	}
+
+	:global(.authors-source-section.section)::before {
+		content: none;
+	}
+
+	:global(.authors-source-section) {
+		gap: 18px;
+	}
+
+	:global(.authors-source-section.section-continue-next) {
+		padding-bottom: 12px !important;
+	}
+
+	:global(.authors-source-section.section-continuation) {
+		padding-top: 58px !important;
+		padding-bottom: 58px !important;
+		margin-top: 0 !important;
+	}
+
+	:global(.authors-source-section.section-continuation.section-continue-next) {
+		padding-bottom: 12px !important;
+	}
+
+	:global(.authors-source-section) :is(h2, h3, h4) {
+		line-height: 1.12;
+	}
+
+	:global(.authors-source-section) > h2,
+	.authors-living-copy > h2 {
+		font-size: clamp(24px, 3vw, 34px);
+	}
+
+	:global(.authors-source-section) p {
+		font-size: 16px;
+		line-height: 1.28;
+	}
+
+	:global(.authors-source-section) > .lede,
+	.authors-living-copy > .lede {
+		max-width: 680px;
+		color: var(--accent);
+		font-size: 18px;
+		line-height: 1.25;
+	}
+
 	.authors-comparison-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 18px;
 		width: 100%;
+	}
+
+	.authors-loss-grid {
+		display: flex !important;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 18px;
+	}
+
+	.authors-loss-grid > .card {
+		flex: 0 1 calc((100% - 36px) / 3);
+		width: calc((100% - 36px) / 3);
+		height: auto;
+		min-height: 0;
+		align-self: flex-start;
+	}
+
+	.model-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.model-card {
+		min-height: 0;
+	}
+
+	:global(.readerpub-model-card.readerpub-model-card) {
+		background: linear-gradient(135deg, #eef6f5 0%, #eef6f5 18%, var(--card-bg) 100%) !important;
+	}
+
+	:global(.readerpub-model-card h3 span) {
+		color: var(--accent) !important;
+	}
+
+	.comparison-list {
+		list-style: none;
+		display: grid;
+		gap: 10px;
+		padding: 0;
+		margin: 0;
+	}
+
+	.comparison-list li {
+		position: relative;
+		padding-left: 18px;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.3;
+	}
+
+	.comparison-list li::before {
+		content: "";
+		position: absolute;
+		top: 0.58em;
+		left: 0;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--accent);
+	}
+
+	:global(.marketplace-model-card .comparison-list li::before) {
+		background: var(--text) !important;
+	}
+
+	.authors-living-layout {
+		display: grid;
+		gap: 18px;
+	}
+
+	.authors-living-copy {
+		display: grid;
+		gap: 18px;
+	}
+
+	.authors-living-copy > * {
+		margin: 0;
+	}
+
+	.authors-living-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.authors-living-grid .author-benefit-card {
+		align-items: flex-start;
+		width: 100%;
+		min-height: 0;
+		padding: 24px;
+	}
+
+	.authors-living-grid .author-benefit-card h2 {
+		grid-column: 2;
+		grid-row: 1;
+		display: flex;
+		align-items: center;
+		min-height: var(--card-inline-icon-size);
+		margin: 0;
+		color: var(--text);
+		font-size: var(--card-heading-font-size);
+		line-height: var(--card-heading-line-height);
+	}
+
+	:global(.authors-living-grid .author-benefit-card .icon-grid-card-copy > :not(h2)) {
+		grid-column: 1 / -1;
+		grid-row: auto !important;
+	}
+
+	:global(.authors-final-cta h2) {
+		white-space: pre-line !important;
+	}
+
+	.author-benefit-lede,
+	.author-benefit-note {
+		color: var(--accent) !important;
+	}
+
+	.author-save-highlight {
+		display: inline-block;
+		font-size: 1.35em;
+		font-weight: 900;
+		line-height: 1;
+		vertical-align: baseline;
+	}
+
+	.bullets {
+		list-style: disc;
+		display: grid;
+		gap: 6px;
+		max-width: 720px;
+		padding-left: 18px;
+	}
+
+	.bullets li {
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.25;
+		list-style: disc;
+	}
+
+	.bullets li::marker {
+		color: var(--accent);
+	}
+
+	.card .bullets {
+		max-width: none;
+		padding-left: 18px;
+	}
+
+	.footer-cta {
+		display: grid;
+		gap: 18px;
+		padding: 58px 32px;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-card);
+		background: var(--button-light-bg);
+		text-align: center;
+	}
+
+	.footer-cta p {
+		color: var(--muted);
+	}
+
+	.authors-footer-cta {
+		padding-top: 29px !important;
+		padding-bottom: 29px !important;
+	}
+
+	.authors-footer-cta-row {
+		justify-content: center;
+		width: 100%;
+	}
+
+	:global(.authors-beneficiaries-block) {
+		display: grid;
+		gap: 28px;
+		margin-top: var(--section-padding);
 	}
 
 	.authors-list-card {
@@ -159,13 +459,118 @@ const pageActions = [startPublishingAction, pricingAction];
 		color: var(--accent);
 	}
 
+	:global(.authors-hero .hero-copy) {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	:global(.authors-hero .hero-copy > *) {
+		margin: 0;
+	}
+
+	:global(.authors-hero h1) {
+		font-size: clamp(36px, 5vw, 56px);
+		line-height: 1.1;
+	}
+
+	:global(.authors-hero .hero-lead) {
+		color: var(--text) !important;
+		font-size: 19.5px !important;
+		line-height: 1.45 !important;
+	}
+
+	:global(.authors-hero .hero-lead strong) {
+		font-weight: 700;
+		color: inherit;
+	}
+
+	:global(.authors-hero .hero-body) {
+		max-width: 720px;
+		color: var(--accent) !important;
+		font-family: var(--font-display);
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
+		font-weight: 700;
+		line-height: 1.12;
+	}
+
+	:global(.authors-hero .authors-hero-fee-line) {
+		max-width: 760px;
+		color: var(--text);
+		font-size: 19.5px;
+		line-height: 1.45;
+	}
+
+	:global(.authors-hero .authors-hero-fee) {
+		color: var(--accent);
+		font-weight: 700;
+	}
+
+	:global(.authors-hero .button) {
+		min-height: 0;
+		padding: 10px 18px;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	:global(.authors-hero .button--secondary) {
+		background: var(--button-light-bg);
+		color: var(--accent);
+		border-color: var(--accent);
+	}
+
+	:global(.authors-hero .author-protection-button) {
+		display: inline-flex !important;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		padding-top: 6px;
+		padding-bottom: 6px;
+	}
+
+	:global(.authors-hero .author-protection-icon) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 23.8px;
+		height: 23.8px;
+		flex-shrink: 0;
+	}
+
+	:global(.authors-hero .author-protection-icon .section-icon) {
+		display: block;
+		width: 100% !important;
+		height: 100% !important;
+	}
+
 	@media (max-width: 900px) {
 		.authors-comparison-grid {
 			grid-template-columns: 1fr;
 		}
 
+		.model-grid,
+		.authors-living-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.authors-loss-grid > .card {
+			flex-basis: 100%;
+			width: 100%;
+		}
+
 		.authors-model-list {
 			text-align: left;
+		}
+
+		:global(.authors-hero .hero-lead),
+		:global(.authors-hero .authors-hero-fee-line) {
+			font-size: 15.6px !important;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.footer-cta {
+			padding: 28px 24px;
 		}
 	}
 </style>

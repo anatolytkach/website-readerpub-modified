@@ -14,6 +14,7 @@
 	--border: #d8dee8;
 	--card-bg: #ffffff;
 	--card-tint: #fbfaf8;
+	--button-light-bg: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
 	--shadow-soft: 0 16px 36px rgba(20, 23, 31, 0.08);
 	--radius-card: 8px;
 	--radius-control: 999px;
@@ -291,10 +292,12 @@ p {
 
 .nav-signin,
 .nav-cta {
-	min-height: 30px;
-	padding: 7px 12px;
-	font-size: 0.875rem;
-	font-weight: 500;
+	min-height: auto;
+	height: auto;
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
 }
 
 .nav-toggle {
@@ -718,14 +721,24 @@ p {
 
 .button--secondary,
 .button--secondary:visited {
-	background: #ffffff;
+	background: var(--button-light-bg);
 	color: var(--accent);
 	border-color: var(--accent);
 }
 
 .button--secondary:hover {
-	background: var(--accent-soft);
+	background: var(--button-light-bg);
 	color: var(--accent);
+}
+
+.button.nav-cta,
+.button.nav-signin {
+	min-height: auto;
+	height: auto;
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
 }
 
 .section--dark .button--secondary {
@@ -1273,9 +1286,11 @@ p {
 	}
 
 	.nav-cta {
-		min-height: 30px;
-		padding: 7px 12px;
-		font-size: 0.875rem;
+		min-height: auto;
+		height: auto;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1;
 	}
 
 	.nav-actions {
@@ -1331,7 +1346,7 @@ p {
 		flex-shrink: 0;
 	}
 
-	.nav-cta {
+	.button.nav-cta {
 		font-size: 12px;
 		padding: 5px 9px;
 	}

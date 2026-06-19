@@ -38,7 +38,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		title="Why readers abandon books"
 		body="The problem is not access. Readers already have access to more books than they can finish. The problem is isolation."
 	>
-		<CardGrid columns="4" class="weread-source-icon-grid">
+		<CardGrid columns="2" class="weread-source-icon-grid">
 			<article class="card icon-grid-card">
 				<SectionIcon type="readerBook" title="Reading is isolated" />
 				<div class="icon-grid-card-copy">
@@ -68,18 +68,17 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 				</div>
 			</article>
 		</CardGrid>
-	</Section>
-
-	<Section
-		tone="gray"
-		title="The problem with app-based reading"
-		body="App-based reading gave books digital access, but it kept reading isolated from the web."
-	>
-		<CardGrid columns="3">
-			<Card title="Problem" body="Readers move between apps, stores, social networks and private notes with no shared context." />
-			<Card title="Why it fails" body="The book becomes a closed object. Discovery, discussion and long-term engagement happen somewhere else." />
-			<Card title="Outcome" body="Reading becomes easier to start but harder to connect to people, ideas and future books." />
-		</CardGrid>
+		<div class="weread-combined-subsection">
+			<header class="section-header">
+				<h2>The problem with app-based reading</h2>
+				<p class="section-lead">App-based reading gave books digital access, but it kept reading isolated from the web.</p>
+			</header>
+			<CardGrid columns="3">
+				<Card title="Problem" body="Readers move between apps, stores, social networks and private notes with no shared context." />
+				<Card title="Why it fails" body="The book becomes a closed object. Discovery, discussion and long-term engagement happen somewhere else." />
+				<Card title="Outcome" body="Reading becomes easier to start but harder to connect to people, ideas and future books." />
+			</CardGrid>
+		</div>
 	</Section>
 
 	<Section
@@ -198,42 +197,41 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 			<Card title="Readers connect to books" body="Discovery can come through people and communities, not only store rankings." />
 			<Card title="Books connect to future work" body="A title can remain active on the web after the first sale or download." />
 		</CardGrid>
-	</Section>
-
-	<Section
-		tone="green"
-		title="Who benefits from living publication reading?"
-	>
-		<CardGrid columns="4" class="weread-benefits-icon-grid">
-			<article class="card weread-benefit-card">
-				<div class="weread-benefit-card-heading">
-					<SectionIcon type="readerBook" title="Readers" />
-					<h3>Readers</h3>
-				</div>
-				<p>Gain immediate access without installation or platform lock-in.</p>
-			</article>
-			<article class="card weread-benefit-card">
-				<div class="weread-benefit-card-heading">
-					<SectionIcon type="author" title="Authors" />
-					<h3>Authors</h3>
-				</div>
-				<p>Maintain stronger visibility into reader engagement.</p>
-			</article>
-			<article class="card weread-benefit-card">
-				<div class="weread-benefit-card-heading">
-					<SectionIcon type="publisher" title="Publishers" />
-					<h3>Publishers</h3>
-				</div>
-				<p>Support modern reading experiences without relying on file delivery.</p>
-			</article>
-			<article class="card weread-benefit-card">
-				<div class="weread-benefit-card-heading">
-					<SectionIcon type="library" title="Institutions" />
-					<h3>Institutions</h3>
-				</div>
-				<p>Provide collections that are easier to access and use.</p>
-			</article>
-		</CardGrid>
+		<div class="weread-combined-subsection">
+			<header class="section-header">
+				<h2>Who benefits from living publication reading?</h2>
+			</header>
+			<CardGrid columns="4" class="weread-benefits-icon-grid">
+				<article class="card weread-benefit-card">
+					<div class="weread-benefit-card-heading">
+						<SectionIcon type="readerBook" title="Readers" />
+						<h3>Readers</h3>
+					</div>
+					<p>Gain immediate access without installation or platform lock-in.</p>
+				</article>
+				<article class="card weread-benefit-card">
+					<div class="weread-benefit-card-heading">
+						<SectionIcon type="author" title="Authors" />
+						<h3>Authors</h3>
+					</div>
+					<p>Maintain stronger visibility into reader engagement.</p>
+				</article>
+				<article class="card weread-benefit-card">
+					<div class="weread-benefit-card-heading">
+						<SectionIcon type="publisher" title="Publishers" />
+						<h3>Publishers</h3>
+					</div>
+					<p>Support modern reading experiences without relying on file delivery.</p>
+				</article>
+				<article class="card weread-benefit-card">
+					<div class="weread-benefit-card-heading">
+						<SectionIcon type="library" title="Institutions" />
+						<h3>Institutions</h3>
+					</div>
+					<p>Provide collections that are easier to access and use.</p>
+				</article>
+			</CardGrid>
+		</div>
 	</Section>
 
 	<CtaBlock
@@ -327,6 +325,12 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 
 	.weread-source-bullets li::marker {
 		color: var(--accent);
+	}
+
+	.weread-combined-subsection {
+		display: grid;
+		gap: 28px;
+		margin-top: var(--section-padding);
 	}
 
 	.weread-card-product {

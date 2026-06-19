@@ -11,7 +11,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 <Base
 	title={`Transforming the world of books. | ${SITE_NAME}`}
-	description="We make books readable online and keep readers around. No apps, downloads, or platform lock-in."
+	description="We make books readable online and keep readers connected. No apps, downloads, or platform lock-in."
 >
 	<HeroSection
 		class="home-hero"
@@ -26,7 +26,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		spacerBackgroundPositionY="0%"
 	>
 		<p class="home-hero-statement hero-body">
-			We make books readable online and keep readers around.
+			We make books readable online and keep readers connected.
 		</p>
 		<p class="home-hero-strategy">
 			Read instantly. Publish securely. Distribute strategically.
@@ -63,24 +63,24 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	<Section
 		tone="white"
 		class="home-file-model-section"
-		title="The file-first model breaks the relationship"
+		title="The old file-first model breaks the relationship"
 		body="The old publishing model ends when a file is delivered. ReaderPub helps publications remain alive and connected after delivery."
-	>
-		<div class="home-comparison-grid">
-			<article class="card home-list-card">
-				<div class="card-copy">
-					<h3>Old model</h3>
-					<ul class="home-model-list">
-						<li>File uploaded</li>
-						<li>Reader downloads</li>
-						<li>Discussion moves elsewhere</li>
+		>
+			<div class="home-comparison-grid">
+				<article class="card home-list-card home-old-model-card">
+					<div class="card-copy">
+						<h3>Old model</h3>
+						<ul class="home-model-list" style="--home-model-marker-color: var(--text);">
+							<li>File uploaded</li>
+							<li>Reader downloads</li>
+							<li>Discussion moves elsewhere</li>
 						<li>Audience becomes invisible</li>
 						<li>Relationship ends</li>
 					</ul>
-				</div>
-			</article>
-			<article class="card home-list-card">
-				<div class="card-copy">
+					</div>
+				</article>
+				<article class="card home-list-card home-readerpub-model-card" style="background: linear-gradient(135deg, #eef6f5 0%, #eef6f5 18%, var(--card-bg) 100%);">
+					<div class="card-copy">
 					<h3><span class="home-title-accent">ReaderPub</span> model</h3>
 					<ul class="home-model-list">
 						<li>Publication goes live</li>
@@ -96,7 +96,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	<Section tone="white" class="home-web-asset-section" title="What changes when a book becomes a living web asset?">
 		<div class="home-comparison-grid">
-			<article class="card home-comparison-card">
+				<article class="card home-comparison-card" style="background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 18%, var(--card-bg) 100%);">
 				<div class="card-copy">
 					<h3>Traditional publishing</h3>
 					<p class="home-flow home-flow--dark">Publish → Download → Relationship ends</p>
@@ -145,7 +145,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		</CardGrid>
 	</Section>
 
-	<Section tone="green" title="Who benefits from living publications?">
+	<Section tone="green" title="Who benefits from web-native reading?">
 		<CardGrid columns="4">
 			<Card icon="readerBook" title="Readers" body="They get instant access, context, discussion and better discovery." />
 			<Card icon="author" title="Authors" body="They keep more revenue, more audience visibility and more long-term reader connection." />
@@ -201,6 +201,10 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		min-height: 0;
 	}
 
+	:global(.home-readerpub-model-card.home-readerpub-model-card) {
+		background: linear-gradient(135deg, #eef6f5 0%, #eef6f5 18%, var(--card-bg) 100%) !important;
+	}
+
 	.home-flow {
 		color: var(--accent);
 		font-weight: 700;
@@ -249,7 +253,11 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	.home-model-list li::marker {
-		color: var(--accent);
+		color: var(--home-model-marker-color, var(--accent));
+	}
+
+	:global(.home-old-model-card .home-model-list li::marker) {
+		color: var(--text) !important;
 	}
 
 	@media (max-width: 900px) {

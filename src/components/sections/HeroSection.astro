@@ -5,7 +5,7 @@ import type { PageAction } from "../../data/pages";
 interface Props {
 	eyebrow?: string;
 	title?: string;
-	lead: string;
+	lead?: string;
 	body?: string;
 	image?: string;
 	imageAlt?: string;
@@ -31,6 +31,7 @@ const spacerStyle = spacerBackgroundPositionY
 	: undefined;
 const hasEyebrowSlot = Astro.slots.has("eyebrow");
 const hasTitleSlot = Astro.slots.has("title");
+const hasLeadSlot = Astro.slots.has("lead");
 const hasBodySlot = Astro.slots.has("body");
 ---
 
@@ -43,7 +44,7 @@ const hasBodySlot = Astro.slots.has("body");
 		)}
 		{(title || hasTitleSlot) && <h1>{hasTitleSlot ? <slot name="title" /> : title}</h1>}
 		<slot name="tagline" />
-		<p class="hero-lead">{lead}</p>
+		{(lead || hasLeadSlot) && <p class="hero-lead">{hasLeadSlot ? <slot name="lead" /> : lead}</p>}
 		{hasBodySlot ? <p class="hero-body"><slot name="body" /></p> : body && <p class="hero-body">{body}</p>}
 		<slot />
 		{actions.length > 0 && (
