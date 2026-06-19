@@ -74,9 +74,9 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		</CardGrid>
 	</Section>
 
-	<Section tone="green" title="What changes when you publish on ReaderPub">
+		<Section tone="white" class="wepub-path-section" title="What changes when you publish on ReaderPub">
 		<div class="wepub-comparison-grid">
-			<article class="card wepub-list-card">
+			<article class="card wepub-list-card wepub-old-path-card">
 				<div class="card-copy">
 					<h3>Old publishing path</h3>
 					<ul class="wepub-model-list">
@@ -87,9 +87,9 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 					</ul>
 				</div>
 			</article>
-			<article class="card wepub-list-card">
+			<article class="card wepub-list-card wepub-readerpub-path-card">
 				<div class="card-copy">
-					<h3>ReaderPub path</h3>
+					<h3><span>ReaderPub</span> path</h3>
 					<ul class="wepub-model-list">
 						<li>Create a browser-readable publication</li>
 						<li>Build an author-centered web presence</li>
@@ -101,7 +101,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		</div>
 	</Section>
 
-	<Section tone="white" title="Lower commission, better reader connection, longer book lifecycle">
+	<Section tone="green" class="wepub-economics-section" title="Better economics, stronger connections, longer-lasting value">
 		<CardGrid columns="3">
 			<Card title="Lower commission" body="ReaderPub uses a 5% platform commission for direct sales." />
 			<Card
@@ -123,7 +123,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		<CardGrid columns="3">
 			<Card title="Web-native publishing" body="Publish books as web destinations rather than isolated downloads." />
 			<Card title="Reader visibility" body="Maintain visibility into publication activity after release." />
-			<Card title="Secure publishing" body="Protect access through controlled web delivery." />
+			<Card title="Anti-piracy" body="Protect access through obfuscated web delivery." />
 			<Card title="Direct sales" body="Build direct commercial relationships with readers." />
 			<Card title="EPUB generation" body="Generate EPUB editions when external distribution requires them." />
 			<Card title="Long-term engagement" body="Keep publications connected to readers after launch." />
@@ -134,14 +134,14 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		tone="green"
 		title="From digital files to living web assets"
 		body="ReaderPub helps publishers transform books and knowledge publications into living web assets that remain active after release."
-	>
-		<CardGrid columns="4">
-			<Card title="Readers" body="Continue engaging with the publication." />
-			<Card title="Authors" body="Maintain stronger reader relationships." />
-			<Card title="Publishers" body="Gain visibility beyond the moment of sale." />
-			<Card title="Institutions" body="Publish knowledge that remains discoverable and useful over time." />
-		</CardGrid>
-	</Section>
+		>
+			<CardGrid columns="4">
+				<Card icon="readerBook" title="Readers" body="Continue engaging with the publication." />
+				<Card icon="author" title="Authors" body="Maintain stronger reader relationships." />
+				<Card icon="publisher" title="Publishers" body="Gain visibility beyond the moment of sale." />
+				<Card icon="library" title="Institutions" body="Publish knowledge that remains discoverable and useful over time." />
+			</CardGrid>
+		</Section>
 
 	<CtaBlock
 		title="Publish living web assets."
@@ -160,6 +160,30 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 	.wepub-list-card {
 		min-height: 0;
+	}
+
+	.wepub-old-path-card {
+		background: var(--card-bg);
+	}
+
+	.wepub-old-path-card .wepub-model-list li::marker {
+		color: var(--text);
+	}
+
+	.wepub-readerpub-path-card {
+		background: linear-gradient(135deg, #eef6f5 0%, #eef6f5 18%, var(--card-bg) 100%);
+	}
+
+	.wepub-readerpub-path-card h3 span {
+		color: var(--accent);
+	}
+
+	:global(.section.wepub-path-section) {
+		padding-top: calc(var(--section-padding) * 0.4375) !important;
+	}
+
+	:global(.wepub-economics-section .card) {
+		--card-tint: #fbfaf8;
 	}
 
 	.wepub-model-list {
