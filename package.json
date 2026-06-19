@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "deploy:staging": "npm run build && wrangler pages deploy dist --project-name readerpub-website-staging --branch develop",
     "preview": "astro preview",
     "astro": "astro"
   },
