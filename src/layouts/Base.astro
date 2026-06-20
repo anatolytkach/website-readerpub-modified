@@ -36,5 +36,24 @@ const {
 			</main>
 			<Footer />
 		</div>
+		<a href="/kb" class="kb-fab" title="Knowledge Base" aria-label="Knowledge Base" transition:persist>?</a>
+		<script is:inline>
+			(() => {
+				const fab = document.querySelector(".kb-fab");
+
+				const updateFab = () => {
+					if (!fab) return;
+
+					const isKb = window.location.pathname === "/kb" || window.location.pathname === "/kb/";
+					fab.href = isKb ? "/" : "/kb";
+					fab.title = isKb ? "Home" : "Knowledge Base";
+					fab.setAttribute("aria-label", isKb ? "Home" : "Knowledge Base");
+					fab.textContent = isKb ? "✕" : "?";
+				};
+
+				updateFab();
+				document.addEventListener("astro:page-load", updateFab);
+			})();
+		</script>
 	</body>
 </html>

@@ -17,6 +17,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 	description="WePub helps authors and publishers create living publications that remain connected to readers, discussion and discovery after release."
 >
 	<HeroSection
+		eyebrow="WePub"
 		lead="Most publishing systems are built to distribute files through marketplaces, surrendering the book audience to the marketplace."
 		image="/images/wepub.webp"
 		imageAlt="WePub publishing workflow from manuscript to live book"
@@ -278,6 +279,12 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 	:global(.section.wepub-path-section) {
 		padding-top: calc(var(--section-padding) * 0.4375) !important;
+	}
+
+	@media (orientation: portrait) {
+		:global(.section.wepub-path-section) {
+			padding-top: var(--section-padding) !important;
+		}
 	}
 
 	:global(.wepub-economics-section .card) {

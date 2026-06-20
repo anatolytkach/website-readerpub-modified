@@ -10,15 +10,26 @@ const {
 	label,
 	variant = "primary",
 	external = false,
+	modalTarget,
 	class: className = "",
 } = Astro.props;
+
+const classes = ["button", variant === "secondary" && "button--secondary", className];
 ---
 
-<a
-	class:list={["button", variant === "secondary" && "button--secondary", className]}
-	href={href}
-	target={external ? "_blank" : undefined}
-	rel={external ? "noopener noreferrer" : undefined}
->
-	{label}
-</a>
+{
+	modalTarget ? (
+		<button class:list={classes} type="button" data-modal-open={modalTarget}>
+			{label}
+		</button>
+	) : (
+		<a
+			class:list={classes}
+			href={href}
+			target={external ? "_blank" : undefined}
+			rel={external ? "noopener noreferrer" : undefined}
+		>
+			{label}
+		</a>
+	)
+}

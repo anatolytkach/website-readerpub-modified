@@ -30,6 +30,7 @@ export interface PageAction {
 	href: string;
 	variant?: ActionVariant;
 	external?: boolean;
+	modalTarget?: string;
 }
 
 export interface PageCard {
@@ -551,32 +552,22 @@ export const pages = {
 		eyebrow: "Get started",
 		heroTitle: "Tell us what you want to publish.",
 		heroLead:
-			"ReaderPub can support books, catalogs, institutional collections and community publishing programs.",
+			"ReaderPub supports books, catalogs, institutional collections and community publishing programs.",
 		heroBody:
-			"This base keeps contact simple while the production onboarding form is redesigned in a later pass.",
+			"The publishing process, as well as our approach to reading, distributing, discussing, and selling books is detailed in our knowledge base.",
 		heroSpacerBackgroundPositionY: "90%",
-		image: "/images/onboarding.webp",
+		image: "/images/contact.webp",
 		imageAlt: "ReaderPub onboarding",
-		actions: [{ label: "Email ReaderPub", href: "mailto:hello@reader.pub" }, { label: "Publish now", href: PUBLISH_URL, external: true, variant: "secondary" }],
-		sections: [
-			{
-				tone: "gray",
-				kicker: "Contact paths",
-				title: "Start with the publishing path that fits you.",
-				body:
-					"The production form from the old site was intentionally not copied into this base; this route is ready for a redesigned form.",
-				columns: "3",
-				cards: [
-					{ title: "Authors", body: "Publish books and build a direct reader presence.", icon: "author" },
-					{ title: "Publishers", body: "Move catalogs and programs to a web-native model.", icon: "publisher" },
-					{ title: "Institutions", body: "Build searchable reading libraries and public collections.", icon: "library" },
-				],
-			},
+		actions: [
+			{ label: "Knowledge base", href: "/kb", variant: "secondary" },
+			{ label: "See pricing", href: "/pricing", variant: "secondary" },
+			{ label: "Request live Pilot", href: "#request-onboarding-modal", modalTarget: "#request-onboarding-modal" },
 		],
+		sections: [],
 		cta: {
-			title: "Ready to start?",
+			title: "Not ready for a live pilot yet?",
 			body: "Send the ReaderPub team a short note about your publishing needs.",
-			actions: [{ label: "Email ReaderPub", href: "mailto:hello@reader.pub" }],
+			actions: [{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" }],
 		},
 	},
 	kb: {
@@ -584,9 +575,14 @@ export const pages = {
 		description: "ReaderPub knowledge base for web-native publishing, reading and distribution.",
 		eyebrow: "Knowledge base",
 		heroTitle: "Short answers about ReaderPub.",
-		heroLead:
-			"Use this page as the base for product, publishing, security and pricing documentation.",
+		heroLead: "",
 		heroSpacerBackgroundPositionY: "50%",
+		image: "/images/kb.webp",
+		imageAlt: "ReaderPub knowledge base",
+		actions: [
+			{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" },
+			{ label: "Request ReaderPub Pilot", href: "/contact", variant: "secondary" },
+		],
 		sections: [
 			{
 				tone: "white",
@@ -607,8 +603,8 @@ export const pages = {
 		],
 		cta: {
 			title: "Need a direct answer?",
-			body: "Contact ReaderPub about publishing or institutional use.",
-			actions: [{ label: "Contact us", href: "/contact" }],
+			body: "If you haven't found a suitable answer here, ask our team.",
+			actions: [{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" }],
 		},
 	},
 	terms: {

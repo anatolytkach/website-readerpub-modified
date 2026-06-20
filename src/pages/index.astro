@@ -232,6 +232,16 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		padding-top: calc(var(--section-padding) * 0.6667);
 	}
 
+	@media (orientation: portrait) {
+		:global(.home-file-model-section) {
+			padding-bottom: var(--section-padding);
+		}
+
+		:global(.home-web-asset-section) {
+			padding-top: var(--section-padding);
+		}
+	}
+
 	:global(.home-web-asset-section .section-header),
 	:global(.home-web-asset-section .section-header h2) {
 		max-width: none;

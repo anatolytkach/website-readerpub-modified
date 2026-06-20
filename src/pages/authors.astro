@@ -20,6 +20,7 @@ const pageActions = [startPublishingAction, pricingAction];
 >
 	<HeroSection
 		class="authors-hero"
+		eyebrow="Authors"
 		image="/images/author1.webp"
 		imageAlt="Author publishing on the web and staying connected to readers"
 		spacerBackgroundPositionY="54%"
@@ -224,6 +225,17 @@ const pageActions = [startPublishingAction, pricingAction];
 
 	:global(.authors-source-section.section-continuation.section-continue-next) {
 		padding-bottom: 12px !important;
+	}
+
+	@media (orientation: portrait) {
+		:global(.authors-source-section.section-continuation) {
+			padding-top: var(--section-padding) !important;
+			padding-bottom: var(--section-padding) !important;
+		}
+
+		:global(.authors-source-section.section-continuation.section-continue-next) {
+			padding-bottom: 12px !important;
+		}
 	}
 
 	:global(.authors-source-section) :is(h2, h3, h4) {
@@ -553,6 +565,28 @@ const pageActions = [startPublishingAction, pricingAction];
 			grid-template-columns: 1fr;
 		}
 
+		.authors-living-copy,
+		.authors-living-grid,
+		.authors-living-grid .author-benefit-card {
+			min-width: 0;
+			max-width: 100%;
+		}
+
+		.authors-living-copy > h2 {
+			justify-self: center;
+			margin-right: auto;
+			margin-left: auto;
+			text-align: center;
+		}
+
+		.authors-living-copy > h2,
+		.authors-living-copy > .lede,
+		.authors-living-grid .author-benefit-card :is(h2, p, li) {
+			max-width: 100%;
+			white-space: normal;
+			overflow-wrap: break-word;
+		}
+
 		.authors-loss-grid > .card {
 			flex-basis: 100%;
 			width: 100%;
@@ -565,6 +599,10 @@ const pageActions = [startPublishingAction, pricingAction];
 		:global(.authors-hero .hero-lead),
 		:global(.authors-hero .authors-hero-fee-line) {
 			font-size: 15.6px !important;
+		}
+
+		:global(.authors-hero .authors-hero-fee-line) {
+			order: 7;
 		}
 	}
 

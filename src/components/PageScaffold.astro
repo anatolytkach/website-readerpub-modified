@@ -14,6 +14,7 @@ interface Props {
 
 const { page } = Astro.props;
 const heroTaglineParts = page.heroTagline?.split(" | ") ?? [];
+const hasHeroBodySlot = Astro.slots.has("hero-body");
 ---
 
 <Base title={page.metaTitle} description={page.description}>
@@ -21,7 +22,7 @@ const heroTaglineParts = page.heroTagline?.split(" | ") ?? [];
 		eyebrow={page.eyebrow}
 		title={page.heroTitle}
 		lead={page.heroLead}
-		body={page.heroBody}
+		body={hasHeroBodySlot ? undefined : page.heroBody}
 		image={page.image}
 		imageAlt={page.imageAlt}
 		actions={page.actions}
@@ -36,6 +37,11 @@ const heroTaglineParts = page.heroTagline?.split(" | ") ?? [];
 					</>
 				))}
 			</p>
+		)}
+		{hasHeroBodySlot && (
+			<Fragment slot="body">
+				<slot name="hero-body" />
+			</Fragment>
 		)}
 	</HeroSection>
 
@@ -55,4 +61,6 @@ const heroTaglineParts = page.heroTagline?.split(" | ") ?? [];
 	))}
 
 	{page.cta && <CtaBlock {...page.cta} />}
+
+	<slot />
 </Base>

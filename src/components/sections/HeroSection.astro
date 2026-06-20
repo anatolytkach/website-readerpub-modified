@@ -45,7 +45,7 @@ const hasBodySlot = Astro.slots.has("body");
 		{(title || hasTitleSlot) && <h1>{hasTitleSlot ? <slot name="title" /> : title}</h1>}
 		<slot name="tagline" />
 		{(lead || hasLeadSlot) && <p class="hero-lead">{hasLeadSlot ? <slot name="lead" /> : lead}</p>}
-		{hasBodySlot ? <p class="hero-body"><slot name="body" /></p> : body && <p class="hero-body">{body}</p>}
+		{hasBodySlot ? <div class="hero-body"><slot name="body" /></div> : body && <p class="hero-body">{body}</p>}
 		<slot />
 		{actions.length > 0 && (
 			<div class="cta-row">

@@ -530,6 +530,15 @@ const ctaActions = [
 		margin-top: 0 !important;
 	}
 
+	@media (orientation: portrait) {
+		.institutions-solution-section,
+		.institutions-benefits-section,
+		.institutions-expanded-section {
+			padding-top: var(--section-padding) !important;
+			padding-bottom: var(--section-padding) !important;
+		}
+	}
+
 	.institutions-solution-section > h2,
 	.institutions-benefits-section > h2 {
 		margin: 0;
@@ -693,6 +702,7 @@ const ctaActions = [
 		grid-row: 1;
 		align-self: center;
 		margin: 0;
+		text-align: left;
 	}
 
 	.institutions-expanded-section .icon-grid-card .icon-grid-card-copy > :not(h2):not(h3):not(h4) {
@@ -705,21 +715,25 @@ const ctaActions = [
 	}
 
 	.institutions-access-card-heading {
-		display: inline-grid;
-		grid-template-columns: 56px minmax(0, max-content);
-		column-gap: var(--card-icon-gap);
+		--institutions-access-icon-size: 56px;
+		display: flex;
+		gap: var(--card-icon-gap);
 		align-items: center;
-		justify-self: center;
-		justify-items: start;
+		justify-content: center;
+		width: 100%;
+		max-width: 100%;
 		text-align: left;
 	}
 
 	.institutions-access-card-heading > :global(.section-icon) {
-		width: 56px;
-		height: 56px;
+		flex: 0 0 var(--institutions-access-icon-size);
+		width: var(--institutions-access-icon-size);
+		height: var(--institutions-access-icon-size);
 	}
 
 	.institutions-access-card-heading > h3 {
+		flex: 0 1 auto;
+		max-width: min(16em, calc(100% - var(--institutions-access-icon-size) - var(--card-icon-gap)));
 		margin: 0;
 		text-align: left !important;
 	}
@@ -801,25 +815,32 @@ const ctaActions = [
 		}
 	}
 
-	@media (max-width: 900px) {
+	@media (max-width: 1100px) {
+		.network-hero {
+			padding-top: 23px;
+		}
+
 		.menu-eyebrow {
 			display: inline-flex;
 			align-items: center;
 			gap: 8px;
-			margin: 0 0 6px;
-			color: var(--accent);
-			font-size: clamp(13px, 2.8vw, 15px);
-			font-weight: 400;
-			letter-spacing: 0.06em;
+			margin: -8px 0 6px !important;
+			color: #6f7b8a;
+			font-family: var(--font-body);
+			font-size: clamp(0.8rem, 1.6vw, 0.9rem);
+			font-weight: 300;
+			letter-spacing: 0.08em;
 			line-height: 1.2;
 			text-transform: uppercase;
 		}
+	}
 
+	@media (max-width: 900px) {
 		.network-hero {
 			grid-template-columns: 1fr;
 			justify-items: center;
 			margin-bottom: 0;
-			padding-top: 70px;
+			padding-top: 23px;
 			padding-bottom: var(--section-padding);
 			text-align: center;
 		}
@@ -831,6 +852,58 @@ const ctaActions = [
 
 		.network-hero-title {
 			font-size: clamp(30.6px, 4.25vw, 47.6px) !important;
+		}
+
+		.institutions-expanded-section .icon-grid-card {
+			--card-heading-font-size: clamp(1.05rem, 5.2vw, 1.35rem);
+			--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
+			display: flex !important;
+			flex-flow: row wrap;
+			justify-content: center !important;
+			align-items: center;
+			column-gap: var(--card-icon-gap) !important;
+			row-gap: 18px !important;
+			text-align: center;
+		}
+
+		.institutions-expanded-section .icon-grid-card > :global(.section-icon) {
+			flex: 0 0 var(--card-inline-icon-size);
+			align-self: center;
+			width: var(--card-inline-icon-size) !important;
+			height: var(--card-inline-icon-size) !important;
+		}
+
+		.institutions-expanded-section .icon-grid-card .icon-grid-card-copy {
+			display: contents;
+		}
+
+		.institutions-expanded-section .icon-grid-card .icon-grid-card-copy > h3 {
+			flex: 0 1 auto;
+			max-width: calc(100% - var(--card-inline-icon-size) - var(--card-icon-gap));
+			font-size: var(--card-heading-font-size);
+			text-align: left;
+		}
+
+		.institutions-expanded-section .icon-grid-card .icon-grid-card-copy > :not(h2):not(h3):not(h4) {
+			flex: 0 0 100%;
+		}
+
+		.institutions-access-card-heading {
+			--card-heading-font-size: clamp(1.05rem, 5.2vw, 1.35rem);
+			--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
+			--institutions-access-icon-size: var(--card-inline-icon-size);
+			text-align: left;
+		}
+
+		.institutions-access-card-heading > :global(.section-icon) {
+			width: var(--card-inline-icon-size) !important;
+			height: var(--card-inline-icon-size) !important;
+		}
+
+		.institutions-access-card-heading > h3 {
+			max-width: min(16em, calc(100% - var(--card-inline-icon-size) - var(--card-icon-gap)));
+			font-size: var(--card-heading-font-size);
+			text-align: left !important;
 		}
 
 		.network-hero-lede {

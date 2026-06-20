@@ -61,6 +61,7 @@ const featuredBooks = [
 >
 	<HeroSection
 		class="security-hero"
+		eyebrow="Security"
 		title="Protect access, not just files."
 		lead="Traditional ebook security focuses on DRM – the downloaded file is bound to the device."
 		image="/images/security.webp"
@@ -243,7 +244,7 @@ const featuredBooks = [
 				</div>
 				<div class="security-position-solution">
 					<p>
-						ReaderPub removes the most scalable starting point for large-scale piracy: <span class="security-position-solution-contrast">we don't delive a complete, reusable ebook file to the end user.</span>
+						ReaderPub removes the most scalable starting point for large-scale piracy:<br /><span class="security-position-solution-contrast">we don't deliver a complete, reusable ebook file to the end user.</span>
 					</p>
 					<p>
 						At that, our web-accessible book editions are fully protected against serial downloading or copying.
@@ -285,6 +286,13 @@ const featuredBooks = [
 		margin-top: 0 !important;
 		padding-top: 58px !important;
 		padding-bottom: 58px !important;
+	}
+
+	@media (orientation: portrait) {
+		:global(.security-source-section) {
+			padding-top: var(--section-padding) !important;
+			padding-bottom: var(--section-padding) !important;
+		}
 	}
 
 	:global(.security-first-section) {
@@ -801,10 +809,21 @@ const featuredBooks = [
 	}
 
 	@media (max-width: 980px) {
+		.security-hero-access-copy {
+			order: 6;
+		}
+
 		.security-control-layout,
+		.security-source-distribution-layout,
 		.security-books-layout,
 		.security-position-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.security-source-distribution-copy > h2 {
+			align-self: center;
+			width: 100%;
+			text-align: center;
 		}
 
 		.security-books-copy {

@@ -1,6 +1,486 @@
 ---
+import KbHelpModal from "../components/KbHelpModal.astro";
 import PageScaffold from "../components/PageScaffold.astro";
+import SectionIcon from "../components/SectionIcon.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
 import { pages } from "../data/pages";
+
+const page = {
+	...pages.kb,
+	sections: [],
+	cta: undefined,
+};
+
+const faqCategories = [
+	{
+		title: "ReaderPub Platform",
+		icon: "program",
+		questions: [
+			{
+				question: "What is ReaderPub?",
+				answer:
+					"ReaderPub is a web-native publishing network that turns books and knowledge publications from static files into live web assets that can be read, searched, discussed, shared and connected to readers.",
+			},
+			{
+				question: "What does web-native publishing mean?",
+				answer:
+					"Web-native publishing means a book or publication opens directly in the browser, has a web presence, and can stay connected to discovery, discussion, author presence and audience activity.",
+			},
+			{
+				question: "Is ReaderPub only an ebook store?",
+				answer:
+					"No. ReaderPub includes publishing, reading, discussion and knowledge layers. Commerce is part of the model, but the larger goal is keeping publications active on the web.",
+			},
+			{
+				question: "What products are included in ReaderPub?",
+				answer:
+					"ReaderPub includes WePub for publishing, WeRead for browser-based reading, WeBuzz for book discussion and discovery, and BookTree for structured notes, excerpts and research.",
+			},
+			{
+				question: "What makes ReaderPub different from traditional digital publishing?",
+				answer:
+					"Traditional publishing often ends with file delivery. ReaderPub keeps books and publications readable, searchable, discussable and connected after release.",
+			},
+		],
+	},
+	{
+		title: "For Readers",
+		icon: "readerBook",
+		questions: [
+			{
+				question: "How can I start reading on ReaderPub?",
+				answer:
+					"Open the ReaderPub catalog, choose a book, and start reading directly in WeRead, ReaderPub's browser-based reading layer. No separate reading app is required.",
+			},
+			{
+				question: "How large is the ReaderPub catalog?",
+				answer:
+					"ReaderPub includes a catalog of more than 60,000 books, including public-domain works available for browser-based reading.",
+			},
+			{
+				question: "What is WeRead?",
+				answer:
+					"WeRead is ReaderPub's browser-native reader. It lets books open from a link and keeps reading connected to notes, discussion, discovery and community.",
+			},
+			{
+				question: "Do I need to download books before reading?",
+				answer:
+					"No. ReaderPub is designed for web reading. Books can open directly in the browser, so readers can start immediately without downloading a separate file.",
+			},
+			{
+				question: "Is ReaderPub free for readers?",
+				answer:
+					"Public-domain books can be read free of charge. Access to commercial books depends on the author's or publisher's pricing.",
+			},
+		],
+	},
+	{
+		title: "For Authors & Publishers",
+		titleLines: ["For Authors &", "Publishers"],
+		icon: "author",
+		questions: [
+			{
+				question: "What is WePub?",
+				answer:
+					"WePub is ReaderPub's publishing layer. It helps authors and publishers create web-native publications instead of relying only on downloadable files.",
+			},
+			{
+				question: "Why is ReaderPub different for authors?",
+				answer:
+					"Most marketplaces sell books but keep the customer relationship. ReaderPub is designed to help authors keep a stronger connection to readers after publication.",
+			},
+			{
+				question: "Can authors still use EPUB files?",
+				answer:
+					"Yes. ReaderPub can support EPUB generation when authors or publishers need files for external distribution, archival use or other publishing workflows.",
+			},
+			{
+				question: "How does ReaderPub help with reader relationships?",
+				answer:
+					"Books can remain readable, searchable, discussable and connected to author activity after release, instead of disappearing into a marketplace account after purchase.",
+			},
+			{
+				question: "How are authors and publishers charged?",
+				answer:
+					"ReaderPub uses creator-friendly pricing, including a 5% platform commission for direct sales and optional monthly plans for larger catalogs.",
+			},
+		],
+	},
+	{
+		title: "For Organizations & Education",
+		titleLines: ["For Organizations &", "Education"],
+		icon: "university",
+		questions: [
+			{
+				question: "Why do institutions need ReaderPub?",
+				answer:
+					"Many institutional collections are stored online but remain difficult to find, read and discuss. ReaderPub helps turn collections into useful web-native publications.",
+			},
+			{
+				question: "What can institutions publish?",
+				answer:
+					"Libraries, universities and public organizations can publish books, archives, research, reports, educational materials, course content and public collections.",
+			},
+			{
+				question: "How does ReaderPub help educational use?",
+				answer:
+					"ReaderPub makes materials easier to open, read, organize and discuss, helping students, instructors and research communities use publications more actively.",
+			},
+			{
+				question: "Can institutions manage large collections?",
+				answer:
+					"Yes. ReaderPub is designed to support institutional catalogs, collection management, controlled access and long-term publication infrastructure.",
+			},
+			{
+				question: "How are organizations priced?",
+				answer:
+					"Organizations use separate institutional plans based on collection scale, storage, access needs, support and deployment requirements.",
+			},
+		],
+	},
+	{
+		title: "ReaderPub Security",
+		icon: "security",
+		questions: [
+			{
+				question: "How does ReaderPub protect publications?",
+				answer:
+					"ReaderPub focuses on controlled browser access rather than routine file handoff. This helps reduce the risks created by distributing complete reusable files.",
+			},
+			{
+				question: "What is the difference between file protection and access protection?",
+				answer:
+					"File protection tries to protect a file after delivery. Access protection controls how readers reach and use a publication before a reusable file is exposed.",
+			},
+			{
+				question: "Does ReaderPub support protected books?",
+				answer:
+					"Yes. ReaderPub supports protected reading through controlled web access for commercial books, institutional materials and restricted collections.",
+			},
+			{
+				question: "How does ReaderPub help reduce piracy risk?",
+				answer:
+					"ReaderPub can keep protected books inside a controlled browser reading environment and uses ReaderPub protection mechanisms such as Theft Guard to reduce unauthorized copying and redistribution.",
+			},
+			{
+				question: "Can institutions control access to content?",
+				answer:
+					"Yes. Institutions can use access rules for public, private, paid or restricted materials depending on their publishing needs.",
+			},
+		],
+	},
+	{
+		title: "WeBuzz Community",
+		icon: "fan",
+		questions: [
+			{
+				question: "What is WeBuzz?",
+				answer:
+					"WeBuzz is ReaderPub's community and discussion layer for books. It connects conversations around books, authors, passages, ideas and reading communities.",
+			},
+			{
+				question: "Why does the book industry need WeBuzz?",
+				answer:
+					"Book discussion is scattered across reviews, Reddit, Facebook, Discord and private groups. WeBuzz keeps conversation closer to the publication itself.",
+			},
+			{
+				question: "What can readers discuss on WeBuzz?",
+				answer:
+					"Readers can discuss complete books, authors, specific passages, literary ideas, recommendations and broader reading topics.",
+			},
+			{
+				question: "Who can use WeBuzz?",
+				answer:
+					"Readers, authors, publishers, libraries, universities and public communities can use WeBuzz to keep discussion attached to books and publications.",
+			},
+			{
+				question: "How does WeBuzz help discovery?",
+				answer:
+					"WeBuzz lets discovery come from readers, conversations and communities, not only from marketplace rankings or algorithms.",
+			},
+		],
+	},
+] as const;
 ---
 
-<PageScaffold page={pages.kb} />
+<PageScaffold page={page}>
+	<div slot="hero-body" class="kb-hero-body-copy">
+		<p>ReaderPub is a web-native publishing network.</p>
+		<p>Use this page as a knowledge base for product, publishing, security and pricing features of the platform.</p>
+		<p class="kb-hero-body-question">If you haven't found a suitable answer here, ask our team.</p>
+	</div>
+
+	<section class="kb-faq-section" aria-label="ReaderPub knowledge base FAQ">
+		<div class="kb-faq-grid">
+			{faqCategories.map((category) => (
+				<div class="kb-faq-block">
+					<h2 class="kb-faq-heading">
+						<SectionIcon type={category.icon} title={`${category.title} icon`} />
+						<span class="kb-faq-heading-label" aria-label={category.title}>
+							{category.titleLines ? category.titleLines.map((line) => <span>{line}</span>) : category.title}
+						</span>
+					</h2>
+					{category.questions.map((item) => (
+						<details class="kb-faq-item">
+							<summary>{item.question}</summary>
+							<p>{item.answer}</p>
+						</details>
+					))}
+				</div>
+			))}
+		</div>
+	</section>
+
+	{pages.kb.cta && <CtaBlock {...pages.kb.cta} class="kb-faq-cta" />}
+
+	<KbHelpModal />
+</PageScaffold>
+
+<script>
+	const setupKbFaqAccordion = () => {
+		const faqSection = document.querySelector(".kb-faq-section");
+
+		if (!faqSection || faqSection.getAttribute("data-faq-ready") === "true") {
+			return;
+		}
+
+		faqSection.setAttribute("data-faq-ready", "true");
+
+		faqSection.addEventListener("click", (event) => {
+			const target = event.target;
+
+			if (!(target instanceof Element)) {
+				return;
+			}
+
+			const summary = target.closest("summary");
+
+			if (!summary || !faqSection.contains(summary)) {
+				return;
+			}
+
+			const details = summary.closest("details.kb-faq-item");
+
+			if (!details) {
+				return;
+			}
+
+			event.preventDefault();
+
+			const isOpen = details.open;
+
+			document.querySelectorAll("details.kb-faq-item[open]").forEach((item) => {
+				item.open = false;
+			});
+
+			if (!isOpen) {
+				details.open = true;
+			}
+		});
+	};
+
+	setupKbFaqAccordion();
+	document.addEventListener("astro:page-load", setupKbFaqAccordion);
+</script>
+
+<style>
+	.kb-hero-body-copy {
+		display: grid;
+		gap: 0.65em;
+	}
+
+	.kb-hero-body-copy p {
+		margin: 0;
+		color: var(--accent);
+	}
+
+	.kb-hero-body-copy .kb-hero-body-question {
+		color: var(--text);
+		font-size: 90%;
+	}
+
+	.kb-faq-section {
+		padding: var(--section-padding) 0 !important;
+	}
+
+	.kb-faq-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 24px;
+	}
+
+	.kb-faq-block {
+		--kb-card-tint: var(--card-tint);
+		padding: 24px;
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		background: linear-gradient(135deg, var(--kb-card-tint) 0%, var(--kb-card-tint) 18%, #ffffff 100%);
+	}
+
+	.kb-faq-block:nth-child(1),
+	.kb-faq-block:nth-child(4),
+	.kb-faq-block:nth-child(5) {
+		--kb-card-tint: #eef6f5;
+	}
+
+	.kb-faq-heading {
+		--kb-faq-heading-size: 22px;
+		--kb-faq-icon-size: calc(var(--kb-faq-heading-size) * 1.7);
+		display: flex;
+		gap: 12px;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		max-width: 100%;
+		margin: 0 0 16px;
+		color: var(--accent);
+		font-size: var(--kb-faq-heading-size);
+		font-weight: 600;
+	}
+
+	.kb-faq-heading-label {
+		display: grid;
+		align-items: center;
+		justify-content: flex-start;
+		flex: 0 1 auto;
+		width: fit-content;
+		min-width: 0;
+		max-width: min(11em, calc(100% - var(--kb-faq-icon-size) - 12px));
+		min-height: var(--kb-faq-icon-size);
+		text-align: left;
+	}
+
+	.kb-faq-heading-label > span {
+		display: block;
+		width: max-content;
+		max-width: 100%;
+	}
+
+	:global(.kb-faq-heading .section-icon) {
+		width: var(--kb-faq-icon-size) !important;
+		height: var(--kb-faq-icon-size) !important;
+	}
+
+	.kb-faq-item {
+		border-bottom: 1px solid var(--border);
+	}
+
+	.kb-faq-item:last-child {
+		border-bottom: none;
+	}
+
+	.kb-faq-item summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 14px 0;
+		color: var(--text);
+		font-size: 17px;
+		font-weight: 500;
+		list-style: none;
+		cursor: pointer;
+		outline: none;
+	}
+
+	.kb-faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.kb-faq-item summary::after {
+		content: "+";
+		flex-shrink: 0;
+		margin-left: 12px;
+		color: var(--muted);
+		font-size: 20px;
+		font-weight: 400;
+		transition: transform 0.2s ease;
+	}
+
+	.kb-faq-item[open] summary::after {
+		transform: rotate(45deg);
+	}
+
+	.kb-faq-item p {
+		margin: 0 0 16px;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.5;
+	}
+
+	.kb-faq-item[open] summary {
+		color: var(--accent);
+	}
+
+	.kb-faq-item[open] p {
+		margin-bottom: 12px;
+		padding: 12px 16px;
+		border-radius: 8px;
+		background: #ffffff;
+	}
+
+	:global(.kb-faq-cta) {
+		margin-top: 0;
+	}
+
+	@media (orientation: portrait) {
+		.kb-faq-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.kb-faq-block {
+			--kb-card-tint: var(--card-tint);
+		}
+
+		.kb-faq-block:nth-child(2),
+		.kb-faq-block:nth-child(4),
+		.kb-faq-block:nth-child(6) {
+			--kb-card-tint: var(--card-tint);
+		}
+
+		.kb-faq-block:nth-child(1),
+		.kb-faq-block:nth-child(3),
+		.kb-faq-block:nth-child(5) {
+			--kb-card-tint: #eef6f5;
+		}
+
+		.kb-faq-heading {
+			margin-right: auto;
+			margin-left: auto;
+			text-align: center !important;
+		}
+
+		.kb-faq-item,
+		.kb-faq-item summary,
+		.kb-faq-item p {
+			text-align: left !important;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.kb-faq-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.kb-faq-block {
+			--kb-card-tint: var(--card-tint);
+		}
+
+		.kb-faq-block:nth-child(2),
+		.kb-faq-block:nth-child(4),
+		.kb-faq-block:nth-child(6) {
+			--kb-card-tint: var(--card-tint);
+		}
+
+		.kb-faq-block:nth-child(1),
+		.kb-faq-block:nth-child(3),
+		.kb-faq-block:nth-child(5) {
+			--kb-card-tint: #eef6f5;
+		}
+
+		.kb-faq-item,
+		.kb-faq-item summary,
+		.kb-faq-item p {
+			text-align: left !important;
+		}
+	}
+</style>

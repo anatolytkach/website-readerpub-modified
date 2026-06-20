@@ -1,6 +1,735 @@
 ---
-import PageScaffold from "../components/PageScaffold.astro";
+import Base from "../layouts/Base.astro";
+import KbHelpModal from "../components/KbHelpModal.astro";
+import SectionIcon from "../components/SectionIcon.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import { PUBLISH_URL } from "../consts";
 import { pages } from "../data/pages";
+
+const page = pages.contact;
 ---
 
-<PageScaffold page={pages.contact} />
+<Base title={page.metaTitle} description={page.description}>
+	<HeroSection
+		title={page.heroTitle}
+		lead={page.heroLead}
+		body={page.heroBody}
+		image={page.image}
+		imageAlt={page.imageAlt}
+		actions={page.actions}
+		spacerBackgroundPositionY={page.heroSpacerBackgroundPositionY}
+	/>
+
+	<section class="section section--green contact-tips-section" aria-labelledby="contact-tips-heading">
+		<h2 id="contact-tips-heading">Useful tips:</h2>
+
+		<div class="contact-tips-grid">
+			<article class="card contact-tip-card">
+				<header class="contact-tip-heading">
+					<SectionIcon type="author" title="Independent authors and small publishers icon" />
+					<h3>Independent authors &amp; small publishers</h3>
+				</header>
+
+				<ul class="contact-tip-list">
+					<li>Upload one or multiple files (Word or EPUB).</li>
+					<li>WePub engine produces web publishing + optional EPUB output.</li>
+					<li>Enable Buy, analytics, and fan clubs.</li>
+					<li>See sales and billing reports.</li>
+					<li>Monitor social activity related to your listings.</li>
+					<li>Communicate with your fans and followers.</li>
+					<li>Plan events and presentations.</li>
+				</ul>
+
+				<p class="contact-tip-note">
+					If you already have a finished Word manuscript or EPUB file, you may not even need to contact us in
+					advance; just publish your book right now:
+				</p>
+
+				<div class="cta-row contact-tip-actions">
+					<a class="button" href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Submit your book</a>
+				</div>
+			</article>
+
+			<article class="card contact-tip-card">
+				<header class="contact-tip-heading">
+					<SectionIcon type="library" title="Institutions and catalogs icon" />
+					<h3>Institutions &amp; catalogs</h3>
+				</header>
+
+				<p class="contact-tip-lede">We support all commonly used formats to import collections:</p>
+
+				<ul class="contact-tip-list">
+					<li>Bulk file drop (ZIP of EPUB/Word files) + metadata spreadsheet</li>
+					<li>OPDS/OPDS2 feeds (where available)</li>
+					<li>MARC/ONIX/CSV metadata exports + cover assets</li>
+					<li>S3-compatible bucket export or rsync/FTP transfer</li>
+					<li>Repository exports (institutional repositories / digital collections)</li>
+					<li>We map identifiers, preserve catalog structure, and publish as a web library.</li>
+				</ul>
+
+				<div class="cta-row contact-tip-actions">
+					<button class="button" type="button" data-modal-open="#request-onboarding-modal">Request live Pilot</button>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	{page.cta && <CtaBlock {...page.cta} />}
+
+	<KbHelpModal />
+
+	<div class="modal onboarding-modal" id="request-onboarding-modal" aria-hidden="true">
+		<div class="modal-backdrop" data-modal-close></div>
+		<div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="request-onboarding-modal-title">
+			<button class="modal-close" type="button" aria-label="Close" data-modal-close>x</button>
+			<div class="onboarding-modal-inner">
+				<h3 id="request-onboarding-modal-title">Request a Pilot</h3>
+				<p class="onboarding-modal-note">
+					We serve independent authors, publishers, and institutions.<br />
+					If you already have files (Word or EPUB) or maintain in-house catalogs, please mention this in your
+					message.
+				</p>
+
+				<form class="onboarding-form" method="POST" action="/api/onboarding">
+					<label for="your-name">Your name</label>
+					<input id="your-name" name="your_name" type="text" required />
+
+					<label for="role">I am</label>
+					<select id="role" name="role" required>
+						<option value="">Select one</option>
+						<option value="Author">Author</option>
+						<option value="Publisher">Publisher</option>
+						<option value="Library">Library</option>
+						<option value="University / Research">University / Research</option>
+						<option value="Government organization">Government organization</option>
+						<option value="Public organization">Public organization</option>
+						<option value="Other business entity">Other business entity</option>
+					</select>
+
+					<div class="onboarding-conditional" id="org-group">
+						<label for="name">Organization</label>
+						<input id="name" name="name" type="text" />
+					</div>
+
+					<div class="onboarding-conditional" id="website-group">
+						<label for="website">Website</label>
+						<input id="website" name="website" type="url" />
+					</div>
+
+					<label for="email">Email</label>
+					<input id="email" name="email" type="email" required />
+
+					<label for="phone">Phone</label>
+					<input id="phone" name="phone" type="tel" />
+
+					<label for="project">What do you intend to publish or launch?</label>
+					<textarea
+						id="project"
+						name="project"
+						required
+						placeholder="Example: a digital reading room, a publisher catalog, a policy library, or a new book release."
+						rows="5"></textarea>
+
+					<label for="titles">How many titles (estimate)</label>
+					<input id="titles" name="titles" type="number" min="0" />
+
+					<label for="timeline">Timeline</label>
+					<select id="timeline" name="timeline">
+						<option value="">Select one</option>
+						<option value="Now">Now</option>
+						<option value="This month">This month</option>
+						<option value="This quarter">This quarter</option>
+						<option value="Not sure yet">Not sure yet</option>
+					</select>
+
+					<fieldset>
+						<legend>What features you need?</legend>
+						<label><input type="checkbox" name="needs" value="Web publishing" /> Web publishing</label>
+						<label><input type="checkbox" name="needs" value="Sales" /> Sales</label>
+						<label><input type="checkbox" name="needs" value="Fan clubs" /> Fan clubs</label>
+						<label><input type="checkbox" name="needs" value="EPUB output" /> EPUB output</label>
+						<label><input type="checkbox" name="needs" value="Migration / catalog import" /> Migration / catalog import</label>
+					</fieldset>
+
+					<label for="notes">Anything else?</label>
+					<textarea id="notes" name="notes" rows="4"></textarea>
+
+					<input type="hidden" name="topic" value="" />
+
+					<p class="onboarding-form-error" hidden></p>
+					<div class="cta-row onboarding-modal-actions">
+						<button class="button" type="submit">Send a message</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal onboarding-success-modal" id="onboarding-success-modal" aria-hidden="true">
+		<div class="modal-backdrop"></div>
+		<div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="onboarding-success-modal-title">
+			<button class="modal-close" type="button" aria-label="Close" data-success-close>x</button>
+			<div class="onboarding-success-inner">
+				<p id="onboarding-success-modal-title">
+					Thank you, your message has been sent.<br />
+					We will get back to you soon.
+				</p>
+			</div>
+		</div>
+	</div>
+</Base>
+
+<script>
+	const setupOnboardingModal = () => {
+		const requestModal = document.querySelector("#request-onboarding-modal");
+		const successModal = document.querySelector("#onboarding-success-modal");
+		const onboardingForm = document.querySelector(".onboarding-form");
+
+		if (!requestModal || !successModal || !onboardingForm) {
+			return;
+		}
+
+		if (requestModal.getAttribute("data-onboarding-ready") === "true") {
+			return;
+		}
+
+		requestModal.setAttribute("data-onboarding-ready", "true");
+
+		const openButtons = Array.from(document.querySelectorAll('[data-modal-open="#request-onboarding-modal"]'));
+		const formError = onboardingForm.querySelector(".onboarding-form-error");
+		const submitButton = onboardingForm.querySelector('button[type="submit"]');
+		const roleSelect = document.querySelector("#role");
+		const orgGroup = document.querySelector("#org-group");
+		const websiteGroup = document.querySelector("#website-group");
+		const orgInput = document.querySelector("#name");
+		const websiteInput = document.querySelector("#website");
+		const topicInput = onboardingForm.querySelector('input[name="topic"]');
+
+		const closeModal = (modalElement) => {
+			modalElement.classList.remove("is-open");
+			modalElement.setAttribute("aria-hidden", "true");
+		};
+
+		const openModal = (modalElement) => {
+			modalElement.classList.add("is-open");
+			modalElement.setAttribute("aria-hidden", "false");
+		};
+
+		const updateConditionalFields = () => {
+			const isAuthor = roleSelect?.value === "Author";
+
+			if (orgGroup) {
+				orgGroup.style.display = isAuthor ? "none" : "";
+			}
+			if (orgInput) {
+				orgInput.required = !isAuthor;
+			}
+			if (websiteGroup) {
+				websiteGroup.style.display = isAuthor ? "none" : "";
+			}
+			if (websiteInput) {
+				websiteInput.required = !isAuthor;
+			}
+		};
+
+		const syncTopic = () => {
+			if (topicInput instanceof HTMLInputElement) {
+				topicInput.value = new URLSearchParams(window.location.search).get("topic") || "";
+			}
+		};
+
+		const resetTurnstile = () => {
+			if (window.turnstile && typeof window.turnstile.reset === "function") {
+				window.turnstile.reset();
+			}
+		};
+
+		closeModal(requestModal);
+		closeModal(successModal);
+		updateConditionalFields();
+		syncTopic();
+
+		roleSelect?.addEventListener("change", updateConditionalFields);
+
+		openButtons.forEach((btn) => {
+			btn.addEventListener("click", (event) => {
+				event.preventDefault();
+				syncTopic();
+				if (formError) {
+					formError.textContent = "";
+					formError.hidden = true;
+				}
+				closeModal(successModal);
+				openModal(requestModal);
+			});
+		});
+
+		requestModal.querySelectorAll("[data-modal-close]").forEach((el) => {
+			el.addEventListener("click", () => {
+				closeModal(requestModal);
+			});
+		});
+
+		successModal.querySelectorAll("[data-success-close]").forEach((el) => {
+			el.addEventListener("click", () => {
+				closeModal(successModal);
+			});
+		});
+
+		onboardingForm.addEventListener("submit", async (event) => {
+			event.preventDefault();
+
+			const formData = new FormData(onboardingForm);
+			const action = onboardingForm.getAttribute("action");
+			const originalButtonText = submitButton?.textContent || "";
+
+			if (formError) {
+				formError.textContent = "";
+				formError.hidden = true;
+			}
+			if (submitButton) {
+				submitButton.disabled = true;
+				submitButton.textContent = "Sending...";
+			}
+
+			try {
+				if (!action) {
+					throw new Error("The onboarding endpoint is not configured.");
+				}
+
+				const response = await fetch(action, {
+					method: "POST",
+					body: formData,
+					headers: {
+						Accept: "application/json",
+					},
+				});
+				const payload = await response.json().catch(() => null);
+
+				if (!response.ok || !payload?.ok) {
+					throw new Error(payload?.error || "We could not submit your request. Please try again.");
+				}
+
+				closeModal(requestModal);
+				openModal(successModal);
+				onboardingForm.reset();
+				updateConditionalFields();
+				resetTurnstile();
+			} catch (error) {
+				if (formError) {
+					formError.textContent =
+						error instanceof Error ? error.message : "We could not submit your request. Please try again.";
+					formError.hidden = false;
+				}
+				resetTurnstile();
+			} finally {
+				if (submitButton) {
+					submitButton.disabled = false;
+					submitButton.textContent = originalButtonText;
+				}
+			}
+		});
+
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") {
+				closeModal(requestModal);
+				closeModal(successModal);
+			}
+		});
+	};
+
+	document.addEventListener("astro:page-load", setupOnboardingModal);
+	setupOnboardingModal();
+</script>
+
+<style>
+	.contact-tips-section {
+		gap: 30px;
+	}
+
+	.contact-tips-section h2 {
+		margin: 0;
+	}
+
+	.contact-tips-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.contact-tip-card {
+		gap: 22px;
+		min-height: 0;
+	}
+
+	.contact-tip-heading {
+		--contact-tip-heading-size: var(--card-heading-font-size);
+		--contact-tip-icon-size: calc(var(--contact-tip-heading-size) * 1.7);
+		display: flex;
+		gap: 18px;
+		align-items: center;
+		justify-content: center;
+		text-align: left;
+	}
+
+	:global(.contact-tip-heading .section-icon) {
+		flex: 0 0 var(--contact-tip-icon-size);
+		width: var(--contact-tip-icon-size) !important;
+		height: var(--contact-tip-icon-size) !important;
+	}
+
+	.contact-tip-heading h3 {
+		flex: 0 1 auto;
+		max-width: min(16em, calc(100% - var(--contact-tip-icon-size) - 18px));
+		margin: 0;
+		font-size: var(--card-heading-font-size);
+		line-height: var(--card-heading-line-height);
+		color: var(--text);
+		text-align: left;
+	}
+
+	.contact-tip-lede {
+		margin: 0;
+		color: var(--accent);
+		font-size: 1.125rem;
+		line-height: 1.45;
+	}
+
+	.contact-tip-list {
+		display: grid;
+		gap: 8px;
+		margin: 0;
+		padding-left: 22px;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.45;
+	}
+
+	.contact-tip-list li::marker {
+		color: var(--accent);
+	}
+
+	.contact-tip-note {
+		margin: 0;
+		color: var(--text);
+		font-size: 1rem;
+		line-height: 1.45;
+	}
+
+	.contact-tip-actions {
+		justify-content: flex-start;
+		margin-top: auto;
+	}
+
+	.modal {
+		position: fixed;
+		inset: 0;
+		z-index: 1100;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		padding: 24px;
+	}
+
+	.modal.is-open {
+		display: flex;
+	}
+
+	.modal-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(20, 23, 31, 0.35);
+	}
+
+	.modal-content {
+		position: relative;
+		z-index: 1;
+		display: block;
+		background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg) 15%, #ffffff 100%);
+		border: 1px solid var(--border);
+		border-radius: 16px;
+		box-shadow: 0 24px 70px rgba(20, 23, 31, 0.22);
+	}
+
+	.modal-close {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 4;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		padding: 0;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		background: #ffffff;
+		color: var(--text);
+		font: inherit;
+		font-size: 20px;
+		line-height: 1;
+		box-shadow: 0 8px 20px rgba(20, 23, 31, 0.15);
+		cursor: pointer;
+	}
+
+	.onboarding-modal {
+		align-items: center;
+	}
+
+	.onboarding-modal .modal-content {
+		width: min(480px, calc(100vw - 32px));
+		max-width: min(480px, calc(100vw - 32px));
+		height: min(84dvh, 920px);
+		max-height: min(84dvh, 920px);
+		padding: 0;
+		overflow: hidden;
+		line-height: 1.35;
+	}
+
+	.onboarding-modal-inner {
+		position: absolute;
+		inset: 56px 4px 10px 10px;
+		display: grid;
+		gap: 14px;
+		height: auto;
+		padding: 0 10px 14px;
+		overflow-y: auto;
+		border-radius: inherit;
+		scrollbar-gutter: stable;
+		scrollbar-width: thin;
+	}
+
+	.onboarding-modal-inner::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	.onboarding-modal-inner::-webkit-scrollbar-track {
+		margin: 10px 0;
+		background: transparent;
+	}
+
+	.onboarding-modal-inner::-webkit-scrollbar-thumb {
+		background: rgba(77, 91, 113, 0.45);
+		border: 2px solid transparent;
+		border-radius: 999px;
+		background-clip: padding-box;
+	}
+
+	.onboarding-modal-inner h3 {
+		margin: 0;
+		text-align: center;
+	}
+
+	.onboarding-modal-note {
+		margin: 0;
+		color: var(--text);
+		font-size: 16px;
+		line-height: 1.35;
+		text-align: left;
+	}
+
+	.onboarding-form {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.onboarding-form > label,
+	.onboarding-form legend,
+	.onboarding-conditional > label {
+		display: block;
+		margin-top: 4px;
+		color: var(--text);
+		font-size: 16px;
+		font-weight: 500;
+	}
+
+	.onboarding-conditional {
+		display: grid;
+		gap: 10px;
+	}
+
+	.onboarding-form input[type="text"],
+	.onboarding-form input[type="url"],
+	.onboarding-form input[type="email"],
+	.onboarding-form input[type="tel"],
+	.onboarding-form input[type="number"],
+	.onboarding-form select,
+	.onboarding-form textarea {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 10px 12px;
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		background: #ffffff;
+		color: var(--text);
+		font: inherit;
+		font-size: 16px;
+		outline: none;
+		appearance: none;
+		-webkit-appearance: none;
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.onboarding-form textarea {
+		min-height: 110px;
+		resize: vertical;
+	}
+
+	.onboarding-form input[type="text"]:focus,
+	.onboarding-form input[type="url"]:focus,
+	.onboarding-form input[type="email"]:focus,
+	.onboarding-form input[type="tel"]:focus,
+	.onboarding-form input[type="number"]:focus,
+	.onboarding-form select:focus,
+	.onboarding-form textarea:focus {
+		border-color: var(--accent);
+		box-shadow: 0 0 0 3px rgba(0, 133, 134, 0.12);
+	}
+
+	.onboarding-form fieldset {
+		display: grid;
+		gap: 8px;
+		padding: 12px;
+		border: 1px solid var(--border);
+		border-radius: 10px;
+	}
+
+	.onboarding-form fieldset label {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+		color: var(--muted);
+		font-size: 16px;
+		font-weight: 400;
+	}
+
+	.onboarding-form input[type="checkbox"] {
+		flex: 0 0 16px;
+		width: 16px;
+		height: 16px;
+		accent-color: var(--accent);
+	}
+
+	.onboarding-form-error {
+		margin: 2px 0 0;
+		color: #b42318;
+		font-size: 15px;
+		line-height: 1.35;
+		text-align: center;
+	}
+
+	.onboarding-form .button:disabled {
+		opacity: 0.68;
+		cursor: progress;
+		transform: none;
+	}
+
+	.onboarding-modal-actions {
+		justify-content: center;
+		margin-top: 6px;
+	}
+
+	.onboarding-success-modal .modal-content {
+		width: min(540px, calc(100vw - 32px));
+		max-width: min(540px, calc(100vw - 32px));
+		padding: 28px 24px;
+		line-height: 1.35;
+	}
+
+	.onboarding-success-inner {
+		display: grid;
+		place-items: center;
+		min-height: 120px;
+		padding-top: 12px;
+		text-align: center;
+	}
+
+	.onboarding-success-inner p {
+		max-width: 460px;
+		margin: 0;
+		color: var(--accent);
+		font-size: 20.5px;
+		line-height: 1.3;
+	}
+
+	@media (max-width: 900px) {
+		.contact-tips-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.contact-tips-section {
+			gap: 24px;
+		}
+	}
+
+	@media (orientation: landscape) and (max-width: 900px) {
+		.onboarding-modal .modal-content {
+			width: min(560px, calc(100vw - 32px));
+			max-width: min(560px, calc(100vw - 32px));
+			height: min(92dvh, 500px);
+			max-height: min(92dvh, 500px);
+		}
+
+		.onboarding-modal-inner {
+			inset: 44px 10px 8px;
+			gap: 10px;
+		}
+
+		.onboarding-modal-note,
+		.onboarding-form > label,
+		.onboarding-form legend,
+		.onboarding-conditional > label,
+		.onboarding-form fieldset label,
+		.onboarding-form input[type="text"],
+		.onboarding-form input[type="url"],
+		.onboarding-form input[type="email"],
+		.onboarding-form input[type="tel"],
+		.onboarding-form input[type="number"],
+		.onboarding-form select,
+		.onboarding-form textarea,
+		.onboarding-success-inner p {
+			font-size: 14px;
+		}
+
+		.onboarding-form input[type="text"],
+		.onboarding-form input[type="url"],
+		.onboarding-form input[type="email"],
+		.onboarding-form input[type="tel"],
+		.onboarding-form input[type="number"],
+		.onboarding-form select,
+		.onboarding-form textarea {
+			padding: 8px 10px;
+		}
+	}
+
+	@media (orientation: portrait) {
+		.contact-tip-heading {
+			justify-content: center;
+			text-align: left;
+		}
+
+		.contact-tip-list,
+		.contact-tip-note {
+			text-align: left;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.contact-tip-heading {
+			text-align: left;
+		}
+
+		.contact-tip-actions {
+			width: 100%;
+			justify-content: center;
+		}
+
+		.onboarding-modal {
+			padding: 16px;
+		}
+	}
+</style>

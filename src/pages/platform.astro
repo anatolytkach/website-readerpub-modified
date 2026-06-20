@@ -58,6 +58,7 @@ const benefitCards = [
 	description="ReaderPub combines publishing, reading, discussion and knowledge tools into one platform for Living Publications."
 >
 	<HeroSection
+		eyebrow="Platform"
 		lead="We combine publishing, reading, discussion and knowledge tools into a single platform so books stay active on the web after release."
 		image="/images/home2.webp"
 		imageAlt="ReaderPub platform connecting books, readers, authors and institutions"
@@ -573,6 +574,18 @@ const benefitCards = [
 		padding-top: 58px !important;
 	}
 
+	@media (orientation: portrait) {
+		.platform-source-section.section-continue-next {
+			padding-bottom: var(--section-padding) !important;
+		}
+
+		.platform-source-section.section-continuation,
+		.platform-source-section.platform-first-white-section {
+			padding-top: var(--section-padding) !important;
+			padding-bottom: var(--section-padding) !important;
+		}
+	}
+
 	.platform-source-section.platform-audiences-section > h2 {
 		grid-area: title;
 		margin-bottom: 0;
@@ -1048,7 +1061,7 @@ const benefitCards = [
 		:global(.platform-hero.hero-section) {
 			grid-template-columns: 1fr;
 			justify-items: center;
-			padding-top: 29px;
+			padding-top: 23px;
 			padding-bottom: 29px;
 			text-align: center;
 		}

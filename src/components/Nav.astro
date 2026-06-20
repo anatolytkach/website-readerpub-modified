@@ -78,10 +78,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 		</button>
 	</div>
 	<ul class="nav-overlay-links">
-		<li><a href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Sign in</a></li>
-		<li><a href="/contact">Get started</a></li>
-		<li class="nav-overlay-divider" aria-hidden="true"></li>
-		{primaryLinks.map((link) => (
+		{primaryLinks.slice(0, 3).map((link) => (
 			<li><a href={link.href} class:list={[isActive(link.href) && "is-active"]}>{link.label}</a></li>
 		))}
 		<li class="nav-overlay-group">
@@ -92,46 +89,18 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 				))}
 			</ul>
 		</li>
+		{primaryLinks.slice(3).map((link) => (
+			<li><a href={link.href} class:list={[isActive(link.href) && "is-active"]}>{link.label}</a></li>
+		))}
+		<li class="nav-overlay-divider" aria-hidden="true"></li>
+		<li><a href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Sign in</a></li>
+		<li><a href="/contact">Get started</a></li>
 	</ul>
 </div>
 
 <script is:inline>
 	(() => {
-		const toggle = document.querySelector(".nav-toggle");
-		const overlay = document.querySelector(".nav-overlay");
-		const close = document.querySelector(".nav-close");
-		const dropdownToggle = document.querySelector(".nav-dropdown-toggle");
-		const dropdown = document.querySelector(".nav-dropdown");
 		const normalizePath = (path) => path.replace(/\/+$/, "") || "/";
-		const closeDropdown = () => {
-			dropdown?.classList.remove("nav-dropdown--open");
-			dropdownToggle?.setAttribute("aria-expanded", "false");
-		};
-		const dismissDropdown = () => {
-			closeDropdown();
-			dropdown?.classList.add("nav-dropdown--dismissed");
-			const activeElement = document.activeElement;
-			if (activeElement instanceof HTMLElement) activeElement.blur();
-		};
-
-		const closeMenu = () => {
-			overlay?.classList.remove("nav-overlay--open");
-			overlay?.setAttribute("aria-hidden", "true");
-			toggle?.setAttribute("aria-expanded", "false");
-			document.body.classList.remove("nav-open");
-		};
-
-		toggle?.addEventListener("click", () => {
-			overlay?.classList.add("nav-overlay--open");
-			overlay?.setAttribute("aria-hidden", "false");
-			toggle.setAttribute("aria-expanded", "true");
-			document.body.classList.add("nav-open");
-		});
-
-		close?.addEventListener("click", closeMenu);
-		overlay?.addEventListener("click", (event) => {
-			if (event.target instanceof Element && event.target.closest("a")) closeMenu();
-		});
 
 		const updateActiveLink = () => {
 			const currentPath = normalizePath(window.location.pathname);
@@ -165,38 +134,113 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 			});
 		};
 
-		dropdownToggle?.addEventListener("click", () => {
-			dropdown?.classList.remove("nav-dropdown--dismissed");
-			const isOpen = dropdown?.classList.toggle("nav-dropdown--open");
-			dropdownToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-		});
+		const closeMenu = () => {
+			document.querySelectorAll(".nav-overlay").forEach((overlay) => {
+				overlay.classList.remove("nav-overlay--open");
+				overlay.setAttribute("aria-hidden", "true");
+			});
+			document.querySelectorAll(".nav-toggle").forEach((toggle) => {
+				toggle.setAttribute("aria-expanded", "false");
+			});
+			document.body.classList.remove("nav-open");
+		};
 
-		document.addEventListener("click", (event) => {
-			if (!(event.target instanceof Element)) return;
-			if (event.target.closest(".nav-dropdown-menu a")) {
-				dismissDropdown();
-				return;
-			}
-			if (!event.target.closest(".nav-dropdown")) {
-				closeDropdown();
-			}
-		});
+		const closeDropdown = () => {
+			document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
+				dropdown.classList.remove("nav-dropdown--open");
+				dropdown.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+			});
+		};
 
-		document.addEventListener("pointerover", (event) => {
-			if (!(event.target instanceof Element)) return;
-			if (event.target.closest(".nav-dropdown-toggle")) {
-				dropdown?.classList.remove("nav-dropdown--dismissed");
-			}
-		});
+		const dismissDropdown = (dropdown) => {
+			closeDropdown();
+			dropdown?.classList.add("nav-dropdown--dismissed");
+			const activeElement = document.activeElement;
+			if (activeElement instanceof HTMLElement) activeElement.blur();
+		};
 
-		document.addEventListener("keydown", (event) => {
-			if (event.key === "Escape") {
-				closeMenu();
-				closeDropdown();
-			}
-		});
+		const setupNav = () => {
+			const toggle = document.querySelector(".nav-toggle");
+			const overlay = document.querySelector(".nav-overlay");
+			const close = document.querySelector(".nav-close");
+			const dropdownToggle = document.querySelector(".nav-dropdown-toggle");
+			const dropdown = document.querySelector(".nav-dropdown");
 
-		document.addEventListener("astro:page-load", updateActiveLink);
+			if (toggle && toggle.getAttribute("data-nav-ready") !== "true") {
+				toggle.setAttribute("data-nav-ready", "true");
+				toggle.addEventListener("click", () => {
+					overlay?.classList.add("nav-overlay--open");
+					overlay?.setAttribute("aria-hidden", "false");
+					toggle.setAttribute("aria-expanded", "true");
+					document.body.classList.add("nav-open");
+				});
+			}
+
+			if (close && close.getAttribute("data-nav-ready") !== "true") {
+				close.setAttribute("data-nav-ready", "true");
+				close.addEventListener("click", closeMenu);
+			}
+
+			if (overlay && overlay.getAttribute("data-nav-ready") !== "true") {
+				overlay.setAttribute("data-nav-ready", "true");
+				overlay.addEventListener("click", (event) => {
+					if (event.target instanceof Element && event.target.closest("a")) closeMenu();
+				});
+			}
+
+			if (dropdownToggle && dropdownToggle.getAttribute("data-nav-ready") !== "true") {
+				dropdownToggle.setAttribute("data-nav-ready", "true");
+				dropdownToggle.addEventListener("click", () => {
+					dropdown?.classList.remove("nav-dropdown--dismissed");
+					const isOpen = dropdown?.classList.toggle("nav-dropdown--open");
+					dropdownToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+				});
+			}
+
+			updateActiveLink();
+		};
+
+		if (document.documentElement.getAttribute("data-nav-global-ready") !== "true") {
+			document.documentElement.setAttribute("data-nav-global-ready", "true");
+
+			document.addEventListener("click", (event) => {
+				if (!(event.target instanceof Element)) return;
+				const openOverlay = document.querySelector(".nav-overlay.nav-overlay--open");
+				if (openOverlay && !event.target.closest(".nav-overlay") && !event.target.closest(".nav-toggle")) {
+					closeMenu();
+				}
+
+				const activeDropdown = event.target.closest(".nav-dropdown");
+				if (event.target.closest(".nav-dropdown-menu a")) {
+					dismissDropdown(activeDropdown);
+					return;
+				}
+				if (!activeDropdown) {
+					closeDropdown();
+				}
+			});
+
+			document.addEventListener("pointerover", (event) => {
+				if (!(event.target instanceof Element)) return;
+				if (event.target.closest(".nav-dropdown-toggle")) {
+					event.target.closest(".nav-dropdown")?.classList.remove("nav-dropdown--dismissed");
+				}
+			});
+
+			document.addEventListener("keydown", (event) => {
+				if (event.key === "Escape") {
+					closeMenu();
+					closeDropdown();
+				}
+			});
+
+			document.addEventListener("astro:page-load", setupNav);
+			document.addEventListener("astro:page-load", updateActiveLink);
+			document.addEventListener("astro:before-swap", closeMenu);
+			document.addEventListener("astro:before-swap", closeDropdown);
+		}
+
+		setupNav();
 		updateActiveLink();
 	})();
 </script>
