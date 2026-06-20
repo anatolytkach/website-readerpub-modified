@@ -18,8 +18,8 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 >
 	<HeroSection
 		lead="Most publishing systems are built to distribute files through marketplaces, surrendering the book audience to the marketplace."
-		image="/images/publish.webp"
-		imageAlt="Publishing a book as a web-native ReaderPub asset"
+		image="/images/wepub.webp"
+		imageAlt="WePub publishing workflow from manuscript to live book"
 		actions={[publishAction, pricingAction]}
 		spacerBackgroundPositionY="18%"
 	>
@@ -29,7 +29,8 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 	<Section
 		tone="gray"
-		title="The old model sells files"
+		class="wepub-old-model-section"
+		title="The old model just creates book files for download"
 		body="A file-based model can distribute a book, but it usually separates the author from the reader."
 	>
 		<CardGrid columns="2">
@@ -99,6 +100,37 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 				</div>
 			</article>
 		</div>
+		<div class="wepub-start-grid">
+			<article class="card wepub-start-card">
+				<div class="card-copy">
+					<h3>What you get</h3>
+					<p class="wepub-start-lede">Everything you need to publish, monetize, and grow a direct audience.</p>
+					<ul class="wepub-start-list">
+						<li>A fast web edition readers can open instantly.</li>
+						<li>Direct sales to connected readers.</li>
+						<li>Low 5% commission on sales.</li>
+						<li>Fan clubs for every book and author.</li>
+						<li>Analytics for sales and engagement.</li>
+						<li>Optional production-ready EPUB output.</li>
+					</ul>
+				</div>
+			</article>
+			<article class="card wepub-start-card">
+				<div class="card-copy">
+					<h3>How publishing works</h3>
+					<p class="wepub-start-lede">A simple workflow from manuscript to live web edition.</p>
+					<ol class="wepub-start-list">
+						<li>Share your manuscript (Word, or EPUB).</li>
+						<li>We prepare your web edition and metadata.</li>
+						<li>You define sales and fan-club options.</li>
+						<li>Your book goes live &mdash; with analytics from day one.</li>
+					</ol>
+					<p class="wepub-start-lede wepub-compat-lede">
+						Compatible with WeRead for web reading and BookTree for organizing sources.
+					</p>
+				</div>
+			</article>
+		</div>
 	</Section>
 
 	<Section tone="green" class="wepub-economics-section" title="Better economics, stronger connections, longer-lasting value">
@@ -117,6 +149,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 	<Section
 		tone="white"
+		class="wepub-infrastructure-section"
 		title="Publishing infrastructure built for the web"
 		body="WePub combines secure publishing, browser delivery, direct sales and audience visibility inside a single publishing workflow."
 	>
@@ -158,6 +191,71 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		width: 100%;
 	}
 
+	:global(.wepub-old-model-section .section-header),
+	:global(.wepub-old-model-section .section-header h2),
+	:global(.wepub-old-model-section .section-lead) {
+		max-width: none;
+		width: 100%;
+	}
+
+	@media (min-width: 901px) {
+		:global(.wepub-old-model-section .section-header h2) {
+			font-size: clamp(1.9rem, 3vw, 2.08rem);
+			white-space: nowrap;
+		}
+
+		:global(.wepub-old-model-section .section-lead) {
+			font-size: clamp(1rem, 1.55vw, 1.08rem);
+			white-space: nowrap;
+		}
+	}
+
+	.wepub-start-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.wepub-start-card {
+		--card-tint: #fcfaf8;
+		background: var(--button-light-bg);
+		min-height: 0;
+	}
+
+	.wepub-start-lede {
+		color: var(--accent);
+		font-size: 1.125rem;
+		line-height: 1.45;
+	}
+
+	.wepub-start-list {
+		display: grid;
+		gap: 10px;
+		padding-left: 1.15rem;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	ul.wepub-start-list,
+	ul.wepub-start-list li {
+		list-style: disc;
+	}
+
+	ol.wepub-start-list,
+	ol.wepub-start-list li {
+		list-style: decimal;
+	}
+
+	.wepub-start-list li::marker {
+		color: var(--accent);
+	}
+
+	.wepub-compat-lede {
+		margin-top: 0;
+	}
+
 	.wepub-list-card {
 		min-height: 0;
 	}
@@ -184,6 +282,11 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 	:global(.wepub-economics-section .card) {
 		--card-tint: #fbfaf8;
+	}
+
+	:global(.wepub-infrastructure-section .card) {
+		--card-tint: #fcfaf8 !important;
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 18%, #ffffff 100%) !important;
 	}
 
 	.wepub-model-list {
@@ -239,11 +342,13 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 	}
 
 	@media (max-width: 900px) {
-		.wepub-comparison-grid {
+		.wepub-comparison-grid,
+		.wepub-start-grid {
 			grid-template-columns: 1fr;
 		}
 
-		.wepub-model-list {
+		.wepub-model-list,
+		.wepub-start-list {
 			text-align: left;
 		}
 

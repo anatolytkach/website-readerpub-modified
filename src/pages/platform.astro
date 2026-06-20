@@ -1,6 +1,1130 @@
 ---
-import PageScaffold from "../components/PageScaffold.astro";
-import { pages } from "../data/pages";
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Section from "../components/sections/Section.astro";
+import Base from "../layouts/Base.astro";
+import { BOOKS_URL, SITE_NAME } from "../consts";
+
+const heroActions = [
+	{ label: "Start publishing", href: "/wepub" },
+	{ label: "Explore security", href: "/security/", variant: "secondary" as const },
+];
+
+const ctaActions = [
+	{ label: "Get started", href: "/contact" },
+	{ label: "See pricing", href: "/pricing", variant: "secondary" as const },
+];
+
+const problemCards = [
+	{
+		title: "Publishing is separate",
+		body: "Books are created and distributed through one set of tools.",
+	},
+	{
+		title: "Reading is separate",
+		body: "Readers move into isolated applications and ecosystems.",
+	},
+	{
+		title: "Discussion is separate",
+		body: "Conversations happen across many platforms disconnected from the publication.",
+	},
+	{
+		title: "Knowledge is separate",
+		body: "Notes, references and long-term work often live outside the publication ecosystem.",
+	},
+];
+
+const benefitCards = [
+	{ title: "Authors", body: "Maintain stronger relationships with readers.", icon: "author" as const },
+	{ title: "Publishers", body: "Operate within a unified publishing ecosystem.", icon: "publisher" as const },
+	{
+		title: "Institutions",
+		body: "Support publishing, learning and knowledge management in one environment.",
+		icon: "library" as const,
+	},
+	{
+		title: "Readers",
+		body: "Access, discuss and organize publications within a connected system.",
+		icon: "reader" as const,
+	},
+];
+
 ---
 
-<PageScaffold page={pages.platform} />
+<Base
+	title={`Platform | ${SITE_NAME}`}
+	description="ReaderPub combines publishing, reading, discussion and knowledge tools into one platform for Living Publications."
+>
+	<HeroSection
+		lead="We combine publishing, reading, discussion and knowledge tools into a single platform so books stay active on the web after release."
+		image="/images/home2.webp"
+		imageAlt="ReaderPub platform connecting books, readers, authors and institutions"
+		actions={heroActions}
+		spacerBackgroundPositionY="45%"
+		class="platform-hero"
+	>
+		<Fragment slot="title"><span class="platform-hero-product">ReaderPub:</span><br />A web-native publishing network.</Fragment>
+		<Fragment slot="body">Publish securely to the web.<br />Listen to and retain your readers.</Fragment>
+	</HeroSection>
+
+	<Section
+		tone="gray"
+		title="Publishing systems are fragmented"
+		body="Most digital publishing workflows rely on disconnected tools. Publishing, reading, discussion and knowledge management often happen in separate systems."
+	>
+		<CardGrid columns="2" class="platform-problem-grid">
+			{problemCards.map((card) => <Card {...card} />)}
+		</CardGrid>
+	</Section>
+
+	<div class="platform-source-sections">
+		<section class="section section--white spec-cards-section platform-source-section platform-source-problem-section section-continue-next">
+			<h2>ReaderPub exists because the old model breaks the relationship</h2>
+			<p class="lede">
+				File-first publishing can move a book from one place to another, but it cannot keep books connected to readers, authors, institutions and communities.
+			</p>
+			<div class="model-grid">
+				<div class="card platform-old-model-card" style="--card-tint: #fcfaf8; background: var(--button-light-bg);">
+					<h3>Old publishing model</h3>
+					<ul class="comparison-list">
+						<li>Create a file</li>
+						<li>Upload it to a marketplace or archive</li>
+						<li>Lose the reader relationship</li>
+						<li>Move discussion to external platforms</li>
+					</ul>
+				</div>
+				<div class="card">
+					<h3><span class="platform-readerpub-word">ReaderPub</span> model</h3>
+					<ul class="comparison-list">
+						<li>Publish the book as a web asset</li>
+						<li>Keep readers, authors and institutions connected</li>
+						<li>Attach discussion and discovery to the work</li>
+						<li>Extend the life of every publication</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section id="platform-model" class="section section--green spec-cards-section platform-source-section platform-products-section section-continuation">
+			<h2 class="platform-products-heading">Four products. One connected platform.</h2>
+			<p class="lede platform-products-lede">ReaderPub combines publishing, reading, discovery, and discussion into a single ecosystem.</p>
+			<div class="card-grid platform-three-grid platform-products-grid">
+				<div class="card">
+					<h3>WePub</h3>
+					<p>Publishing workflow for authors and organizations.</p>
+					<ul class="bullets">
+						<li>Upload Word or EPUB file for a single web edition production</li>
+						<li>Upload the entire catalogue through API for bulk publishing</li>
+						<li>Preview web-accessible editions before publishing</li>
+						<li>Define pricing</li>
+						<li>Manage published titles</li>
+						<li>Generate optional EPUBs</li>
+					</ul>
+					<a class="button button--secondary" href="/wepub">Explore WePub</a>
+				</div>
+				<div class="card">
+					<h3>WeRead</h3>
+					<p>Instant browser-based reading for long-form content.</p>
+					<ul class="bullets">
+						<li>Read without downloading files</li>
+						<li>Use annotations and notes</li>
+						<li>Support native device text-to-speech</li>
+						<li>Reduce unauthorized copying with Theft Guard</li>
+						<li>Share the book or it's content</li>
+						<li>Discuss the book or an author with the community</li>
+					</ul>
+					<a class="button" href={BOOKS_URL} target="_blank" rel="noreferrer">60K+ books in Catalog</a>
+				</div>
+				<div class="card">
+					<h3>WeBuzz</h3>
+					<p>Discuss books, authors, and passages with readers around the world. Build communities around literature, connect directly with authors and publishers, and turn reading into a shared experience.</p>
+					<ul class="bullets">
+						<li>Book discussions</li>
+						<li>Author discussions</li>
+						<li>Passage discussions</li>
+						<li>Reader communities</li>
+						<li>Author participation</li>
+						<li>Publisher engagement</li>
+					</ul>
+					<a class="button button--secondary" href="/webuzz">Explore WeBuzz</a>
+				</div>
+				<div class="card">
+					<h3>BookTree</h3>
+					<p>Structure for books, editions, metadata, catalogs, and collections.</p>
+					<ul class="bullets">
+						<li>Organize books, excerpts, and references across projects</li>
+						<li>Keep context while reading long and complex materials</li>
+						<li>Build personal knowledge maps from what you read</li>
+						<li>Consolidate your notes from multiple books while working on your own manuscript</li>
+					</ul>
+					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section--white spec-cards-section platform-source-section section-continuation platform-capabilities-section">
+			<h2>Platform Capabilities</h2>
+			<div class="card-grid platform-three-grid">
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Browser-based reading</h3><p class="platform-capability-copy">Instant delivery through the web.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Protected web editions</h3><p class="platform-capability-copy">Web-native access instead of file handoff.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Direct sales</h3><p class="platform-capability-copy">Sell books, courses, cohorts, and limited releases.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Low commission</h3><p class="platform-capability-copy">Direct-to-reader commerce with a low 5% platform fee.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Reader analytics</h3><p class="platform-capability-copy">Track engagement, feedback, and access patterns.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Collaboration</h3><p class="platform-capability-copy">Annotations, notes, and shared context for teams.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Institutional access</h3><p class="platform-capability-copy">User, group, course, department, and role controls.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Catalog support</h3><p class="platform-capability-copy">Import and preserve structured metadata at scale.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Readers' community</h3><p class="platform-capability-copy">Readers discuss and promote books and knowledge content</p></div>
+			</div>
+			<Section
+				tone="green"
+				class="platform-flow-section"
+				title="How ReaderPub works"
+				body="Each layer supports a different stage of the publication lifecycle while remaining part of a unified platform."
+			>
+				<ol class="platform-flow" aria-label="ReaderPub publication lifecycle">
+					<li>Publication</li>
+					<li>Reading</li>
+					<li>Discussion</li>
+					<li>Knowledge</li>
+				</ol>
+				<p class="platform-flow-note">
+					Instead of moving readers and content between disconnected systems, ReaderPub keeps these activities within one publishing environment.
+				</p>
+				<div class="card-grid platform-two-grid platform-onboarding-grid">
+					<section class="card platform-onboarding-card">
+						<h3>For creators</h3>
+						<p class="lede">Publish your book on ReaderPub.</p>
+						<ul class="bullets">
+							<li>Upload Word or EPUB files</li>
+							<li>Publish browser-based editions</li>
+							<li>Generate production-ready EPUBs</li>
+							<li>Track reader engagement</li>
+						</ul>
+						<div class="cta-row">
+							<a class="button" href="/wepub">Start publishing</a>
+							<a class="button button--secondary" href="/pricing/">See pricing</a>
+						</div>
+					</section>
+					<section class="card platform-onboarding-card">
+						<h3>For organizations</h3>
+						<p class="lede">Bring your organization to ReaderPub.</p>
+						<ul class="bullets">
+							<li>Import from OPDS, MARC, ONIX, KBART, S3, or CSV</li>
+							<li>Manage users, groups, and permissions</li>
+							<li>Use ReaderPub or custom subdomain deployment</li>
+							<li>Track usage and engagement</li>
+						</ul>
+						<div class="cta-row">
+							<a class="button" href="/contact/">Contact us for details</a>
+							<a class="button button--secondary" href="/security/">Explore security</a>
+						</div>
+					</section>
+				</div>
+			</Section>
+		</section>
+
+		<section class="section section--white platform-source-section platform-audiences-section platform-first-white-section section-continuation">
+			<h2>Audiences</h2>
+			<div class="card-grid platform-audiences-cards">
+				<div class="card"><h3>Authors</h3><p>Publish and sell directly, then analyze reader engagement.</p></div>
+				<div class="card"><h3>Publishers</h3><p>Manage titles, editions, catalogs, and controlled access.</p></div>
+				<div class="card"><h3>Schools</h3><p>Distribute course materials and monitor usage.</p></div>
+				<div class="card"><h3>Libraries</h3><p>Create browser-based digital shelves for communities.</p></div>
+				<div class="card"><h3>Organizations</h3><p>Publish reports, papers, and structured knowledge online.</p></div>
+				<div class="card">
+					<h3>Manufacturers</h3>
+					<p>Publish easily accessible manuals and technical documentation.</p>
+				</div>
+			</div>
+			<img
+				class="image-block platform-audiences-image"
+				src="/images/audience.webp"
+				alt="Readers, authors, institutions, and publishers connected on ReaderPub"
+				loading="lazy"
+				decoding="async"
+				width="1024"
+				height="841"
+			/>
+		</section>
+
+		<section class="section section--white platform-source-section platform-reading-section section-continuation">
+			<h2>Reading Experience</h2>
+			<div class="card-grid platform-reading-cards">
+				<div class="card"><h3>Annotations</h3><p>Highlights, notes, and preserved context.</p></div>
+				<div class="card"><h3>Shared context</h3><p>Discussion among readers, authors, and instructors.</p></div>
+				<div class="card"><h3>Read-aloud support</h3><p>Native device text-to-speech voices.</p></div>
+				<div class="card"><h3>Long-form navigation</h3><p>Clean typography for serious reading.</p></div>
+				<div class="card"><h3>Cross-device access</h3><p>Return to assigned or purchased titles anywhere.</p></div>
+				<div class="card"><h3>Structured reading</h3><p>Chapters, editions, and metadata stay connected.</p></div>
+			</div>
+			<img
+				class="image-block platform-reading-image"
+				src="/images/readers2.webp"
+				alt="Reader experience with WeRead in the browser"
+				loading="lazy"
+				decoding="async"
+				width="1024"
+				height="1024"
+			/>
+		</section>
+
+		<section class="section section--white platform-source-section platform-commerce-section section-continuation">
+			<h2 class="platform-commerce-heading">Commerce &amp; Analytics</h2>
+			<div class="platform-commerce-split">
+				<img
+					class="image-block platform-commerce-image"
+					src="/images/commerce.webp"
+					alt="Commerce and analytics for direct sales and reader engagement"
+					loading="lazy"
+					decoding="async"
+					width="667"
+					height="600"
+				/>
+				<div class="platform-commerce-cards">
+					<section class="card">
+						<h3>Manage sales and promotion</h3>
+						<p>Sell directly and keep the reader relationship.</p>
+						<ul class="bullets">
+							<li>Sell web editions directly with low commission</li>
+							<li>Support books, courses, cohorts, and limited releases</li>
+							<li>Build fan clubs and reader communities</li>
+							<li>Connect sales to engagement analytics</li>
+						</ul>
+					</section>
+					<section class="card">
+						<h3>Keep track on your readers' audience</h3>
+						<p>Know what happens after publication.</p>
+						<ul class="bullets">
+							<li>Reader engagement and annotation activity</li>
+							<li>Title, collection, and institutional usage insights</li>
+							<li>First-party relationship with readers</li>
+						</ul>
+					</section>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section--white platform-source-section platform-control-section section-continuation">
+			<div class="platform-control-split">
+				<img
+					class="image-block platform-control-image"
+					src="/images/control.webp"
+					alt="ReaderPub Access Control for teams, classes, students, departments, and partners"
+					loading="lazy"
+					decoding="async"
+					width="960"
+					height="936"
+				/>
+				<div class="platform-control-copy">
+					<h2 class="platform-control-heading">Institutional control</h2>
+					<div class="card platform-control-info-card">
+						<p class="lede platform-control-lede">
+							Access can be assigned by user, group, course, department, team, program, partner
+							organization, or custom permission.
+						</p>
+						<ul class="bullets platform-control-list">
+							<li>Public and private collections</li>
+							<li>Controlled access programs</li>
+							<li>Course and cohort distribution</li>
+							<li>Team-based publishing workflows</li>
+							<li>Permission-based administration</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<Section tone="green">
+		<Fragment slot="title">Who benefits from <span class="platform-title-accent">ReaderPub</span>?</Fragment>
+		<CardGrid columns="4">
+			{benefitCards.map((card) => <Card {...card} />)}
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="A complete platform for web-native books publishing."
+		body="ReaderPub brings publishing, reading, discussion and knowledge management together in one system."
+		actions={ctaActions}
+	/>
+</Base>
+
+<style>
+	.platform-source-sections {
+		--section-flow-gap: 16px;
+		--section-block-gap-adjust: 12px;
+	}
+
+	:global(.platform-title-accent) {
+		color: var(--accent);
+	}
+
+	.platform-source-section {
+		display: flex;
+		flex-direction: column;
+		gap: var(--section-flow-gap);
+		align-items: stretch;
+		margin: 0;
+	}
+
+	.platform-source-section > * {
+		margin: 0 !important;
+	}
+
+	.platform-source-section > :is(.card-grid, .cta-row) {
+		margin-top: var(--section-block-gap-adjust) !important;
+	}
+
+	.platform-source-section > :is(.card-grid, .cta-row) + :is(p, ul, ol, .bullets, h3, h4) {
+		margin-top: var(--section-block-gap-adjust) !important;
+	}
+
+	.platform-source-section.section-continue-next {
+		padding-bottom: 58px !important;
+	}
+
+	.platform-source-section.section-continuation {
+		padding-top: 58px !important;
+		padding-bottom: 58px !important;
+		margin-top: 0 !important;
+	}
+
+	.platform-source-section h2 {
+		font-size: clamp(24px, 3vw, 34px);
+		line-height: 1.12;
+	}
+
+	.platform-source-section .lede {
+		max-width: 780px;
+		color: var(--accent);
+		font-size: 18px;
+		line-height: 1.4;
+	}
+
+	.platform-source-section .platform-readerpub-word {
+		color: var(--accent);
+	}
+
+	.platform-source-section .card {
+		min-height: 0;
+	}
+
+	.platform-source-section .card > .button {
+		align-self: flex-start;
+		margin-top: auto;
+	}
+
+	.platform-source-section .model-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--section-flow-gap);
+		width: 100%;
+	}
+
+	.platform-source-section .comparison-list {
+		display: grid;
+		gap: 10px;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.platform-source-section .comparison-list li {
+		position: relative;
+		padding-left: 18px;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.3;
+	}
+
+	.platform-source-section .comparison-list li::before {
+		content: "";
+		position: absolute;
+		top: 0.58em;
+		left: 0;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--accent);
+	}
+
+	.platform-source-section .platform-old-model-card {
+		--card-tint: #fcfaf8 !important;
+		background: var(--button-light-bg) !important;
+	}
+
+	.platform-source-section .platform-old-model-card .comparison-list li::before {
+		background: var(--text) !important;
+	}
+
+	.platform-source-section .bullets {
+		display: grid;
+		gap: 6px;
+		max-width: 720px;
+		padding-left: 18px;
+		list-style: disc;
+	}
+
+	.platform-source-section .bullets li {
+		padding: 0;
+		border: 0;
+		background: transparent;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.25;
+		list-style: disc;
+	}
+
+	.platform-source-section .bullets li::marker {
+		color: var(--accent);
+	}
+
+	.platform-source-section .card .bullets {
+		max-width: none;
+		padding-left: 18px;
+	}
+
+	.platform-source-section .platform-products-lede {
+		align-self: flex-start;
+		margin-right: auto !important;
+		margin-left: 0 !important;
+		text-align: left !important;
+	}
+
+	.platform-source-section .platform-two-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--section-flow-gap);
+	}
+
+	.platform-source-section .platform-three-grid {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.platform-source-section.platform-products-section .platform-products-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.platform-source-section.platform-products-section .card {
+		--card-tint: #fcfaf8;
+		background: var(--button-light-bg);
+	}
+
+	.platform-source-section.platform-products-section .card h3 {
+		color: var(--accent);
+	}
+
+	.platform-source-section .platform-onboarding-grid .platform-onboarding-card {
+		align-items: stretch;
+		text-align: left;
+	}
+
+	.platform-source-section .platform-onboarding-grid .platform-onboarding-card .lede {
+		color: var(--accent);
+	}
+
+	.platform-source-section .platform-onboarding-grid .platform-onboarding-card :is(p, .bullets, li) {
+		text-align: left;
+	}
+
+	.platform-source-section .platform-onboarding-grid .platform-onboarding-card .cta-row {
+		justify-content: flex-start;
+		width: fit-content;
+		max-width: 100%;
+		margin-inline: 0;
+		margin-top: auto;
+		padding-top: 24px;
+	}
+
+	.platform-source-section.platform-capabilities-section .platform-capability-card {
+		align-items: center !important;
+		text-align: center !important;
+	}
+
+	.platform-source-section.platform-capabilities-section .platform-capability-card :is(h3, p) {
+		width: 100%;
+		text-align: center !important;
+	}
+
+	:global(.platform-source-section.platform-capabilities-section > .platform-flow-section) {
+		margin-top: var(--section-padding) !important;
+		padding-top: var(--section-padding) !important;
+	}
+
+	:global(.platform-flow-section .platform-onboarding-grid) {
+		margin-top: var(--section-padding) !important;
+	}
+
+	.platform-source-section.platform-audiences-section {
+		display: grid;
+		grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+		grid-template-areas:
+			"title title"
+			"image cards";
+		column-gap: 32px;
+		row-gap: 16px;
+		align-items: center;
+	}
+
+	.platform-source-section.platform-first-white-section {
+		padding-top: 58px !important;
+	}
+
+	.platform-source-section.platform-audiences-section > h2 {
+		grid-area: title;
+		margin-bottom: 0;
+	}
+
+	.platform-source-section .platform-audiences-cards {
+		grid-area: cards;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		justify-content: stretch;
+		justify-items: stretch;
+		width: 100%;
+	}
+
+	.platform-source-section .platform-audiences-image {
+		grid-area: image;
+		justify-self: start;
+		align-self: center;
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+	}
+
+	.platform-source-section.platform-reading-section {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 42%);
+		grid-template-areas:
+			"title title"
+			"cards image";
+		column-gap: 32px;
+		row-gap: 16px;
+		align-items: center;
+	}
+
+	.platform-source-section.platform-reading-section > h2 {
+		grid-area: title;
+		margin-bottom: 0;
+	}
+
+	.platform-source-section .platform-reading-cards {
+		grid-area: cards;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		align-self: center;
+		justify-content: stretch;
+		justify-items: stretch;
+		width: 100%;
+	}
+
+	.platform-source-section .platform-reading-cards .card {
+		--card-tint: #fcfaf8;
+		background: var(--button-light-bg);
+	}
+
+	.platform-source-section .platform-reading-image {
+		grid-area: image;
+		justify-self: end;
+		align-self: center;
+		width: 100%;
+		max-width: 100%;
+		max-height: 100%;
+		margin: 0;
+		object-fit: contain;
+	}
+
+	.platform-source-section.platform-commerce-section > h2 {
+		margin-bottom: 0;
+	}
+
+	.platform-source-section .platform-commerce-split {
+		display: grid;
+		grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+		grid-template-areas: "image cards";
+		column-gap: 64px;
+		align-items: center;
+		width: 100%;
+		margin-top: var(--section-block-gap-adjust) !important;
+	}
+
+	.platform-source-section .platform-commerce-image {
+		grid-area: image;
+		justify-self: start;
+		align-self: center;
+		width: 90%;
+		max-width: 90% !important;
+		margin: 0;
+	}
+
+	.platform-source-section .platform-commerce-cards {
+		grid-area: cards;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: var(--section-flow-gap);
+		width: 100%;
+	}
+
+	.platform-source-section .platform-control-split {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 42%);
+		grid-template-areas: "copy image";
+		column-gap: 64px;
+		align-items: center;
+		width: 100%;
+	}
+
+	.platform-source-section .platform-control-image {
+		grid-area: image;
+		justify-self: end;
+		align-self: center;
+		width: 85%;
+		max-width: 85% !important;
+		margin: 0;
+	}
+
+	.platform-source-section .platform-control-copy {
+		grid-area: copy;
+		display: flex;
+		flex-direction: column;
+		gap: var(--section-flow-gap);
+		min-width: 0;
+	}
+
+	.platform-source-section .platform-control-copy > * {
+		margin: 0 !important;
+	}
+
+	.platform-source-section .platform-control-info-card {
+		--card-tint: #fcfaf8 !important;
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%) !important;
+	}
+
+	.platform-source-section .platform-control-info-card > * {
+		margin: 0 !important;
+	}
+
+	@media (min-width: 901px) {
+		.platform-source-section.platform-capabilities-section .platform-three-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.platform-source-section .model-grid,
+		.platform-source-section .platform-two-grid,
+		.platform-source-section .platform-three-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.platform-source-section.platform-products-section .platform-products-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.platform-source-section.platform-audiences-section {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				"title"
+				"image"
+				"cards";
+			justify-items: center;
+		}
+
+		.platform-source-section .platform-audiences-cards {
+			grid-template-columns: 1fr;
+		}
+
+		.platform-source-section .platform-audiences-image {
+			justify-self: center;
+			margin-inline: auto;
+		}
+
+		.platform-source-section.platform-reading-section {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				"title"
+				"image"
+				"cards";
+			justify-items: center;
+		}
+
+		.platform-source-section .platform-reading-cards {
+			grid-template-columns: 1fr;
+		}
+
+		.platform-source-section .platform-reading-image {
+			justify-self: center;
+			margin-inline: auto;
+		}
+
+		.platform-source-section .platform-commerce-split {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				"image"
+				"cards";
+			row-gap: var(--section-flow-gap);
+			justify-items: center;
+		}
+
+		.platform-source-section .platform-commerce-image {
+			justify-self: center;
+			width: 90%;
+			max-width: min(520px, 90%) !important;
+			margin-inline: auto;
+		}
+
+		.platform-source-section .platform-control-split {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				"heading"
+				"lede"
+				"image"
+				"list";
+			row-gap: var(--section-flow-gap);
+			justify-items: center;
+		}
+
+		.platform-source-section .platform-control-copy {
+			display: contents;
+		}
+
+		.platform-source-section .platform-control-heading {
+			grid-area: heading;
+		}
+
+		.platform-source-section .platform-control-lede {
+			grid-area: lede;
+		}
+
+		.platform-source-section .platform-control-image {
+			grid-area: image;
+			justify-self: center;
+			width: 85%;
+			max-width: min(520px, 85%) !important;
+			margin-inline: auto;
+		}
+
+		.platform-source-section .platform-control-list {
+			grid-area: list;
+			width: 100%;
+		}
+
+		.platform-source-section.platform-control-section .platform-control-heading,
+		.platform-source-section.platform-control-section .platform-control-lede {
+			width: 100%;
+			text-align: center !important;
+		}
+
+		.platform-source-section .platform-three-grid .card > p {
+			text-align: left !important;
+		}
+
+		.platform-source-section.platform-capabilities-section .platform-three-grid .card > p,
+		.platform-source-section.platform-capabilities-section .platform-three-grid .card > h3,
+		.platform-source-section.platform-capabilities-section .platform-capability-title,
+		.platform-source-section.platform-capabilities-section .platform-capability-copy {
+			text-align: center !important;
+		}
+
+		.platform-source-section .platform-products-heading,
+		.platform-source-section .platform-commerce-heading {
+			width: 100%;
+			text-align: center !important;
+		}
+
+		.platform-source-section .platform-products-lede {
+			width: 100%;
+			text-align: center !important;
+		}
+	}
+
+	.platform-comparison-block {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.platform-hero-product {
+		color: var(--accent);
+	}
+
+	:global(.platform-hero.hero-section) {
+		grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+		gap: 32px;
+		align-items: start;
+		padding-top: 54px;
+		padding-bottom: 58px;
+	}
+
+	:global(.platform-hero > *) {
+		min-width: 0;
+	}
+
+	:global(.platform-hero .hero-copy) {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		align-self: start;
+	}
+
+	:global(.platform-hero .hero-copy > *) {
+		margin: 0;
+	}
+
+	:global(.platform-hero .hero-copy h1) {
+		max-width: none;
+		font-size: clamp(36px, 5vw, 56px);
+		line-height: 1.1;
+	}
+
+	:global(.platform-hero .hero-lead) {
+		max-width: none;
+		color: var(--text) !important;
+		font-size: 22.95px !important;
+		line-height: 1.45 !important;
+		margin: 0;
+	}
+
+	:global(.platform-hero .hero-body) {
+		max-width: 720px;
+		color: var(--accent);
+		font-family: var(--font-display);
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
+		font-weight: 700;
+		line-height: 1.12;
+	}
+
+	:global(.platform-hero .cta-row) {
+		gap: 12px;
+		justify-content: flex-start;
+	}
+
+	:global(.platform-hero .button) {
+		min-height: auto;
+		padding: 10px 18px;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 1;
+	}
+
+	:global(.platform-hero .button--secondary) {
+		background: var(--button-light-bg);
+		color: var(--accent);
+		border-color: var(--accent);
+	}
+
+	.platform-comparison-card {
+		min-height: 0;
+	}
+
+	.platform-comparison-card--accent h3 {
+		color: var(--accent);
+	}
+
+	:global(.platform-problem-grid) {
+		align-items: start;
+	}
+
+	:global(.platform-problem-grid .card) {
+		height: auto;
+		min-height: 0;
+	}
+
+	.platform-list {
+		display: grid;
+		gap: 10px;
+		padding-left: 1.2rem;
+		color: var(--muted);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.platform-list li::marker {
+		color: var(--accent);
+	}
+
+	.platform-flow {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 34px;
+		width: 100%;
+		list-style: none;
+		counter-reset: platform-flow;
+	}
+
+	.platform-flow li {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 86px;
+		padding: 18px;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-card);
+		background: var(--button-light-bg);
+		color: var(--text);
+		font-weight: 700;
+		text-align: center;
+	}
+
+	.platform-flow li:not(:last-child)::after {
+		content: "\2192";
+		position: absolute;
+		top: 50%;
+		right: -27px;
+		transform: translateY(-50%);
+		color: var(--accent);
+		font-size: 1.35rem;
+		font-weight: 700;
+	}
+
+	.platform-flow-note {
+		max-width: 760px;
+		color: var(--accent);
+		font-size: 1.125rem;
+		line-height: 1.45;
+	}
+
+	:global(.platform-image-section) {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+		grid-template-areas:
+			"copy image"
+			"cards image";
+		column-gap: 40px;
+		row-gap: 22px;
+		align-items: center;
+	}
+
+	:global(.platform-image-section--audiences),
+	:global(.platform-image-section--commerce) {
+		grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1fr);
+		grid-template-areas:
+			"image copy"
+			"image cards";
+	}
+
+	:global(.platform-image-section--control) {
+		grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+		grid-template-areas:
+			"copy image"
+			"cards image";
+	}
+
+	.platform-image-copy {
+		grid-area: copy;
+	}
+
+	.platform-section-image {
+		grid-area: image;
+		justify-self: center;
+		align-self: center;
+		width: 100%;
+		max-width: 500px;
+		margin: 0;
+	}
+
+	.platform-commerce-image {
+		max-width: 440px;
+	}
+
+	.platform-control-image {
+		max-width: 430px;
+	}
+
+	.platform-media-cards,
+	.platform-control-list {
+		grid-area: cards;
+	}
+
+	.platform-control-list {
+		max-width: 720px;
+	}
+
+	@media (max-width: 900px) {
+		:global(.platform-hero.hero-section) {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			padding-top: 29px;
+			padding-bottom: 29px;
+			text-align: center;
+		}
+
+		:global(.platform-hero .hero-copy) {
+			align-items: center;
+			text-align: center;
+		}
+
+		:global(.platform-hero .hero-copy h1) {
+			font-size: clamp(30.6px, 4.25vw, 47.6px) !important;
+		}
+
+		:global(.platform-hero .hero-lead) {
+			font-size: 18.36px !important;
+			line-height: 1.45 !important;
+		}
+
+		:global(.platform-hero .hero-body) {
+			font-size: clamp(22.1px, 2.72vw, 32.3px);
+		}
+
+		:global(.platform-hero .cta-row) {
+			justify-content: center;
+		}
+
+		.platform-comparison-block,
+		.platform-flow {
+			grid-template-columns: 1fr;
+		}
+
+		.platform-flow {
+			gap: 16px;
+		}
+
+		.platform-flow li:not(:last-child)::after {
+			content: "\2193";
+			top: auto;
+			right: auto;
+			bottom: -18px;
+			left: 50%;
+			transform: translateX(-50%);
+			font-size: 1.1rem;
+		}
+
+		.platform-flow-note {
+			justify-self: center;
+			text-align: center;
+		}
+
+		:global(.platform-image-section),
+		:global(.platform-image-section--audiences),
+		:global(.platform-image-section--commerce),
+		:global(.platform-image-section--control) {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				"copy"
+				"image"
+				"cards";
+			justify-items: center;
+			text-align: center;
+		}
+
+		:global(.platform-image-section) > .section-header {
+			display: grid !important;
+		}
+
+		.platform-section-image,
+		.platform-commerce-image,
+		.platform-control-image {
+			max-width: min(500px, 100%);
+		}
+
+		.platform-control-list {
+			justify-self: stretch;
+			text-align: left;
+		}
+	}
+</style>

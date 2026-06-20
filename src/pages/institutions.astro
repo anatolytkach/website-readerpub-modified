@@ -1,6 +1,893 @@
 ---
-import PageScaffold from "../components/PageScaffold.astro";
-import { pages } from "../data/pages";
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import Section from "../components/sections/Section.astro";
+import SectionIcon from "../components/SectionIcon.astro";
+import Base from "../layouts/Base.astro";
+import { SITE_NAME } from "../consts";
+import type { PageCard } from "../data/pages";
+
+const problemCards: PageCard[] = [
+	{
+		title: "Discovery is limited",
+		body: "PDF archives are not searchable through, so users cannot find what exists.",
+	},
+	{
+		title: "Collections remain isolated",
+		body: "PDF files are not designed for easy reading on mobile devices",
+	},
+	{
+		title: "Discussion rarely happens",
+		body: "Reading happens without community, discussion or feedback loops.",
+	},
+	{
+		title: "Reusability is low",
+		body: "Knowledge remains locked in archives instead of circulating through the open web.",
+	},
+	{
+		title: "Value remains hidden",
+		body: "Important materials fail to reach the audiences they were created to serve.",
+	},
+];
+
+const valueCards: PageCard[] = [
+	{
+		title: "Universities",
+		body: "Extend the reach of research and educational materials.",
+	},
+	{
+		title: "Libraries",
+		body: "Make collections more visible and accessible.",
+	},
+	{
+		title: "Public organizations",
+		body: "Increase the usefulness of published information.",
+	},
+	{
+		title: "Research groups",
+		body: "Keep knowledge connected to readers and communities.",
+	},
+];
+
+const benefitCards: PageCard[] = [
+	{
+		title: "Institutions",
+		body: "Increase visibility and long-term value of collections.",
+		icon: "library",
+	},
+	{
+		title: "Researchers",
+		body: "Reach broader audiences and preserve context around their work.",
+		icon: "research",
+	},
+	{
+		title: "Students",
+		body: "Access and engage with materials more easily.",
+		icon: "university",
+	},
+	{
+		title: "Communities",
+		body: "Benefit from more discoverable and accessible knowledge.",
+		icon: "fan",
+	},
+];
+
+const ctaActions = [
+	{ label: "Build an institutional library", href: "/contact?topic=institution" },
+	{ label: "See pricing", href: "/pricing", variant: "secondary" as const },
+];
 ---
 
-<PageScaffold page={pages.institutions} />
+<Base
+	title={`${SITE_NAME} for Institutions`}
+	description="With ReaderPub, institutions create live knowledge publications that remain visible, accessible and useful over time."
+>
+	<section class="network-hero institutions-network-hero">
+		<div class="institutions-network-media">
+			<img
+				class="image-block image-large network-hero-image institutions-network-image"
+				src="/images/institutions.webp"
+				alt="Institutional knowledge becoming readable and discoverable on the web"
+				loading="eager"
+				decoding="async"
+				width="1115"
+				height="895"
+			/>
+		</div>
+		<div class="network-hero-copy institutions-network-copy">
+			<div class="menu-eyebrow">INSTITUTIONS</div>
+			<h1 class="network-hero-title">Institutions publish knowledge.<br />The web buries it.</h1>
+			<p class="network-hero-lede institutions-hero-problem">
+				Libraries, universities, and public organizations generate valuable knowledge that is often inaccessible and underused.
+			</p>
+			<p class="home-hero-statement">We bring the value back to the web.</p>
+			<p class="institutions-hero-followup">
+				With ReaderPub, institutions create web publications that remain visible and useful at any time.
+			</p>
+			<div class="cta-row">
+				<a class="button" href="/contact?topic=institution">Build an institutional library</a>
+				<a class="button secondary" href="/pricing">See pricing</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="hero-background-spacer" aria-hidden="true" style="--hero-background-spacer-position-y: 63%;"></section>
+
+	<script>
+		let institutionsHeroBackgroundSpacerObserver;
+
+		const syncInstitutionsHeroBackgroundSpacer = () => {
+			const hero = document.querySelector(".institutions-network-hero");
+			const spacer = hero?.nextElementSibling;
+
+			if (!hero || !spacer?.classList.contains("hero-background-spacer")) {
+				return;
+			}
+
+			const heroImage = hero.querySelector(".institutions-network-image");
+			const referenceHeight =
+				heroImage?.getBoundingClientRect().height || hero.getBoundingClientRect().height;
+
+			if (referenceHeight > 0) {
+				spacer.style.setProperty("--hero-background-spacer-height", `${Math.round(referenceHeight * 0.3)}px`);
+			}
+		};
+
+		const syncInstitutionsHeroBackgroundSpacers = () => {
+			const hero = document.querySelector(".institutions-network-hero");
+
+			if (!hero) {
+				return;
+			}
+
+			if (institutionsHeroBackgroundSpacerObserver) {
+				institutionsHeroBackgroundSpacerObserver.disconnect();
+			}
+
+			if ("ResizeObserver" in window) {
+				institutionsHeroBackgroundSpacerObserver = new ResizeObserver(syncInstitutionsHeroBackgroundSpacer);
+				institutionsHeroBackgroundSpacerObserver.observe(hero);
+
+				const heroImage = hero.querySelector(".institutions-network-image");
+				heroImage && institutionsHeroBackgroundSpacerObserver.observe(heroImage);
+				heroImage?.addEventListener("load", syncInstitutionsHeroBackgroundSpacer, { once: true });
+			}
+
+			syncInstitutionsHeroBackgroundSpacer();
+		};
+
+		document.addEventListener("astro:page-load", syncInstitutionsHeroBackgroundSpacers);
+		window.addEventListener("load", syncInstitutionsHeroBackgroundSpacers, { once: true });
+		window.addEventListener("resize", syncInstitutionsHeroBackgroundSpacers, { passive: true });
+		syncInstitutionsHeroBackgroundSpacers();
+	</script>
+
+	<Section
+		tone="gray"
+		title="Why institutional publishing fails online"
+		body="Many organizations successfully publish knowledge, but struggle to make it visible, accessible and actively used."
+	>
+		<CardGrid columns="4" class="institutions-top-problem-grid">
+			{problemCards.map((card) => <Card {...card} />)}
+		</CardGrid>
+	</Section>
+
+	<section class="section spec-cards-section institutions-solution-section section-continuation">
+		<h2>ReaderPub turns knowledge into live web assets</h2>
+		<div class="card-grid institutions-solution-grid">
+			<div class="card">
+				<h3>Readable on the web</h3>
+				<p>Collections can be opened directly in the browser.</p>
+			</div>
+			<div class="card">
+				<h3>Searchable and structured</h3>
+				<p>Books, authors and collections become easier to find and navigate.</p>
+			</div>
+			<div class="card">
+				<h3>Connected to discussion</h3>
+				<p>Readers can engage around works, authors and ideas.</p>
+			</div>
+			<div class="card">
+				<h3>Useful beyond storage</h3>
+				<p>Institutional publishing becomes active public infrastructure, not just digital preservation.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section section--green institutions-publisher-intro institutions-benefits-section section-continuation">
+		<div class="institutions-publisher-copy">
+			<h2>Publish on the web without losing control. Keep your audience.</h2>
+			<p class="lede institutions-publisher-lede">
+				Launch catalogs, excerpts, and controlled reading programs on a public platform built for discovery — with secure, account-based access and a delivery model designed to reduce file leakage risk.
+			</p>
+			<p class="institutions-publisher-access">
+				Access is fully configurable: institutions define who can read, which content is restricted, and how access is granted across users and teams.
+			</p>
+			<p class="lede institutions-publisher-note">
+				In addition to web publishing, ReaderPub delivers a production-ready EPUB that you can archive, distribute externally, or publish on other platforms — while keeping your primary access securely managed online.
+			</p>
+		</div>
+		<article class="card institutions-publisher-card">
+			<ul class="bullets institutions-publisher-list">
+				<li>Control access by channel, cohort, or program.</li>
+				<li>Deliver web-only reading through verified user accounts — no downloadable files, no heavy DRM.</li>
+				<li>Track engagement across titles in real time.</li>
+				<li>Showcase frontlist and backlist with confidence.</li>
+				<li>Offer public excerpts or restricted access by segment.</li>
+				<li>Measure engagement and demand by title.</li>
+				<li>Build direct relationships with readers and partner institutions.</li>
+				<li>Run collaborative reading programs with shared, pass-forward annotations across cohorts.</li>
+			</ul>
+		</article>
+	</section>
+
+	<section class="section spec-cards-section section-continuation institutions-expanded-section">
+		<div class="card-grid icon-grid institutions-expanded-pair-grid">
+			<div class="card icon-grid-card institutions-green-gradient-card">
+				<SectionIcon type="sale" title="Sell titles" />
+				<div class="icon-grid-card-copy">
+					<h3>Sell titles with lower fees — and keep your audience</h3>
+					<ul class="bullets">
+						<li>Commerce-ready distribution under control</li>
+						<li>Low 5% sales commission</li>
+						<li>First-party analytics: revenue, cohorts, engagement.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="fan" title="WeBuzz communities" />
+				<div class="icon-grid-card-copy">
+					<h3>Build WeBuzz communities around collections.</h3>
+					<p>Create ongoing discussion around authors, series, archives, collections, and educational materials through ReaderPub's integrated literary social network.</p>
+					<ul class="bullets">
+						<li>Book- and author-level memberships with direct reader access.</li>
+						<li>Campaign-ready drops: releases, excerpts, limited access.</li>
+						<li>Community analytics connected to sales.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="library" title="Libraries" />
+				<div class="icon-grid-card-copy">
+					<h3>Libraries extend their mission into the public web.</h3>
+					<p>Create digital reading rooms that serve patrons, partners, and communities.</p>
+					<ul class="bullets">
+						<li>Extend collections with digital programs and access..</li>
+						<li>Run reading programs with impact.</li>
+						<li>Curate shelves and programs with public visibility.</li>
+						<li>Support community reading initiatives and cohorts.</li>
+						<li>Extend collections with modern web access.</li>
+						<li>Track engagement to guide programming.</li>
+						<li>Enable inclusive access with built-in device TTS for patrons who prefer listening.</li>
+					</ul>
+					<p class="institutions-outcome-note">Turn community collections into a public reading library online.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card institutions-green-gradient-card">
+				<SectionIcon type="university" title="Universities" />
+				<div class="icon-grid-card-copy">
+					<h3>Universities publish research with visibility and trust.</h3>
+					<p>Support faculty, labs, and students with a public research library.</p>
+					<ul class="bullets">
+						<li>Power coursework and cohort reading.</li>
+						<li>Unify campus libraries and labs.</li>
+						<li>Release working papers, reports, and open archives.</li>
+						<li>Power coursework reading and cohort programs.</li>
+						<li>Unify campus libraries and departmental collections.</li>
+						<li>Highlight institutional expertise to the public.</li>
+					</ul>
+					<p class="institutions-outcome-note">Publish research libraries with clear public access and attribution.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card institutions-green-gradient-card">
+				<SectionIcon type="government" title="Government" />
+				<div class="icon-grid-card-copy">
+					<h3>Government publishes with transparency and reach.</h3>
+					<p>Make public documents, research, and policy libraries easy to find and read.</p>
+					<ul class="bullets">
+						<li>Improve transparency and access.</li>
+						<li>Serve staff and constituents together.</li>
+						<li>Centralize reports, regulations, and public resources.</li>
+						<li>Serve staff and constituents with the same library.</li>
+						<li>Improve transparency with accessible reading formats.</li>
+						<li>Track public engagement to inform policy work.</li>
+					</ul>
+					<p class="institutions-outcome-note">Make policy libraries readable and searchable for the public.</p>
+				</div>
+			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="charity" title="Public organizations" />
+				<div class="icon-grid-card-copy">
+					<h3>Public organizations amplify mission-driven knowledge.</h3>
+					<p>Publish reports, guides, and resources that reach the right communities.</p>
+					<ul class="bullets">
+						<li>Share mission resources with clarity and permanence.</li>
+						<li>Curate resources for communities and partners.</li>
+						<li>Publish reports with lasting visibility.</li>
+						<li>Curate collections for partners and constituents.</li>
+						<li>Launch public reading programs and campaigns.</li>
+						<li>Build trust with transparent, accessible publishing.</li>
+					</ul>
+					<p class="institutions-outcome-note">Deliver mission resources through a trusted public reading library.</p>
+				</div>
+			</div>
+		</div>
+		<div class="card-grid icon-grid institutions-expanded-access-grid">
+			<div class="card institutions-access-card">
+				<div class="institutions-access-card-heading">
+					<SectionIcon type="fan" title="Institutional reading communities" />
+					<h3>Create communities around collections.</h3>
+				</div>
+				<div class="institutions-access-card-body">
+					<p>Publishers, libraries and universities can use <strong class="institutions-community-highlight">WeBuzz Community</strong> to support book clubs, reading programs, classroom discussions, and collaborative exploration of texts.</p>
+					<ul class="bullets">
+						<li>Digital book clubs</li>
+						<li>Shared reading experiences</li>
+						<li>Classroom discussion</li>
+						<li>Academic engagement</li>
+						<li>Community participation</li>
+					</ul>
+				</div>
+				<a class="button" href="/webuzz">Explore WeBuzz Community</a>
+			</div>
+			<div class="card institutions-access-card">
+				<div class="institutions-access-card-heading">
+					<SectionIcon type="access" title="Control access at every level" />
+					<h3>Control access at every level</h3>
+				</div>
+				<div class="institutions-access-card-body">
+					<p>ReaderPub gives institutions administrative control over publications, users, and teams — allowing you to manage access, roles, and distribution policies from a single platform.</p>
+					<ul class="bullets">
+						<li>Assign access by user, group, or role</li>
+						<li>Control visibility of individual publications</li>
+						<li>Manage internal teams and external audiences</li>
+						<li>Maintain oversight across your entire catalog</li>
+					</ul>
+				</div>
+				<a class="button button--secondary" href="/security#control-who-reads">Learn how access control works</a>
+			</div>
+			<div class="card institutions-access-card">
+				<div class="institutions-access-card-heading">
+					<SectionIcon type="security" title="Built to reduce file leakage" />
+					<h3>Built to reduce file leakage</h3>
+				</div>
+				<div class="institutions-access-card-body">
+					<p>In file-based systems, content can circulate beyond the platform after delivery. ReaderPub minimizes that risk by keeping primary reading access on the web instead of routinely distributing a complete downloadable book file.</p>
+					<p class="institutions-leakage-note">Traditional DRM tries to control a file after delivery. ReaderPub reduces risk earlier by avoiding routine end-user delivery of the primary reading file.</p>
+				</div>
+				<a class="button button--secondary" href="/security#control-who-reads">Read about our protection model</a>
+			</div>
+		</div>
+	</section>
+
+	<Section
+		tone="white"
+		class="institutions-value-section"
+		title="Knowledge becomes more valuable when it is used"
+		body="Collections create the greatest value when readers can discover them, access them and engage with them over time."
+	>
+		<CardGrid columns="4">
+			{valueCards.map((card) => <Card {...card} />)}
+		</CardGrid>
+	</Section>
+
+	<Section tone="green" title="Who benefits from web-native institutional publishing?">
+		<CardGrid columns="4">
+			{benefitCards.map((card) => <Card {...card} />)}
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="Knowledge should not disappear inside repositories."
+		body="With ReaderPub, institutions create live knowledge publications that remain visible, accessible and useful over time."
+		actions={ctaActions}
+	/>
+</Base>
+
+<style>
+	.menu-eyebrow {
+		display: none;
+	}
+
+	.network-hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+		gap: 32px;
+		align-items: center;
+		margin-bottom: 0;
+		padding-top: 70px;
+		padding-bottom: var(--section-padding);
+		background: var(--surface);
+	}
+
+	.network-hero > * {
+		min-width: 0;
+	}
+
+	.network-hero-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.network-hero-copy > * {
+		margin: 0;
+	}
+
+	.network-hero-title {
+		font-size: clamp(36px, 5vw, 56px);
+		line-height: 1.1;
+	}
+
+	.network-hero-lede {
+		color: var(--accent) !important;
+		font-size: 19.5px !important;
+		line-height: 1.45 !important;
+		margin: 0;
+	}
+
+	.home-hero-statement {
+		max-width: 720px;
+		color: var(--accent);
+		font-family: var(--font-display);
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
+		font-weight: 700;
+		line-height: 1.12;
+	}
+
+	.institutions-hero-followup {
+		max-width: 720px;
+		color: var(--text);
+		font-size: 19.5px;
+		line-height: 1.45;
+	}
+
+	.network-hero-image {
+		display: block;
+		width: auto;
+		max-width: 100% !important;
+		height: min(var(--hero-image-reader-height), calc(100cqw * var(--hero-image-reader-ratio)));
+		object-fit: contain;
+		margin: 0;
+	}
+
+	.image-block.image-large {
+		max-width: 552px;
+	}
+
+	.institutions-network-hero {
+		grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr);
+		gap: 40px;
+	}
+
+	.institutions-network-media {
+		container-type: inline-size;
+		display: flex;
+		align-items: center;
+		align-self: stretch;
+		justify-content: flex-start;
+		min-width: 0;
+		order: 1;
+	}
+
+	.institutions-network-image {
+		flex: 0 0 auto;
+	}
+
+	.institutions-network-copy {
+		order: 2;
+	}
+
+	.institutions-hero-problem {
+		color: var(--text) !important;
+		font-size: 19.5px !important;
+	}
+
+	.network-hero .button.secondary {
+		background: var(--button-light-bg);
+		color: var(--accent);
+		border-color: var(--accent);
+	}
+
+	.network-hero .button.secondary:hover {
+		background: var(--button-light-bg);
+		color: var(--accent);
+	}
+
+	:global(.institutions-top-problem-grid) {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		align-items: stretch;
+	}
+
+	:global(.institutions-top-problem-grid > .card) {
+		grid-column: span 2;
+		height: 100%;
+		min-height: 0;
+	}
+
+	:global(.institutions-top-problem-grid > .card:nth-child(4)) {
+		grid-column: 2 / span 2;
+	}
+
+	:global(.institutions-top-problem-grid > .card:nth-child(5)) {
+		grid-column: 4 / span 2;
+	}
+
+	.institutions-solution-section,
+	.institutions-benefits-section,
+	.institutions-expanded-section {
+		--card: #fcfaf8;
+		--link: var(--accent);
+		--section-flow-gap: 16px;
+	}
+
+	.institutions-solution-section,
+	.institutions-benefits-section,
+	.institutions-expanded-section {
+		padding-top: 58px !important;
+		padding-bottom: 58px !important;
+		margin-top: 0 !important;
+	}
+
+	.institutions-solution-section > h2,
+	.institutions-benefits-section > h2 {
+		margin: 0;
+	}
+
+	.institutions-solution-section > p,
+	.institutions-benefits-section > p,
+	.institutions-expanded-section > p,
+	.institutions-benefits-section h2 + p {
+		color: var(--link);
+		font-size: 18px;
+		line-height: 1.25;
+	}
+
+	.institutions-solution-section .card-grid,
+	.institutions-expanded-section .card-grid {
+		display: grid;
+		gap: var(--section-flow-gap);
+		justify-content: stretch;
+		justify-items: stretch;
+		align-items: stretch;
+		width: 100%;
+		max-width: none;
+	}
+
+	.institutions-solution-section .card,
+	.institutions-expanded-section .card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--section-flow-gap);
+		height: 100%;
+		min-height: 130px;
+		padding: 18px;
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		background: linear-gradient(135deg, var(--card) 0%, var(--card) 15%, #ffffff 100%);
+	}
+
+	.institutions-solution-section .card {
+		--card-tint: #eef6f5;
+		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
+	}
+
+	.institutions-expanded-section .institutions-green-gradient-card {
+		--card-tint: #eef6f5;
+		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
+	}
+
+	.institutions-solution-section .card h3,
+	.institutions-expanded-section .card h3 {
+		white-space: normal;
+	}
+
+	.institutions-solution-grid {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.institutions-publisher-intro {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(320px, 0.86fr);
+		gap: clamp(32px, 5vw, 64px);
+		align-items: start;
+		padding: var(--section-padding) !important;
+	}
+
+	.institutions-publisher-intro > * {
+		margin: 0 !important;
+	}
+
+	.institutions-publisher-copy {
+		display: grid;
+		gap: var(--section-flow-gap);
+		min-width: 0;
+	}
+
+	.institutions-publisher-lede,
+	.institutions-publisher-note {
+		color: var(--link) !important;
+		max-width: 760px;
+	}
+
+	.institutions-publisher-card {
+		height: auto;
+		min-height: 0;
+		gap: var(--section-flow-gap);
+	}
+
+	.institutions-publisher-access {
+		color: var(--text) !important;
+		font-size: 18px;
+		line-height: 1.45;
+		max-width: none;
+	}
+
+	.institutions-publisher-list {
+		max-width: none;
+	}
+
+	.institutions-expanded-section {
+		display: grid;
+		gap: var(--section-flow-gap);
+		padding-bottom: 0 !important;
+	}
+
+	:global(.institutions-value-section .section-header) {
+		max-width: none;
+	}
+
+	:global(.institutions-value-section .section-header h2) {
+		max-width: none;
+	}
+
+	.institutions-expanded-pair-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+	}
+
+	.institutions-expanded-access-grid {
+		--section-green-circle-center: 50% 50%;
+		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+		gap: 24px;
+		padding: var(--section-padding);
+		border-radius: var(--radius-card);
+		background: repeating-radial-gradient(
+			circle at var(--section-green-circle-center),
+			var(--surface-green) 0,
+			var(--surface-green) 36px,
+			#f1fffc 36px,
+			#f1fffc 44px
+		);
+	}
+
+	.institutions-expanded-access-grid > .institutions-access-card {
+		grid-column: span 2;
+	}
+
+	.institutions-expanded-access-grid > .institutions-access-card:nth-child(3) {
+		grid-column: 1 / -1;
+	}
+
+	.institutions-expanded-section .icon-grid-card {
+		display: grid !important;
+		grid-template-columns: 56px minmax(0, 1fr) !important;
+		column-gap: 14px !important;
+		row-gap: var(--section-flow-gap) !important;
+		align-items: flex-start;
+		width: 100%;
+	}
+
+	.institutions-expanded-section .icon-grid-card > :global(.section-icon) {
+		grid-column: 1;
+		grid-row: 1;
+		align-self: center;
+	}
+
+	.institutions-expanded-section .icon-grid-card .icon-grid-card-copy {
+		display: contents;
+	}
+
+	.institutions-expanded-section .icon-grid-card .icon-grid-card-copy > h3 {
+		grid-column: 2;
+		grid-row: 1;
+		align-self: center;
+		margin: 0;
+	}
+
+	.institutions-expanded-section .icon-grid-card .icon-grid-card-copy > :not(h2):not(h3):not(h4) {
+		grid-column: 1 / -1;
+		grid-row: auto;
+	}
+
+	.institutions-access-card {
+		align-items: stretch;
+	}
+
+	.institutions-access-card-heading {
+		display: inline-grid;
+		grid-template-columns: 56px minmax(0, max-content);
+		column-gap: var(--card-icon-gap);
+		align-items: center;
+		justify-self: center;
+		justify-items: start;
+		text-align: left;
+	}
+
+	.institutions-access-card-heading > :global(.section-icon) {
+		width: 56px;
+		height: 56px;
+	}
+
+	.institutions-access-card-heading > h3 {
+		margin: 0;
+		text-align: left !important;
+	}
+
+	.institutions-access-card-body {
+		display: grid;
+		gap: var(--section-flow-gap);
+	}
+
+	.institutions-access-card > .button {
+		margin-top: auto;
+		align-self: center;
+	}
+
+	.institutions-community-highlight {
+		color: var(--text);
+		font-family: var(--font-display);
+		font-weight: 700;
+	}
+
+	.institutions-outcome-note {
+		color: var(--link) !important;
+	}
+
+	.institutions-leakage-note {
+		color: var(--text) !important;
+	}
+
+	.institutions-solution-section .bullets,
+	.institutions-benefits-section .bullets,
+	.institutions-expanded-section .bullets {
+		display: grid;
+		gap: 6px;
+		max-width: 720px;
+		padding-left: 18px;
+		list-style: disc;
+	}
+
+	.institutions-solution-section .bullets li,
+	.institutions-benefits-section .bullets li,
+	.institutions-expanded-section .bullets li {
+		padding: 0;
+		border: 0;
+		background: transparent;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.25;
+		list-style: disc;
+	}
+
+	.institutions-solution-section .bullets li::marker,
+	.institutions-benefits-section .bullets li::marker,
+	.institutions-expanded-section .bullets li::marker {
+		color: var(--accent);
+	}
+
+	.institutions-solution-section .card .bullets,
+	.institutions-expanded-section .card .bullets {
+		max-width: none;
+		padding-left: 18px;
+	}
+
+	@media (min-width: 901px) and (max-width: 1180px) {
+		:global(.institutions-value-section .section-header h2) {
+			font-size: clamp(40px, 4vw, 54px);
+			white-space: nowrap;
+		}
+	}
+
+	@media (max-width: 1180px) {
+		.institutions-solution-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1181px) {
+		:global(.institutions-value-section .section-header h2) {
+			white-space: nowrap;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.menu-eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			margin: 0 0 6px;
+			color: var(--accent);
+			font-size: clamp(13px, 2.8vw, 15px);
+			font-weight: 400;
+			letter-spacing: 0.06em;
+			line-height: 1.2;
+			text-transform: uppercase;
+		}
+
+		.network-hero {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			margin-bottom: 0;
+			padding-top: 70px;
+			padding-bottom: var(--section-padding);
+			text-align: center;
+		}
+
+		.network-hero-copy {
+			align-items: center;
+			text-align: center;
+		}
+
+		.network-hero-title {
+			font-size: clamp(30.6px, 4.25vw, 47.6px) !important;
+		}
+
+		.network-hero-lede {
+			font-size: 15.6px !important;
+			line-height: 1.45 !important;
+		}
+
+		.home-hero-statement {
+			font-size: clamp(22.1px, 2.72vw, 32.3px);
+		}
+
+		.network-hero-image {
+			max-width: min(100%, 520px) !important;
+			margin-inline: auto;
+		}
+
+		.institutions-network-hero {
+			grid-template-columns: 1fr;
+		}
+
+		.institutions-network-copy {
+			order: 1;
+		}
+
+		.institutions-network-media {
+			order: 2;
+			justify-content: center;
+			width: 100%;
+		}
+
+		.institutions-network-image {
+			flex: 0 1 auto;
+		}
+
+		:global(.institutions-top-problem-grid) {
+			grid-template-columns: 1fr;
+		}
+
+		:global(.institutions-top-problem-grid > .card),
+		:global(.institutions-top-problem-grid > .card:nth-child(4)),
+		:global(.institutions-top-problem-grid > .card:nth-child(5)) {
+			grid-column: auto;
+		}
+
+		.institutions-publisher-intro {
+			grid-template-columns: 1fr;
+		}
+
+		.institutions-solution-grid,
+		.institutions-expanded-pair-grid,
+		.institutions-expanded-access-grid {
+			grid-template-columns: 1fr !important;
+		}
+
+		.institutions-expanded-access-grid > .institutions-access-card,
+		.institutions-expanded-access-grid > .institutions-access-card:nth-child(3) {
+			grid-column: auto;
+		}
+	}
+</style>

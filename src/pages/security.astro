@@ -1,6 +1,844 @@
 ---
-import PageScaffold from "../components/PageScaffold.astro";
-import { pages } from "../data/pages";
+import Base from "../layouts/Base.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Section from "../components/sections/Section.astro";
+import SpecCardsSection from "../components/sections/SpecCardsSection.astro";
+import SectionIcon from "../components/SectionIcon.astro";
+import { SITE_NAME } from "../consts";
+
+const heroActions = [
+	{ label: "See how it works", href: "#protected-books" },
+];
+
+const ctaActions = [
+	{ label: "Contact us for details", href: "/contact" },
+];
+
+const featuredBooks = [
+	{
+		title: "The Adventures of Tom Sawyer, Complete",
+		author: "Mark Twain",
+		readUrl: "https://reader.pub/books/reader/?id=90000074",
+		coverUrl: "https://reader.pub/books/content/74/OEBPS/5490705198151656392_cover.jpg",
+	},
+	{
+		title: "Treasure Island",
+		author: "Robert Louis Stevenson",
+		readUrl: "https://reader.pub/books/reader/?id=90000120",
+		coverUrl: "https://reader.pub/books/content/120/OEBPS/4692925496734829213_cover.jpg",
+	},
+	{
+		title: "The Divine Comedy",
+		author: "Dante Alighieri",
+		readUrl: "https://reader.pub/books/reader/?id=90008800",
+		coverUrl: "https://reader.pub/books/content/8800/OEBPS/2447739984665842663_cover.jpg",
+	},
+	{
+		title: "The Tale of Peter Rabbit",
+		author: "Beatrix Potter",
+		readUrl: "https://reader.pub/books/reader/?id=90014838",
+		coverUrl: "/images/Peter_Rabbit.webp",
+	},
+	{
+		title: 'The Nursery "Alice"',
+		author: "Lewis Carroll",
+		readUrl: "https://reader.pub/books/reader/?id=90055040",
+		coverUrl: "https://reader.pub/books/content/55040/OEBPS/9181153211494798952_cover.jpg",
+	},
+	{
+		title: "Pinocchio: The Tale of a Puppet",
+		author: "Carlo Collodi",
+		readUrl: "https://reader.pub/books/reader/?id=90016865",
+		coverUrl: "https://reader.pub/books/content/16865/OEBPS/5166451335491288599_illus-cover.jpg",
+	},
+];
 ---
 
-<PageScaffold page={pages.security} />
+<Base
+	title={`Security | ${SITE_NAME}`}
+	description="ReaderPub protects access to web-native publications before complete files are distributed."
+>
+	<HeroSection
+		class="security-hero"
+		title="Protect access, not just files."
+		lead="Traditional ebook security focuses on DRM – the downloaded file is bound to the device."
+		image="/images/security.webp"
+		imageAlt="ReaderPub security and controlled access"
+		actions={heroActions}
+		spacerBackgroundPositionY="78%"
+	>
+		<Fragment slot="body">
+			<span class="security-hero-body-muted" style="color: rgb(105, 115, 128);">Traditional publishing protects files.</span>
+			<span>We protect access to the book.</span>
+		</Fragment>
+		<p class="security-hero-access-copy">
+			ReaderPub does not deliver any files.<br />Instead, we protect the book's text from copying.
+		</p>
+	</HeroSection>
+
+	<SpecCardsSection tone="gray" class="section-continue-next security-source-section security-first-section">
+		<h2>File-based piracy scales, bypassing the DRM</h2>
+		<p class="security-mobile-left-text">
+			When complete files are distributed to readers, publishers lose much of their control over what happens next.<br />Once that file exists on a device, it becomes the starting point for extraction, conversion, and redistribution.
+		</p>
+		<div class="card-grid security-steps-grid">
+			<div class="card security-step-card">
+				<svg class="security-step-icon" viewBox="0 0 298.97 269.23" style="transform: rotate(90deg);"><path d="M298.95 134.03c-0.19,-4.2 -2.71,-7.95 -6.54,-9.69l-276.52 -123.31c-1.46,-0.67 -3.06,-1.02 -4.68,-1.02 -6.19,0 -11.21,5.02 -11.21,11.21 0,1.64 0.36,3.27 1.06,4.76l53.95 118.64 -53.95 118.64c-0.69,1.49 -1.06,3.11 -1.06,4.76 0,6.19 5.02,11.21 11.21,11.21 1.62,0 3.21,-0.35 4.68,-1.02l276.52 -123.31c3.99,-1.82 6.56,-5.81 6.56,-10.2 0,-0.22 -0.01,-0.44 -0.02,-0.66l0 0zm-38.77 0.58l-226.43 100.89 43.79 -96.22c0.67,-1.46 1.02,-3.06 1.02,-4.67 0,-1.61 -0.35,-3.21 -1.02,-4.67l-43.79 -96.22 226.43 100.89 -0 -0z"/></svg>
+				<h3>File delivered</h3>
+				<p>A complete ebook file reaches the reader’s device.</p>
+			</div>
+			<div class="card security-step-card">
+				<svg class="security-step-icon" viewBox="0 0 298.97 269.23"><path d="M298.95 134.03c-0.19,-4.2 -2.71,-7.95 -6.54,-9.69l-276.52 -123.31c-1.46,-0.67 -3.06,-1.02 -4.68,-1.02 -6.19,0 -11.21,5.02 -11.21,11.21 0,1.64 0.36,3.27 1.06,4.76l53.95 118.64 -53.95 118.64c-0.69,1.49 -1.06,3.11 -1.06,4.76 0,6.19 5.02,11.21 11.21,11.21 1.62,0 3.21,-0.35 4.68,-1.02l276.52 -123.31c3.99,-1.82 6.56,-5.81 6.56,-10.2 0,-0.22 -0.01,-0.44 -0.02,-0.66l0 0zm-38.77 0.58l-226.43 100.89 43.79 -96.22c0.67,-1.46 1.02,-3.06 1.02,-4.67 0,-1.61 -0.35,-3.21 -1.02,-4.67l-43.79 -96.22 226.43 100.89 -0 -0z"/></svg>
+				<h3>File extracted</h3>
+				<p>The file becomes available for copying outside the original platform.</p>
+			</div>
+			<div class="card security-step-card">
+				<svg class="security-step-icon" viewBox="0 0 298.97 269.23" style="transform: rotate(-90deg);"><path d="M298.95 134.03c-0.19,-4.2 -2.71,-7.95 -6.54,-9.69l-276.52 -123.31c-1.46,-0.67 -3.06,-1.02 -4.68,-1.02 -6.19,0 -11.21,5.02 -11.21,11.21 0,1.64 0.36,3.27 1.06,4.76l53.95 118.64 -53.95 118.64c-0.69,1.49 -1.06,3.11 -1.06,4.76 0,6.19 5.02,11.21 11.21,11.21 1.62,0 3.21,-0.35 4.68,-1.02l276.52 -123.31c3.99,-1.82 6.56,-5.81 6.56,-10.2 0,-0.22 -0.01,-0.44 -0.02,-0.66l0 0zm-38.77 0.58l-226.43 100.89 43.79 -96.22c0.67,-1.46 1.02,-3.06 1.02,-4.67 0,-1.61 -0.35,-3.21 -1.02,-4.67l-43.79 -96.22 226.43 100.89 -0 -0z"/></svg>
+				<h3>File converted</h3>
+				<p>It can be turned into DRM-free ebook formats for reuse.</p>
+			</div>
+			<div class="card security-step-card">
+				<svg class="security-step-icon security-step-icon--bad" viewBox="0 0 1856.52 1856.44"><path d="M928.26 0c-511.32,0 -928.26,416.94 -928.26,928.18 0,511.24 416.94,928.26 928.26,928.26 511.32,0 928.26,-416.94 928.26,-928.26 0,-511.32 -414.78,-928.18 -928.26,-928.18zm0 116.28c449.86,0 814.13,364.27 814.13,811.98 0,447.71 -364.27,811.98 -814.13,811.98 -449.87,0 -811.98,-362.2 -811.98,-812.06 0,-447.63 362.12,-811.9 811.98,-811.9zm351.08 333.59c-138.26,0 -250.15,111.89 -250.15,250.14 0,138.26 111.89,250.15 250.15,250.15 138.26,0 250.14,-114.13 250.14,-250.15 0,-136.02 -114.12,-250.14 -250.14,-250.14zm-700.01 4.31c-138.26,0 -250.15,114.12 -250.15,250.14 0,136.02 111.89,250.15 250.15,250.15 138.26,0 250.14,-111.89 250.14,-250.15 0,-138.26 -114.12,-250.14 -250.14,-250.14zm700.01 111.97c74.64,0 133.86,59.22 133.86,133.86 0,74.65 -59.22,133.86 -133.86,133.86 -74.65,0 -133.86,-59.22 -133.86,-133.86 0,-74.64 59.22,-133.86 133.86,-133.86zm-700.01 4.4c74.64,0 133.86,59.22 133.86,133.86 0,74.65 -59.22,133.86 -133.86,133.86 -74.65,0 -133.87,-59.22 -133.87,-133.86 0,-74.64 59.22,-133.86 133.87,-133.86zm348.93 458.66c-188.69,0 -344.53,131.71 -386.25,307.21 -6.55,30.69 13.19,61.46 43.88,70.25 30.69,6.55 61.46,-13.19 70.25,-43.88l0 -0.08c28.53,-125.07 138.26,-217.22 272.13,-217.22 133.86,0 243.59,92.15 272.12,217.22 6.55,30.69 37.32,50.51 70.25,43.88 30.69,-6.55 50.51,-37.32 43.88,-70.25 0,0 0,0 0,0 -39.48,-175.58 -197.48,-307.21 -386.25,-307.21l0 0.08z"/></svg>
+				<h3>File redistributed</h3>
+				<p>Once a reusable file circulates, redistribution can scale quickly.</p>
+			</div>
+		</div>
+		<p style="color: var(--text);">This pattern is repeatable, automatable, and widely used <strong>by book pirates</strong> across the industry!</p>
+	</SpecCardsSection>
+
+	<SpecCardsSection class="section-continuation section-continue-next security-source-section security-source-risk-reduction-section">
+		<h2>ReaderPub reduces risk before the handoff</h2>
+		<p class="lede">
+			ReaderPub's primary model keeps reading on the web through controlled access rather than routinely delivering a complete downloadable book file to every reader.
+		</p>
+		<div class="model-grid">
+			<div class="card security-traditional-problem-card" style="background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 35%, #ffffff 100%) !important;">
+				<h3>Traditional security problem</h3>
+				<ul class="comparison-list security-traditional-list">
+					<li>Protection starts after the file is delivered</li>
+					<li>Access and possession become hard to separate</li>
+					<li>Redistribution risk remains part of the model</li>
+				</ul>
+			</div>
+			<div class="card">
+				<h3><span class="security-readerpub-title" style="color: var(--accent);">ReaderPub</span> solution</h3>
+				<ul class="comparison-list">
+					<li>Primary reading access stays on the web</li>
+					<li>Access is managed through accounts and permissions</li>
+					<li>EPUB output remains available when needed</li>
+				</ul>
+			</div>
+		</div>
+	</SpecCardsSection>
+
+	<SpecCardsSection id="control-who-reads" tone="green" class="section-continuation section-continue-next security-source-section security-source-protected-distribution-section">
+		<div class="security-source-distribution-layout">
+			<div class="security-source-distribution-copy">
+				<h2>Protected distribution without file delivery</h2>
+				<p class="security-source-green-copy security-mobile-left-text">
+					ReaderPub offers protected web editions: readers access content in the browser through
+					WeRead instead of receiving a downloadable book file.
+				</p>
+				<ul class="bullets">
+					<li>Browser-based access instead of file delivery</li>
+					<li>User-level and group-level access control</li>
+					<li>Protected reading sessions and reduced copy exposure</li>
+					<li>Suitable for premium, private, course, and research editions</li>
+				</ul>
+				<p class="security-source-theft-guard-text">All your books are fully protected by the patent-pending <strong class="security-source-theft-guard-name">WeRead Theft Guard</strong> that employs glyph images instead of regular characters, so the text is not accessible to crawling robots.</p>
+			</div>
+			<div class="footer-cta security-source-inline-cta security-source-theft-guard-card">
+				<h3>
+					<span class="security-source-theft-guard-highlight">WeRead Theft Guard</span>
+				</h3>
+				<p class="security-source-theft-guard-copy security-mobile-left-text">
+					Designed to reduce copying, downloading, and unauthorized redistribution.
+				</p>
+				<ul class="bullets security-source-theft-guard-list">
+					<li>No standard file handoff</li>
+					<li>Platform-managed access</li>
+					<li>Glyph-based obfuscation</li>
+				</ul>
+				<div class="cta-row security-source-theft-guard-action">
+					<SectionIcon type="security" title="WeRead Theft Guard" />
+					<a class="button" href="#protected-books">See how it works</a>
+				</div>
+			</div>
+		</div>
+	</SpecCardsSection>
+
+	<section id="protected-books" class="section section--white security-protected-books-section">
+		<div class="security-books-layout">
+			<div class="security-books-copy">
+				<h2>
+					<SectionIcon type="security" title="Protected publication" />
+					<span>Protected books remain live web assets.</span>
+				</h2>
+				<p>
+					We protect your books against downloading or copying by the patent-pending WeRead Theft Guard.
+				</p>
+				<p class="security-books-note">Open a protected edition and try the reading experience directly.</p>
+			</div>
+			<div class="indie-protection-books">
+				{featuredBooks.map((b) => (
+					<a class="book-card-link" href={b.readUrl} target="_blank" rel="noreferrer">
+						<div class="card book-card">
+							<div class="book-cover-placeholder" style={`background-image: url('${b.coverUrl}');`}></div>
+							<div class="book-card-text">
+								<h3>{b.title}</h3>
+								<p>{b.author}</p>
+								<div class="book-card-protected">
+									<span>Protected by<br /><strong class="indie-theft-guard-name">WeRead Theft Guard</strong></span>
+									<svg class="section-icon" viewBox="0 0 48 48" role="img" aria-label="WeRead Theft Guard">
+										<path d="M10 14c4-1.8 7.5-1.8 11 0v22c-3.5-1.8-7-1.8-11 0z"></path>
+										<path d="M32 14c-4-1.8-7.5-1.8-11 0v22c3.5-1.8 7-1.8 11 0z"></path>
+										<line x1="21" y1="14" x2="21" y2="36"></line>
+										<path d="M31.5 18.8l10 3.8v7.2c0 6-4 11.1-10 13.4-6-2.3-10-7.4-10-13.4v-7.2z" fill="var(--bg)"></path>
+										<path d="M31.5 18.8l10 3.8v7.2c0 6-4 11.1-10 13.4-6-2.3-10-7.4-10-13.4v-7.2z"></path>
+										<path d="M27.7 30.5l3.4 3.4 6.5-7"></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<Section tone="green" class="security-control-section" title="Control who reads and monitor the activity">
+		<div class="security-control-layout">
+			<div class="security-copy-stack">
+				<p>
+					ReaderPub gives institutions, publishers and organizations control over access to their publications. You decide who can read, under what conditions and at what level of visibility.
+				</p>
+				<p>
+					Access is protected at the content level and managed through administrative controls, structured user access and collection-level visibility.
+				</p>
+				<ul class="security-check-list">
+					<li>Define who can access each publication or collection</li>
+					<li>Use account-based access for controlled distribution</li>
+					<li>Manage teams, roles and permissions centrally</li>
+					<li>Maintain visibility across published content</li>
+				</ul>
+			</div>
+			<article class="card security-callout-card">
+				<SectionIcon type="library" title="Institutional access" />
+				<h3>Built for organizations.</h3>
+				<p>
+					Access-first publishing supports public collections, restricted programs, course materials and private institutional knowledge.
+				</p>
+				<a class="button" href="/contact">Talk to us</a>
+			</article>
+		</div>
+		<div class="security-position-section">
+			<header class="section-header">
+				<h2>A practical, honest security position</h2>
+			</header>
+			<div class="security-position-grid">
+				<div class="security-position-problem">
+					<p>No digital system can prevent every form of copying.</p>
+					<p>Screenshots, manual capture, and other low-efficiency methods can still exist.</p>
+				</div>
+				<div class="security-position-solution">
+					<p>
+						ReaderPub removes the most scalable starting point for large-scale piracy: <span class="security-position-solution-contrast">we don't delive a complete, reusable ebook file to the end user.</span>
+					</p>
+					<p>
+						At that, our web-accessible book editions are fully protected against serial downloading or copying.
+					</p>
+				</div>
+			</div>
+		</div>
+	</Section>
+
+	<CtaBlock
+		title="Publish securely with access control built in."
+		body="ReaderPub security is designed for web-native publications, direct publishing and institutional collections."
+		actions={ctaActions}
+	/>
+</Base>
+
+<style>
+	:global(.security-hero .hero-body) {
+		display: grid;
+		gap: 0;
+		font-family: var(--font-display);
+		font-size: clamp(22px, 2.6vw, 32px);
+		font-weight: 700;
+		line-height: 1.12;
+	}
+
+	:global(.security-hero .hero-body .security-hero-body-muted) {
+		color: var(--muted);
+	}
+
+	.security-hero-access-copy {
+		max-width: 760px;
+		color: var(--accent) !important;
+		font-size: var(--hero-problem-copy-size) !important;
+		line-height: 1.45;
+	}
+
+	:global(.security-source-section) {
+		margin-top: 0 !important;
+		padding-top: 58px !important;
+		padding-bottom: 58px !important;
+	}
+
+	:global(.security-first-section) {
+		margin-top: var(--section-padding) !important;
+	}
+
+	:global(.security-source-section > p),
+	:global(.security-source-section > .lede) {
+		max-width: 720px;
+		color: var(--accent);
+		font-size: 1.125rem;
+		line-height: 1.35;
+	}
+
+	:global(.security-source-section > p[style]) {
+		font-size: 1.125rem;
+		line-height: 1.35;
+	}
+
+	:global(.security-source-risk-reduction-section) {
+		gap: var(--section-gap) !important;
+		padding-bottom: var(--section-padding) !important;
+	}
+
+	:global(.security-source-section.security-source-risk-reduction-section) {
+		padding-bottom: var(--section-padding) !important;
+	}
+
+	:global(.security-source-protected-distribution-section) {
+		padding-top: var(--section-padding) !important;
+	}
+
+	.security-steps-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		align-items: start;
+	}
+
+	.security-step-card {
+		position: relative;
+		height: auto;
+		min-height: 0;
+	}
+
+	.security-step-icon {
+		position: absolute;
+		top: 14px;
+		right: 14px;
+		width: 28px;
+		height: 28px;
+		fill: var(--accent);
+	}
+
+	.security-step-icon--bad {
+		fill: var(--text);
+	}
+
+	.model-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		width: 100%;
+	}
+
+	.security-traditional-problem-card {
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%) !important;
+	}
+
+	.security-traditional-problem-card .comparison-list li::before {
+		background: var(--text);
+	}
+
+	.security-traditional-list {
+		padding-left: 1.1rem !important;
+		list-style: disc !important;
+	}
+
+	.security-traditional-list li {
+		padding-left: 0 !important;
+		list-style: disc !important;
+	}
+
+	.security-traditional-list li::before {
+		content: none !important;
+	}
+
+	.security-traditional-list li::marker {
+		color: var(--text) !important;
+	}
+
+	.security-readerpub-title {
+		color: var(--accent);
+	}
+
+	.comparison-list {
+		display: grid;
+		gap: 10px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.comparison-list li {
+		position: relative;
+		padding-left: 18px;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.3;
+	}
+
+	.comparison-list li::before {
+		content: "";
+		position: absolute;
+		top: 0.58em;
+		left: 0;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--accent);
+	}
+
+	.bullets {
+		display: grid;
+		gap: 6px;
+		max-width: 720px;
+		margin: 0;
+		padding-left: 18px;
+		list-style: disc;
+	}
+
+	.bullets li {
+		padding: 0;
+		border: 0;
+		background: transparent;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.25;
+		list-style: disc;
+	}
+
+	.bullets li::marker {
+		color: var(--accent);
+	}
+
+	.security-source-distribution-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.3fr) minmax(0, 360px);
+		gap: 24px;
+		align-items: center;
+	}
+
+	.security-source-distribution-copy {
+		display: flex;
+		flex-direction: column;
+		gap: var(--section-gap);
+		min-width: 0;
+	}
+
+	.security-source-distribution-copy > h2,
+	.security-source-distribution-copy > .bullets {
+		margin: 0;
+	}
+
+	.security-source-green-copy,
+	.security-source-theft-guard-text {
+		color: var(--accent) !important;
+		font-size: 18px !important;
+		line-height: 1.35 !important;
+	}
+
+	.security-source-theft-guard-text {
+		max-width: 680px;
+	}
+
+	.security-source-theft-guard-name,
+	.security-source-theft-guard-highlight {
+		color: var(--accent);
+		font-weight: 700;
+	}
+
+	.security-source-inline-cta {
+		display: grid;
+		gap: var(--section-gap);
+		width: 100%;
+		max-width: 360px;
+		margin-left: auto;
+		padding: 36px 32px;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-card);
+		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
+		text-align: center;
+		justify-items: center;
+		align-self: center;
+	}
+
+	.security-source-inline-cta .cta-row {
+		justify-content: center;
+	}
+
+	:global(.security-source-theft-guard-card h3) {
+		max-width: 620px;
+		font-size: calc(1.45rem * 0.85);
+	}
+
+	:global(.security-source-theft-guard-card h3 > span) {
+		display: block;
+	}
+
+	:global(.security-source-theft-guard-card h3 > .security-source-theft-guard-highlight) {
+		font-size: 1.18em;
+		margin-top: 8px;
+	}
+
+	:global(.security-source-theft-guard-copy) {
+		max-width: 620px;
+		margin: 0;
+		color: var(--muted);
+		font-size: 13.6px;
+		line-height: 1.35;
+		text-align: center;
+	}
+
+	:global(.security-source-theft-guard-list li) {
+		font-size: 13.6px !important;
+	}
+
+	:global(.bullets.security-source-theft-guard-list li) {
+		font-size: 13.6px !important;
+	}
+
+	.security-source-theft-guard-list {
+		width: fit-content;
+		max-width: 100%;
+		margin: 0 auto;
+		text-align: left;
+	}
+
+	.security-source-theft-guard-action {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		justify-content: center;
+	}
+
+	.security-source-theft-guard-action :global(.section-icon) {
+		width: 41px;
+		height: 41px;
+	}
+
+	:global(.security-source-theft-guard-action .button) {
+		min-height: auto;
+		padding: 11px 18px;
+		font-size: 13.6px;
+	}
+
+	.security-control-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.3fr) minmax(0, 360px);
+		gap: 24px;
+		align-items: center;
+	}
+
+	.security-copy-stack,
+	.security-books-copy {
+		display: grid;
+		gap: 16px;
+		align-content: start;
+		min-width: 0;
+	}
+
+	.security-copy-stack p,
+	.security-books-copy p,
+	.security-position-grid p {
+		margin: 0;
+		color: var(--accent);
+		font-size: 1.125rem;
+		line-height: 1.45;
+	}
+
+	.security-check-list {
+		display: grid;
+		gap: 10px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		color: var(--muted);
+		line-height: 1.45;
+	}
+
+	.security-check-list li {
+		position: relative;
+		padding-left: 24px;
+	}
+
+	.security-check-list li::before {
+		content: "";
+		position: absolute;
+		top: 0.72em;
+		left: 0;
+		width: 8px;
+		height: 8px;
+		border-radius: 999px;
+		background: var(--accent);
+		transform: translateY(-50%);
+	}
+
+	.security-check-list--muted li::before {
+		background: var(--text);
+	}
+
+	.security-callout-card {
+		width: 100%;
+		max-width: 360px;
+		margin-left: auto;
+		align-items: center;
+		justify-items: center;
+		align-self: center;
+		text-align: center;
+	}
+
+	.security-callout-card :global(.section-icon) {
+		width: 52px;
+		height: 52px;
+	}
+
+	.security-callout-card h3,
+	.security-callout-card p {
+		text-align: center;
+	}
+
+	.security-callout-card .button {
+		width: fit-content;
+		margin: auto auto 0;
+		align-self: center;
+	}
+
+	.security-books-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+		gap: 32px;
+		align-items: center;
+		width: 100%;
+	}
+
+	.security-books-copy h2 {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		align-items: center;
+		width: 100%;
+		margin: 0;
+		text-align: center;
+	}
+
+	.security-books-copy h2 :global(.section-icon) {
+		width: 48px;
+		height: 48px;
+		flex: 0 0 auto;
+	}
+
+	.security-books-note {
+		color: var(--text) !important;
+	}
+
+	.security-protected-books-section {
+		--link: #008586;
+		--section-flow-gap: 16px;
+	}
+
+	:global(#protected-books .book-card-link) {
+		display: block;
+		width: 100%;
+		max-width: none;
+		text-decoration: none !important;
+		color: inherit !important;
+		transition: transform 0.15s ease;
+	}
+
+	:global(#protected-books .book-card-link:hover),
+	:global(#protected-books .book-card-link:focus-visible) {
+		transform: translateY(-2px);
+	}
+
+	:global(#protected-books .book-card-link *),
+	:global(#protected-books .book-card-link:hover *),
+	:global(#protected-books .book-card-link:focus-visible *) {
+		text-decoration: none !important;
+	}
+
+	:global(#protected-books .indie-protection-books) {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(min(100%, 280px), 1fr));
+		gap: var(--section-flow-gap);
+		align-items: stretch;
+		width: 100%;
+		min-width: 0;
+		justify-content: stretch;
+	}
+
+	:global(#protected-books .book-card) {
+		display: flex;
+		flex-direction: row !important;
+		gap: 18px;
+		align-items: center;
+		padding: 18px 20px;
+		min-height: 0;
+		width: 100%;
+		box-sizing: border-box;
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 18%, #ffffff 100%) !important;
+	}
+
+	:global(#protected-books .book-cover-placeholder) {
+		display: block;
+		width: 84px;
+		height: 126px;
+		border-radius: 2px;
+		background: linear-gradient(135deg, #e9eef3, #d8e1ea);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		flex-shrink: 0;
+		box-shadow: 0 3px 10px rgba(13, 28, 45, 0.12);
+	}
+
+	:global(#protected-books .book-card-text) {
+		display: grid;
+		gap: 6px;
+		min-width: 0;
+		text-align: left;
+	}
+
+	:global(#protected-books .book-card h3) {
+		color: var(--link);
+		font-size: clamp(16px, 1.25vw, 20px);
+		line-height: 1.12;
+		font-family: "Space Grotesk", system-ui, sans-serif;
+		letter-spacing: -0.02em;
+		overflow-wrap: anywhere;
+	}
+
+	:global(#protected-books .book-card-text > p) {
+		margin: 0;
+		color: var(--text);
+		font-size: clamp(13px, 1.05vw, 16px);
+		line-height: 1.3;
+	}
+
+	:global(#protected-books .book-card-protected) {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		margin-top: 8px;
+		color: color-mix(in srgb, var(--text) 72%, white 28%);
+		font-size: 14px;
+		line-height: 1.25;
+		max-width: 100%;
+	}
+
+	:global(#protected-books .book-card-protected span) {
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	:global(#protected-books .book-card-protected .section-icon) {
+		width: 31.2px !important;
+		height: 31.2px !important;
+		flex-shrink: 0;
+	}
+
+	:global(#protected-books .book-card-protected .indie-theft-guard-name) {
+		color: var(--link);
+	}
+
+	:global(#protected-books .indie-theft-guard-name) {
+		font-family: "Playfair Display", serif;
+		font-weight: 700;
+		color: inherit;
+	}
+
+	.security-position-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.3fr) minmax(0, 360px);
+		gap: 24px;
+		align-items: center;
+	}
+
+	.security-position-section {
+		display: grid;
+		gap: 28px;
+		margin-top: var(--section-padding);
+	}
+
+	.security-position-solution {
+		display: grid;
+		gap: 12px;
+		width: 100%;
+		max-width: 360px;
+		justify-self: end;
+	}
+
+	.security-position-solution-contrast {
+		color: var(--text);
+	}
+
+	.security-position-problem {
+		display: grid;
+		gap: 12px;
+		align-self: center;
+	}
+
+	.security-position-grid .security-position-problem p {
+		color: var(--text) !important;
+		font-size: 1.215rem;
+		font-weight: 400;
+	}
+
+	@media (max-width: 980px) {
+		.security-control-layout,
+		.security-books-layout,
+		.security-position-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.security-books-copy {
+			justify-items: center;
+			text-align: center;
+		}
+
+		.security-position-solution {
+			max-width: none;
+			justify-self: stretch;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.security-steps-grid {
+			grid-template-columns: 1fr;
+		}
+
+		:global(#protected-books .indie-protection-books) {
+			grid-template-columns: 1fr;
+		}
+
+		:global(#protected-books .book-card) {
+			gap: 14px;
+			padding: 16px;
+		}
+
+		:global(#protected-books .book-cover-placeholder) {
+			width: 72px;
+			height: 108px;
+		}
+
+		:global(#protected-books .book-card h3) {
+			font-size: clamp(16px, 6vw, 20px);
+		}
+	}
+</style>
