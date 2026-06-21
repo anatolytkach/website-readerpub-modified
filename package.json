@@ -4,6 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "dev:watch": "bash scripts/dev-watchdog.sh",
+    "dev:watch:start": "bash scripts/dev-watchdog-launchd.sh start",
+    "dev:watch:stop": "bash scripts/dev-watchdog-launchd.sh stop",
+    "dev:watch:status": "bash scripts/dev-watchdog-launchd.sh status",
     "build": "astro build",
     "deploy:staging": "npm run build && wrangler pages deploy dist --project-name readerpub-website-staging --branch develop",
     "preview": "astro preview",

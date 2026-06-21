@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.readerpub.modified.dev-watchdog</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/anatoly/Dropbox/production/reader.pub/website_new_modified/scripts/dev-watchdog.sh</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/anatoly/Dropbox/production/reader.pub/website_new_modified</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>HOST</key>
+    <string>127.0.0.1</string>
+    <key>PORT</key>
+    <string>4321</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>/Users/anatoly/Dropbox/production/reader.pub/website_new_modified/.astro/dev-watchdog/launchd.out</string>
+
+  <key>StandardErrorPath</key>
+  <string>/Users/anatoly/Dropbox/production/reader.pub/website_new_modified/.astro/dev-watchdog/launchd.err</string>
+</dict>
+</plist>
