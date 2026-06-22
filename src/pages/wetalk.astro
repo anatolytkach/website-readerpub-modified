@@ -9,6 +9,10 @@ import { SITE_NAME } from "../consts";
 
 const requestPilotAction = { label: "Request a Pilot", href: "/contact?topic=wetalk" };
 const contactAction = { label: "Contact Us", href: "/contact", variant: "secondary" as const };
+const institutionHeroActions = [
+	{ label: "Build an institutional library", href: "/contact?topic=institution" },
+	{ label: "See pricing", href: "/pricing", variant: "secondary" as const },
+];
 
 const fragmentationCards = [
 	{
@@ -105,36 +109,42 @@ const audienceCards = [
 >
 	<HeroSection
 		eyebrow="WeTalk"
-		title="WeTalk: Private discussion spaces for institutional knowledge"
 		lead="Universities, libraries and organizations publish valuable materials that need discussion, but not always public exposure."
-		body="WeTalk creates controlled discussion environments around the materials an organization publishes and manages."
-		actions={[requestPilotAction, contactAction]}
-	/>
+		body="WeTalk creates controlled discussion space for the materials published and managed by an organization."
+		image="/images/wetalk.webp"
+		imageAlt="WeTalk private discussion spaces for institutional knowledge"
+		actions={institutionHeroActions}
+		class="wetalk-hero"
+	>
+		<Fragment slot="title"><span class="wetalk-hero-product">WeTalk:</span><br />Private discussion for institutional knowledge</Fragment>
+	</HeroSection>
 
 	<Section
 		tone="gray"
 		title="Institutional discussion is fragmented"
 		body="Organizations often publish useful materials, but discussion happens in separate systems where access, context and long-term value are harder to preserve."
 	>
-		<CardGrid columns="4">
+		<CardGrid columns="2">
 			{fragmentationCards.map((card) => <Card {...card} />)}
 		</CardGrid>
 	</Section>
 
 	<Section
 		tone="green"
+		class="wetalk-discussion-layer-section"
 		title="A discussion layer for controlled-access content"
 		body="WeTalk keeps discussion close to the publications an organization controls, with participation rules that match institutional access needs."
 	>
-		<CardGrid columns="4">
+		<CardGrid columns="2">
 			{discussionLayerCards.map((card) => <Card {...card} />)}
 		</CardGrid>
 	</Section>
 
 	<Section
 		tone="white"
+		class="wetalk-workflow-section"
 		title="How WeTalk works"
-		body="WeTalk can support discussion around course materials, collections, research, restricted releases and membership-based access."
+		body="WeTalk supports membership-based access to discussions around course materials, research, restricted releases and more."
 	>
 		<CardGrid columns="3">
 			{workflowCards.map((card) => <Card {...card} />)}
@@ -186,13 +196,47 @@ const audienceCards = [
 	<CtaBlock
 		title="Knowledge is more valuable when people can discuss it."
 		body="WeTalk helps organizations create controlled discussion environments around the materials they publish."
-		actions={[requestPilotAction, contactAction]}
+		actions={[institutionHeroActions[0]]}
 	/>
 </Base>
 
 <style>
+	:global(.wetalk-hero-product) {
+		color: var(--accent);
+	}
+
+	:global(.wetalk-hero .hero-image) {
+		height: min(var(--hero-image-reader-height), calc(100cqw * var(--hero-image-reader-ratio)));
+	}
+
+	:global(.wetalk-discussion-layer-section .section-header),
+	:global(.wetalk-discussion-layer-section .section-header h2) {
+		max-width: none !important;
+	}
+
+	@media (min-width: 901px) {
+		:global(.wetalk-discussion-layer-section .section-header) {
+			width: 100%;
+		}
+
+		:global(.wetalk-discussion-layer-section .section-header h2) {
+			width: max-content;
+			white-space: nowrap !important;
+		}
+	}
+
 	:global(.wetalk-comparison-section .section-header) {
 		max-width: none;
+	}
+
+	:global(.wetalk-workflow-section),
+	:global(.wetalk-comparison-section) {
+		--card-tint: #fcfaf8;
+	}
+
+	:global(.wetalk-workflow-section .card),
+	:global(.wetalk-comparison-section .card) {
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 18%, #ffffff 100%) !important;
 	}
 
 	.wetalk-comparison-grid {

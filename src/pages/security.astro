@@ -214,9 +214,6 @@ const featuredBooks = [
 				<p>
 					ReaderPub gives institutions, publishers and organizations control over access to their publications. You decide who can read, under what conditions and at what level of visibility.
 				</p>
-				<p>
-					Access is protected at the content level and managed through administrative controls, structured user access and collection-level visibility.
-				</p>
 				<ul class="security-check-list">
 					<li>Define who can access each publication or collection</li>
 					<li>Use account-based access for controlled distribution</li>
@@ -327,12 +324,13 @@ const featuredBooks = [
 
 	.security-steps-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		align-items: start;
+		grid-auto-rows: 1fr;
+		align-items: stretch;
 	}
 
 	.security-step-card {
 		position: relative;
-		height: auto;
+		height: 100%;
 		min-height: 0;
 	}
 
@@ -792,8 +790,12 @@ const featuredBooks = [
 		justify-self: end;
 	}
 
+	.security-position-grid .security-position-solution p {
+		color: var(--accent) !important;
+	}
+
 	.security-position-solution-contrast {
-		color: var(--text);
+		color: inherit;
 	}
 
 	.security-position-problem {

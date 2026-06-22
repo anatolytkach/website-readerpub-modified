@@ -139,6 +139,17 @@ const benefitCards = [
 					<a class="button" href={BOOKS_URL} target="_blank" rel="noreferrer">60K+ books in Catalog</a>
 				</div>
 				<div class="card">
+					<h3>BookTree</h3>
+					<p>Structure for books, editions, metadata, catalogs, and collections.</p>
+					<ul class="bullets">
+						<li>Organize books, excerpts, and references across projects</li>
+						<li>Keep context while reading long and complex materials</li>
+						<li>Build personal knowledge maps from what you read</li>
+						<li>Consolidate your notes from multiple books while working on your own manuscript</li>
+					</ul>
+					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
+				</div>
+				<div class="card">
 					<h3>WeBuzz</h3>
 					<p>Discuss books, authors, and passages with readers around the world. Build literature communities, connect directly with authors and publishers, and turn reading into a shared experience.</p>
 					<ul class="bullets">
@@ -161,17 +172,6 @@ const benefitCards = [
 						<li>Institutional permissions</li>
 					</ul>
 					<a class="button button--secondary" href="/wetalk">Explore WeTalk</a>
-				</div>
-				<div class="card">
-					<h3>BookTree</h3>
-					<p>Structure for books, editions, metadata, catalogs, and collections.</p>
-					<ul class="bullets">
-						<li>Organize books, excerpts, and references across projects</li>
-						<li>Keep context while reading long and complex materials</li>
-						<li>Build personal knowledge maps from what you read</li>
-						<li>Consolidate your notes from multiple books while working on your own manuscript</li>
-					</ul>
-					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
 				</div>
 			</div>
 		</section>
@@ -198,9 +198,8 @@ const benefitCards = [
 				<ol class="platform-flow" aria-label="ReaderPub publication lifecycle">
 					<li>WePub</li>
 					<li>WeRead</li>
-					<li>WeBuzz</li>
-					<li>WeTalk</li>
 					<li>BookTree</li>
+					<li>WeBuzz / WeTalk</li>
 				</ol>
 				<p class="platform-flow-note">
 					Instead of moving readers and content between disconnected systems, ReaderPub keeps these activities within one publishing environment.
@@ -519,6 +518,10 @@ const benefitCards = [
 
 	.platform-source-section.platform-products-section .platform-products-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.platform-source-section.platform-products-section .platform-products-grid > .card:nth-child(3) {
+		grid-column: 1 / -1;
 	}
 
 	.platform-source-section.platform-products-section .card {
