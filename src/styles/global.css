@@ -558,6 +558,10 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	color: #ffffff;
 }
 
+.section--dark :is(.cta-block-copy > p, .section-lead) {
+	color: #3dcccd;
+}
+
 .section {
 	display: grid;
 	gap: 28px;
@@ -841,7 +845,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 .card.icon-grid-card > .section-icon {
 	grid-column: 1;
 	grid-row: 1;
-	align-self: start;
+	align-self: center;
 	width: var(--card-inline-icon-size) !important;
 	height: var(--card-inline-icon-size) !important;
 }
@@ -861,7 +865,8 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	min-height: var(--card-inline-icon-size);
 	margin: 0;
 	text-align: left;
-	white-space: nowrap;
+	white-space: normal;
+	overflow-wrap: anywhere;
 }
 
 .card--with-icon p,
@@ -1366,6 +1371,13 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 		text-align: center;
 	}
 
+	.content .section .card-grid.institutions-benefit-grid > .card.card--with-icon:last-child > .card-copy > h3 {
+		flex-basis: min-content;
+		width: min-content;
+		overflow-wrap: normal;
+		word-break: normal;
+	}
+
 	.content .section .card-grid .card:has(> .weread-benefit-card-heading) {
 		--card-heading-font-size: clamp(1.05rem, 5.2vw, 1.35rem);
 		--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
@@ -1396,6 +1408,8 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 		padding-top: 0 !important;
 		font-size: var(--card-heading-font-size);
 		text-align: left;
+		white-space: normal;
+		overflow-wrap: anywhere;
 	}
 }
 

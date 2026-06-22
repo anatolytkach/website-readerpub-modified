@@ -500,24 +500,25 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		display: grid;
 		grid-template-columns: var(--card-inline-icon-size) minmax(0, 1fr);
 		column-gap: var(--card-icon-gap);
-		align-items: flex-start;
+		align-items: center;
 		min-height: var(--card-inline-icon-size);
 	}
 
 	:global(.weread-benefits-icon-grid .weread-benefit-card-heading > .section-icon) {
-		align-self: flex-start;
+		align-self: center;
 		width: var(--card-inline-icon-size) !important;
 		height: var(--card-inline-icon-size) !important;
 	}
 
 	:global(.weread-benefits-icon-grid .weread-benefit-card-heading > h3) {
-		align-self: flex-start;
+		align-self: center;
 		margin: 0;
-		padding-top: 10px;
+		padding-top: 0;
 		font-size: var(--card-heading-font-size);
-		line-height: 1;
+		line-height: var(--card-heading-line-height);
 		text-align: left;
-		white-space: nowrap;
+		white-space: normal;
+		overflow-wrap: anywhere;
 	}
 
 	:global(.weread-benefits-icon-grid .weread-benefit-card > p) {
@@ -571,8 +572,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		}
 
 		:global(.weread-source-icon-grid .icon-grid-card-copy) {
-			display: grid;
-			gap: 10px;
+			display: contents;
 		}
 
 		:global(.weread-benefits-icon-grid .icon-grid-card-copy) {

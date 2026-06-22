@@ -67,8 +67,8 @@ const benefitCards: PageCard[] = [
 		icon: "university",
 	},
 	{
-		title: "Communities",
-		body: "Benefit from more discoverable and accessible knowledge.",
+		title: "Professional communities",
+		body: "Support ongoing discussion across controlled-access materials.",
 		icon: "fan",
 	},
 ];
@@ -373,7 +373,7 @@ const ctaActions = [
 	</Section>
 
 	<Section tone="green" title="Who benefits from web-native institutional publishing?">
-		<CardGrid columns="4">
+		<CardGrid columns="2" class="institutions-benefit-grid">
 			{benefitCards.map((card) => <Card {...card} />)}
 		</CardGrid>
 	</Section>
@@ -715,11 +715,11 @@ const ctaActions = [
 	}
 
 	.institutions-access-card-heading {
-		--institutions-access-icon-size: 56px;
-		display: flex;
+		--institutions-access-icon-size: calc(var(--card-heading-font-size) * 1.7);
+		display: grid;
+		grid-template-columns: var(--institutions-access-icon-size) minmax(0, 1fr);
 		gap: var(--card-icon-gap);
 		align-items: center;
-		justify-content: center;
 		width: 100%;
 		max-width: 100%;
 		text-align: left;
@@ -732,10 +732,12 @@ const ctaActions = [
 	}
 
 	.institutions-access-card-heading > h3 {
-		flex: 0 1 auto;
-		max-width: min(16em, calc(100% - var(--institutions-access-icon-size) - var(--card-icon-gap)));
+		min-width: 0;
+		max-width: 100%;
 		margin: 0;
 		text-align: left !important;
+		white-space: normal;
+		overflow-wrap: anywhere;
 	}
 
 	.institutions-access-card-body {
@@ -892,6 +894,11 @@ const ctaActions = [
 			--card-heading-font-size: clamp(1.05rem, 5.2vw, 1.35rem);
 			--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
 			--institutions-access-icon-size: var(--card-inline-icon-size);
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: center;
+			align-items: center;
+			gap: var(--card-icon-gap);
 			text-align: left;
 		}
 
@@ -901,7 +908,8 @@ const ctaActions = [
 		}
 
 		.institutions-access-card-heading > h3 {
-			max-width: min(16em, calc(100% - var(--card-inline-icon-size) - var(--card-icon-gap)));
+			flex: 0 1 auto;
+			max-width: calc(100% - var(--card-inline-icon-size) - var(--card-icon-gap));
 			font-size: var(--card-heading-font-size);
 			text-align: left !important;
 		}
