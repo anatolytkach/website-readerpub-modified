@@ -69,35 +69,57 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	</section>
 
 	<section class="section section--white spec-cards-section webuzz-solution-section section-continuation section-continue-next">
-		<div class="webuzz-legacy-overview-grid">
-			<div class="webuzz-legacy-copy">
-				<h2>Reading does not end on the last page.</h2>
-				<p class="lede">
-					Current platforms separate reading from discussion. Readers talk about books on social networks, forums and messaging platforms, while the publication itself remains disconnected from the conversation.
-				</p>
-				<p>
-					ReaderPub combines publishing, reading, discovery, and discussion in one ecosystem. Through WeBuzz, readers can discuss books, follow thoughtful readers, engage with authors, and participate in literary communities.
-				</p>
-			</div>
-			<div class="card webuzz-overview-card">
-				<div class="webuzz-overview-card-heading">
-					<SectionIcon type="fan" title="Three ways to join the conversation" />
-					<h2>Three ways to join the conversation:</h2>
+		<div class="webuzz-legacy-overview">
+			<h2 class="webuzz-legacy-heading">Reading does not end on the last page.</h2>
+			<div class="webuzz-legacy-intro-grid">
+				<div class="webuzz-legacy-copy">
+					<p class="lede">
+						Current platforms separate reading from discussion.
+					</p>
+					<p class="lede">
+						Readers talk about books on social networks, forums and messaging platforms, while the publication itself remains disconnected from the conversation.
+					</p>
 				</div>
-				<ul class="bullets webuzz-legacy-list">
-					<li>
-						<strong>Book Discussions</strong>
-						<span>Talk about complete books and reading experiences.</span>
-					</li>
-					<li>
-						<strong>Author Discussions</strong>
-						<span>Discuss authors, ideas, and literary influence.</span>
-					</li>
-					<li>
-						<strong>Passage Discussions</strong>
-						<span>Start conversations across specific excerpts and quotations.</span>
-					</li>
-				</ul>
+				<div class="card webuzz-legacy-solution-card">
+					<p>
+						ReaderPub combines publishing, reading, discovery, and discussion in one ecosystem.<br />
+						Through WeBuzz, readers can discuss books, follow thoughtful readers, engage with authors, and participate in literary communities.
+					</p>
+				</div>
+			</div>
+			<div class="webuzz-overview-card-grid">
+				<div class="card webuzz-overview-card">
+					<div class="webuzz-overview-card-heading">
+						<SectionIcon type="fan" title="Three ways to join the conversation" />
+						<h2>Three ways to join the conversation:</h2>
+					</div>
+					<ul class="bullets webuzz-legacy-list">
+						<li>
+							<strong>Book Discussions</strong>
+							<span>Talk about complete books and reading experiences.</span>
+						</li>
+						<li>
+							<strong>Author Discussions</strong>
+							<span>Discuss authors, ideas, and literary influence.</span>
+						</li>
+						<li>
+							<strong>Passage Discussions</strong>
+							<span>Start conversations across specific excerpts and quotations.</span>
+						</li>
+					</ul>
+				</div>
+				<div class="card webuzz-overview-card webuzz-overview-card--green">
+					<div class="webuzz-overview-card-heading">
+						<SectionIcon type="noAds" title="No ads in discussion" />
+						<h2>No ads in discussion</h2>
+					</div>
+					<p class="webuzz-overview-note">
+						WeBuzz is built for literary conversation, not advertising feeds.
+					</p>
+					<p class="webuzz-overview-note">
+						Discussions around books, authors and passages are not interrupted or shaped by ad-driven social media mechanics.
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -392,17 +414,36 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		}
 	}
 
-	.webuzz-legacy-overview-grid {
+	.webuzz-legacy-overview {
 		display: grid;
-		grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+		gap: 28px;
+	}
+
+	.webuzz-legacy-intro-grid,
+	.webuzz-overview-card-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 32px;
-		align-items: start;
+		width: 100%;
+	}
+
+	.webuzz-legacy-intro-grid {
+		align-items: center;
+	}
+
+	.webuzz-legacy-intro-grid > .card {
+		align-self: center;
+	}
+
+	.webuzz-overview-card-grid {
+		align-items: stretch;
 	}
 
 	.webuzz-legacy-copy {
 		display: flex;
 		flex-direction: column;
 		gap: var(--section-flow-gap);
+		align-self: center !important;
 		min-width: 0;
 	}
 
@@ -410,10 +451,15 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		margin: 0 !important;
 	}
 
-	.webuzz-legacy-copy h2,
+	.webuzz-legacy-heading,
 	.webuzz-overview-card-heading h2 {
 		font-size: clamp(24px, 3vw, 34px);
 		line-height: 1.12;
+	}
+
+	.webuzz-legacy-heading {
+		max-width: none;
+		margin: 0 !important;
 	}
 
 	.webuzz-legacy-copy > p {
@@ -430,10 +476,27 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		color: var(--link);
 	}
 
+	.webuzz-legacy-solution-card {
+		padding: 24px;
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+	}
+
+	.webuzz-legacy-solution-card p {
+		margin: 0 !important;
+		color: var(--accent);
+		font-size: 18px;
+		line-height: 1.45;
+	}
+
 	.webuzz-overview-card {
 		min-height: 130px;
 		padding: 18px;
 		border-radius: 10px;
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+	}
+
+	.webuzz-overview-card--green {
+		padding: 24px;
 		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
 	}
 
@@ -442,7 +505,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		--inline-icon-size: calc(var(--inline-heading-font-size) * 1.7);
 		display: flex !important;
 		align-items: center !important;
-		justify-content: center;
+		justify-content: flex-start !important;
 		gap: 18px;
 	}
 
@@ -476,6 +539,13 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		font-size: 16px;
 		line-height: 1.25;
 		list-style: disc;
+	}
+
+	.webuzz-overview-note {
+		margin: var(--section-flow-gap) 0 0 !important;
+		color: var(--accent);
+		font-size: 18px;
+		line-height: 1.45;
 	}
 
 	.webuzz-legacy-list li::marker {
@@ -594,10 +664,6 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 
-		.webuzz-legacy-overview-grid {
-			grid-template-columns: 1fr;
-		}
-
 		:global(.webuzz-benefits-section .webuzz-matters-grid) {
 			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
@@ -628,6 +694,18 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 		.webuzz-model-list {
 			text-align: left;
+		}
+
+	}
+
+	@media (max-width: 760px) {
+		.webuzz-legacy-intro-grid,
+		.webuzz-overview-card-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.webuzz-overview-card-heading {
+			justify-content: center !important;
 		}
 	}
 

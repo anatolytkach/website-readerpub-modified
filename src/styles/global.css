@@ -580,6 +580,10 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	color: var(--accent);
 }
 
+.section.section--green :where(p, .section-lead):not(.card :where(p, .section-lead)) {
+	color: var(--text) !important;
+}
+
 .section-kicker {
 	display: inline-flex;
 	width: fit-content;

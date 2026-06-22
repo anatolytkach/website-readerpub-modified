@@ -124,17 +124,30 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		</CardGrid>
 	</Section>
 
-	<Section
-		tone="white"
-		title="Why web reading wins"
-		body="The fastest way to start reading, with a full reader experience - no downloads required."
-	>
-		<ul class="weread-source-bullets">
-			<li>Most major book libraries still don't offer a true web reader that matches the quality of native apps.</li>
-			<li>Many readers don't want to install another app or struggle with device-specific readers.</li>
-			<li>With WeRead, a simple link is enough - click and start reading instantly.</li>
-			<li>You get the same long-form reading comfort without setup or friction.</li>
-		</ul>
+	<Section tone="white" class="weread-web-reading-section">
+		<div class="weread-web-reading-intro">
+			<div class="weread-web-reading-copy">
+				<header class="section-header">
+					<h2>Why web reading wins</h2>
+					<p class="section-lead">The fastest way to start reading, with a full reader experience - no downloads required.</p>
+				</header>
+				<ul class="weread-source-bullets">
+					<li>Most major book libraries still don't offer a true web reader that matches the quality of native apps.</li>
+					<li>Many readers don't want to install another app or struggle with device-specific readers.</li>
+					<li>With WeRead, a simple link is enough - click and start reading instantly.</li>
+					<li>You get the same long-form reading comfort without setup or friction.</li>
+				</ul>
+			</div>
+			<article class="card weread-ad-free-card">
+				<div class="weread-ad-free-card-heading">
+					<SectionIcon type="noAds" title="Ad-free public-domain reading" />
+					<h3>Ad-free public-domain reading</h3>
+				</div>
+				<p>
+					ReaderPub's WeRead catalog provides browser-based access to public-domain books without advertising around the reading experience.
+				</p>
+			</article>
+		</div>
 		<CardGrid columns="3" class="weread-feature-cards">
 			<article class="card">
 				<h3><span class="weread-card-product">WeRead:</span><br />Reader benefits</h3>
@@ -184,13 +197,16 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	</Section>
 
 	<Section
-		body="Notes, comments, recommendations and discussions become part of the reading environment instead of disappearing into separate products."
 		class="weread-network-section"
 		tone="green"
 	>
 		<Fragment slot="title">
-			<span class="weread-card-product">WeRead:</span><br />
-			<span class="weread-network-title-line">Reading as part of a network, with connected context</span>
+			<span class="weread-card-product">WeRead:</span>
+			<span class="weread-network-title-line">A richer catalog with connected context</span>
+		</Fragment>
+		<Fragment slot="body">
+			<span class="weread-network-black-copy">The WeRead catalog includes tens of thousands of books with annotations and author biographies, helping readers understand what a book is about before they begin reading.</span>
+			<span>Notes, comments, recommendations and discussions become part of the reading environment instead of disappearing into separate products.</span>
 		</Fragment>
 		<CardGrid columns="3">
 			<Card title="Books connect to readers" body="Reading activity can point people toward communities and conversations about the work." />
@@ -327,6 +343,66 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		color: var(--accent);
 	}
 
+	:global(.weread-web-reading-section .section-header) {
+		max-width: none;
+		text-align: left;
+	}
+
+	.weread-web-reading-intro {
+		display: grid;
+		grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+		gap: 32px;
+		align-items: start;
+		width: 100%;
+	}
+
+	.weread-web-reading-copy {
+		display: grid;
+		gap: 28px;
+		min-width: 0;
+	}
+
+	.weread-web-reading-copy > .section-header {
+		margin: 0 !important;
+	}
+
+	.weread-web-reading-copy .weread-source-bullets {
+		margin: 0;
+	}
+
+	.weread-ad-free-card {
+		--weread-ad-card-heading-size: clamp(1.2rem, 2vw, 1.55rem);
+		--weread-ad-card-icon-size: calc(var(--weread-ad-card-heading-size) * 1.7);
+		align-self: start;
+		gap: 18px;
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+	}
+
+	.weread-ad-free-card-heading {
+		display: flex;
+		align-items: center;
+		gap: var(--card-icon-gap);
+	}
+
+	:global(.weread-ad-free-card-heading .section-icon) {
+		flex: 0 0 var(--weread-ad-card-icon-size);
+		width: var(--weread-ad-card-icon-size) !important;
+		height: var(--weread-ad-card-icon-size) !important;
+	}
+
+	.weread-ad-free-card-heading h3 {
+		margin: 0 !important;
+		font-size: var(--weread-ad-card-heading-size);
+		line-height: 1.1;
+	}
+
+	.weread-ad-free-card p {
+		margin: 0 !important;
+		color: var(--accent);
+		font-size: var(--hero-problem-copy-size);
+		line-height: 1.45;
+	}
+
 	.weread-combined-subsection {
 		display: grid;
 		gap: 28px;
@@ -341,6 +417,10 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		display: inline-block;
 	}
 
+	:global(.weread-network-section .section-header h2) {
+		white-space: nowrap;
+	}
+
 	:global(.weread-network-section .section-header) {
 		max-width: 1080px;
 	}
@@ -349,9 +429,28 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		max-width: 1080px;
 	}
 
+	:global(.weread-network-section .section-lead) {
+		display: grid;
+		gap: var(--section-gap);
+	}
+
+	:global(.weread-network-section .section-lead span) {
+		display: block;
+	}
+
+	:global(.weread-network-section .section-lead .weread-network-black-copy) {
+		color: var(--text) !important;
+	}
+
 	@media (min-width: 901px) {
 		.weread-network-title-line {
 			white-space: nowrap;
+		}
+	}
+
+	@media (max-width: 900px) {
+		:global(.weread-network-section .section-header h2) {
+			white-space: normal;
 		}
 	}
 
@@ -461,6 +560,14 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 
 		.weread-source-bullets {
 			text-align: left;
+		}
+
+		.weread-web-reading-intro {
+			grid-template-columns: 1fr;
+		}
+
+		:global(.weread-web-reading-section .section-header) {
+			text-align: center;
 		}
 
 		:global(.weread-source-icon-grid .icon-grid-card-copy) {
