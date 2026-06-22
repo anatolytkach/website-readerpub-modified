@@ -3184,7 +3184,7 @@
         "route": "/institutions/",
         "tag": "p",
         "role": "paragraph",
-        "text": "Increase visibility and long-term value of access-controlled collections.",
+        "text": "Increase visibility and long-term value of controlled-access collections.",
         "dom_path": "body > div > main > section[8] > div > article[1] > div > p"
       },
       {
@@ -8160,7 +8160,7 @@
         "route": "/webuzz/",
         "tag": "p",
         "role": "paragraph",
-        "text": "Researches and colleagues can explore ideas together around access-controlled publications.",
+        "text": "Researches and colleagues can explore ideas together around controlled-access publications.",
         "dom_path": "body > div > main > section[9] > div > div > article[4] > div > p"
       },
       {

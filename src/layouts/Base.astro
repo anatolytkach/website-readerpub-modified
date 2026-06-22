@@ -8,7 +8,14 @@ import { ViewTransitions } from "astro:transitions";
 const {
 	title = `${SITE_NAME} - Web-Native Publishing Network`,
 	description = `${SITE_NAME} is a web-native publishing network for readers, authors, publishers and institutions.`,
+	canonical,
 } = Astro.props;
+
+const canonicalUrl = canonical
+	? canonical.startsWith("http")
+		? canonical
+		: `https://${SITE_DOMAIN}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
+	: undefined;
 ---
 
 <html lang="en">
@@ -22,6 +29,7 @@ const {
 		<meta name="application-name" content={SITE_NAME} />
 		<meta name="author" content={SITE_NAME} />
 		<meta name="hostname" content={SITE_DOMAIN} />
+		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"

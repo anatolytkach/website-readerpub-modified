@@ -23,7 +23,8 @@ export type IconName =
 	| "dollars"
 	| "fan"
 	| "security"
-	| "access";
+	| "access"
+	| "noAds";
 
 export interface PageAction {
 	label: string;

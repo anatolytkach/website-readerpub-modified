@@ -5,9 +5,10 @@ const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isActive = (href: string) => pathname === href;
 const solutionLinks = [
 	{ href: "/platform", label: "Platform" },
-	{ href: "/weread", label: "WeRead" },
 	{ href: "/wepub", label: "WePub" },
+	{ href: "/weread", label: "WeRead" },
 	{ href: "/webuzz", label: "WeBuzz" },
+	{ href: "/wetalk", label: "WeTalk" },
 	{ href: "/booktree", label: "BookTree" },
 ];
 const primaryLinks = [
