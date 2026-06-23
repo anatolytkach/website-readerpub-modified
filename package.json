@@ -10,6 +10,7 @@
     "dev:watch:status": "bash scripts/dev-watchdog-launchd.sh status",
     "build": "astro build",
     "deploy:staging": "npm run build && wrangler pages deploy dist --project-name readerpub-website-staging --branch develop",
+    "deploy:production": "npm run build && wrangler pages deploy dist --project-name readerpub-website --branch master",
     "preview": "astro preview",
     "astro": "astro"
   },
