@@ -286,7 +286,39 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	:global(.home-problem-grid .card--link:hover),
 	:global(.home-problem-grid .card--link:focus-visible) {
 		border-color: var(--accent);
-		box-shadow: 0 10px 22px rgba(0, 133, 134, 0.18);
+		box-shadow: 0 18px 40px rgba(20, 23, 31, 0.12);
+	}
+
+	:global(.home-problem-grid .card--link > .card-icon-heading) {
+		--card-icon-heading-size: var(--card-inline-icon-size, 56px);
+		display: grid;
+		grid-template-columns: var(--card-icon-heading-size) minmax(0, 1fr) auto;
+		gap: var(--card-icon-gap);
+		align-items: center;
+		justify-content: stretch;
+		width: 100%;
+		text-align: left;
+	}
+
+	:global(.home-problem-grid .card--link > .card-icon-heading::after) {
+		content: "→";
+		justify-self: end;
+		color: var(--accent);
+		font-family: var(--font-body);
+		font-size: calc(var(--card-heading-font-size) * 1.25);
+		font-weight: 400;
+		line-height: 1;
+	}
+
+	:global(.home-problem-grid .card--link > .card-icon-heading > .section-icon) {
+		grid-column: 1;
+		justify-self: start;
+	}
+
+	:global(.home-problem-grid .card--link > .card-icon-heading > h3) {
+		grid-column: 2;
+		max-width: none;
+		text-align: left;
 	}
 
 	:global(.home-file-model-section .card) {

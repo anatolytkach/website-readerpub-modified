@@ -18,9 +18,13 @@ const canonicalUrl = canonical
 	: undefined;
 ---
 
-<html lang="en">
+<html lang="en" class="no-js">
 	<head>
 		<meta charset="utf-8" />
+		<script is:inline>
+			document.documentElement.classList.remove("no-js");
+			document.documentElement.classList.add("animation-pass-ready");
+		</script>
 		<link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
@@ -62,6 +66,9 @@ const canonicalUrl = canonical
 				updateFab();
 				document.addEventListener("astro:page-load", updateFab);
 			})();
+		</script>
+		<script>
+			import "../scripts/animation-pass.js";
 		</script>
 	</body>
 </html>
