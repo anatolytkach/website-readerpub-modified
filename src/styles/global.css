@@ -831,7 +831,41 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	height: var(--card-inline-icon-size) !important;
 }
 
-.card--with-icon,
+.card--with-icon {
+	--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
+}
+
+.card--with-icon > p {
+	margin: 0;
+	text-align: center;
+}
+
+.card-icon-heading {
+	--card-icon-heading-size: var(--card-inline-icon-size, 56px);
+	display: flex;
+	gap: var(--card-icon-gap);
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-width: 100%;
+	text-align: left;
+}
+
+.card-icon-heading > .section-icon {
+	flex: 0 0 var(--card-icon-heading-size);
+	width: var(--card-icon-heading-size) !important;
+	height: var(--card-icon-heading-size) !important;
+}
+
+.card-icon-heading > :is(h2, h3, h4) {
+	flex: 0 1 auto;
+	max-width: min(16em, calc(100% - var(--card-icon-heading-size) - var(--card-icon-gap)));
+	margin: 0;
+	text-align: left;
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
 .card.icon-grid-card {
 	--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
 	display: grid;
@@ -841,7 +875,6 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	align-items: start;
 }
 
-.card--with-icon > .section-icon,
 .card.icon-grid-card > .section-icon {
 	grid-column: 1;
 	grid-row: 1;
@@ -850,13 +883,11 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	height: var(--card-inline-icon-size) !important;
 }
 
-.card--with-icon > .card-copy,
 .card.icon-grid-card > .icon-grid-card-copy {
 	display: contents;
 	min-width: 0;
 }
 
-.card--with-icon :is(h2, h3, h4),
 .card.icon-grid-card .icon-grid-card-copy > :is(h2, h3, h4) {
 	grid-column: 2;
 	grid-row: 1;
@@ -869,7 +900,6 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	overflow-wrap: anywhere;
 }
 
-.card--with-icon p,
 .card.icon-grid-card .icon-grid-card-copy > p {
 	grid-column: 1 / -1;
 	grid-row: 2;
@@ -1137,6 +1167,17 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 		padding: 24px;
 	}
 
+	.card--with-icon,
+	.card-icon-heading {
+		--card-heading-font-size: clamp(1.05rem, 5.2vw, 1.35rem);
+		--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
+		--card-icon-heading-size: var(--card-inline-icon-size);
+	}
+
+	.card-icon-heading > :is(h2, h3, h4) {
+		font-size: var(--card-heading-font-size);
+	}
+
 	.cta-block {
 		display: grid;
 		justify-items: center;
@@ -1320,7 +1361,6 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 		justify-content: center;
 	}
 
-	.content .section .card-grid .card.card--with-icon,
 	.content .section .card-grid .card.icon-grid-card {
 		--card-heading-font-size: clamp(1.05rem, 5.2vw, 1.35rem);
 		--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
@@ -1335,7 +1375,6 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 		text-align: center;
 	}
 
-	.content .section .card-grid .card.card--with-icon > .section-icon,
 	.content .section .card-grid .card.icon-grid-card > .section-icon {
 		flex: 0 0 var(--card-inline-icon-size);
 		align-self: center !important;
@@ -1344,12 +1383,10 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 		transform: none;
 	}
 
-	.content .section .card-grid .card.card--with-icon > .card-copy,
 	.content .section .card-grid .card.icon-grid-card > .icon-grid-card-copy {
 		display: contents !important;
 	}
 
-	.content .section .card-grid .card.card--with-icon :is(h2, h3, h4),
 	.content .section .card-grid .card.icon-grid-card .icon-grid-card-copy > :is(h2, h3, h4) {
 		flex: 0 1 auto;
 		align-self: center !important;
@@ -1364,14 +1401,24 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 		overflow-wrap: anywhere;
 	}
 
-	.content .section .card-grid .card.card--with-icon p,
 	.content .section .card-grid .card.icon-grid-card .icon-grid-card-copy > p {
 		flex: 0 0 100%;
 		max-width: 100%;
 		text-align: center;
 	}
 
-	.content .section .card-grid.institutions-benefit-grid > .card.card--with-icon:last-child > .card-copy > h3 {
+	.content .section .card-grid .card.card--with-icon,
+	.content .section .card-grid .card-icon-heading {
+		--card-heading-font-size: clamp(1.05rem, 5.2vw, 1.35rem);
+		--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
+		--card-icon-heading-size: var(--card-inline-icon-size);
+	}
+
+	.content .section .card-grid .card-icon-heading > :is(h2, h3, h4) {
+		font-size: var(--card-heading-font-size);
+	}
+
+	.content .section .card-grid.institutions-benefit-grid > .card.card--with-icon:last-child > .card-icon-heading > h3 {
 		flex-basis: min-content;
 		width: min-content;
 		overflow-wrap: normal;

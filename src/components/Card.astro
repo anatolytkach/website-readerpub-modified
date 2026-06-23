@@ -12,19 +12,37 @@ const { title, body, icon, href, class: className = "" } = Astro.props;
 {
 	href ? (
 		<a class:list={["card", "card--link", icon && "card--with-icon", className]} href={href}>
-			{icon && <SectionIcon type={icon} title={`${title} icon`} />}
-			<div class="card-copy">
-				<h3>{title}</h3>
-				<p>{body}</p>
-			</div>
+			{icon ? (
+				<>
+					<div class="card-icon-heading">
+						<SectionIcon type={icon} title={`${title} icon`} />
+						<h3>{title}</h3>
+					</div>
+					<p>{body}</p>
+				</>
+			) : (
+				<div class="card-copy">
+					<h3>{title}</h3>
+					<p>{body}</p>
+				</div>
+			)}
 		</a>
 	) : (
 		<article class:list={["card", icon && "card--with-icon", className]}>
-			{icon && <SectionIcon type={icon} title={`${title} icon`} />}
-			<div class="card-copy">
-				<h3>{title}</h3>
-				<p>{body}</p>
-			</div>
+			{icon ? (
+				<>
+					<div class="card-icon-heading">
+						<SectionIcon type={icon} title={`${title} icon`} />
+						<h3>{title}</h3>
+					</div>
+					<p>{body}</p>
+				</>
+			) : (
+				<div class="card-copy">
+					<h3>{title}</h3>
+					<p>{body}</p>
+				</div>
+			)}
 		</article>
 	)
 }

@@ -135,7 +135,7 @@ const audienceCards = [
 		title="A discussion layer for controlled-access content"
 		body="WeTalk keeps discussion close to the publications an organization controls, with participation rules that match institutional access needs."
 	>
-		<CardGrid columns="2">
+		<CardGrid columns="2" class="wetalk-icon-card-grid">
 			{discussionLayerCards.map((card) => <Card {...card} />)}
 		</CardGrid>
 	</Section>
@@ -151,8 +151,8 @@ const audienceCards = [
 		</CardGrid>
 	</Section>
 
-	<Section tone="green" title="Built for organizations">
-		<CardGrid columns="3">
+	<Section tone="green" title="Built for organizations" class="wetalk-organizations-section">
+		<CardGrid columns="3" class="wetalk-icon-card-grid">
 			{organizationCards.map((card) => <Card {...card} />)}
 		</CardGrid>
 	</Section>
@@ -271,6 +271,33 @@ const audienceCards = [
 	}
 
 	@media (max-width: 900px) {
+		:global(.wetalk-icon-card-grid .card.card--with-icon) {
+			text-align: center;
+		}
+
+		:global(.wetalk-icon-card-grid .card.card--with-icon > .card-icon-heading) {
+			display: grid !important;
+			grid-template-columns: var(--card-icon-heading-size) min(13em, calc(100vw - 120px));
+			justify-content: center !important;
+			align-items: center !important;
+			width: 100%;
+			max-width: 100%;
+			column-gap: var(--card-icon-gap);
+			text-align: left;
+		}
+
+		:global(.wetalk-icon-card-grid .card.card--with-icon > .card-icon-heading > .section-icon) {
+			grid-column: 1;
+			width: var(--card-icon-heading-size) !important;
+			height: var(--card-icon-heading-size) !important;
+		}
+
+		:global(.wetalk-icon-card-grid .card.card--with-icon > .card-icon-heading > h3) {
+			grid-column: 2;
+			max-width: none;
+			text-align: left;
+		}
+
 		.wetalk-comparison-grid {
 			grid-template-columns: 1fr;
 		}

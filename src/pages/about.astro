@@ -1,0 +1,211 @@
+---
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Section from "../components/sections/Section.astro";
+import Base from "../layouts/Base.astro";
+
+const heroActions = [
+	{ label: "Explore the platform", href: "/platform/" },
+	{ label: "Request a pilot", href: "/contact/", variant: "secondary" as const },
+];
+
+const finalActions = [
+	{ label: "Request a pilot", href: "/contact/" },
+	{ label: "Explore the platform", href: "/platform/", variant: "secondary" as const },
+];
+---
+
+<Base
+	title="About ReaderPub — Web-Native Publishing Infrastructure"
+	description="ReaderPub is building web-native publishing infrastructure for books, knowledge publications, controlled-access communities and live web assets."
+	canonical="/about/"
+>
+	<HeroSection
+		class="about-hero"
+		title="Built by a team of product innovation enthusiasts"
+		image="/images/about.webp"
+		imageAlt="ReaderPub web-native publishing infrastructure"
+		actions={heroActions}
+		spacerBackgroundPositionY="72%"
+	>
+		<Fragment slot="body">
+			<p>
+				The ReaderPub project originated within the product development environment of <a href="https://julianassociates.net/" target="_blank" rel="noopener noreferrer">Julian Associates</a>, where new software product initiatives have been designed, developed and brought to market.
+			</p>
+			<p class="about-hero-solution">
+				ReaderPub Inc. is now focused on building a new model for web-native publishing, reading, discussion and institutional knowledge management.
+			</p>
+		</Fragment>
+	</HeroSection>
+
+	<Section tone="green" class="about-section" title="Why ReaderPub exists">
+		<div class="about-copy-stack">
+			<p>
+				Digital publishing made distribution easier, but it did not solve what happens after publication. Books and knowledge publications are still often treated as files to deliver rather than assets that can remain active on the web.
+			</p>
+			<p>ReaderPub was created to address that gap.</p>
+		</div>
+		<CardGrid columns="4" class="about-card-grid about-two-row-grid">
+			<Card title="File-first publishing" body="Traditional digital publishing often ends when a file is delivered." />
+			<Card title="Reader relationships" body="Authors, publishers and institutions often lose visibility after access begins." />
+			<Card title="Discussion and discovery" body="Conversation, discovery and reader activity frequently move away from the publication itself." />
+			<Card title="Web-native future" body="ReaderPub helps publications remain readable, searchable, discussable and useful after release." />
+		</CardGrid>
+	</Section>
+
+	<Section tone="white" class="about-section about-building-section" title="What we are building">
+		<CardGrid columns="3" class="about-card-grid">
+			<Card title="Web-native publishing" body="Tools for creating publications that can live on the web instead of ending as static files." />
+			<Card title="Browser-based reading" body="A reading layer that lets books and publications open directly in the browser." />
+			<Card title="Connected discussions" body="Community and discussion boards for books, research and controlled-access materials." />
+			<Card title="Institutional publishing" body="Infrastructure for universities, libraries and organizations that publish and manage knowledge collections." />
+			<Card title="Security and access" body="A protection model focused on controlled access rather than routine file handoff." />
+			<Card title="Knowledge structure" body="Tools for connecting publications, notes, excerpts, references and long-term work." />
+		</CardGrid>
+	</Section>
+
+	<Section tone="green" class="about-section" title="Current focus">
+		<div class="about-copy-stack">
+			<p>
+				ReaderPub is focused on pilot projects with authors, publishers, universities, libraries and organizations that need better ways to publish, protect, read and discuss digital materials.
+			</p>
+			<p>
+				The goal is to work with partners who want to test web-native publishing, controlled access, community discussion and institutional knowledge workflows in real use cases.
+			</p>
+		</div>
+		<CardGrid columns="4" class="about-card-grid about-two-row-grid">
+			<Card title="Authors and publishers" body="Create web-native publications and maintain stronger reader relationships." />
+			<Card title="Universities and libraries" body="Publish educational materials, archives and collections with controlled access and discussion." />
+			<Card title="Organizations" body="Build private discussion spaces and live web assets around institutional knowledge." />
+			<Card title="Strategic partners" body="Explore publishing, reading, community and knowledge infrastructure for new markets." />
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="Interested in working with ReaderPub?"
+		body="ReaderPub is available for pilot projects, institutional conversations and strategic partnership discussions."
+		actions={finalActions}
+	/>
+</Base>
+
+<style>
+	.about-copy-stack {
+		display: grid;
+		gap: 14px;
+		max-width: 820px;
+	}
+
+	.about-copy-stack p {
+		margin: 0;
+		font-size: 1.125rem;
+		line-height: 1.45;
+	}
+
+	:global(.hero-section.about-hero) {
+		grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr) !important;
+		gap: 40px !important;
+	}
+
+	:global(.about-hero .hero-lead) {
+		color: var(--text);
+		font-size: var(--hero-problem-copy-size);
+	}
+
+	:global(.about-hero .hero-media) {
+		order: -1;
+		justify-content: flex-end !important;
+	}
+
+	:global(.about-hero .hero-copy) {
+		order: 1;
+	}
+
+	:global(.about-hero .hero-body) {
+		display: grid;
+		gap: 14px;
+		font-family: var(--font-body);
+		font-weight: 400;
+		line-height: 1.45;
+	}
+
+	:global(.about-hero .hero-body p) {
+		margin: 0;
+		color: var(--text);
+		font-size: var(--hero-problem-copy-size);
+		line-height: 1.45;
+	}
+
+	:global(.about-hero .hero-body .about-hero-solution) {
+		color: var(--accent);
+		font-size: var(--hero-solution-copy-size);
+	}
+
+	:global(.about-hero .hero-image) {
+		height: var(--hero-image-reader-height);
+		object-fit: contain;
+	}
+
+	.about-card-grid {
+		align-items: stretch;
+	}
+
+	:global(.about-two-row-grid.card-grid--4) {
+		align-items: start;
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+	}
+
+	:global(.about-two-row-grid.card-grid--4 > .card) {
+		height: auto;
+		min-height: 0;
+	}
+
+	:global(.about-section .card) {
+		min-height: 0;
+		background: var(--button-light-bg) !important;
+	}
+
+	:global(.about-section .card h3) {
+		overflow-wrap: normal;
+	}
+
+	:global(.about-section .card p) {
+		font-size: 1rem;
+	}
+
+	@media (max-width: 900px) {
+		:global(.about-two-row-grid.card-grid--4) {
+			grid-template-columns: 1fr !important;
+		}
+
+		:global(.hero-section.about-hero) {
+			grid-template-columns: 1fr !important;
+		}
+
+		:global(.about-hero .hero-media) {
+			order: 1 !important;
+			justify-content: center !important;
+		}
+
+		:global(.about-hero h1) {
+			order: 2 !important;
+		}
+
+		:global(.about-hero .hero-lead) {
+			order: 3 !important;
+		}
+
+		:global(.about-hero .hero-body) {
+			order: 4 !important;
+		}
+
+		:global(.about-hero .cta-row) {
+			order: 5 !important;
+		}
+
+		:global(.about-hero .hero-image) {
+			height: auto;
+		}
+	}
+</style>

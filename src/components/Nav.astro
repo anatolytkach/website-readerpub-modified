@@ -17,6 +17,7 @@ const primaryLinks = [
 	{ href: "/institutions", label: "Institutions" },
 	{ href: "/security", label: "Security" },
 	{ href: "/pricing", label: "Pricing" },
+	{ href: "/about", label: "About" },
 ];
 const hasActivePrimaryLink = primaryLinks.some((link) => isActive(link.href));
 const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => isActive(link.href));
