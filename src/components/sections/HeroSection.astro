@@ -26,9 +26,19 @@ const {
 	class: className = "",
 } = Astro.props;
 
-const spacerStyle = spacerBackgroundPositionY
-	? `--hero-background-spacer-position-y: ${spacerBackgroundPositionY};`
+const spacerBackgroundPositionPercent = spacerBackgroundPositionY?.endsWith("%")
+	? Number.parseFloat(spacerBackgroundPositionY)
 	: undefined;
+const shouldFlipSpacerBackground =
+	typeof spacerBackgroundPositionPercent === "number" &&
+	Number.isFinite(spacerBackgroundPositionPercent) &&
+	Math.floor(spacerBackgroundPositionPercent / 9) % 2 === 1;
+const spacerStyle = [
+	spacerBackgroundPositionY && `--hero-background-spacer-position-y: ${spacerBackgroundPositionY};`,
+	shouldFlipSpacerBackground && "--hero-background-spacer-scale-x: -1;",
+]
+	.filter(Boolean)
+	.join("") || undefined;
 const hasEyebrowSlot = Astro.slots.has("eyebrow");
 const hasTitleSlot = Astro.slots.has("title");
 const hasLeadSlot = Astro.slots.has("lead");
