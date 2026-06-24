@@ -8,7 +8,7 @@ import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import { SITE_NAME } from "../consts";
 
-const joinConversationAction = { label: "Join the conversation in WeBuzz", href: "/wetalk/", external: true };
+const joinConversationAction = { label: "Join the conversation in WeBuzz", href: "https://webuzz.org/", external: true };
 const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/wetalk" };
 ---
 
@@ -318,13 +318,13 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	:global(.webuzz-fragmented-grid) {
-		align-items: start !important;
-		grid-auto-rows: auto !important;
+		align-items: stretch !important;
+		grid-auto-rows: 1fr !important;
 	}
 
 	:global(.webuzz-fragmented-grid .card) {
-		align-self: start !important;
-		height: auto !important;
+		align-self: stretch !important;
+		height: 100% !important;
 		min-height: 0 !important;
 	}
 
