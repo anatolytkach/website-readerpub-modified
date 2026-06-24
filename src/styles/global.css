@@ -8,7 +8,7 @@
 	--surface-dark: #111821;
 	--text: #14171f;
 	--muted: #4e5a6a;
-	--accent: #008586;
+	--accent: #028f80;
 	--accent-dark: #006b68;
 	--accent-soft: #e2f3f1;
 	--border: #d8dee8;
@@ -25,7 +25,7 @@
 	--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
 	--card-icon-column: var(--card-inline-icon-size);
 	--card-icon-gap: 12px;
-	--page-max: 1200px;
+	--page-max: 1180px;
 	--hero-image-reader-ratio: 0.8326316;
 	--hero-image-reader-height: 450px;
 	--hero-solution-copy-size: 1.375rem;
@@ -166,8 +166,8 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 }
 
 .site-logo {
-	width: 62px;
-	height: 56px;
+	width: 44px;
+	height: 44px;
 	object-fit: contain;
 	flex: 0 0 auto;
 }
@@ -743,7 +743,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 
 .button:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 10px 22px rgba(0, 133, 134, 0.18);
+	box-shadow: 0 10px 22px rgba(2, 143, 128, 0.18);
 	background: var(--accent-dark);
 }
 
@@ -1052,14 +1052,14 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	font-weight: 700;
 	line-height: 1;
 	text-decoration: none;
-	box-shadow: 0 2px 12px rgba(0, 133, 134, 0.3);
+	box-shadow: 0 2px 12px rgba(2, 143, 128, 0.3);
 	transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .kb-fab:hover {
 	color: #ffffff;
 	transform: scale(1.1);
-	box-shadow: 0 4px 20px rgba(0, 133, 134, 0.45);
+	box-shadow: 0 4px 20px rgba(2, 143, 128, 0.45);
 }
 
 @media (max-width: 1100px) {
@@ -1478,7 +1478,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	}
 
 	.site-logo {
-		width: 48px;
+		width: 44px;
 		height: 44px;
 	}
 
@@ -1538,8 +1538,8 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	}
 
 	.site-logo {
-		width: 48px;
-		height: 40px;
+		width: 44px;
+		height: 44px;
 	}
 
 	.nav-actions {
