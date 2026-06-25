@@ -786,6 +786,13 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	align-items: center;
 }
 
+.cta-block > .cta-row {
+	flex: 0 0 auto;
+	justify-self: end;
+	justify-content: flex-end;
+	margin-left: auto;
+}
+
 .card-grid {
 	display: grid;
 	gap: 18px;
@@ -952,9 +959,9 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 }
 
 .cta-block {
-	display: flex;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
 	align-items: center;
-	justify-content: space-between;
 	gap: 28px;
 	padding: 46px 0;
 }
@@ -962,7 +969,9 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 .cta-block-copy {
 	display: grid;
 	gap: 12px;
+	justify-self: start;
 	max-width: 720px;
+	min-width: 0;
 }
 
 .cta-block p {
@@ -1188,8 +1197,15 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 
 	.cta-block {
 		display: grid;
+		grid-template-columns: 1fr;
 		justify-items: center;
 		text-align: center;
+	}
+
+	.cta-block > .cta-row {
+		justify-self: center;
+		justify-content: center;
+		margin-left: 0;
 	}
 }
 
@@ -1465,6 +1481,34 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 		text-align: left;
 		white-space: normal;
 		overflow-wrap: anywhere;
+	}
+}
+
+@media (orientation: portrait) and (min-width: 901px) {
+	.content .cta-block {
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+		justify-content: stretch;
+		justify-items: stretch;
+		text-align: left;
+	}
+
+	.content .cta-block > .cta-row {
+		justify-self: end;
+		justify-content: flex-end;
+		margin-left: auto;
+	}
+
+	.content .cta-block-copy {
+		justify-self: start;
+		text-align: left;
+	}
+
+	.content .cta-block-copy h2 {
+		justify-self: start;
+		margin-right: 0;
+		margin-left: 0;
+		text-align: left;
 	}
 }
 
