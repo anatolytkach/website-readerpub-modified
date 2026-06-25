@@ -88,6 +88,10 @@ const clearHeroRevealTimers = () => {
 };
 
 const shouldRevealElement = (element) => {
+	if (element.matches(".legal-page")) {
+		return false;
+	}
+
 	if (element.closest(".hero-section, .network-hero") && element.matches(".hero-media, .image-block, figure, picture")) {
 		return false;
 	}

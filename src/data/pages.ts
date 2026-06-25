@@ -608,32 +608,4 @@ export const pages = {
 			actions: [{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" }],
 		},
 	},
-	terms: {
-		metaTitle: `Terms of Service and Privacy Policy | ${SITE_NAME}`,
-		description: "ReaderPub Terms of Service and Privacy Policy.",
-		eyebrow: "Legal",
-		heroTitle: "Terms of Service and Privacy Policy.",
-		heroLead:
-			"This route is preserved from the current site and ready for final legal content review.",
-		heroSpacerBackgroundPositionY: "100%",
-		sections: [
-			{
-				tone: "white",
-				kicker: "Last updated",
-				title: "June 2026",
-				body:
-					"The original site contains the full legal copy. This new base keeps the route and typography structure without copying the full legal page automatically.",
-				columns: "2",
-				cards: [
-					{ title: "Terms of Service", body: "Use this block for account, acceptable use, published content and service terms.", icon: "publisher" },
-					{ title: "Privacy Policy", body: "Use this block for data collection, account data, communications and user rights.", icon: "security" },
-				],
-			},
-		],
-		cta: {
-			title: "Legal content checkpoint.",
-			body: "Final legal text should be reviewed before production deployment.",
-			actions: [{ label: "Contact us", href: "/contact" }],
-		},
-	},
 } satisfies Record<string, PageBlueprint>;

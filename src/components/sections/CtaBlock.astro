@@ -16,7 +16,7 @@ const hasBodySlot = Astro.slots.has("body");
 <section class:list={["cta-block", "section--dark", className]}>
 	<div class="cta-block-copy">
 		<h2>{title}</h2>
-		<p>{hasBodySlot ? <slot name="body" /> : body}</p>
+		{(hasBodySlot || body) && <p>{hasBodySlot ? <slot name="body" /> : body}</p>}
 	</div>
 	<div class="cta-row">
 		{actions.map((action) => <ActionLink {...action} />)}
