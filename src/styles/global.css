@@ -1031,7 +1031,11 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 }
 
 .site-footer .site-footer-tagline {
-	font-size: 1.1875rem;
+	font-size: 1.06875rem;
+}
+
+.site-footer .site-footer-meta {
+	color: #c1c2c4;
 }
 
 .site-footer a {
