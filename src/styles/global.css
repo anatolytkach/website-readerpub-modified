@@ -10,11 +10,17 @@
 	--muted: #4e5a6a;
 	--accent: #028f80;
 	--accent-dark: #006b68;
+	--accent-gradient-top: #1fa898;
+	--accent-hover-gradient-top: #02786f;
+	--accent-hover-gradient-bottom: #026558;
 	--accent-soft: #e2f3f1;
 	--border: #d8dee8;
 	--card-bg: #ffffff;
 	--card-tint: #fbfaf8;
 	--button-light-bg: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+	--button-green-bg: linear-gradient(180deg, var(--accent-gradient-top) 0%, var(--accent) 100%);
+	--button-green-hover-bg: linear-gradient(180deg, var(--accent-hover-gradient-top) 0%, var(--accent-hover-gradient-bottom) 100%);
+	--button-green-hover-shadow: 0 8px 20px rgba(0, 143, 128, 0.2);
 	--shadow-soft: 0 16px 36px rgba(20, 23, 31, 0.08);
 	--radius-card: 8px;
 	--radius-control: 999px;
@@ -729,7 +735,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	padding: 11px 18px;
 	border: 1px solid var(--accent);
 	border-radius: var(--radius-control);
-	background: var(--accent);
+	background: var(--button-green-bg);
 	color: #ffffff;
 	font-family: inherit;
 	font-size: 0.95rem;
@@ -743,8 +749,8 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 
 .button:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 10px 22px rgba(2, 143, 128, 0.18);
-	background: var(--accent-dark);
+	box-shadow: var(--button-green-hover-shadow);
+	background: var(--button-green-hover-bg);
 }
 
 .button--secondary,
@@ -1059,20 +1065,21 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	width: 48px;
 	height: 48px;
 	border-radius: 50%;
-	background: var(--accent);
+	background: var(--button-green-bg);
 	color: #ffffff;
 	font-size: 24px;
 	font-weight: 700;
 	line-height: 1;
 	text-decoration: none;
-	box-shadow: 0 2px 12px rgba(2, 143, 128, 0.3);
-	transition: transform 0.15s ease, box-shadow 0.15s ease;
+	box-shadow: none;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .kb-fab:hover {
 	color: #ffffff;
-	transform: scale(1.1);
-	box-shadow: 0 4px 20px rgba(2, 143, 128, 0.45);
+	transform: translateY(-2px);
+	box-shadow: var(--button-green-hover-shadow);
+	background: var(--button-green-hover-bg);
 }
 
 @media (max-width: 1100px) {
