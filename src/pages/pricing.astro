@@ -184,6 +184,11 @@ const ctaActions = [
 			<Card icon="publisher" title="For publishers" body="Scale catalogs without depending on marketplace economics." />
 			<Card icon="library" title="For institutions" body="Get predictable costs for long-term collections and infrastructure." />
 			<Card icon="readerBook" title="For readers" body="Interacting with authors and predictably lower book prices." />
+			<Card
+				icon="program"
+				title="Scribe AI Companion"
+				body="Integrated Scribe AI Companion is free for readers. Tokenized billing applies for institutions."
+			/>
 		</CardGrid>
 	</Section>
 
@@ -363,7 +368,7 @@ const ctaActions = [
 	}
 
 	.pricing-readerpub-model-card {
-		--card-tint: #eef6f5;
+		--card-tint: #eaf9f5;
 		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
 	}
 
@@ -374,6 +379,16 @@ const ctaActions = [
 
 	:global(.pricing-benefits-grid) {
 		align-items: stretch;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-auto-rows: auto;
+	}
+
+	:global(.pricing-benefits-grid > .card) {
+		grid-column: span 2;
+	}
+
+	:global(.pricing-benefits-grid > .card:nth-child(5)) {
+		grid-column: 2 / span 2;
 	}
 
 	.creator-plan-grid {
@@ -427,6 +442,15 @@ const ctaActions = [
 	}
 
 	@media (max-width: 900px) {
+		:global(.pricing-benefits-grid) {
+			grid-template-columns: 1fr;
+		}
+
+		:global(.pricing-benefits-grid > .card),
+		:global(.pricing-benefits-grid > .card:nth-child(5)) {
+			grid-column: auto;
+		}
+
 		.pricing-hero-paths-list {
 			order: 6;
 		}

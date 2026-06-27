@@ -56,13 +56,14 @@ const finalActions = [
 	</Section>
 
 	<Section tone="white" class="about-section about-building-section" title="What we are building">
-		<CardGrid columns="3" class="about-card-grid">
+		<CardGrid columns="3" class="about-card-grid about-building-grid">
 			<Card title="Web-native publishing" body="Tools for creating publications that can live on the web instead of ending as static files." />
 			<Card title="Browser-based reading" body="A reading layer that lets books and publications open directly in the browser." />
 			<Card title="Connected discussions" body="Community and discussion boards for books, research and controlled-access materials." />
 			<Card title="Institutional publishing" body="Infrastructure for universities, libraries and organizations that publish and manage knowledge collections." />
 			<Card title="Security and access" body="A protection model focused on controlled access rather than routine file handoff." />
 			<Card title="Knowledge structure" body="Tools for connecting publications, notes, excerpts, references and long-term work." />
+			<Card title="AI-powered conversation" body="Scribe adds focused conversation for books, literature, writing, publishing and ReaderPub platform guidance." />
 		</CardGrid>
 	</Section>
 
@@ -163,6 +164,25 @@ const finalActions = [
 		min-height: 0;
 	}
 
+	:global(.about-building-grid.card-grid--3) {
+		grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+		grid-auto-rows: auto;
+	}
+
+	:global(.about-building-grid > .card) {
+		grid-column: span 2;
+	}
+
+	:global(.about-building-grid > .card:nth-child(1)),
+	:global(.about-building-grid > .card:nth-child(6)) {
+		grid-column: 2 / span 2;
+	}
+
+	:global(.about-building-grid > .card:nth-child(2)),
+	:global(.about-building-grid > .card:nth-child(7)) {
+		grid-column: 4 / span 2;
+	}
+
 	:global(.about-section .card) {
 		min-height: 0;
 		background: var(--button-light-bg) !important;
@@ -177,6 +197,18 @@ const finalActions = [
 	}
 
 	@media (max-width: 900px) {
+		:global(.about-building-grid.card-grid--3) {
+			grid-template-columns: 1fr !important;
+		}
+
+		:global(.about-building-grid > .card),
+		:global(.about-building-grid > .card:nth-child(1)),
+		:global(.about-building-grid > .card:nth-child(2)),
+		:global(.about-building-grid > .card:nth-child(6)),
+		:global(.about-building-grid > .card:nth-child(7)) {
+			grid-column: auto;
+		}
+
 		:global(.about-two-row-grid.card-grid--4) {
 			grid-template-columns: 1fr !important;
 		}

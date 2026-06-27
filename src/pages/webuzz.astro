@@ -263,7 +263,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		title="Who benefits from live book discussions?"
 		body="WeBuzz connects books, authors, readers, fragments and literary ideas in one network."
 	>
-		<CardGrid columns="3" class="webuzz-matters-grid">
+		<CardGrid columns="4" class="webuzz-matters-grid">
 			<Card icon="readerBook" title="Readers" body="Discovery becomes social and discussion stays attached to books." />
 			<Card
 				icon="author"
@@ -271,6 +271,12 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 				body="Audience activity no longer disappears after the sale. Books gain a longer public life after launch."
 			/>
 			<Card icon="library" title="Institutions" body="Controlled collections become part of active research and educational workflow." />
+			<Card
+				icon="fan"
+				title="Continue the conversation with Scribe"
+				body="Conversations with Scribe on WeBuzz are saved in My Activity and can be continued at any time."
+				href="/scribe"
+			/>
 		</CardGrid>
 	</Section>
 
@@ -615,7 +621,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	:global(.webuzz-benefits-section .webuzz-matters-grid) {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		gap: 18px;
 	}
 
@@ -647,7 +653,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	:global(.webuzz-readers-section .webuzz-image-cards .card),
 	:global(.webuzz-publishers-section .webuzz-image-cards .card) {
-		background: linear-gradient(135deg, #eef6f5 0%, #eef6f5 18%, #ffffff 100%) !important;
+		background: linear-gradient(135deg, #eaf9f5 0%, #eaf9f5 18%, #ffffff 100%) !important;
 	}
 
 	.webuzz-section-image {
@@ -665,7 +671,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		}
 
 		:global(.webuzz-benefits-section .webuzz-matters-grid) {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 
 		.webuzz-image-split {

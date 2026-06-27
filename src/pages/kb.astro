@@ -34,7 +34,7 @@ const faqCategories = [
 			{
 				question: "What products are included in ReaderPub?",
 				answer:
-					"ReaderPub includes WePub for publishing, WeRead for active browser-based reading, WeBuzz for public book discussion and discovery, WeTalk for private institutional discussion, and BookTree for structured notes, excerpts and research.",
+					"ReaderPub includes WePub for publishing, WeRead for active browser-based reading, WeBuzz for public book discussion and discovery, WeTalk for private institutional discussion, BookTree for structured notes, excerpts and research, and Scribe for focused AI-powered conversation.",
 			},
 			{
 				question: "What makes ReaderPub different from traditional digital publishing?",
@@ -200,6 +200,37 @@ const faqCategories = [
 			},
 		],
 	},
+	{
+		title: "Scribe AI Companion",
+		icon: "program",
+		questions: [
+			{
+				question: "What is Scribe?",
+				answer:
+					"Scribe is ReaderPub’s AI companion specialized in literature, books, writing, publishing and ReaderPub platform guidance.",
+			},
+			{
+				question: "What makes Scribe different from general AI assistants?",
+				answer:
+					"Scribe combines modern language models with specialized knowledge about books, authors, literature, writing, publishing and ReaderPub workflows, allowing it to provide more focused conversations in these areas.",
+			},
+			{
+				question: "Are conversations with Scribe saved?",
+				answer:
+					"Yes. Conversations with Scribe on WeBuzz are saved in My Activity and can be continued at any time.",
+			},
+			{
+				question: "Can Scribe help with writing and publishing questions?",
+				answer:
+					"Yes. Scribe can support focused conversations about storytelling, editing, publishing workflows, platform setup and ReaderPub product guidance.",
+			},
+			{
+				question: "Is Scribe only for readers?",
+				answer:
+					"No. Scribe is useful for readers, authors, publishers and institutions that need focused help around books, literature, writing, publishing and ReaderPub.",
+			},
+		],
+	},
 ] as const;
 ---
 
@@ -305,22 +336,27 @@ const faqCategories = [
 
 	.kb-faq-grid {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		gap: 24px;
 	}
 
 	.kb-faq-block {
 		--kb-card-tint: var(--card-tint);
+		grid-column: span 2;
 		padding: 24px;
 		border: 1px solid var(--border);
 		border-radius: 12px;
 		background: linear-gradient(135deg, var(--kb-card-tint) 0%, var(--kb-card-tint) 18%, #ffffff 100%);
 	}
 
+	.kb-faq-block:last-child:nth-child(odd) {
+		grid-column: 2 / span 2;
+	}
+
 	.kb-faq-block:nth-child(1),
 	.kb-faq-block:nth-child(4),
 	.kb-faq-block:nth-child(5) {
-		--kb-card-tint: #eef6f5;
+		--kb-card-tint: #eaf9f5;
 	}
 
 	.kb-faq-heading {
@@ -429,6 +465,7 @@ const faqCategories = [
 
 		.kb-faq-block {
 			--kb-card-tint: var(--card-tint);
+			grid-column: auto;
 		}
 
 		.kb-faq-block:nth-child(2),
@@ -440,7 +477,7 @@ const faqCategories = [
 		.kb-faq-block:nth-child(1),
 		.kb-faq-block:nth-child(3),
 		.kb-faq-block:nth-child(5) {
-			--kb-card-tint: #eef6f5;
+			--kb-card-tint: #eaf9f5;
 		}
 
 		.kb-faq-heading {
@@ -463,6 +500,7 @@ const faqCategories = [
 
 		.kb-faq-block {
 			--kb-card-tint: var(--card-tint);
+			grid-column: auto;
 		}
 
 		.kb-faq-block:nth-child(2),
@@ -474,7 +512,7 @@ const faqCategories = [
 		.kb-faq-block:nth-child(1),
 		.kb-faq-block:nth-child(3),
 		.kb-faq-block:nth-child(5) {
-			--kb-card-tint: #eef6f5;
+			--kb-card-tint: #eaf9f5;
 		}
 
 		.kb-faq-item,

@@ -34,8 +34,6 @@ const cardGroupSelector = ".card-grid, .model-grid, .platform-commerce-cards, .w
 const heroMediaSelectors = [".hero-section .hero-media", ".network-hero .institutions-network-media", ".network-hero > .image-block"];
 const revealExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .modal-content";
 const cardExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .hero-section, .network-hero, .cta-block, form, .modal-content";
-const interactiveChildSelector =
-	"button, input, textarea, select, summary, [role='button'], .button, [tabindex]:not([tabindex='-1'])";
 const cardRevealDuration = 1240;
 const cardRevealDelay = 360;
 
@@ -120,7 +118,7 @@ const isAnimationCard = (card) => {
 		return false;
 	}
 
-	return !card.querySelector(interactiveChildSelector);
+	return true;
 };
 
 const isRevealOnlyCard = (card) => {

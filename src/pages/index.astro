@@ -82,7 +82,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 					</ul>
 					</div>
 				</article>
-				<article class="card home-list-card home-readerpub-model-card" style="background: linear-gradient(135deg, #eef6f5 0%, #eef6f5 18%, var(--card-bg) 100%);">
+				<article class="card home-list-card home-readerpub-model-card" style="background: linear-gradient(135deg, #eaf9f5 0%, #eaf9f5 18%, var(--card-bg) 100%);">
 					<div class="card-copy">
 					<h3><span class="home-title-accent">ReaderPub</span> model</h3>
 					<ul class="home-model-list">
@@ -152,6 +152,12 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				<div class="card-copy">
 					<h3><a class="home-product-link" href="/booktree">BookTree</a></h3>
 					<p>Serious readers connect books, notes and projects into durable knowledge structures.</p>
+				</div>
+			</article>
+			<article class="card">
+				<div class="card-copy">
+					<h3><a class="home-product-link" href="/scribe">Scribe</a></h3>
+					<p>A specialized AI companion for literature, writing, publishing and ReaderPub.</p>
 				</div>
 			</article>
 		</CardGrid>
@@ -229,7 +235,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	:global(.home-readerpub-model-card.home-readerpub-model-card) {
-		background: linear-gradient(135deg, #eef6f5 0%, #eef6f5 18%, var(--card-bg) 100%) !important;
+		background: linear-gradient(135deg, #eaf9f5 0%, #eaf9f5 18%, var(--card-bg) 100%) !important;
 	}
 
 	.home-flow {
@@ -281,6 +287,14 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-product-divider {
 		color: var(--text);
+	}
+
+	@media (min-width: 901px) {
+		:global(.home-product-grid > .card:last-child) {
+			grid-column: 1 / -1;
+			justify-self: center;
+			width: calc((100% - 18px) / 2);
+		}
 	}
 
 	:global(.home-problem-grid .card--link:hover),

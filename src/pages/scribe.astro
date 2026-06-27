@@ -1,0 +1,148 @@
+---
+import Card from "../components/Card.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Section from "../components/sections/Section.astro";
+import Base from "../layouts/Base.astro";
+
+const primaryActions = [
+	{ label: "Try Scribe", href: "/contact/" },
+	{ label: "Explore ReaderPub", href: "/platform/", variant: "secondary" as const },
+];
+---
+
+<Base
+	title="Scribe — AI Companion for Literature, Writing and Publishing | ReaderPub"
+	description="Scribe is ReaderPub’s specialized AI companion for conversations about books, authors, literature, writing, publishing and ReaderPub platform workflows."
+	canonical="/scribe/"
+>
+	<HeroSection
+		class="scribe-hero"
+		image="/images/scribe_hero.webp"
+		imageAlt="Scribe AI Companion for ReaderPub literature and publishing conversations"
+		actions={primaryActions}
+		spacerBackgroundPositionY="90%"
+	>
+		<Fragment slot="title"><span class="scribe-hero-product">Scribe:</span><br />All things literature AI companion.</Fragment>
+		<div class="scribe-hero-copy">
+			<p class="scribe-hero-problem">
+				General-purpose AI can answer almost anything. However, its answers often lack specificity and are full of platitudes.
+			</p>
+			<p class="scribe-hero-solution">
+				Scribe combines modern language models with specialized knowledge about literature, books, authors, writing, publishing and ReaderPub platform capabilities to support focused conversation.
+			</p>
+		</div>
+	</HeroSection>
+
+	<Section
+		tone="gray"
+		title="Literary and publishing knowledge is scattered across too many places"
+		body="Readers, authors, publishers and institutions often move between books, search engines, documentation, online discussions and general-purpose AI assistants to find answers. Each source knows only part of the picture."
+	>
+		<CardGrid columns="3" class="scribe-problem-grid scribe-centered-card-grid">
+			<Card title="Books" body="Books provide knowledge but cannot answer questions." />
+			<Card title="Search" body="Search engines return links rather than conversations." />
+			<Card title="General AI" body="General AI lacks focused literary and publishing context." />
+			<Card title="Community discussion" body="Community discussions are valuable but difficult to search." />
+			<Card title="Publishing knowledge" body="Publishing knowledge is often buried in documents, forums and workflows." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="green"
+		title="A specialized AI for literature, writing and publishing"
+		body="Scribe gives ReaderPub users a conversational way to explore books, authors, literary ideas, writing questions, publishing workflows and platform guidance. Instead of switching between many tools, users can ask questions in one place and continue the conversation over time."
+	>
+		<CardGrid columns="3" class="scribe-centered-card-grid">
+			<Card title="Literature" body="Discuss books, authors, genres, literary history and ideas." />
+			<Card title="Writing" body="Explore storytelling, editing, structure, style and writing techniques." />
+			<Card title="Publishing" body="Ask about publishing workflows, distribution, copyright, pricing and industry practices." />
+			<Card title="ReaderPub" body="Get guidance about ReaderPub features, publishing tools and platform workflows." />
+			<Card title="WeBuzz" body="Continue conversations that connect with book discussion and community activity." />
+		</CardGrid>
+	</Section>
+
+	<Section
+		tone="white"
+		title="How Scribe works"
+		body="Scribe combines modern language models with specialized sources and platform context to support focused conversations about literature, writing and publishing."
+	>
+		<CardGrid columns="3" class="scribe-centered-card-grid">
+			<Card title="Specialized knowledge" body="Uses information about books, authors, literature, writing, publishing and ReaderPub." />
+			<Card title="Conversational AI" body="Supports natural conversations instead of isolated searches." />
+			<Card title="Persistent conversations" body="Discussions with Scribe can be saved and continued later." />
+			<Card title="Available across ReaderPub" body="Scribe can be opened from the website, WeRead catalog and WeBuzz." />
+			<Card title="Context-aware answers" body="Answers can use platform materials, discussions, documentation and publishing resources when relevant." />
+		</CardGrid>
+	</Section>
+
+	<Section tone="green" title="Who benefits from Scribe?">
+		<CardGrid columns="3" class="scribe-centered-card-grid">
+			<Card icon="readerBook" title="Readers" body="Understand books, authors, references and literary context more deeply." />
+			<Card icon="author" title="Authors" body="Discuss writing, research, editing and publishing questions." />
+			<Card icon="publisher" title="Publishers" body="Get immediate guidance about publishing workflows and platform features." />
+			<Card icon="library" title="Institutions" body="Support readers, staff and communities with a specialized literary and publishing assistant." />
+			<Card icon="fan" title="WeBuzz users" body="Continue saved conversations with Scribe from My Activity." />
+		</CardGrid>
+	</Section>
+
+	<CtaBlock
+		title="Knowledge is more useful when you can have a conversation with it."
+		body="Scribe helps readers, authors, publishers and institutions explore literature, writing and publishing through focused AI-powered conversation."
+		actions={primaryActions}
+	/>
+</Base>
+
+<style>
+	.scribe-hero-product {
+		color: var(--accent);
+	}
+
+	.scribe-hero-copy {
+		display: grid;
+		gap: 14px;
+		max-width: 820px;
+	}
+
+	.scribe-hero-copy p {
+		margin: 0;
+		line-height: 1.45;
+	}
+
+	.scribe-hero-problem {
+		color: var(--text);
+		font-size: var(--hero-problem-copy-size);
+	}
+
+	.scribe-hero-solution {
+		color: var(--accent);
+		font-size: var(--hero-solution-copy-size);
+	}
+
+	:global(.scribe-centered-card-grid.card-grid--3) {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+
+	:global(.scribe-centered-card-grid.card-grid--3 > .card) {
+		grid-column: span 2;
+	}
+
+	:global(.scribe-centered-card-grid.card-grid--3 > .card:nth-child(4)) {
+		grid-column: 2 / span 2;
+	}
+
+	:global(.scribe-centered-card-grid.card-grid--3 > .card:nth-child(5)) {
+		grid-column: 4 / span 2;
+	}
+
+	@media (max-width: 900px) {
+		:global(.scribe-centered-card-grid.card-grid--3) {
+			grid-template-columns: 1fr !important;
+		}
+
+		:global(.scribe-centered-card-grid.card-grid--3 > .card) {
+			grid-column: 1 / -1 !important;
+		}
+	}
+</style>

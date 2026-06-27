@@ -119,11 +119,15 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		title="Knowledge compounds through relationships"
 		body="The value of reading rarely comes from a single publication. It comes from the connections built across many publications over time."
 	>
-		<CardGrid columns="4">
+		<CardGrid columns="4" class="booktree-relationship-grid">
 			<Card title="Research" body="Connect evidence across many sources." />
 			<Card title="Writing" body="Preserve references while developing manuscripts." />
 			<Card title="Study" body="Build durable learning structures." />
 			<Card title="Discovery" body="Reveal relationships between ideas that would otherwise be lost." />
+			<Card
+				title="Explore connections"
+				body="Use Scribe to map links between books, authors, history, literary movements and research topics."
+			/>
 		</CardGrid>
 	</Section>
 
@@ -279,6 +283,23 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
 	}
 
+	:global(.card-grid.booktree-relationship-grid) {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		grid-auto-rows: auto;
+	}
+
+	:global(.booktree-relationship-grid > .card) {
+		grid-column: span 2;
+	}
+
+	:global(.booktree-relationship-grid > .card:nth-child(4)) {
+		grid-column: 2 / span 2;
+	}
+
+	:global(.booktree-relationship-grid > .card:nth-child(5)) {
+		grid-column: 4 / span 2;
+	}
+
 	@media (max-width: 900px) {
 		.booktree-source-model-grid {
 			grid-template-columns: 1fr;
@@ -286,6 +307,14 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 
 		.booktree-flow-chain {
 			justify-content: flex-start;
+		}
+
+		:global(.card-grid.booktree-relationship-grid) {
+			grid-template-columns: 1fr;
+		}
+
+		:global(.booktree-relationship-grid > .card) {
+			grid-column: auto;
 		}
 	}
 </style>

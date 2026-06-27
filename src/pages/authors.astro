@@ -108,60 +108,67 @@ const pageActions = [startPublishingAction, pricingAction];
 				</p>
 			</div>
 			<div class="card-grid authors-living-grid">
-				<div class="card icon-grid-card author-benefit-card">
-					<SectionIcon type="dollars" title="Monetize your catalog" />
-					<div class="icon-grid-card-copy">
+				<div class="card author-benefit-card">
+					<div class="author-benefit-heading">
+						<SectionIcon type="dollars" title="Monetize your catalog" />
 						<h2>Monetize your catalog</h2>
-						<p class="author-benefit-lede">Publish on the web - with optional EPUB output when you need it.</p>
-						<ul class="bullets">
-							<li>Direct sales</li>
-							<li>Bundles and promotions (optional)</li>
-							<li>Fan clubs and memberships</li>
-							<li>Web edition plus optional production-ready EPUB delivery.</li>
-						</ul>
-						<p class="author-benefit-note">
-							Save on <strong class="author-save-highlight">5%</strong> commission versus Amazon's 35%. Use your freed-up resources to promote your books on ReaderPub.
-						</p>
 					</div>
+					<p class="author-benefit-lede">Publish on the web - with optional EPUB output when you need it.</p>
+					<ul class="bullets">
+						<li>Direct sales</li>
+						<li>Bundles and promotions (optional)</li>
+						<li>Fan clubs and memberships</li>
+						<li>Web edition plus optional production-ready EPUB delivery.</li>
+					</ul>
+					<p class="author-benefit-note">
+						Save on <strong class="author-save-highlight">5%</strong> commission versus Amazon's 35%. Use your freed-up resources to promote your books on ReaderPub.
+					</p>
 				</div>
-				<div class="card icon-grid-card author-benefit-card">
-					<SectionIcon type="readerBook" title="Sell directly to your readers" />
-					<div class="icon-grid-card-copy">
+				<div class="card author-benefit-card">
+					<div class="author-benefit-heading">
+						<SectionIcon type="readerBook" title="Sell directly to your readers" />
 						<h2>Sell directly and communicate with your readers.</h2>
-						<p class="author-benefit-lede">Keep your audience, keep your data, and keep more of each sale.</p>
-						<ul class="bullets">
-							<li>Sell web editions and ebooks directly on ReaderPub.</li>
-							<li>5% sales commission, far below Amazon's take.</li>
-							<li>See sales and reader engagement analytics in one place.</li>
-							<li>Receive context-rich reader notes attached to exact passages - not generic comments.</li>
-						</ul>
 					</div>
+					<p class="author-benefit-lede">Keep your audience, keep your data, and keep more of each sale.</p>
+					<ul class="bullets">
+						<li>Sell web editions and ebooks directly on ReaderPub.</li>
+						<li>5% sales commission, far below Amazon's take.</li>
+						<li>See sales and reader engagement analytics in one place.</li>
+						<li>Receive context-rich reader notes attached to exact passages - not generic comments.</li>
+					</ul>
 				</div>
-				<div class="card icon-grid-card author-benefit-card">
-					<SectionIcon type="author" title="Author benefits" />
-					<div class="icon-grid-card-copy">
+				<div class="card author-benefit-card">
+					<div class="author-benefit-heading">
+						<SectionIcon type="author" title="Author benefits" />
 						<h2>Author benefits</h2>
-						<p class="author-benefit-lede">Everything you need to publish, manage, and grow your work.</p>
-						<ul class="bullets">
-							<li>Organize sources, annotations, and drafts in one place.</li>
-							<li>Publish to a public audience or private collaborators.</li>
-							<li>Build authority with transparent references and updates.</li>
-							<li>Keep work structured across projects and editions.</li>
-						</ul>
 					</div>
+					<p class="author-benefit-lede">Everything you need to publish, manage, and grow your work.</p>
+					<ul class="bullets">
+						<li>Organize sources, annotations, and drafts in one place.</li>
+						<li>Publish to a public audience or private collaborators.</li>
+						<li>Build authority with transparent references and updates.</li>
+						<li>Keep work structured across projects and editions.</li>
+					</ul>
 				</div>
-				<div class="card icon-grid-card author-benefit-card">
-					<SectionIcon type="research" title="Make your research legible" />
-					<div class="icon-grid-card-copy">
+				<div class="card author-benefit-card">
+					<div class="author-benefit-heading">
+						<SectionIcon type="research" title="Make your research legible" />
 						<h2>Make your research legible</h2>
-						<p class="author-benefit-lede">Show readers where ideas come from and where they lead.</p>
-						<ul class="bullets">
-							<li>Show sources, references, and context alongside your texts.</li>
-							<li>Present evolving ideas transparently, not as static PDFs.</li>
-							<li>Invite readers, collaborators, and institutions into your work.</li>
-							<li>Turn research and writing into a readable public record.</li>
-						</ul>
 					</div>
+					<p class="author-benefit-lede">Show readers where ideas come from and where they lead.</p>
+					<ul class="bullets">
+						<li>Show sources, references, and context alongside your texts.</li>
+						<li>Present evolving ideas transparently, not as static PDFs.</li>
+						<li>Invite readers, collaborators, and institutions into your work.</li>
+						<li>Turn research and writing into a readable public record.</li>
+					</ul>
+				</div>
+				<div class="card author-benefit-card author-benefit-card--scribe">
+					<div class="author-benefit-heading">
+						<SectionIcon type="program" title="Writing and publishing companion" />
+						<h2>Writing and publishing companion</h2>
+					</div>
+					<p class="author-benefit-lede">Scribe gives authors a focused AI companion for developing ideas, shaping drafts, comparing publishing options, planning launches, and clarifying ReaderPub workflows across writing, editing, and long-term audience work.</p>
 				</div>
 			</div>
 		</div>
@@ -302,7 +309,7 @@ const pageActions = [startPublishingAction, pricingAction];
 	}
 
 	:global(.readerpub-model-card.readerpub-model-card) {
-		background: linear-gradient(135deg, #eef6f5 0%, #eef6f5 18%, var(--card-bg) 100%) !important;
+		background: linear-gradient(135deg, #eaf9f5 0%, #eaf9f5 18%, var(--card-bg) 100%) !important;
 	}
 
 	:global(.readerpub-model-card h3 span) {
@@ -356,20 +363,32 @@ const pageActions = [startPublishingAction, pricingAction];
 
 	.authors-living-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-auto-rows: auto;
 	}
 
 	.authors-living-grid .author-benefit-card {
-		align-items: flex-start;
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
 		width: 100%;
+		height: 100%;
 		min-height: 0;
 		padding: 24px;
 	}
 
-	.authors-living-grid .author-benefit-card h2 {
-		grid-column: 2;
-		grid-row: 1;
-		display: flex;
+	.authors-living-grid .author-benefit-heading {
+		display: grid;
+		grid-template-columns: var(--card-inline-icon-size) minmax(0, 1fr);
+		column-gap: var(--card-icon-gap);
 		align-items: center;
+	}
+
+	.authors-living-grid .author-benefit-heading :global(.section-icon) {
+		width: var(--card-inline-icon-size) !important;
+		height: var(--card-inline-icon-size) !important;
+	}
+
+	.authors-living-grid .author-benefit-card h2 {
 		min-height: var(--card-inline-icon-size);
 		margin: 0;
 		color: var(--text);
@@ -377,9 +396,18 @@ const pageActions = [startPublishingAction, pricingAction];
 		line-height: var(--card-heading-line-height);
 	}
 
-	:global(.authors-living-grid .author-benefit-card .icon-grid-card-copy > :not(h2)) {
+	.authors-living-grid .author-benefit-card :is(.author-benefit-lede, .author-benefit-note, .bullets) {
+		margin: 0;
+	}
+
+	.authors-living-grid .author-benefit-card--scribe {
 		grid-column: 1 / -1;
-		grid-row: auto !important;
+		justify-self: center;
+		width: calc((100% - 18px) / 2);
+	}
+
+	.authors-living-grid .author-benefit-card--scribe .author-benefit-lede {
+		color: var(--text) !important;
 	}
 
 	:global(.authors-final-cta h2) {
@@ -579,6 +607,12 @@ const pageActions = [startPublishingAction, pricingAction];
 			max-width: 100%;
 		}
 
+		.authors-living-grid .author-benefit-card--scribe {
+			grid-column: auto;
+			justify-self: stretch;
+			width: 100%;
+		}
+
 		.authors-living-copy > h2 {
 			justify-self: center;
 			margin-right: auto;
@@ -618,4 +652,5 @@ const pageActions = [startPublishingAction, pricingAction];
 			padding: 28px 24px;
 		}
 	}
+
 </style>

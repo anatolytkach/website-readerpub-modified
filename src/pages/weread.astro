@@ -148,7 +148,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 				</p>
 			</article>
 		</div>
-		<CardGrid columns="3" class="weread-feature-cards">
+		<CardGrid columns="2" class="weread-feature-cards">
 			<article class="card">
 				<h3><span class="weread-card-product">WeRead:</span><br />Reader benefits</h3>
 				<p>A personal reading space built for discovery and continuity.</p>
@@ -193,6 +193,19 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
 				</div>
 			</article>
+			<article class="card">
+				<h3><span class="weread-card-product">Scribe:</span><br />Ask while you read</h3>
+				<p>A focused AI companion for books, authors, references, and literary context.</p>
+				<ul class="weread-source-bullets">
+					<li>Ask questions about unfamiliar references and ideas.</li>
+					<li>Explore authors, genres, literary history, and themes.</li>
+					<li>Discuss difficult passages without leaving ReaderPub.</li>
+					<li>Continue Scribe conversations connected to your reading activity.</li>
+				</ul>
+				<div class="cta-row">
+					<a class="button button--secondary" href="/scribe">Explore Scribe</a>
+				</div>
+			</article>
 		</CardGrid>
 	</Section>
 
@@ -208,10 +221,15 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 			<span class="weread-network-black-copy">The WeRead catalog includes tens of thousands of books with annotations and author biographies, helping readers understand what a book is about before they begin reading.</span>
 			<span>Notes, comments, recommendations and discussions become part of the reading environment instead of disappearing into separate products.</span>
 		</Fragment>
-		<CardGrid columns="3">
+		<CardGrid columns="4">
 			<Card title="Books connect to readers" body="Reading activity can point people toward communities and conversations about the work." />
 			<Card title="Readers connect to books" body="Discovery can come through people and communities, not only store rankings." />
 			<Card title="Books connect to future work" body="A title can remain active on the web after the first sale or download." />
+			<Card
+				title="Ask while you read"
+				body="Readers can ask Scribe questions about books, authors, literary references and historical context without leaving the ReaderPub environment."
+				href="/scribe"
+			/>
 		</CardGrid>
 		<div class="weread-combined-subsection">
 			<header class="section-header">
@@ -530,6 +548,10 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		--card-tint: #fbfaf8;
 		gap: 14px;
 		min-height: 0;
+	}
+
+	:global(.weread-feature-cards.card-grid) {
+		grid-auto-rows: auto;
 	}
 
 	:global(.weread-feature-cards .card h3) {

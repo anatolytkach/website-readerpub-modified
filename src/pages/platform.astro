@@ -109,7 +109,7 @@ const benefitCards = [
 		</section>
 
 		<section id="platform-model" class="section section--green spec-cards-section platform-source-section platform-products-section section-continuation">
-			<h2 class="platform-products-heading">Five products. One connected platform.</h2>
+			<h2 class="platform-products-heading">Six products. One connected platform.</h2>
 			<p class="lede platform-products-lede">ReaderPub combines publishing, reading, discovery, and discussion into a single ecosystem.</p>
 			<div class="card-grid platform-three-grid platform-products-grid">
 				<div class="card">
@@ -139,17 +139,6 @@ const benefitCards = [
 					<a class="button" href={BOOKS_URL} target="_blank" rel="noreferrer">60K+ books in Catalog</a>
 				</div>
 				<div class="card">
-					<h3>BookTree</h3>
-					<p>Structure for books, editions, metadata, catalogs, and collections.</p>
-					<ul class="bullets">
-						<li>Organize books, excerpts, and references across projects</li>
-						<li>Keep context while reading long and complex materials</li>
-						<li>Build personal knowledge maps from what you read</li>
-						<li>Consolidate your notes from multiple books while working on your own manuscript</li>
-					</ul>
-					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
-				</div>
-				<div class="card">
 					<h3>WeBuzz</h3>
 					<p>Discuss books, authors, and passages with readers around the world. Build literature communities, connect directly with authors and publishers, and turn reading into a shared experience.</p>
 					<ul class="bullets">
@@ -172,6 +161,28 @@ const benefitCards = [
 						<li>Institutional permissions</li>
 					</ul>
 					<a class="button button--secondary" href="/wetalk">Explore WeTalk</a>
+				</div>
+				<div class="card">
+					<h3>BookTree</h3>
+					<p>Structure for books, editions, metadata, catalogs, and collections.</p>
+					<ul class="bullets">
+						<li>Organize books, excerpts, and references across projects</li>
+						<li>Keep context while reading long and complex materials</li>
+						<li>Build personal knowledge maps from what you read</li>
+						<li>Consolidate your notes from multiple books while working on your own manuscript</li>
+					</ul>
+					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
+				</div>
+				<div class="card">
+					<h3>Scribe</h3>
+					<p>A conversational AI layer for books, literature, writing, publishing and ReaderPub platform guidance.</p>
+					<ul class="bullets">
+						<li>Ask focused questions about literature, books and authors</li>
+						<li>Discuss writing, editing and publishing workflows</li>
+						<li>Use platform guidance without leaving ReaderPub</li>
+						<li>Continue saved WeBuzz conversations from My Activity</li>
+					</ul>
+					<a class="button button--secondary" href="/scribe">Explore Scribe</a>
 				</div>
 			</div>
 		</section>
@@ -200,6 +211,7 @@ const benefitCards = [
 					<li>WeRead</li>
 					<li>BookTree</li>
 					<li>WeBuzz / WeTalk</li>
+					<li>Scribe</li>
 				</ol>
 				<p class="platform-flow-note">
 					Instead of moving readers and content between disconnected systems, ReaderPub keeps these activities within one publishing environment.
@@ -518,10 +530,7 @@ const benefitCards = [
 
 	.platform-source-section.platform-products-section .platform-products-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.platform-source-section.platform-products-section .platform-products-grid > .card:nth-child(3) {
-		grid-column: 1 / -1;
+		grid-auto-rows: auto;
 	}
 
 	.platform-source-section.platform-products-section .card {
@@ -535,6 +544,8 @@ const benefitCards = [
 
 	.platform-source-section .platform-onboarding-grid .platform-onboarding-card {
 		align-items: stretch;
+		--card-tint: #fcfaf8;
+		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%) !important;
 		text-align: left;
 	}
 
@@ -571,7 +582,7 @@ const benefitCards = [
 	}
 
 	:global(.platform-flow-section .platform-onboarding-grid) {
-		margin-top: var(--section-padding) !important;
+		margin-top: var(--section-flow-gap) !important;
 	}
 
 	.platform-source-section.platform-audiences-section {
@@ -976,7 +987,7 @@ const benefitCards = [
 
 	.platform-flow {
 		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(6, minmax(0, 1fr));
 		gap: 34px;
 		width: 100%;
 		list-style: none;
@@ -985,6 +996,7 @@ const benefitCards = [
 
 	.platform-flow li {
 		position: relative;
+		grid-column: span 2;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -996,6 +1008,14 @@ const benefitCards = [
 		color: var(--text);
 		font-weight: 700;
 		text-align: center;
+	}
+
+	.platform-flow li:nth-child(4) {
+		grid-column: 2 / span 2;
+	}
+
+	.platform-flow li:nth-child(5) {
+		grid-column: 4 / span 2;
 	}
 
 	.platform-flow li:not(:last-child)::after {
@@ -1108,12 +1128,19 @@ const benefitCards = [
 			grid-template-columns: 1fr;
 		}
 
+		.platform-flow li,
+		.platform-flow li:nth-child(4),
+		.platform-flow li:nth-child(5) {
+			grid-column: auto;
+		}
+
 		.platform-flow {
 			gap: 16px;
 		}
 
 		.platform-flow li:not(:last-child)::after {
 			content: "\2193";
+			display: block;
 			top: auto;
 			right: auto;
 			bottom: -18px;

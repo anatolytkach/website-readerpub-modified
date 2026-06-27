@@ -358,6 +358,17 @@ const ctaActions = [
 				</div>
 				<a class="button button--secondary" href="/security#control-who-reads">Read about our protection model</a>
 			</div>
+			<div class="card institutions-access-card">
+				<div class="institutions-access-card-heading">
+					<SectionIcon type="program" title="Institutional knowledge assistant" />
+					<h3>Institutional knowledge assistant</h3>
+				</div>
+				<div class="institutions-access-card-body">
+					<p>Organizations can offer Scribe, a specialized AI companion for controlled-access publications, collections and educational materials.</p>
+					<p class="institutions-scribe-note">Scribe helps readers ask focused questions across approved materials while keeping the conversation tied to the institution's collection, course context, and access rules. It keeps exploration inside ReaderPub.</p>
+				</div>
+				<a class="button button--secondary" href="/scribe">Explore Scribe</a>
+			</div>
 		</div>
 	</section>
 
@@ -578,12 +589,12 @@ const ctaActions = [
 	}
 
 	.institutions-solution-section .card {
-		--card-tint: #eef6f5;
+		--card-tint: #eaf9f5;
 		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
 	}
 
 	.institutions-expanded-section .institutions-green-gradient-card {
-		--card-tint: #eef6f5;
+		--card-tint: #eaf9f5;
 		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
 	}
 
@@ -658,6 +669,7 @@ const ctaActions = [
 	.institutions-expanded-access-grid {
 		--section-green-circle-center: 50% 50%;
 		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+		grid-auto-rows: auto;
 		gap: 24px;
 		padding: var(--section-padding);
 		border-radius: var(--radius-card);
@@ -672,10 +684,7 @@ const ctaActions = [
 
 	.institutions-expanded-access-grid > .institutions-access-card {
 		grid-column: span 2;
-	}
-
-	.institutions-expanded-access-grid > .institutions-access-card:nth-child(3) {
-		grid-column: 1 / -1;
+		padding: 28px;
 	}
 
 	.institutions-expanded-section .icon-grid-card {
@@ -761,6 +770,10 @@ const ctaActions = [
 	}
 
 	.institutions-leakage-note {
+		color: var(--text) !important;
+	}
+
+	.institutions-scribe-note {
 		color: var(--text) !important;
 	}
 
@@ -966,8 +979,7 @@ const ctaActions = [
 			grid-template-columns: 1fr !important;
 		}
 
-		.institutions-expanded-access-grid > .institutions-access-card,
-		.institutions-expanded-access-grid > .institutions-access-card:nth-child(3) {
+		.institutions-expanded-access-grid > .institutions-access-card {
 			grid-column: auto;
 		}
 	}
