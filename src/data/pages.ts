@@ -32,6 +32,9 @@ export interface PageAction {
 	variant?: ActionVariant;
 	external?: boolean;
 	modalTarget?: string;
+	class?: string;
+	iconSrc?: string;
+	iconAlt?: string;
 }
 
 export interface PageCard {
@@ -582,6 +585,14 @@ export const pages = {
 		imageAlt: "ReaderPub knowledge base",
 		actions: [
 			{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" },
+			{
+				label: "Ask Scribe",
+				href: "/scribe",
+				variant: "secondary",
+				class: "button--scribe-demo",
+				iconSrc: "/images/scribe.svg",
+				iconAlt: "",
+			},
 			{ label: "Request ReaderPub Pilot", href: "/contact", variant: "secondary" },
 		],
 		sections: [
@@ -605,7 +616,17 @@ export const pages = {
 		cta: {
 			title: "Need a direct answer?",
 			body: "If you haven't found a suitable answer here, ask our team.",
-			actions: [{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" }],
+			actions: [
+				{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" },
+				{
+					label: "Ask Scribe",
+					href: "/scribe",
+					variant: "secondary",
+					class: "button--scribe-demo",
+					iconSrc: "/images/scribe.svg",
+					iconAlt: "",
+				},
+			],
 		},
 	},
 } satisfies Record<string, PageBlueprint>;

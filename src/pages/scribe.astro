@@ -7,7 +7,19 @@ import Section from "../components/sections/Section.astro";
 import Base from "../layouts/Base.astro";
 
 const primaryActions = [
-	{ label: "Try Scribe", href: "/contact/" },
+	{
+		label: "Try Scribe demo",
+		href: "/contact/",
+		variant: "secondary" as const,
+		class: "button--scribe-demo",
+		iconSrc: "/images/scribe.svg",
+		iconAlt: "",
+	},
+	{ label: "Explore ReaderPub", href: "/platform/" },
+];
+
+const ctaActions = [
+	primaryActions[0],
 	{ label: "Explore ReaderPub", href: "/platform/", variant: "secondary" as const },
 ];
 ---
@@ -90,7 +102,7 @@ const primaryActions = [
 	<CtaBlock
 		title="Knowledge is more useful when you can have a conversation with it."
 		body="Scribe helps readers, authors, publishers and institutions explore literature, writing and publishing through focused AI-powered conversation."
-		actions={primaryActions}
+		actions={ctaActions}
 	/>
 </Base>
 
@@ -134,6 +146,32 @@ const primaryActions = [
 
 	:global(.scribe-centered-card-grid.card-grid--3 > .card:nth-child(5)) {
 		grid-column: 4 / span 2;
+	}
+
+	:global(.button.button--scribe-demo),
+	:global(.button.button--scribe-demo:visited),
+	:global(.section--dark .button.button--scribe-demo),
+	:global(.section--dark .button.button--scribe-demo:visited) {
+		gap: 13px;
+		background: linear-gradient(315deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		color: var(--accent);
+		border-color: var(--accent);
+	}
+
+	:global(.button.button--scribe-demo:hover),
+	:global(.section--dark .button.button--scribe-demo:hover) {
+		background: linear-gradient(315deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		color: var(--accent);
+	}
+
+	:global(.button.button--scribe-demo .button-icon) {
+		display: block;
+		flex: 0 0 auto;
+		width: 18px;
+		height: 18px;
+		object-fit: contain;
+		transform: scale(1.35);
+		transform-origin: center;
 	}
 
 	@media (max-width: 900px) {

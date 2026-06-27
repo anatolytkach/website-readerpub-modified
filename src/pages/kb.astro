@@ -458,6 +458,29 @@ const faqCategories = [
 		margin-top: 0;
 	}
 
+	:global(.button.button--scribe-demo),
+	:global(.button.button--scribe-demo:visited) {
+		gap: 13px;
+		background: linear-gradient(315deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		color: var(--accent);
+		border-color: var(--accent);
+	}
+
+	:global(.button.button--scribe-demo:hover) {
+		background: linear-gradient(315deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		color: var(--accent);
+	}
+
+	:global(.button.button--scribe-demo .button-icon) {
+		display: block;
+		flex: 0 0 auto;
+		width: 18px;
+		height: 18px;
+		object-fit: contain;
+		transform: scale(1.35);
+		transform-origin: center;
+	}
+
 	@media (orientation: portrait) {
 		.kb-faq-grid {
 			grid-template-columns: 1fr;
