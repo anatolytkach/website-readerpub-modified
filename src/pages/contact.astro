@@ -12,14 +12,17 @@ const page = pages.contact;
 
 <Base title={page.metaTitle} description={page.description}>
 	<HeroSection
-		title={page.heroTitle}
+		class="contact-hero"
 		lead={page.heroLead}
 		body={page.heroBody}
 		image={page.image}
 		imageAlt={page.imageAlt}
 		actions={page.actions}
 		spacerBackgroundPositionY={page.heroSpacerBackgroundPositionY}
-	/>
+	>
+		<Fragment slot="title">Tell us what you’re publishing.</Fragment>
+		<p slot="tagline" class="contact-hero-solution">We’ll make it as easy as breathing.</p>
+	</HeroSection>
 
 	<section class="section section--green contact-tips-section" aria-labelledby="contact-tips-heading">
 		<h2 id="contact-tips-heading">Useful tips:</h2>
@@ -348,8 +351,34 @@ const page = pages.contact;
 </script>
 
 <style>
+	.contact-hero-solution {
+		margin: 0;
+		max-width: 720px;
+		color: var(--accent) !important;
+		font-family: var(--font-display) !important;
+		font-size: clamp(22.1px, 2.72vw, 32.3px) !important;
+		font-weight: 700 !important;
+		line-height: 1.12 !important;
+	}
+
+	:global(.contact-hero .hero-copy) {
+		gap: 16px;
+	}
+
 	.contact-tips-section {
 		gap: 30px;
+	}
+
+	@media (orientation: portrait) {
+		.contact-hero-solution {
+			order: 3;
+			justify-self: center;
+			text-align: center;
+		}
+
+		:global(.contact-hero > .hero-media) {
+			order: 4;
+		}
 	}
 
 	.contact-tips-section h2 {

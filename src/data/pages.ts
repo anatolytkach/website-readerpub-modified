@@ -554,7 +554,7 @@ export const pages = {
 		metaTitle: `${SITE_NAME} Contact`,
 		description: "Contact ReaderPub about web-native publishing for authors, publishers and institutions.",
 		eyebrow: "Get started",
-		heroTitle: "Tell us what you want to publish.",
+		heroTitle: "Tell us what you’re publishing.",
 		heroLead:
 			"ReaderPub supports books, catalogs, institutional collections and community publishing programs.",
 		heroBody:
