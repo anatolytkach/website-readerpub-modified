@@ -35,24 +35,24 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		<div class="contact-tips-grid">
 			<article class="card contact-tip-card">
 				<header class="contact-tip-heading">
-					<SectionIcon type="author" title="Independent authors and small publishers icon" />
-					<h3>Independent authors &amp; small publishers</h3>
+					<SectionIcon type="author" title="Authors and small publishers icon" />
+					<h3>Authors &amp; small publishers</h3>
 				</header>
+
+				<p class="contact-tip-note">
+					If your manuscript is ready in Word or EPUB format, you don't even need to contact us—simply publish
+					your book right now:
+				</p>
 
 				<ul class="contact-tip-list">
 					<li>Upload one or multiple files (Word or EPUB).</li>
 					<li>WePub engine produces web publishing + optional EPUB output.</li>
-					<li>Enable Buy, analytics, and fan clubs.</li>
+					<li>Set price and connect analytics.</li>
 					<li>See sales and billing reports.</li>
 					<li>Monitor social activity related to your listings.</li>
 					<li>Communicate with your fans and followers.</li>
 					<li>Plan events and presentations.</li>
 				</ul>
-
-				<p class="contact-tip-note">
-					If you already have a finished Word manuscript or EPUB file, you may not even need to contact us in
-					advance; just publish your book right now:
-				</p>
 
 				<div class="cta-row contact-tip-actions">
 					<a class="button" href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Submit your book</a>
@@ -455,7 +455,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 
 	.contact-tip-note {
 		margin: 0;
-		color: var(--text);
+		color: var(--accent);
 		font-size: 1rem;
 		line-height: 1.45;
 	}
