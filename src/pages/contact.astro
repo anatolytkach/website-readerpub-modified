@@ -8,13 +8,14 @@ import { PUBLISH_URL } from "../consts";
 import { pages } from "../data/pages";
 
 const page = pages.contact;
+const contactHeroBodySecondLine = "Ask our team for additional info or simply request a live Pilot.";
+const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecondLine}`, "");
 ---
 
 <Base title={page.metaTitle} description={page.description}>
 	<HeroSection
 		class="contact-hero"
 		lead={page.heroLead}
-		body={page.heroBody}
 		image={page.image}
 		imageAlt={page.imageAlt}
 		actions={page.actions}
@@ -22,6 +23,10 @@ const page = pages.contact;
 	>
 		<Fragment slot="title">Tell us what you’re publishing.</Fragment>
 		<p slot="tagline" class="contact-hero-solution">We’ll make it as easy as breathing.</p>
+		<Fragment slot="body">
+			{contactHeroBodyFirstLine}<br />
+			{contactHeroBodySecondLine}
+		</Fragment>
 	</HeroSection>
 
 	<section class="section section--green contact-tips-section" aria-labelledby="contact-tips-heading">
@@ -363,6 +368,10 @@ const page = pages.contact;
 
 	:global(.contact-hero .hero-copy) {
 		gap: 16px;
+	}
+
+	:global(.contact-hero .hero-body) {
+		font-size: var(--hero-problem-copy-size);
 	}
 
 	.contact-tips-section {

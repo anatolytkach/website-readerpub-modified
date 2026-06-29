@@ -558,13 +558,13 @@ export const pages = {
 		heroLead:
 			"ReaderPub supports books, catalogs, institutional collections and community publishing programs.",
 		heroBody:
-			"The publishing process, as well as our approach to reading, distributing, discussing, and selling books is detailed in our knowledge base.",
+			"Our knowledge base outlines the ReaderPub's way of reading, distributing, discussing, and selling books. Ask our team for additional info or simply request a live Pilot.",
 		heroSpacerBackgroundPositionY: "90%",
 		image: "/images/contact.webp",
 		imageAlt: "ReaderPub onboarding",
 		actions: [
 			{ label: "Knowledge base", href: "/kb", variant: "secondary" },
-			{ label: "See pricing", href: "/pricing", variant: "secondary" },
+			{ label: "Ask us a question", href: "#kb-help-modal", variant: "secondary", modalTarget: "#kb-help-modal" },
 			{ label: "Request live Pilot", href: "#request-onboarding-modal", modalTarget: "#request-onboarding-modal" },
 		],
 		sections: [],
