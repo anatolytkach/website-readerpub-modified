@@ -36,11 +36,14 @@ const revealExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .modal-con
 const cardExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .hero-section, .network-hero, .cta-block, form, .modal-content";
 const cardRevealDuration = 1240;
 const cardRevealDelay = 360;
+const cardRevealThreshold = 0.65;
+const cardRowTopTolerance = 8;
 
 const revealedElements = new WeakSet();
-const revealedCardGroups = new WeakSet();
+const revealedCards = new WeakSet();
 let revealObserver;
 let cardRevealObserver;
+let cardRevealRowsByTarget = new WeakMap();
 let cardRevealTimers = [];
 let heroRevealTimers = [];
 let isClientNavigation = animationPassState.isClientNavigation;
@@ -151,16 +154,69 @@ const getCardRevealGroups = () => {
 	return [...groups].filter((group) => group instanceof HTMLElement && getAnimationCards(group).length > 0);
 };
 
-const revealCardGroup = (group) => {
-	const cards = getAnimationCards(group);
+const getCardRevealRows = () => {
+	const rows = [];
 
-	if (cards.length < 1) {
+	for (const group of getCardRevealGroups()) {
+		const groupRows = [];
+		const cards = getAnimationCards(group);
+
+		for (const card of cards) {
+			const rect = card.getBoundingClientRect();
+
+			if (rect.width <= 0 || rect.height <= 0) {
+				continue;
+			}
+
+			const rowTop = Math.round(rect.top);
+			let row = groupRows.find(({ top }) => Math.abs(top - rowTop) <= cardRowTopTolerance);
+
+			if (!row) {
+				row = { top: rowTop, cards: [] };
+				groupRows.push(row);
+			}
+
+			row.top = Math.min(row.top, rowTop);
+			row.cards.push(card);
+		}
+
+		rows.push(
+			...groupRows
+				.sort((a, b) => a.top - b.top)
+				.map((row) => ({
+					cards: row.cards.sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left),
+				})),
+		);
+	}
+
+	return rows;
+};
+
+const getCardRowTarget = (cards) => {
+	return cards.reduce((target, card) => {
+		const targetRect = target.getBoundingClientRect();
+		const cardRect = card.getBoundingClientRect();
+
+		return cardRect.height > targetRect.height ? card : target;
+	}, cards[0]);
+};
+
+const revealCardRow = (cards) => {
+	const visibleCards = cards.filter((card) => card instanceof HTMLElement);
+
+	if (visibleCards.length < 1) {
 		return;
 	}
 
-	revealedCardGroups.add(group);
+	visibleCards.forEach((card, index) => {
+		if (revealedCards.has(card)) {
+			card.classList.add("is-card-revealed");
+			card.classList.add("is-card-reveal-complete");
+			return;
+		}
 
-	cards.forEach((card, index) => {
+		revealedCards.add(card);
+
 		const revealTimer = window.setTimeout(() => {
 			card.classList.add("is-card-revealed");
 
@@ -294,37 +350,50 @@ const setupCardReveal = () => {
 	cardRevealObserver = undefined;
 
 	if (reduceMotionQuery.matches || !supportsIntersectionObserver) {
-		for (const group of getCardRevealGroups()) {
-			revealCardGroup(group);
+		for (const row of getCardRevealRows()) {
+			revealCardRow(row.cards);
 		}
 
 		return;
 	}
 
-	const groups = getCardRevealGroups();
+	const rows = getCardRevealRows();
+	cardRevealRowsByTarget = new WeakMap();
 
 	cardRevealObserver = new IntersectionObserver(
 		(entries) => {
 			for (const entry of entries) {
-				if (entry.isIntersecting) {
+				if (entry.intersectionRatio >= cardRevealThreshold) {
+					const row = cardRevealRowsByTarget.get(entry.target);
+
 					cardRevealObserver?.unobserve(entry.target);
-					revealCardGroup(entry.target);
+
+					if (row) {
+						revealCardRow(row.cards);
+					}
 				}
 			}
 		},
 		{
-			rootMargin: "0px 0px -18% 0px",
-			threshold: 0.35,
+			rootMargin: "0px",
+			threshold: cardRevealThreshold,
 		},
 	);
 
-	for (const group of groups) {
-		if (revealedCardGroups.has(group)) {
-			revealCardGroup(group);
+	for (const row of rows) {
+		const target = getCardRowTarget(row.cards);
+
+		if (!target) {
 			continue;
 		}
 
-		cardRevealObserver.observe(group);
+		if (row.cards.every((card) => revealedCards.has(card))) {
+			revealCardRow(row.cards);
+			continue;
+		}
+
+		cardRevealRowsByTarget.set(target, row);
+		cardRevealObserver.observe(target);
 	}
 };
 
