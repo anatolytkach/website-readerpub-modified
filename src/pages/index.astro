@@ -350,6 +350,22 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	@media (orientation: portrait) {
+		:global(.content .hero-section.home-hero.section--with-media .home-hero-strategy) {
+			order: 7;
+		}
+
+		:global(.content.content .hero-section.home-hero.section--with-media .home-hero-lockin.home-hero-lockin.hero-lead) {
+			order: 8;
+		}
+
+		:global(.content.content .hero-section.home-hero.section--with-media .home-hero-statement.home-hero-statement.hero-body) {
+			order: 6;
+		}
+
+		:global(.content .hero-section.home-hero.section--with-media .cta-row) {
+			order: 9;
+		}
+
 		:global(.home-file-model-section) {
 			padding-bottom: var(--section-padding);
 		}
