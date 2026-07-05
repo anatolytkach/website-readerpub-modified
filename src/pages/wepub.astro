@@ -78,7 +78,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 		<Section tone="white" class="wepub-path-section" title="What changes when you publish on ReaderPub">
 		<div class="wepub-comparison-grid">
-			<article class="card wepub-list-card wepub-old-path-card">
+			<article class="comparison-text-panel wepub-list-card wepub-old-path-card">
 				<div class="card-copy">
 					<h3>Old publishing path</h3>
 					<ul class="wepub-model-list">
@@ -89,7 +89,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 					</ul>
 				</div>
 			</article>
-			<article class="card wepub-list-card wepub-readerpub-path-card">
+			<article class="card card--good wepub-list-card wepub-readerpub-path-card">
 				<div class="card-copy">
 					<h3><span>ReaderPub</span> path</h3>
 					<ul class="wepub-model-list">
@@ -227,7 +227,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 	.wepub-start-lede {
 		color: var(--accent);
 		font-size: 1.125rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.wepub-start-list {
@@ -270,7 +270,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 	}
 
 	.wepub-readerpub-path-card {
-		background: linear-gradient(135deg, #eaf9f5 0%, #eaf9f5 18%, var(--card-bg) 100%);
+		background: var(--surface-green);
 	}
 
 	.wepub-readerpub-path-card h3 span {
@@ -293,7 +293,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 	:global(.wepub-infrastructure-section .card) {
 		--card-tint: #fcfaf8 !important;
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 18%, #ffffff 100%) !important;
+		background: var(--card-bg) !important;
 	}
 
 	.wepub-model-list {
@@ -313,7 +313,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		max-width: 760px;
 		color: var(--accent);
 		font-size: 1.125rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.wepub-source-icon-grid .card.icon-grid-card) {

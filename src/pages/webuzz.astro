@@ -337,7 +337,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	.webuzz-problem-section h2 {
 		max-width: none;
 		font-size: clamp(24px, 3vw, 34px);
-		line-height: 1.12;
+		line-height: var(--line-height-heading);
 	}
 
 	.webuzz-problem-section .webuzz-comparison-grid {
@@ -355,13 +355,13 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		padding: 18px;
 		border: 1px solid var(--border);
 		border-radius: 10px;
-		background: linear-gradient(135deg, var(--card) 0%, var(--card) 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	.webuzz-problem-section .webuzz-comparison-grid .card h3 {
 		padding-right: 54px;
 		font-size: clamp(19px, 1.62vw, 26px);
-		line-height: 1.15;
+		line-height: var(--line-height-heading);
 	}
 
 	.webuzz-problem-section .webuzz-comparison-grid .card p {
@@ -380,7 +380,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		position: absolute;
 		top: 20px;
 		right: 22px;
-		font-family: "Nunito Sans", sans-serif;
+		font-family: var(--font-ui);
 		font-size: 30px;
 		font-weight: 800;
 		line-height: 1;
@@ -460,7 +460,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	.webuzz-legacy-heading,
 	.webuzz-overview-card-heading h2 {
 		font-size: clamp(24px, 3vw, 34px);
-		line-height: 1.12;
+		line-height: var(--line-height-heading);
 	}
 
 	.webuzz-legacy-heading {
@@ -471,7 +471,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	.webuzz-legacy-copy > p {
 		max-width: 760px;
 		font-size: 18px;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.webuzz-legacy-copy > p.lede {
@@ -484,26 +484,26 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	.webuzz-legacy-solution-card {
 		padding: 24px;
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	.webuzz-legacy-solution-card p {
 		margin: 0 !important;
 		color: var(--accent);
 		font-size: 18px;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.webuzz-overview-card {
 		min-height: 130px;
 		padding: 18px;
 		border-radius: 10px;
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	.webuzz-overview-card--green {
 		padding: 24px;
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	.webuzz-overview-card-heading {
@@ -543,7 +543,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		padding: 0;
 		color: var(--muted);
 		font-size: 16px;
-		line-height: 1.25;
+		line-height: var(--line-height-body);
 		list-style: disc;
 	}
 
@@ -551,7 +551,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		margin: var(--section-flow-gap) 0 0 !important;
 		color: var(--accent);
 		font-size: 18px;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.webuzz-legacy-list li::marker {
@@ -560,9 +560,10 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	.webuzz-legacy-list strong {
 		color: var(--link);
-		font-family: "Playfair Display", serif;
+		font-family: var(--font-heading);
 		font-size: 20px;
-		line-height: 1.12;
+		font-weight: var(--font-weight-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	.webuzz-legacy-list span {
@@ -606,7 +607,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	:global(.webuzz-discussion-lifecycle-section .card) {
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	.webuzz-lifecycle-subsection {
@@ -648,12 +649,12 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	:global(.webuzz-authors-section .webuzz-image-cards .card),
 	:global(.webuzz-libraries-section .webuzz-image-cards .card) {
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%) !important;
+		background: var(--card-bg) !important;
 	}
 
 	:global(.webuzz-readers-section .webuzz-image-cards .card),
 	:global(.webuzz-publishers-section .webuzz-image-cards .card) {
-		background: linear-gradient(135deg, #eaf9f5 0%, #eaf9f5 18%, #ffffff 100%) !important;
+		background: var(--surface-green) !important;
 	}
 
 	.webuzz-section-image {

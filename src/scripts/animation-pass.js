@@ -34,6 +34,33 @@ const cardGroupSelector = ".card-grid, .model-grid, .platform-commerce-cards, .w
 const heroMediaSelectors = [".hero-section .hero-media", ".network-hero .institutions-network-media", ".network-hero > .image-block"];
 const revealExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .modal-content";
 const cardExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .hero-section, .network-hero, .cta-block, form, .modal-content";
+const goodCardSelector = [
+	".card--good",
+	".section--green .card",
+	".home-readerpub-model-card",
+	".home-readerpub-publishing-card",
+	".platform-readerpub-model-card",
+	".readerpub-model-card",
+	".pricing-readerpub-model-card",
+	".wepub-readerpub-path-card",
+	".booktree-with-card",
+	".security-readerpub-solution-card",
+	".webuzz-legacy-solution-card",
+	".webuzz-overview-card--green",
+].join(",");
+const badCardSelector = [
+	".section--gray .card",
+	".section[class*='problem'] .card",
+	".card-grid[class*='problem'] .card",
+	"[class*='problem-grid'] .card",
+	".card[class*='old']",
+	".card[class*='traditional']",
+	".card[class*='marketplace']",
+	".card[class*='without']",
+	".card[class*='fragmented']",
+	".card[class*='loss']",
+	".card[class*='fail']",
+].join(",");
 const cardRevealDuration = 1240;
 const cardRevealDelay = 360;
 const cardRevealThreshold = 0.65;
@@ -100,8 +127,16 @@ const shouldRevealElement = (element) => {
 	return !element.closest(revealExcludedAreaSelector);
 };
 
+const isGraySectionCard = (card) => {
+	return card instanceof HTMLElement && Boolean(card.closest(".section--gray"));
+};
+
 const isAnimationCard = (card) => {
 	if (!(card instanceof HTMLElement)) {
+		return false;
+	}
+
+	if (isGraySectionCard(card)) {
 		return false;
 	}
 
@@ -121,11 +156,35 @@ const isAnimationCard = (card) => {
 		return false;
 	}
 
+	if (!card.classList.contains("card--good") && card.matches(badCardSelector)) {
+		return false;
+	}
+
 	return true;
 };
 
 const isRevealOnlyCard = (card) => {
-	return card instanceof HTMLElement && card.matches(".home-problem-grid .card--link");
+	return card instanceof HTMLElement && !isGraySectionCard(card) && !card.matches(badCardSelector) && card.matches(".home-problem-grid .card--link");
+};
+
+const shouldTreatAsGoodCard = (card) => {
+	if (!(card instanceof HTMLElement)) {
+		return false;
+	}
+
+	if (card.matches(goodCardSelector)) {
+		return true;
+	}
+
+	if (card.matches(badCardSelector)) {
+		return false;
+	}
+
+	if (card.matches("a, .card--link, .book-card, .footer-cta")) {
+		return false;
+	}
+
+	return !card.closest(cardExcludedAreaSelector);
 };
 
 const directCardsForGroup = (group) => {
@@ -294,6 +353,10 @@ const markCards = () => {
 	}
 
 	for (const card of document.querySelectorAll(".card")) {
+		if (shouldTreatAsGoodCard(card)) {
+			card.classList.add("card--good");
+		}
+
 		if (isAnimationCard(card)) {
 			card.setAttribute("data-hover-card", "");
 			card.setAttribute("data-card-reveal", "");

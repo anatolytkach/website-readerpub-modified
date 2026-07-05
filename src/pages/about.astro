@@ -101,7 +101,7 @@ const finalActions = [
 	.about-copy-stack p {
 		margin: 0;
 		font-size: 1.125rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.hero-section.about-hero) {
@@ -128,19 +128,23 @@ const finalActions = [
 		gap: 14px;
 		font-family: var(--font-body);
 		font-weight: 400;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.about-hero .hero-body p) {
 		margin: 0;
 		color: var(--text);
 		font-size: var(--hero-problem-copy-size);
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.about-hero .hero-body .about-hero-solution) {
 		color: var(--accent);
+		font-family: var(--font-heading);
 		font-size: var(--hero-solution-copy-size);
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	:global(.about-hero .hero-image) {

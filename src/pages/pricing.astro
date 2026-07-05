@@ -54,7 +54,7 @@ const ctaActions = [
 	<section class="pricing-source-section pricing-source-model-change-section">
 		<h2>The pricing model change that matters</h2>
 		<div class="model-grid">
-			<div class="card pricing-marketplace-model-card">
+			<div class="comparison-text-panel pricing-marketplace-model-card">
 				<h3>Marketplace economics</h3>
 				<ul class="comparison-list">
 					<li>High commission</li>
@@ -63,7 +63,7 @@ const ctaActions = [
 					<li>Relationship ends after purchase</li>
 				</ul>
 			</div>
-			<div class="card pricing-readerpub-model-card">
+			<div class="card card--good pricing-readerpub-model-card">
 				<h3><span class="pricing-readerpub-word">ReaderPub</span> economics</h3>
 				<ul class="comparison-list">
 					<li>5% platform commission for direct sales</li>
@@ -209,10 +209,11 @@ const ctaActions = [
 	:global(.pricing-hero .hero-body) {
 		max-width: 720px;
 		color: var(--accent);
-		font-family: var(--font-display);
+		font-family: var(--font-heading);
 		font-size: clamp(22.1px, 2.72vw, 32.3px);
-		font-weight: 700;
-		line-height: 1.12;
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	.pricing-hero-paths-list {
@@ -222,7 +223,7 @@ const ctaActions = [
 		padding-left: 1.1rem;
 		color: var(--text);
 		font-size: calc(var(--hero-problem-copy-size) * 0.85) !important;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.pricing-hero-paths-list li::marker {
@@ -233,7 +234,7 @@ const ctaActions = [
 		margin: 0;
 		color: var(--muted);
 		font-size: 1.125rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.pricing-problem-emphasis {
@@ -293,7 +294,7 @@ const ctaActions = [
 		max-width: 760px;
 		color: var(--muted);
 		font-size: 1.125rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.pricing-source-section > .lede {
@@ -306,7 +307,7 @@ const ctaActions = [
 		max-width: none !important;
 		color: var(--accent);
 		font-size: min(1.125rem, 2.15vw) !important;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.pricing-author-lede-lines > span {
@@ -323,7 +324,7 @@ const ctaActions = [
 		gap: 9px;
 		padding-left: 1.1rem;
 		color: var(--muted);
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.pricing-source-sections .bullets li::marker {
@@ -343,7 +344,7 @@ const ctaActions = [
 		padding: 0;
 		list-style: none;
 		color: var(--muted);
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.comparison-list li {
@@ -369,7 +370,7 @@ const ctaActions = [
 
 	.pricing-readerpub-model-card {
 		--card-tint: #eaf9f5;
-		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
+		background: var(--card-bg);
 	}
 
 	.pricing-solution-copy p {
@@ -404,11 +405,11 @@ const ctaActions = [
 	}
 
 	.plan-price {
-		font-family: var(--font-display);
+		font-family: var(--font-heading);
 		font-size: clamp(28px, 3vw, 40px) !important;
-		line-height: 1.05 !important;
+		line-height: var(--line-height-heading) !important;
 		color: var(--text) !important;
-		font-weight: 700;
+		font-weight: var(--font-weight-heading);
 	}
 
 	.plan-price span {
@@ -428,7 +429,7 @@ const ctaActions = [
 		gap: 9px;
 		padding-left: 1.1rem;
 		color: var(--muted);
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.pricing-bullets li::marker {

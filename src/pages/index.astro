@@ -70,7 +70,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		body="The old publishing model ends when a file is delivered. ReaderPub helps publications remain alive and connected after delivery."
 		>
 			<div class="home-comparison-grid">
-				<article class="card home-list-card home-old-model-card">
+				<article class="comparison-text-panel home-list-card home-old-model-card">
 					<div class="card-copy">
 						<h3>Old model</h3>
 						<ul class="home-model-list" style="--home-model-marker-color: var(--text);">
@@ -82,7 +82,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 					</ul>
 					</div>
 				</article>
-				<article class="card home-list-card home-readerpub-model-card" style="background: linear-gradient(135deg, #eaf9f5 0%, #eaf9f5 18%, var(--card-bg) 100%);">
+				<article class="card card--good home-list-card home-readerpub-model-card" style="background: var(--surface-green);">
 					<div class="card-copy">
 					<h3><span class="home-title-accent">ReaderPub</span> model</h3>
 					<ul class="home-model-list">
@@ -99,14 +99,14 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	<Section tone="white" class="home-web-asset-section" title="What changes when a book becomes a living web asset?">
 		<div class="home-comparison-grid">
-				<article class="card home-comparison-card" style="background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 18%, var(--card-bg) 100%);">
+				<article class="comparison-text-panel home-comparison-card home-old-publishing-card" style="background: var(--card-bg);">
 				<div class="card-copy">
 					<h3>Traditional publishing</h3>
 					<p class="home-flow home-flow--dark">Publish → Download → Relationship ends</p>
 					<p>The old model delivers a file and loses the reader relationship after access begins.</p>
 				</div>
 			</article>
-			<article class="card home-comparison-card">
+			<article class="card card--good home-comparison-card home-readerpub-publishing-card">
 				<div class="card-copy">
 					<h3><span class="home-title-accent">ReaderPub</span> publishing</h3>
 					<p class="home-flow">
@@ -204,19 +204,21 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	.home-hero-statement {
 		max-width: 720px;
 		color: var(--accent);
-		font-family: var(--font-body);
+		font-family: var(--font-heading);
 		font-size: var(--hero-solution-copy-size);
-		font-weight: 400;
-		line-height: 1.45;
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	.home-hero-strategy {
 		max-width: 720px;
 		color: var(--accent);
-		font-family: var(--font-display);
+		font-family: var(--font-heading);
 		font-size: clamp(22.1px, 2.72vw, 32.3px);
-		font-weight: 700;
-		line-height: 1.12;
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	.home-hero-lockin {
@@ -237,7 +239,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	:global(.home-readerpub-model-card.home-readerpub-model-card) {
-		background: linear-gradient(135deg, #eaf9f5 0%, #eaf9f5 18%, var(--card-bg) 100%) !important;
+		background: var(--surface-green) !important;
 	}
 
 	.home-flow {
@@ -265,19 +267,22 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		border-radius: var(--radius-control);
 		background: var(--button-light-bg);
 		color: var(--accent);
-		line-height: 1.1;
+		line-height: var(--line-height-heading);
 		text-decoration: none;
 		cursor: pointer;
-		transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+		transition:
+			border-color var(--motion-deliberate) ease,
+			background var(--motion-deliberate) ease,
+			color var(--motion-deliberate) ease;
 	}
 
 	:global(.home-product-grid .home-product-link:hover),
 	:global(.home-product-grid .home-product-link:focus-visible) {
-		transform: translateY(-2px);
-		border-color: var(--accent);
-		box-shadow: 0 10px 22px rgba(2, 143, 128, 0.18);
-		background: var(--button-light-bg);
-		color: var(--accent);
+		transform: none;
+		border-color: var(--text);
+		box-shadow: none;
+		background: var(--text);
+		color: #ffffff;
 	}
 
 	:global(.home-product-grid .home-product-title-line) {
@@ -301,8 +306,9 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	:global(.home-problem-grid .card--link:hover),
 	:global(.home-problem-grid .card--link:focus-visible) {
-		border-color: var(--accent);
-		box-shadow: 0 18px 40px rgba(20, 23, 31, 0.12);
+		transform: none;
+		border-color: #000000;
+		box-shadow: none;
 	}
 
 	:global(.home-problem-grid .card--link > .card-icon-heading) {

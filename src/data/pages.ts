@@ -1,7 +1,8 @@
 import { BOOKS_URL, HERO_TAGLINE, PUBLISH_URL, SITE_NAME } from "../consts";
 
 export type SectionTone = "white" | "gray" | "green" | "dark";
-export type ActionVariant = "primary" | "secondary";
+export type ActionVariant = "primary" | "secondary" | "tertiary";
+export type CardVariant = "default" | "accent" | "compact" | "metric";
 
 export type IconName =
 	| "publisher"
@@ -42,6 +43,7 @@ export interface PageCard {
 	body: string;
 	icon?: IconName;
 	href?: string;
+	variant?: CardVariant;
 }
 
 export interface PageSection {

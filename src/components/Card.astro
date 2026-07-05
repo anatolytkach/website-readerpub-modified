@@ -6,12 +6,13 @@ interface Props extends PageCard {
 	class?: string;
 }
 
-const { title, body, icon, href, class: className = "" } = Astro.props;
+const { title, body, icon, href, variant = "default", class: className = "" } = Astro.props;
+const classes = ["card", `card--${variant}`, icon && "card--with-icon", className];
 ---
 
 {
 	href ? (
-		<a class:list={["card", "card--link", icon && "card--with-icon", className]} href={href}>
+		<a class:list={[...classes, "card--link"]} href={href}>
 			{icon ? (
 				<>
 					<div class="card-icon-heading">
@@ -28,7 +29,7 @@ const { title, body, icon, href, class: className = "" } = Astro.props;
 			)}
 		</a>
 	) : (
-		<article class:list={["card", icon && "card--with-icon", className]}>
+		<article class:list={classes}>
 			{icon ? (
 				<>
 					<div class="card-icon-heading">

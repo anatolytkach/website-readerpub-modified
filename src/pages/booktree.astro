@@ -57,7 +57,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 			The focus shifts from storing information to preserving context.
 		</Fragment>
 		<div class="booktree-source-model-grid">
-			<article class="card booktree-source-model-card booktree-without-card">
+			<article class="comparison-text-panel booktree-source-model-card booktree-without-card">
 				<div class="card-copy">
 					<h3>Without BookTree</h3>
 					<ul class="booktree-source-list">
@@ -68,7 +68,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 					</ul>
 				</div>
 			</article>
-			<article class="card booktree-source-model-card booktree-with-card">
+			<article class="card card--good booktree-source-model-card booktree-with-card">
 				<div class="card-copy">
 					<h3>With <span>BookTree</span></h3>
 					<ul class="booktree-source-list">
@@ -190,7 +190,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	}
 
 	.booktree-without-card {
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	.booktree-with-card h3 span {
@@ -210,7 +210,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		padding-left: 18px;
 		color: var(--muted);
 		font-size: 16px;
-		line-height: 1.3;
+		line-height: var(--line-height-body);
 	}
 
 	.booktree-source-list li::before {
@@ -238,7 +238,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		min-height: 0;
 		padding: 24px;
 		border-radius: 10px;
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	.flow-chain {
@@ -257,7 +257,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		gap: 8px;
 		color: var(--text);
 		font-size: 15.3px;
-		line-height: 1.25;
+		line-height: var(--line-height-body);
 	}
 
 	.flow-chain li:not(:last-child)::after {
@@ -280,7 +280,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	}
 
 	:global(.booktree-benefits-section .booktree-use-grid .card) {
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	:global(.card-grid.booktree-relationship-grid) {

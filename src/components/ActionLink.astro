@@ -16,7 +16,12 @@ const {
 	iconAlt = "",
 } = Astro.props;
 
-const classes = ["button", variant === "secondary" && "button--secondary", className];
+const classes = [
+	"button",
+	variant === "secondary" && "button--secondary",
+	variant === "tertiary" && "button--tertiary",
+	className,
+];
 ---
 
 {

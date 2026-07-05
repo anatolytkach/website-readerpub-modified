@@ -469,7 +469,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		gap: 14px;
 		color: var(--text);
 		font-size: 1.125rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.terms-hero .hero-body p) {
@@ -533,10 +533,10 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.legal-block h4 {
 		color: var(--accent);
-		font-family: var(--font-body);
+		font-family: var(--font-heading);
 		font-size: 1.125rem;
-		font-weight: 700;
-		line-height: 1.25;
+		font-weight: var(--font-weight-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	.legal-block p,
@@ -545,7 +545,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		max-width: none;
 		color: var(--text);
 		font-size: 1rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.legal-block ul {

@@ -292,7 +292,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 
 	.weread-source-hero h1 {
 		font-size: clamp(36px, 5vw, 56px);
-		line-height: 1.1;
+		line-height: var(--line-height-heading);
 	}
 
 	.weread-source-hero .readers-hero-product {
@@ -308,16 +308,17 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		max-width: 760px;
 		color: var(--text) !important;
 		font-size: 19.5px !important;
-		line-height: 1.45 !important;
+		line-height: var(--line-height-body) !important;
 	}
 
 	:global(.weread-source-hero .hero-body) {
 		max-width: 720px;
 		color: var(--accent) !important;
-		font-family: var(--font-display) !important;
+		font-family: var(--font-heading) !important;
 		font-size: clamp(22.1px, 2.72vw, 32.3px) !important;
-		font-weight: 700 !important;
-		line-height: 1.12 !important;
+		font-weight: var(--font-weight-heading) !important;
+		letter-spacing: var(--letter-spacing-heading) !important;
+		line-height: var(--line-height-heading) !important;
 	}
 
 	.weread-source-hero .hero-image {
@@ -393,7 +394,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		--weread-ad-card-icon-size: calc(var(--weread-ad-card-heading-size) * 1.7);
 		align-self: start;
 		gap: 18px;
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	.weread-ad-free-card-heading {
@@ -411,14 +412,14 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	.weread-ad-free-card-heading h3 {
 		margin: 0 !important;
 		font-size: var(--weread-ad-card-heading-size);
-		line-height: 1.1;
+		line-height: var(--line-height-heading);
 	}
 
 	.weread-ad-free-card p {
 		margin: 0 !important;
 		color: var(--accent);
 		font-size: var(--hero-problem-copy-size);
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.weread-combined-subsection {
@@ -556,7 +557,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 
 	:global(.weread-feature-cards .card h3) {
 		font-size: clamp(1.35rem, 2vw, 1.75rem);
-		line-height: 1.12;
+		line-height: var(--line-height-heading);
 	}
 
 	:global(.weread-feature-cards .cta-row) {
@@ -614,7 +615,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 			gap: 8px;
 			margin: 0 0 6px;
 			color: var(--muted);
-			font-family: var(--font-body);
+			font-family: var(--font-heading);
 			font-size: clamp(1rem, 2vw, 1.125rem);
 			font-weight: 500;
 			letter-spacing: 0.08em;

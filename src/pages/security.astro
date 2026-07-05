@@ -114,7 +114,7 @@ const featuredBooks = [
 			ReaderPub's primary model keeps reading on the web through controlled access rather than routinely delivering a complete downloadable book file to every reader.
 		</p>
 		<div class="model-grid">
-			<div class="card security-traditional-problem-card" style="background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 35%, #ffffff 100%) !important;">
+			<div class="comparison-text-panel security-traditional-problem-card" style="background: var(--card-bg) !important;">
 				<h3>Traditional security problem</h3>
 				<ul class="comparison-list security-traditional-list">
 					<li>Protection starts after the file is delivered</li>
@@ -122,7 +122,7 @@ const featuredBooks = [
 					<li>Redistribution risk remains part of the model</li>
 				</ul>
 			</div>
-			<div class="card">
+			<div class="card card--good security-readerpub-solution-card">
 				<h3><span class="security-readerpub-title" style="color: var(--accent);">ReaderPub</span> solution</h3>
 				<ul class="comparison-list">
 					<li>Primary reading access stays on the web</li>
@@ -263,10 +263,11 @@ const featuredBooks = [
 	:global(.security-hero .hero-body) {
 		display: grid;
 		gap: 0;
-		font-family: var(--font-display);
+		font-family: var(--font-heading);
 		font-size: clamp(22px, 2.6vw, 32px);
-		font-weight: 700;
-		line-height: 1.12;
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	:global(.security-hero .hero-body .security-hero-body-muted) {
@@ -277,7 +278,7 @@ const featuredBooks = [
 		max-width: 760px;
 		color: var(--accent) !important;
 		font-size: var(--hero-problem-copy-size) !important;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.security-source-section) {
@@ -302,12 +303,12 @@ const featuredBooks = [
 		max-width: 720px;
 		color: var(--accent);
 		font-size: 1.125rem;
-		line-height: 1.35;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.security-source-section > p[style]) {
 		font-size: 1.125rem;
-		line-height: 1.35;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.security-source-risk-reduction-section) {
@@ -356,7 +357,7 @@ const featuredBooks = [
 	}
 
 	.security-traditional-problem-card {
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%) !important;
+		background: var(--card-bg) !important;
 	}
 
 	.security-traditional-problem-card .comparison-list li::before {
@@ -398,7 +399,7 @@ const featuredBooks = [
 		padding-left: 18px;
 		color: var(--muted);
 		font-size: 16px;
-		line-height: 1.3;
+		line-height: var(--line-height-body);
 	}
 
 	.comparison-list li::before {
@@ -427,7 +428,7 @@ const featuredBooks = [
 		background: transparent;
 		color: var(--muted);
 		font-size: 16px;
-		line-height: 1.25;
+		line-height: var(--line-height-body);
 		list-style: disc;
 	}
 
@@ -458,7 +459,7 @@ const featuredBooks = [
 	.security-source-theft-guard-text {
 		color: var(--accent) !important;
 		font-size: 18px !important;
-		line-height: 1.35 !important;
+		line-height: var(--line-height-body) !important;
 	}
 
 	.security-source-theft-guard-text {
@@ -480,7 +481,7 @@ const featuredBooks = [
 		padding: 36px 32px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-card);
-		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
+		background: var(--card-bg);
 		text-align: center;
 		justify-items: center;
 		align-self: center;
@@ -509,7 +510,7 @@ const featuredBooks = [
 		margin: 0;
 		color: var(--muted);
 		font-size: 13.6px;
-		line-height: 1.35;
+		line-height: var(--line-height-body);
 		text-align: center;
 	}
 
@@ -567,7 +568,7 @@ const featuredBooks = [
 		margin: 0;
 		color: var(--accent);
 		font-size: 1.125rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.security-check-list {
@@ -577,7 +578,7 @@ const featuredBooks = [
 		padding: 0;
 		list-style: none;
 		color: var(--muted);
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.security-check-list li {
@@ -699,7 +700,7 @@ const featuredBooks = [
 		min-height: 0;
 		width: 100%;
 		box-sizing: border-box;
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 18%, #ffffff 100%) !important;
+		background: var(--card-bg) !important;
 	}
 
 	:global(#protected-books .book-cover-placeholder) {
@@ -707,7 +708,7 @@ const featuredBooks = [
 		width: 84px;
 		height: 126px;
 		border-radius: 2px;
-		background: linear-gradient(135deg, #e9eef3, #d8e1ea);
+		background: var(--surface-gray);
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -725,8 +726,8 @@ const featuredBooks = [
 	:global(#protected-books .book-card h3) {
 		color: var(--link);
 		font-size: clamp(16px, 1.25vw, 20px);
-		line-height: 1.12;
-		font-family: "Space Grotesk", system-ui, sans-serif;
+		line-height: var(--line-height-heading);
+		font-family: var(--font-heading);
 		letter-spacing: -0.02em;
 		overflow-wrap: anywhere;
 	}
@@ -735,7 +736,7 @@ const featuredBooks = [
 		margin: 0;
 		color: var(--text);
 		font-size: clamp(13px, 1.05vw, 16px);
-		line-height: 1.3;
+		line-height: var(--line-height-body);
 	}
 
 	:global(#protected-books .book-card-protected) {
@@ -745,7 +746,7 @@ const featuredBooks = [
 		margin-top: 8px;
 		color: color-mix(in srgb, var(--text) 72%, white 28%);
 		font-size: 14px;
-		line-height: 1.25;
+		line-height: var(--line-height-body);
 		max-width: 100%;
 	}
 
@@ -765,8 +766,8 @@ const featuredBooks = [
 	}
 
 	:global(#protected-books .indie-theft-guard-name) {
-		font-family: "Playfair Display", serif;
-		font-weight: 700;
+		font-family: var(--font-heading);
+		font-weight: var(--font-weight-heading);
 		color: inherit;
 	}
 

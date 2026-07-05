@@ -87,7 +87,7 @@ const benefitCards = [
 				File-first publishing can move a book from one place to another, but it cannot keep books connected to readers, authors, institutions and communities.
 			</p>
 			<div class="model-grid">
-				<div class="card platform-old-model-card" style="--card-tint: #fcfaf8; background: var(--button-light-bg);">
+				<div class="comparison-text-panel platform-old-model-card" style="--card-tint: #fcfaf8; background: var(--button-light-bg);">
 					<h3>Old publishing model</h3>
 					<ul class="comparison-list">
 						<li>Create a file</li>
@@ -96,7 +96,7 @@ const benefitCards = [
 						<li>Move discussion to external platforms</li>
 					</ul>
 				</div>
-				<div class="card">
+				<div class="card card--good platform-readerpub-model-card">
 					<h3><span class="platform-readerpub-word">ReaderPub</span> model</h3>
 					<ul class="comparison-list">
 						<li>Publish the book as a web asset</li>
@@ -418,14 +418,14 @@ const benefitCards = [
 
 	.platform-source-section h2 {
 		font-size: clamp(24px, 3vw, 34px);
-		line-height: 1.12;
+		line-height: var(--line-height-heading);
 	}
 
 	.platform-source-section .lede {
 		max-width: 780px;
 		color: var(--accent);
 		font-size: 18px;
-		line-height: 1.4;
+		line-height: var(--line-height-body);
 	}
 
 	.platform-source-section .platform-readerpub-word {
@@ -461,7 +461,7 @@ const benefitCards = [
 		padding-left: 18px;
 		color: var(--muted);
 		font-size: 16px;
-		line-height: 1.3;
+		line-height: var(--line-height-body);
 	}
 
 	.platform-source-section .comparison-list li::before {
@@ -498,7 +498,7 @@ const benefitCards = [
 		background: transparent;
 		color: var(--muted);
 		font-size: 16px;
-		line-height: 1.25;
+		line-height: var(--line-height-body);
 		list-style: disc;
 	}
 
@@ -545,7 +545,7 @@ const benefitCards = [
 	.platform-source-section .platform-onboarding-grid .platform-onboarding-card {
 		align-items: stretch;
 		--card-tint: #fcfaf8;
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%) !important;
+		background: var(--card-bg) !important;
 		text-align: left;
 	}
 
@@ -738,7 +738,7 @@ const benefitCards = [
 
 	.platform-source-section .platform-control-info-card {
 		--card-tint: #fcfaf8 !important;
-		background: linear-gradient(135deg, #fcfaf8 0%, #fcfaf8 15%, #ffffff 100%) !important;
+		background: var(--card-bg) !important;
 	}
 
 	.platform-source-section .platform-control-info-card > * {
@@ -916,24 +916,25 @@ const benefitCards = [
 	:global(.platform-hero .hero-copy h1) {
 		max-width: none;
 		font-size: clamp(36px, 5vw, 56px);
-		line-height: 1.1;
+		line-height: var(--line-height-heading);
 	}
 
 	:global(.platform-hero .hero-lead) {
 		max-width: none;
 		color: var(--text) !important;
 		font-size: 22.95px !important;
-		line-height: 1.45 !important;
+		line-height: var(--line-height-body) !important;
 		margin: 0;
 	}
 
 	:global(.platform-hero .hero-body) {
 		max-width: 720px;
 		color: var(--accent);
-		font-family: var(--font-display);
+		font-family: var(--font-heading);
 		font-size: clamp(22.1px, 2.72vw, 32.3px);
-		font-weight: 700;
-		line-height: 1.12;
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	:global(.platform-hero .cta-row) {
@@ -950,9 +951,9 @@ const benefitCards = [
 	}
 
 	:global(.platform-hero .button--secondary) {
-		background: var(--button-light-bg);
-		color: var(--accent);
-		border-color: var(--accent);
+		background: var(--accent);
+		color: #ffffff;
+		border-color: transparent;
 	}
 
 	.platform-comparison-card {
@@ -1033,7 +1034,7 @@ const benefitCards = [
 		max-width: 760px;
 		color: var(--accent);
 		font-size: 1.125rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.platform-image-section) {
@@ -1112,7 +1113,7 @@ const benefitCards = [
 
 		:global(.platform-hero .hero-lead) {
 			font-size: 18.36px !important;
-			line-height: 1.45 !important;
+			line-height: var(--line-height-body) !important;
 		}
 
 		:global(.platform-hero .hero-body) {

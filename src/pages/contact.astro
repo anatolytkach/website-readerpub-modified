@@ -360,10 +360,11 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		margin: 0;
 		max-width: 720px;
 		color: var(--accent) !important;
-		font-family: var(--font-display) !important;
+		font-family: var(--font-heading) !important;
 		font-size: clamp(22.1px, 2.72vw, 32.3px) !important;
-		font-weight: 700 !important;
-		line-height: 1.12 !important;
+		font-weight: var(--font-weight-heading) !important;
+		letter-spacing: var(--letter-spacing-heading) !important;
+		line-height: var(--line-height-heading) !important;
 	}
 
 	:global(.contact-hero .hero-copy) {
@@ -436,7 +437,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		margin: 0;
 		color: var(--accent);
 		font-size: 1.125rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.contact-tip-list {
@@ -446,7 +447,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		padding-left: 22px;
 		color: var(--muted);
 		font-size: 1rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.contact-tip-list li::marker {
@@ -457,7 +458,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		margin: 0;
 		color: var(--accent);
 		font-size: 1rem;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.contact-tip-actions {
@@ -489,7 +490,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		position: relative;
 		z-index: 1;
 		display: block;
-		background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg) 15%, #ffffff 100%);
+		background: var(--card-bg);
 		border: 1px solid var(--border);
 		border-radius: 16px;
 		box-shadow: 0 24px 70px rgba(20, 23, 31, 0.22);
@@ -528,7 +529,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		max-height: min(84dvh, 920px);
 		padding: 0;
 		overflow: hidden;
-		line-height: 1.35;
+		line-height: var(--line-height-body);
 	}
 
 	.onboarding-modal-inner {
@@ -569,7 +570,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		margin: 0;
 		color: var(--text);
 		font-size: 16px;
-		line-height: 1.35;
+		line-height: var(--line-height-body);
 		text-align: left;
 	}
 
@@ -660,7 +661,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		margin: 2px 0 0;
 		color: #b42318;
 		font-size: 15px;
-		line-height: 1.35;
+		line-height: var(--line-height-body);
 		text-align: center;
 	}
 
@@ -679,7 +680,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		width: min(540px, calc(100vw - 32px));
 		max-width: min(540px, calc(100vw - 32px));
 		padding: 28px 24px;
-		line-height: 1.35;
+		line-height: var(--line-height-body);
 	}
 
 	.onboarding-success-inner {
@@ -695,7 +696,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		margin: 0;
 		color: var(--accent);
 		font-size: 20.5px;
-		line-height: 1.3;
+		line-height: var(--line-height-body);
 	}
 
 	@media (max-width: 900px) {

@@ -428,30 +428,31 @@ const ctaActions = [
 
 	.network-hero-title {
 		font-size: clamp(36px, 5vw, 56px);
-		line-height: 1.1;
+		line-height: var(--line-height-heading);
 	}
 
 	.network-hero-lede {
 		color: var(--accent) !important;
 		font-size: 19.5px !important;
-		line-height: 1.45 !important;
+		line-height: var(--line-height-body) !important;
 		margin: 0;
 	}
 
 	.home-hero-statement {
 		max-width: 720px;
 		color: var(--accent);
-		font-family: var(--font-display);
+		font-family: var(--font-heading);
 		font-size: clamp(22.1px, 2.72vw, 32.3px);
-		font-weight: 700;
-		line-height: 1.12;
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	.institutions-hero-followup {
 		max-width: 720px;
 		color: var(--text);
 		font-size: 19.5px;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 	}
 
 	.network-hero-image {
@@ -496,14 +497,15 @@ const ctaActions = [
 	}
 
 	.network-hero .button.secondary {
-		background: var(--button-light-bg);
-		color: var(--accent);
-		border-color: var(--accent);
+		background: var(--accent);
+		color: #ffffff;
+		border-color: transparent;
 	}
 
 	.network-hero .button.secondary:hover {
-		background: var(--button-light-bg);
-		color: var(--accent);
+		background: var(--text);
+		color: #ffffff;
+		border-color: transparent;
 	}
 
 	:global(.institutions-top-problem-grid) {
@@ -561,7 +563,7 @@ const ctaActions = [
 	.institutions-benefits-section h2 + p {
 		color: var(--link);
 		font-size: 18px;
-		line-height: 1.25;
+		line-height: var(--line-height-body);
 	}
 
 	.institutions-solution-section .card-grid,
@@ -585,17 +587,17 @@ const ctaActions = [
 		padding: 18px;
 		border: 1px solid var(--border);
 		border-radius: 10px;
-		background: linear-gradient(135deg, var(--card) 0%, var(--card) 15%, #ffffff 100%);
+		background: var(--card-bg);
 	}
 
 	.institutions-solution-section .card {
 		--card-tint: #eaf9f5;
-		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
+		background: var(--card-bg);
 	}
 
 	.institutions-expanded-section .institutions-green-gradient-card {
 		--card-tint: #eaf9f5;
-		background: linear-gradient(135deg, var(--card-tint) 0%, var(--card-tint) 18%, var(--card-bg) 100%);
+		background: var(--card-bg);
 	}
 
 	.institutions-solution-section .card h3,
@@ -640,7 +642,7 @@ const ctaActions = [
 	.institutions-publisher-access {
 		color: var(--text) !important;
 		font-size: 18px;
-		line-height: 1.45;
+		line-height: var(--line-height-body);
 		max-width: none;
 	}
 
@@ -673,13 +675,7 @@ const ctaActions = [
 		gap: 24px;
 		padding: var(--section-padding);
 		border-radius: var(--radius-card);
-		background: repeating-radial-gradient(
-			circle at var(--section-green-circle-center),
-			var(--surface-green) 0,
-			var(--surface-green) 36px,
-			#f1fffc 36px,
-			#f1fffc 44px
-		);
+		background: var(--surface-green);
 	}
 
 	.institutions-expanded-access-grid > .institutions-access-card {
@@ -761,8 +757,8 @@ const ctaActions = [
 
 	.institutions-community-highlight {
 		color: var(--text);
-		font-family: var(--font-display);
-		font-weight: 700;
+		font-family: var(--font-heading);
+		font-weight: var(--font-weight-heading);
 	}
 
 	.institutions-outcome-note {
@@ -795,7 +791,7 @@ const ctaActions = [
 		background: transparent;
 		color: var(--muted);
 		font-size: 16px;
-		line-height: 1.25;
+		line-height: var(--line-height-body);
 		list-style: disc;
 	}
 
@@ -929,7 +925,7 @@ const ctaActions = [
 
 		.network-hero-lede {
 			font-size: 15.6px !important;
-			line-height: 1.45 !important;
+			line-height: var(--line-height-body) !important;
 		}
 
 		.home-hero-statement {
