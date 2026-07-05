@@ -32,6 +32,17 @@ const revealSelectors = [
 
 const cardGroupSelector = ".card-grid, .model-grid, .platform-commerce-cards, .webuzz-overview-card-grid";
 const heroMediaSelectors = [".hero-section .hero-media", ".network-hero .institutions-network-media", ".network-hero > .image-block"];
+const mediaRevealSelector = [
+	".hero-media",
+	".institutions-network-media",
+	".section-media",
+	".proof-media",
+	".image-block",
+	".image-placeholder",
+	"figure",
+	"picture",
+].join(",");
+const mediaRevealContextSelector = ".hero-section, .network-hero, .section, .proof-section, .pricing-source-section, .pricing-source-sections, section";
 const revealExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .modal-content";
 const cardExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .hero-section, .network-hero, .cta-block, form, .modal-content";
 const goodCardSelector = [
@@ -69,9 +80,11 @@ const cardRowTopTolerance = 8;
 const revealedElements = new WeakSet();
 const revealedCards = new WeakSet();
 let revealObserver;
+let revealElementsByTarget = new WeakMap();
 let cardRevealObserver;
 let cardRevealRowsByTarget = new WeakMap();
 let cardRevealTimers = [];
+let cardRevealSentinels = [];
 let heroRevealTimers = [];
 let isClientNavigation = animationPassState.isClientNavigation;
 let hasRunInitialSetup = animationPassState.hasRunInitialSetup;
@@ -93,10 +106,73 @@ const uniqueElements = (selectors) => {
 	);
 };
 
-const revealElement = (element) => {
+const revealElement = (element, observerTarget = element) => {
 	element.classList.add("is-revealed");
 	revealedElements.add(element);
-	revealObserver?.unobserve(element);
+	revealObserver?.unobserve(observerTarget);
+};
+
+const revealObserverTargetElements = (observerTarget) => {
+	const elements = revealElementsByTarget.get(observerTarget);
+
+	if (elements) {
+		for (const element of elements) {
+			element.classList.add("is-revealed");
+			revealedElements.add(element);
+		}
+
+		revealObserver?.unobserve(observerTarget);
+		return;
+	}
+
+	revealElement(observerTarget);
+};
+
+const clearMediaRevealDirections = () => {
+	for (const element of document.querySelectorAll("[data-media-reveal-direction]")) {
+		element.removeAttribute("data-media-reveal-direction");
+	}
+};
+
+const setMediaRevealDirection = (element) => {
+	if (!(element instanceof HTMLElement) || !element.matches(mediaRevealSelector)) {
+		return;
+	}
+
+	const context = element.closest(mediaRevealContextSelector);
+	const elementRect = element.getBoundingClientRect();
+	const contextRect = context?.getBoundingClientRect();
+
+	if (!contextRect || elementRect.width <= 0 || elementRect.height <= 0 || contextRect.width <= 0) {
+		return;
+	}
+
+	const elementCenter = elementRect.left + elementRect.width / 2;
+	const contextCenter = contextRect.left + contextRect.width / 2;
+	element.setAttribute("data-media-reveal-direction", elementCenter < contextCenter ? "left" : "right");
+};
+
+const getRevealObserverTarget = (element) => {
+	if (element instanceof HTMLElement && element.matches(mediaRevealSelector)) {
+		const context = element.closest(mediaRevealContextSelector);
+
+		if (context instanceof HTMLElement) {
+			return context;
+		}
+	}
+
+	return element;
+};
+
+const shouldRevealObservedTargetImmediately = (target) => {
+	if (!(target instanceof Element)) {
+		return false;
+	}
+
+	const rect = target.getBoundingClientRect();
+	const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+	return rect.top <= viewportHeight * 0.92;
 };
 
 const clearCardRevealTimers = () => {
@@ -113,6 +189,20 @@ const clearHeroRevealTimers = () => {
 	}
 
 	heroRevealTimers = [];
+};
+
+const clearCardRevealSentinels = () => {
+	for (const sentinel of cardRevealSentinels) {
+		sentinel.remove();
+	}
+
+	cardRevealSentinels = [];
+
+	for (const group of document.querySelectorAll("[data-card-reveal-position-patched]")) {
+		group.style.position = group.getAttribute("data-card-reveal-original-position") || "";
+		group.removeAttribute("data-card-reveal-original-position");
+		group.removeAttribute("data-card-reveal-position-patched");
+	}
 };
 
 const shouldRevealElement = (element) => {
@@ -243,15 +333,77 @@ const getCardRevealRows = () => {
 			...groupRows
 				.sort((a, b) => a.top - b.top)
 				.map((row) => ({
+					group,
 					cards: row.cards.sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left),
-				})),
+				}))
+				.map((row) => {
+					setGoodCardRevealDirections(row.cards);
+					return row;
+				}),
 		);
 	}
 
 	return rows;
 };
 
-const getCardRowTarget = (cards) => {
+const isGoodRevealCard = (card) => card instanceof HTMLElement && card.classList.contains("card--good");
+
+const setGoodCardRevealDirections = (cards) => {
+	const goodCards = cards.filter((card) => isGoodRevealCard(card));
+
+	if (goodCards.length < 1) {
+		return;
+	}
+
+	if (goodCards.length === 1) {
+		goodCards[0].setAttribute("data-card-reveal-direction", "right");
+		return;
+	}
+
+	const rowLeft = Math.min(...goodCards.map((card) => card.getBoundingClientRect().left));
+	const rowRight = Math.max(...goodCards.map((card) => card.getBoundingClientRect().right));
+	const rowCenter = rowLeft + (rowRight - rowLeft) / 2;
+
+	for (const card of goodCards) {
+		const rect = card.getBoundingClientRect();
+		const cardCenter = rect.left + rect.width / 2;
+		card.setAttribute("data-card-reveal-direction", cardCenter < rowCenter ? "left" : "right");
+	}
+};
+
+const createCardRowSentinel = (row) => {
+	const groupRect = row.group.getBoundingClientRect();
+	const rowTop = Math.min(...row.cards.map((card) => card.getBoundingClientRect().top));
+	const rowBottom = Math.max(...row.cards.map((card) => card.getBoundingClientRect().bottom));
+	const rowHeight = Math.max(1, rowBottom - rowTop);
+	const groupPosition = window.getComputedStyle(row.group).position;
+
+	if (groupPosition === "static") {
+		row.group.setAttribute("data-card-reveal-original-position", row.group.style.position);
+		row.group.setAttribute("data-card-reveal-position-patched", "");
+		row.group.style.position = "relative";
+	}
+
+	const sentinel = document.createElement("span");
+	sentinel.setAttribute("aria-hidden", "true");
+	sentinel.setAttribute("data-card-row-sentinel", "");
+	sentinel.style.cssText = [
+		"position:absolute",
+		"left:0",
+		`top:${Math.max(0, rowTop - groupRect.top)}px`,
+		"width:1px",
+		`height:${rowHeight}px`,
+		"pointer-events:none",
+		"visibility:hidden",
+	].join(";");
+
+	row.group.append(sentinel);
+	cardRevealSentinels.push(sentinel);
+
+	return sentinel;
+};
+
+const getTallestCard = (cards) => {
 	return cards.reduce((target, card) => {
 		const targetRect = target.getBoundingClientRect();
 		const cardRect = card.getBoundingClientRect();
@@ -260,8 +412,41 @@ const getCardRowTarget = (cards) => {
 	}, cards[0]);
 };
 
+const getCardRowTarget = (row) => {
+	const stableCards = row.cards.filter((card) => !isGoodRevealCard(card));
+
+	if (stableCards.length > 0) {
+		return getTallestCard(stableCards);
+	}
+
+	return createCardRowSentinel(row);
+};
+
+const getCardCenterX = (card) => {
+	const rect = card.getBoundingClientRect();
+	return rect.left + rect.width / 2;
+};
+
+const getCardRevealOrder = (cards) => {
+	const rowLeft = Math.min(...cards.map((card) => card.getBoundingClientRect().left));
+	const rowRight = Math.max(...cards.map((card) => card.getBoundingClientRect().right));
+	const rowCenter = rowLeft + (rowRight - rowLeft) / 2;
+
+	return [...cards].sort((a, b) => {
+		const aCenter = getCardCenterX(a);
+		const bCenter = getCardCenterX(b);
+		const distanceDiff = Math.abs(aCenter - rowCenter) - Math.abs(bCenter - rowCenter);
+
+		if (distanceDiff !== 0) {
+			return distanceDiff;
+		}
+
+		return aCenter - bCenter;
+	});
+};
+
 const revealCardRow = (cards) => {
-	const visibleCards = cards.filter((card) => card instanceof HTMLElement);
+	const visibleCards = getCardRevealOrder(cards.filter((card) => card instanceof HTMLElement));
 
 	if (visibleCards.length < 1) {
 		return;
@@ -303,6 +488,7 @@ const prepareHeroMedia = () => {
 	for (const target of targets) {
 		target.setAttribute("data-hero-load-reveal", "");
 		target.classList.remove("is-hero-load-revealed");
+		setMediaRevealDirection(target);
 	}
 
 	return targets;
@@ -321,11 +507,8 @@ const revealHeroMedia = (target, delay = 0) => {
 	heroRevealTimers.push(timer);
 };
 
-const setupHeroMedia = ({ delay = 0 } = {}) => {
-	const targets = prepareHeroMedia();
-
+const setupHeroMedia = ({ delay = 0, targets = prepareHeroMedia() } = {}) => {
 	for (const target of targets) {
-
 		if (reduceMotionQuery.matches) {
 			document.documentElement.classList.remove("animation-pass-hold-hero");
 			target.classList.add("is-hero-load-revealed");
@@ -348,6 +531,7 @@ const markCards = () => {
 	for (const card of document.querySelectorAll("[data-hover-card], [data-card-reveal]")) {
 		card.removeAttribute("data-hover-card");
 		card.removeAttribute("data-card-reveal");
+		card.removeAttribute("data-card-reveal-direction");
 		card.classList.remove("is-card-revealed");
 		card.classList.remove("is-card-reveal-complete");
 	}
@@ -370,6 +554,7 @@ const markCards = () => {
 const setupReveal = () => {
 	revealObserver?.disconnect();
 	revealObserver = undefined;
+	revealElementsByTarget = new WeakMap();
 
 	const targets = uniqueElements(revealSelectors).filter(shouldRevealElement);
 
@@ -386,7 +571,7 @@ const setupReveal = () => {
 		(entries) => {
 			for (const entry of entries) {
 				if (entry.isIntersecting) {
-					revealElement(entry.target);
+					revealObserverTargetElements(entry.target);
 				}
 			}
 		},
@@ -396,21 +581,37 @@ const setupReveal = () => {
 		},
 	);
 
+	const observerTargets = new Set();
+
 	for (const element of targets) {
 		element.setAttribute("data-reveal", "");
+		setMediaRevealDirection(element);
 
 		if (revealedElements.has(element)) {
 			element.classList.add("is-revealed");
 			continue;
 		}
 
-		revealObserver.observe(element);
+		const observerTarget = getRevealObserverTarget(element);
+		const elementsForTarget = revealElementsByTarget.get(observerTarget) || [];
+		elementsForTarget.push(element);
+		revealElementsByTarget.set(observerTarget, elementsForTarget);
+		observerTargets.add(observerTarget);
+	}
+
+	for (const observerTarget of observerTargets) {
+		if (shouldRevealObservedTargetImmediately(observerTarget)) {
+			revealObserverTargetElements(observerTarget);
+		} else {
+			revealObserver.observe(observerTarget);
+		}
 	}
 };
 
 const setupCardReveal = () => {
 	cardRevealObserver?.disconnect();
 	cardRevealObserver = undefined;
+	clearCardRevealSentinels();
 
 	if (reduceMotionQuery.matches || !supportsIntersectionObserver) {
 		for (const row of getCardRevealRows()) {
@@ -422,29 +623,39 @@ const setupCardReveal = () => {
 
 	const rows = getCardRevealRows();
 	cardRevealRowsByTarget = new WeakMap();
+	const observedTargets = new Set();
 
 	cardRevealObserver = new IntersectionObserver(
 		(entries) => {
 			for (const entry of entries) {
-				if (entry.intersectionRatio >= cardRevealThreshold) {
-					const row = cardRevealRowsByTarget.get(entry.target);
+				const rowsForTarget = cardRevealRowsByTarget.get(entry.target);
+				const canRevealOnIntersect =
+					rowsForTarget?.some((row) => row.group === entry.target) ||
+					(entry.target instanceof HTMLElement && entry.target.hasAttribute("data-card-row-sentinel"));
 
+				if (entry.intersectionRatio >= cardRevealThreshold || (entry.isIntersecting && canRevealOnIntersect)) {
 					cardRevealObserver?.unobserve(entry.target);
+					if (entry.target instanceof HTMLElement && entry.target.hasAttribute("data-card-row-sentinel")) {
+						entry.target.remove();
+					}
 
-					if (row) {
-						revealCardRow(row.cards);
+					if (rowsForTarget) {
+						rowsForTarget.forEach((row, rowIndex) => {
+							const timer = window.setTimeout(() => revealCardRow(row.cards), rowIndex * cardRevealDelay);
+							cardRevealTimers.push(timer);
+						});
 					}
 				}
 			}
 		},
 		{
 			rootMargin: "0px",
-			threshold: cardRevealThreshold,
+			threshold: [0, cardRevealThreshold],
 		},
 	);
 
 	for (const row of rows) {
-		const target = getCardRowTarget(row.cards);
+		const target = getCardRowTarget(row);
 
 		if (!target) {
 			continue;
@@ -455,22 +666,32 @@ const setupCardReveal = () => {
 			continue;
 		}
 
-		cardRevealRowsByTarget.set(target, row);
-		cardRevealObserver.observe(target);
+		const targetRows = cardRevealRowsByTarget.get(target) || [];
+		targetRows.push(row);
+		cardRevealRowsByTarget.set(target, targetRows);
+
+		if (!observedTargets.has(target)) {
+			observedTargets.add(target);
+			cardRevealObserver.observe(target);
+		}
 	}
 };
 
 const setupAnimationPass = ({ heroDelay = 0 } = {}) => {
-	document.documentElement.classList.add("animation-pass-ready");
-	if (heroDelay === 0) {
-		document.documentElement.classList.remove("animation-pass-hold-hero");
-	}
 	clearHeroRevealTimers();
 	clearCardRevealTimers();
-	setupHeroMedia({ delay: heroDelay });
+	clearMediaRevealDirections();
+	const heroTargets = prepareHeroMedia();
 	markCards();
 	setupReveal();
 	setupCardReveal();
+	if (heroDelay === 0) {
+		document.documentElement.classList.remove("animation-pass-hold-hero");
+	} else {
+		document.documentElement.classList.add("animation-pass-hold-hero");
+	}
+	document.documentElement.classList.add("animation-pass-ready");
+	setupHeroMedia({ delay: heroDelay, targets: heroTargets });
 };
 
 const runInitialSetup = () => {
@@ -490,10 +711,12 @@ if (document.readyState === "loading") {
 
 document.addEventListener("astro:after-swap", () => {
 	setClientNavigation(true);
-	document.documentElement.classList.add("animation-pass-ready");
-	document.documentElement.classList.add("animation-pass-hold-hero");
+	document.documentElement.classList.remove("animation-pass-ready");
 	clearHeroRevealTimers();
+	clearMediaRevealDirections();
 	prepareHeroMedia();
+	document.documentElement.classList.add("animation-pass-hold-hero");
+	document.documentElement.classList.add("animation-pass-ready");
 });
 
 document.addEventListener("astro:page-load", () => {

@@ -82,7 +82,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 					</ul>
 					</div>
 				</article>
-				<article class="card card--good home-list-card home-readerpub-model-card" style="background: var(--surface-green);">
+				<article class="card card--good home-list-card home-readerpub-model-card">
 					<div class="card-copy">
 					<h3><span class="home-title-accent">ReaderPub</span> model</h3>
 					<ul class="home-model-list">
@@ -203,12 +203,12 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 <style>
 	.home-hero-statement {
 		max-width: 720px;
-		color: var(--accent);
-		font-family: var(--font-heading);
+		color: var(--accent-orange);
+		font-family: var(--font-body);
 		font-size: var(--hero-solution-copy-size);
-		font-weight: var(--font-weight-heading);
-		letter-spacing: var(--letter-spacing-heading);
-		line-height: var(--line-height-heading);
+		font-weight: 400;
+		letter-spacing: 0;
+		line-height: var(--line-height-body);
 	}
 
 	.home-hero-strategy {
@@ -239,7 +239,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	:global(.home-readerpub-model-card.home-readerpub-model-card) {
-		background: var(--surface-green) !important;
+		background: var(--card-bg) !important;
 	}
 
 	.home-flow {
@@ -388,7 +388,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	@media (min-width: 901px) {
 		:global(.home-web-asset-section .section-header h2) {
-			white-space: nowrap;
+			white-space: normal;
 		}
 	}
 

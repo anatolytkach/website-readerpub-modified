@@ -427,7 +427,7 @@ const ctaActions = [
 	}
 
 	.network-hero-title {
-		font-size: clamp(36px, 5vw, 56px);
+		font-size: clamp(30.6px, 4.25vw, 47.6px);
 		line-height: var(--line-height-heading);
 	}
 
@@ -675,7 +675,13 @@ const ctaActions = [
 		gap: 24px;
 		padding: var(--section-padding);
 		border-radius: var(--radius-card);
-		background: var(--surface-green);
+		background: repeating-radial-gradient(
+			circle at var(--section-green-circle-center),
+			#028f80 0,
+			#028f80 36px,
+			#019989 36px,
+			#019989 44px
+		);
 	}
 
 	.institutions-expanded-access-grid > .institutions-access-card {
@@ -810,7 +816,7 @@ const ctaActions = [
 	@media (min-width: 901px) and (max-width: 1180px) {
 		:global(.institutions-value-section .section-header h2) {
 			font-size: clamp(40px, 4vw, 54px);
-			white-space: nowrap;
+			white-space: normal;
 		}
 	}
 
@@ -822,7 +828,7 @@ const ctaActions = [
 
 	@media (min-width: 1181px) {
 		:global(.institutions-value-section .section-header h2) {
-			white-space: nowrap;
+			white-space: normal;
 		}
 	}
 
@@ -862,7 +868,7 @@ const ctaActions = [
 		}
 
 		.network-hero-title {
-			font-size: clamp(30.6px, 4.25vw, 47.6px) !important;
+			font-size: clamp(26.01px, 3.6125vw, 40.46px) !important;
 		}
 
 		.institutions-expanded-section .icon-grid-card {

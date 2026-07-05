@@ -342,8 +342,8 @@ const benefitCards = [
 					height="936"
 				/>
 				<div class="platform-control-copy">
-					<h2 class="platform-control-heading">Institutional control</h2>
 					<div class="card platform-control-info-card">
+						<h3 class="platform-control-heading">Institutional control</h3>
 						<p class="lede platform-control-lede">
 							Access can be assigned by user, group, course, department, team, program, partner
 							organization, or custom permission.
@@ -817,24 +817,16 @@ const benefitCards = [
 		.platform-source-section .platform-control-split {
 			grid-template-columns: 1fr;
 			grid-template-areas:
-				"heading"
-				"lede"
 				"image"
-				"list";
+				"copy";
 			row-gap: var(--section-flow-gap);
 			justify-items: center;
 		}
 
 		.platform-source-section .platform-control-copy {
-			display: contents;
-		}
-
-		.platform-source-section .platform-control-heading {
-			grid-area: heading;
-		}
-
-		.platform-source-section .platform-control-lede {
-			grid-area: lede;
+			grid-area: copy;
+			display: flex;
+			width: 100%;
 		}
 
 		.platform-source-section .platform-control-image {
@@ -846,7 +838,6 @@ const benefitCards = [
 		}
 
 		.platform-source-section .platform-control-list {
-			grid-area: list;
 			width: 100%;
 		}
 
@@ -915,7 +906,7 @@ const benefitCards = [
 
 	:global(.platform-hero .hero-copy h1) {
 		max-width: none;
-		font-size: clamp(36px, 5vw, 56px);
+		font-size: clamp(30.6px, 4.25vw, 47.6px);
 		line-height: var(--line-height-heading);
 	}
 
@@ -938,7 +929,7 @@ const benefitCards = [
 	}
 
 	:global(.platform-hero .cta-row) {
-		gap: 12px;
+		gap: var(--button-row-gap);
 		justify-content: flex-start;
 	}
 
@@ -952,6 +943,12 @@ const benefitCards = [
 
 	:global(.platform-hero .button--secondary) {
 		background: var(--accent);
+		color: #ffffff;
+		border-color: transparent;
+	}
+
+	:global(.platform-hero .button--secondary:hover) {
+		background: var(--text);
 		color: #ffffff;
 		border-color: transparent;
 	}
@@ -1108,7 +1105,7 @@ const benefitCards = [
 		}
 
 		:global(.platform-hero .hero-copy h1) {
-			font-size: clamp(30.6px, 4.25vw, 47.6px) !important;
+			font-size: clamp(26.01px, 3.6125vw, 40.46px) !important;
 		}
 
 		:global(.platform-hero .hero-lead) {
@@ -1181,6 +1178,21 @@ const benefitCards = [
 		.platform-control-list {
 			justify-self: stretch;
 			text-align: left;
+		}
+	}
+
+	@media (orientation: landscape) {
+		.platform-source-section.platform-capabilities-section .platform-capability-card {
+			align-items: stretch !important;
+			text-align: left !important;
+		}
+
+		.platform-source-section.platform-capabilities-section .platform-capability-card :is(h3, p),
+		.platform-source-section.platform-capabilities-section .platform-three-grid .card > p,
+		.platform-source-section.platform-capabilities-section .platform-three-grid .card > h3,
+		.platform-source-section.platform-capabilities-section .platform-capability-title,
+		.platform-source-section.platform-capabilities-section .platform-capability-copy {
+			text-align: left !important;
 		}
 	}
 </style>

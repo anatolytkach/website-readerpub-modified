@@ -309,7 +309,7 @@ const pageActions = [startPublishingAction, pricingAction];
 	}
 
 	:global(.readerpub-model-card.readerpub-model-card) {
-		background: var(--surface-green) !important;
+		background: var(--card-bg) !important;
 	}
 
 	:global(.readerpub-model-card h3 span) {
@@ -517,7 +517,7 @@ const pageActions = [startPublishingAction, pricingAction];
 	}
 
 	:global(.authors-hero h1) {
-		font-size: clamp(36px, 5vw, 56px);
+		font-size: clamp(30.6px, 4.25vw, 47.6px);
 		line-height: var(--line-height-heading);
 	}
 
@@ -563,6 +563,12 @@ const pageActions = [startPublishingAction, pricingAction];
 
 	:global(.authors-hero .button--secondary) {
 		background: var(--accent);
+		color: #ffffff;
+		border-color: transparent;
+	}
+
+	:global(.authors-hero .button--secondary:hover) {
+		background: var(--text);
 		color: #ffffff;
 		border-color: transparent;
 	}

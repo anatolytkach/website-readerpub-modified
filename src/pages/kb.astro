@@ -338,11 +338,16 @@ const faqCategories = [
 		display: grid;
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 		gap: 24px;
+		min-width: 0;
+		max-width: 100%;
+		overflow-x: clip;
 	}
 
 	.kb-faq-block {
 		--kb-card-tint: var(--card-tint);
 		grid-column: span 2;
+		min-width: 0;
+		max-width: 100%;
 		padding: 24px;
 		border: 1px solid var(--border);
 		border-radius: 12px;
@@ -388,8 +393,9 @@ const faqCategories = [
 
 	.kb-faq-heading-label > span {
 		display: block;
-		width: max-content;
+		width: auto;
 		max-width: 100%;
+		overflow-wrap: anywhere;
 	}
 
 	:global(.kb-faq-heading .section-icon) {
@@ -398,6 +404,8 @@ const faqCategories = [
 	}
 
 	.kb-faq-item {
+		min-width: 0;
+		max-width: 100%;
 		border-bottom: 1px solid var(--border);
 	}
 
@@ -492,6 +500,10 @@ const faqCategories = [
 			grid-column: auto;
 		}
 
+		.kb-faq-block:last-child:nth-child(odd) {
+			grid-column: auto;
+		}
+
 		.kb-faq-block:nth-child(2),
 		.kb-faq-block:nth-child(4),
 		.kb-faq-block:nth-child(6) {
@@ -524,6 +536,10 @@ const faqCategories = [
 
 		.kb-faq-block {
 			--kb-card-tint: var(--card-tint);
+			grid-column: auto;
+		}
+
+		.kb-faq-block:last-child:nth-child(odd) {
 			grid-column: auto;
 		}
 

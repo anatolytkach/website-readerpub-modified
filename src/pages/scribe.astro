@@ -129,7 +129,11 @@ const ctaActions = [
 
 	.scribe-hero-solution {
 		color: var(--accent);
+		font-family: var(--font-body);
 		font-size: var(--hero-solution-copy-size);
+		font-weight: 400;
+		letter-spacing: 0;
+		line-height: var(--line-height-body);
 	}
 
 	:global(.scribe-centered-card-grid.card-grid--3) {
@@ -160,9 +164,9 @@ const ctaActions = [
 
 	:global(.button.button--scribe-demo:hover),
 	:global(.section--dark .button.button--scribe-demo:hover) {
-		background: var(--text);
-		color: #ffffff;
-		border-color: transparent;
+		background: #ffffff;
+		color: var(--text);
+		border-color: #ffffff;
 	}
 
 	:global(.button.button--scribe-demo .button-icon) {

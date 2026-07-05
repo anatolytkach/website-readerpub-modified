@@ -209,11 +209,11 @@ const ctaActions = [
 	:global(.pricing-hero .hero-body) {
 		max-width: 720px;
 		color: var(--accent);
-		font-family: var(--font-heading);
-		font-size: clamp(22.1px, 2.72vw, 32.3px);
-		font-weight: var(--font-weight-heading);
-		letter-spacing: var(--letter-spacing-heading);
-		line-height: var(--line-height-heading);
+		font-family: var(--font-body);
+		font-size: var(--hero-solution-copy-size);
+		font-weight: 400;
+		letter-spacing: 0;
+		line-height: var(--line-height-body);
 	}
 
 	.pricing-hero-paths-list {
@@ -252,7 +252,7 @@ const ctaActions = [
 	}
 
 	.pricing-problem-title-nowrap {
-		white-space: nowrap;
+		white-space: normal;
 	}
 
 	.pricing-source-sections {
@@ -311,7 +311,7 @@ const ctaActions = [
 	}
 
 	.pricing-author-lede-lines > span {
-		white-space: nowrap;
+		white-space: normal;
 	}
 
 	.pricing-readerpub-word {
