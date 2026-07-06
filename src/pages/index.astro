@@ -203,7 +203,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 <style>
 	.home-hero-statement {
 		max-width: 720px;
-		color: var(--accent-orange);
+		color: var(--accent);
 		font-family: var(--font-body);
 		font-size: var(--hero-solution-copy-size);
 		font-weight: 400;
@@ -229,7 +229,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	.home-comparison-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 
@@ -257,18 +257,57 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		color: var(--accent);
 	}
 
-	:global(.home-product-grid .home-product-link) {
+	:global(.home-readerpub-publishing-card:hover h3),
+	:global(.home-readerpub-publishing-card:hover h3 *) {
+		color: var(--accent-orange) !important;
+	}
+
+	:global(.home-readerpub-publishing-card:hover .home-flow-arrow) {
+		color: var(--accent-orange) !important;
+	}
+
+	:global(.home-product-grid .home-product-link),
+	:global(.home-product-grid .home-product-link:visited) {
 		display: inline-flex;
+		position: relative;
+		isolation: isolate;
 		align-items: center;
 		justify-content: center;
-		min-height: 34px;
-		padding: 7px 12px;
-		border: 1px solid var(--border);
+		min-height: 42px;
+		padding: 11px 18px;
+		border: 1px solid transparent;
 		border-radius: var(--radius-control);
-		background: var(--button-light-bg);
+		background: transparent;
 		color: var(--accent);
+		font-family: var(--font-ui);
+		font-size: 0.95rem;
+		font-weight: 500;
 		line-height: var(--line-height-heading);
 		text-decoration: none;
+		-webkit-mask-image:
+			url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23000%27%20d%3D%27M%200%200%20C%204.5%2025%204.5%2075%200%20100%20L%20100%20100%20L%20100%200%20Z%27/%3E%3C/svg%3E"),
+			linear-gradient(#000, #000);
+		mask-image:
+			url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23000%27%20d%3D%27M%200%200%20C%204.5%2025%204.5%2075%200%20100%20L%20100%20100%20L%20100%200%20Z%27/%3E%3C/svg%3E"),
+			linear-gradient(#000, #000);
+		-webkit-mask-position:
+			left top,
+			right top;
+		mask-position:
+			left top,
+			right top;
+		-webkit-mask-repeat:
+			no-repeat,
+			no-repeat;
+		mask-repeat:
+			no-repeat,
+			no-repeat;
+		-webkit-mask-size:
+			var(--button-left-curve-width) 100%,
+			calc(100% - var(--button-left-curve-width) + 1px) 100%;
+		mask-size:
+			var(--button-left-curve-width) 100%,
+			calc(100% - var(--button-left-curve-width) + 1px) 100%;
 		cursor: pointer;
 		transition:
 			border-color var(--motion-deliberate) ease,
@@ -276,13 +315,75 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			color var(--motion-deliberate) ease;
 	}
 
+	:global(.home-product-grid .home-product-link::before),
+	:global(.home-product-grid .home-product-link::after) {
+		content: "";
+		position: absolute;
+		border-radius: var(--radius-control);
+		-webkit-mask-image:
+			url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23000%27%20d%3D%27M%200%200%20C%204.5%2025%204.5%2075%200%20100%20L%20100%20100%20L%20100%200%20Z%27/%3E%3C/svg%3E"),
+			linear-gradient(#000, #000);
+		mask-image:
+			url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23000%27%20d%3D%27M%200%200%20C%204.5%2025%204.5%2075%200%20100%20L%20100%20100%20L%20100%200%20Z%27/%3E%3C/svg%3E"),
+			linear-gradient(#000, #000);
+		-webkit-mask-position:
+			left top,
+			right top;
+		mask-position:
+			left top,
+			right top;
+		-webkit-mask-repeat:
+			no-repeat,
+			no-repeat;
+		mask-repeat:
+			no-repeat,
+			no-repeat;
+		-webkit-mask-size:
+			var(--button-left-curve-width) 100%,
+			calc(100% - var(--button-left-curve-width) + 1px) 100%;
+		mask-size:
+			var(--button-left-curve-width) 100%,
+			calc(100% - var(--button-left-curve-width) + 1px) 100%;
+		pointer-events: none;
+		transition: background var(--motion-deliberate) ease;
+	}
+
+	:global(.home-product-grid .home-product-link::before) {
+		inset: 0;
+		z-index: -2;
+		background: var(--accent-orange);
+	}
+
+	:global(.home-product-grid .home-product-link::after) {
+		inset: 1px;
+		z-index: -1;
+		background: #ffffff;
+	}
+
 	:global(.home-product-grid .home-product-link:hover),
 	:global(.home-product-grid .home-product-link:focus-visible) {
 		transform: none;
-		border-color: var(--text);
+		border-color: transparent;
 		box-shadow: none;
-		background: var(--text);
-		color: #ffffff;
+		background: transparent;
+		color: #ffffff !important;
+	}
+
+	:global(.home-product-grid .home-product-link:hover::before),
+	:global(.home-product-grid .home-product-link:hover::after),
+	:global(.home-product-grid .home-product-link:focus-visible::before),
+	:global(.home-product-grid .home-product-link:focus-visible::after) {
+		background: var(--button-green-hover-bg);
+	}
+
+	:global(.home-product-grid .card:hover .home-product-link:hover),
+	:global(.home-product-grid .card:hover .home-product-link:focus-visible) {
+		color: #ffffff !important;
+	}
+
+	:global(.content .section--green .home-product-grid .card:hover h3 .home-product-link:hover),
+	:global(.content .section--green .home-product-grid .card:hover h3 .home-product-link:focus-visible) {
+		color: #ffffff !important;
 	}
 
 	:global(.home-product-grid .home-product-title-line) {
@@ -292,8 +393,12 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		gap: 8px;
 	}
 
-	.home-product-divider {
-		color: var(--text);
+	:global(.content .section--green .home-product-grid .card h3 .home-product-divider) {
+		color: var(--accent) !important;
+		font-family: var(--font-ui);
+		font-size: 0.95rem;
+		font-weight: 500;
+		line-height: var(--line-height-heading);
 	}
 
 	@media (min-width: 901px) {

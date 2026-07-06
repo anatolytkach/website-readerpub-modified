@@ -21,6 +21,7 @@
 	--button-green-bg: var(--accent-orange);
 	--button-green-hover-bg: var(--text);
 	--button-green-hover-shadow: none;
+	--button-left-curve-width: 96px;
 	--button-row-gap: 18px;
 	--nav-button-gap: 12px;
 	--card-good-reveal-offset: clamp(10px, 2vw, 18px);
@@ -30,6 +31,31 @@
 	--radius-control: 0 999px 999px 0;
 	--section-gap: 18px;
 	--section-padding: 64px;
+	--section-stack-gap: calc(var(--section-padding) * 2);
+	--card-grid-gap: calc(var(--section-gap) * 1.5);
+	--gray-edge-air: clamp(36px, 4vw, 72px);
+	--green-edge-air-top-wave-a: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H1440%20V70%20C1360%2010%201300%20290%201210%20210%20C1095%20110%201030%20270%20930%20170%20C850%2090%20840%20300%20760%20350%20C650%20430%20570%20320%20470%20230%20C335%20140%20290%20410%20190%20330%20C100%20260%2070%20500%200%20430%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-top-wave-b: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H1440%20V96%20C1350%2032%201315%20250%201218%20170%20C1110%2080%201070%20310%20955%20230%20C830%20150%20805%20420%20650%20300%20C535%20205%20455%2078%20330%20180%20C210%20295%20150%20530%200%20452%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-top-wave-c: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H1440%20V54%20C1348%20150%201290%2016%201184%20120%20C1046%20246%20995%20132%20860%20188%20C720%20248%20660%2042%20526%20154%20C390%20270%20350%20520%20212%20386%20C112%20292%2074%20482%200%20420%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-top-wave-d: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H1440%20V118%20C1302%2052%201264%20300%201136%20216%20C990%20122%20942%20330%20816%20252%20C702%20186%20668%2088%20548%20174%20C400%20280%20350%20420%20234%20308%20C122%20198%2080%20520%200%20474%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-top-wave-e: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H1440%20V82%20C1358%2028%201302%20206%201192%20156%20C1080%20108%201022%20272%20904%20244%20C760%20210%20734%20454%20598%20320%20C470%20194%20436%2092%20302%20232%20C190%20350%20128%20458%200%20398%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-top-wave-f: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H1440%20V42%20C1328%20116%201280%20248%201170%20182%20C1045%20108%201020%2062%20882%20142%20C752%20220%20700%20395%20590%20276%20C468%20148%20390%20360%20260%20292%20C150%20232%2092%20500%200%20460%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-top-wave-g: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H1440%20V104%20C1368%2068%201310%2018%201218%2092%20C1088%20196%201038%20310%20920%20226%20C778%20126%20720%20348%20584%20238%20C470%20150%20420%20466%20304%20368%20C186%20270%20130%20340%200%20500%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-top-wave-h: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H1440%20V66%20C1336%20190%201298%2088%201168%20156%20C1060%20212%201018%2040%20890%20132%20C752%20234%20690%20512%20546%20334%20C448%20214%20382%20286%20264%20216%20C154%20154%2092%20430%200%20410%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-bottom-wave-a: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20470%20C110%20380%20185%20530%20330%20430%20C420%20370%20500%20300%20610%20385%20C760%20500%20780%20230%20940%20310%20C1080%20380%201125%20110%201275%20210%20C1360%20270%201390%2090%201440%20130%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-bottom-wave-b: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20520%20C130%20390%20210%20310%20348%20438%20C474%20552%20520%20286%20668%20368%20C792%20438%20830%20170%20970%20276%20C1115%20386%201162%20230%201278%20152%20C1364%2094%201408%20186%201440%2072%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-bottom-wave-c: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20438%20C96%20328%20182%20562%20316%20462%20C424%20380%20488%20166%20604%20300%20C734%20452%20798%20350%20928%20250%20C1058%20150%201112%20392%201242%20258%20C1348%20148%201378%2042%201440%20102%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-bottom-wave-d: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20492%20C116%20548%20176%20330%20294%20408%20C438%20506%20502%20238%20626%20346%20C748%20454%20790%20114%20934%20208%20C1044%20280%201126%20448%201248%20286%20C1338%20166%201390%20238%201440%2086%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-bottom-wave-e: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20456%20C88%20374%20132%20290%20262%20360%20C390%20430%20454%20548%20576%20424%20C712%20284%20760%20354%20890%20298%20C1034%20236%201068%2074%201196%20178%20C1308%20268%201362%20128%201440%20156%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-bottom-wave-f: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20506%20C124%20418%20196%20504%20320%20382%20C426%20278%20488%20460%20596%20404%20C742%20328%20810%2086%20948%20194%20C1082%20298%201132%20376%201256%20242%20C1344%20146%201398%2044%201440%20116%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-bottom-wave-g: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20424%20C102%20528%20172%20408%20288%20488%20C420%20578%20480%20218%20622%20326%20C744%20418%20828%20312%20936%20364%20C1064%20426%201098%20132%201234%20224%20C1328%20288%201382%2078%201440%2096%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-bottom-wave-h: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20540%20C116%20430%20182%20198%20330%20326%20C448%20428%20514%20520%20642%20382%20C770%20246%20800%20438%20946%20286%20C1064%20164%201120%2092%201248%20170%20C1360%20238%201390%20178%201440%2048%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-a);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-a);
+	--green-edge-top-wave-width: 100%;
+	--green-edge-bottom-wave-width: 100%;
+	--green-edge-top-wave-x: 50%;
+	--green-edge-bottom-wave-x: 50%;
 	--card-heading-font-size: 1.35rem;
 	--card-heading-line-height: var(--line-height-heading);
 	--card-inline-icon-size: calc(var(--card-heading-font-size) * 1.7);
@@ -80,6 +106,86 @@ body {
 	background-color: var(--page-bg);
 	line-height: var(--line-height-body);
 	overflow-x: clip;
+}
+
+body.page-home {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-a);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-a);
+}
+
+body.page-about {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-b);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-c);
+}
+
+body.page-authors {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-c);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-e);
+}
+
+body.page-booktree {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-d);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-g);
+}
+
+body.page-contact {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-e);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-b);
+}
+
+body.page-institutions {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-f);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-d);
+}
+
+body.page-kb {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-g);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-f);
+}
+
+body.page-platform {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-h);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-h);
+}
+
+body.page-pricing {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-a);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-d);
+}
+
+body.page-scribe {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-b);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-f);
+}
+
+body.page-security {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-c);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-h);
+}
+
+body.page-webuzz {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-d);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-a);
+}
+
+body.page-wepub {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-e);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-c);
+}
+
+body.page-weread {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-f);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-e);
+}
+
+body.page-wetalk {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-g);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-b);
+}
+
+body.page-terms {
+	--green-edge-air-top-wave: var(--green-edge-air-top-wave-h);
+	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-g);
 }
 
 a {
@@ -344,7 +450,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	height: auto;
 	padding: 6px 12px;
 	font-size: 14px;
-	font-weight: var(--font-weight-ui);
+	font-weight: 500;
 	line-height: var(--line-height-heading);
 }
 
@@ -508,6 +614,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 }
 
 .section--gray {
+	--section-bg-size: max(3200px, 260vw) max(4200px, 360vh);
 	--section-bg: repeating-linear-gradient(
 		45deg,
 		#f1f2f5 0,
@@ -518,59 +625,176 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 }
 
 .section--green {
-	--section-green-circle-center: 25% 75%;
+	--section-green-circle-x: 25%;
+	--section-green-circle-y: 75%;
+	--section-bg-size: auto;
 	--section-bg: repeating-radial-gradient(
-		circle at var(--section-green-circle-center),
-		#028f80 0,
-		#028f80 36px,
-		#019989 36px,
-		#019989 44px
+		circle at var(--section-green-circle-x) calc(var(--section-green-circle-y) + var(--section-bg-parallax-y)),
+		#027468 0,
+		#027468 46.4px,
+		#018275 46.4px,
+		#018275 51.733px
 	);
 }
 
 .content > .section--green:nth-child(4n + 1 of .section--green) {
-	--section-green-circle-center: 25% 75%;
+	--section-green-circle-x: 25%;
+	--section-green-circle-y: 75%;
 }
 
 .content > .section--green:nth-child(4n + 2 of .section--green) {
-	--section-green-circle-center: 75% 75%;
+	--section-green-circle-x: 75%;
+	--section-green-circle-y: 75%;
 }
 
 .content > .section--green:nth-child(4n + 3 of .section--green) {
-	--section-green-circle-center: 25% 25%;
+	--section-green-circle-x: 25%;
+	--section-green-circle-y: 25%;
 }
 
 .content > .section--green:nth-child(4n of .section--green) {
-	--section-green-circle-center: 75% 25%;
+	--section-green-circle-x: 75%;
+	--section-green-circle-y: 25%;
 }
 
 .section.section--gray,
 .section.section--green {
+	--section-bg-parallax-y: 0px;
 	padding: var(--section-padding);
 	border-radius: 0;
 	background: var(--section-bg);
+	background-position: center calc(50% + var(--section-bg-parallax-y));
+	background-repeat: no-repeat;
+	background-size: var(--section-bg-size, auto);
+	will-change: background-position;
 }
 
-.section.section--gray::before,
-.section.section--green::before {
+.section.section--gray {
+	padding-bottom: calc(var(--section-padding) + var(--gray-edge-air));
+}
+
+.section.section--gray > * {
+	position: relative;
+	z-index: 1;
+}
+
+.section.section--gray::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: var(--gray-edge-air);
+	background: var(--page-bg);
+	clip-path: polygon(0 0, 100% 100%, 100% 100%, 0 100%);
+	z-index: 0;
+	pointer-events: none;
+}
+
+.section.section--green,
+.institutions-expanded-access-grid {
+	--green-edge-air: clamp(53.333px, 6.222vw, 115.555px);
+	--green-edge-top-air: var(--green-edge-air-top-wave);
+	--green-edge-bottom-air: var(--green-edge-air-bottom-wave);
+	background: transparent;
+	background-position: center center;
+	padding-top: calc(var(--section-padding) + var(--green-edge-air));
+	padding-bottom: calc(var(--section-padding) + var(--green-edge-air));
+	will-change: auto;
+}
+
+.institutions-expanded-access-grid {
+	position: relative;
+	isolation: isolate;
+}
+
+.section.section--gray::before {
 	content: none;
+}
+
+.section.section--green::before,
+.institutions-expanded-access-grid::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: calc(50% - 50vw);
+	width: 100vw;
+	background: var(--section-bg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: var(--section-bg-size, auto);
+	z-index: -2;
+	pointer-events: none;
+	will-change: background;
+}
+
+.section.section--green::after,
+.institutions-expanded-access-grid::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: calc(50% - 50vw);
+	width: 100vw;
+	background-image: var(--green-edge-top-air), var(--green-edge-bottom-air);
+	background-position: var(--green-edge-top-wave-x) top, var(--green-edge-bottom-wave-x) bottom;
+	background-repeat: no-repeat;
+	background-size: var(--green-edge-top-wave-width) var(--green-edge-air),
+		var(--green-edge-bottom-wave-width) var(--green-edge-air);
+	z-index: -1;
+	pointer-events: none;
+}
+
+.section.section--green:has(+ .cta-block),
+.institutions-expanded-access-grid:has(+ .cta-block) {
+	--green-edge-bottom-air: none;
+	padding-top: calc(var(--section-padding) * 2 + var(--green-edge-air));
+	padding-bottom: calc(var(--section-padding) * 2);
+}
+
+.content > .section.section--green + .cta-block {
+	margin-top: 0;
+}
+
+.section.section--green:has(+ .cta-block)::before,
+.institutions-expanded-access-grid:has(+ .cta-block)::before {
+	bottom: -2px;
+}
+
+.content > .section.section--green + .cta-block::before {
+	top: -2px;
 }
 
 .section.section--gray + .section.section--green,
 .section.section--green + .section.section--gray {
-	margin-top: var(--section-padding);
+	margin-top: var(--section-stack-gap);
 }
 
-.section.section--gray:has(+ .section.section--gray),
-.section.section--green:has(+ .section.section--green) {
+.section.section--gray:has(+ .section.section--gray) {
 	padding-bottom: calc(var(--section-padding) * 0.5);
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 }
 
-.section.section--gray + .section.section--gray,
-.section.section--green + .section.section--green {
+.section.section--gray:has(+ .section.section--gray)::after {
+	content: none;
+}
+
+.section.section--green:has(+ .section.section--green) {
+	padding-bottom: calc(var(--section-padding) * 0.5 + var(--green-edge-air));
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.section.section--gray + .section.section--gray {
 	padding-top: calc(var(--section-padding) * 0.5);
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.section.section--green + .section.section--green {
+	padding-top: calc(var(--section-padding) * 0.5 + var(--green-edge-air));
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
@@ -593,8 +817,13 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	padding-top: calc(var(--section-padding) * 2);
 }
 
+.content > .hero-background-spacer + .section.section--green,
+.content > .hero-background-spacer + script + .section.section--green {
+	padding-top: calc(var(--section-padding) * 2 + var(--green-edge-air));
+}
+
 .section:is(.section--gray, .section--green):has(+ .cta-block) {
-	margin-bottom: var(--section-padding);
+	margin-bottom: 0;
 }
 
 .section--dark {
@@ -613,6 +842,15 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 .section {
 	display: grid;
 	gap: 28px;
+}
+
+.content > :is(.section, .cta-block) + :is(.section, .cta-block) {
+	margin-top: var(--section-stack-gap);
+}
+
+.content > .hero-background-spacer + :is(.section, .cta-block),
+.content > .hero-background-spacer + script + :is(.section, .cta-block) {
+	margin-top: 0;
 }
 
 .section-header {
@@ -676,7 +914,14 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 }
 
 .section.section--green
-	:where(h1, h2, h3, h4, p, .section-lead):not(
+	:where(h1, h2, h3, h4):not(
+		:where(.card, .footer-cta) :where(h1, h2, h3, h4)
+) {
+	color: #ff803b !important;
+}
+
+.section.section--green
+	:where(p, .section-lead):not(
 		:where(.card, .footer-cta) :where(h1, h2, h3, h4, p, .section-lead)
 	) {
 	color: #ffffff !important;
@@ -757,6 +1002,20 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	max-width: 760px;
 }
 
+.hero-title-rest {
+	display: inline-block;
+	font-size: 0.85em;
+	line-height: inherit;
+}
+
+.section-title-accent {
+	color: var(--accent-orange) !important;
+}
+
+.section-title-rest {
+	color: var(--text) !important;
+}
+
 .hero-lead,
 .hero-body {
 	max-width: 760px;
@@ -833,10 +1092,34 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	color: #ffffff;
 	font-family: var(--font-ui);
 	font-size: 0.95rem;
-	font-weight: 600;
+	font-weight: 500;
 	line-height: var(--line-height-heading);
 	text-align: center;
 	text-decoration: none;
+	-webkit-mask-image:
+		url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23000%27%20d%3D%27M%200%200%20C%204.5%2025%204.5%2075%200%20100%20L%20100%20100%20L%20100%200%20Z%27/%3E%3C/svg%3E"),
+		linear-gradient(#000, #000);
+	mask-image:
+		url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23000%27%20d%3D%27M%200%200%20C%204.5%2025%204.5%2075%200%20100%20L%20100%20100%20L%20100%200%20Z%27/%3E%3C/svg%3E"),
+		linear-gradient(#000, #000);
+	-webkit-mask-position:
+		left top,
+		right top;
+	mask-position:
+		left top,
+		right top;
+	-webkit-mask-repeat:
+		no-repeat,
+		no-repeat;
+	mask-repeat:
+		no-repeat,
+		no-repeat;
+	-webkit-mask-size:
+		var(--button-left-curve-width) 100%,
+		calc(100% - var(--button-left-curve-width) + 1px) 100%;
+	mask-size:
+		var(--button-left-curve-width) 100%,
+		calc(100% - var(--button-left-curve-width) + 1px) 100%;
 	cursor: pointer;
 	transition:
 		transform var(--motion-deliberate) ease,
@@ -905,7 +1188,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	height: auto;
 	padding: 6px 12px;
 	font-size: 14px;
-	font-weight: var(--font-weight-ui);
+	font-weight: 500;
 	line-height: var(--line-height-heading);
 }
 
@@ -939,7 +1222,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 
 .card-grid {
 	display: grid;
-	gap: 18px;
+	gap: var(--card-grid-gap);
 	grid-auto-rows: 1fr;
 	align-items: stretch;
 	min-width: 0;
@@ -1040,7 +1323,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 
 	.institutions-publisher-intro
 		> .institutions-publisher-copy:first-child:has(+ .institutions-publisher-card) {
-		padding-top: 28px;
+		padding-top: 0;
 	}
 
 	.security-source-distribution-layout
@@ -1052,6 +1335,16 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 .comparison-text-panel .card-copy {
 	display: grid;
 	gap: 10px;
+}
+
+.content
+	:is(
+		.comparison-text-panel,
+		.institutions-publisher-copy,
+		.security-source-distribution-copy
+	):has(+ :is(.card--good, .institutions-publisher-card, .security-source-theft-guard-card))
+	li::marker {
+	color: var(--accent-orange) !important;
 }
 
 .card-grid > .card {
@@ -1212,6 +1505,10 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	min-width: 0;
 }
 
+.cta-block-copy h2 {
+	font-size: clamp(1.62rem, 2.592vw, 2.592rem);
+}
+
 .cta-block p {
 	font-size: 1.125rem;
 	line-height: var(--line-height-body);
@@ -1257,6 +1554,10 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	line-height: var(--line-height-heading);
 }
 
+.site-footer .site-footer-tagline-dot {
+	color: var(--accent-orange);
+}
+
 .site-footer .site-footer-meta {
 	color: var(--muted);
 }
@@ -1282,7 +1583,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	width: 48px;
 	height: 48px;
 	border-radius: 0;
-	background: var(--accent);
+	background: var(--accent-orange);
 	color: #ffffff;
 	font-size: 24px;
 	font-weight: 700;
@@ -1858,6 +2159,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	transition: transform var(--motion-hero) var(--motion-ease);
 }
 
+.animation-pass-ready [data-reveal][data-media-reveal-origin="left"],
 .animation-pass-ready [data-reveal][data-media-reveal-direction="left"] {
 	--media-reveal-start-x: calc(-100vw - 48px);
 }
@@ -1884,6 +2186,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	transform: translate3d(var(--media-reveal-start-x), 0, 0) scale(1.035);
 }
 
+.animation-pass-ready [data-hero-load-reveal][data-media-reveal-origin="left"],
 .animation-pass-ready [data-hero-load-reveal][data-media-reveal-direction="left"] {
 	--media-reveal-start-x: calc(-100vw - 48px);
 }
@@ -1929,6 +2232,14 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	--card-reveal-start-x: calc(100vw + 48px);
 	transform: translate3d(var(--card-reveal-start-x), 0, 0);
 	transition: transform var(--motion-hero) var(--motion-ease);
+}
+
+.animation-pass-ready.animation-pass-preparing [data-card-reveal] {
+	transition: none !important;
+}
+
+.animation-pass-ready .card-grid:has([data-card-reveal].card--good) {
+	overflow: visible;
 }
 
 .animation-pass-ready [data-card-reveal].card--good[data-card-reveal-direction="left"] {
@@ -2026,11 +2337,24 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 					.webuzz-overview-card-heading .section-icon
 				)
 			)
-		):hover
-		:is(h2, h3, h4),
-	.animation-pass-ready
-		:is([data-hover-card].card--good, [data-hover-card].card--accent, .section--green [data-hover-card]):not(
-			:has(
+			):hover
+			:is(h2, h3, h4),
+		:is(.card--good, .card--accent, .section--green .card):not(
+				:has(
+					:is(
+						.section-icon,
+						.card-icon-heading > svg,
+						.weread-benefit-card-heading > .section-icon,
+						.author-benefit-heading .section-icon,
+						.contact-tip-heading .section-icon,
+						.webuzz-overview-card-heading .section-icon
+					)
+				)
+			):hover
+			:is(h2, h3, h4) *,
+		.animation-pass-ready
+			:is([data-hover-card].card--good, [data-hover-card].card--accent, .section--green [data-hover-card]):not(
+				:has(
 				:is(
 					.section-icon,
 					.card-icon-heading > svg,
@@ -2040,9 +2364,27 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 					.webuzz-overview-card-heading .section-icon
 				)
 			)
-		):hover
-		:is(h2, h3, h4) {
-		color: var(--accent-orange) !important;
+			):hover
+			:is(h2, h3, h4),
+		.animation-pass-ready
+			:is([data-hover-card].card--good, [data-hover-card].card--accent, .section--green [data-hover-card]):not(
+				:has(
+					:is(
+						.section-icon,
+						.card-icon-heading > svg,
+						.weread-benefit-card-heading > .section-icon,
+						.author-benefit-heading .section-icon,
+						.contact-tip-heading .section-icon,
+						.webuzz-overview-card-heading .section-icon
+					)
+				)
+			):hover
+			:is(h2, h3, h4) * {
+			color: var(--accent-orange) !important;
+		}
+
+	.content .section--green .home-product-grid .card:hover :is(h2, h3, h4) .home-product-link:is(:hover, :focus-visible) {
+		color: #ffffff !important;
 	}
 }
 

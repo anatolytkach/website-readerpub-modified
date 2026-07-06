@@ -84,7 +84,7 @@ const ctaActions = [
 	description="With ReaderPub, institutions create live knowledge publications that remain visible, accessible and useful over time."
 >
 	<section class="network-hero institutions-network-hero">
-		<div class="institutions-network-media" data-hero-load-reveal>
+		<div class="institutions-network-media" data-hero-load-reveal data-media-reveal-origin="left">
 			<img
 				class="image-block image-large network-hero-image institutions-network-image"
 				src="/images/institutions.webp"
@@ -165,9 +165,9 @@ const ctaActions = [
 
 	<Section
 		tone="gray"
-		title="Why institutional publishing fails online"
 		body="Many organizations successfully publish knowledge, but struggle to make it visible, accessible and actively used."
 	>
+		<Fragment slot="title"><span class="section-title-accent">Why</span> <span class="section-title-rest">institutional publishing fails online</span></Fragment>
 		<CardGrid columns="4" class="institutions-top-problem-grid">
 			{problemCards.map((card) => <Card {...card} />)}
 		</CardGrid>
@@ -227,10 +227,11 @@ const ctaActions = [
 			<div class="card icon-grid-card institutions-green-gradient-card">
 				<SectionIcon type="sale" title="Sell titles" />
 				<div class="icon-grid-card-copy">
-					<h3>Sell titles with lower fees — and keep your audience</h3>
+					<h3>Publishers sell titles with lower fees — and keep the audience connected</h3>
+					<p class="institutions-commerce-note">Your books portfolio is launched as active web assets, not isolated product files. The books are fully. protected from copying – no DRM required.</p>
 					<ul class="bullets">
-						<li>Commerce-ready distribution under control</li>
-						<li>Low 5% sales commission</li>
+						<li>Commerce-ready distribution under control.</li>
+						<li>Low 5% sales commission.</li>
 						<li>First-party analytics: revenue, cohorts, engagement.</li>
 					</ul>
 				</div>
@@ -530,26 +531,16 @@ const ctaActions = [
 	.institutions-solution-section,
 	.institutions-benefits-section,
 	.institutions-expanded-section {
-		--card: #fcfaf8;
 		--link: var(--accent);
-		--section-flow-gap: 16px;
+		--section-flow-gap: 18px;
 	}
 
 	.institutions-solution-section,
 	.institutions-benefits-section,
 	.institutions-expanded-section {
-		padding-top: 58px !important;
-		padding-bottom: 58px !important;
-		margin-top: 0 !important;
-	}
-
-	@media (orientation: portrait) {
-		.institutions-solution-section,
-		.institutions-benefits-section,
-		.institutions-expanded-section {
-			padding-top: var(--section-padding) !important;
-			padding-bottom: var(--section-padding) !important;
-		}
+		padding-top: var(--section-padding) !important;
+		padding-bottom: var(--section-padding) !important;
+		margin-top: var(--section-stack-gap) !important;
 	}
 
 	.institutions-solution-section > h2,
@@ -569,7 +560,7 @@ const ctaActions = [
 	.institutions-solution-section .card-grid,
 	.institutions-expanded-section .card-grid {
 		display: grid;
-		gap: var(--section-flow-gap);
+		gap: calc(var(--section-flow-gap) * 1.5);
 		justify-content: stretch;
 		justify-items: stretch;
 		align-items: stretch;
@@ -579,25 +570,7 @@ const ctaActions = [
 
 	.institutions-solution-section .card,
 	.institutions-expanded-section .card {
-		display: flex;
-		flex-direction: column;
-		gap: var(--section-flow-gap);
 		height: 100%;
-		min-height: 130px;
-		padding: 18px;
-		border: 1px solid var(--border);
-		border-radius: 10px;
-		background: var(--card-bg);
-	}
-
-	.institutions-solution-section .card {
-		--card-tint: #eaf9f5;
-		background: var(--card-bg);
-	}
-
-	.institutions-expanded-section .institutions-green-gradient-card {
-		--card-tint: #eaf9f5;
-		background: var(--card-bg);
 	}
 
 	.institutions-solution-section .card h3,
@@ -613,7 +586,7 @@ const ctaActions = [
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) minmax(320px, 0.86fr);
 		gap: clamp(32px, 5vw, 64px);
-		align-items: start;
+		align-items: center;
 		padding: var(--section-padding) !important;
 	}
 
@@ -622,6 +595,7 @@ const ctaActions = [
 	}
 
 	.institutions-publisher-copy {
+		align-self: center;
 		display: grid;
 		gap: var(--section-flow-gap);
 		min-width: 0;
@@ -629,18 +603,19 @@ const ctaActions = [
 
 	.institutions-publisher-lede,
 	.institutions-publisher-note {
-		color: var(--link) !important;
+		color: #ffffff !important;
 		max-width: 760px;
 	}
 
 	.institutions-publisher-card {
+		align-self: center;
 		height: auto;
 		min-height: 0;
 		gap: var(--section-flow-gap);
 	}
 
-	.institutions-publisher-access {
-		color: var(--text) !important;
+	.institutions-publisher-intro .institutions-publisher-access {
+		color: #ff803b !important;
 		font-size: 18px;
 		line-height: var(--line-height-body);
 		max-width: none;
@@ -653,6 +628,9 @@ const ctaActions = [
 	.institutions-expanded-section {
 		display: grid;
 		gap: var(--section-flow-gap);
+	}
+
+	:global(.institutions-expanded-section:has(+ .institutions-value-section)) {
 		padding-bottom: 0 !important;
 	}
 
@@ -669,24 +647,34 @@ const ctaActions = [
 	}
 
 	.institutions-expanded-access-grid {
-		--section-green-circle-center: 50% 50%;
+		--section-green-circle-x: 50%;
+		--section-green-circle-y: 50%;
+		--section-bg-parallax-y: 0px;
+		--section-bg-size: auto;
+		--section-bg: repeating-radial-gradient(
+			circle at var(--section-green-circle-x) calc(var(--section-green-circle-y) + var(--section-bg-parallax-y)),
+			#027468 0,
+			#027468 46.4px,
+			#018275 46.4px,
+			#018275 51.733px
+		);
 		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
 		grid-auto-rows: auto;
-		gap: 24px;
-		padding: var(--section-padding);
-		border-radius: var(--radius-card);
-		background: repeating-radial-gradient(
-			circle at var(--section-green-circle-center),
-			#028f80 0,
-			#028f80 36px,
-			#019989 36px,
-			#019989 44px
-		);
+		gap: calc(var(--section-flow-gap) * 1.5);
+		margin-top: calc(var(--section-padding) - var(--section-flow-gap));
+		padding: calc(var(--section-padding) + var(--green-edge-air)) var(--section-padding);
+		border-radius: 0;
+		background: transparent;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: var(--section-bg-size);
+		will-change: background;
 	}
 
 	.institutions-expanded-access-grid > .institutions-access-card {
 		grid-column: span 2;
-		padding: 28px;
+		border-color: var(--accent);
+		border-radius: calc(var(--radius-card) * 3);
 	}
 
 	.institutions-expanded-section .icon-grid-card {
@@ -758,13 +746,17 @@ const ctaActions = [
 
 	.institutions-access-card > .button {
 		margin-top: auto;
-		align-self: center;
+		align-self: flex-start;
 	}
 
 	.institutions-community-highlight {
 		color: var(--text);
 		font-family: var(--font-heading);
 		font-weight: var(--font-weight-heading);
+	}
+
+	.institutions-commerce-note {
+		color: var(--text) !important;
 	}
 
 	.institutions-outcome-note {

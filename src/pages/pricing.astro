@@ -41,7 +41,7 @@ const ctaActions = [
 
 	<Section tone="gray" class="pricing-problem-section">
 		<Fragment slot="title">
-			<span class="pricing-problem-title-nowrap">Publishing pricing no longer matches the market</span>
+			<span class="pricing-problem-title-nowrap"><span class="section-title-rest">Publishing pricing</span> <span class="section-title-accent">no longer matches the market</span></span>
 		</Fragment>
 		<div class="pricing-copy-stack">
 			<p>Different types of publishers use digital publishing platforms in very different ways.</p>
@@ -334,7 +334,7 @@ const ctaActions = [
 	.model-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 

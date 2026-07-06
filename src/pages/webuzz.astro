@@ -25,12 +25,12 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		actions={[joinConversationAction]}
 		spacerBackgroundPositionY="27%"
 	>
-		<Fragment slot="title"><span class="webuzz-legacy-product">WeBuzz:</span><br />The missing layer of the book industry</Fragment>
+		<Fragment slot="title"><span class="webuzz-legacy-product">WeBuzz:</span><br /><span class="hero-title-rest">The missing layer of the book industry</span></Fragment>
 		<Fragment slot="body">WeBuzz is ReaderPub's integrated literary social network, connecting readers, authors, and publishers through discussions, reactions, and shared reading experiences around every book.</Fragment>
 	</HeroSection>
 
 	<section class="section section--gray spec-cards-section webuzz-problem-section">
-		<h2>Books are the last major medium without a native social layer</h2>
+		<h2><span class="section-title-rest">Books are the last major medium</span> <span class="section-title-accent">without a native social layer</span></h2>
 		<div class="card-grid webuzz-comparison-grid">
 			<div class="card webuzz-check-card">
 				<h3>Video</h3>
@@ -288,8 +288,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	.webuzz-problem-section {
 		--link: var(--accent);
-		--card: #fcfaf8;
-		--section-flow-gap: 16px;
+		--section-flow-gap: 18px;
 		--section-block-gap-adjust: 12px;
 		display: grid;
 		gap: 28px;
@@ -336,20 +335,12 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	.webuzz-problem-section .webuzz-comparison-grid {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: var(--section-flow-gap);
+		gap: calc(var(--section-flow-gap) * 1.5);
 	}
 
 	.webuzz-problem-section .webuzz-comparison-grid .card {
 		position: relative;
-		display: flex;
-		flex-direction: column;
-		gap: var(--section-flow-gap);
 		height: 100%;
-		min-height: 130px;
-		padding: 18px;
-		border: 1px solid var(--border);
-		border-radius: 10px;
-		background: var(--card-bg);
 	}
 
 	.webuzz-problem-section .webuzz-comparison-grid .card h3 {
@@ -392,26 +383,19 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	.webuzz-solution-section {
 		--link: var(--accent);
-		--section-flow-gap: 16px;
+		--section-flow-gap: 18px;
 		display: flex;
 		flex-direction: column;
 		gap: var(--section-flow-gap);
 		align-items: stretch;
 		position: relative;
-		margin-top: 0 !important;
-		padding-top: 58px !important;
-		padding-bottom: 58px !important;
+		margin-top: var(--section-stack-gap) !important;
+		padding-top: var(--section-padding) !important;
+		padding-bottom: var(--section-padding) !important;
 	}
 
 	.webuzz-solution-section > * {
 		margin: 0 !important;
-	}
-
-	@media (orientation: portrait) {
-		.webuzz-solution-section {
-			padding-top: var(--section-padding) !important;
-			padding-bottom: var(--section-padding) !important;
-		}
 	}
 
 	.webuzz-legacy-overview {
@@ -423,11 +407,11 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	.webuzz-overview-card-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 32px;
 		width: 100%;
 	}
 
 	.webuzz-legacy-intro-grid {
+		gap: 32px;
 		align-items: center;
 	}
 
@@ -436,6 +420,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	.webuzz-overview-card-grid {
+		gap: 48px;
 		align-items: stretch;
 	}
 
@@ -477,8 +462,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	.webuzz-legacy-solution-card {
-		padding: 24px;
-		background: var(--card-bg);
+		min-height: 0;
 	}
 
 	.webuzz-legacy-solution-card p {
@@ -489,15 +473,11 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	.webuzz-overview-card {
-		min-height: 130px;
-		padding: 18px;
-		border-radius: 10px;
-		background: var(--card-bg);
+		min-height: 0;
 	}
 
 	.webuzz-overview-card--green {
-		padding: 24px;
-		background: var(--card-bg);
+		min-height: 0;
 	}
 
 	.webuzz-overview-card-heading {
@@ -567,7 +547,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	.webuzz-comparison-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 
@@ -617,7 +597,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	:global(.webuzz-benefits-section .webuzz-matters-grid) {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 	}
 
 	:global(.webuzz-image-section .section-header) {

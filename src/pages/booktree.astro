@@ -32,9 +32,9 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 
 	<Section
 		tone="gray"
-		title="Books are organized. Knowledge is not."
 		body="People may keep their books organized, but the ideas they collect often become scattered across files, notes and projects."
 	>
+		<Fragment slot="title"><span class="section-title-accent">Books are organized.</span> <span class="section-title-rest">Knowledge is not.</span></Fragment>
 		<CardGrid columns="2" class="booktree-problem-grid">
 			<Card title="Ideas scatter" body="Important insights become distributed across many books and sources." />
 			<Card title="Context disappears" body="Notes lose meaning when separated from the publications they came from." />
@@ -181,7 +181,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	.booktree-source-model-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 
@@ -236,9 +236,6 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 
 	.booktree-flow-card {
 		min-height: 0;
-		padding: 24px;
-		border-radius: 10px;
-		background: var(--card-bg);
 	}
 
 	.flow-chain {

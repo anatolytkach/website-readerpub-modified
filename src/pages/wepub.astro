@@ -24,16 +24,16 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		actions={[publishAction, pricingAction]}
 		spacerBackgroundPositionY="18%"
 	>
-		<Fragment slot="title"><span style="color: var(--accent);">WePub:</span><br />Publish to readers, you never lose.</Fragment>
+		<Fragment slot="title"><span style="color: var(--accent);">WePub:</span><br /><span class="hero-title-rest">Publish to readers, you never lose.</span></Fragment>
 		<Fragment slot="body">ReaderPub turns books into living web assets: readable, searchable, discussable and connected, so authors and publishers achieve strategic distribution.</Fragment>
 	</HeroSection>
 
 	<Section
 		tone="gray"
 		class="wepub-old-model-section"
-		title="The old model just creates book files for download"
 		body="A file-based model can distribute a book, but it usually separates the author from the reader."
 	>
+		<Fragment slot="title"><span class="section-title-rest">The old model</span> <span class="section-title-accent">just creates book files for download</span></Fragment>
 		<CardGrid columns="2">
 			<Card
 				title="Problem"
@@ -188,7 +188,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 	.wepub-comparison-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 
@@ -214,13 +214,11 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 	.wepub-start-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 
 	.wepub-start-card {
-		--card-tint: #fcfaf8;
-		background: var(--button-light-bg);
 		min-height: 0;
 	}
 
@@ -288,12 +286,11 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 	}
 
 	:global(.wepub-economics-section .card) {
-		--card-tint: #fbfaf8;
+		min-height: 0;
 	}
 
 	:global(.wepub-infrastructure-section .card) {
-		--card-tint: #fcfaf8 !important;
-		background: var(--card-bg) !important;
+		min-height: 0;
 	}
 
 	.wepub-model-list {

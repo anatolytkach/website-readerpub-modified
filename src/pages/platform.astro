@@ -66,15 +66,15 @@ const benefitCards = [
 		spacerBackgroundPositionY="45%"
 		class="platform-hero"
 	>
-		<Fragment slot="title"><span class="platform-hero-product">ReaderPub:</span><br />A web-native publishing network.</Fragment>
+		<Fragment slot="title"><span class="platform-hero-product">ReaderPub:</span><br /><span class="hero-title-rest">A web-native publishing network.</span></Fragment>
 		<Fragment slot="body">Publish securely to the web.<br />Listen to and retain your readers.</Fragment>
 	</HeroSection>
 
 	<Section
 		tone="gray"
-		title="Publishing systems are fragmented"
 		body="Most digital publishing workflows rely on disconnected tools. Publishing, reading, discussion and knowledge management often happen in separate systems."
 	>
+		<Fragment slot="title"><span class="section-title-rest">Publishing systems</span> <span class="section-title-accent">are fragmented</span></Fragment>
 		<CardGrid columns="2" class="platform-problem-grid">
 			{problemCards.map((card) => <Card {...card} />)}
 		</CardGrid>
@@ -87,7 +87,7 @@ const benefitCards = [
 				File-first publishing can move a book from one place to another, but it cannot keep books connected to readers, authors, institutions and communities.
 			</p>
 			<div class="model-grid">
-				<div class="comparison-text-panel platform-old-model-card" style="--card-tint: #fcfaf8; background: var(--button-light-bg);">
+				<div class="comparison-text-panel platform-old-model-card">
 					<h3>Old publishing model</h3>
 					<ul class="comparison-list">
 						<li>Create a file</li>
@@ -413,7 +413,7 @@ const benefitCards = [
 	.platform-source-section.section-continuation {
 		padding-top: 58px !important;
 		padding-bottom: 58px !important;
-		margin-top: 0 !important;
+		margin-top: var(--section-stack-gap) !important;
 	}
 
 	.platform-source-section h2 {
@@ -444,7 +444,7 @@ const benefitCards = [
 	.platform-source-section .model-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: var(--section-flow-gap);
+		gap: calc(var(--section-flow-gap) * 1.5);
 		width: 100%;
 	}
 
@@ -476,8 +476,7 @@ const benefitCards = [
 	}
 
 	.platform-source-section .platform-old-model-card {
-		--card-tint: #fcfaf8 !important;
-		background: var(--button-light-bg) !important;
+		background: transparent !important;
 	}
 
 	.platform-source-section .platform-old-model-card .comparison-list li::before {
@@ -521,7 +520,7 @@ const benefitCards = [
 	.platform-source-section .platform-two-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: var(--section-flow-gap);
+		gap: calc(var(--section-flow-gap) * 1.5);
 	}
 
 	.platform-source-section .platform-three-grid {
@@ -534,8 +533,7 @@ const benefitCards = [
 	}
 
 	.platform-source-section.platform-products-section .card {
-		--card-tint: #fcfaf8;
-		background: var(--button-light-bg);
+		min-height: 0;
 	}
 
 	.platform-source-section.platform-products-section .card h3 {
@@ -544,8 +542,6 @@ const benefitCards = [
 
 	.platform-source-section .platform-onboarding-grid .platform-onboarding-card {
 		align-items: stretch;
-		--card-tint: #fcfaf8;
-		background: var(--card-bg) !important;
 		text-align: left;
 	}
 
@@ -660,8 +656,7 @@ const benefitCards = [
 	}
 
 	.platform-source-section .platform-reading-cards .card {
-		--card-tint: #fcfaf8;
-		background: var(--button-light-bg);
+		min-height: 0;
 	}
 
 	.platform-source-section .platform-reading-image {
@@ -702,7 +697,7 @@ const benefitCards = [
 		grid-area: cards;
 		display: grid;
 		grid-template-columns: minmax(0, 1fr);
-		gap: var(--section-flow-gap);
+		gap: calc(var(--section-flow-gap) * 1.5);
 		width: 100%;
 	}
 
@@ -873,7 +868,7 @@ const benefitCards = [
 	.platform-comparison-block {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 
@@ -937,7 +932,7 @@ const benefitCards = [
 		min-height: auto;
 		padding: 10px 18px;
 		font-size: 14px;
-		font-weight: 600;
+		font-weight: 500;
 		line-height: 1;
 	}
 
@@ -1002,7 +997,7 @@ const benefitCards = [
 		padding: 18px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-card);
-		background: var(--button-light-bg);
+		background: var(--card-bg);
 		color: var(--text);
 		font-weight: 700;
 		text-align: center;

@@ -28,16 +28,16 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		>
 			<Fragment slot="title">
 				<span class="readers-hero-product" style="color: var(--accent);">WeRead:</span><br />
-				<span class="readers-hero-title-small">Genuine eReader.<br />Right in your browser.</span>
+				<span class="readers-hero-title-small hero-title-rest">Genuine eReader.<br />Right in your browser.</span>
 			</Fragment>
 			<Fragment slot="body">We bring all around books together.</Fragment>
 		</HeroSection>
 
 	<Section
 		tone="gray"
-		title="Why readers abandon books"
 		body="The problem is not access. Readers already have access to more books than they can finish. The problem is isolation."
 	>
+		<Fragment slot="title"><span class="section-title-accent">Why</span> <span class="section-title-rest">readers abandon books</span></Fragment>
 		<CardGrid columns="2" class="weread-source-icon-grid">
 			<article class="card icon-grid-card">
 				<SectionIcon type="readerBook" title="Reading is isolated" />
@@ -68,7 +68,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 				</div>
 			</article>
 		</CardGrid>
-		<div class="weread-combined-subsection">
+		<div class="weread-combined-subsection weread-app-problem-subsection">
 			<header class="section-header">
 				<h2>The problem with app-based reading</h2>
 				<p class="section-lead">App-based reading gave books digital access, but it kept reading isolated from the web.</p>
@@ -221,15 +221,10 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 			<span class="weread-network-black-copy">The WeRead catalog includes tens of thousands of books with annotations and author biographies, helping readers understand what a book is about before they begin reading.</span>
 			<span>Notes, comments, recommendations and discussions become part of the reading environment instead of disappearing into separate products.</span>
 		</Fragment>
-		<CardGrid columns="4">
+		<CardGrid columns="3">
 			<Card title="Books connect to readers" body="Reading activity can point people toward communities and conversations about the work." />
 			<Card title="Readers connect to books" body="Discovery can come through people and communities, not only store rankings." />
 			<Card title="Books connect to future work" body="A title can remain active on the web after the first sale or download." />
-			<Card
-				title="Ask while you read"
-				body="Readers can ask Scribe questions about books, authors, literary references and historical context without leaving the ReaderPub environment."
-				href="/scribe"
-			/>
 		</CardGrid>
 		<div class="weread-combined-subsection">
 			<header class="section-header">
@@ -291,6 +286,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	}
 
 	.weread-source-hero h1 {
+		max-width: 1060px;
 		font-size: clamp(30.6px, 4.25vw, 47.6px);
 		line-height: var(--line-height-heading);
 	}
@@ -325,15 +321,39 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		align-self: center;
 	}
 
+	@media (min-width: 901px) {
+		:global(.weread-source-hero.hero-section) {
+			grid-template-columns: minmax(0, 1fr) minmax(520px, 0.75fr);
+			gap: 24px;
+		}
+
+		:global(.weread-source-hero .hero-media) {
+			justify-content: flex-end;
+		}
+
+		.weread-source-hero .hero-image {
+			max-width: 720px;
+			height: min(var(--hero-image-reader-height), calc(100cqw * var(--hero-image-reader-ratio)));
+		}
+
+		.weread-source-hero .readers-hero-title-small {
+			white-space: nowrap;
+		}
+	}
+
 	.weread-comparison-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 
 	.weread-list-card {
 		min-height: 0;
+	}
+
+	.weread-app-problem-subsection h2 {
+		color: var(--accent-orange);
 	}
 
 	.weread-model-list {
@@ -429,7 +449,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	}
 
 	.weread-card-product {
-		color: var(--accent);
+		color: var(--accent-orange);
 	}
 
 	.weread-network-title-line {
@@ -442,10 +462,17 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 
 	:global(.weread-network-section .section-header) {
 		max-width: 1080px;
+		justify-items: start;
+		text-align: left;
 	}
 
 	:global(.weread-network-section .section-header h2) {
 		max-width: 1080px;
+		text-align: left;
+	}
+
+	:global(.weread-network-section .section-header h2 .weread-card-product) {
+		color: #ff803b !important;
 	}
 
 	:global(.weread-network-section .section-lead) {
@@ -458,7 +485,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	}
 
 	:global(.weread-network-section .section-lead .weread-network-black-copy) {
-		color: var(--text) !important;
+		color: #ffffff !important;
 	}
 
 	@media (min-width: 901px) {
@@ -558,6 +585,17 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	:global(.weread-feature-cards .card h3) {
 		font-size: clamp(1.35rem, 2vw, 1.75rem);
 		line-height: var(--line-height-heading);
+	}
+
+	:global(.weread-feature-cards .card h3 .weread-card-product) {
+		color: var(--accent);
+	}
+
+	:global(.weread-feature-cards .card:hover h3),
+	:global(.weread-feature-cards .card:hover h3 .weread-card-product),
+	:global(.weread-feature-cards .card:focus-within h3),
+	:global(.weread-feature-cards .card:focus-within h3 .weread-card-product) {
+		color: var(--accent-orange);
 	}
 
 	:global(.weread-feature-cards .cta-row) {

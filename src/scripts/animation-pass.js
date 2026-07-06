@@ -43,8 +43,10 @@ const mediaRevealSelector = [
 	"picture",
 ].join(",");
 const mediaRevealContextSelector = ".hero-section, .network-hero, .section, .proof-section, .pricing-source-section, .pricing-source-sections, section";
+const mediaRevealReferenceSelector = ".hero-copy, .network-hero-copy, .proof-copy, .section-header";
 const revealExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .modal-content";
 const cardExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .hero-section, .network-hero, .cta-block, form, .modal-content";
+const backgroundParallaxSelector = ".section.section--gray, .section.section--green, .institutions-expanded-access-grid";
 const goodCardSelector = [
 	".card--good",
 	".section--green .card",
@@ -83,9 +85,13 @@ let revealObserver;
 let revealElementsByTarget = new WeakMap();
 let cardRevealObserver;
 let cardRevealRowsByTarget = new WeakMap();
+let cardNaturalRects = new WeakMap();
 let cardRevealTimers = [];
 let cardRevealSentinels = [];
 let heroRevealTimers = [];
+let backgroundParallaxTargets = [];
+let backgroundParallaxFrame = 0;
+let hasBackgroundParallaxListeners = false;
 let isClientNavigation = animationPassState.isClientNavigation;
 let hasRunInitialSetup = animationPassState.hasRunInitialSetup;
 const supportsIntersectionObserver = "IntersectionObserver" in window;
@@ -134,20 +140,93 @@ const clearMediaRevealDirections = () => {
 	}
 };
 
+const getExplicitMediaRevealDirection = (element) => {
+	const direction = element.getAttribute("data-media-reveal-origin");
+
+	return direction === "left" || direction === "right" ? direction : undefined;
+};
+
+const getLayoutRect = (element) => {
+	if (!(element instanceof HTMLElement)) {
+		return undefined;
+	}
+
+	const width = element.offsetWidth;
+	const height = element.offsetHeight;
+
+	if (width <= 0 || height <= 0) {
+		return element.getBoundingClientRect();
+	}
+
+	let left = 0;
+	let top = 0;
+	let current = element;
+
+	while (current instanceof HTMLElement) {
+		left += current.offsetLeft;
+		top += current.offsetTop;
+		current = current.offsetParent;
+	}
+
+	return {
+		left,
+		top,
+		right: left + width,
+		bottom: top + height,
+		width,
+		height,
+	};
+};
+
+const getMediaRevealReference = (element, context) => {
+	if (!(context instanceof HTMLElement)) {
+		return undefined;
+	}
+
+	return [...context.children].find((child) => {
+		return child instanceof HTMLElement && child !== element && child.matches(mediaRevealReferenceSelector);
+	});
+};
+
 const setMediaRevealDirection = (element) => {
 	if (!(element instanceof HTMLElement) || !element.matches(mediaRevealSelector)) {
 		return;
 	}
 
-	const context = element.closest(mediaRevealContextSelector);
-	const elementRect = element.getBoundingClientRect();
-	const contextRect = context?.getBoundingClientRect();
+	const explicitDirection = getExplicitMediaRevealDirection(element);
 
-	if (!contextRect || elementRect.width <= 0 || elementRect.height <= 0 || contextRect.width <= 0) {
+	if (explicitDirection) {
+		element.setAttribute("data-media-reveal-direction", explicitDirection);
+		return;
+	}
+
+	const context = element.closest(mediaRevealContextSelector);
+	const elementRect = getLayoutRect(element);
+	const contextRect = context instanceof HTMLElement ? getLayoutRect(context) : undefined;
+
+	if (!elementRect || !contextRect || elementRect.width <= 0 || elementRect.height <= 0 || contextRect.width <= 0) {
 		return;
 	}
 
 	const elementCenter = elementRect.left + elementRect.width / 2;
+	const reference = getMediaRevealReference(element, context);
+	const referenceRect = reference ? getLayoutRect(reference) : undefined;
+	const tolerance = Math.min(24, Math.max(8, contextRect.width * 0.02));
+
+	if (referenceRect && referenceRect.width > 0 && referenceRect.height > 0) {
+		const referenceCenter = referenceRect.left + referenceRect.width / 2;
+
+		if (elementRect.right <= referenceRect.left + tolerance || elementCenter < referenceCenter - tolerance) {
+			element.setAttribute("data-media-reveal-direction", "left");
+			return;
+		}
+
+		if (elementRect.left >= referenceRect.right - tolerance || elementCenter > referenceCenter + tolerance) {
+			element.setAttribute("data-media-reveal-direction", "right");
+			return;
+		}
+	}
+
 	const contextCenter = contextRect.left + contextRect.width / 2;
 	element.setAttribute("data-media-reveal-direction", elementCenter < contextCenter ? "left" : "right");
 };
@@ -189,6 +268,64 @@ const clearHeroRevealTimers = () => {
 	}
 
 	heroRevealTimers = [];
+};
+
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+const isGreenParallaxTarget = (element) => {
+	return element.matches(".section--green, .institutions-expanded-access-grid");
+};
+
+const updateBackgroundParallax = () => {
+	backgroundParallaxFrame = 0;
+
+	if (reduceMotionQuery.matches) {
+		for (const target of backgroundParallaxTargets) {
+			target.style.setProperty("--section-bg-parallax-y", "0px");
+		}
+
+		return;
+	}
+
+	const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 1;
+	const maxOffset = Math.min(420, viewportHeight * 0.46);
+
+	for (const target of backgroundParallaxTargets) {
+		const rect = target.getBoundingClientRect();
+
+		if (rect.bottom < -viewportHeight * 0.25 || rect.top > viewportHeight * 1.25) {
+			continue;
+		}
+
+		const rawOffset = (viewportHeight * 0.5 - rect.top) * 0.42;
+		const offset = isGreenParallaxTarget(target) ? rawOffset : clamp(rawOffset, -maxOffset, maxOffset);
+
+		target.style.setProperty("--section-bg-parallax-y", `${offset.toFixed(2)}px`);
+	}
+};
+
+const requestBackgroundParallaxUpdate = () => {
+	if (backgroundParallaxFrame) {
+		return;
+	}
+
+	backgroundParallaxFrame = window.requestAnimationFrame(updateBackgroundParallax);
+};
+
+const setupBackgroundParallax = () => {
+	backgroundParallaxTargets = uniqueElements([backgroundParallaxSelector]);
+
+	if (!hasBackgroundParallaxListeners) {
+		window.addEventListener("scroll", requestBackgroundParallaxUpdate, { passive: true });
+		window.addEventListener("resize", requestBackgroundParallaxUpdate);
+		hasBackgroundParallaxListeners = true;
+	}
+
+	requestBackgroundParallaxUpdate();
+};
+
+const getNaturalRect = (element) => {
+	return cardNaturalRects.get(element) || element.getBoundingClientRect();
 };
 
 const clearCardRevealSentinels = () => {
@@ -311,7 +448,7 @@ const getCardRevealRows = () => {
 		const cards = getAnimationCards(group);
 
 		for (const card of cards) {
-			const rect = card.getBoundingClientRect();
+			const rect = getNaturalRect(card);
 
 			if (rect.width <= 0 || rect.height <= 0) {
 				continue;
@@ -329,24 +466,35 @@ const getCardRevealRows = () => {
 			row.cards.push(card);
 		}
 
-		rows.push(
-			...groupRows
-				.sort((a, b) => a.top - b.top)
-				.map((row) => ({
-					group,
-					cards: row.cards.sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left),
-				}))
-				.map((row) => {
-					setGoodCardRevealDirections(row.cards);
-					return row;
-				}),
-		);
+		const sortedRows = groupRows.sort((a, b) => a.top - b.top).map((row) => ({
+			group,
+			cards: row.cards.sort((a, b) => getNaturalRect(a).left - getNaturalRect(b).left),
+		}));
+
+		setGoodCardRevealDirectionsForRows(sortedRows);
+		rows.push(...sortedRows);
 	}
 
 	return rows;
 };
 
 const isGoodRevealCard = (card) => card instanceof HTMLElement && card.classList.contains("card--good");
+
+const isPortraitViewport = () => {
+	const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 1;
+	const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 1;
+	return viewportHeight >= viewportWidth;
+};
+
+const setGoodCardRevealOffset = (card, direction) => {
+	const rect = getNaturalRect(card);
+	const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 1;
+	const gutter = 64;
+	const offset = direction === "left" ? -gutter - rect.right : viewportWidth + gutter - rect.left;
+
+	card.setAttribute("data-card-reveal-direction", direction);
+	card.style.setProperty("--card-reveal-start-x", `${offset.toFixed(2)}px`);
+};
 
 const setGoodCardRevealDirections = (cards) => {
 	const goodCards = cards.filter((card) => isGoodRevealCard(card));
@@ -356,25 +504,59 @@ const setGoodCardRevealDirections = (cards) => {
 	}
 
 	if (goodCards.length === 1) {
-		goodCards[0].setAttribute("data-card-reveal-direction", "right");
+		setGoodCardRevealOffset(goodCards[0], "right");
 		return;
 	}
 
-	const rowLeft = Math.min(...goodCards.map((card) => card.getBoundingClientRect().left));
-	const rowRight = Math.max(...goodCards.map((card) => card.getBoundingClientRect().right));
+	const rowLeft = Math.min(...goodCards.map((card) => getNaturalRect(card).left));
+	const rowRight = Math.max(...goodCards.map((card) => getNaturalRect(card).right));
 	const rowCenter = rowLeft + (rowRight - rowLeft) / 2;
 
 	for (const card of goodCards) {
-		const rect = card.getBoundingClientRect();
+		const rect = getNaturalRect(card);
 		const cardCenter = rect.left + rect.width / 2;
-		card.setAttribute("data-card-reveal-direction", cardCenter < rowCenter ? "left" : "right");
+		setGoodCardRevealOffset(card, cardCenter < rowCenter ? "left" : "right");
+	}
+};
+
+const shouldAlternateStackedRows = (rows) => {
+	const goodRows = rows.filter((row) => row.cards.some((card) => isGoodRevealCard(card)));
+
+	if (!isPortraitViewport() || goodRows.length < 2) {
+		return false;
+	}
+
+	return goodRows.every((row) => row.cards.filter((card) => isGoodRevealCard(card)).length === 1);
+};
+
+const setGoodCardRevealDirectionsForRows = (rows) => {
+	if (!shouldAlternateStackedRows(rows)) {
+		for (const row of rows) {
+			setGoodCardRevealDirections(row.cards);
+		}
+
+		return;
+	}
+
+	let goodCardIndex = 0;
+
+	for (const row of rows) {
+		const goodCards = row.cards.filter((card) => isGoodRevealCard(card));
+
+		if (goodCards.length !== 1) {
+			setGoodCardRevealDirections(row.cards);
+			continue;
+		}
+
+		setGoodCardRevealOffset(goodCards[0], goodCardIndex % 2 === 0 ? "left" : "right");
+		goodCardIndex += 1;
 	}
 };
 
 const createCardRowSentinel = (row) => {
 	const groupRect = row.group.getBoundingClientRect();
-	const rowTop = Math.min(...row.cards.map((card) => card.getBoundingClientRect().top));
-	const rowBottom = Math.max(...row.cards.map((card) => card.getBoundingClientRect().bottom));
+	const rowTop = Math.min(...row.cards.map((card) => getNaturalRect(card).top));
+	const rowBottom = Math.max(...row.cards.map((card) => getNaturalRect(card).bottom));
 	const rowHeight = Math.max(1, rowBottom - rowTop);
 	const groupPosition = window.getComputedStyle(row.group).position;
 
@@ -405,14 +587,18 @@ const createCardRowSentinel = (row) => {
 
 const getTallestCard = (cards) => {
 	return cards.reduce((target, card) => {
-		const targetRect = target.getBoundingClientRect();
-		const cardRect = card.getBoundingClientRect();
+		const targetRect = getNaturalRect(target);
+		const cardRect = getNaturalRect(card);
 
 		return cardRect.height > targetRect.height ? card : target;
 	}, cards[0]);
 };
 
 const getCardRowTarget = (row) => {
+	if (row.cards.length === 1) {
+		return createCardRowSentinel(row);
+	}
+
 	const stableCards = row.cards.filter((card) => !isGoodRevealCard(card));
 
 	if (stableCards.length > 0) {
@@ -422,14 +608,21 @@ const getCardRowTarget = (row) => {
 	return createCardRowSentinel(row);
 };
 
+const shouldRevealCardTargetImmediately = (target) => {
+	const rect = target.getBoundingClientRect();
+	const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 1;
+
+	return rect.top <= viewportHeight * 0.92;
+};
+
 const getCardCenterX = (card) => {
-	const rect = card.getBoundingClientRect();
+	const rect = getNaturalRect(card);
 	return rect.left + rect.width / 2;
 };
 
 const getCardRevealOrder = (cards) => {
-	const rowLeft = Math.min(...cards.map((card) => card.getBoundingClientRect().left));
-	const rowRight = Math.max(...cards.map((card) => card.getBoundingClientRect().right));
+	const rowLeft = Math.min(...cards.map((card) => getNaturalRect(card).left));
+	const rowRight = Math.max(...cards.map((card) => getNaturalRect(card).right));
 	const rowCenter = rowLeft + (rowRight - rowLeft) / 2;
 
 	return [...cards].sort((a, b) => {
@@ -475,6 +668,23 @@ const revealCardRow = (cards) => {
 	});
 };
 
+const revealCardRowsForTarget = (target) => {
+	const rowsForTarget = cardRevealRowsByTarget.get(target);
+
+	if (target instanceof HTMLElement && target.hasAttribute("data-card-row-sentinel")) {
+		target.remove();
+	}
+
+	if (!rowsForTarget) {
+		return;
+	}
+
+	rowsForTarget.forEach((row, rowIndex) => {
+		const timer = window.setTimeout(() => revealCardRow(row.cards), rowIndex * cardRevealDelay);
+		cardRevealTimers.push(timer);
+	});
+};
+
 const prepareHeroMedia = () => {
 	const targets = uniqueElements(heroMediaSelectors);
 
@@ -495,6 +705,8 @@ const prepareHeroMedia = () => {
 };
 
 const revealHeroMedia = (target, delay = 0) => {
+	setMediaRevealDirection(target);
+
 	const timer = window.setTimeout(() => {
 		window.requestAnimationFrame(() => {
 			window.requestAnimationFrame(() => {
@@ -528,15 +740,20 @@ const setupHeroMedia = ({ delay = 0, targets = prepareHeroMedia() } = {}) => {
 };
 
 const markCards = () => {
+	cardNaturalRects = new WeakMap();
+
 	for (const card of document.querySelectorAll("[data-hover-card], [data-card-reveal]")) {
 		card.removeAttribute("data-hover-card");
 		card.removeAttribute("data-card-reveal");
 		card.removeAttribute("data-card-reveal-direction");
+		card.style.removeProperty("--card-reveal-start-x");
 		card.classList.remove("is-card-revealed");
 		card.classList.remove("is-card-reveal-complete");
 	}
 
 	for (const card of document.querySelectorAll(".card")) {
+		cardNaturalRects.set(card, card.getBoundingClientRect());
+
 		if (shouldTreatAsGoodCard(card)) {
 			card.classList.add("card--good");
 		}
@@ -635,16 +852,7 @@ const setupCardReveal = () => {
 
 				if (entry.intersectionRatio >= cardRevealThreshold || (entry.isIntersecting && canRevealOnIntersect)) {
 					cardRevealObserver?.unobserve(entry.target);
-					if (entry.target instanceof HTMLElement && entry.target.hasAttribute("data-card-row-sentinel")) {
-						entry.target.remove();
-					}
-
-					if (rowsForTarget) {
-						rowsForTarget.forEach((row, rowIndex) => {
-							const timer = window.setTimeout(() => revealCardRow(row.cards), rowIndex * cardRevealDelay);
-							cardRevealTimers.push(timer);
-						});
-					}
+					revealCardRowsForTarget(entry.target);
 				}
 			}
 		},
@@ -672,7 +880,12 @@ const setupCardReveal = () => {
 
 		if (!observedTargets.has(target)) {
 			observedTargets.add(target);
-			cardRevealObserver.observe(target);
+
+			if (shouldRevealCardTargetImmediately(target)) {
+				revealCardRowsForTarget(target);
+			} else {
+				cardRevealObserver.observe(target);
+			}
 		}
 	}
 };
@@ -681,16 +894,21 @@ const setupAnimationPass = ({ heroDelay = 0 } = {}) => {
 	clearHeroRevealTimers();
 	clearCardRevealTimers();
 	clearMediaRevealDirections();
+	document.documentElement.classList.add("animation-pass-preparing");
 	const heroTargets = prepareHeroMedia();
 	markCards();
 	setupReveal();
 	setupCardReveal();
+	setupBackgroundParallax();
 	if (heroDelay === 0) {
 		document.documentElement.classList.remove("animation-pass-hold-hero");
 	} else {
 		document.documentElement.classList.add("animation-pass-hold-hero");
 	}
 	document.documentElement.classList.add("animation-pass-ready");
+	window.requestAnimationFrame(() => {
+		document.documentElement.classList.remove("animation-pass-preparing");
+	});
 	setupHeroMedia({ delay: heroDelay, targets: heroTargets });
 };
 

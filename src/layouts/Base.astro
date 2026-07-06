@@ -16,6 +16,8 @@ const canonicalUrl = canonical
 		? canonical
 		: `https://${SITE_DOMAIN}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
 	: undefined;
+const routeSlug = Astro.url.pathname.replace(/^\/+|\/+$/g, "").split("/")[0] || "home";
+const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`;
 ---
 
 <html lang="en" class="no-js">
@@ -40,7 +42,7 @@ const canonicalUrl = canonical
 		/>
 		<ViewTransitions />
 	</head>
-	<body>
+	<body class={pageClass}>
 		<div class="page">
 			<Nav />
 			<main class="content">

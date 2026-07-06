@@ -79,7 +79,7 @@ const featuredBooks = [
 	</HeroSection>
 
 	<SpecCardsSection tone="gray" class="section-continue-next security-source-section security-first-section">
-		<h2>File-based piracy scales, bypassing the DRM</h2>
+		<h2><span class="section-title-rest">File-based piracy scales,</span> <span class="section-title-accent">bypassing the DRM</span></h2>
 		<p class="security-mobile-left-text">
 			When complete files are distributed to readers, publishers lose much of their control over what happens next.<br />Once that file exists on a device, it becomes the starting point for extraction, conversion, and redistribution.
 		</p>
@@ -287,6 +287,10 @@ const featuredBooks = [
 		padding-bottom: 58px !important;
 	}
 
+	:global(.security-source-section.section-continuation) {
+		margin-top: var(--section-stack-gap) !important;
+	}
+
 	@media (orientation: portrait) {
 		:global(.security-source-section) {
 			padding-top: var(--section-padding) !important;
@@ -352,7 +356,7 @@ const featuredBooks = [
 	.model-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 
@@ -688,7 +692,7 @@ const featuredBooks = [
 	:global(#protected-books .indie-protection-books) {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(min(100%, 280px), 1fr));
-		gap: var(--section-flow-gap);
+		gap: calc(var(--section-flow-gap) * 1.5);
 		align-items: stretch;
 		width: 100%;
 		min-width: 0;

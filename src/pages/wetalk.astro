@@ -117,14 +117,14 @@ const audienceCards = [
 		spacerBackgroundPositionY="100%"
 		class="wetalk-hero"
 	>
-		<Fragment slot="title"><span class="wetalk-hero-product">WeTalk:</span><br />Private discussion for institutional knowledge</Fragment>
+		<Fragment slot="title"><span class="wetalk-hero-product">WeTalk:</span><br /><span class="hero-title-rest">Private discussion for institutional knowledge</span></Fragment>
 	</HeroSection>
 
 	<Section
 		tone="gray"
-		title="Institutional discussion is fragmented"
 		body="Organizations often publish useful materials, but discussion happens in separate systems where access, context and long-term value are harder to preserve."
 	>
+		<Fragment slot="title"><span class="section-title-rest">Institutional discussion</span> <span class="section-title-accent">is fragmented</span></Fragment>
 		<CardGrid columns="2">
 			{fragmentationCards.map((card) => <Card {...card} />)}
 		</CardGrid>
@@ -243,7 +243,7 @@ const audienceCards = [
 	.wetalk-comparison-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: var(--section-gap);
+		gap: var(--card-grid-gap);
 		width: 100%;
 	}
 
