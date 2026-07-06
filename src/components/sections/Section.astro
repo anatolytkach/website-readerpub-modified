@@ -23,13 +23,30 @@ const {
 const resolvedTone = hasMedia ? "white" : tone;
 const hasTitleSlot = Astro.slots.has("title");
 const hasBodySlot = Astro.slots.has("body");
+const titleParts = typeof title === "string" ? title.split("ReaderPub") : [];
+const titleHasReaderPub = titleParts.length > 1;
 ---
 
 <section id={id} class:list={["section", `section--${resolvedTone}`, hasMedia && "section--with-media", className]}>
 	{(kicker || title || hasTitleSlot || body || hasBodySlot) && (
 		<header class="section-header">
 			{kicker && <p class="section-kicker">{kicker}</p>}
-			{(title || hasTitleSlot) && <h2>{hasTitleSlot ? <slot name="title" /> : title}</h2>}
+			{(title || hasTitleSlot) && (
+				<h2>
+					{hasTitleSlot ? (
+						<slot name="title" />
+					) : titleHasReaderPub ? (
+						titleParts.map((part, index) => (
+							<Fragment>
+								{index > 0 && <span class="readerpub-heading-word">ReaderPub</span>}
+								{part}
+							</Fragment>
+						))
+					) : (
+						title
+					)}
+				</h2>
+			)}
 			{hasBodySlot ? <p class="section-lead"><slot name="body" /></p> : body && <p class="section-lead">{body}</p>}
 		</header>
 	)}

@@ -71,7 +71,10 @@ const finalActions = [
 	<Section tone="green" class="about-section" title="Current focus">
 		<div class="about-copy-stack">
 			<p>
-				ReaderPub is focused on pilot projects with authors, publishers, universities, libraries and organizations that need better ways to publish, protect, read and discuss digital materials.
+				We have already launched a WeRead catalog of 60К+ public domain books accessible via the browser. In addition, our literature-focused WeBuzz social network is rapidly gaining momentum.
+			</p>
+			<p>
+				ReaderPub is currently focused on pilot projects with authors, publishers, universities, libraries and organizations that need better ways to publish, protect, read and discuss digital materials.
 			</p>
 			<p>
 				The goal is to work with partners who want to test web-native publishing, controlled access, community discussion and institutional knowledge workflows in real use cases.
@@ -96,13 +99,20 @@ const finalActions = [
 	.about-copy-stack {
 		display: grid;
 		gap: 14px;
-		max-width: 820px;
+		grid-column: 1 / -1;
+		justify-self: stretch;
+		width: 100%;
+		max-width: none;
 	}
 
 	.about-copy-stack p {
 		margin: 0;
 		font-size: 1.125rem;
 		line-height: var(--line-height-body);
+	}
+
+	:global(.about-section.section--green > .about-copy-stack p) {
+		max-width: none !important;
 	}
 
 	:global(.hero-section.about-hero) {
@@ -157,6 +167,13 @@ const finalActions = [
 
 	.about-card-grid {
 		align-items: stretch;
+	}
+
+	:global(.about-building-section > .section-header h2) {
+		margin-right: auto;
+		margin-left: auto;
+		color: var(--accent);
+		text-align: center;
 	}
 
 	:global(.about-two-row-grid.card-grid--4) {

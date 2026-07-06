@@ -117,7 +117,7 @@ const featuredBooks = [
 	</SpecCardsSection>
 
 	<SpecCardsSection class="section-continuation section-continue-next security-source-section security-source-risk-reduction-section section--two-column">
-		<h2>ReaderPub reduces risk before the handoff</h2>
+		<h2><span class="readerpub-heading-word">ReaderPub</span> reduces risk before the handoff</h2>
 		<p class="lede">
 			ReaderPub's primary model keeps reading on the web through controlled access rather than routinely delivering a complete downloadable book file to every reader.
 		</p>
@@ -181,19 +181,19 @@ const featuredBooks = [
 	<section id="protected-books" class="section section--white security-protected-books-section section--two-column">
 		<div class="security-books-layout">
 			<div class="security-books-copy">
-				<h2>
+				<h3 class="security-books-heading">
 					<SectionIcon type="security" title="Protected publication" />
 					<span>Protected books remain browser-readable web assets.</span>
-				</h2>
+				</h3>
 				<p>
 					We protect your books against downloading or copying by the patent-pending WeRead Theft Guard.
 				</p>
 				<p class="security-books-note">Open a protected edition and try the reading experience directly.</p>
 			</div>
-			<div class="indie-protection-books">
+			<div class="indie-protection-books" data-card-reveal-origin="right" data-card-reveal-order="inner-first">
 				{featuredBooks.map((b) => (
 					<a class="book-card-link" href={b.readUrl} target="_blank" rel="noreferrer">
-						<div class="card book-card">
+						<div class="card card--good book-card security-protected-book-card">
 							<div class="book-cover-placeholder" style={`background-image: url('${b.coverUrl}');`}></div>
 							<div class="book-card-text">
 								<h3>{b.title}</h3>
@@ -217,9 +217,10 @@ const featuredBooks = [
 		</div>
 	</section>
 
-	<Section tone="green" class="security-control-section section--two-column" title="Control who reads and monitor the activity">
+	<Section tone="green" class="security-control-section section--two-column">
 		<div class="security-control-layout">
 			<div class="security-copy-stack">
+				<h2>Control who reads and monitor the activity</h2>
 				<p>
 					ReaderPub gives institutions, publishers and organizations control over access to their publications. You decide who can read, under what conditions and at what level of visibility.
 				</p>
@@ -230,7 +231,7 @@ const featuredBooks = [
 					<li>Maintain visibility across published content</li>
 				</ul>
 			</div>
-			<article class="card security-callout-card">
+			<article class="card security-callout-card" data-card-reveal-origin="right">
 				<SectionIcon type="library" title="Institutional access" />
 				<h3>Built for organizations.</h3>
 				<p>
@@ -240,13 +241,11 @@ const featuredBooks = [
 			</article>
 		</div>
 		<div class="security-position-section">
-			<header class="section-header">
-				<h2>A practical, honest security position</h2>
-			</header>
 			<div class="security-position-grid">
 				<div class="security-position-problem">
-					<p>No digital system can prevent every form of copying.</p>
-					<p>Screenshots, manual capture, and other low-efficiency methods can still exist.</p>
+					<h2>A practical, honest security position</h2>
+					<h3 class="security-position-problem-callout">No digital system can prevent every form of copying.</h3>
+					<h3 class="security-position-problem-callout">Screenshots, manual capture, and other low-efficiency methods can still exist.</h3>
 				</div>
 				<div class="security-position-solution">
 					<p>
@@ -384,6 +383,12 @@ const featuredBooks = [
 
 	.security-pirates-highlight {
 		color: var(--accent-orange);
+	}
+
+	.security-pattern-note {
+		width: max-content;
+		max-width: 100% !important;
+		white-space: nowrap;
 	}
 
 	:global(body .page .content .section--gray .security-step-card) {
@@ -671,6 +676,11 @@ const featuredBooks = [
 		min-width: 0;
 	}
 
+	.security-copy-stack > h2,
+	.security-position-problem > h2 {
+		margin: 0;
+	}
+
 	.security-copy-stack p,
 	.security-books-copy p,
 	.security-position-grid p {
@@ -686,7 +696,7 @@ const featuredBooks = [
 		margin: 0;
 		padding: 0;
 		list-style: none;
-		color: var(--muted);
+		color: #ffffff;
 		line-height: var(--line-height-body);
 	}
 
@@ -703,7 +713,7 @@ const featuredBooks = [
 		width: 8px;
 		height: 8px;
 		border-radius: 999px;
-		background: var(--accent);
+		background: var(--accent-orange);
 		transform: translateY(-50%);
 	}
 
@@ -731,6 +741,10 @@ const featuredBooks = [
 		text-align: center;
 	}
 
+	:global(body .page .content .security-callout-card > p) {
+		text-align: center !important;
+	}
+
 	.security-callout-card .button {
 		width: fit-content;
 		margin: auto auto 0;
@@ -739,13 +753,27 @@ const featuredBooks = [
 
 	.security-books-layout {
 		display: grid;
-		grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+		grid-template-columns: minmax(0, 320px) max-content;
 		gap: 32px;
 		align-items: center;
+		justify-content: space-between;
 		width: 100%;
 	}
 
-	.security-books-copy h2 {
+	.security-books-copy {
+		justify-items: center;
+		text-align: center;
+	}
+
+	.security-books-copy p {
+		text-align: center !important;
+	}
+
+	:global(body .page .content #protected-books .security-books-copy > p) {
+		text-align: center !important;
+	}
+
+	.security-books-heading {
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
@@ -755,7 +783,7 @@ const featuredBooks = [
 		text-align: center;
 	}
 
-	.security-books-copy h2 :global(.section-icon) {
+	.security-books-heading :global(.section-icon) {
 		width: 48px;
 		height: 48px;
 		flex: 0 0 auto;
@@ -768,20 +796,35 @@ const featuredBooks = [
 	.security-protected-books-section {
 		--link: #028f80;
 		--section-flow-gap: 16px;
+		--protected-book-card-cover-width: 84px;
+		--protected-book-card-gap: 18px;
+		--protected-book-card-padding-x: 20px;
+		--protected-book-card-text-width: 198px;
+		--protected-book-card-width: calc(
+			var(--protected-book-card-cover-width) + var(--protected-book-card-gap) + var(--protected-book-card-text-width) +
+				var(--protected-book-card-padding-x) * 2
+		);
 	}
 
 	:global(#protected-books .book-card-link) {
 		display: block;
-		width: 100%;
+		width: fit-content;
 		max-width: none;
 		text-decoration: none !important;
 		color: inherit !important;
 		transition: transform 0.15s ease;
+		justify-self: start;
 	}
 
 	:global(#protected-books .book-card-link:hover),
 	:global(#protected-books .book-card-link:focus-visible) {
-		transform: translateY(-2px);
+		transform: none;
+	}
+
+	:global(#protected-books .book-card-link:hover .book-card),
+	:global(#protected-books .book-card-link:focus-visible .book-card),
+	:global(#protected-books .book-card:hover) {
+		border-color: var(--accent-orange) !important;
 	}
 
 	:global(#protected-books .book-card-link *),
@@ -792,29 +835,33 @@ const featuredBooks = [
 
 	:global(#protected-books .indie-protection-books) {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(min(100%, 280px), 1fr));
+		grid-template-columns: repeat(2, var(--protected-book-card-width));
 		gap: calc(var(--section-flow-gap) * 1.5);
 		align-items: stretch;
-		width: 100%;
+		width: max-content;
 		min-width: 0;
-		justify-content: stretch;
+		justify-content: end;
 	}
 
 	:global(#protected-books .book-card) {
 		display: flex;
 		flex-direction: row !important;
-		gap: 18px;
+		gap: var(--protected-book-card-gap);
 		align-items: center;
-		padding: 18px 20px;
+		padding: 18px var(--protected-book-card-padding-x);
 		min-height: 0;
-		width: 100%;
+		width: var(--protected-book-card-width);
+		max-width: var(--protected-book-card-width);
 		box-sizing: border-box;
+		border-color: transparent !important;
+		border-radius: calc(var(--radius-card) * 3) !important;
 		background: var(--card-bg) !important;
+		box-shadow: var(--card-green-shadow) !important;
 	}
 
 	:global(#protected-books .book-cover-placeholder) {
 		display: block;
-		width: 84px;
+		width: var(--protected-book-card-cover-width);
 		height: 126px;
 		border-radius: 2px;
 		background: var(--surface-gray);
@@ -828,6 +875,9 @@ const featuredBooks = [
 	:global(#protected-books .book-card-text) {
 		display: grid;
 		gap: 6px;
+		flex: 0 0 var(--protected-book-card-text-width);
+		width: var(--protected-book-card-text-width);
+		max-width: var(--protected-book-card-text-width);
 		min-width: 0;
 		text-align: left;
 	}
@@ -838,7 +888,9 @@ const featuredBooks = [
 		line-height: var(--line-height-heading);
 		font-family: var(--font-heading);
 		letter-spacing: -0.02em;
-		overflow-wrap: anywhere;
+		width: 100%;
+		max-width: 100%;
+		overflow-wrap: normal;
 	}
 
 	:global(#protected-books .book-card-text > p) {
@@ -851,12 +903,14 @@ const featuredBooks = [
 	:global(#protected-books .book-card-protected) {
 		display: inline-flex;
 		align-items: center;
+		justify-content: space-between;
 		gap: 10px;
 		margin-top: 8px;
 		color: color-mix(in srgb, var(--text) 72%, white 28%);
 		font-size: 14px;
 		line-height: var(--line-height-body);
-		max-width: 100%;
+		width: var(--protected-book-card-text-width);
+		max-width: var(--protected-book-card-text-width);
 	}
 
 	:global(#protected-books .book-card-protected span) {
@@ -868,6 +922,8 @@ const featuredBooks = [
 		width: 31.2px !important;
 		height: 31.2px !important;
 		flex-shrink: 0;
+		color: var(--accent-orange) !important;
+		stroke: var(--accent-orange) !important;
 	}
 
 	:global(#protected-books .book-card-protected .indie-theft-guard-name) {
@@ -902,7 +958,7 @@ const featuredBooks = [
 	}
 
 	.security-position-grid .security-position-solution p {
-		color: var(--accent) !important;
+		color: #ffffff !important;
 	}
 
 	.security-position-solution-contrast {
@@ -915,10 +971,13 @@ const featuredBooks = [
 		align-self: center;
 	}
 
-	.security-position-grid .security-position-problem p {
-		color: var(--text) !important;
-		font-size: 1.215rem;
-		font-weight: 400;
+	.security-position-problem-callout {
+		margin: 0;
+		color: #ffffff !important;
+	}
+
+	:global(.section.section--green .security-position-problem .security-position-problem-callout) {
+		color: #ffffff !important;
 	}
 
 	@media (max-width: 980px) {
@@ -948,6 +1007,11 @@ const featuredBooks = [
 			max-width: none;
 			justify-self: stretch;
 		}
+
+		.security-pattern-note {
+			width: 100%;
+			white-space: normal;
+		}
 	}
 
 	@media (max-width: 640px) {
@@ -960,12 +1024,19 @@ const featuredBooks = [
 		}
 
 		:global(#protected-books .indie-protection-books) {
-			grid-template-columns: 1fr;
+			grid-template-columns: minmax(0, 1fr);
+			width: 100%;
+		}
+
+		:global(#protected-books .book-card-link) {
+			width: 100%;
 		}
 
 		:global(#protected-books .book-card) {
 			gap: 14px;
 			padding: 16px;
+			width: 100%;
+			max-width: 100%;
 		}
 
 		:global(#protected-books .book-cover-placeholder) {
@@ -973,8 +1044,19 @@ const featuredBooks = [
 			height: 108px;
 		}
 
+		:global(#protected-books .book-card-text) {
+			flex: 1 1 auto;
+			width: auto;
+			max-width: none;
+		}
+
 		:global(#protected-books .book-card h3) {
 			font-size: clamp(16px, 6vw, 20px);
+		}
+
+		:global(#protected-books .book-card-protected) {
+			width: 100%;
+			max-width: 100%;
 		}
 	}
 </style>

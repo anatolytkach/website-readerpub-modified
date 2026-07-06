@@ -20,6 +20,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 		imageAlt={page.imageAlt}
 		actions={page.actions}
 		spacerBackgroundPositionY={page.heroSpacerBackgroundPositionY}
+		showSpacer={false}
 	>
 		<Fragment slot="title">Tell us what you’re publishing.</Fragment>
 		<p slot="tagline" class="contact-hero-solution">We’ll make it as easy as breathing.</p>
@@ -373,6 +374,10 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 
 	:global(.contact-hero .hero-body) {
 		font-size: var(--hero-problem-copy-size);
+	}
+
+	:global(.contact-hero) + .contact-tips-section {
+		margin-top: var(--section-stack-gap);
 	}
 
 	.contact-tips-section {

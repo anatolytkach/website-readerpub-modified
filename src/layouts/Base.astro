@@ -26,6 +26,7 @@ const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`
 		<script is:inline>
 			document.documentElement.classList.remove("no-js");
 			document.documentElement.classList.add("animation-pass-ready");
+			document.documentElement.classList.add("animation-pass-hold-hero");
 		</script>
 		<link rel="icon" type="image/svg+xml" href="/images/logo.svg?v=ff5a00" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -72,7 +73,7 @@ const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`
 		<script is:inline>
 			(() => {
 				const keepTextLineBreaks = () => {
-					const textBlocks = document.querySelectorAll(".content :is(h1, h2, p)");
+					const textBlocks = document.querySelectorAll(".content :is(h2, p)");
 
 					for (const textBlock of textBlocks) {
 						if (textBlock.matches("p") && textBlock.closest(".card")) {

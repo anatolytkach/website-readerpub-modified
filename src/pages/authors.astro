@@ -74,7 +74,7 @@ const pageActions = [startPublishingAction, pricingAction];
 	</Section>
 
 	<SpecCardsSection class="authors-source-section authors-model-section section--two-column section-continuation section-continue-next">
-		<h2>ReaderPub changes the author model</h2>
+		<h2><span class="readerpub-heading-word">ReaderPub</span> changes the author model</h2>
 		<div class="model-grid">
 			<div class="comparison-text-panel model-card marketplace-model-card">
 				<h3>Marketplace publishing</h3>
@@ -251,7 +251,7 @@ const pageActions = [startPublishingAction, pricingAction];
 
 	:global(.authors-source-section) > h2,
 	.authors-living-copy > h2 {
-		font-size: clamp(24px, 3vw, 34px);
+		font-size: clamp(21.6px, 2.7vw, 30.6px);
 	}
 
 	:global(.authors-source-section) p {
@@ -484,7 +484,8 @@ const pageActions = [startPublishingAction, pricingAction];
 	}
 
 	.authors-living-card {
-		border-color: var(--accent);
+		border-color: transparent;
+		box-shadow: var(--card-green-shadow);
 	}
 
 	.authors-model-list {
@@ -515,7 +516,6 @@ const pageActions = [startPublishingAction, pricingAction];
 	}
 
 	:global(.authors-hero h1) {
-		font-size: clamp(30.6px, 4.25vw, 47.6px);
 		line-height: var(--line-height-heading);
 	}
 
@@ -572,12 +572,17 @@ const pageActions = [startPublishingAction, pricingAction];
 	}
 
 	:global(.authors-hero .author-protection-button) {
+		--author-protection-shield-fill: var(--accent);
 		display: inline-flex !important;
 		align-items: center;
 		justify-content: center;
 		gap: 10px;
 		padding-top: 6px;
 		padding-bottom: 6px;
+	}
+
+	:global(.authors-hero .author-protection-button:hover) {
+		--author-protection-shield-fill: var(--text);
 	}
 
 	:global(.authors-hero .author-protection-icon) {
@@ -593,6 +598,11 @@ const pageActions = [startPublishingAction, pricingAction];
 		display: block;
 		width: 100% !important;
 		height: 100% !important;
+		stroke: #ffffff;
+	}
+
+	:global(.authors-hero .author-protection-icon .section-icon [fill]) {
+		fill: var(--author-protection-shield-fill) !important;
 	}
 
 	@media (max-width: 900px) {

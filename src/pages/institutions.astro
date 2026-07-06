@@ -174,7 +174,7 @@ const ctaActions = [
 	</Section>
 
 	<section class="section spec-cards-section institutions-solution-section section-continuation">
-		<h2>ReaderPub turns knowledge into active web assets</h2>
+		<h2><span class="readerpub-heading-word">ReaderPub</span> turns knowledge into active web assets</h2>
 		<div class="card-grid institutions-solution-grid">
 			<div class="card">
 				<h3>Readable on the web</h3>
@@ -428,7 +428,6 @@ const ctaActions = [
 	}
 
 	.network-hero-title {
-		font-size: clamp(30.6px, 4.25vw, 47.6px);
 		line-height: var(--line-height-heading);
 	}
 
@@ -604,7 +603,7 @@ const ctaActions = [
 	.institutions-publisher-lede,
 	.institutions-publisher-note {
 		color: #ffffff !important;
-		max-width: 760px;
+		max-width: none;
 	}
 
 	.institutions-publisher-card {
@@ -665,8 +664,9 @@ const ctaActions = [
 
 	.institutions-expanded-access-grid > .institutions-access-card {
 		grid-column: span 2;
-		border-color: var(--accent);
+		border-color: transparent;
 		border-radius: calc(var(--radius-card) * 3);
+		box-shadow: var(--card-green-shadow);
 	}
 
 	.institutions-expanded-section .icon-grid-card {
@@ -799,7 +799,7 @@ const ctaActions = [
 
 	@media (min-width: 901px) and (max-width: 1180px) {
 		:global(.institutions-value-section .section-header h2) {
-			font-size: clamp(40px, 4vw, 54px);
+			font-size: clamp(36px, 3.6vw, 48.6px);
 			white-space: normal;
 		}
 	}
@@ -849,10 +849,6 @@ const ctaActions = [
 		.network-hero-copy {
 			align-items: center;
 			text-align: center;
-		}
-
-		.network-hero-title {
-			font-size: clamp(26.01px, 3.6125vw, 40.46px) !important;
 		}
 
 		.institutions-expanded-section .icon-grid-card {

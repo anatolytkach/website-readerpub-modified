@@ -5,6 +5,7 @@ import CardGrid from "../components/CardGrid.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
+import SpecCardsSection from "../components/sections/SpecCardsSection.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const heroActions = [
@@ -31,8 +32,10 @@ const ctaActions = [
 		actions={heroActions}
 		spacerBackgroundPositionY="81%"
 	>
-		<Fragment slot="title">Free for indies.<br />Fair for everyone else.</Fragment>
-		<Fragment slot="body">ReaderPub matches both paths:</Fragment>
+		<Fragment slot="title"><span class="pricing-hero-free">Free</span> for indies.<br /><span class="pricing-hero-fair">Fair</span> for everyone else.</Fragment>
+		<Fragment slot="body">
+			<h2 class="pricing-hero-paths-title">ReaderPub matches both paths:</h2>
+		</Fragment>
 		<ul class="pricing-hero-paths-list">
 			<li>Authors and publishers sell directly to readers with low commission.</li>
 			<li>Institutions maintain collections with adjustable storage fees.</li>
@@ -47,11 +50,11 @@ const ctaActions = [
 			<p>Different types of publishers use digital publishing platforms in very different ways.</p>
 			<p>Authors and publishers need efficient sales economics.</p>
 			<p>Universities, libraries and organizations need long-term infrastructure, storage and collection management.</p>
-			<p class="pricing-problem-emphasis"><strong>A single pricing model does not fit both.</strong></p>
+			<h3 class="pricing-problem-emphasis"><span>A single pricing model</span> does not fit both.</h3>
 		</div>
 	</Section>
 
-	<section class="pricing-source-section pricing-source-model-change-section">
+	<SpecCardsSection class="pricing-source-section pricing-source-model-change-section section--two-column section-continue-next">
 		<h2>The pricing model change that matters</h2>
 		<div class="model-grid">
 			<div class="comparison-text-panel pricing-marketplace-model-card">
@@ -73,7 +76,7 @@ const ctaActions = [
 				</ul>
 			</div>
 		</div>
-	</section>
+	</SpecCardsSection>
 
 	<Section tone="green" class="pricing-solution-section" title="Balanced pricing model for all industry players">
 		<div class="pricing-copy-stack pricing-solution-copy">
@@ -206,6 +209,20 @@ const ctaActions = [
 		max-width: 780px;
 	}
 
+	:global(.pricing-problem-section .pricing-copy-stack) {
+		width: 100%;
+		max-width: none;
+	}
+
+	:global(.pricing-problem-section .pricing-copy-stack p) {
+		max-width: none !important;
+	}
+
+	:global(.pricing-solution-section .pricing-copy-stack) {
+		width: 100%;
+		max-width: none;
+	}
+
 	:global(.pricing-hero .hero-body) {
 		max-width: 720px;
 		color: var(--accent);
@@ -214,6 +231,18 @@ const ctaActions = [
 		font-weight: 400;
 		letter-spacing: 0;
 		line-height: var(--line-height-body);
+	}
+
+	:global(.pricing-hero .pricing-hero-free) {
+		color: var(--accent) !important;
+	}
+
+	:global(.pricing-hero .pricing-hero-fair) {
+		color: var(--accent-orange) !important;
+	}
+
+	:global(.pricing-hero .pricing-hero-paths-title) {
+		color: var(--accent);
 	}
 
 	.pricing-hero-paths-list {
@@ -230,6 +259,43 @@ const ctaActions = [
 		color: var(--accent);
 	}
 
+	@media (orientation: landscape) {
+		:global(.pricing-hero) {
+			--pricing-hero-copy-width: 46rem;
+			grid-template-columns: minmax(0, var(--pricing-hero-copy-width)) minmax(420px, 1fr) !important;
+		}
+
+		:global(.pricing-hero .hero-copy) {
+			width: 100%;
+			max-width: var(--pricing-hero-copy-width);
+		}
+
+		:global(.pricing-hero .hero-copy > :is(h1, .hero-lead, .hero-body, .cta-row)),
+		.pricing-hero-paths-list {
+			max-width: var(--pricing-hero-copy-width) !important;
+		}
+
+		:global(.pricing-hero .hero-lead),
+		:global(.pricing-hero .hero-body),
+		.pricing-hero-paths-list {
+			width: 100%;
+		}
+
+		:global(.pricing-hero .pricing-hero-paths-title) {
+			white-space: nowrap;
+		}
+
+		:global(.pricing-hero .hero-media) {
+			justify-content: flex-start;
+		}
+
+		:global(.pricing-hero .hero-image) {
+			width: min(100%, 680px);
+			max-width: none;
+			height: auto;
+		}
+	}
+
 	.pricing-copy-stack p {
 		margin: 0;
 		color: var(--muted);
@@ -238,12 +304,17 @@ const ctaActions = [
 	}
 
 	.pricing-problem-emphasis {
+		margin: 0;
 		color: var(--text) !important;
-		font-weight: 700;
+		font-family: var(--font-heading);
+		font-size: clamp(1.35rem, 2vw, 1.85rem);
+		font-weight: 500;
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
 	}
 
-	.pricing-problem-emphasis strong {
-		font-weight: 700;
+	.pricing-problem-emphasis span {
+		color: var(--accent-orange);
 	}
 
 	.pricing-problem-title-nowrap {
@@ -267,10 +338,6 @@ const ctaActions = [
 		background: transparent;
 		border: 0;
 		box-shadow: none;
-	}
-
-	.pricing-source-model-change-section {
-		margin-top: var(--section-padding);
 	}
 
 	:global(.pricing-source-model-change-section + .pricing-solution-section) {
@@ -354,7 +421,7 @@ const ctaActions = [
 	}
 
 	.pricing-marketplace-model-card .comparison-list li::before {
-		background: var(--text);
+		background: var(--accent-orange);
 	}
 
 	.pricing-readerpub-model-card {
@@ -362,8 +429,13 @@ const ctaActions = [
 		background: var(--card-bg);
 	}
 
+	.pricing-readerpub-model-card h3,
+	.pricing-readerpub-model-card h3 * {
+		font-weight: 500;
+	}
+
 	.pricing-solution-copy p {
-		color: var(--accent) !important;
+		color: #ffffff !important;
 		font-size: calc(1.125rem * 1.1) !important;
 	}
 

@@ -82,7 +82,7 @@ const benefitCards = [
 
 	<div class="platform-source-sections">
 		<section class="section section--white spec-cards-section platform-source-section platform-source-problem-section section--two-column section-continue-next">
-			<h2>ReaderPub exists because the old model breaks the relationship</h2>
+			<h2><span class="readerpub-heading-word">ReaderPub</span> exists because the old model breaks the relationship</h2>
 			<p class="lede">
 				File-first publishing can move a book from one place to another, but it cannot keep books connected to readers, authors, institutions and communities.
 			</p>
@@ -436,7 +436,7 @@ const benefitCards = [
 	}
 
 	.platform-source-section h2 {
-		font-size: clamp(24px, 3vw, 34px);
+		font-size: clamp(21.6px, 2.7vw, 30.6px);
 		line-height: var(--line-height-heading);
 	}
 
@@ -569,7 +569,7 @@ const benefitCards = [
 		margin: 0;
 		color: var(--accent-orange);
 		font-family: var(--font-heading);
-		font-size: clamp(24px, 3vw, 34px);
+		font-size: clamp(21.6px, 2.7vw, 30.6px);
 		font-weight: var(--font-weight-heading);
 		letter-spacing: var(--letter-spacing-heading);
 		line-height: var(--line-height-heading);
@@ -939,7 +939,6 @@ const benefitCards = [
 
 	:global(.platform-hero .hero-copy h1) {
 		max-width: none;
-		font-size: clamp(30.6px, 4.25vw, 47.6px);
 		line-height: var(--line-height-heading);
 	}
 
@@ -1034,9 +1033,10 @@ const benefitCards = [
 		justify-content: center;
 		min-height: 86px;
 		padding: 18px;
-		border: 1px solid var(--accent);
+		border: 1px solid transparent;
 		border-radius: calc(var(--radius-card) * 3);
 		background: var(--card-bg);
+		box-shadow: var(--card-green-shadow);
 		color: var(--accent);
 		font-family: var(--font-heading);
 		font-size: var(--card-heading-font-size);
@@ -1071,6 +1071,8 @@ const benefitCards = [
 	}
 
 	.platform-flow li.card:hover {
+		border-color: var(--accent-orange) !important;
+		box-shadow: none !important;
 		color: var(--accent-orange) !important;
 	}
 
@@ -1149,10 +1151,6 @@ const benefitCards = [
 		:global(.platform-hero .hero-copy) {
 			align-items: center;
 			text-align: center;
-		}
-
-		:global(.platform-hero .hero-copy h1) {
-			font-size: clamp(26.01px, 3.6125vw, 40.46px) !important;
 		}
 
 		:global(.platform-hero .hero-lead) {

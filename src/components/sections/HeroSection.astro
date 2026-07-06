@@ -12,6 +12,7 @@ interface Props {
 	mediaRevealOrigin?: "left" | "right";
 	actions?: PageAction[];
 	spacerBackgroundPositionY?: string;
+	showSpacer?: boolean;
 	class?: string;
 }
 
@@ -25,6 +26,7 @@ const {
 	mediaRevealOrigin,
 	actions = [],
 	spacerBackgroundPositionY,
+	showSpacer = true,
 	class: className = "",
 } = Astro.props;
 
@@ -80,7 +82,7 @@ const hasBodySlot = Astro.slots.has("body");
 	)}
 </section>
 
-<section class="hero-background-spacer" aria-hidden="true" style={spacerStyle}></section>
+{showSpacer && <section class="hero-background-spacer" aria-hidden="true" style={spacerStyle}></section>}
 
 <script>
 	let heroBackgroundSpacerObserver;

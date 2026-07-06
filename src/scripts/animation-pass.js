@@ -29,7 +29,7 @@ const revealSelectors = [
 	"picture",
 ];
 
-const cardGroupSelector = ".card-grid, .model-grid, .platform-commerce-cards, .webuzz-overview-card-grid";
+const cardGroupSelector = ".card-grid, .model-grid, .platform-commerce-cards, .webuzz-overview-card-grid, .indie-protection-books";
 const heroMediaSelectors = [".hero-section .hero-media", ".network-hero .institutions-network-media", ".network-hero > .image-block"];
 const mediaRevealSelector = [
 	".hero-media",
@@ -57,6 +57,7 @@ const goodCardSelector = [
 	".wepub-readerpub-path-card",
 	".booktree-with-card",
 	".security-readerpub-solution-card",
+	".security-protected-book-card",
 	".webuzz-legacy-solution-card",
 	".webuzz-overview-card--green",
 ].join(",");
@@ -75,9 +76,10 @@ const badCardSelector = [
 ].join(",");
 const cardRevealDuration = 1240;
 const cardRevealDelay = 360;
+const cardRiseRevealDelay = 140;
 const cardRevealThreshold = 0.65;
 const cardRowTopTolerance = 8;
-const cardRevealDirections = ["left", "right", "bottom", "fade"];
+const cardRevealDirections = ["left", "right", "bottom", "fade", "rise"];
 
 const revealedElements = new WeakSet();
 const revealedCards = new WeakSet();
@@ -450,11 +452,13 @@ const isAnimationCard = (card) => {
 		return false;
 	}
 
-	if (card.matches("a, .card--link, .book-card, .footer-cta")) {
+	const isProtectedBookRevealCard = card.matches(".security-protected-book-card");
+
+	if (card.matches("a, .card--link, .book-card, .footer-cta") && !isProtectedBookRevealCard) {
 		return false;
 	}
 
-	if (card.closest("a, .book-card-link")) {
+	if (card.closest("a, .book-card-link") && !isProtectedBookRevealCard) {
 		return false;
 	}
 
@@ -486,7 +490,7 @@ const shouldTreatAsGoodCard = (card) => {
 		return false;
 	}
 
-	if (card.matches("a, .card--link, .book-card, .footer-cta")) {
+	if (card.matches("a, .card--link, .book-card, .footer-cta") && !card.matches(".security-protected-book-card")) {
 		return false;
 	}
 
@@ -511,7 +515,11 @@ const getCardRevealGroups = () => {
 	const groups = new Set(document.querySelectorAll(cardGroupSelector));
 
 	for (const card of document.querySelectorAll("[data-card-reveal]")) {
-		if (card.parentElement) {
+		const existingGroup = card.closest(cardGroupSelector);
+
+		if (existingGroup instanceof HTMLElement) {
+			groups.add(existingGroup);
+		} else if (card.parentElement) {
 			groups.add(card.parentElement);
 		}
 	}
@@ -565,17 +573,24 @@ const isPortraitViewport = () => {
 	return viewportHeight >= viewportWidth;
 };
 
+const isWhiteBackgroundRevealCard = (card) => card instanceof HTMLElement && !getGreenRevealContainer(card);
+
 const setGoodCardRevealOffset = (card, direction) => {
 	const rect = getNaturalRect(card);
 	const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 1;
 	const gutter = 64;
 	const offsetX =
-		direction === "bottom" || direction === "fade"
+		direction === "bottom" || direction === "fade" || direction === "rise"
 			? 0
 			: direction === "left"
 				? -gutter - rect.right
 				: viewportWidth + gutter - rect.left;
-	const offsetY = direction === "bottom" ? "calc(100vh + 48px)" : "0px";
+	const offsetY =
+		direction === "bottom"
+			? "calc(100vh + 48px)"
+			: direction === "rise"
+				? "var(--card-good-reveal-offset)"
+				: "0px";
 
 	card.setAttribute("data-card-reveal-direction", direction);
 	card.style.setProperty("--card-reveal-start-x", `${offsetX.toFixed(2)}px`);
@@ -583,6 +598,10 @@ const setGoodCardRevealOffset = (card, direction) => {
 };
 
 const getExplicitCardRevealDirection = (card) => {
+	if (isWhiteBackgroundRevealCard(card)) {
+		return "rise";
+	}
+
 	const source = card.closest("[data-card-reveal-origin]");
 	const direction = source?.getAttribute("data-card-reveal-origin");
 
@@ -770,6 +789,10 @@ const revealCardRow = (cards) => {
 		return;
 	}
 
+	const revealDelay = visibleCards.some((card) => card.getAttribute("data-card-reveal-direction") === "rise")
+		? cardRiseRevealDelay
+		: cardRevealDelay;
+
 	visibleCards.forEach((card, index) => {
 		if (revealedCards.has(card)) {
 			card.classList.add("is-card-revealed");
@@ -787,7 +810,7 @@ const revealCardRow = (cards) => {
 			}, cardRevealDuration);
 
 			cardRevealTimers.push(completeTimer);
-		}, index * cardRevealDelay);
+		}, index * revealDelay);
 
 		cardRevealTimers.push(revealTimer);
 	});
@@ -809,7 +832,24 @@ const revealCardRowsForTarget = (target) => {
 	rowsForTarget.forEach((row) => {
 		const timer = window.setTimeout(() => revealCardRow(row.cards), revealDelay);
 		cardRevealTimers.push(timer);
-		revealDelay += Math.max(1, row.cards.filter((card) => card instanceof HTMLElement).length) * cardRevealDelay;
+		const rowDelay = row.cards.some((card) => card.getAttribute("data-card-reveal-direction") === "rise")
+			? cardRiseRevealDelay
+			: cardRevealDelay;
+		revealDelay += Math.max(1, row.cards.filter((card) => card instanceof HTMLElement).length) * rowDelay;
+	});
+};
+
+const revealCardRowsForTargetWhenReady = (target) => {
+	if (
+		document.documentElement.classList.contains("animation-pass-ready") &&
+		!document.documentElement.classList.contains("animation-pass-preparing")
+	) {
+		revealCardRowsForTarget(target);
+		return;
+	}
+
+	window.requestAnimationFrame(() => {
+		window.requestAnimationFrame(() => revealCardRowsForTarget(target));
 	});
 };
 
@@ -824,6 +864,9 @@ const prepareHeroMedia = () => {
 	}
 
 	for (const target of targets) {
+		target.style.removeProperty("opacity");
+		target.style.removeProperty("transform");
+		target.style.removeProperty("transition");
 		target.setAttribute("data-hero-load-reveal", "");
 		target.classList.remove("is-hero-load-revealed");
 		setMediaRevealDirection(target);
@@ -837,8 +880,8 @@ const revealHeroMedia = (target, delay = 0) => {
 
 	const timer = window.setTimeout(() => {
 		window.requestAnimationFrame(() => {
+			document.documentElement.classList.remove("animation-pass-hold-hero");
 			window.requestAnimationFrame(() => {
-				document.documentElement.classList.remove("animation-pass-hold-hero");
 				target.classList.add("is-hero-load-revealed");
 			});
 		});
@@ -867,6 +910,19 @@ const setupHeroMedia = ({ delay = 0, targets = prepareHeroMedia() } = {}) => {
 	}
 };
 
+const holdHeroMediaForPageExit = () => {
+	document.documentElement.classList.add("animation-pass-hold-hero");
+
+	for (const target of document.querySelectorAll("[data-hero-load-reveal]")) {
+		target.classList.remove("is-hero-load-revealed");
+		target.style.setProperty("opacity", "0", "important");
+		target.style.setProperty("transform", "translate3d(0, var(--card-good-reveal-offset), 0) scale(0.985)", "important");
+		target.style.setProperty("transition", "none", "important");
+	}
+
+	document.documentElement.getBoundingClientRect();
+};
+
 const markCards = () => {
 	cardNaturalRects = new WeakMap();
 
@@ -875,6 +931,7 @@ const markCards = () => {
 		card.removeAttribute("data-card-reveal");
 		card.removeAttribute("data-card-reveal-direction");
 		card.style.removeProperty("--card-reveal-start-x");
+		card.style.removeProperty("--card-reveal-start-y");
 		card.classList.remove("is-card-revealed");
 		card.classList.remove("is-card-reveal-complete");
 	}
@@ -1011,7 +1068,7 @@ const setupCardReveal = () => {
 			observedTargets.add(target);
 
 			if (shouldRevealCardTargetImmediately(target)) {
-				revealCardRowsForTarget(target);
+				revealCardRowsForTargetWhenReady(target);
 			} else {
 				cardRevealObserver.observe(target);
 			}
@@ -1027,14 +1084,14 @@ const setupAnimationPass = ({ heroDelay = 0 } = {}) => {
 	const heroTargets = prepareHeroMedia();
 	markCards();
 	setupReveal();
-	setupCardReveal();
-	setupBackgroundParallax();
-	if (heroDelay === 0) {
-		document.documentElement.classList.remove("animation-pass-hold-hero");
-	} else {
+	if (heroTargets.length > 0 && !reduceMotionQuery.matches) {
 		document.documentElement.classList.add("animation-pass-hold-hero");
+	} else {
+		document.documentElement.classList.remove("animation-pass-hold-hero");
 	}
 	document.documentElement.classList.add("animation-pass-ready");
+	setupCardReveal();
+	setupBackgroundParallax();
 	window.requestAnimationFrame(() => {
 		document.documentElement.classList.remove("animation-pass-preparing");
 	});
@@ -1081,3 +1138,11 @@ if ("addEventListener" in reduceMotionQuery) {
 } else {
 	reduceMotionQuery.addListener(setupAnimationPass);
 }
+
+window.addEventListener("beforeunload", holdHeroMediaForPageExit);
+window.addEventListener("pagehide", holdHeroMediaForPageExit);
+window.addEventListener("pageshow", (event) => {
+	if (event.persisted) {
+		setupAnimationPass();
+	}
+});

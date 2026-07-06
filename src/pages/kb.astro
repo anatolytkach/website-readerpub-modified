@@ -1,8 +1,9 @@
 ---
 import KbHelpModal from "../components/KbHelpModal.astro";
-import PageScaffold from "../components/PageScaffold.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Base from "../layouts/Base.astro";
 import { pages } from "../data/pages";
 
 const page = {
@@ -234,12 +235,42 @@ const faqCategories = [
 ] as const;
 ---
 
-<PageScaffold page={page}>
-	<div slot="hero-body" class="kb-hero-body-copy">
-		<p>ReaderPub is a web-native publishing network.</p>
-		<p>Use this page as a knowledge base for product, publishing, security and pricing features of the platform.</p>
-		<p class="kb-hero-body-question">If you haven't found a suitable answer here, ask our team.</p>
-	</div>
+<Base title={page.metaTitle} description={page.description}>
+	<HeroSection
+		eyebrow={page.eyebrow}
+		lead={page.heroLead}
+		image={page.image}
+		imageAlt={page.imageAlt}
+		spacerBackgroundPositionY={page.heroSpacerBackgroundPositionY}
+	>
+		<Fragment slot="title">
+			Short answers about <span class="kb-hero-readerpub">ReaderPub</span><span class="kb-hero-title-dot">.</span>
+		</Fragment>
+		<Fragment slot="body">
+			<div class="kb-hero-body-copy">
+				<p>ReaderPub is a web-native publishing network.</p>
+				<p>Use this page as a knowledge base for product, publishing, security and pricing features of the platform.</p>
+				<p class="kb-hero-body-question">If you haven't found a suitable answer here, ask our team.</p>
+			</div>
+		</Fragment>
+		<div class="kb-hero-actions cta-row">
+			<button class="button" type="button" data-modal-open="#kb-help-modal">Ask us a question</button>
+			<span class="kb-hero-scribe-action">
+				<img
+					class="kb-hero-scribe-icon"
+					src="/images/scribe-action.svg"
+					alt=""
+					aria-hidden="true"
+					width="35"
+					height="42"
+				/>
+				<a class="button button--secondary button--scribe-demo" href="/scribe">Ask Scribe</a>
+			</span>
+			<span class="kb-hero-pilot-row">
+				<a class="button button--secondary" href="/contact">Request a Pilot</a>
+			</span>
+		</div>
+	</HeroSection>
 
 	<section class="kb-faq-section" aria-label="ReaderPub knowledge base FAQ">
 		<div class="kb-faq-grid">
@@ -265,7 +296,7 @@ const faqCategories = [
 	{pages.kb.cta && <CtaBlock {...pages.kb.cta} class="kb-faq-cta" />}
 
 	<KbHelpModal />
-</PageScaffold>
+</Base>
 
 <script>
 	const setupKbFaqAccordion = () => {
@@ -315,6 +346,14 @@ const faqCategories = [
 </script>
 
 <style>
+	.kb-hero-readerpub {
+		color: var(--accent);
+	}
+
+	.kb-hero-title-dot {
+		color: var(--accent-orange);
+	}
+
 	.kb-hero-body-copy {
 		display: grid;
 		gap: 0.65em;
@@ -328,6 +367,42 @@ const faqCategories = [
 	.kb-hero-body-copy .kb-hero-body-question {
 		color: var(--text);
 		font-size: 90%;
+	}
+
+	.kb-hero-actions {
+		--kb-hero-button-height: 42px;
+		--kb-hero-icon-gap: 10.5px;
+		align-items: center;
+	}
+
+	.kb-hero-actions > .button,
+	.kb-hero-scribe-action > .button {
+		flex: 0 0 auto;
+		width: auto;
+		min-width: max-content;
+		height: var(--kb-hero-button-height);
+		margin: 0;
+	}
+
+	.kb-hero-scribe-action {
+		display: inline-flex;
+		flex: 0 0 auto;
+		align-items: center;
+		gap: var(--kb-hero-icon-gap);
+	}
+
+	.kb-hero-scribe-icon {
+		display: block;
+		flex: 0 0 auto;
+		width: auto;
+		max-width: none;
+		height: var(--kb-hero-button-height);
+		object-fit: contain;
+	}
+
+	.kb-hero-pilot-row {
+		display: flex;
+		flex: 0 0 100%;
 	}
 
 	.kb-faq-section {
@@ -375,7 +450,7 @@ const faqCategories = [
 		margin: 0 0 16px;
 		color: var(--accent);
 		font-size: var(--kb-faq-heading-size);
-		font-weight: 600;
+		font-weight: 500;
 	}
 
 	.kb-faq-heading-label {
