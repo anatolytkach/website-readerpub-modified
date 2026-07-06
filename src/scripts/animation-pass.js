@@ -16,7 +16,6 @@ const revealSelectors = [
 	".network-hero-copy",
 	".proof-copy",
 	".cta-block-copy",
-	".platform-flow",
 	".flow-chain",
 	".comparison-list",
 	".faq-list",
@@ -83,6 +82,7 @@ const revealedElements = new WeakSet();
 const revealedCards = new WeakSet();
 let revealObserver;
 let revealElementsByTarget = new WeakMap();
+let mediaRevealSentinels = [];
 let cardRevealObserver;
 let cardRevealRowsByTarget = new WeakMap();
 let cardNaturalRects = new WeakMap();
@@ -128,10 +128,27 @@ const revealObserverTargetElements = (observerTarget) => {
 		}
 
 		revealObserver?.unobserve(observerTarget);
+		if (observerTarget instanceof HTMLElement && observerTarget.hasAttribute("data-media-reveal-sentinel")) {
+			observerTarget.remove();
+		}
 		return;
 	}
 
 	revealElement(observerTarget);
+};
+
+const clearMediaRevealSentinels = () => {
+	for (const sentinel of mediaRevealSentinels) {
+		sentinel.remove();
+	}
+
+	mediaRevealSentinels = [];
+
+	for (const context of document.querySelectorAll("[data-media-reveal-position-patched]")) {
+		context.style.position = context.getAttribute("data-media-reveal-original-position") || "";
+		context.removeAttribute("data-media-reveal-original-position");
+		context.removeAttribute("data-media-reveal-position-patched");
+	}
 };
 
 const clearMediaRevealDirections = () => {
@@ -236,7 +253,37 @@ const getRevealObserverTarget = (element) => {
 		const context = element.closest(mediaRevealContextSelector);
 
 		if (context instanceof HTMLElement) {
-			return context;
+			const elementRect = getLayoutRect(element);
+			const contextRect = getLayoutRect(context);
+
+			if (!elementRect || !contextRect || elementRect.width <= 0 || elementRect.height <= 0) {
+				return context;
+			}
+
+			const contextPosition = window.getComputedStyle(context).position;
+
+			if (contextPosition === "static") {
+				context.setAttribute("data-media-reveal-original-position", context.style.position);
+				context.setAttribute("data-media-reveal-position-patched", "");
+				context.style.position = "relative";
+			}
+
+			const sentinel = document.createElement("span");
+			sentinel.setAttribute("aria-hidden", "true");
+			sentinel.setAttribute("data-media-reveal-sentinel", "");
+			sentinel.style.cssText = [
+				"position:absolute",
+				"left:0",
+				`top:${Math.max(0, elementRect.top - contextRect.top)}px`,
+				"width:1px",
+				`height:${Math.max(1, elementRect.height)}px`,
+				"pointer-events:none",
+				"visibility:hidden",
+			].join(";");
+
+			context.append(sentinel);
+			mediaRevealSentinels.push(sentinel);
+			return sentinel;
 		}
 	}
 
@@ -496,6 +543,20 @@ const setGoodCardRevealOffset = (card, direction) => {
 	card.style.setProperty("--card-reveal-start-x", `${offset.toFixed(2)}px`);
 };
 
+const getExplicitCardRevealDirection = (card) => {
+	const source = card.closest("[data-card-reveal-origin]");
+	const direction = source?.getAttribute("data-card-reveal-origin");
+
+	return direction === "left" || direction === "right" ? direction : undefined;
+};
+
+const getCardRevealOrderMode = (cards) => {
+	const source = cards.find((card) => card instanceof HTMLElement && card.closest("[data-card-reveal-order]"));
+	const mode = source?.closest("[data-card-reveal-order]")?.getAttribute("data-card-reveal-order");
+
+	return mode === "inner-first" ? mode : undefined;
+};
+
 const setGoodCardRevealDirections = (cards) => {
 	const goodCards = cards.filter((card) => isGoodRevealCard(card));
 
@@ -504,7 +565,7 @@ const setGoodCardRevealDirections = (cards) => {
 	}
 
 	if (goodCards.length === 1) {
-		setGoodCardRevealOffset(goodCards[0], "right");
+		setGoodCardRevealOffset(goodCards[0], getExplicitCardRevealDirection(goodCards[0]) || "right");
 		return;
 	}
 
@@ -515,7 +576,7 @@ const setGoodCardRevealDirections = (cards) => {
 	for (const card of goodCards) {
 		const rect = getNaturalRect(card);
 		const cardCenter = rect.left + rect.width / 2;
-		setGoodCardRevealOffset(card, cardCenter < rowCenter ? "left" : "right");
+		setGoodCardRevealOffset(card, getExplicitCardRevealDirection(card) || (cardCenter < rowCenter ? "left" : "right"));
 	}
 };
 
@@ -621,6 +682,19 @@ const getCardCenterX = (card) => {
 };
 
 const getCardRevealOrder = (cards) => {
+	const orderMode = getCardRevealOrderMode(cards);
+
+	if (orderMode === "inner-first") {
+		const direction = getExplicitCardRevealDirection(cards.find((card) => card instanceof HTMLElement));
+
+		return [...cards].sort((a, b) => {
+			const aCenter = getCardCenterX(a);
+			const bCenter = getCardCenterX(b);
+
+			return direction === "left" ? bCenter - aCenter : aCenter - bCenter;
+		});
+	}
+
 	const rowLeft = Math.min(...cards.map((card) => getNaturalRect(card).left));
 	const rowRight = Math.max(...cards.map((card) => getNaturalRect(card).right));
 	const rowCenter = rowLeft + (rowRight - rowLeft) / 2;
@@ -772,6 +846,7 @@ const setupReveal = () => {
 	revealObserver?.disconnect();
 	revealObserver = undefined;
 	revealElementsByTarget = new WeakMap();
+	clearMediaRevealSentinels();
 
 	const targets = uniqueElements(revealSelectors).filter(shouldRevealElement);
 

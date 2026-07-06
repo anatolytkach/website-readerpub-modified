@@ -696,10 +696,15 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	--green-edge-air: clamp(53.333px, 6.222vw, 115.555px);
 	--green-edge-top-air: var(--green-edge-air-top-wave);
 	--green-edge-bottom-air: var(--green-edge-air-bottom-wave);
+	--green-edge-top-inset: var(--green-edge-air);
+	--green-edge-bottom-inset: var(--green-edge-air);
+	--green-section-safe-offset: var(--section-padding);
+	--green-section-padding-top: calc(var(--green-section-safe-offset) + var(--green-edge-top-inset));
+	--green-section-padding-bottom: calc(var(--green-section-safe-offset) + var(--green-edge-bottom-inset));
 	background: transparent;
 	background-position: center center;
-	padding-top: calc(var(--section-padding) + var(--green-edge-air));
-	padding-bottom: calc(var(--section-padding) + var(--green-edge-air));
+	padding-top: var(--green-section-padding-top);
+	padding-bottom: var(--green-section-padding-bottom);
 	will-change: auto;
 }
 
@@ -749,8 +754,8 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 .section.section--green:has(+ .cta-block),
 .institutions-expanded-access-grid:has(+ .cta-block) {
 	--green-edge-bottom-air: none;
-	padding-top: calc(var(--section-padding) * 2 + var(--green-edge-air));
-	padding-bottom: calc(var(--section-padding) * 2);
+	--green-edge-bottom-inset: 0px;
+	--green-section-padding-bottom: calc(var(--green-section-safe-offset) * 2);
 }
 
 .content > .section.section--green + .cta-block {
@@ -819,11 +824,17 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 
 .content > .hero-background-spacer + .section.section--green,
 .content > .hero-background-spacer + script + .section.section--green {
-	padding-top: calc(var(--section-padding) * 2 + var(--green-edge-air));
+	padding-top: var(--green-section-padding-top);
 }
 
 .section:is(.section--gray, .section--green):has(+ .cta-block) {
 	margin-bottom: 0;
+}
+
+body .page .content .section.section--green,
+body .page .content .institutions-expanded-access-grid {
+	padding-top: var(--green-section-padding-top) !important;
+	padding-bottom: var(--green-section-padding-bottom) !important;
 }
 
 .section--dark {
@@ -846,6 +857,10 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 
 .content > :is(.section, .cta-block) + :is(.section, .cta-block) {
 	margin-top: var(--section-stack-gap);
+}
+
+.content > .section.section--white + .section.section--white {
+	margin-top: calc(var(--section-stack-gap) * 0.8);
 }
 
 .content > .hero-background-spacer + :is(.section, .cta-block),
@@ -917,7 +932,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	:where(h1, h2, h3, h4):not(
 		:where(.card, .footer-cta) :where(h1, h2, h3, h4)
 ) {
-	color: #ff803b !important;
+	color: #ff8d4f !important;
 }
 
 .section.section--green
@@ -1533,7 +1548,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	justify-items: center;
 	isolation: isolate;
 	margin-top: 0;
-	padding: 42px 0 28px;
+	padding: 63px 0 42px;
 	border-top: 1px solid var(--border);
 	color: var(--muted);
 	text-align: center;
@@ -1549,7 +1564,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	color: var(--accent);
 	font-family: var(--font-heading);
 	font-size: 1.06875rem;
-	font-weight: 600;
+	font-weight: 500;
 	letter-spacing: 0.08em;
 	line-height: var(--line-height-heading);
 }

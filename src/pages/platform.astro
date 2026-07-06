@@ -207,42 +207,46 @@ const benefitCards = [
 				body="Each layer supports a different stage of the publication lifecycle while remaining part of a unified platform."
 			>
 				<ol class="platform-flow" aria-label="ReaderPub publication lifecycle">
-					<li>WePub</li>
-					<li>WeRead</li>
-					<li>BookTree</li>
-					<li>WeBuzz / WeTalk</li>
-					<li>Scribe</li>
+					<li class="card">WePub</li>
+					<li class="card">WeRead</li>
+					<li class="card">BookTree</li>
+					<li class="card">WeBuzz / WeTalk</li>
+					<li class="card">Scribe</li>
 				</ol>
 				<p class="platform-flow-note">
 					Instead of moving readers and content between disconnected systems, ReaderPub keeps these activities within one publishing environment.
 				</p>
 				<div class="card-grid platform-two-grid platform-onboarding-grid">
-					<section class="card platform-onboarding-card">
-						<h3>For creators</h3>
-						<p class="lede">Publish your book on ReaderPub.</p>
-						<ul class="bullets">
-							<li>Upload Word or EPUB files</li>
-							<li>Publish browser-based web editions</li>
-							<li>Generate production-ready EPUBs</li>
-							<li>Track reader engagement</li>
-						</ul>
-						<div class="cta-row">
-							<a class="button" href="/wepub">Start publishing</a>
-							<a class="button button--secondary" href="/pricing/">See pricing</a>
+					<section class="platform-onboarding-panel">
+						<h3 class="platform-onboarding-heading">For creators</h3>
+						<div class="card platform-onboarding-card" data-card-reveal-origin="left">
+							<p class="lede">Publish your book on ReaderPub.</p>
+							<ul class="bullets">
+								<li>Upload Word or EPUB files</li>
+								<li>Publish browser-based web editions</li>
+								<li>Generate production-ready EPUBs</li>
+								<li>Track reader engagement</li>
+							</ul>
+							<div class="cta-row">
+								<a class="button" href="/wepub">Start publishing</a>
+								<a class="button button--secondary" href="/pricing/">See pricing</a>
+							</div>
 						</div>
 					</section>
-					<section class="card platform-onboarding-card">
-						<h3>For organizations</h3>
-						<p class="lede">Bring your organization to ReaderPub.</p>
-						<ul class="bullets">
-							<li>Import from OPDS, MARC, ONIX, KBART, S3, or CSV</li>
-							<li>Manage users, groups, and permissions</li>
-							<li>Use ReaderPub or custom subdomain deployment</li>
-							<li>Track usage and engagement</li>
-						</ul>
-						<div class="cta-row">
-							<a class="button" href="/contact/">Contact us for details</a>
-							<a class="button button--secondary" href="/security/">Explore security</a>
+					<section class="platform-onboarding-panel">
+						<h3 class="platform-onboarding-heading">For organizations</h3>
+						<div class="card platform-onboarding-card" data-card-reveal-origin="right">
+							<p class="lede">Bring your organization to ReaderPub.</p>
+							<ul class="bullets">
+								<li>Import from OPDS, MARC, ONIX, KBART, S3, or CSV</li>
+								<li>Manage users, groups, and permissions</li>
+								<li>Use ReaderPub or custom subdomain deployment</li>
+								<li>Track usage and engagement</li>
+							</ul>
+							<div class="cta-row">
+								<a class="button" href="/contact/">Contact us for details</a>
+								<a class="button button--secondary" href="/security/">Explore security</a>
+							</div>
 						</div>
 					</section>
 				</div>
@@ -251,7 +255,7 @@ const benefitCards = [
 
 		<section class="section section--white platform-source-section platform-audiences-section platform-first-white-section section-continuation">
 			<h2>Audiences</h2>
-			<div class="card-grid platform-audiences-cards">
+			<div class="card-grid platform-audiences-cards" data-card-reveal-origin="right" data-card-reveal-order="inner-first">
 				<div class="card"><h3>Authors</h3><p>Publish and sell directly, then analyze reader engagement.</p></div>
 				<div class="card"><h3>Publishers</h3><p>Manage titles, editions, catalogs, and controlled access.</p></div>
 				<div class="card"><h3>Schools</h3><p>Distribute course materials and monitor usage.</p></div>
@@ -275,7 +279,7 @@ const benefitCards = [
 
 		<section class="section section--white platform-source-section platform-reading-section section-continuation">
 			<h2>Reading Experience</h2>
-			<div class="card-grid platform-reading-cards">
+			<div class="card-grid platform-reading-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
 				<div class="card"><h3>Annotations</h3><p>Highlights, notes, and preserved context.</p></div>
 				<div class="card"><h3>Shared context</h3><p>Discussion among readers, authors, and instructors.</p></div>
 				<div class="card"><h3>Read-aloud support</h3><p>Native device text-to-speech voices.</p></div>
@@ -331,6 +335,7 @@ const benefitCards = [
 		</section>
 
 		<section class="section section--white platform-source-section platform-control-section section-continuation">
+			<h2>Institutional control</h2>
 			<div class="platform-control-split">
 				<img
 					class="image-block platform-control-image"
@@ -342,8 +347,8 @@ const benefitCards = [
 					height="936"
 				/>
 				<div class="platform-control-copy">
-					<div class="card platform-control-info-card">
-						<h3 class="platform-control-heading">Institutional control</h3>
+					<div class="card platform-control-info-card" data-card-reveal-origin="left">
+						<h3 class="platform-control-heading">Controlled access to internal publications</h3>
 						<p class="lede platform-control-lede">
 							Access can be assigned by user, group, course, department, team, program, partner
 							organization, or custom permission.
@@ -382,6 +387,14 @@ const benefitCards = [
 		--section-block-gap-adjust: 12px;
 	}
 
+	:global(.content > .section.section--gray + .platform-source-sections) {
+		margin-top: var(--section-stack-gap);
+	}
+
+	:global(.content > .platform-source-sections + .section.section--green) {
+		margin-top: var(--section-stack-gap);
+	}
+
 	:global(.platform-title-accent) {
 		color: var(--accent);
 	}
@@ -414,6 +427,12 @@ const benefitCards = [
 		padding-top: 58px !important;
 		padding-bottom: 58px !important;
 		margin-top: var(--section-stack-gap) !important;
+	}
+
+	.platform-source-section.platform-audiences-section + .platform-source-section.platform-reading-section,
+	.platform-source-section.platform-reading-section + .platform-source-section.platform-commerce-section,
+	.platform-source-section.platform-commerce-section + .platform-source-section.platform-control-section {
+		margin-top: calc(var(--section-stack-gap) * 0.7) !important;
 	}
 
 	.platform-source-section h2 {
@@ -480,7 +499,7 @@ const benefitCards = [
 	}
 
 	.platform-source-section .platform-old-model-card .comparison-list li::before {
-		background: var(--text) !important;
+		background: var(--accent-orange) !important;
 	}
 
 	.platform-source-section .bullets {
@@ -540,9 +559,27 @@ const benefitCards = [
 		color: var(--accent);
 	}
 
+	.platform-source-section .platform-onboarding-grid .platform-onboarding-panel {
+		display: grid;
+		grid-template-rows: auto minmax(0, 1fr);
+		gap: var(--section-flow-gap);
+		min-width: 0;
+	}
+
+	.platform-source-section .platform-onboarding-grid .platform-onboarding-heading {
+		margin: 0;
+		color: #ff8d4f;
+		font-family: var(--font-heading);
+		font-size: clamp(24px, 3vw, 34px);
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
+	}
+
 	.platform-source-section .platform-onboarding-grid .platform-onboarding-card {
 		align-items: stretch;
 		text-align: left;
+		height: 100%;
 	}
 
 	.platform-source-section .platform-onboarding-grid .platform-onboarding-card .lede {
@@ -578,7 +615,7 @@ const benefitCards = [
 	}
 
 	:global(.platform-flow-section .platform-onboarding-grid) {
-		margin-top: var(--section-flow-gap) !important;
+		margin-top: 0 !important;
 	}
 
 	.platform-source-section.platform-audiences-section {
@@ -670,7 +707,8 @@ const benefitCards = [
 		object-fit: contain;
 	}
 
-	.platform-source-section.platform-commerce-section > h2 {
+	.platform-source-section.platform-commerce-section > h2,
+	.platform-source-section.platform-control-section > h2 {
 		margin-bottom: 0;
 	}
 
@@ -708,6 +746,7 @@ const benefitCards = [
 		column-gap: 64px;
 		align-items: center;
 		width: 100%;
+		margin-top: var(--section-block-gap-adjust) !important;
 	}
 
 	.platform-source-section .platform-control-image {
@@ -979,6 +1018,7 @@ const benefitCards = [
 	}
 
 	.platform-flow {
+		--platform-flow-heading-color: #ff8d4f;
 		display: grid;
 		grid-template-columns: repeat(6, minmax(0, 1fr));
 		gap: 34px;
@@ -995,12 +1035,21 @@ const benefitCards = [
 		justify-content: center;
 		min-height: 86px;
 		padding: 18px;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-card);
+		border: 1px solid var(--accent);
+		border-radius: calc(var(--radius-card) * 3);
 		background: var(--card-bg);
-		color: var(--text);
-		font-weight: 700;
+		color: var(--accent);
+		font-family: var(--font-heading);
+		font-size: var(--card-heading-font-size);
+		font-weight: var(--font-weight-heading);
+		line-height: var(--card-heading-line-height);
 		text-align: center;
+		transition:
+			transform var(--motion-base) var(--motion-ease),
+			box-shadow var(--motion-base) var(--motion-ease),
+			background var(--motion-base) var(--motion-ease),
+			border-color var(--motion-base) var(--motion-ease),
+			color var(--motion-base) var(--motion-ease);
 	}
 
 	.platform-flow li:nth-child(4) {
@@ -1017,13 +1066,18 @@ const benefitCards = [
 		top: 50%;
 		right: -27px;
 		transform: translateY(-50%);
-		color: var(--accent);
+		color: var(--platform-flow-heading-color);
 		font-size: 1.35rem;
 		font-weight: 700;
 	}
 
+	.platform-flow li.card:hover {
+		color: var(--accent-orange) !important;
+	}
+
 	.platform-flow-note {
 		max-width: 760px;
+		margin-top: var(--section-flow-gap);
 		color: var(--accent);
 		font-size: 1.125rem;
 		line-height: var(--line-height-body);
