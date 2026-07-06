@@ -117,7 +117,7 @@ const audienceCards = [
 		spacerBackgroundPositionY="100%"
 		class="wetalk-hero"
 	>
-		<Fragment slot="title"><span class="wetalk-hero-product">WeTalk:</span><br /><span class="hero-title-rest">Private discussion for institutional knowledge</span></Fragment>
+		<Fragment slot="title"><span class="wetalk-hero-product">WeTalk<span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">Private discussion for institutional knowledge</span></Fragment>
 	</HeroSection>
 
 	<Section
@@ -160,7 +160,7 @@ const audienceCards = [
 
 	<Section
 		tone="white"
-		class="wetalk-comparison-section"
+		class="wetalk-comparison-section section--two-column"
 		title="WeTalk and WeBuzz"
 		body="ReaderPub supports both public literary conversation and private institutional discussion, but they serve different needs."
 	>
@@ -210,24 +210,10 @@ const audienceCards = [
 		height: min(var(--hero-image-reader-height), calc(100cqw * var(--hero-image-reader-ratio)));
 	}
 
-	:global(.wetalk-discussion-layer-section .section-header),
-	:global(.wetalk-discussion-layer-section .section-header h2) {
-		max-width: none !important;
-	}
-
 	@media (min-width: 901px) {
-		:global(.wetalk-discussion-layer-section .section-header) {
-			width: 100%;
-		}
-
 		:global(.wetalk-discussion-layer-section .section-header h2) {
-			width: 100%;
 			white-space: normal !important;
 		}
-	}
-
-	:global(.wetalk-comparison-section .section-header) {
-		max-width: none;
 	}
 
 	:global(.wetalk-workflow-section),

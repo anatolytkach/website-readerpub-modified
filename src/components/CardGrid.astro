@@ -2,11 +2,12 @@
 interface Props {
 	columns?: "2" | "3" | "4";
 	class?: string;
+	[key: string]: unknown;
 }
 
-const { columns = "3", class: className = "" } = Astro.props;
+const { columns = "3", class: className = "", ...attrs } = Astro.props;
 ---
 
-<div class:list={["card-grid", `card-grid--${columns}`, className]}>
+<div {...attrs} class:list={["card-grid", `card-grid--${columns}`, className]}>
 	<slot />
 </div>

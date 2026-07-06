@@ -66,7 +66,7 @@ const benefitCards = [
 		spacerBackgroundPositionY="45%"
 		class="platform-hero"
 	>
-		<Fragment slot="title"><span class="platform-hero-product">ReaderPub:</span><br /><span class="hero-title-rest">A web-native publishing network.</span></Fragment>
+		<Fragment slot="title"><span class="platform-hero-product">ReaderPub<span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">A web-native publishing network.</span></Fragment>
 		<Fragment slot="body">Publish securely to the web.<br />Listen to and retain your readers.</Fragment>
 	</HeroSection>
 
@@ -81,7 +81,7 @@ const benefitCards = [
 	</Section>
 
 	<div class="platform-source-sections">
-		<section class="section section--white spec-cards-section platform-source-section platform-source-problem-section section-continue-next">
+		<section class="section section--white spec-cards-section platform-source-section platform-source-problem-section section--two-column section-continue-next">
 			<h2>ReaderPub exists because the old model breaks the relationship</h2>
 			<p class="lede">
 				File-first publishing can move a book from one place to another, but it cannot keep books connected to readers, authors, institutions and communities.
@@ -253,7 +253,7 @@ const benefitCards = [
 			</Section>
 		</section>
 
-		<section class="section section--white platform-source-section platform-audiences-section platform-first-white-section section-continuation">
+		<section class="section section--white platform-source-section platform-audiences-section platform-first-white-section section--two-column section-continuation">
 			<h2>Audiences</h2>
 			<div class="card-grid platform-audiences-cards" data-card-reveal-origin="right" data-card-reveal-order="inner-first">
 				<div class="card"><h3>Authors</h3><p>Publish and sell directly, then analyze reader engagement.</p></div>
@@ -277,7 +277,7 @@ const benefitCards = [
 			/>
 		</section>
 
-		<section class="section section--white platform-source-section platform-reading-section section-continuation">
+		<section class="section section--white platform-source-section platform-reading-section section--two-column section-continuation">
 			<h2>Reading Experience</h2>
 			<div class="card-grid platform-reading-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
 				<div class="card"><h3>Annotations</h3><p>Highlights, notes, and preserved context.</p></div>
@@ -298,7 +298,7 @@ const benefitCards = [
 			/>
 		</section>
 
-		<section class="section section--white platform-source-section platform-commerce-section section-continuation">
+		<section class="section section--white platform-source-section platform-commerce-section section--two-column section-continuation">
 			<h2 class="platform-commerce-heading">Commerce &amp; Analytics</h2>
 			<div class="platform-commerce-split">
 				<img
@@ -334,7 +334,7 @@ const benefitCards = [
 			</div>
 		</section>
 
-		<section class="section section--white platform-source-section platform-control-section section-continuation">
+		<section class="section section--white platform-source-section platform-control-section section--two-column section-continuation">
 			<h2>Institutional control</h2>
 			<div class="platform-control-split">
 				<img
@@ -441,7 +441,6 @@ const benefitCards = [
 	}
 
 	.platform-source-section .lede {
-		max-width: 780px;
 		color: var(--accent);
 		font-size: 18px;
 		line-height: var(--line-height-body);
@@ -568,7 +567,7 @@ const benefitCards = [
 
 	.platform-source-section .platform-onboarding-grid .platform-onboarding-heading {
 		margin: 0;
-		color: #ff8d4f;
+		color: var(--accent-orange);
 		font-family: var(--font-heading);
 		font-size: clamp(24px, 3vw, 34px);
 		font-weight: var(--font-weight-heading);
@@ -1018,7 +1017,7 @@ const benefitCards = [
 	}
 
 	.platform-flow {
-		--platform-flow-heading-color: #ff8d4f;
+		--platform-flow-heading-color: var(--accent-orange);
 		display: grid;
 		grid-template-columns: repeat(6, minmax(0, 1fr));
 		gap: 34px;
@@ -1076,7 +1075,6 @@ const benefitCards = [
 	}
 
 	.platform-flow-note {
-		max-width: 760px;
 		margin-top: var(--section-flow-gap);
 		color: var(--accent);
 		font-size: 1.125rem;

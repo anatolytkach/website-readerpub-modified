@@ -65,7 +65,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	<Section
 		tone="white"
-		class="home-file-model-section"
+		class="home-file-model-section section--two-column"
 		title="The old file-first model breaks the relationship"
 		body="The old publishing model ends when a file is delivered. ReaderPub helps publications remain alive and connected after delivery."
 		>
@@ -97,7 +97,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		</div>
 	</Section>
 
-	<Section tone="white" class="home-web-asset-section" title="What changes when a book becomes a living web asset?">
+	<Section tone="white" class="home-web-asset-section section--two-column" title="What changes when a book becomes a living web asset?">
 		<div class="home-comparison-grid">
 				<article class="comparison-text-panel home-comparison-card home-old-publishing-card" style="background: var(--card-bg);">
 				<div class="card-copy">
@@ -484,11 +484,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		:global(.home-web-asset-section) {
 			padding-top: var(--section-padding);
 		}
-	}
-
-	:global(.home-web-asset-section .section-header),
-	:global(.home-web-asset-section .section-header h2) {
-		max-width: none;
 	}
 
 	@media (min-width: 901px) {

@@ -19,7 +19,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	<HeroSection
 		class="booktree-hero"
 		eyebrow="BookTree"
-		title="BookTree keeps track of what you are trying to learn."
+		title="BookTree: Keep track of what you are trying to learn."
 		lead="Knowledge breaks when context is lost. Books, notes and research materials often become disconnected over time."
 		body="BookTree gives long-form readers, researchers, students and authors a way to keep context alive across everything they read."
 		image="/images/booktree.webp"
@@ -27,7 +27,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		actions={[tryBookTreeAction]}
 		spacerBackgroundPositionY="36%"
 	>
-		<Fragment slot="title"><span class="booktree-hero-product" style="color: var(--accent);">BookTree</span> keeps track of what you are trying to learn.</Fragment>
+		<Fragment slot="title"><span class="booktree-hero-product" style="color: var(--accent);">BookTree<span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">Keep track of what you are trying to learn.</span></Fragment>
 	</HeroSection>
 
 	<Section
@@ -48,7 +48,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 
 	<Section
 		tone="white"
-		class="booktree-source-section booktree-source-solution-section"
+		class="booktree-source-section booktree-source-solution-section section--two-column"
 		title="BookTree connects reading to thinking"
 	>
 		<Fragment slot="body">
@@ -225,7 +225,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	}
 
 	.booktree-without-card .booktree-source-list li::before {
-		background: var(--text);
+		background: var(--accent-orange);
 	}
 
 	.booktree-connected-subsection {
@@ -259,7 +259,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 
 	.flow-chain li:not(:last-child)::after {
 		content: "→";
-		color: var(--accent);
+		color: var(--accent-orange);
 		font-weight: 700;
 	}
 
@@ -268,8 +268,11 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	}
 
 	.booktree-flow-chain li {
-		font-size: 18px;
-		font-weight: 600;
+		font-family: var(--font-heading);
+		font-size: var(--card-heading-font-size);
+		font-weight: var(--font-weight-heading);
+		line-height: var(--card-heading-line-height);
+		letter-spacing: var(--letter-spacing-heading);
 	}
 
 	.booktree-source-audience-intro {

@@ -24,7 +24,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		actions={[publishAction, pricingAction]}
 		spacerBackgroundPositionY="18%"
 	>
-		<Fragment slot="title"><span style="color: var(--accent);">WePub:</span><br /><span class="hero-title-rest">Publish to readers, you never lose.</span></Fragment>
+		<Fragment slot="title"><span style="color: var(--accent);">WePub<span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">Publish to readers, you never lose.</span></Fragment>
 		<Fragment slot="body">ReaderPub turns books into living web assets: readable, searchable, discussable and connected, so authors and publishers achieve strategic distribution.</Fragment>
 	</HeroSection>
 
@@ -76,7 +76,7 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		</CardGrid>
 	</Section>
 
-		<Section tone="white" class="wepub-path-section" title="What changes when you publish on ReaderPub">
+		<Section tone="white" class="wepub-path-section section--two-column" title="What changes when you publish on ReaderPub">
 		<div class="wepub-comparison-grid">
 			<article class="comparison-text-panel wepub-list-card wepub-old-path-card">
 				<div class="card-copy">
@@ -192,13 +192,6 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		width: 100%;
 	}
 
-	:global(.wepub-old-model-section .section-header),
-	:global(.wepub-old-model-section .section-header h2),
-	:global(.wepub-old-model-section .section-lead) {
-		max-width: none;
-		width: 100%;
-	}
-
 	@media (min-width: 901px) {
 		:global(.wepub-old-model-section .section-header h2) {
 			font-size: clamp(1.9rem, 3vw, 2.08rem);
@@ -307,7 +300,6 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 	}
 
 	.wepub-supporting-text {
-		max-width: 760px;
 		color: var(--accent);
 		font-size: 1.125rem;
 		line-height: var(--line-height-body);

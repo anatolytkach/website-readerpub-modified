@@ -77,6 +77,7 @@ const cardRevealDuration = 1240;
 const cardRevealDelay = 360;
 const cardRevealThreshold = 0.65;
 const cardRowTopTolerance = 8;
+const cardRevealDirections = ["left", "right", "bottom", "fade"];
 
 const revealedElements = new WeakSet();
 const revealedCards = new WeakSet();
@@ -375,6 +376,37 @@ const getNaturalRect = (element) => {
 	return cardNaturalRects.get(element) || element.getBoundingClientRect();
 };
 
+const getNextElementSibling = (element) => {
+	let next = element.nextElementSibling;
+
+	while (next instanceof HTMLElement && next.matches("script, style")) {
+		next = next.nextElementSibling;
+	}
+
+	return next;
+};
+
+const isLowerGreenRevealCard = (card) => {
+	const container = getGreenRevealContainer(card);
+	const next = container ? getNextElementSibling(container) : undefined;
+
+	return next instanceof HTMLElement && next.matches(".cta-block");
+};
+
+const getGreenRevealContainer = (card) => {
+	let current = card.parentElement;
+
+	while (current instanceof HTMLElement) {
+		if (current.matches(".section--green, .institutions-expanded-access-grid")) {
+			return current;
+		}
+
+		current = current.parentElement;
+	}
+
+	return undefined;
+};
+
 const clearCardRevealSentinels = () => {
 	for (const sentinel of cardRevealSentinels) {
 		sentinel.remove();
@@ -537,17 +569,32 @@ const setGoodCardRevealOffset = (card, direction) => {
 	const rect = getNaturalRect(card);
 	const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 1;
 	const gutter = 64;
-	const offset = direction === "left" ? -gutter - rect.right : viewportWidth + gutter - rect.left;
+	const offsetX =
+		direction === "bottom" || direction === "fade"
+			? 0
+			: direction === "left"
+				? -gutter - rect.right
+				: viewportWidth + gutter - rect.left;
+	const offsetY = direction === "bottom" ? "calc(100vh + 48px)" : "0px";
 
 	card.setAttribute("data-card-reveal-direction", direction);
-	card.style.setProperty("--card-reveal-start-x", `${offset.toFixed(2)}px`);
+	card.style.setProperty("--card-reveal-start-x", `${offsetX.toFixed(2)}px`);
+	card.style.setProperty("--card-reveal-start-y", offsetY);
 };
 
 const getExplicitCardRevealDirection = (card) => {
 	const source = card.closest("[data-card-reveal-origin]");
 	const direction = source?.getAttribute("data-card-reveal-origin");
 
-	return direction === "left" || direction === "right" ? direction : undefined;
+	if (direction && cardRevealDirections.includes(direction)) {
+		return direction;
+	}
+
+	if (getGreenRevealContainer(card)) {
+		return isLowerGreenRevealCard(card) ? "bottom" : "fade";
+	}
+
+	return isLowerGreenRevealCard(card) ? "bottom" : undefined;
 };
 
 const getCardRevealOrderMode = (cards) => {
@@ -656,6 +703,10 @@ const getTallestCard = (cards) => {
 };
 
 const getCardRowTarget = (row) => {
+	if (row.cards.some((card) => getGreenRevealContainer(card))) {
+		return row.group;
+	}
+
 	if (row.cards.length === 1) {
 		return createCardRowSentinel(row);
 	}
@@ -753,9 +804,12 @@ const revealCardRowsForTarget = (target) => {
 		return;
 	}
 
-	rowsForTarget.forEach((row, rowIndex) => {
-		const timer = window.setTimeout(() => revealCardRow(row.cards), rowIndex * cardRevealDelay);
+	let revealDelay = 0;
+
+	rowsForTarget.forEach((row) => {
+		const timer = window.setTimeout(() => revealCardRow(row.cards), revealDelay);
 		cardRevealTimers.push(timer);
+		revealDelay += Math.max(1, row.cards.filter((card) => card instanceof HTMLElement).length) * cardRevealDelay;
 	});
 };
 

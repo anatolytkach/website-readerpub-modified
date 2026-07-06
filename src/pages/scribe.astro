@@ -12,15 +12,13 @@ const primaryActions = [
 		href: "/contact/",
 		variant: "secondary" as const,
 		class: "button--scribe-demo",
-		iconSrc: "/images/scribe.svg",
-		iconAlt: "",
 	},
 	{ label: "Explore ReaderPub", href: "/platform/" },
 ];
 
 const ctaActions = [
 	primaryActions[0],
-	{ label: "Explore ReaderPub", href: "/platform/", variant: "secondary" as const },
+	primaryActions[1],
 ];
 ---
 
@@ -33,10 +31,9 @@ const ctaActions = [
 		class="scribe-hero"
 		image="/images/scribe_hero.webp"
 		imageAlt="Scribe AI Companion for ReaderPub literature and publishing conversations"
-		actions={primaryActions}
 		spacerBackgroundPositionY="90%"
 	>
-		<Fragment slot="title"><span class="scribe-hero-product">Scribe:</span><br /><span class="hero-title-rest">All things literature AI companion.</span></Fragment>
+		<Fragment slot="title"><span class="scribe-hero-product">Scribe<span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">All things literature AI companion.</span></Fragment>
 		<div class="scribe-hero-copy">
 			<p class="scribe-hero-problem">
 				General-purpose AI can answer almost anything. However, its answers often lack specificity and are full of platitudes.
@@ -45,19 +42,32 @@ const ctaActions = [
 				Scribe combines modern language models with specialized knowledge about literature, books, authors, writing, publishing and ReaderPub platform capabilities to support focused conversation.
 			</p>
 		</div>
+		<div class="scribe-hero-actions">
+			<img
+				class="scribe-hero-action-icon"
+				src="/images/scribe-action.svg"
+				alt=""
+				aria-hidden="true"
+				width="35"
+				height="42"
+				style="display: block; width: auto !important; height: 42px !important; max-width: none !important; flex: 0 0 auto;"
+			/>
+			<a class="button button--secondary button--scribe-demo" href="/contact/">Talk to Scribe</a>
+			<a class="button" href="/platform/">Explore ReaderPub</a>
+		</div>
 	</HeroSection>
 
 	<Section
 		tone="gray"
 		body="Readers, authors, publishers and institutions often move between books, search engines, documentation, online discussions and general-purpose AI assistants to find answers. Each source knows only part of the picture."
 	>
-		<Fragment slot="title"><span class="section-title-rest">Literary and publishing knowledge</span> <span class="section-title-accent">is scattered across too many places</span></Fragment>
+		<Fragment slot="title"><span class="section-title-rest">Literary and research knowledge</span> <span class="section-title-accent">is scattered across too many places</span></Fragment>
 		<CardGrid columns="3" class="scribe-problem-grid scribe-centered-card-grid">
 			<Card title="Books" body="Books provide knowledge but cannot answer questions." />
 			<Card title="Search" body="Search engines return links rather than conversations." />
 			<Card title="General AI" body="General AI lacks focused literary and publishing context." />
 			<Card title="Community discussion" body="Community discussions are valuable but difficult to search." />
-			<Card title="Publishing knowledge" body="Publishing knowledge is often buried in documents, forums and workflows." />
+			<Card title="Educational knowledge" body="Educational and research knowledge is often buried in documents, forums and workflows." />
 		</CardGrid>
 	</Section>
 
@@ -162,11 +172,61 @@ const ctaActions = [
 		border-color: transparent;
 	}
 
-	:global(.button.button--scribe-demo:hover),
+	:global(.button.button--scribe-demo:hover) {
+		background: var(--text);
+		color: #ffffff;
+		border-color: transparent;
+	}
+
 	:global(.section--dark .button.button--scribe-demo:hover) {
 		background: #ffffff;
 		color: var(--text);
 		border-color: #ffffff;
+	}
+
+	.scribe-hero-actions {
+		--scribe-hero-button-height: 42px;
+		--scribe-hero-icon-gap: 10.5px;
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: var(--scribe-hero-icon-gap);
+		width: auto;
+		max-width: 100%;
+	}
+
+	.scribe-hero-actions > .button {
+		align-self: center;
+		flex: 0 0 auto;
+		margin: 0;
+		width: auto;
+		min-width: max-content;
+		height: var(--scribe-hero-button-height);
+	}
+
+	.scribe-hero-actions > .button:not(.button--scribe-demo) {
+		margin-left: calc(var(--button-row-gap) - var(--scribe-hero-icon-gap));
+	}
+
+	.scribe-hero-action-icon {
+		align-self: center;
+		display: block;
+		flex: 0 0 auto;
+		width: auto;
+		max-width: none;
+		height: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
+
+	@media (max-width: 560px) {
+		.scribe-hero-actions {
+			flex-wrap: wrap;
+		}
+
+		.scribe-hero-actions > .button:not(.button--scribe-demo) {
+			margin-left: 0;
+		}
 	}
 
 	:global(.button.button--scribe-demo .button-icon) {

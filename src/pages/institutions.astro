@@ -195,7 +195,7 @@ const ctaActions = [
 		</div>
 	</section>
 
-	<section class="section section--green institutions-publisher-intro institutions-benefits-section section-continuation">
+	<section class="section section--green institutions-publisher-intro institutions-benefits-section section--two-column section-continuation">
 		<div class="institutions-publisher-copy">
 			<h2>Publish on the web without losing control. Keep your audience.</h2>
 			<p class="lede institutions-publisher-lede">
@@ -615,7 +615,7 @@ const ctaActions = [
 	}
 
 	.institutions-publisher-intro .institutions-publisher-access {
-		color: #ff8d4f !important;
+		color: var(--accent-orange) !important;
 		font-size: 18px;
 		line-height: var(--line-height-body);
 		max-width: none;
@@ -634,14 +634,6 @@ const ctaActions = [
 		padding-bottom: 0 !important;
 	}
 
-	:global(.institutions-value-section .section-header) {
-		max-width: none;
-	}
-
-	:global(.institutions-value-section .section-header h2) {
-		max-width: none;
-	}
-
 	.institutions-expanded-pair-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 	}
@@ -653,10 +645,10 @@ const ctaActions = [
 		--section-bg-size: auto;
 		--section-bg: repeating-radial-gradient(
 			circle at var(--section-green-circle-x) calc(var(--section-green-circle-y) + var(--section-bg-parallax-y)),
-			#027468 0,
-			#027468 46.4px,
-			#018275 46.4px,
-			#018275 51.733px
+			#02685e 0,
+			#02685e 46.4px,
+			#017569 46.4px,
+			#017569 51.733px
 		);
 		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
 		grid-auto-rows: auto;

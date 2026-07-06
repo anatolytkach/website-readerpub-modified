@@ -69,6 +69,48 @@ const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`
 				document.addEventListener("astro:page-load", updateFab);
 			})();
 		</script>
+		<script is:inline>
+			(() => {
+				const keepTextLineBreaks = () => {
+					const textBlocks = document.querySelectorAll(".content :is(h1, h2, p)");
+
+					for (const textBlock of textBlocks) {
+						if (textBlock.matches("p") && textBlock.closest(".card")) {
+							continue;
+						}
+
+						const walker = document.createTreeWalker(textBlock, NodeFilter.SHOW_TEXT);
+						const textNodes = [];
+						let node = walker.nextNode();
+
+						while (node) {
+							textNodes.push(node);
+							node = walker.nextNode();
+						}
+
+						for (const textNode of textNodes) {
+							textNode.nodeValue = textNode.nodeValue
+								.replace(/\u00a0/g, " ")
+								.replace(/(^|[^\p{L}])(\p{L}{2,3})\s+(?=\p{L})/gu, (_match, prefix, word) => `${prefix}${word}\u00a0`);
+						}
+
+						for (let index = textNodes.length - 1; index >= 0; index -= 1) {
+							const textNode = textNodes[index];
+
+							if (!/\S+\s+\S+\s*$/.test(textNode.nodeValue)) {
+								continue;
+							}
+
+							textNode.nodeValue = textNode.nodeValue.replace(/(\S+)\s+(\S+)\s*$/, "$1\u00a0$2");
+							break;
+						}
+					}
+				};
+
+				keepTextLineBreaks();
+				document.addEventListener("astro:page-load", keepTextLineBreaks);
+			})();
+		</script>
 		<script>
 			import "../scripts/animation-pass.js";
 		</script>

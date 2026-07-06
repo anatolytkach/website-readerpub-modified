@@ -27,7 +27,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		spacerBackgroundPositionY="9%"
 		>
 			<Fragment slot="title">
-				<span class="readers-hero-product" style="color: var(--accent);">WeRead:</span><br />
+				<span class="readers-hero-product" style="color: var(--accent);">WeRead<span class="hero-title-colon">:</span></span><br />
 				<span class="readers-hero-title-small hero-title-rest">Genuine eReader.<br />Right in your browser.</span>
 			</Fragment>
 			<Fragment slot="body">We bring all around books together.</Fragment>
@@ -124,7 +124,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		</CardGrid>
 	</Section>
 
-	<Section tone="white" class="weread-web-reading-section">
+	<Section tone="white" class="weread-web-reading-section section--two-column">
 		<div class="weread-web-reading-intro">
 			<div class="weread-web-reading-copy">
 				<header class="section-header">
@@ -383,7 +383,6 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	}
 
 	:global(.weread-web-reading-section .section-header) {
-		max-width: none;
 		text-align: left;
 	}
 
@@ -461,18 +460,16 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	}
 
 	:global(.weread-network-section .section-header) {
-		max-width: 1080px;
 		justify-items: start;
 		text-align: left;
 	}
 
 	:global(.weread-network-section .section-header h2) {
-		max-width: 1080px;
 		text-align: left;
 	}
 
 	:global(.weread-network-section .section-header h2 .weread-card-product) {
-		color: #ff8d4f !important;
+		color: var(--accent-orange) !important;
 	}
 
 	:global(.weread-network-section .section-lead) {

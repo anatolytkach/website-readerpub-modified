@@ -25,7 +25,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		actions={[joinConversationAction]}
 		spacerBackgroundPositionY="27%"
 	>
-		<Fragment slot="title"><span class="webuzz-legacy-product">WeBuzz:</span><br /><span class="hero-title-rest">The missing layer of the book industry</span></Fragment>
+		<Fragment slot="title"><span class="webuzz-legacy-product">WeBuzz<span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">The missing layer of the book industry</span></Fragment>
 		<Fragment slot="body">WeBuzz is ReaderPub's integrated literary social network, connecting readers, authors, and publishers through discussions, reactions, and shared reading experiences around every book.</Fragment>
 	</HeroSection>
 
@@ -51,7 +51,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		</div>
 		<div class="webuzz-fragmented-subsection">
 			<header class="section-header">
-				<h2>Book discussions are fragmented</h2>
+				<h2><span class="section-title-rest">Book discussions</span> <span class="section-title-accent">are fragmented</span></h2>
 				<p class="section-lead">
 					Most conversations about books happen away from the book itself. Discussions become scattered across platforms, communities and private spaces.
 				</p>
@@ -68,7 +68,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		</div>
 	</section>
 
-	<section class="section section--white spec-cards-section webuzz-solution-section section-continuation section-continue-next">
+	<section class="section section--white spec-cards-section webuzz-solution-section section--two-column section-continuation section-continue-next">
 		<div class="webuzz-legacy-overview">
 			<h2 class="webuzz-legacy-heading">Reading does not end on the last page.</h2>
 			<div class="webuzz-legacy-intro-grid">
@@ -161,7 +161,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		body="WeBuzz gives readers a place to discuss books, passages, recommendations and ideas without sending the publication out of view."
 	>
 		<div class="webuzz-image-split">
-			<CardGrid columns="2" class="webuzz-image-cards">
+			<CardGrid columns="2" class="webuzz-image-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
 				<Card title="Book discussion" body="Readers can respond to the complete work in one shared context." />
 				<Card title="Passage discussion" body="Specific ideas and fragments can start focused conversations." />
 				<Card title="Recommendations" body="Readers can discover books through people and communities." />
@@ -187,7 +187,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		body="Reviews are only one signal. WeBuzz helps authors see discussion about books, scenes, ideas and passages after publication."
 	>
 		<div class="webuzz-image-split">
-			<CardGrid columns="2" class="webuzz-image-cards">
+			<CardGrid columns="2" class="webuzz-image-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
 				<Card title="Reader reactions" body="Audience response remains connected to the work that sparked it." />
 				<Card title="Questions and context" body="Authors can understand what readers are asking and debating." />
 				<Card title="Ongoing presence" body="The author remains visible after the launch window closes." />
@@ -213,7 +213,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		body="WeBuzz keeps conversation, discovery and audience activity attached to titles instead of scattering them across separate channels."
 	>
 		<div class="webuzz-image-split">
-			<CardGrid columns="2" class="webuzz-image-cards">
+			<CardGrid columns="2" class="webuzz-image-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
 				<Card title="Beyond launch" body="Books can keep accumulating reader activity after release." />
 				<Card title="Community discovery" body="New readers can find titles through discussion and recommendation." />
 				<Card title="Portfolio visibility" body="Publishers can see where attention is forming across publications." />
@@ -239,7 +239,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		body="Universities, libraries and organizations can use WeBuzz to support learning, programs and community discussion connected to collections."
 	>
 		<div class="webuzz-image-split">
-			<CardGrid columns="2" class="webuzz-image-cards">
+			<CardGrid columns="2" class="webuzz-image-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
 				<Card title="Courses" body="Discussion can continue alongside assigned texts and research materials." />
 				<Card title="Library programs" body="Collections can become active places for engagement." />
 				<Card title="Book clubs" body="Groups form more easily around instantly accessible books than around files." />
@@ -294,8 +294,8 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		gap: 28px;
 		align-items: stretch;
 		position: relative;
-		padding-top: var(--section-padding) !important;
-		padding-bottom: var(--section-padding) !important;
+		padding-top: calc(var(--section-padding) * 2) !important;
+		padding-bottom: calc(var(--section-padding) + var(--gray-edge-air)) !important;
 	}
 
 	.webuzz-problem-section > * {
@@ -328,7 +328,6 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	.webuzz-problem-section h2 {
-		max-width: none;
 		font-size: clamp(24px, 3vw, 34px);
 		line-height: var(--line-height-heading);
 	}
@@ -420,7 +419,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	.webuzz-overview-card-grid {
-		gap: 48px;
+		gap: var(--card-grid-gap);
 		align-items: stretch;
 	}
 
@@ -443,12 +442,10 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	.webuzz-legacy-heading {
-		max-width: none;
 		margin: 0 !important;
 	}
 
 	.webuzz-legacy-copy > p {
-		max-width: 760px;
 		font-size: 18px;
 		line-height: var(--line-height-body);
 	}
@@ -590,11 +587,6 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		margin-top: var(--section-padding);
 	}
 
-	.webuzz-lifecycle-subsection .section-header,
-	.webuzz-lifecycle-subsection .section-lead {
-		max-width: none;
-	}
-
 	:global(.webuzz-benefits-section .webuzz-matters-grid) {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: var(--card-grid-gap);
@@ -602,11 +594,6 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	:global(.webuzz-image-section .section-header) {
 		width: 100%;
-		max-width: none;
-	}
-
-	:global(.webuzz-image-section .section-header h2) {
-		max-width: none;
 	}
 
 	.webuzz-image-split {
