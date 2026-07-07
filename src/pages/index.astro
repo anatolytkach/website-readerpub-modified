@@ -63,21 +63,27 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		</CardGrid>
 	</Section>
 
-	<section class="section section--white home-tech-section" aria-labelledby="home-tech-title">
+	<section class="section section--white home-tech-heading-section" aria-labelledby="home-tech-title">
 		<h2 id="home-tech-title" class="home-tech-title">
-			<span class="home-tech-title-prefix">The solution:</span> <span class="home-tech-title-readerpub">ReaderPub</span>
+			<span class="home-tech-title-prefix">The solution:</span>
+			<span class="home-tech-title-line"><span class="home-tech-title-readerpub" style="color: var(--accent);">ReaderPub</span>&nbsp;–&nbsp;A web-native publishing network.</span>
 		</h2>
-		<picture class="home-tech-picture">
-			<source media="(orientation: portrait)" srcset="/images/tech_mobile.webp" width="823" height="1743" />
-			<img
-				src="/images/tech.webp"
-				alt="ReaderPub connects web publishing, reading, discussion and knowledge tools"
-				loading="lazy"
-				decoding="async"
-				width="1663"
-				height="946"
-			/>
-		</picture>
+	</section>
+	<section class="section section--green home-tech-visual-section" aria-label="ReaderPub interface preview">
+		<div class="home-tech-visual-frame">
+			<picture class="home-tech-picture">
+				<source media="(orientation: portrait)" srcset="/images/tech_mobile.webp" width="823" height="1743" />
+				<img
+					src="/images/tech.webp"
+					alt="ReaderPub connects web publishing, reading, discussion and knowledge tools"
+					loading="lazy"
+					decoding="async"
+					width="1663"
+					height="946"
+				/>
+			</picture>
+			<a class="button home-tech-visual-button" href="/platform">Explore ReaderPub</a>
+		</div>
 	</section>
 
 	<Section
@@ -248,18 +254,26 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		max-width: none;
 	}
 
-	:global(.home-tech-section) {
+	:global(.home-tech-heading-section) {
 		gap: 34px;
-		justify-items: stretch;
+		justify-items: center;
 		padding-top: calc(var(--section-padding) * 0.8);
-		padding-bottom: calc(var(--section-padding) * 0.8);
+		padding-bottom: calc(var(--section-padding) * 0.4);
 	}
 
-	:global(.content > .section.section--gray + .home-tech-section) {
+	:global(.home-tech-visual-section) {
+		justify-items: stretch;
+	}
+
+	:global(.content > .section.section--gray + .home-tech-heading-section) {
 		margin-top: calc(var(--section-stack-gap) * 0.8);
 	}
 
-	:global(.content > .home-tech-section + .section.section--white) {
+	:global(.content > .home-tech-heading-section + .home-tech-visual-section) {
+		margin-top: 0;
+	}
+
+	:global(.content > .home-tech-visual-section + .section.section--white) {
 		margin-top: calc(var(--section-stack-gap) * 0.64);
 	}
 
@@ -272,8 +286,34 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		color: var(--accent-orange);
 	}
 
-	.home-tech-title-readerpub {
-		color: var(--accent);
+	.home-tech-title-line {
+		display: block;
+		color: var(--text);
+		white-space: nowrap;
+	}
+
+	.home-tech-title .home-tech-title-readerpub {
+		color: var(--accent) !important;
+	}
+
+	.home-tech-visual-frame {
+		display: grid;
+		justify-items: center;
+		gap: calc(var(--section-padding) * 0.45);
+		box-sizing: border-box;
+		width: 100%;
+	}
+
+	.home-tech-visual-button,
+	.home-tech-visual-button:visited {
+		justify-self: center;
+		width: auto;
+		background: var(--accent-orange);
+	}
+
+	.home-tech-visual-button:hover,
+	.home-tech-visual-button:focus-visible {
+		background: var(--text);
 	}
 
 	.home-tech-picture {
@@ -522,7 +562,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	@media (orientation: portrait) {
-		:global(.home-tech-section) {
+		:global(.home-tech-heading-section) {
 			width: 100vw !important;
 			max-width: 100vw !important;
 			margin-right: calc(50% - 50vw) !important;
@@ -533,7 +573,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		}
 
 		.home-tech-title {
-			order: 1 !important;
 			justify-self: stretch;
 			box-sizing: border-box;
 			width: 100vw !important;
@@ -544,18 +583,31 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			padding-left: calc(var(--section-padding) * 0.5);
 		}
 
+		.home-tech-title-line {
+			white-space: normal;
+		}
+
+		.home-tech-visual-frame {
+			gap: calc(var(--section-padding) * 0.45);
+		}
+
+		.home-tech-visual-button,
+		.home-tech-visual-button:visited {
+			justify-self: center;
+			width: auto;
+		}
+
 		.home-tech-picture {
-			order: 2 !important;
 			justify-self: stretch;
-			width: 100vw !important;
-			max-width: 100vw !important;
-			margin-left: calc(50% - 50vw) !important;
+			width: 100%;
+			max-width: 100%;
+			margin-left: 0 !important;
 		}
 
 		.home-tech-picture img {
-			width: 100vw !important;
-			max-width: none !important;
-			}
+			width: 100%;
+			max-width: 100%;
+		}
 
 		:global(.content .hero-section.home-hero.section--with-media .home-hero-strategy) {
 			order: 7;
