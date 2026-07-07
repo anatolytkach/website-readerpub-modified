@@ -248,4 +248,32 @@ const ctaActions = [
 			grid-column: 1 / -1 !important;
 		}
 	}
+
+	@media (orientation: portrait) {
+		:global(.scribe-hero .hero-copy) {
+			display: contents;
+		}
+
+		:global(.scribe-hero h1) {
+			order: 2;
+			justify-self: center;
+			text-align: center;
+		}
+
+		:global(.scribe-hero > .hero-media) {
+			order: 3;
+		}
+
+		.scribe-hero-copy {
+			order: 4;
+			justify-self: center;
+			text-align: center;
+		}
+
+		.scribe-hero-actions {
+			order: 5;
+			justify-self: center;
+			justify-content: center;
+		}
+	}
 </style>

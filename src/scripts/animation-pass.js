@@ -30,7 +30,12 @@ const revealSelectors = [
 ];
 
 const cardGroupSelector = ".card-grid, .model-grid, .platform-commerce-cards, .webuzz-overview-card-grid, .indie-protection-books";
-const heroMediaSelectors = [".hero-section .hero-media", ".network-hero .institutions-network-media", ".network-hero > .image-block"];
+const heroMediaSelectors = [
+	".hero-section .hero-media",
+	".network-hero .institutions-network-media",
+	".network-hero > .image-block",
+	".home-tech-picture",
+];
 const mediaRevealSelector = [
 	".hero-media",
 	".institutions-network-media",
