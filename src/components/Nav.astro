@@ -27,7 +27,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 <nav class="nav" aria-label="Primary">
 	<div class="nav-brand">
 		<img src="/images/logo.svg?v=ff5a00" alt="" class="site-logo" width="44" height="44" fetchpriority="high" />
-		<a class="nav-logo-link" href="/">{SITE_NAME}</a>
+		<a class="nav-logo-link" href="/" aria-label={SITE_NAME}><span class="readerpub-brand-reader">Reader</span><span class="readerpub-brand-pub">Pub</span></a>
 	</div>
 
 	<ul class="nav-links">
@@ -74,7 +74,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 
 <div class="nav-overlay" aria-hidden="true">
 	<div class="nav-overlay-header">
-		<span class="nav-logo">{SITE_NAME}</span>
+		<span class="nav-logo"><span class="readerpub-brand-reader">Reader</span><span class="readerpub-brand-pub">Pub</span></span>
 		<button class="nav-close" type="button" aria-label="Close navigation menu">
 			<span class="nav-close-bar"></span>
 			<span class="nav-close-bar"></span>

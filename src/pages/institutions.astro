@@ -2,6 +2,7 @@
 import Card from "../components/Card.astro";
 import CardGrid from "../components/CardGrid.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import Base from "../layouts/Base.astro";
@@ -83,85 +84,32 @@ const ctaActions = [
 	title={`${SITE_NAME} for Institutions`}
 	description="With ReaderPub, institutions create live knowledge publications that remain visible, accessible and useful over time."
 >
-	<section class="network-hero institutions-network-hero">
-		<div class="institutions-network-media" data-hero-load-reveal data-media-reveal-origin="left">
-			<img
-				class="image-block image-large network-hero-image institutions-network-image"
-				src="/images/institutions.webp"
-				alt="Institutional knowledge becoming readable and discoverable on the web"
-				loading="eager"
-				decoding="async"
-				width="1115"
-				height="895"
-			/>
+	<HeroSection
+		class="institutions-network-hero"
+		copyClass="network-hero-copy institutions-network-copy"
+		mediaClass="institutions-network-media"
+		imageClass="network-hero-image institutions-network-image"
+		titleClass="network-hero-title"
+		image="/images/institutions.webp"
+		imageAlt="Institutional knowledge becoming readable and discoverable on the web"
+		mediaRevealOrigin="left"
+		mediaPosition="start"
+		spacerBackgroundPositionY="63%"
+	>
+		<div slot="before-title" class="menu-eyebrow">INSTITUTIONS</div>
+		<Fragment slot="title">Institutions publish knowledge.<br />The web buries it.</Fragment>
+		<p class="network-hero-lede institutions-hero-problem">
+			Libraries, universities, and public organizations generate valuable knowledge that is often inaccessible and underused.
+		</p>
+		<p class="home-hero-statement">We bring the value back to the web.</p>
+		<p class="institutions-hero-followup">
+			With ReaderPub, institutions create web publications that remain visible and useful at any time.
+		</p>
+		<div class="cta-row">
+			<a class="button" href="/contact?topic=institution">Build an institutional library</a>
+			<a class="button secondary" href="/pricing">See pricing</a>
 		</div>
-		<div class="network-hero-copy institutions-network-copy">
-			<div class="menu-eyebrow">INSTITUTIONS</div>
-			<h1 class="network-hero-title">Institutions publish knowledge.<br />The web buries it.</h1>
-			<p class="network-hero-lede institutions-hero-problem">
-				Libraries, universities, and public organizations generate valuable knowledge that is often inaccessible and underused.
-			</p>
-			<p class="home-hero-statement">We bring the value back to the web.</p>
-			<p class="institutions-hero-followup">
-				With ReaderPub, institutions create web publications that remain visible and useful at any time.
-			</p>
-			<div class="cta-row">
-				<a class="button" href="/contact?topic=institution">Build an institutional library</a>
-				<a class="button secondary" href="/pricing">See pricing</a>
-			</div>
-		</div>
-	</section>
-
-	<section class="hero-background-spacer" aria-hidden="true" style="--hero-background-spacer-position-y: 63%; --hero-background-spacer-scale-x: -1;"></section>
-
-	<script>
-		let institutionsHeroBackgroundSpacerObserver;
-
-		const syncInstitutionsHeroBackgroundSpacer = () => {
-			const hero = document.querySelector(".institutions-network-hero");
-			const spacer = hero?.nextElementSibling;
-
-			if (!hero || !spacer?.classList.contains("hero-background-spacer")) {
-				return;
-			}
-
-			const heroImage = hero.querySelector(".institutions-network-image");
-			const referenceHeight =
-				heroImage?.getBoundingClientRect().height || hero.getBoundingClientRect().height;
-
-			if (referenceHeight > 0) {
-				spacer.style.setProperty("--hero-background-spacer-height", `${Math.round(referenceHeight * 0.3)}px`);
-			}
-		};
-
-		const syncInstitutionsHeroBackgroundSpacers = () => {
-			const hero = document.querySelector(".institutions-network-hero");
-
-			if (!hero) {
-				return;
-			}
-
-			if (institutionsHeroBackgroundSpacerObserver) {
-				institutionsHeroBackgroundSpacerObserver.disconnect();
-			}
-
-			if ("ResizeObserver" in window) {
-				institutionsHeroBackgroundSpacerObserver = new ResizeObserver(syncInstitutionsHeroBackgroundSpacer);
-				institutionsHeroBackgroundSpacerObserver.observe(hero);
-
-				const heroImage = hero.querySelector(".institutions-network-image");
-				heroImage && institutionsHeroBackgroundSpacerObserver.observe(heroImage);
-				heroImage?.addEventListener("load", syncInstitutionsHeroBackgroundSpacer, { once: true });
-			}
-
-			syncInstitutionsHeroBackgroundSpacer();
-		};
-
-		document.addEventListener("astro:page-load", syncInstitutionsHeroBackgroundSpacers);
-		window.addEventListener("load", syncInstitutionsHeroBackgroundSpacers, { once: true });
-		window.addEventListener("resize", syncInstitutionsHeroBackgroundSpacers, { passive: true });
-		syncInstitutionsHeroBackgroundSpacers();
-	</script>
+	</HeroSection>
 
 	<Section
 		tone="gray"
@@ -174,7 +122,7 @@ const ctaActions = [
 	</Section>
 
 	<section class="section spec-cards-section institutions-solution-section section-continuation">
-		<h2><span class="readerpub-heading-word">ReaderPub</span> turns knowledge into active web assets</h2>
+		<h2><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> turns knowledge into active web assets</h2>
 		<div class="card-grid institutions-solution-grid">
 			<div class="card">
 				<h3>Readable on the web</h3>
@@ -402,36 +350,21 @@ const ctaActions = [
 		display: none;
 	}
 
-	.network-hero {
-		display: grid;
-		grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-		gap: 32px;
-		align-items: center;
-		margin-bottom: 0;
-		padding-top: 70px;
-		padding-bottom: var(--section-padding);
-		background: var(--surface);
-	}
-
-	.network-hero > * {
-		min-width: 0;
-	}
-
-	.network-hero-copy {
+	:global(.network-hero-copy) {
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
 	}
 
-	.network-hero-copy > * {
+	:global(.network-hero-copy > *) {
 		margin: 0;
 	}
 
-	.network-hero-title {
+	:global(.network-hero-title) {
 		line-height: var(--line-height-heading);
 	}
 
-	.network-hero-lede {
+	:global(.network-hero-lede) {
 		color: var(--accent) !important;
 		font-size: 19.5px !important;
 		line-height: var(--line-height-body) !important;
@@ -455,39 +388,22 @@ const ctaActions = [
 		line-height: var(--line-height-body);
 	}
 
-	.network-hero-image {
+	:global(.network-hero-image) {
 		display: block;
-		width: auto;
-		max-width: 100% !important;
-		height: min(var(--hero-image-reader-height), calc(100cqw * var(--hero-image-reader-ratio)));
 		object-fit: contain;
 		margin: 0;
 	}
 
-	.image-block.image-large {
-		max-width: 552px;
-	}
-
-	.institutions-network-hero {
-		grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr);
-		gap: 40px;
-	}
-
-	.institutions-network-media {
-		container-type: inline-size;
-		display: flex;
-		align-items: center;
-		align-self: stretch;
+	:global(.institutions-network-media) {
 		justify-content: flex-start;
-		min-width: 0;
 		order: 1;
 	}
 
-	.institutions-network-image {
+	:global(.institutions-network-image) {
 		flex: 0 0 auto;
 	}
 
-	.institutions-network-copy {
+	:global(.institutions-network-copy) {
 		order: 2;
 	}
 
@@ -496,13 +412,13 @@ const ctaActions = [
 		font-size: 19.5px !important;
 	}
 
-	.network-hero .button.secondary {
+	:global(.institutions-network-hero .button.secondary) {
 		background: var(--accent);
 		color: #ffffff;
 		border-color: transparent;
 	}
 
-	.network-hero .button.secondary:hover {
+	:global(.institutions-network-hero .button.secondary:hover) {
 		background: var(--text);
 		color: #ffffff;
 		border-color: transparent;
@@ -817,7 +733,7 @@ const ctaActions = [
 	}
 
 	@media (max-width: 1100px) {
-		.network-hero {
+		:global(.institutions-network-hero) {
 			padding-top: 23px;
 		}
 
@@ -837,7 +753,7 @@ const ctaActions = [
 	}
 
 	@media (max-width: 900px) {
-		.network-hero {
+		:global(.institutions-network-hero) {
 			grid-template-columns: 1fr;
 			justify-items: center;
 			margin-bottom: 0;
@@ -846,7 +762,7 @@ const ctaActions = [
 			text-align: center;
 		}
 
-		.network-hero-copy {
+		:global(.network-hero-copy) {
 			align-items: center;
 			text-align: center;
 		}
@@ -909,7 +825,7 @@ const ctaActions = [
 			text-align: left !important;
 		}
 
-		.network-hero-lede {
+		:global(.network-hero-lede) {
 			font-size: 15.6px !important;
 			line-height: var(--line-height-body) !important;
 		}
@@ -918,26 +834,26 @@ const ctaActions = [
 			font-size: clamp(22.1px, 2.72vw, 32.3px);
 		}
 
-		.network-hero-image {
+		:global(.network-hero-image) {
 			max-width: min(100%, 520px) !important;
 			margin-inline: auto;
 		}
 
-		.institutions-network-hero {
+		:global(.institutions-network-hero) {
 			grid-template-columns: 1fr;
 		}
 
-		.institutions-network-copy {
+		:global(.institutions-network-copy) {
 			order: 1;
 		}
 
-		.institutions-network-media {
+		:global(.institutions-network-media) {
 			order: 2;
 			justify-content: center;
 			width: 100%;
 		}
 
-		.institutions-network-image {
+		:global(.institutions-network-image) {
 			flex: 0 1 auto;
 		}
 
@@ -967,52 +883,52 @@ const ctaActions = [
 	}
 
 	@media (orientation: portrait) {
-		.institutions-network-hero {
+		:global(.institutions-network-hero) {
 			grid-template-columns: 1fr;
 			text-align: center;
 		}
 
-		.institutions-network-copy {
+		:global(.institutions-network-copy) {
 			display: contents;
 		}
 
-		.institutions-network-copy .menu-eyebrow {
+		:global(.institutions-network-copy .menu-eyebrow) {
 			order: 1;
 			justify-self: start;
 			text-align: left;
 		}
 
-		.institutions-network-copy .network-hero-title {
+		:global(.institutions-network-copy .network-hero-title) {
 			order: 2;
 			justify-self: center;
 			text-align: center;
 		}
 
-		.institutions-network-media {
+		:global(.institutions-network-media) {
 			order: 3;
 			justify-content: center;
 			width: 100%;
 		}
 
-		.institutions-network-copy .network-hero-lede {
+		:global(.institutions-network-copy .network-hero-lede) {
 			order: 4;
 			justify-self: center;
 			text-align: center;
 		}
 
-		.institutions-network-copy .home-hero-statement {
+		:global(.institutions-network-copy .home-hero-statement) {
 			order: 5;
 			justify-self: center;
 			text-align: center;
 		}
 
-		.institutions-network-copy .institutions-hero-followup {
+		:global(.institutions-network-copy .institutions-hero-followup) {
 			order: 6;
 			justify-self: center;
 			text-align: center;
 		}
 
-		.institutions-network-copy .cta-row {
+		:global(.institutions-network-copy .cta-row) {
 			order: 7;
 			justify-self: center;
 			justify-content: center;

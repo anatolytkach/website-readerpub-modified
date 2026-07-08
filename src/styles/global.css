@@ -345,6 +345,15 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	text-decoration: none;
 }
 
+.readerpub-brand-pub,
+.readerpub-heading-pub {
+	color: var(--accent-orange) !important;
+}
+
+.hero-section .readerpub-heading-pub {
+	color: inherit !important;
+}
+
 .nav-links {
 	position: absolute;
 	left: 50%;
@@ -1094,6 +1103,10 @@ body .page .content .institutions-expanded-access-grid {
 }
 
 .hero-title-colon {
+	color: var(--accent);
+}
+
+.hero-product-part-accent {
 	color: var(--accent-orange);
 }
 
@@ -1189,7 +1202,45 @@ body .page .content .institutions-expanded-access-grid {
 	body .page .content .hero-section.section--with-media > .hero-media,
 	body .page .content .network-hero > :is(.institutions-network-media, .network-hero-media) {
 		align-items: center !important;
-		align-self: stretch !important;
+		align-self: center !important;
+	}
+}
+
+@media (orientation: landscape) and (min-width: 901px) {
+	body .page .content .hero-section.section--with-media {
+		grid-template-columns: minmax(0, 52%) minmax(0, 40%);
+		column-gap: 8%;
+		align-items: center;
+	}
+
+	body .page .content .hero-section.section--with-media.hero-section--media-start {
+		grid-template-columns: minmax(0, 40%) minmax(0, 52%);
+	}
+
+	body .page .content .hero-section.section--with-media > .hero-copy {
+		grid-column: 1;
+		align-self: center;
+	}
+
+	body .page .content .hero-section.section--with-media > .hero-media {
+		grid-column: 2;
+		justify-content: flex-end;
+		width: 100%;
+	}
+
+	body .page .content .hero-section.section--with-media.hero-section--media-start > .hero-copy {
+		grid-column: 2;
+	}
+
+	body .page .content .hero-section.section--with-media.hero-section--media-start > .hero-media {
+		grid-column: 1;
+		justify-content: flex-start;
+	}
+
+	body .page .content .hero-section.section--with-media .hero-image {
+		width: 100%;
+		max-width: 100%;
+		height: auto;
 	}
 }
 

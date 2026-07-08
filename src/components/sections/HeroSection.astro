@@ -10,6 +10,11 @@ interface Props {
 	image?: string;
 	imageAlt?: string;
 	mediaRevealOrigin?: "left" | "right";
+	mediaPosition?: "start" | "end";
+	copyClass?: string;
+	mediaClass?: string;
+	imageClass?: string;
+	titleClass?: string;
 	actions?: PageAction[];
 	spacerBackgroundPositionY?: string;
 	showSpacer?: boolean;
@@ -24,6 +29,11 @@ const {
 	image,
 	imageAlt = "",
 	mediaRevealOrigin,
+	mediaPosition = "end",
+	copyClass = "",
+	mediaClass = "",
+	imageClass = "",
+	titleClass,
 	actions = [],
 	spacerBackgroundPositionY,
 	showSpacer = true,
@@ -44,19 +54,21 @@ const spacerStyle = [
 	.filter(Boolean)
 	.join("") || undefined;
 const hasEyebrowSlot = Astro.slots.has("eyebrow");
+const hasBeforeTitleSlot = Astro.slots.has("before-title");
 const hasTitleSlot = Astro.slots.has("title");
 const hasLeadSlot = Astro.slots.has("lead");
 const hasBodySlot = Astro.slots.has("body");
 ---
 
-<section class:list={["hero-section", "section--white", image && "section--with-media", className]}>
-	<div class="hero-copy">
+<section class:list={["hero-section", "section--white", image && "section--with-media", mediaPosition === "start" && "hero-section--media-start", className]}>
+	<div class:list={["hero-copy", copyClass]}>
 		{(eyebrow || hasEyebrowSlot) && (
 			<p class="section-kicker">
 				{hasEyebrowSlot ? <slot name="eyebrow" /> : eyebrow}
 			</p>
 		)}
-		{(title || hasTitleSlot) && <h1>{hasTitleSlot ? <slot name="title" /> : title}</h1>}
+		{hasBeforeTitleSlot && <slot name="before-title" />}
+		{(title || hasTitleSlot) && <h1 class={titleClass}>{hasTitleSlot ? <slot name="title" /> : title}</h1>}
 		<slot name="tagline" />
 		{(lead || hasLeadSlot) && <p class="hero-lead">{hasLeadSlot ? <slot name="lead" /> : lead}</p>}
 		{hasBodySlot ? <div class="hero-body"><slot name="body" /></div> : body && <p class="hero-body">{body}</p>}
@@ -68,9 +80,9 @@ const hasBodySlot = Astro.slots.has("body");
 		)}
 	</div>
 	{image && (
-		<div class="hero-media" data-hero-load-reveal data-media-reveal-origin={mediaRevealOrigin}>
+		<div class:list={["hero-media", mediaClass]} data-hero-load-reveal data-media-reveal-origin={mediaRevealOrigin}>
 			<img
-				class="image-block hero-image"
+				class:list={["image-block", "hero-image", imageClass]}
 				src={image}
 				alt={imageAlt}
 				loading="eager"

@@ -38,7 +38,7 @@ const titleHasReaderPub = titleParts.length > 1;
 					) : titleHasReaderPub ? (
 						titleParts.map((part, index) => (
 							<Fragment>
-								{index > 0 && <span class="readerpub-heading-word">ReaderPub</span>}
+								{index > 0 && <span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span>}
 								{part}
 							</Fragment>
 						))

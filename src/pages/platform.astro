@@ -66,7 +66,7 @@ const benefitCards = [
 		spacerBackgroundPositionY="45%"
 		class="platform-hero"
 	>
-		<Fragment slot="title"><span class="platform-hero-product">ReaderPub<span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">A web-native publishing network.</span></Fragment>
+		<Fragment slot="title"><span class="platform-hero-product">Reader<span class="hero-product-part-accent">Pub</span><span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">A web-native publishing network.</span></Fragment>
 		<Fragment slot="body">Publish securely to the web.<br />Listen to and retain your readers.</Fragment>
 	</HeroSection>
 
@@ -82,7 +82,7 @@ const benefitCards = [
 
 	<div class="platform-source-sections">
 		<section class="section section--white spec-cards-section platform-source-section platform-source-problem-section section--two-column section-continue-next">
-			<h2><span class="readerpub-heading-word">ReaderPub</span> exists because the old model breaks the relationship</h2>
+			<h2><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> exists because the old model breaks the relationship</h2>
 			<p class="lede">
 				File-first publishing can move a book from one place to another, but it cannot keep books connected to readers, authors, institutions and communities.
 			</p>
@@ -915,9 +915,6 @@ const benefitCards = [
 	}
 
 	:global(.platform-hero.hero-section) {
-		grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-		gap: 32px;
-		align-items: start;
 		padding-top: 54px;
 		padding-bottom: 58px;
 	}
@@ -930,7 +927,6 @@ const benefitCards = [
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
-		align-self: start;
 	}
 
 	:global(.platform-hero .hero-copy > *) {

@@ -262,7 +262,6 @@ const ctaActions = [
 	@media (orientation: landscape) {
 		:global(.pricing-hero) {
 			--pricing-hero-copy-width: 46rem;
-			grid-template-columns: minmax(0, var(--pricing-hero-copy-width)) minmax(420px, 1fr) !important;
 		}
 
 		:global(.pricing-hero .hero-copy) {
@@ -283,16 +282,6 @@ const ctaActions = [
 
 		:global(.pricing-hero .pricing-hero-paths-title) {
 			white-space: nowrap;
-		}
-
-		:global(.pricing-hero .hero-media) {
-			justify-content: flex-start;
-		}
-
-		:global(.pricing-hero .hero-image) {
-			width: min(100%, 680px);
-			max-width: none;
-			height: auto;
 		}
 	}
 

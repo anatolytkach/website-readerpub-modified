@@ -28,6 +28,7 @@ const finalActions = [
 		image="/images/about.webp"
 		imageAlt="ReaderPub web-native publishing infrastructure"
 		mediaRevealOrigin="left"
+		mediaPosition="start"
 		actions={heroActions}
 		spacerBackgroundPositionY="72%"
 	>
@@ -113,11 +114,6 @@ const finalActions = [
 
 	:global(.about-section.section--green > .about-copy-stack p) {
 		max-width: none !important;
-	}
-
-	:global(.hero-section.about-hero) {
-		grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr) !important;
-		gap: 40px !important;
 	}
 
 	:global(.about-hero .hero-lead) {

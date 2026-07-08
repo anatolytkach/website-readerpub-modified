@@ -11,11 +11,13 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 >
 	<HeroSection
 		class="terms-hero"
-		title="ReaderPub Terms of Service and Privacy Policy"
 		image="/images/terms.webp"
 		imageAlt="ReaderPub terms of service and privacy policy"
 		spacerBackgroundPositionY="100%"
 	>
+		<Fragment slot="title">
+			<span style="color: var(--accent);">Reader</span><span style="color: var(--accent-orange);">Pub</span><span style="color: var(--accent);">:</span><br /><span class="terms-hero-title-rest">Terms of Service and Privacy Policy</span>
+		</Fragment>
 		<Fragment slot="body">
 			<p class="legal-updated">Last Updated: June 2026</p>
 			<p class="terms-hero-green">Welcome to ReaderPub and WeBuzz.</p>
@@ -460,6 +462,10 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 </Base>
 
 <style>
+	.terms-hero-title-rest {
+		color: var(--text);
+	}
+
 	:global(.terms-hero .hero-copy) {
 		max-width: 760px;
 	}

@@ -66,7 +66,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	<section class="section section--white home-tech-heading-section" aria-labelledby="home-tech-title">
 		<h2 id="home-tech-title" class="home-tech-title">
 			<span class="home-tech-title-prefix">The solution:</span>
-			<span class="home-tech-title-line"><span class="home-tech-title-readerpub" style="color: var(--accent);">ReaderPub</span>&nbsp;–&nbsp;A web-native publishing network.</span>
+			<span class="home-tech-title-line"><span class="home-tech-title-readerpub" style="color: var(--accent);"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span>&nbsp;–&nbsp;A web-native publishing network.</span>
 		</h2>
 	</section>
 	<section class="section section--green home-tech-visual-section" aria-label="ReaderPub interface preview">
@@ -249,9 +249,11 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		color: var(--text);
 	}
 
-	:global(.home-hero .hero-image) {
-		height: min(clamp(500px, 31vw, 560px), calc(100cqw * 0.98));
-		max-width: none;
+	@media (orientation: portrait) {
+		:global(.home-hero .hero-image) {
+			height: min(clamp(500px, 31vw, 560px), calc(100cqw * 0.98));
+			max-width: none;
+		}
 	}
 
 	:global(.home-tech-heading-section) {

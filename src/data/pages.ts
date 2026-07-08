@@ -82,12 +82,6 @@ const readAction: PageAction = {
 	external: true,
 };
 
-const publishAction: PageAction = {
-	label: "Publish with ReaderPub",
-	href: PUBLISH_URL,
-	external: true,
-};
-
 export const pages = {
 	home: {
 		metaTitle: `${SITE_NAME} - Web-Native Publishing Network`,
@@ -220,47 +214,6 @@ export const pages = {
 			title: "Read without setup.",
 			body: "Open the catalog and start reading in the browser.",
 			actions: [readAction],
-		},
-	},
-	wepub: {
-		metaTitle: `WePub | ${SITE_NAME}`,
-		description: "WePub gives authors and publishers web-native distribution without losing reader relationships.",
-		eyebrow: "Publish",
-		heroTitle: "WePub: publish to readers, keep the relationship.",
-		heroLead:
-			"WePub turns books into web-native assets that can be read, searched, discussed and sold directly.",
-		heroBody:
-			"Authors and publishers can use ReaderPub as a direct web presence instead of handing the audience to a marketplace.",
-		heroSpacerBackgroundPositionY: "18%",
-		image: "/images/publish.webp",
-		imageAlt: "Publishing a book as a web-native ReaderPub asset",
-		actions: [publishAction, { label: "Why authors switch", href: "/authors", variant: "secondary" }],
-		sections: [
-			{
-				tone: "gray",
-				kicker: "Publishing problem",
-				title: "The old model sells files and loses readers.",
-				body:
-					"ReaderPub starts from the opposite premise: the book should remain active as a connected web asset.",
-				columns: "3",
-				cards: [
-					{ title: "Direct publishing", body: "Publish a browser-readable edition and keep a direct route to readers.", icon: "publisher" },
-					{ title: "Author presence", body: "Keep books connected to author pages, updates and future work.", icon: "author" },
-					{ title: "Lower friction", body: "Support direct sales with a platform fee designed for creators.", icon: "dollars" },
-				],
-			},
-			{
-				tone: "green",
-				kicker: "Publishing system",
-				title: "Web editions first, file output when useful.",
-				body:
-					"The new base keeps WePub ready for web-native publication, optional EPUB workflows and strategic distribution.",
-			},
-		],
-		cta: {
-			title: "Publish without losing the audience.",
-			body: "Use ReaderPub as a direct publishing surface for books and long-form materials.",
-			actions: [publishAction, { label: "See pricing", href: "/pricing", variant: "secondary" }],
 		},
 	},
 	webuzz: {
