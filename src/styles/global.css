@@ -12,6 +12,9 @@
 	--accent-orange: #ff5a00;
 	--accent-dark: #006b68;
 	--accent-soft: #e2f3f1;
+	--section-green-wide-stripe: #00564c;
+	--section-green-narrow-stripe: #006457;
+	--section-green-orange: #ff4900;
 	--icon-reader-book: #009b8a;
 	--icon-author: #d0186a;
 	--icon-publisher: #1557e5;
@@ -74,6 +77,9 @@
 	--green-edge-air-bottom-wave-f: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20506%20C124%20418%20196%20504%20320%20382%20C426%20278%20488%20460%20596%20404%20C742%20328%20810%2086%20948%20194%20C1082%20298%201132%20376%201256%20242%20C1344%20146%201398%2044%201440%20116%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
 	--green-edge-air-bottom-wave-g: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20424%20C102%20528%20172%20408%20288%20488%20C420%20578%20480%20218%20622%20326%20C744%20418%20828%20312%20936%20364%20C1064%20426%201098%20132%201234%20224%20C1328%20288%201382%2078%201440%2096%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
 	--green-edge-air-bottom-wave-h: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20540%20C116%20430%20182%20198%20330%20326%20C448%20428%20514%20520%20642%20382%20C770%20246%20800%20438%20946%20286%20C1064%20164%201120%2092%201248%20170%20C1360%20238%201390%20178%201440%2048%20L1440%20560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-top-wave-scroll: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202200%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H2200%20V520%20C2108%20456%202060%20372%201988%20420%20C1888%20488%201824%20174%201710%20230%20C1618%20276%201570%2060%201470%20110%20C1364%20164%201310%20310%201194%20246%20C1070%20176%201012%20454%20890%20350%20C770%20248%20714%2092%20596%20168%20C482%20242%20424%20520%20304%20454%20C198%20394%20112%20552%200%20520%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-air-bottom-wave-scroll: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202200%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20520%20C120%20450%20190%20552%20306%20486%20C432%20414%20500%20230%20620%20310%20C748%20396%20820%20212%20942%20268%20C1068%20326%201130%2092%201252%20158%20C1376%20224%201446%20336%201568%20218%20C1688%20102%201756%20290%201878%20222%20C1998%20156%202054%20450%202200%20520%20V560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+	--green-edge-wave-scroll-x: 0px;
 	--green-edge-air-top-wave: var(--green-edge-air-top-wave-a);
 	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-a);
 	--green-edge-top-wave-width: 100%;
@@ -348,6 +354,11 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 .readerpub-brand-pub,
 .readerpub-heading-pub {
 	color: var(--accent-orange) !important;
+}
+
+.readerpub-heading-word--spaced {
+	display: inline-block;
+	margin-left: 0.24em;
 }
 
 .hero-section .readerpub-heading-pub {
@@ -659,15 +670,16 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 }
 
 .section--green {
+	--accent-orange: var(--section-green-orange);
 	--section-green-circle-x: 25%;
 	--section-green-circle-y: 75%;
 	--section-bg-size: auto;
 	--section-bg: repeating-radial-gradient(
 		circle at var(--section-green-circle-x) calc(var(--section-green-circle-y) + var(--section-bg-parallax-y)),
-		#02685e 0,
-		#02685e 46.4px,
-		#017569 46.4px,
-		#017569 51.733px
+		var(--section-green-wide-stripe) 0,
+		var(--section-green-wide-stripe) 46.4px,
+		var(--section-green-narrow-stripe) 46.4px,
+		var(--section-green-narrow-stripe) 51.733px
 	);
 }
 
@@ -727,11 +739,15 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 
 .section.section--green,
 .institutions-expanded-access-grid {
-	--green-edge-air: clamp(53.333px, 6.222vw, 115.555px);
-	--green-edge-top-air: var(--green-edge-air-top-wave);
-	--green-edge-bottom-air: var(--green-edge-air-bottom-wave);
+	--green-edge-air: clamp(72px, 8.2vw, 150px);
+	--green-edge-top-air: var(--green-edge-air-top-wave-scroll);
+	--green-edge-bottom-air: var(--green-edge-air-bottom-wave-scroll);
 	--green-edge-top-inset: var(--green-edge-air);
 	--green-edge-bottom-inset: var(--green-edge-air);
+	--green-edge-top-wave-x: 0px;
+	--green-edge-bottom-wave-x: 0px;
+	--green-edge-top-wave-width: 2200px;
+	--green-edge-bottom-wave-width: 2200px;
 	--green-section-safe-offset: var(--section-padding);
 	--green-section-padding-top: calc(var(--green-section-safe-offset) + var(--green-edge-top-inset));
 	--green-section-padding-bottom: calc(var(--green-section-safe-offset) + var(--green-edge-bottom-inset));
@@ -779,12 +795,16 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	left: calc(50% - 50vw);
 	width: 100vw;
 	background-image: var(--green-edge-top-air), var(--green-edge-bottom-air);
-	background-position: var(--green-edge-top-wave-x) top, var(--green-edge-bottom-wave-x) bottom;
-	background-repeat: no-repeat;
-	background-size: var(--green-edge-top-wave-width) var(--green-edge-air),
+	background-position:
+		calc(var(--green-edge-top-wave-x) + var(--green-edge-wave-scroll-x)) top,
+		calc(var(--green-edge-bottom-wave-x) + var(--green-edge-wave-scroll-x)) bottom;
+	background-repeat: repeat-x;
+	background-size:
+		var(--green-edge-top-wave-width) var(--green-edge-air),
 		var(--green-edge-bottom-wave-width) var(--green-edge-air);
 	z-index: -1;
 	pointer-events: none;
+	will-change: background-position;
 }
 
 .section.section--green:has(+ .cta-block),
@@ -935,6 +955,33 @@ body .page .content .institutions-expanded-access-grid {
 .content :is(.section, .hero-section, .proof-section, .cta-block) :is(h1, h2, h3, h4, p, li) {
 	max-width: 100%;
 	overflow-wrap: anywhere;
+}
+
+.heading--center-full,
+h2.heading--center-full,
+h3.heading--center-full,
+.heading--center-full-h2,
+.heading--center-full-h3 {
+	display: block;
+	grid-column: 1 / -1;
+	justify-self: stretch !important;
+	box-sizing: border-box;
+	width: 100% !important;
+	max-width: none !important;
+	margin-right: 0;
+	margin-left: 0;
+	text-align: center !important;
+}
+
+@media (orientation: landscape) {
+	h3.heading--center-full,
+	.heading--center-full-h3 {
+		justify-self: center !important;
+		width: 80% !important;
+		max-width: calc(var(--page-max) * 0.8) !important;
+		margin-right: auto !important;
+		margin-left: auto !important;
+	}
 }
 
 @media (orientation: landscape) {

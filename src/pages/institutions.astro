@@ -554,16 +554,17 @@ const ctaActions = [
 	}
 
 	.institutions-expanded-access-grid {
+		--accent-orange: var(--section-green-orange);
 		--section-green-circle-x: 50%;
 		--section-green-circle-y: 50%;
 		--section-bg-parallax-y: 0px;
 		--section-bg-size: auto;
 		--section-bg: repeating-radial-gradient(
 			circle at var(--section-green-circle-x) calc(var(--section-green-circle-y) + var(--section-bg-parallax-y)),
-			#02685e 0,
-			#02685e 46.4px,
-			#017569 46.4px,
-			#017569 51.733px
+			var(--section-green-wide-stripe) 0,
+			var(--section-green-wide-stripe) 46.4px,
+			var(--section-green-narrow-stripe) 46.4px,
+			var(--section-green-narrow-stripe) 51.733px
 		);
 		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
 		grid-auto-rows: auto;

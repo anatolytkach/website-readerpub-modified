@@ -74,6 +74,16 @@ const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`
 			(() => {
 				const keepTextLineBreaks = () => {
 					const textBlocks = document.querySelectorAll(".content :is(h2, p)");
+					const colonSpacePlaceholder = "\uE000";
+					const nextContentSibling = (node) => {
+						let next = node.nextSibling;
+
+						while (next && next.nodeType === Node.TEXT_NODE && !next.nodeValue.trim()) {
+							next = next.nextSibling;
+						}
+
+						return next;
+					};
 
 					for (const textBlock of textBlocks) {
 						if (textBlock.matches("p") && textBlock.closest(".card")) {
@@ -90,13 +100,25 @@ const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`
 						}
 
 						for (const textNode of textNodes) {
+							const hasNextContentSibling = Boolean(nextContentSibling(textNode));
+
 							textNode.nodeValue = textNode.nodeValue
+								.replace(/:\u00a0\u00a0/g, `:${colonSpacePlaceholder}${colonSpacePlaceholder}`)
 								.replace(/\u00a0/g, " ")
+								.replace(new RegExp(colonSpacePlaceholder, "g"), "\u00a0")
 								.replace(/(^|[^\p{L}])(\p{L}{2,3})\s+(?=\p{L})/gu, (_match, prefix, word) => `${prefix}${word}\u00a0`);
+
+							if (hasNextContentSibling && /\s$/.test(textNode.nodeValue)) {
+								continue;
+							}
 						}
 
 						for (let index = textNodes.length - 1; index >= 0; index -= 1) {
 							const textNode = textNodes[index];
+
+							if (nextContentSibling(textNode) && /\s$/.test(textNode.nodeValue)) {
+								continue;
+							}
 
 							if (!/\S+\s+\S+\s*$/.test(textNode.nodeValue)) {
 								continue;

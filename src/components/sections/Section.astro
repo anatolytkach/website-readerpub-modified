@@ -24,7 +24,10 @@ const resolvedTone = hasMedia ? "white" : tone;
 const hasTitleSlot = Astro.slots.has("title");
 const hasBodySlot = Astro.slots.has("body");
 const titleParts = typeof title === "string" ? title.split("ReaderPub") : [];
+const titleRenderParts = titleParts.map((part, index) => (index < titleParts.length - 1 ? part.trimEnd() : part));
 const titleHasReaderPub = titleParts.length > 1;
+const hasVisibleTitleTextBeforeReaderPub = (parts: string[], index: number) =>
+	parts.slice(0, index).some((part) => part.trim().length > 0);
 ---
 
 <section id={id} class:list={["section", `section--${resolvedTone}`, hasMedia && "section--with-media", className]}>
@@ -36,9 +39,14 @@ const titleHasReaderPub = titleParts.length > 1;
 					{hasTitleSlot ? (
 						<slot name="title" />
 					) : titleHasReaderPub ? (
-						titleParts.map((part, index) => (
+						titleRenderParts.map((part, index) => (
 							<Fragment>
-								{index > 0 && <span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span>}
+								{index > 0 && (
+									<Fragment>
+										{hasVisibleTitleTextBeforeReaderPub(titleParts, index) && <Fragment set:html="&#32;" />}
+										<span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span>
+									</Fragment>
+								)}
 								{part}
 							</Fragment>
 						))

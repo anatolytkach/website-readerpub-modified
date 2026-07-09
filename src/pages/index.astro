@@ -65,22 +65,46 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	<section class="section section--white home-tech-heading-section" aria-labelledby="home-tech-title">
 		<h2 id="home-tech-title" class="home-tech-title">
-			<span class="home-tech-title-line home-tech-title-line-primary"><span class="home-tech-title-prefix">The solution:</span> <span class="home-tech-title-readerpub" style="color: var(--accent);"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span></span>
+			<span class="home-tech-title-line home-tech-title-line-primary"><span class="home-tech-title-prefix">The solution:&nbsp;&nbsp;</span><span class="home-tech-title-readerpub" style="color: var(--accent);"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span></span>
 			<span class="home-tech-title-line home-tech-title-line-solution">Browser-based eReader <span class="home-tech-title-plus">+</span> web-native publishing network.</span>
 		</h2>
-		<picture class="home-tech-picture home-tablet-picture">
-			<source media="(orientation: portrait)" srcset="/images/tablet_mobile.webp" width="699" height="1228" />
-			<img
-				src="/images/tablet.webp"
-				alt="ReaderPub browser-based eReader and web-native publishing network"
+		<script is:inline>
+			(() => {
+				try {
+					const readerDemoSessionKey = "readerpub:home-reader-demo-started:90000120";
+					const readerPositionKey = "readerpub:lastcfi:90000120";
+					const navigationEntry = performance.getEntriesByType("navigation")[0];
+
+					if (sessionStorage.getItem(readerDemoSessionKey)) {
+						return;
+					}
+
+					sessionStorage.setItem(readerDemoSessionKey, "1");
+
+					if (navigationEntry?.type !== "reload") {
+						localStorage.removeItem(readerPositionKey);
+					}
+				} catch {}
+			})();
+		</script>
+		<div class="home-reader-frame">
+			<iframe
+				src="/books/reader/?id=90000120&source=gutenberg&reader=protected&protectedArtifactBookId=90000120&protectedArtifactSource=r2"
+				title="Treasure Island in WeRead"
 				loading="lazy"
-				decoding="async"
-				width="2200"
-				height="1600"
-			/>
-		</picture>
-		<h2 class="home-tech-visual-title">No, it’s not an app – it is <span class="home-tech-visual-weread">We<span>Read</span></span> webpage.</h2>
-		<a class="button home-tech-visual-button home-tech-reader-button" href="/weread">Explore WeRead</a>
+				referrerpolicy="strict-origin-when-cross-origin"
+				allow="fullscreen"
+			></iframe>
+		</div>
+		<div class="home-tech-reader-cta">
+			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2">Yes, it’s not an app – it is&#32;<span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
+			<h3 class="home-tech-reader-subtitle heading--center-full heading--center-full-h3">You can read the thrilling story right here, or...</h3>
+			<div class="home-tech-reader-actions">
+				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">Read 60K+ books in WeRead</a>
+				<span class="home-tech-reader-actions-separator">or</span>
+				<a class="button home-tech-visual-button home-tech-reader-button" href="/weread">Explore WeRead</a>
+			</div>
+		</div>
 	</section>
 	<section class="section section--green home-tech-visual-section" aria-label="Explore ReaderPub platform">
 		<h2 class="home-tech-container-title">
@@ -122,17 +146,17 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				</article>
 				<article class="card card--good home-list-card home-readerpub-model-card">
 					<div class="card-copy">
-					<h3><span class="home-title-accent">ReaderPub</span> model</h3>
-					<ul class="home-model-list">
-						<li>Book is published online</li>
-						<li>Reader opens instantly in web eReader</li>
-						<li>Comments stay connected</li>
-						<li>Audience remains visible</li>
-						<li>Relationship continues</li>
-					</ul>
-				</div>
-			</article>
-		</div>
+						<h3><span class="home-title-accent readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> model</h3>
+						<ul class="home-model-list">
+							<li>Book is published online</li>
+							<li>Reader opens instantly in web eReader</li>
+							<li>Comments stay connected</li>
+							<li>Audience remains visible</li>
+							<li>Relationship continues</li>
+						</ul>
+					</div>
+				</article>
+			</div>
 	</Section>
 
 	<Section tone="white" class="home-web-asset-section section--two-column" title="What changes when a book becomes a living web asset?">
@@ -146,7 +170,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			</article>
 			<article class="card card--good home-comparison-card home-readerpub-publishing-card">
 				<div class="card-copy">
-					<h3><span class="home-title-accent">ReaderPub</span> publishing</h3>
+					<h3><span class="home-title-accent readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> publishing</h3>
 					<p class="home-flow">
 						Publish <span class="home-flow-arrow">→</span> Discover <span class="home-flow-arrow">→</span> Read <span class="home-flow-arrow">→</span>
 						Share &amp; Discuss <span class="home-flow-arrow">→</span> Follow &amp; Engage
@@ -296,6 +320,8 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	.home-tech-title {
+		justify-self: stretch;
+		width: 100%;
 		margin: 0;
 		text-align: center;
 	}
@@ -307,8 +333,13 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-tech-title-line {
 		display: block;
+		margin: 0;
 		color: var(--text);
 		white-space: normal;
+	}
+
+	.home-tech-title-line + .home-tech-title-line {
+		margin-top: clamp(10px, 1vw, 16px);
 	}
 
 	.home-tech-title-line-primary {
@@ -317,7 +348,11 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-tech-title-line-solution {
 		color: var(--text);
+		font-family: var(--font-heading);
 		font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+		font-weight: var(--font-weight-heading);
+		line-height: var(--line-height-heading);
+		white-space: nowrap;
 	}
 
 	.home-tech-title-plus {
@@ -326,6 +361,15 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-tech-title .home-tech-title-readerpub {
 		color: var(--accent) !important;
+	}
+
+	.home-product-word {
+		display: inline-block;
+		color: var(--accent);
+	}
+
+	.home-product-word > span:last-child {
+		color: var(--accent-orange);
 	}
 
 	.home-tech-visual-button,
@@ -351,10 +395,83 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		height: auto;
 	}
 
+	.home-reader-frame {
+		justify-self: stretch;
+		width: 100%;
+		height: clamp(520px, 68vw, 820px);
+		overflow: hidden;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		box-shadow: var(--card-green-shadow);
+		transition:
+			border-color var(--motion-deliberate) ease,
+			box-shadow var(--motion-deliberate) ease;
+	}
+
+	.home-reader-frame:hover,
+	.home-reader-frame:focus-within {
+		border-color: var(--accent);
+	}
+
+	.home-reader-frame iframe {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border: 0;
+		background: #ffffff;
+	}
+
+	.home-tablet-picture {
+		display: block;
+		justify-self: stretch;
+		width: 100%;
+	}
+
+	.home-tablet-picture img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.home-tech-reader-cta {
+		display: grid;
+		justify-items: center;
+		gap: clamp(10px, 1vw, 16px);
+		justify-self: stretch;
+		width: 100%;
+	}
+
 	.home-tech-visual-title {
 		margin: 0;
 		color: var(--text) !important;
 		text-align: center;
+	}
+
+	.home-tech-reader-subtitle {
+		margin: 0;
+		color: var(--text) !important;
+	}
+
+	.home-tech-reader-actions {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--button-row-gap);
+		justify-self: center;
+		width: 100%;
+		margin-top: calc(var(--button-row-gap) * 0.25);
+	}
+
+	.home-tech-reader-actions-separator {
+		color: var(--text);
+		font-family: var(--font-body);
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: var(--line-height-heading);
+	}
+
+	.home-tech-reader-actions .button {
+		width: auto;
 	}
 
 	.home-tech-container-title {
@@ -372,16 +489,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-tech-container-title-primary {
 		color: #ffffff !important;
-	}
-
-	.home-tech-visual-weread {
-		display: inline-block;
-		margin-left: 0.28em;
-		color: var(--accent);
-	}
-
-	.home-tech-visual-weread span {
-		color: var(--accent-orange);
 	}
 
 	.home-comparison-grid {
@@ -645,28 +752,18 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			white-space: normal;
 		}
 
-		.home-tech-heading-section > .home-tech-reader-button,
-		.home-tech-heading-section > .home-tech-reader-button:visited {
-			order: 4 !important;
-			justify-self: center;
-			width: auto;
-		}
-
-		.home-tech-heading-section > .home-tablet-picture {
+		.home-reader-frame {
 			order: 2 !important;
-			justify-self: stretch;
-			width: 100vw;
-			max-width: 100vw;
-			margin-left: 0 !important;
+			height: min(76vh, 760px);
+			border-color: var(--accent);
 		}
 
-		.home-tech-heading-section > .home-tablet-picture img {
-			width: 100%;
-			max-width: 100vw;
-		}
-
-		.home-tech-heading-section > .home-tech-visual-title {
+		.home-tech-heading-section > .home-tech-reader-cta {
 			order: 3 !important;
+		}
+
+		.home-tech-reader-cta > .home-tech-reader-actions {
+			flex-wrap: wrap;
 		}
 
 		.home-tech-visual-section > .home-tech-container-title {

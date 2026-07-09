@@ -1,6 +1,8 @@
 const animationPassState = (window.readerPubAnimationPassState ||= {
 	hasRunInitialSetup: false,
 	isClientNavigation: false,
+	greenWaveCurrentOffset: 0,
+	greenWaveTargetOffset: 0,
 });
 const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -84,6 +86,9 @@ const cardRiseRevealDelay = 140;
 const cardRevealThreshold = 0.65;
 const cardRowTopTolerance = 8;
 const cardRevealDirections = ["left", "right", "bottom", "fade", "rise"];
+const greenWaveScrollSpeed = 0.64;
+const greenWaveEase = 0.18;
+const greenWaveSettleDistance = 0.08;
 
 const revealedElements = new WeakSet();
 const revealedCards = new WeakSet();
@@ -99,6 +104,9 @@ let heroRevealTimers = [];
 let backgroundParallaxTargets = [];
 let backgroundParallaxFrame = 0;
 let hasBackgroundParallaxListeners = false;
+let greenWaveLastScrollY;
+let greenWaveCurrentOffset = animationPassState.greenWaveCurrentOffset || 0;
+let greenWaveTargetOffset = animationPassState.greenWaveTargetOffset || 0;
 let isClientNavigation = animationPassState.isClientNavigation;
 let hasRunInitialSetup = animationPassState.hasRunInitialSetup;
 const supportsIntersectionObserver = "IntersectionObserver" in window;
@@ -330,8 +338,59 @@ const isGreenParallaxTarget = (element) => {
 	return element.matches(".section--green, .institutions-expanded-access-grid");
 };
 
+const getScrollY = () => {
+	return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+};
+
+const setGreenWaveOffset = (offset) => {
+	document.documentElement.style.setProperty("--green-edge-wave-scroll-x", `${offset.toFixed(2)}px`);
+	animationPassState.greenWaveCurrentOffset = offset;
+};
+
+const updateGreenWaveScrollTarget = () => {
+	const scrollY = getScrollY();
+
+	if (greenWaveLastScrollY === undefined) {
+		greenWaveLastScrollY = scrollY;
+		return;
+	}
+
+	const scrollDelta = Math.abs(scrollY - greenWaveLastScrollY);
+	greenWaveLastScrollY = scrollY;
+
+	if (scrollDelta <= 0) {
+		return;
+	}
+
+	greenWaveTargetOffset += scrollDelta * greenWaveScrollSpeed;
+	animationPassState.greenWaveTargetOffset = greenWaveTargetOffset;
+};
+
+const updateGreenWaveOffset = () => {
+	if (reduceMotionQuery.matches) {
+		greenWaveCurrentOffset = 0;
+		greenWaveTargetOffset = 0;
+		animationPassState.greenWaveTargetOffset = 0;
+		setGreenWaveOffset(0);
+		return false;
+	}
+
+	const distance = greenWaveTargetOffset - greenWaveCurrentOffset;
+
+	if (Math.abs(distance) <= greenWaveSettleDistance) {
+		greenWaveCurrentOffset = greenWaveTargetOffset;
+		setGreenWaveOffset(greenWaveCurrentOffset);
+		return false;
+	}
+
+	greenWaveCurrentOffset += distance * greenWaveEase;
+	setGreenWaveOffset(greenWaveCurrentOffset);
+	return true;
+};
+
 const updateBackgroundParallax = () => {
 	backgroundParallaxFrame = 0;
+	const shouldContinueGreenWave = updateGreenWaveOffset();
 
 	if (reduceMotionQuery.matches) {
 		for (const target of backgroundParallaxTargets) {
@@ -356,9 +415,15 @@ const updateBackgroundParallax = () => {
 
 		target.style.setProperty("--section-bg-parallax-y", `${offset.toFixed(2)}px`);
 	}
+
+	if (shouldContinueGreenWave) {
+		requestBackgroundParallaxUpdate();
+	}
 };
 
 const requestBackgroundParallaxUpdate = () => {
+	updateGreenWaveScrollTarget();
+
 	if (backgroundParallaxFrame) {
 		return;
 	}
@@ -368,6 +433,7 @@ const requestBackgroundParallaxUpdate = () => {
 
 const setupBackgroundParallax = () => {
 	backgroundParallaxTargets = uniqueElements([backgroundParallaxSelector]);
+	greenWaveLastScrollY = getScrollY();
 
 	if (!hasBackgroundParallaxListeners) {
 		window.addEventListener("scroll", requestBackgroundParallaxUpdate, { passive: true });
@@ -429,6 +495,10 @@ const clearCardRevealSentinels = () => {
 
 const shouldRevealElement = (element) => {
 	if (element.matches(".legal-page")) {
+		return false;
+	}
+
+	if (isGreenParallaxTarget(element)) {
 		return false;
 	}
 
@@ -962,6 +1032,12 @@ const setupReveal = () => {
 	revealObserver = undefined;
 	revealElementsByTarget = new WeakMap();
 	clearMediaRevealSentinels();
+
+	for (const element of document.querySelectorAll(".section--green[data-reveal], .institutions-expanded-access-grid[data-reveal]")) {
+		element.removeAttribute("data-reveal");
+		element.classList.remove("is-revealed");
+		revealedElements.delete(element);
+	}
 
 	const targets = uniqueElements(revealSelectors).filter(shouldRevealElement);
 

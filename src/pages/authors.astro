@@ -87,7 +87,7 @@ const pageActions = [startPublishingAction, pricingAction];
 				</ul>
 			</div>
 			<div class="card card--good model-card readerpub-model-card">
-				<h3><span>ReaderPub</span> publishing</h3>
+				<h3><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> publishing</h3>
 				<ul class="comparison-list">
 					<li>5% platform commission</li>
 					<li>Author-centered web presence</li>
@@ -311,7 +311,7 @@ const pageActions = [startPublishingAction, pricingAction];
 		background: var(--card-bg) !important;
 	}
 
-	:global(.readerpub-model-card h3 span) {
+	:global(.readerpub-model-card h3 > .readerpub-heading-word) {
 		color: var(--accent) !important;
 	}
 
