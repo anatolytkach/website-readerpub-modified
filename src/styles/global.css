@@ -2038,7 +2038,10 @@ body .page .content .institutions-expanded-access-grid {
 		text-align: center;
 	}
 
-	.content > :is(section, .section):has(> :is(.hero-media, .section-media, .image-block, .image-placeholder, figure, picture)) {
+	.content
+		> :is(section, .section):not(.section--green):not(.section--gray):has(
+			> :is(.hero-media, .section-media, .image-block, .image-placeholder, figure, picture)
+		) {
 		--section-bg: var(--surface);
 	}
 
@@ -2058,16 +2061,6 @@ body .page .content .institutions-expanded-access-grid {
 		)
 		> :is(.hero-copy, .proof-copy, .section-header) {
 		display: contents;
-	}
-
-	:is(
-			.section--with-media,
-			.content > :is(section, .section):has(> :is(.hero-media, .section-media, .image-block, .image-placeholder, figure, picture))
-		)
-		> :not(.hero-copy):not(.proof-copy):not(.section-header):not(.hero-media):not(.section-media):not(.image-block):not(
-			.image-placeholder
-		):not(figure):not(picture):not(.cta-row) {
-		order: 8;
 	}
 
 	:is(
@@ -2428,6 +2421,23 @@ body .page .content .institutions-expanded-access-grid {
 
 .animation-pass-ready.animation-pass-hold-hero [data-hero-load-reveal][data-media-reveal-direction] {
 	transform: translate3d(0, var(--hero-media-reveal-start-y), 0) scale(0.985) !important;
+}
+
+.animation-pass-ready .home-tech-picture[data-reveal],
+.animation-pass-ready .home-tech-picture[data-reveal][data-media-reveal-direction] {
+	--hero-media-reveal-start-y: var(--card-good-reveal-offset);
+	opacity: 0;
+	transform: translate3d(0, var(--hero-media-reveal-start-y), 0) scale(0.985);
+	transition:
+		opacity var(--motion-hero-media-reveal) var(--motion-ease),
+		transform var(--motion-hero-media-reveal) var(--motion-ease);
+	will-change: opacity, transform;
+}
+
+.animation-pass-ready .home-tech-picture[data-reveal].is-revealed,
+.animation-pass-ready .home-tech-picture[data-reveal][data-media-reveal-direction].is-revealed {
+	opacity: 1;
+	transform: translate3d(0, 0, 0) scale(1);
 }
 
 .animation-pass-ready [data-hover-card] {

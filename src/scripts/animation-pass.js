@@ -34,7 +34,6 @@ const heroMediaSelectors = [
 	".hero-section .hero-media",
 	".network-hero .institutions-network-media",
 	".network-hero > .image-block",
-	".home-tech-picture",
 ];
 const mediaRevealSelector = [
 	".hero-media",
