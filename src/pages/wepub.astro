@@ -6,10 +6,20 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SectionIcon from "../components/SectionIcon.astro";
+import ProductName from "../components/ProductName.astro";
 import { PUBLISH_URL, SITE_NAME } from "../consts";
 
 const publishAction = { label: "Publish with WePub", href: PUBLISH_URL, external: true };
 const pricingAction = { label: "See pricing", href: "/pricing", variant: "secondary" as const };
+const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
+	const number = index + 1;
+
+	return {
+		number,
+		top: `/images/wepub-publishing-flow/top_${number}.png`,
+		body: `/images/wepub-publishing-flow/body_${number}.png`,
+	};
+});
 ---
 
 <Base
@@ -48,9 +58,10 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 
 	<Section
 		tone="white"
-		title="The new model builds direct web presence"
-		body="WePub treats a book as a web publication that can be read, found, discussed and connected to the author over time."
+		class="wepub-solution-section"
 	>
+		<Fragment slot="title"><em class="wepub-solution-title-prefix">The solution:</em><ProductName name="WePub" /> builds direct web presence</Fragment>
+		<h3 class="wepub-solution-lede">WePub treats a book as a web publication that can be read, found, discussed and connected to the author over time.</h3>
 		<CardGrid columns="3" class="wepub-source-icon-grid">
 			<article class="card icon-grid-card">
 				<SectionIcon type="publisher" title="Web-native book pages" />
@@ -75,6 +86,88 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 			</article>
 		</CardGrid>
 	</Section>
+
+	<section class="section section--green wepub-flow-slider-section section-continuation" aria-label="WePub publishing flow">
+		<div class="wepub-flow-slider-shell">
+			<div
+				class="wepub-flow-slider"
+				data-wepub-flow-slider
+				data-slides={JSON.stringify(publishingFlowSlides)}
+			>
+				<div class="wepub-flow-top-stage" aria-hidden="true">
+					<img
+						class="wepub-flow-top-image"
+						src={publishingFlowSlides[0].top}
+						alt=""
+						loading="eager"
+						decoding="async"
+						width="1900"
+						height="332"
+						data-flow-top-image
+					/>
+				</div>
+				<div class="wepub-flow-body-window">
+					<img
+						class="wepub-flow-body-image is-current"
+						src={publishingFlowSlides[0].body}
+						alt={`WePub publishing flow screen ${publishingFlowSlides[0].number}`}
+						loading="eager"
+						decoding="async"
+						width="1900"
+						height="1418"
+						data-flow-current-image
+					/>
+					<img
+						class="wepub-flow-body-image"
+						src={publishingFlowSlides[1].body}
+						alt={`WePub publishing flow screen ${publishingFlowSlides[1].number}`}
+						loading="lazy"
+						decoding="async"
+						width="1900"
+						height="1418"
+						data-flow-next-image
+					/>
+				</div>
+				<div class="wepub-flow-slider-controls" aria-label="Slider controls">
+					<button class="wepub-flow-slider-arrow" type="button" aria-label="Previous slide" data-flow-control="prev">‹</button>
+					<div class="wepub-flow-slider-dots" role="tablist" aria-label="Publishing flow slides">
+						{publishingFlowSlides.map((slide, index) => (
+							<button
+								class:list={["wepub-flow-slider-dot", index === 0 && "is-active"]}
+								type="button"
+								aria-label={`Show slide ${slide.number}`}
+								aria-selected={index === 0 ? "true" : "false"}
+								data-flow-dot={index}
+							/>
+						))}
+					</div>
+					<button class="wepub-flow-slider-arrow" type="button" aria-label="Next slide" data-flow-control="next">›</button>
+				</div>
+				<div class="wepub-flow-preload" aria-hidden="true">
+					{publishingFlowSlides.slice(1).map((slide) => (
+						<img
+							src={slide.top}
+							alt=""
+							loading="lazy"
+							decoding="async"
+							width="1900"
+							height="332"
+						/>
+					))}
+					{publishingFlowSlides.slice(2).map((slide) => (
+						<img
+							src={slide.body}
+							alt=""
+							loading="lazy"
+							decoding="async"
+							width="1900"
+							height="1418"
+						/>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
 
 		<Section tone="white" class="wepub-path-section section--two-column" title="What changes when you publish on ReaderPub">
 		<div class="wepub-comparison-grid">
@@ -305,6 +398,196 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		line-height: var(--line-height-body);
 	}
 
+	:global(.wepub-solution-section > .section-header) {
+		justify-self: stretch;
+		width: 100%;
+		max-width: none;
+		text-align: center;
+	}
+
+	:global(.wepub-solution-section > .section-header h2) {
+		text-align: center;
+	}
+
+	.wepub-solution-title-prefix {
+		font-style: italic;
+	}
+
+	.wepub-solution-title-prefix::after {
+		content: "\00a0\00a0";
+	}
+
+	.wepub-solution-lede {
+		justify-self: center;
+		width: min(100%, 980px);
+		margin: 0;
+		color: var(--accent);
+		font-size: clamp(1.25rem, 2.1vw, 1.8rem);
+		line-height: var(--line-height-heading);
+		text-align: center;
+	}
+
+	.wepub-flow-slider-section {
+		--wepub-flow-radius: min(32px, calc(var(--radius-card) * 3));
+		display: block;
+	}
+
+	.wepub-flow-slider-shell {
+		width: min(100%, calc(100vw - 48px), 1900px);
+		max-width: 100%;
+		margin-inline: auto;
+		overflow: hidden;
+		border-radius: var(--wepub-flow-radius);
+		background: #ffffff;
+		box-shadow: var(--card-green-shadow);
+	}
+
+	.wepub-flow-slider {
+		position: relative;
+		display: grid;
+		width: 100%;
+		max-width: 100%;
+		overflow: hidden;
+		background: #ffffff;
+	}
+
+	.wepub-flow-top-stage {
+		position: relative;
+		width: 100%;
+		max-width: 100%;
+		aspect-ratio: 1900 / 332;
+		overflow: hidden;
+		background: #ffffff;
+	}
+
+	.wepub-flow-top-image {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.wepub-flow-body-window {
+		position: relative;
+		width: 100%;
+		max-width: 100%;
+		aspect-ratio: 1900 / 1418;
+		overflow: hidden;
+		background: #ffffff;
+	}
+
+	.wepub-flow-body-image {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		transform: translateX(100%);
+		transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+		will-change: transform;
+	}
+
+	.wepub-flow-body-image.is-current {
+		transform: translateX(0);
+	}
+
+	.wepub-flow-body-image.is-exiting-next {
+		transform: translateX(-100%);
+	}
+
+	.wepub-flow-body-image.is-exiting-prev {
+		transform: translateX(100%);
+	}
+
+	.wepub-flow-body-image.is-entering-next {
+		transform: translateX(100%);
+	}
+
+	.wepub-flow-body-image.is-entering-prev {
+		transform: translateX(-100%);
+	}
+
+	.wepub-flow-body-image.is-entered {
+		transform: translateX(0);
+	}
+
+	.wepub-flow-body-image.is-resetting {
+		transition: none;
+	}
+
+	.wepub-flow-slider-controls {
+		display: grid;
+		grid-template-columns: 44px minmax(0, 1fr) 44px;
+		gap: 14px;
+		align-items: center;
+		padding: 18px clamp(18px, 3vw, 34px);
+		background: #ffffff;
+	}
+
+	.wepub-flow-slider-arrow,
+	.wepub-flow-slider-dot {
+		border: 0;
+		font-family: var(--font-ui);
+		cursor: pointer;
+	}
+
+	.wepub-flow-slider-arrow {
+		display: inline-grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 999px;
+		background: var(--accent);
+		color: #ffffff;
+		font-size: 30px;
+		line-height: 1;
+		transition:
+			background var(--motion-deliberate) ease,
+			color var(--motion-deliberate) ease;
+	}
+
+	.wepub-flow-slider-arrow:hover,
+	.wepub-flow-slider-arrow:focus-visible {
+		background: var(--accent-orange);
+	}
+
+	.wepub-flow-slider-dots {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.wepub-flow-slider-dot {
+		width: 10px;
+		height: 10px;
+		padding: 0;
+		border-radius: 999px;
+		background: rgba(0, 153, 133, 0.3);
+		transition:
+			background var(--motion-deliberate) ease,
+			transform var(--motion-deliberate) ease;
+	}
+
+	.wepub-flow-slider-dot.is-active {
+		background: var(--accent-orange);
+		transform: scale(1.35);
+	}
+
+	.wepub-flow-preload {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
 	:global(.wepub-source-icon-grid .card.icon-grid-card) {
 		display: grid !important;
 		grid-template-columns: var(--card-icon-column) minmax(0, 1fr) !important;
@@ -351,5 +634,169 @@ const pricingAction = { label: "See pricing", href: "/pricing", variant: "second
 		:global(.wepub-source-icon-grid .icon-grid-card-copy) {
 			display: contents;
 		}
+
+		.wepub-flow-slider-controls {
+			grid-template-columns: 40px minmax(0, 1fr) 40px;
+			gap: 10px;
+			padding: 14px;
+		}
+
+		.wepub-flow-slider-arrow {
+			width: 40px;
+			height: 40px;
+			font-size: 26px;
+		}
 	}
 </style>
+
+<script>
+	const setupWePubFlowSliders = () => {
+		const sliders = document.querySelectorAll<HTMLElement>("[data-wepub-flow-slider]");
+
+		sliders.forEach((slider) => {
+			if (slider.dataset.sliderReady === "true") return;
+
+			const slides = JSON.parse(slider.dataset.slides || "[]") as Array<{ number: number; top: string; body: string }>;
+			const topImage = slider.querySelector<HTMLImageElement>("[data-flow-top-image]");
+			const currentImage = slider.querySelector<HTMLImageElement>("[data-flow-current-image]");
+			const nextImage = slider.querySelector<HTMLImageElement>("[data-flow-next-image]");
+			const dots = Array.from(slider.querySelectorAll<HTMLButtonElement>("[data-flow-dot]"));
+			const prevButton = slider.querySelector<HTMLButtonElement>('[data-flow-control="prev"]');
+			const nextButton = slider.querySelector<HTMLButtonElement>('[data-flow-control="next"]');
+			const total = slides.length;
+
+			if (!topImage || !currentImage || !nextImage || total === 0) return;
+
+			slider.dataset.sliderReady = "true";
+
+			let currentIndex = 0;
+			let targetIndex = 0;
+			let isAnimating = false;
+			let autoTimer: number | undefined;
+			const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+			const setTopImage = (index: number) => {
+				topImage.src = slides[index].top;
+			};
+
+			const setCurrentBodyImage = (index: number) => {
+				currentImage.src = slides[index].body;
+				currentImage.alt = `WePub publishing flow screen ${slides[index].number}`;
+			};
+
+			const setDots = (index: number) => {
+				dots.forEach((dot, dotIndex) => {
+					const isActive = dotIndex === index;
+					dot.classList.toggle("is-active", isActive);
+					dot.setAttribute("aria-selected", isActive ? "true" : "false");
+				});
+			};
+
+			const completeTransition = () => {
+				setTopImage(targetIndex);
+				setCurrentBodyImage(targetIndex);
+				currentImage.className = "wepub-flow-body-image is-resetting is-current";
+				nextImage.className = "wepub-flow-body-image is-resetting";
+				currentIndex = targetIndex;
+				isAnimating = false;
+				setDots(currentIndex);
+				window.requestAnimationFrame(() => {
+					currentImage.classList.remove("is-resetting");
+					nextImage.classList.remove("is-resetting");
+				});
+			};
+
+			const goTo = (nextIndex: number, immediate = false, direction: "next" | "prev" = "next") => {
+				if (isAnimating && !immediate) return;
+
+				const normalizedIndex = (nextIndex + total) % total;
+				if (normalizedIndex === currentIndex && !immediate) return;
+
+				if (immediate || motionQuery.matches) {
+					targetIndex = normalizedIndex;
+					setTopImage(targetIndex);
+					setCurrentBodyImage(targetIndex);
+					currentImage.className = "wepub-flow-body-image is-resetting is-current";
+					nextImage.className = "wepub-flow-body-image is-resetting";
+					currentIndex = targetIndex;
+					isAnimating = false;
+					setDots(currentIndex);
+					window.requestAnimationFrame(() => {
+						currentImage.classList.remove("is-resetting");
+						nextImage.classList.remove("is-resetting");
+					});
+					return;
+				}
+
+				targetIndex = normalizedIndex;
+				isAnimating = true;
+				setDots(targetIndex);
+
+				nextImage.src = slides[targetIndex].body;
+				nextImage.alt = `WePub publishing flow screen ${slides[targetIndex].number}`;
+				currentImage.className = "wepub-flow-body-image is-current";
+				nextImage.className = `wepub-flow-body-image is-entering-${direction}`;
+
+				window.requestAnimationFrame(() => {
+					currentImage.classList.remove("is-current");
+					currentImage.classList.add(`is-exiting-${direction}`);
+					nextImage.classList.add("is-entered");
+				});
+			};
+
+			const stopAuto = () => {
+				if (autoTimer === undefined) return;
+				window.clearInterval(autoTimer);
+				autoTimer = undefined;
+			};
+
+			const startAuto = () => {
+				if (total <= 1 || motionQuery.matches) return;
+				stopAuto();
+				autoTimer = window.setInterval(() => {
+					goTo(currentIndex + 1, false, "next");
+				}, 5200);
+			};
+
+			nextImage.addEventListener("transitionend", (event) => {
+				if (event.target !== nextImage || event.propertyName !== "transform") return;
+				completeTransition();
+			});
+
+			prevButton?.addEventListener("click", () => {
+				stopAuto();
+				goTo(currentIndex - 1, false, "prev");
+				startAuto();
+			});
+
+			nextButton?.addEventListener("click", () => {
+				stopAuto();
+				goTo(currentIndex + 1, false, "next");
+				startAuto();
+			});
+
+			dots.forEach((dot, index) => {
+				dot.addEventListener("click", () => {
+					stopAuto();
+					goTo(index, false, index < currentIndex ? "prev" : "next");
+					startAuto();
+				});
+			});
+
+			slider.addEventListener("mouseenter", stopAuto);
+			slider.addEventListener("mouseleave", startAuto);
+
+			motionQuery.addEventListener("change", () => {
+				stopAuto();
+				goTo(currentIndex, true);
+				startAuto();
+			});
+
+			goTo(0, true);
+			startAuto();
+		});
+	};
+
+	document.addEventListener("astro:page-load", setupWePubFlowSliders);
+	setupWePubFlowSliders();
+</script>

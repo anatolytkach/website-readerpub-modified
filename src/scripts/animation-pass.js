@@ -641,6 +641,55 @@ const getCardRevealRows = () => {
 
 const isGoodRevealCard = (card) => card instanceof HTMLElement && card.classList.contains("card--good");
 
+const getGreenContainerCardRows = (container) => {
+	const cards = [
+		...new Set(
+			[...container.querySelectorAll(cardGroupSelector)].flatMap((group) =>
+				group instanceof HTMLElement ? getAnimationCards(group).filter((card) => isGoodRevealCard(card)) : [],
+			),
+		),
+	];
+	const rows = [];
+
+	for (const card of cards) {
+		const rect = getNaturalRect(card);
+
+		if (rect.width <= 0 || rect.height <= 0) {
+			continue;
+		}
+
+		const rowTop = Math.round(rect.top);
+		let row = rows.find(({ top }) => Math.abs(top - rowTop) <= cardRowTopTolerance);
+
+		if (!row) {
+			row = { top: rowTop, cards: [] };
+			rows.push(row);
+		}
+
+		row.top = Math.min(row.top, rowTop);
+		row.cards.push(card);
+	}
+
+	return rows.sort((a, b) => a.top - b.top);
+};
+
+const shouldRiseAsTopLowerGreenCardRow = (card) => {
+	const container = getGreenRevealContainer(card);
+
+	if (!(container instanceof HTMLElement) || !isLowerGreenRevealCard(card)) {
+		return false;
+	}
+
+	const rows = getGreenContainerCardRows(container);
+
+	if (rows.length < 2) {
+		return false;
+	}
+
+	const cardTop = Math.round(getNaturalRect(card).top);
+	return Math.abs(rows[0].top - cardTop) <= cardRowTopTolerance;
+};
+
 const isPortraitViewport = () => {
 	const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 1;
 	const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 1;
@@ -671,15 +720,21 @@ const setGoodCardRevealOffset = (card, direction) => {
 	card.style.setProperty("--card-reveal-start-y", offsetY);
 };
 
+const getDeclaredCardRevealDirection = (card) => {
+	const source = card.closest("[data-card-reveal-origin]");
+	const direction = source?.getAttribute("data-card-reveal-origin");
+
+	return direction && cardRevealDirections.includes(direction) ? direction : undefined;
+};
+
 const getExplicitCardRevealDirection = (card) => {
 	if (isWhiteBackgroundRevealCard(card)) {
 		return "rise";
 	}
 
-	const source = card.closest("[data-card-reveal-origin]");
-	const direction = source?.getAttribute("data-card-reveal-origin");
+	const direction = getDeclaredCardRevealDirection(card);
 
-	if (direction && cardRevealDirections.includes(direction)) {
+	if (direction) {
 		return direction;
 	}
 
@@ -690,6 +745,20 @@ const getExplicitCardRevealDirection = (card) => {
 	return isLowerGreenRevealCard(card) ? "bottom" : undefined;
 };
 
+const getPreferredCardRevealDirection = (card, preferredDirection) => {
+	if (isWhiteBackgroundRevealCard(card)) {
+		return "rise";
+	}
+
+	const declaredDirection = getDeclaredCardRevealDirection(card);
+
+	if (declaredDirection) {
+		return declaredDirection;
+	}
+
+	return preferredDirection || getExplicitCardRevealDirection(card);
+};
+
 const getCardRevealOrderMode = (cards) => {
 	const source = cards.find((card) => card instanceof HTMLElement && card.closest("[data-card-reveal-order]"));
 	const mode = source?.closest("[data-card-reveal-order]")?.getAttribute("data-card-reveal-order");
@@ -697,7 +766,7 @@ const getCardRevealOrderMode = (cards) => {
 	return mode === "inner-first" ? mode : undefined;
 };
 
-const setGoodCardRevealDirections = (cards) => {
+const setGoodCardRevealDirections = (cards, preferredDirection) => {
 	const goodCards = cards.filter((card) => isGoodRevealCard(card));
 
 	if (goodCards.length < 1) {
@@ -705,7 +774,7 @@ const setGoodCardRevealDirections = (cards) => {
 	}
 
 	if (goodCards.length === 1) {
-		setGoodCardRevealOffset(goodCards[0], getExplicitCardRevealDirection(goodCards[0]) || "right");
+		setGoodCardRevealOffset(goodCards[0], getPreferredCardRevealDirection(goodCards[0], preferredDirection) || "right");
 		return;
 	}
 
@@ -716,7 +785,10 @@ const setGoodCardRevealDirections = (cards) => {
 	for (const card of goodCards) {
 		const rect = getNaturalRect(card);
 		const cardCenter = rect.left + rect.width / 2;
-		setGoodCardRevealOffset(card, getExplicitCardRevealDirection(card) || (cardCenter < rowCenter ? "left" : "right"));
+		setGoodCardRevealOffset(
+			card,
+			getPreferredCardRevealDirection(card, preferredDirection) || (cardCenter < rowCenter ? "left" : "right"),
+		);
 	}
 };
 
@@ -733,7 +805,10 @@ const shouldAlternateStackedRows = (rows) => {
 const setGoodCardRevealDirectionsForRows = (rows) => {
 	if (!shouldAlternateStackedRows(rows)) {
 		for (const row of rows) {
-			setGoodCardRevealDirections(row.cards);
+			setGoodCardRevealDirections(
+				row.cards,
+				row.cards.some((card) => shouldRiseAsTopLowerGreenCardRow(card)) ? "rise" : undefined,
+			);
 		}
 
 		return;
@@ -743,9 +818,16 @@ const setGoodCardRevealDirectionsForRows = (rows) => {
 
 	for (const row of rows) {
 		const goodCards = row.cards.filter((card) => isGoodRevealCard(card));
+		const shouldRiseRow = row.cards.some((card) => shouldRiseAsTopLowerGreenCardRow(card));
 
 		if (goodCards.length !== 1) {
-			setGoodCardRevealDirections(row.cards);
+			setGoodCardRevealDirections(row.cards, shouldRiseRow ? "rise" : undefined);
+			continue;
+		}
+
+		if (shouldRiseRow) {
+			setGoodCardRevealOffset(goodCards[0], getPreferredCardRevealDirection(goodCards[0], "rise") || "rise");
+			goodCardIndex += 1;
 			continue;
 		}
 

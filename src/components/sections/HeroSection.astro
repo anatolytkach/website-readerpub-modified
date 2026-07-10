@@ -1,5 +1,6 @@
 ---
 import ActionLink from "../ActionLink.astro";
+import ProductTitle from "../ProductTitle.astro";
 import type { PageAction } from "../../data/pages";
 
 interface Props {
@@ -68,7 +69,7 @@ const hasBodySlot = Astro.slots.has("body");
 			</p>
 		)}
 		{hasBeforeTitleSlot && <slot name="before-title" />}
-		{(title || hasTitleSlot) && <h1 class={titleClass}>{hasTitleSlot ? <slot name="title" /> : title}</h1>}
+		{(title || hasTitleSlot) && <h1 class={titleClass}>{hasTitleSlot ? <slot name="title" /> : title && <ProductTitle text={title} />}</h1>}
 		<slot name="tagline" />
 		{(lead || hasLeadSlot) && <p class="hero-lead">{hasLeadSlot ? <slot name="lead" /> : lead}</p>}
 		{hasBodySlot ? <div class="hero-body"><slot name="body" /></div> : body && <p class="hero-body">{body}</p>}

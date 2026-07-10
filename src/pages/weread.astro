@@ -6,6 +6,7 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SectionIcon from "../components/SectionIcon.astro";
+import ProductName from "../components/ProductName.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const startReadingAction = { label: "Start reading", href: BOOKS_URL, external: true };
@@ -178,7 +179,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		</div>
 		<CardGrid columns="2" class="weread-feature-cards">
 			<article class="card">
-				<h3><span class="weread-card-product">WeRead:</span><br />Reader benefits</h3>
+				<h3><ProductName name="WeRead" colon /><br />Reader benefits</h3>
 				<p>A personal reading space built for discovery and continuity.</p>
 				<ul class="weread-source-bullets">
 					<li>Curated shelves, reading plans, and discovery lists.</li>
@@ -193,7 +194,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 				</div>
 			</article>
 			<article class="card">
-				<h3><span class="weread-card-product">WeBuzz:</span><br />Reading is better together.</h3>
+				<h3><ProductName name="WeBuzz" colon /><br />Reading is better together.</h3>
 				<p>Books become more meaningful when they are discussed.</p>
 				<p>With WeBuzz, readers can talk about books, authors, and specific passages. Follow readers whose insights you value and discover new books through conversation.</p>
 				<ul class="weread-source-bullets">
@@ -208,7 +209,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 				</div>
 			</article>
 			<article class="card">
-				<h3><span class="weread-card-product">BookTree:</span><br />Built for serious reading</h3>
+				<h3><ProductName name="BookTree" colon /><br />Built for serious reading</h3>
 				<p>Structure, focus, and long-term work with texts.</p>
 				<ul class="weread-source-bullets">
 					<li>Organize books, excerpts, and references across projects.</li>
@@ -242,7 +243,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		tone="green"
 	>
 		<Fragment slot="title">
-			<span class="weread-card-product">WeRead:&nbsp;&nbsp;</span><span class="weread-network-title-line">A richer catalog with connected context</span>
+			<ProductName name="WeRead" colon />&nbsp;&nbsp;<span class="weread-network-title-line">A richer catalog with connected context</span>
 		</Fragment>
 		<Fragment slot="body">
 			<span class="weread-network-black-copy">The WeRead catalog includes tens of thousands of books with annotations and author biographies, helping readers understand what a book is about before they begin reading.</span>

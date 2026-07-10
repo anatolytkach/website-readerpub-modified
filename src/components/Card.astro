@@ -1,5 +1,6 @@
 ---
 import SectionIcon from "./SectionIcon.astro";
+import ProductTitle from "./ProductTitle.astro";
 import type { PageCard } from "../data/pages";
 
 interface Props extends PageCard {
@@ -17,13 +18,13 @@ const classes = ["card", `card--${variant}`, icon && "card--with-icon", classNam
 				<>
 					<div class="card-icon-heading">
 						<SectionIcon type={icon} title={`${title} icon`} />
-						<h3>{title}</h3>
+						<h3><ProductTitle text={title} /></h3>
 					</div>
 					<p>{body}</p>
 				</>
 			) : (
 				<div class="card-copy">
-					<h3>{title}</h3>
+					<h3><ProductTitle text={title} /></h3>
 					<p>{body}</p>
 				</div>
 			)}
@@ -34,13 +35,13 @@ const classes = ["card", `card--${variant}`, icon && "card--with-icon", classNam
 				<>
 					<div class="card-icon-heading">
 						<SectionIcon type={icon} title={`${title} icon`} />
-						<h3>{title}</h3>
+						<h3><ProductTitle text={title} /></h3>
 					</div>
 					<p>{body}</p>
 				</>
 			) : (
 				<div class="card-copy">
-					<h3>{title}</h3>
+					<h3><ProductTitle text={title} /></h3>
 					<p>{body}</p>
 				</div>
 			)}

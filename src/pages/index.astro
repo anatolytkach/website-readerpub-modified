@@ -97,7 +97,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			></iframe>
 		</div>
 		<div class="home-tech-reader-cta">
-			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2">Yes, it’s not an app – it is&#32;<span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
+			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2">You got it, it’s not an app – it is&#32;<span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
 			<h3 class="home-tech-reader-subtitle heading--center-full heading--center-full-h3">You can read the thrilling story right here, or...</h3>
 			<div class="home-tech-reader-actions">
 				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">Read 60K+ books in WeRead</a>
@@ -190,29 +190,29 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		<CardGrid columns="2" class="home-product-grid">
 			<article class="card">
 				<div class="card-copy">
-					<h3><a class="home-product-link" href="/weread">WeRead</a></h3>
+					<h3><a class="home-product-link" href="/weread"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Read</span></a></h3>
 					<p>Books open instantly in the browser instead of being trapped inside apps or files.</p>
 				</div>
 			</article>
 			<article class="card">
 				<div class="card-copy">
-					<h3><a class="home-product-link" href="/wepub">WePub</a></h3>
+					<h3><a class="home-product-link" href="/wepub"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Pub</span></a></h3>
 					<p>Authors and publishers release secure web-native publications while keeping audience relationships.</p>
 				</div>
 			</article>
 			<article class="card">
 				<div class="card-copy">
 					<h3 class="home-product-title-line">
-						<a class="home-product-link" href="/webuzz">WeBuzz</a>
+						<a class="home-product-link" href="/webuzz"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Buzz</span></a>
 						<span class="home-product-divider">/</span>
-						<a class="home-product-link" href="/wetalk">WeTalk</a>
+						<a class="home-product-link" href="/wetalk"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Talk</span></a>
 					</h3>
 					<p>Social and private discussions stay connected to books, authors, researchers, and ideas.</p>
 				</div>
 			</article>
 			<article class="card">
 				<div class="card-copy">
-					<h3><a class="home-product-link" href="/booktree">BookTree</a></h3>
+					<h3><a class="home-product-link" href="/booktree"><span class="home-product-name-base">Book</span><span class="home-product-name-accent">Tree</span></a></h3>
 					<p>Serious readers connect books, notes and projects into durable knowledge structures.</p>
 				</div>
 			</article>
@@ -639,6 +639,26 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	:global(.home-product-grid .home-product-link:focus-visible::before),
 	:global(.home-product-grid .home-product-link:focus-visible::after) {
 		background: var(--button-green-hover-bg);
+	}
+
+	:global(.home-product-grid .home-product-link .home-product-name-base) {
+		color: var(--accent) !important;
+		transition: color var(--motion-deliberate) ease;
+	}
+
+	:global(.home-product-grid .home-product-link .home-product-name-accent) {
+		color: var(--accent-orange) !important;
+		transition: color var(--motion-deliberate) ease;
+	}
+
+	:global(.home-product-grid .home-product-link:hover .home-product-name-base),
+	:global(.home-product-grid .home-product-link:focus-visible .home-product-name-base) {
+		color: var(--accent) !important;
+	}
+
+	:global(.home-product-grid .home-product-link:hover .home-product-name-accent),
+	:global(.home-product-grid .home-product-link:focus-visible .home-product-name-accent) {
+		color: var(--accent-orange) !important;
 	}
 
 	:global(.home-product-grid .card:hover .home-product-link:hover),

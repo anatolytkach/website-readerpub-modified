@@ -1,0 +1,15 @@
+---
+import { PRODUCT_NAME_PARTS, type ProductName } from "../utils/productNames";
+
+interface Props {
+	name: ProductName;
+	colon?: boolean;
+	class?: string;
+}
+
+const { name, colon = false, class: className = "" } = Astro.props;
+const [base, accent] = PRODUCT_NAME_PARTS[name];
+const isReaderPub = name === "ReaderPub";
+---
+
+<span class:list={["product-heading-word", isReaderPub && "readerpub-heading-word", className]}><span class:list={["product-heading-base", isReaderPub && "readerpub-heading-reader"]}>{base}</span><span class:list={["product-heading-accent", isReaderPub && "readerpub-heading-pub"]}>{accent}</span>{colon && <span class="product-heading-colon">:</span>}</span>

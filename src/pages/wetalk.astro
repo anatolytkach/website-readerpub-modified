@@ -5,6 +5,7 @@ import CardGrid from "../components/CardGrid.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
+import ProductName from "../components/ProductName.astro";
 import { SITE_NAME } from "../consts";
 
 const requestPilotAction = { label: "Request a Pilot", href: "/contact?topic=wetalk" };
@@ -166,7 +167,7 @@ const audienceCards = [
 	>
 		<div class="model-grid wetalk-comparison-grid">
 			<article class="card wetalk-comparison-card">
-				<h3>WeBuzz</h3>
+				<h3><ProductName name="WeBuzz" /></h3>
 				<p>Public literary community for books, authors, passages and reader discovery.</p>
 				<ul class="bullets">
 					<li>Public conversation</li>
@@ -176,7 +177,7 @@ const audienceCards = [
 				</ul>
 			</article>
 			<article class="card wetalk-comparison-card">
-				<h3>WeTalk</h3>
+				<h3><ProductName name="WeTalk" /></h3>
 				<p>Private discussion environment for controlled-access institutional content.</p>
 				<ul class="bullets">
 					<li>Managed participation</li>

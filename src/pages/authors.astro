@@ -73,7 +73,7 @@ const pageActions = [startPublishingAction, pricingAction];
 		</div>
 	</Section>
 
-	<SpecCardsSection class="authors-source-section authors-model-section section--two-column section-continuation section-continue-next">
+	<SpecCardsSection tone="green" class="authors-source-section authors-model-section section--two-column">
 		<h2><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> changes the author model</h2>
 		<div class="model-grid">
 			<div class="comparison-text-panel model-card marketplace-model-card">
@@ -212,7 +212,7 @@ const pageActions = [startPublishingAction, pricingAction];
 		--section-bg: transparent;
 	}
 
-	:global(.authors-source-section.section)::before {
+	:global(.authors-source-section.section--white)::before {
 		content: none;
 	}
 
@@ -343,6 +343,15 @@ const pageActions = [startPublishingAction, pricingAction];
 	}
 
 	:global(.marketplace-model-card .comparison-list li::before) {
+		background: var(--accent-orange) !important;
+	}
+
+	:global(.authors-model-section.section--green) .marketplace-model-card h3,
+	:global(.authors-model-section.section--green) .marketplace-model-card .comparison-list li {
+		color: #ffffff !important;
+	}
+
+	:global(.authors-model-section.section--green) .marketplace-model-card .comparison-list li::before {
 		background: var(--accent-orange) !important;
 	}
 

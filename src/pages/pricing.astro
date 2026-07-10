@@ -6,6 +6,7 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SpecCardsSection from "../components/sections/SpecCardsSection.astro";
+import ProductName from "../components/ProductName.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const heroActions = [
@@ -34,7 +35,7 @@ const ctaActions = [
 	>
 		<Fragment slot="title"><span class="pricing-hero-free">Free</span> for indies.<br /><span class="pricing-hero-fair">Fair</span> for everyone else.</Fragment>
 		<Fragment slot="body">
-			<h2 class="pricing-hero-paths-title">ReaderPub matches both paths:</h2>
+			<h2 class="pricing-hero-paths-title"><ProductName name="ReaderPub" /> matches both paths:</h2>
 		</Fragment>
 		<ul class="pricing-hero-paths-list">
 			<li>Authors and publishers sell directly to readers with low commission.</li>

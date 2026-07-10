@@ -351,9 +351,33 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	text-decoration: none;
 }
 
-.readerpub-brand-pub,
-.readerpub-heading-pub {
+.readerpub-brand-pub {
 	color: var(--accent-orange) !important;
+}
+
+.readerpub-heading-pub {
+	color: var(--product-heading-accent-color, var(--accent-orange)) !important;
+}
+
+.readerpub-heading-reader {
+	color: var(--product-heading-base-color, var(--accent)) !important;
+}
+
+.product-heading-word {
+	display: inline-block;
+	color: var(--accent);
+}
+
+.product-heading-base {
+	color: var(--product-heading-base-color, var(--accent)) !important;
+}
+
+.product-heading-accent {
+	color: var(--product-heading-accent-color, var(--accent-orange)) !important;
+}
+
+.product-heading-colon {
+	color: var(--product-heading-base-color, var(--accent)) !important;
 }
 
 .readerpub-heading-word--spaced {
@@ -1059,6 +1083,8 @@ h3.heading--center-full,
 	:where(h1, h2, h3, h4):not(
 		:where(.card, .footer-cta) :where(h1, h2, h3, h4)
 ) {
+	--product-heading-base-color: #ffffff;
+	--product-heading-accent-color: #ffffff;
 	color: var(--accent-orange) !important;
 }
 
@@ -2646,6 +2672,42 @@ h3.heading--center-full,
 	.content .section--green .home-product-grid .card:hover :is(h2, h3, h4) .home-product-link:is(:hover, :focus-visible) {
 		color: #ffffff !important;
 	}
+
+	:is(.card--good, .card--accent, .section--green .card):hover
+		:is(h2, h3, h4)
+		:is(.product-heading-base, .product-heading-colon, .readerpub-heading-reader),
+	.animation-pass-ready
+		:is([data-hover-card].card--good, [data-hover-card].card--accent, .section--green [data-hover-card]):hover
+		:is(h2, h3, h4)
+		:is(.product-heading-base, .product-heading-colon, .readerpub-heading-reader) {
+		color: var(--product-heading-base-color, var(--accent)) !important;
+	}
+
+	:is(.card--good, .card--accent, .section--green .card):hover
+		:is(h2, h3, h4)
+		:is(.product-heading-accent, .readerpub-heading-pub),
+	.animation-pass-ready
+		:is([data-hover-card].card--good, [data-hover-card].card--accent, .section--green [data-hover-card]):hover
+		:is(h2, h3, h4)
+		:is(.product-heading-accent, .readerpub-heading-pub) {
+		color: var(--product-heading-accent-color, var(--accent-orange)) !important;
+	}
+}
+
+.content :is(h1, h2, h3, h4) .product-heading-base {
+	color: var(--product-heading-base-color, var(--accent)) !important;
+}
+
+.content :is(h1, h2, h3, h4) .product-heading-accent {
+	color: var(--product-heading-accent-color, var(--accent-orange)) !important;
+}
+
+.content :is(h1, h2, h3, h4) .product-heading-colon {
+	color: var(--product-heading-base-color, var(--accent)) !important;
+}
+
+.content .section--dark :is(h1, h2, h3, h4) :is(.product-heading-word, .product-heading-base, .product-heading-accent, .product-heading-colon, .readerpub-heading-reader, .readerpub-heading-pub) {
+	color: inherit !important;
 }
 
 .section--gray .card {

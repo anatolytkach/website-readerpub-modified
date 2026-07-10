@@ -4,6 +4,7 @@ import CardGrid from "../components/CardGrid.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
+import ProductName from "../components/ProductName.astro";
 import Base from "../layouts/Base.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
@@ -81,7 +82,7 @@ const benefitCards = [
 	</Section>
 
 	<div class="platform-source-sections">
-		<section class="section section--white spec-cards-section platform-source-section platform-source-problem-section section--two-column section-continue-next">
+		<section class="section section--green spec-cards-section platform-source-section platform-source-problem-section section--two-column">
 			<h2><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> exists because the old model breaks the relationship</h2>
 			<p class="lede">
 				File-first publishing can move a book from one place to another, but it cannot keep books connected to readers, authors, institutions and communities.
@@ -108,12 +109,12 @@ const benefitCards = [
 			</div>
 		</section>
 
-		<section id="platform-model" class="section section--green spec-cards-section platform-source-section platform-products-section section-continuation">
+		<section id="platform-model" class="section section--white spec-cards-section platform-source-section platform-products-section section-continuation">
 			<h2 class="platform-products-heading">Six products in the unified ecosystem.</h2>
 			<p class="lede platform-products-lede">ReaderPub combines publishing, reading, discovery, and discussion into a single ecosystem.</p>
 			<div class="card-grid platform-three-grid platform-products-grid">
 				<div class="card">
-					<h3>WePub</h3>
+					<h3><ProductName name="WePub" /></h3>
 					<p>Publishing workflow for authors and organizations.</p>
 					<ul class="bullets">
 						<li>Upload Word or EPUB file for a single web edition production</li>
@@ -126,7 +127,7 @@ const benefitCards = [
 					<a class="button button--secondary" href="/wepub">Explore WePub</a>
 				</div>
 				<div class="card">
-					<h3>WeRead</h3>
+					<h3><ProductName name="WeRead" /></h3>
 					<p>Instant browser-based reading for long-form content.</p>
 					<ul class="bullets">
 						<li>Read without downloading files</li>
@@ -139,7 +140,7 @@ const benefitCards = [
 					<a class="button" href={BOOKS_URL} target="_blank" rel="noreferrer">60K+ books in Catalog</a>
 				</div>
 				<div class="card">
-					<h3>WeBuzz</h3>
+					<h3><ProductName name="WeBuzz" /></h3>
 					<p>Discuss books, authors, and passages with readers around the world. Build literature communities, connect directly with authors and publishers, and turn reading into a shared experience.</p>
 					<ul class="bullets">
 						<li>Book discussions</li>
@@ -152,7 +153,7 @@ const benefitCards = [
 					<a class="button button--secondary" href="/webuzz">Explore WeBuzz</a>
 				</div>
 				<div class="card">
-					<h3>WeTalk</h3>
+					<h3><ProductName name="WeTalk" /></h3>
 					<p>Private discussion environments for organizations, educational programs, collections and controlled-access publications.</p>
 					<ul class="bullets">
 						<li>Private discussion spaces</li>
@@ -163,7 +164,7 @@ const benefitCards = [
 					<a class="button button--secondary" href="/wetalk">Explore WeTalk</a>
 				</div>
 				<div class="card">
-					<h3>BookTree</h3>
+					<h3><ProductName name="BookTree" /></h3>
 					<p>Structure for books, editions, metadata, catalogs, and collections.</p>
 					<ul class="bullets">
 						<li>Organize books, excerpts, and references across projects</li>
@@ -207,10 +208,10 @@ const benefitCards = [
 				body="Each layer supports a different stage of the publication lifecycle while remaining part of a unified platform."
 			>
 				<ol class="platform-flow" aria-label="ReaderPub publication lifecycle">
-					<li class="card">WePub</li>
-					<li class="card">WeRead</li>
-					<li class="card">BookTree</li>
-					<li class="card">WeBuzz / WeTalk</li>
+					<li class="card"><ProductName name="WePub" /></li>
+					<li class="card"><ProductName name="WeRead" /></li>
+					<li class="card"><ProductName name="BookTree" /></li>
+					<li class="card"><span class="platform-flow-product-pair"><ProductName name="WeBuzz" /> / <ProductName name="WeTalk" /></span></li>
 					<li class="card">Scribe</li>
 				</ol>
 				<p class="platform-flow-note">
@@ -501,6 +502,23 @@ const benefitCards = [
 		background: var(--accent-orange) !important;
 	}
 
+	.platform-source-section.platform-source-problem-section.section--green > .lede,
+	.platform-source-section.platform-source-problem-section.section--green .platform-old-model-card .comparison-list li {
+		color: #ffffff !important;
+	}
+
+	.platform-source-section.platform-source-problem-section.section--green .platform-old-model-card h3 {
+		color: var(--accent-orange) !important;
+	}
+
+	.platform-source-section.platform-source-problem-section.section--green .platform-old-model-card .comparison-list li::before {
+		background: var(--accent-orange) !important;
+	}
+
+	:global(body .page .content .platform-source-problem-section.section--green .platform-old-model-card .comparison-list li) {
+		color: #ffffff !important;
+	}
+
 	.platform-source-section .bullets {
 		display: grid;
 		gap: 6px;
@@ -533,6 +551,10 @@ const benefitCards = [
 		margin-right: auto !important;
 		margin-left: 0 !important;
 		text-align: left !important;
+	}
+
+	.platform-source-section.platform-products-section.section--white .platform-products-lede {
+		color: var(--accent) !important;
 	}
 
 	.platform-source-section .platform-two-grid {
@@ -1049,6 +1071,14 @@ const benefitCards = [
 
 	.platform-flow li:nth-child(4) {
 		grid-column: 2 / span 2;
+	}
+
+	.platform-flow-product-pair {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.35em;
+		white-space: nowrap;
 	}
 
 	.platform-flow li:nth-child(5) {

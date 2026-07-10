@@ -1,5 +1,6 @@
 ---
 import ActionLink from "../ActionLink.astro";
+import ProductTitle from "../ProductTitle.astro";
 import type { PageAction } from "../../data/pages";
 
 interface Props {
@@ -15,7 +16,7 @@ const hasBodySlot = Astro.slots.has("body");
 
 <section class:list={["cta-block", "section--dark", className]}>
 	<div class="cta-block-copy">
-		<h2>{title}</h2>
+		<h2><ProductTitle text={title} /></h2>
 		{(hasBodySlot || body) && <p>{hasBodySlot ? <slot name="body" /> : body}</p>}
 	</div>
 	<div class="cta-row">

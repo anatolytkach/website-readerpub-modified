@@ -5,6 +5,7 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SectionIcon from "../components/SectionIcon.astro";
+import ProductName from "../components/ProductName.astro";
 import Base from "../layouts/Base.astro";
 import { SITE_NAME } from "../consts";
 import type { PageCard } from "../data/pages";
@@ -122,7 +123,10 @@ const ctaActions = [
 	</Section>
 
 	<section class="section spec-cards-section institutions-solution-section section-continuation">
-		<h2><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> turns knowledge into active web assets</h2>
+		<h2 class="institutions-solution-title">
+			<em class="institutions-solution-title-prefix"><span class="institutions-solution-title-text">The solution</span><span class="institutions-solution-title-colon">:</span></em>
+			<span class="institutions-solution-title-main"><ProductName name="ReaderPub" /> turns knowledge into active web assets</span>
+		</h2>
 		<div class="card-grid institutions-solution-grid">
 			<div class="card">
 				<h3>Readable on the web</h3>
@@ -187,7 +191,7 @@ const ctaActions = [
 			<div class="card icon-grid-card">
 				<SectionIcon type="fan" title="WeBuzz communities" />
 				<div class="icon-grid-card-copy">
-					<h3>Build WeBuzz communities around protected knowledge collections.</h3>
+					<h3>Build <ProductName name="WeBuzz" /> communities around protected knowledge collections.</h3>
 					<p>Create active discussion about authors, archives, research collections, educational materials and special-access publications while maintaining controlled access policies.</p>
 					<ul class="bullets">
 						<li>Support book-, author- and collection-level memberships with managed audience permissions.</li>
@@ -461,6 +465,29 @@ const ctaActions = [
 	.institutions-solution-section > h2,
 	.institutions-benefits-section > h2 {
 		margin: 0;
+	}
+
+	.institutions-solution-title {
+		width: 100%;
+		max-width: none;
+		text-align: center;
+	}
+
+	.institutions-solution-title-prefix,
+	.institutions-solution-title-main {
+		display: block;
+	}
+
+	.institutions-solution-title-prefix {
+		font-style: italic;
+	}
+
+	.institutions-solution-title-text {
+		color: var(--accent-orange) !important;
+	}
+
+	.institutions-solution-title-colon {
+		color: var(--accent) !important;
 	}
 
 	.institutions-solution-section > p,

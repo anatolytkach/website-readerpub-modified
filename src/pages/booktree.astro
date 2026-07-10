@@ -6,6 +6,7 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SectionIcon from "../components/SectionIcon.astro";
+import ProductName from "../components/ProductName.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const tryBookTreeAction = { label: "Try BookTree on any book", href: BOOKS_URL, external: true };
@@ -59,7 +60,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		<div class="booktree-source-model-grid">
 			<article class="comparison-text-panel booktree-source-model-card booktree-without-card">
 				<div class="card-copy">
-					<h3>Without BookTree</h3>
+					<h3>Without <ProductName name="BookTree" /></h3>
 					<ul class="booktree-source-list">
 						<li>Notes remain trapped inside individual books.</li>
 						<li>Connections between sources are easy to lose.</li>
@@ -70,7 +71,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 			</article>
 			<article class="card card--good booktree-source-model-card booktree-with-card">
 				<div class="card-copy">
-					<h3>With <span>BookTree</span></h3>
+					<h3>With <ProductName name="BookTree" /></h3>
 					<ul class="booktree-source-list">
 						<li>Sources remain connected to projects.</li>
 						<li>Notes stay attached to their context.</li>

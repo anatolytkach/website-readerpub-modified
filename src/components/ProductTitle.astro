@@ -1,0 +1,17 @@
+---
+import ProductName from "./ProductName.astro";
+import { tokenizeProductTitle } from "../utils/productNames";
+
+interface Props {
+	text: string;
+}
+
+const { text } = Astro.props;
+const tokens = tokenizeProductTitle(text);
+---
+
+{
+	tokens.map((token) =>
+		token.type === "product" ? <ProductName name={token.name} /> : token.text
+	)
+}
