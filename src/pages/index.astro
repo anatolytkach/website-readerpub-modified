@@ -68,60 +68,101 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			<span class="home-tech-title-line home-tech-title-line-primary"><span class="home-tech-title-prefix">The solution:&nbsp;&nbsp;</span><span class="home-tech-title-readerpub" style="color: var(--accent);"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span></span>
 			<span class="home-tech-title-line home-tech-title-line-solution">Browser-based eReader <span class="home-tech-title-plus">+</span> web-native publishing network.</span>
 		</h2>
-		<script is:inline>
-			(() => {
-				try {
-					const readerDemoSessionKey = "readerpub:home-reader-demo-started:90000120";
-					const readerPositionKey = "readerpub:lastcfi:90000120";
-					const navigationEntry = performance.getEntriesByType("navigation")[0];
-
-					if (sessionStorage.getItem(readerDemoSessionKey)) {
-						return;
-					}
-
-					sessionStorage.setItem(readerDemoSessionKey, "1");
-
-					if (navigationEntry?.type !== "reload") {
-						localStorage.removeItem(readerPositionKey);
-					}
-				} catch {}
-			})();
-		</script>
-		<div class="home-reader-frame">
-			<iframe
-				src="/books/reader/?id=90000120&source=gutenberg&reader=protected&protectedArtifactBookId=90000120&protectedArtifactSource=r2"
-				title="Treasure Island in WeRead"
-				loading="lazy"
-				referrerpolicy="strict-origin-when-cross-origin"
-				allow="fullscreen"
-			></iframe>
+		<div class="home-reader-frame" data-video-player>
+			<a class="home-reader-video-link" href="https://reader.pub/books/reader/?id=90000120" target="_blank" rel="noopener noreferrer" aria-label="Open Treasure Island in WeRead">
+				<video
+					src="/videos/treasure_island-1.mp4"
+					title="Treasure Island in WeRead"
+					muted
+					autoplay
+					playsinline
+					preload="auto"
+				></video>
+			</a>
+			<button class="home-reader-play-button" type="button" aria-label="Play Treasure Island demo">
+				<span aria-hidden="true"></span>
+			</button>
 		</div>
 		<div class="home-tech-reader-cta">
-			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2">You got it, it’s not an app. It is <span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
-			<h2 class="home-tech-reader-subtitle heading--center-full heading--center-full-h2">You can read the thrilling story right here, or...</h2>
+			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2">Guess what? It’s not an app. It is <span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
+			<h2 class="home-tech-reader-subtitle heading--center-full heading--center-full-h2">Read this thrilling story along with...</h2>
 			<div class="home-tech-reader-actions">
-				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">Read 60K+ books in WeRead</a>
+				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">60K+ books in WeRead</a>
 				<span class="home-tech-reader-actions-separator">or</span>
 				<a class="button home-tech-visual-button home-tech-reader-button" href="/weread">Explore WeRead</a>
 			</div>
 		</div>
 	</section>
+
+	<script is:inline>
+		(() => {
+			const setupHomeReaderVideo = () => {
+				const frame = document.querySelector("[data-video-player]");
+
+				if (!(frame instanceof HTMLElement) || frame.dataset.videoReady === "true") {
+					return;
+				}
+
+				const video = frame.querySelector("video");
+				const playButton = frame.querySelector("button");
+
+				if (!(video instanceof HTMLVideoElement) || !(playButton instanceof HTMLButtonElement)) {
+					return;
+				}
+
+				frame.dataset.videoReady = "true";
+
+				const showPlayButton = () => {
+					frame.classList.add("home-reader-frame--show-play");
+				};
+
+				const hidePlayButton = () => {
+					frame.classList.remove("home-reader-frame--show-play");
+				};
+
+				const playVideo = () => {
+					hidePlayButton();
+					video.currentTime = 0;
+					const playAttempt = video.play();
+
+					if (playAttempt && typeof playAttempt.catch === "function") {
+						playAttempt.catch(showPlayButton);
+					}
+				};
+
+				video.addEventListener("play", hidePlayButton);
+				video.addEventListener("ended", () => {
+					video.pause();
+					video.currentTime = 0;
+					showPlayButton();
+				});
+				playButton.addEventListener("click", playVideo);
+
+				requestAnimationFrame(playVideo);
+			};
+
+			setupHomeReaderVideo();
+			document.addEventListener("astro:page-load", setupHomeReaderVideo);
+		})();
+	</script>
 	<section class="section section--green home-tech-visual-section" aria-label="Explore ReaderPub platform">
 		<h2 class="home-tech-container-title">
 			<span class="home-tech-container-title-primary">ReaderPub is end-to-end:</span>
 			<span class="home-tech-container-title-secondary">from creating to publishing and engagement</span>
 		</h2>
-		<picture class="home-tech-picture">
-			<source media="(orientation: portrait)" srcset="/images/tech_mobile.webp" width="823" height="1743" />
-			<img
-				src="/images/tech.webp"
-				alt="ReaderPub connects web publishing, reading, discussion and knowledge tools"
-				loading="lazy"
-				decoding="async"
-				width="1663"
-				height="946"
-			/>
-		</picture>
+		<a class="home-tech-picture-link" href="/platform" aria-label="Explore the ReaderPub platform">
+			<picture class="home-tech-picture">
+				<source media="(orientation: portrait)" srcset="/images/tech_mobile.webp" width="823" height="1743" />
+				<img
+					src="/images/tech.webp"
+					alt="ReaderPub connects web publishing, reading, discussion and knowledge tools"
+					loading="lazy"
+					decoding="async"
+					width="1663"
+					height="946"
+				/>
+			</picture>
+		</a>
 		<a class="button home-tech-visual-button home-tech-platform-button" href="/platform">Explore ReaderPub</a>
 	</section>
 
@@ -389,9 +430,15 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		background: var(--text);
 	}
 
+	.home-tech-picture-link,
 	.home-tech-picture {
 		display: block;
 		width: 100%;
+	}
+
+	.home-tech-picture-link {
+		color: inherit;
+		text-decoration: none;
 	}
 
 	.home-tech-picture img {
@@ -401,12 +448,15 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	.home-reader-frame {
+		position: relative;
 		justify-self: stretch;
 		width: 100%;
-		height: clamp(520px, 68vw, 820px);
+		aspect-ratio: 1272 / 798;
+		height: auto;
 		overflow: hidden;
 		border: 1px solid var(--border);
 		border-radius: 8px;
+		background: #ffffff;
 		box-shadow: var(--card-green-shadow);
 		transition:
 			border-color var(--motion-deliberate) ease,
@@ -415,15 +465,65 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-reader-frame:hover,
 	.home-reader-frame:focus-within {
-		border-color: var(--accent);
+		border-color: var(--accent-orange);
 	}
 
-	.home-reader-frame iframe {
+	.home-reader-video-link {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.home-reader-frame video {
 		display: block;
 		width: 100%;
 		height: 100%;
 		border: 0;
+		object-fit: contain;
 		background: #ffffff;
+	}
+
+	.home-reader-play-button {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		display: grid;
+		place-items: center;
+		width: clamp(56px, 6vw, 86px);
+		aspect-ratio: 1;
+		border: 0;
+		border-radius: 999px;
+		background: var(--accent-orange);
+		box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+		cursor: pointer;
+		opacity: 0;
+		pointer-events: none;
+		transform: translate(-50%, -50%) scale(0.9);
+		transition:
+			background var(--motion-fast) ease,
+			opacity var(--motion-fast) ease,
+			transform var(--motion-fast) ease;
+	}
+
+	.home-reader-play-button:hover,
+	.home-reader-play-button:focus-visible {
+		background: var(--text);
+	}
+
+	.home-reader-play-button > span {
+		width: 0;
+		height: 0;
+		margin-left: 0.16em;
+		border-top: 0.42em solid transparent;
+		border-bottom: 0.42em solid transparent;
+		border-left: 0.64em solid #ffffff;
+		font-size: clamp(30px, 3.1vw, 44px);
+	}
+
+	.home-reader-frame--show-play .home-reader-play-button {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translate(-50%, -50%) scale(1);
 	}
 
 	.home-tablet-picture {
@@ -779,7 +879,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 		.home-reader-frame {
 			order: 2 !important;
-			height: min(76vh, 760px);
+			height: auto;
 			border-color: var(--accent);
 		}
 
@@ -797,7 +897,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			width: 100%;
 		}
 
-		.home-tech-visual-section > .home-tech-picture {
+		.home-tech-visual-section > .home-tech-picture-link {
 			order: 2 !important;
 		}
 
