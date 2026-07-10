@@ -1,5 +1,6 @@
 ---
 import KbHelpModal from "../components/KbHelpModal.astro";
+import ProductName from "../components/ProductName.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
@@ -279,7 +280,13 @@ const faqCategories = [
 					<h2 class="kb-faq-heading">
 						<SectionIcon type={category.icon} title={`${category.title} icon`} />
 						<span class="kb-faq-heading-label" aria-label={category.title}>
-							{category.titleLines ? category.titleLines.map((line) => <span>{line}</span>) : category.title}
+							{category.title === "ReaderPub Security" ? (
+								<span><ProductName name="ReaderPub" /> Security</span>
+							) : category.title === "WeBuzz Community" ? (
+								<span><ProductName name="WeBuzz" /> Community</span>
+							) : category.title === "Scribe AI Companion" ? (
+								<span><span class="kb-faq-product-scribe">Scribe</span> AI Companion</span>
+							) : category.titleLines ? category.titleLines.map((line) => <span>{line}</span>) : category.title}
 						</span>
 					</h2>
 					{category.questions.map((item) => (
@@ -361,7 +368,7 @@ const faqCategories = [
 
 	.kb-hero-body-copy p {
 		margin: 0;
-		color: var(--accent);
+		color: var(--accent-copy);
 	}
 
 	.kb-hero-body-copy .kb-hero-body-question {
@@ -426,6 +433,7 @@ const faqCategories = [
 		border: 1px solid var(--border);
 		border-radius: var(--radius-card);
 		background: var(--card-bg);
+		box-shadow: var(--card-green-shadow);
 	}
 
 	.kb-faq-block:last-child:nth-child(odd) {
@@ -448,7 +456,7 @@ const faqCategories = [
 		width: 100%;
 		max-width: 100%;
 		margin: 0 0 16px;
-		color: var(--accent);
+		color: var(--text);
 		font-size: var(--kb-faq-heading-size);
 		font-weight: 500;
 	}
@@ -470,6 +478,10 @@ const faqCategories = [
 		width: auto;
 		max-width: 100%;
 		overflow-wrap: anywhere;
+	}
+
+	.kb-faq-product-scribe {
+		color: var(--accent);
 	}
 
 	:global(.kb-faq-heading .section-icon) {
@@ -500,6 +512,11 @@ const faqCategories = [
 		outline: none;
 	}
 
+	.kb-faq-item summary:hover,
+	.kb-faq-item summary:focus-visible {
+		color: var(--accent);
+	}
+
 	.kb-faq-item summary::-webkit-details-marker {
 		display: none;
 	}
@@ -526,7 +543,7 @@ const faqCategories = [
 	}
 
 	.kb-faq-item[open] summary {
-		color: var(--accent);
+		color: var(--accent-orange);
 	}
 
 	.kb-faq-item[open] p {
@@ -538,6 +555,30 @@ const faqCategories = [
 
 	:global(.kb-faq-cta) {
 		margin-top: 0;
+	}
+
+	:global(.kb-faq-cta .button-action-with-icon) {
+		display: inline-flex;
+		flex: 0 0 auto;
+		align-items: center;
+		gap: 10.5px;
+	}
+
+	:global(.kb-faq-cta .button-action-with-icon > .button) {
+		flex: 0 0 auto;
+		width: auto;
+		min-width: max-content;
+		height: 42px;
+		margin: 0;
+	}
+
+	:global(.kb-faq-cta .kb-faq-scribe-icon) {
+		display: block;
+		flex: 0 0 auto;
+		width: auto;
+		max-width: none;
+		height: 42px;
+		object-fit: contain;
 	}
 
 	:global(.button.button--scribe-demo),
@@ -552,6 +593,13 @@ const faqCategories = [
 		background: var(--text);
 		color: #ffffff;
 		border-color: transparent;
+	}
+
+	:global(.kb-faq-cta .button.button--scribe-demo:hover),
+	:global(.kb-faq-cta .button.button--scribe-demo:focus-visible) {
+		background: #ffffff;
+		color: var(--text);
+		border-color: #ffffff;
 	}
 
 	:global(.button.button--scribe-demo .button-icon) {

@@ -31,6 +31,7 @@ const finalActions = [
 		mediaPosition="start"
 		actions={heroActions}
 		spacerBackgroundPositionY="72%"
+		showSpacer={false}
 	>
 		<Fragment slot="body">
 			<p>
@@ -146,7 +147,7 @@ const finalActions = [
 	}
 
 	:global(.about-hero .hero-body .about-hero-solution) {
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-family: var(--font-body);
 		font-size: var(--hero-solution-copy-size);
 		font-weight: 400;

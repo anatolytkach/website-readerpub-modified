@@ -36,6 +36,10 @@ export interface PageAction {
 	class?: string;
 	iconSrc?: string;
 	iconAlt?: string;
+	externalIconSrc?: string;
+	externalIconAlt?: string;
+	externalIconClass?: string;
+	externalIconStyle?: string;
 }
 
 export interface PageCard {
@@ -578,8 +582,9 @@ export const pages = {
 					href: "/scribe",
 					variant: "secondary",
 					class: "button--scribe-demo",
-					iconSrc: "/images/scribe.svg",
-					iconAlt: "",
+					externalIconSrc: "/images/scribe-action-dark.svg",
+					externalIconAlt: "",
+					externalIconClass: "kb-faq-scribe-icon",
 				},
 			],
 		},

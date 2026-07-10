@@ -6,6 +6,7 @@ import SectionIcon from "../components/SectionIcon.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
+import ProductName from "../components/ProductName.astro";
 import { SITE_NAME } from "../consts";
 
 const joinConversationAction = { label: "Join the conversation in WeBuzz", href: "https://webuzz.org/", external: true };
@@ -68,6 +69,23 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		</div>
 	</section>
 
+	<section class="section section--white webuzz-community-heading-section section-continuation">
+		<h2 class="webuzz-community-heading">
+			<em>The solution:</em><span class="webuzz-community-heading-gap">&nbsp;&nbsp;</span><ProductName name="WeBuzz" /> creates a community around books
+		</h2>
+	</section>
+
+	<section class="section section--green webuzz-community-frame-section section-continuation" aria-label="WeBuzz community preview">
+		<div class="webuzz-community-frame">
+			<iframe
+				src="https://webuzz.org/"
+				title="WeBuzz community"
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"
+			></iframe>
+		</div>
+	</section>
+
 	<section class="section section--white spec-cards-section webuzz-solution-section section--two-column section-continuation section-continue-next">
 		<div class="webuzz-legacy-overview">
 			<h2 class="webuzz-legacy-heading">Reading does not end on the last page.</h2>
@@ -127,8 +145,8 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	<Section
 		tone="green"
 		class="webuzz-discussion-lifecycle-section"
-		title="Lively publications need lively discussion"
 	>
+		<Fragment slot="title">Lively publications need <span class="green-heading-white">lively discussion</span></Fragment>
 		<Fragment slot="body">
 			WeBuzz is not yet another social network.<br />
 			It is a discussion board for web-living books and publixations.
@@ -141,7 +159,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		</CardGrid>
 		<div class="webuzz-lifecycle-subsection">
 			<header class="section-header">
-				<h2>Discussion extends the life of a publication</h2>
+				<h2>Discussion extends the <span class="green-heading-white">life of a publication</span></h2>
 				<p class="section-lead">A publication becomes more valuable when readers continue engaging with it after release.</p>
 			</header>
 			<CardGrid columns="4">
@@ -260,9 +278,9 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	<Section
 		tone="green"
 		class="webuzz-benefits-section"
-		title="Who benefits from live book discussions?"
 		body="WeBuzz connects books, authors, readers, fragments and literary ideas in one network."
 	>
+		<Fragment slot="title">Who benefits from <span class="green-heading-white">live book discussions</span>?</Fragment>
 		<CardGrid columns="3" class="webuzz-matters-grid">
 			<Card icon="readerBook" title="Readers" body="Discovery becomes social and discussion stays attached to books." />
 			<Card
@@ -380,6 +398,51 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		color: var(--link);
 	}
 
+	.webuzz-community-heading-section {
+		justify-items: center;
+		margin-bottom: 0 !important;
+		padding-bottom: 0 !important;
+	}
+
+	.webuzz-community-heading {
+		width: 100%;
+		max-width: 1180px;
+		margin: 0 !important;
+		text-align: center;
+	}
+
+	.webuzz-community-heading em {
+		font-style: italic;
+	}
+
+	.webuzz-community-heading-gap {
+		white-space: pre;
+	}
+
+	.webuzz-community-frame-section {
+		justify-items: center;
+		margin-top: calc(var(--section-padding) * 0.6) !important;
+	}
+
+	.webuzz-community-frame {
+		width: 100%;
+		max-width: var(--page-max);
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.52);
+		border-radius: var(--radius-card);
+		background: #ffffff;
+		box-shadow: var(--card-green-shadow);
+	}
+
+	.webuzz-community-frame iframe {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border: 0;
+		background: #ffffff;
+	}
+
 	.webuzz-solution-section {
 		--link: var(--accent);
 		--section-flow-gap: 18px;
@@ -455,7 +518,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	.webuzz-legacy-copy > p:not(.lede) {
-		color: var(--link);
+		color: var(--accent-copy);
 	}
 
 	.webuzz-legacy-solution-card {
@@ -464,7 +527,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	.webuzz-legacy-solution-card p {
 		margin: 0 !important;
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-size: 18px;
 		line-height: var(--line-height-body);
 	}
@@ -520,7 +583,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 
 	.webuzz-overview-note {
 		margin: var(--section-flow-gap) 0 0 !important;
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-size: 18px;
 		line-height: var(--line-height-body);
 	}
@@ -683,6 +746,10 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	}
 
 	@media (orientation: portrait) {
+		.webuzz-community-frame {
+			aspect-ratio: 9 / 16;
+		}
+
 		.webuzz-image-split {
 			display: contents;
 		}

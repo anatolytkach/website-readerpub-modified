@@ -56,7 +56,7 @@ const ctaActions = [
 	</Section>
 
 	<SpecCardsSection class="pricing-source-section pricing-source-model-change-section section--two-column section-continue-next">
-		<h2>The pricing model change that matters</h2>
+		<h2><ProductName name="ReaderPub" /> prices won't break the bank – they help you grow.</h2>
 		<div class="model-grid">
 			<div class="comparison-text-panel pricing-marketplace-model-card">
 				<h3>Marketplace economics</h3>
@@ -79,7 +79,8 @@ const ctaActions = [
 		</div>
 	</SpecCardsSection>
 
-	<Section tone="green" class="pricing-solution-section" title="Balanced pricing model for all industry players">
+	<Section tone="green" class="pricing-solution-section">
+		<Fragment slot="title"><span class="green-heading-white">Balanced pricing model</span> for all industry players</Fragment>
 		<div class="pricing-copy-stack pricing-solution-copy">
 			<p>ReaderPub separates publishing economics from infrastructure economics.</p>
 			<p>Authors and publishers get plans tailored to their publishing and sales activity.</p>
@@ -182,7 +183,8 @@ const ctaActions = [
 		</div>
 	</Section>
 
-	<Section tone="green" class="pricing-benefits-section" title="How our pricing model works?">
+	<Section tone="green" class="pricing-benefits-section">
+		<Fragment slot="title">How <span class="green-heading-white">ReaderPub</span> pricing model works?</Fragment>
 		<CardGrid columns="2" class="pricing-benefits-grid">
 			<Card icon="author" title="For authors" body="Keep more revenue from publishing activity." />
 			<Card icon="publisher" title="For publishers" body="Scale catalogs without depending on marketplace economics." />
@@ -226,7 +228,7 @@ const ctaActions = [
 
 	:global(.pricing-hero .hero-body) {
 		max-width: 720px;
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-family: var(--font-body);
 		font-size: var(--hero-solution-copy-size);
 		font-weight: 400;
@@ -345,13 +347,13 @@ const ctaActions = [
 	}
 
 	.pricing-source-section > .lede {
-		color: var(--accent);
+		color: var(--accent-copy);
 	}
 
 	.pricing-author-lede-lines {
 		display: grid;
 		gap: 4px;
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-size: min(1.125rem, 2.15vw) !important;
 		line-height: var(--line-height-body);
 	}

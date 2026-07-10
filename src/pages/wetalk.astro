@@ -131,12 +131,17 @@ const audienceCards = [
 		</CardGrid>
 	</Section>
 
-	<Section
-		tone="green"
-		class="wetalk-discussion-layer-section"
-		title="A discussion layer for controlled-access content"
-		body="WeTalk keeps discussion close to the publications an organization controls, with participation rules that match institutional access needs."
-	>
+	<section class="section section--white wetalk-solution-heading-section section-continuation">
+		<h2 class="wetalk-solution-heading">
+			<em class="wetalk-solution-heading-accent">The solution<span class="wetalk-solution-heading-colon">:</span></em><br />
+			<ProductName name="WeTalk" /> – A discussion layer for controlled-access content
+		</h2>
+	</section>
+
+	<Section tone="green" class="wetalk-discussion-layer-section">
+		<h3 class="wetalk-discussion-layer-lede">
+			<span class="wetalk-discussion-layer-product">WeTalk</span> keeps discussion close to the publications an organization controls, with participation rules that match institutional access needs.
+		</h3>
 		<CardGrid columns="2" class="wetalk-icon-card-grid">
 			{discussionLayerCards.map((card) => <Card {...card} />)}
 		</CardGrid>
@@ -207,10 +212,43 @@ const audienceCards = [
 		color: var(--accent);
 	}
 
-	@media (min-width: 901px) {
-		:global(.wetalk-discussion-layer-section .section-header h2) {
-			white-space: normal !important;
-		}
+	.wetalk-solution-heading-section {
+		justify-items: center;
+		margin-bottom: 0 !important;
+		padding-bottom: 0 !important;
+	}
+
+	.wetalk-solution-heading {
+		width: 100%;
+		max-width: 1180px;
+		margin: 0 !important;
+		text-align: center;
+	}
+
+	.wetalk-solution-heading-accent {
+		color: var(--accent-orange);
+	}
+
+	.wetalk-solution-heading-colon {
+		color: var(--accent);
+	}
+
+	:global(.wetalk-discussion-layer-section) {
+		margin-top: calc(var(--section-padding) * 0.6) !important;
+	}
+
+	.wetalk-discussion-layer-lede {
+		justify-self: stretch;
+		width: min(100%, 980px);
+		margin: 0 !important;
+		color: var(--accent-orange) !important;
+		font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+		line-height: var(--line-height-heading);
+		text-align: left;
+	}
+
+	.wetalk-discussion-layer-product {
+		color: #ffffff !important;
 	}
 
 	:global(.wetalk-workflow-section),

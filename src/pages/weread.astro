@@ -125,9 +125,9 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 
 	<Section
 		tone="green"
-		title="Browser-based active reading"
 		body="WeRead makes the browser the reading environment, so a book can open from a link and remain part of the public web."
 	>
+		<Fragment slot="title">Browser-based <span class="green-heading-white">active reading</span></Fragment>
 		<CardGrid columns="3" class="weread-source-icon-grid">
 			<article class="card icon-grid-card">
 				<SectionIcon type="readerBook" title="Open from a link" />
@@ -256,7 +256,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		</CardGrid>
 		<div class="weread-combined-subsection">
 			<header class="section-header">
-				<h2>Who benefits from reading books online?</h2>
+				<h2>Who benefits from <span class="green-heading-white">reading books online</span>?</h2>
 			</header>
 			<CardGrid columns="4" class="weread-benefits-icon-grid">
 				<article class="card weread-benefit-card">
@@ -518,7 +518,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 
 	.weread-ad-free-card p {
 		margin: 0 !important;
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-size: var(--hero-problem-copy-size);
 		line-height: var(--line-height-body);
 	}

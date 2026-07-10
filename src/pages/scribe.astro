@@ -12,6 +12,10 @@ const primaryActions = [
 		href: "/contact/",
 		variant: "secondary" as const,
 		class: "button--scribe-demo",
+		externalIconSrc: "/images/scribe-action-dark.svg",
+		externalIconAlt: "",
+		externalIconClass: "scribe-final-cta-icon",
+		externalIconStyle: "display: block; width: auto !important; height: 42px !important; max-width: none !important; flex: 0 0 auto; object-fit: contain;",
 	},
 	{ label: "Explore ReaderPub", href: "/platform/" },
 ];
@@ -71,11 +75,24 @@ const ctaActions = [
 		</CardGrid>
 	</Section>
 
+	<section class="section section--white scribe-solution-heading-section section-continuation">
+		<h2 class="scribe-solution-heading">
+			<em class="scribe-solution-heading-prefix">The solution:</em><span class="scribe-solution-heading-gap">&nbsp;&nbsp;</span><span class="scribe-solution-name">Scribe</span><span class="scribe-solution-bang">!</span><img
+				class="scribe-solution-icon"
+				src="/images/scribe-action.svg"
+				alt=""
+				aria-hidden="true"
+				width="1453"
+				height="1747"
+			/>
+		</h2>
+	</section>
+
 	<Section
 		tone="green"
-		title="A specialized AI for literature, writing and publishing"
 		body="Scribe gives ReaderPub users a conversational way to explore books, authors, literary ideas, writing questions, publishing workflows and platform guidance. Instead of switching between many tools, users can ask questions in one place and continue the conversation over time."
 	>
+		<Fragment slot="title"><span class="green-heading-white">A specialized AI</span> for literature, writing and publishing</Fragment>
 		<CardGrid columns="3" class="scribe-centered-card-grid">
 			<Card title="Literature" body="Discuss books, authors, genres, literary history and ideas." />
 			<Card title="Writing" body="Explore storytelling, editing, structure, style and writing techniques." />
@@ -99,7 +116,8 @@ const ctaActions = [
 		</CardGrid>
 	</Section>
 
-	<Section tone="green" title="Who benefits from Scribe?">
+	<Section tone="green">
+		<Fragment slot="title">Who benefits from <span class="green-heading-white">Scribe</span>?</Fragment>
 		<CardGrid columns="3" class="scribe-centered-card-grid">
 			<Card icon="readerBook" title="Readers" body="Understand books, authors, references and literary context more deeply." />
 			<Card icon="author" title="Authors" body="Discuss writing, research, editing and publishing questions." />
@@ -110,6 +128,7 @@ const ctaActions = [
 	</Section>
 
 	<CtaBlock
+		class="scribe-final-cta"
 		title="Knowledge is more useful when you can have a conversation with it."
 		body="Scribe helps readers, authors, publishers and institutions explore literature, writing and publishing through focused AI-powered conversation."
 		actions={ctaActions}
@@ -142,12 +161,56 @@ const ctaActions = [
 	}
 
 	.scribe-hero-solution {
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-family: var(--font-body);
 		font-size: var(--hero-solution-copy-size);
 		font-weight: 400;
 		letter-spacing: 0;
 		line-height: var(--line-height-body);
+	}
+
+	.scribe-solution-heading-section {
+		justify-items: center;
+		margin-bottom: 0 !important;
+		padding-bottom: 0 !important;
+	}
+
+	:global(body .page .content > .scribe-solution-heading-section + .section.section--green) {
+		margin-top: calc(var(--section-padding) * 0.6) !important;
+	}
+
+	.scribe-solution-heading {
+		display: block;
+		width: 100%;
+		margin: 0 !important;
+		text-align: center;
+	}
+
+	.scribe-solution-heading-prefix {
+		color: var(--text);
+		font-style: italic;
+	}
+
+	:global(.scribe-solution-heading-gap) {
+		white-space: pre;
+	}
+
+	.scribe-solution-name {
+		color: var(--accent);
+	}
+
+	.scribe-solution-bang {
+		color: var(--accent-orange);
+	}
+
+	.scribe-solution-icon {
+		display: inline-block;
+		width: auto;
+		height: 1.6em;
+		margin-left: var(--button-row-gap);
+		object-fit: contain;
+		transform: translateY(-22%);
+		vertical-align: middle;
 	}
 
 	:global(.scribe-centered-card-grid.card-grid--3) {
@@ -186,6 +249,53 @@ const ctaActions = [
 		background: #ffffff;
 		color: var(--text);
 		border-color: #ffffff;
+	}
+
+	:global(.scribe-final-cta .button.button--scribe-demo),
+	:global(.scribe-final-cta .button.button--scribe-demo:visited) {
+		background: var(--accent-orange);
+		color: #ffffff;
+		border-color: transparent;
+	}
+
+	:global(.scribe-final-cta .cta-row > .button:not(.button--scribe-demo)),
+	:global(.scribe-final-cta .cta-row > .button:not(.button--scribe-demo):visited) {
+		background: var(--accent);
+		color: #ffffff;
+		border-color: transparent;
+	}
+
+	:global(.scribe-final-cta .button.button--scribe-demo:hover),
+	:global(.scribe-final-cta .button.button--scribe-demo:focus-visible),
+	:global(.scribe-final-cta .cta-row > .button:not(.button--scribe-demo):hover),
+	:global(.scribe-final-cta .cta-row > .button:not(.button--scribe-demo):focus-visible) {
+		background: #ffffff;
+		color: var(--text);
+		border-color: #ffffff;
+	}
+
+	:global(.scribe-final-cta .button-action-with-icon) {
+		display: inline-flex;
+		flex: 0 0 auto;
+		align-items: center;
+		gap: 10.5px;
+	}
+
+	:global(.scribe-final-cta .button-action-with-icon > .button) {
+		flex: 0 0 auto;
+		width: auto;
+		min-width: max-content;
+		height: 42px;
+		margin: 0;
+	}
+
+	:global(.scribe-final-cta .scribe-final-cta-icon) {
+		display: block;
+		flex: 0 0 auto;
+		width: auto;
+		max-width: none;
+		height: 42px;
+		object-fit: contain;
 	}
 
 	.scribe-hero-actions {

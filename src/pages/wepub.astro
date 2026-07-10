@@ -88,84 +88,83 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	</Section>
 
 	<section class="section section--green wepub-flow-slider-section section-continuation" aria-label="WePub publishing flow">
-		<div class="wepub-flow-slider-shell">
-			<div
-				class="wepub-flow-slider"
-				data-wepub-flow-slider
-				data-slides={JSON.stringify(publishingFlowSlides)}
-			>
-				<div class="wepub-flow-top-stage" aria-hidden="true">
-					<img
-						class="wepub-flow-top-image"
-						src={publishingFlowSlides[0].top}
-						alt=""
-						loading="eager"
-						decoding="async"
-						width="1900"
-						height="332"
-						data-flow-top-image
-					/>
-				</div>
-				<div class="wepub-flow-body-window">
-					<img
-						class="wepub-flow-body-image is-current"
-						src={publishingFlowSlides[0].body}
-						alt={`WePub publishing flow screen ${publishingFlowSlides[0].number}`}
-						loading="eager"
-						decoding="async"
-						width="1900"
-						height="1418"
-						data-flow-current-image
-					/>
-					<img
-						class="wepub-flow-body-image"
-						src={publishingFlowSlides[1].body}
-						alt={`WePub publishing flow screen ${publishingFlowSlides[1].number}`}
-						loading="lazy"
-						decoding="async"
-						width="1900"
-						height="1418"
-						data-flow-next-image
-					/>
-				</div>
-				<div class="wepub-flow-slider-controls" aria-label="Slider controls">
-					<button class="wepub-flow-slider-arrow" type="button" aria-label="Previous slide" data-flow-control="prev">‹</button>
-					<div class="wepub-flow-slider-dots" role="tablist" aria-label="Publishing flow slides">
-						{publishingFlowSlides.map((slide, index) => (
-							<button
-								class:list={["wepub-flow-slider-dot", index === 0 && "is-active"]}
-								type="button"
-								aria-label={`Show slide ${slide.number}`}
-								aria-selected={index === 0 ? "true" : "false"}
-								data-flow-dot={index}
+		<div
+			class="wepub-flow-slider-frame"
+			data-wepub-flow-slider
+			data-slides={JSON.stringify(publishingFlowSlides)}
+		>
+			<button class="wepub-flow-slider-arrow wepub-flow-slider-arrow--prev" type="button" aria-label="Previous slide" data-flow-control="prev">‹</button>
+			<div class="wepub-flow-slider-shell">
+				<div class="wepub-flow-slider">
+					<div class="wepub-flow-top-stage" aria-hidden="true">
+						<img
+							class="wepub-flow-top-image is-current"
+							src={publishingFlowSlides[0].top}
+							alt=""
+							loading="eager"
+							decoding="async"
+							width="1900"
+							height="265"
+							data-flow-top-current-image
+						/>
+						<img
+							class="wepub-flow-top-image"
+							src={publishingFlowSlides[1].top}
+							alt=""
+							loading="lazy"
+							decoding="async"
+							width="1900"
+							height="265"
+							data-flow-top-next-image
+						/>
+					</div>
+					<div class="wepub-flow-body-window">
+						<img
+							class="wepub-flow-body-image is-current"
+							src={publishingFlowSlides[0].body}
+							alt={`WePub publishing flow screen ${publishingFlowSlides[0].number}`}
+							loading="eager"
+							decoding="async"
+							width="1900"
+							height="1104"
+							data-flow-current-image
+						/>
+						<img
+							class="wepub-flow-body-image"
+							src={publishingFlowSlides[1].body}
+							alt={`WePub publishing flow screen ${publishingFlowSlides[1].number}`}
+							loading="lazy"
+							decoding="async"
+							width="1900"
+							height="1104"
+							data-flow-next-image
+						/>
+					</div>
+					<div class="wepub-flow-preload" aria-hidden="true">
+						{publishingFlowSlides.slice(2).map((slide) => (
+							<img
+								src={slide.top}
+								alt=""
+								loading="lazy"
+								decoding="async"
+								width="1900"
+								height="265"
+							/>
+						))}
+						{publishingFlowSlides.slice(2).map((slide) => (
+							<img
+								src={slide.body}
+								alt=""
+								loading="lazy"
+								decoding="async"
+								width="1900"
+								height="1104"
 							/>
 						))}
 					</div>
-					<button class="wepub-flow-slider-arrow" type="button" aria-label="Next slide" data-flow-control="next">›</button>
-				</div>
-				<div class="wepub-flow-preload" aria-hidden="true">
-					{publishingFlowSlides.slice(1).map((slide) => (
-						<img
-							src={slide.top}
-							alt=""
-							loading="lazy"
-							decoding="async"
-							width="1900"
-							height="332"
-						/>
-					))}
-					{publishingFlowSlides.slice(2).map((slide) => (
-						<img
-							src={slide.body}
-							alt=""
-							loading="lazy"
-							decoding="async"
-							width="1900"
-							height="1418"
-						/>
-					))}
 				</div>
 			</div>
+			<button class="wepub-flow-slider-arrow wepub-flow-slider-arrow--next" type="button" aria-label="Next slide" data-flow-control="next">›</button>
 		</div>
 	</section>
 
@@ -227,7 +226,8 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		</div>
 	</Section>
 
-	<Section tone="green" class="wepub-economics-section" title="Better economics, stronger connections, longer-lasting value">
+	<Section tone="green" class="wepub-economics-section">
+		<Fragment slot="title">Better economics, stronger connections, <span class="green-heading-white">longer-lasting value</span></Fragment>
 		<CardGrid columns="3">
 			<Card title="Lower commission" body="ReaderPub uses a 5% platform commission for direct sales." />
 			<Card
@@ -259,9 +259,9 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 
 	<Section
 		tone="green"
-		title="From digital files to living web assets"
 		body="ReaderPub helps publishers transform books and knowledge publications into living web assets that remain active after release."
 		>
+			<Fragment slot="title">From digital files <span class="green-heading-white">to living web assets</span></Fragment>
 			<CardGrid columns="4">
 				<Card icon="readerBook" title="Readers" body="Continue engaging with the publication." />
 				<Card icon="author" title="Authors" body="Maintain stronger reader relationships." />
@@ -309,7 +309,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	.wepub-start-lede {
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-size: 1.125rem;
 		line-height: var(--line-height-body);
 	}
@@ -393,7 +393,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	.wepub-supporting-text {
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-size: 1.125rem;
 		line-height: var(--line-height-body);
 	}
@@ -428,14 +428,20 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	.wepub-flow-slider-section {
-		--wepub-flow-radius: min(32px, calc(var(--radius-card) * 3));
+		--wepub-flow-radius: min(16px, calc(var(--radius-card) * 1.5));
 		display: block;
 	}
 
-	.wepub-flow-slider-shell {
-		width: min(100%, calc(100vw - 48px), 1900px);
+	.wepub-flow-slider-frame {
+		position: relative;
+		width: min(80%, calc(100vw - 144px), 1900px);
 		max-width: 100%;
 		margin-inline: auto;
+	}
+
+	.wepub-flow-slider-shell {
+		width: 100%;
+		max-width: 100%;
 		overflow: hidden;
 		border-radius: var(--wepub-flow-radius);
 		background: #ffffff;
@@ -455,7 +461,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		position: relative;
 		width: 100%;
 		max-width: 100%;
-		aspect-ratio: 1900 / 332;
+		aspect-ratio: 1900 / 265;
 		overflow: hidden;
 		background: #ffffff;
 	}
@@ -467,13 +473,33 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
+		opacity: 0;
+		transition: opacity 720ms cubic-bezier(0.22, 1, 0.36, 1);
+		will-change: opacity;
+	}
+
+	.wepub-flow-top-image.is-current,
+	.wepub-flow-top-image.is-entering {
+		opacity: 1;
+	}
+
+	.wepub-flow-top-image.is-current {
+		z-index: 1;
+	}
+
+	.wepub-flow-top-image.is-entering {
+		z-index: 2;
+	}
+
+	.wepub-flow-top-image.is-resetting {
+		transition: none;
 	}
 
 	.wepub-flow-body-window {
 		position: relative;
 		width: 100%;
 		max-width: 100%;
-		aspect-ratio: 1900 / 1418;
+		aspect-ratio: 1900 / 1104;
 		overflow: hidden;
 		background: #ffffff;
 	}
@@ -491,7 +517,14 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	.wepub-flow-body-image.is-current {
+		z-index: 1;
 		transform: translateX(0);
+	}
+
+	.wepub-flow-body-image.is-entering-next,
+	.wepub-flow-body-image.is-entering-prev,
+	.wepub-flow-body-image.is-entered {
+		z-index: 2;
 	}
 
 	.wepub-flow-body-image.is-exiting-next {
@@ -518,64 +551,78 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		transition: none;
 	}
 
-	.wepub-flow-slider-controls {
-		display: grid;
-		grid-template-columns: 44px minmax(0, 1fr) 44px;
-		gap: 14px;
-		align-items: center;
-		padding: 18px clamp(18px, 3vw, 34px);
-		background: #ffffff;
-	}
-
-	.wepub-flow-slider-arrow,
-	.wepub-flow-slider-dot {
+	.wepub-flow-slider-arrow {
+		--wepub-flow-arrow-line-length: 12px;
+		--wepub-flow-arrow-line-stroke: 2px;
+		--wepub-flow-arrow-line-half-stroke: calc(var(--wepub-flow-arrow-line-stroke) / 2);
+		--wepub-flow-arrow-tip-offset: calc(var(--wepub-flow-arrow-line-length) * 0.3535533906);
 		border: 0;
 		font-family: var(--font-ui);
 		cursor: pointer;
-	}
-
-	.wepub-flow-slider-arrow {
+		position: absolute;
+		top: 50%;
+		z-index: 5;
 		display: inline-grid;
 		place-items: center;
 		width: 44px;
 		height: 44px;
 		border-radius: 999px;
-		background: var(--accent);
+		background: var(--accent-orange);
 		color: #ffffff;
-		font-size: 30px;
-		line-height: 1;
+		font-size: 0;
+		line-height: 0;
+		transform: translateY(-50%);
 		transition:
 			background var(--motion-deliberate) ease,
 			color var(--motion-deliberate) ease;
 	}
 
+	.wepub-flow-slider-arrow::before,
+	.wepub-flow-slider-arrow::after {
+		content: "";
+		position: absolute;
+		top: calc(50% - var(--wepub-flow-arrow-line-half-stroke));
+		display: block;
+		width: var(--wepub-flow-arrow-line-length);
+		height: var(--wepub-flow-arrow-line-stroke);
+		border-radius: 999px;
+		background: currentColor;
+	}
+
+	.wepub-flow-slider-arrow--prev::before,
+	.wepub-flow-slider-arrow--prev::after {
+		left: calc(50% - var(--wepub-flow-arrow-tip-offset));
+		transform-origin: 0 50%;
+	}
+
+	.wepub-flow-slider-arrow--next::before,
+	.wepub-flow-slider-arrow--next::after {
+		left: calc(50% + var(--wepub-flow-arrow-tip-offset) - var(--wepub-flow-arrow-line-length));
+		transform-origin: 100% 50%;
+	}
+
+	.wepub-flow-slider-arrow--prev::before,
+	.wepub-flow-slider-arrow--next::after {
+		transform: rotate(-45deg);
+	}
+
+	.wepub-flow-slider-arrow--prev::after,
+	.wepub-flow-slider-arrow--next::before {
+		transform: rotate(45deg);
+	}
+
+	.wepub-flow-slider-arrow--prev {
+		left: -62px;
+	}
+
+	.wepub-flow-slider-arrow--next {
+		right: -62px;
+	}
+
 	.wepub-flow-slider-arrow:hover,
 	.wepub-flow-slider-arrow:focus-visible {
-		background: var(--accent-orange);
-	}
-
-	.wepub-flow-slider-dots {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 10px;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.wepub-flow-slider-dot {
-		width: 10px;
-		height: 10px;
-		padding: 0;
-		border-radius: 999px;
-		background: rgba(0, 153, 133, 0.3);
-		transition:
-			background var(--motion-deliberate) ease,
-			transform var(--motion-deliberate) ease;
-	}
-
-	.wepub-flow-slider-dot.is-active {
-		background: var(--accent-orange);
-		transform: scale(1.35);
+		background: #ffffff !important;
+		color: var(--accent-orange);
 	}
 
 	.wepub-flow-preload {
@@ -635,16 +682,58 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 			display: contents;
 		}
 
-		.wepub-flow-slider-controls {
-			grid-template-columns: 40px minmax(0, 1fr) 40px;
-			gap: 10px;
-			padding: 14px;
+		.wepub-flow-slider-arrow {
+			--wepub-flow-arrow-line-length: 10.667px;
+			--wepub-flow-arrow-line-stroke: 2px;
+			width: 40px;
+			height: 40px;
+		}
+
+		.wepub-flow-slider-arrow--prev {
+			left: -52px;
+		}
+
+		.wepub-flow-slider-arrow--next {
+			right: -52px;
+		}
+	}
+
+	@media (orientation: portrait) {
+		.wepub-flow-slider-frame {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			justify-content: center;
+			column-gap: 12px;
+			row-gap: 12px;
+			width: 100%;
+		}
+
+		.wepub-flow-slider-shell {
+			grid-column: 1 / -1;
+			order: 1;
 		}
 
 		.wepub-flow-slider-arrow {
+			position: relative;
+			top: auto;
+			order: 2;
 			width: 40px;
 			height: 40px;
-			font-size: 26px;
+			transform: none;
+		}
+
+		.wepub-flow-slider-arrow--prev {
+			justify-self: start;
+		}
+
+		.wepub-flow-slider-arrow--next {
+			justify-self: end;
+		}
+
+		.wepub-flow-slider-arrow--prev,
+		.wepub-flow-slider-arrow--next {
+			right: auto;
+			left: auto;
 		}
 	}
 </style>
@@ -657,26 +746,77 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 			if (slider.dataset.sliderReady === "true") return;
 
 			const slides = JSON.parse(slider.dataset.slides || "[]") as Array<{ number: number; top: string; body: string }>;
-			const topImage = slider.querySelector<HTMLImageElement>("[data-flow-top-image]");
-			const currentImage = slider.querySelector<HTMLImageElement>("[data-flow-current-image]");
-			const nextImage = slider.querySelector<HTMLImageElement>("[data-flow-next-image]");
-			const dots = Array.from(slider.querySelectorAll<HTMLButtonElement>("[data-flow-dot]"));
+			const initialTopCurrentImage = slider.querySelector<HTMLImageElement>("[data-flow-top-current-image]");
+			const initialTopNextImage = slider.querySelector<HTMLImageElement>("[data-flow-top-next-image]");
+			const initialCurrentImage = slider.querySelector<HTMLImageElement>("[data-flow-current-image]");
+			const initialNextImage = slider.querySelector<HTMLImageElement>("[data-flow-next-image]");
 			const prevButton = slider.querySelector<HTMLButtonElement>('[data-flow-control="prev"]');
 			const nextButton = slider.querySelector<HTMLButtonElement>('[data-flow-control="next"]');
 			const total = slides.length;
 
-			if (!topImage || !currentImage || !nextImage || total === 0) return;
+			if (!initialTopCurrentImage || !initialTopNextImage || !initialCurrentImage || !initialNextImage || total === 0) return;
 
 			slider.dataset.sliderReady = "true";
 
+			let topCurrentImage = initialTopCurrentImage;
+			let topNextImage = initialTopNextImage;
+			let currentImage = initialCurrentImage;
+			let nextImage = initialNextImage;
 			let currentIndex = 0;
 			let targetIndex = 0;
 			let isAnimating = false;
-			let autoTimer: number | undefined;
+			let isTopAnimating = false;
 			const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-			const setTopImage = (index: number) => {
-				topImage.src = slides[index].top;
+			const resetTopStandbyImage = () => {
+				topNextImage.className = "wepub-flow-top-image is-resetting";
+				window.requestAnimationFrame(() => {
+					topNextImage.classList.remove("is-resetting");
+				});
+			};
+
+			const completeTopTransition = () => {
+				if (!isTopAnimating) return;
+				const previousTopImage = topCurrentImage;
+				topCurrentImage = topNextImage;
+				topNextImage = previousTopImage;
+				topCurrentImage.className = "wepub-flow-top-image is-current";
+				isTopAnimating = false;
+				resetTopStandbyImage();
+			};
+
+			const setTopImage = (index: number, immediate = false) => {
+				const targetSrc = slides[index].top;
+				const currentSrc = new URL(topCurrentImage.getAttribute("src") || "", window.location.href).href;
+				const targetUrl = new URL(targetSrc, window.location.href).href;
+
+				if (currentSrc === targetUrl) return;
+				if (isTopAnimating) completeTopTransition();
+
+				if (immediate || motionQuery.matches) {
+					topCurrentImage.src = targetSrc;
+					topCurrentImage.className = "wepub-flow-top-image is-resetting is-current";
+					isTopAnimating = false;
+					resetTopStandbyImage();
+					window.requestAnimationFrame(() => {
+						topCurrentImage.classList.remove("is-resetting");
+					});
+					return;
+				}
+
+				topNextImage.src = targetSrc;
+				topNextImage.className = "wepub-flow-top-image is-resetting";
+				isTopAnimating = true;
+				const revealTopImage = () => window.requestAnimationFrame(() => {
+					topCurrentImage.className = "wepub-flow-top-image";
+					topNextImage.className = "wepub-flow-top-image is-entering";
+				});
+
+				if (topNextImage.complete) {
+					revealTopImage();
+				} else {
+					topNextImage.decode().then(revealTopImage).catch(revealTopImage);
+				}
 			};
 
 			const setCurrentBodyImage = (index: number) => {
@@ -684,24 +824,16 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 				currentImage.alt = `WePub publishing flow screen ${slides[index].number}`;
 			};
 
-			const setDots = (index: number) => {
-				dots.forEach((dot, dotIndex) => {
-					const isActive = dotIndex === index;
-					dot.classList.toggle("is-active", isActive);
-					dot.setAttribute("aria-selected", isActive ? "true" : "false");
-				});
-			};
-
 			const completeTransition = () => {
-				setTopImage(targetIndex);
-				setCurrentBodyImage(targetIndex);
-				currentImage.className = "wepub-flow-body-image is-resetting is-current";
+				if (!isAnimating) return;
+				const previousCurrentImage = currentImage;
+				currentImage = nextImage;
+				nextImage = previousCurrentImage;
+				currentImage.className = "wepub-flow-body-image is-current";
 				nextImage.className = "wepub-flow-body-image is-resetting";
 				currentIndex = targetIndex;
 				isAnimating = false;
-				setDots(currentIndex);
 				window.requestAnimationFrame(() => {
-					currentImage.classList.remove("is-resetting");
 					nextImage.classList.remove("is-resetting");
 				});
 			};
@@ -714,13 +846,12 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 
 				if (immediate || motionQuery.matches) {
 					targetIndex = normalizedIndex;
-					setTopImage(targetIndex);
+					setTopImage(targetIndex, true);
 					setCurrentBodyImage(targetIndex);
 					currentImage.className = "wepub-flow-body-image is-resetting is-current";
 					nextImage.className = "wepub-flow-body-image is-resetting";
 					currentIndex = targetIndex;
 					isAnimating = false;
-					setDots(currentIndex);
 					window.requestAnimationFrame(() => {
 						currentImage.classList.remove("is-resetting");
 						nextImage.classList.remove("is-resetting");
@@ -730,7 +861,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 
 				targetIndex = normalizedIndex;
 				isAnimating = true;
-				setDots(targetIndex);
+				setTopImage(targetIndex);
 
 				nextImage.src = slides[targetIndex].body;
 				nextImage.alt = `WePub publishing flow screen ${slides[targetIndex].number}`;
@@ -744,56 +875,37 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 				});
 			};
 
-			const stopAuto = () => {
-				if (autoTimer === undefined) return;
-				window.clearInterval(autoTimer);
-				autoTimer = undefined;
-			};
-
-			const startAuto = () => {
-				if (total <= 1 || motionQuery.matches) return;
-				stopAuto();
-				autoTimer = window.setInterval(() => {
-					goTo(currentIndex + 1, false, "next");
-				}, 5200);
-			};
-
-			nextImage.addEventListener("transitionend", (event) => {
+			const handleBodyTransitionEnd = (event: TransitionEvent) => {
+				if (!isAnimating) return;
 				if (event.target !== nextImage || event.propertyName !== "transform") return;
 				completeTransition();
-			});
+			};
+
+			initialCurrentImage.addEventListener("transitionend", handleBodyTransitionEnd);
+			initialNextImage.addEventListener("transitionend", handleBodyTransitionEnd);
+
+			const handleTopTransitionEnd = (event: TransitionEvent) => {
+				if (!isTopAnimating) return;
+				if (event.target !== topNextImage || event.propertyName !== "opacity") return;
+				completeTopTransition();
+			};
+
+			initialTopCurrentImage.addEventListener("transitionend", handleTopTransitionEnd);
+			initialTopNextImage.addEventListener("transitionend", handleTopTransitionEnd);
 
 			prevButton?.addEventListener("click", () => {
-				stopAuto();
 				goTo(currentIndex - 1, false, "prev");
-				startAuto();
 			});
 
 			nextButton?.addEventListener("click", () => {
-				stopAuto();
 				goTo(currentIndex + 1, false, "next");
-				startAuto();
 			});
-
-			dots.forEach((dot, index) => {
-				dot.addEventListener("click", () => {
-					stopAuto();
-					goTo(index, false, index < currentIndex ? "prev" : "next");
-					startAuto();
-				});
-			});
-
-			slider.addEventListener("mouseenter", stopAuto);
-			slider.addEventListener("mouseleave", startAuto);
 
 			motionQuery.addEventListener("change", () => {
-				stopAuto();
 				goTo(currentIndex, true);
-				startAuto();
 			});
 
 			goTo(0, true);
-			startAuto();
 		});
 	};
 

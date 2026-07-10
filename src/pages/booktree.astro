@@ -47,20 +47,27 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		</CardGrid>
 	</Section>
 
+	<section class="section section--white booktree-solution-heading-section section-continuation">
+		<h2 class="booktree-solution-heading">
+			<em class="booktree-solution-heading-prefix">The solution:&nbsp;&nbsp;</em><ProductName name="BookTree" /> connects reading to thinking
+		</h2>
+		<p class="booktree-solution-lede">
+			<ProductName name="BookTree" /> helps readers organize books, excerpts and notes around research, writing and study.<br />
+			Instead of collecting isolated highlights, readers build structured knowledge trees that connect sources, notes, references and projects.
+		</p>
+	</section>
+
 	<Section
-		tone="white"
-		class="booktree-source-section booktree-source-solution-section section--two-column"
-		title="BookTree connects reading to thinking"
+		tone="green"
+		class="booktree-source-section booktree-source-solution-section section--two-column section-continuation"
 	>
-		<Fragment slot="body">
-			BookTree helps readers organize books, excerpts and notes around research, writing and study.<br />
-			Instead of collecting isolated highlights, readers build structured knowledge trees that connect sources, notes, references and projects.<br />
-			The focus shifts from storing information to preserving context.
-		</Fragment>
+		<h2 class="booktree-source-focus-heading">
+			The focus shifts from storing information <span class="booktree-source-focus-white">to preserving context</span>
+		</h2>
 		<div class="booktree-source-model-grid">
 			<article class="comparison-text-panel booktree-source-model-card booktree-without-card">
 				<div class="card-copy">
-					<h3>Without <ProductName name="BookTree" /></h3>
+					<h3>Without <span class="booktree-green-white">BookTree</span></h3>
 					<ul class="booktree-source-list">
 						<li>Notes remain trapped inside individual books.</li>
 						<li>Connections between sources are easy to lose.</li>
@@ -84,20 +91,23 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	</Section>
 
 	<Section
-		tone="green"
+		tone="white"
 		class="booktree-connected-section"
-		title="Knowledge should remain connected"
 		body="Organized reading creates organized knowledge. The relationships between books, references and ideas should remain visible over time."
 	>
+		<Fragment slot="title">Knowledge should remain connected</Fragment>
 		<CardGrid columns="4">
 			<Card title="Context" body="Ideas remain connected to their sources." />
 			<Card title="Continuity" body="Knowledge accumulates instead of fragmenting." />
 			<Card title="Structure" body="Projects retain relationships across many publications." />
 			<Card title="Traceability" body="References remain connected to the work they support." />
 		</CardGrid>
+	</Section>
+
+	<Section tone="green" class="booktree-connected-flow-section section-continuation">
 		<div class="booktree-connected-subsection">
 			<header class="section-header">
-				<h2>From isolated books to connected knowledge</h2>
+				<h2>From isolated books <span class="green-heading-white">to connected knowledge</span></h2>
 				<p class="section-lead">
 					The value of reading rarely comes from a single book. It comes from the relationships between books, notes, ideas and projects accumulated over time. BookTree helps preserve those relationships.
 				</p>
@@ -132,7 +142,8 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		</CardGrid>
 	</Section>
 
-	<Section tone="green" class="booktree-benefits-section" title="Who benefits from structured knowledge?">
+	<Section tone="green" class="booktree-benefits-section">
+		<Fragment slot="title">Who benefits from <span class="green-heading-white">structured knowledge</span>?</Fragment>
 		<p class="section-lead booktree-source-audience-intro">
 			BookTree is designed for people who work with ideas over months and years rather than minutes and hours.
 		</p>
@@ -175,8 +186,53 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		min-height: 0;
 	}
 
-	:global(.booktree-source-section.section--white) {
-		--section-bg: var(--surface);
+	.booktree-solution-heading-section {
+		justify-items: center;
+		margin-bottom: 0 !important;
+		padding-bottom: 0 !important;
+	}
+
+	.booktree-solution-heading {
+		width: 100%;
+		max-width: 1180px;
+		margin: 0 !important;
+		text-align: center;
+	}
+
+	.booktree-solution-heading-prefix {
+		color: var(--text);
+	}
+
+	.booktree-solution-lede {
+		justify-self: center;
+		width: min(80%, calc(var(--page-max) * 0.8));
+		max-width: 80% !important;
+		margin: 0 !important;
+		color: var(--accent-copy);
+		font-size: var(--hero-problem-copy-size);
+		line-height: var(--line-height-body);
+		text-align: left;
+	}
+
+	:global(body .page .content .section.booktree-solution-heading-section > p.booktree-solution-lede) {
+		width: min(80%, calc(var(--page-max) * 0.8)) !important;
+		max-width: 80% !important;
+	}
+
+	:global(.booktree-source-section.section--green) {
+		margin-top: calc(var(--section-padding) * 0.6) !important;
+	}
+
+	.booktree-source-focus-heading {
+		justify-self: stretch;
+		width: 100%;
+		margin: 0 !important;
+		color: var(--accent-orange) !important;
+		text-align: left;
+	}
+
+	.booktree-source-focus-white {
+		color: #ffffff !important;
 	}
 
 	.booktree-source-model-grid {
@@ -191,7 +247,16 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	}
 
 	.booktree-without-card {
-		background: var(--card-bg);
+		background: transparent;
+		color: var(--accent-orange);
+	}
+
+	.booktree-without-card h3 {
+		color: var(--accent-orange) !important;
+	}
+
+	.booktree-green-white {
+		color: #ffffff !important;
 	}
 
 	.booktree-with-card h3 span {
@@ -214,6 +279,10 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		line-height: var(--line-height-body);
 	}
 
+	.booktree-without-card .booktree-source-list li {
+		color: #ffffff;
+	}
+
 	.booktree-source-list li::before {
 		content: "";
 		position: absolute;
@@ -233,6 +302,14 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		display: grid;
 		gap: 28px;
 		margin-top: var(--section-padding);
+	}
+
+	.booktree-connected-flow-section .booktree-connected-subsection {
+		margin-top: 0;
+	}
+
+	:global(body .page .content .section.booktree-connected-flow-section.section--green) {
+		--green-section-padding-top: calc(var(--green-edge-top-inset) + clamp(28px, 3vw, 48px));
 	}
 
 	.booktree-flow-card {

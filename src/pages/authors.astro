@@ -177,9 +177,9 @@ const pageActions = [startPublishingAction, pricingAction];
 		<Section
 			tone="green"
 			class="authors-relationship-section"
-		title="Browser-readable books become active online, and create lasting relationships"
 		body="A web-native publication continues generating discovery, engagement and discussion after release. It remains part of an ongoing relationship rather than becoming a completed transaction."
 	>
+		<Fragment slot="title"><span class="green-heading-white">Browser-readable books</span> become active online, and create lasting relationships</Fragment>
 		<CardGrid columns="4">
 			<Card title="Visibility" body="Reader activity remains visible." />
 			<Card title="Engagement" body="Discussion continues after publication." />
@@ -187,7 +187,7 @@ const pageActions = [startPublishingAction, pricingAction];
 			<Card title="Continuity" body="The publication remains active over time." />
 		</CardGrid>
 			<div class="authors-beneficiaries-block">
-					<h2>Who benefits from web-native publishing?</h2>
+					<h2>Who benefits from <span class="green-heading-white">web-native publishing</span>?</h2>
 				<CardGrid columns="4">
 					<Card icon="author" title="Authors" body="Maintain stronger relationships with readers." />
 					<Card icon="readerBook" title="Readers" body="Stay connected to authors and discussion." />
@@ -261,7 +261,7 @@ const pageActions = [startPublishingAction, pricingAction];
 
 	:global(.authors-source-section) > .lede,
 	.authors-living-copy > .lede {
-		color: var(--accent);
+		color: var(--accent-copy);
 		font-size: 18px;
 		line-height: var(--line-height-body);
 	}
@@ -423,7 +423,7 @@ const pageActions = [startPublishingAction, pricingAction];
 
 	.author-benefit-lede,
 	.author-benefit-note {
-		color: var(--accent) !important;
+		color: var(--accent-copy) !important;
 	}
 
 	.author-save-highlight {

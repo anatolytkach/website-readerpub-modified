@@ -14,6 +14,10 @@ const {
 	class: className = "",
 	iconSrc,
 	iconAlt = "",
+	externalIconSrc,
+	externalIconAlt = "",
+	externalIconClass = "",
+	externalIconStyle,
 } = Astro.props;
 
 const classes = [
@@ -22,12 +26,40 @@ const classes = [
 	variant === "tertiary" && "button--tertiary",
 	className,
 ];
+
+const insideIconSrc = externalIconSrc ? undefined : iconSrc;
 ---
 
 {
-	modalTarget ? (
+	externalIconSrc ? (
+		<span class="button-action-with-icon">
+			<img
+				class:list={["button-external-icon", externalIconClass]}
+				src={externalIconSrc}
+				alt={externalIconAlt}
+				aria-hidden={externalIconAlt ? undefined : "true"}
+				style={externalIconStyle}
+			/>
+			{modalTarget ? (
+				<button class:list={classes} type="button" data-modal-open={modalTarget}>
+					{insideIconSrc && <img class="button-icon" src={insideIconSrc} alt={iconAlt} />}
+					{label}
+				</button>
+			) : (
+				<a
+					class:list={classes}
+					href={href}
+					target={external ? "_blank" : undefined}
+					rel={external ? "noopener noreferrer" : undefined}
+				>
+					{insideIconSrc && <img class="button-icon" src={insideIconSrc} alt={iconAlt} />}
+					{label}
+				</a>
+			)}
+		</span>
+	) : modalTarget ? (
 		<button class:list={classes} type="button" data-modal-open={modalTarget}>
-			{iconSrc && <img class="button-icon" src={iconSrc} alt={iconAlt} />}
+			{insideIconSrc && <img class="button-icon" src={insideIconSrc} alt={iconAlt} />}
 			{label}
 		</button>
 	) : (
@@ -37,7 +69,7 @@ const classes = [
 			target={external ? "_blank" : undefined}
 			rel={external ? "noopener noreferrer" : undefined}
 		>
-			{iconSrc && <img class="button-icon" src={iconSrc} alt={iconAlt} />}
+			{insideIconSrc && <img class="button-icon" src={insideIconSrc} alt={iconAlt} />}
 			{label}
 		</a>
 	)

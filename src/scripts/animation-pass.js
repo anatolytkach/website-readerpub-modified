@@ -673,21 +673,35 @@ const getGreenContainerCardRows = (container) => {
 	return rows.sort((a, b) => a.top - b.top);
 };
 
-const shouldRiseAsTopLowerGreenCardRow = (card) => {
+const getGreenRevealRowState = (card) => {
 	const container = getGreenRevealContainer(card);
 
-	if (!(container instanceof HTMLElement) || !isLowerGreenRevealCard(card)) {
-		return false;
+	if (!(container instanceof HTMLElement)) {
+		return undefined;
 	}
 
 	const rows = getGreenContainerCardRows(container);
 
-	if (rows.length < 2) {
-		return false;
+	if (rows.length < 1) {
+		return undefined;
 	}
 
 	const cardTop = Math.round(getNaturalRect(card).top);
-	return Math.abs(rows[0].top - cardTop) <= cardRowTopTolerance;
+	const index = rows.findIndex((row) => Math.abs(row.top - cardTop) <= cardRowTopTolerance);
+
+	return index >= 0 ? { index, count: rows.length } : undefined;
+};
+
+const shouldRiseAsNonBottomGreenCardRow = (card) => {
+	const rowState = getGreenRevealRowState(card);
+
+	return rowState ? rowState.index < rowState.count - 1 : false;
+};
+
+const shouldRiseFarAsBottomGreenCardRow = (card) => {
+	const rowState = getGreenRevealRowState(card);
+
+	return rowState ? rowState.index === rowState.count - 1 : false;
 };
 
 const isPortraitViewport = () => {
@@ -698,7 +712,17 @@ const isPortraitViewport = () => {
 
 const isWhiteBackgroundRevealCard = (card) => card instanceof HTMLElement && !getGreenRevealContainer(card);
 
-const setGoodCardRevealOffset = (card, direction) => {
+const getNonOverflowBottomRevealOffset = (card) => {
+	const rect = getNaturalRect(card);
+	const page = document.querySelector(".page");
+	const pageBottom = page instanceof HTMLElement ? page.getBoundingClientRect().bottom : document.body.getBoundingClientRect().bottom;
+	const desiredOffset = (window.innerHeight || document.documentElement.clientHeight || 1) + 48;
+	const availableOffset = pageBottom - rect.bottom - 1;
+
+	return Math.max(0, Math.min(desiredOffset, availableOffset));
+};
+
+const setGoodCardRevealOffset = (card, direction, riseDistanceMultiplier = 1) => {
 	const rect = getNaturalRect(card);
 	const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 1;
 	const gutter = 64;
@@ -710,9 +734,11 @@ const setGoodCardRevealOffset = (card, direction) => {
 				: viewportWidth + gutter - rect.left;
 	const offsetY =
 		direction === "bottom"
-			? "calc(100vh + 48px)"
+			? `${getNonOverflowBottomRevealOffset(card).toFixed(2)}px`
 			: direction === "rise"
-				? "var(--card-good-reveal-offset)"
+				? riseDistanceMultiplier === 1
+					? "var(--card-good-reveal-offset)"
+					: `calc(var(--card-good-reveal-offset) * ${riseDistanceMultiplier})`
 				: "0px";
 
 	card.setAttribute("data-card-reveal-direction", direction);
@@ -739,7 +765,7 @@ const getExplicitCardRevealDirection = (card) => {
 	}
 
 	if (getGreenRevealContainer(card)) {
-		return isLowerGreenRevealCard(card) ? "bottom" : "fade";
+		return "fade";
 	}
 
 	return isLowerGreenRevealCard(card) ? "bottom" : undefined;
@@ -748,6 +774,10 @@ const getExplicitCardRevealDirection = (card) => {
 const getPreferredCardRevealDirection = (card, preferredDirection) => {
 	if (isWhiteBackgroundRevealCard(card)) {
 		return "rise";
+	}
+
+	if (preferredDirection && getGreenRevealContainer(card)) {
+		return preferredDirection;
 	}
 
 	const declaredDirection = getDeclaredCardRevealDirection(card);
@@ -766,7 +796,7 @@ const getCardRevealOrderMode = (cards) => {
 	return mode === "inner-first" ? mode : undefined;
 };
 
-const setGoodCardRevealDirections = (cards, preferredDirection) => {
+const setGoodCardRevealDirections = (cards, preferredDirection, riseDistanceMultiplier = 1) => {
 	const goodCards = cards.filter((card) => isGoodRevealCard(card));
 
 	if (goodCards.length < 1) {
@@ -774,7 +804,11 @@ const setGoodCardRevealDirections = (cards, preferredDirection) => {
 	}
 
 	if (goodCards.length === 1) {
-		setGoodCardRevealOffset(goodCards[0], getPreferredCardRevealDirection(goodCards[0], preferredDirection) || "right");
+		setGoodCardRevealOffset(
+			goodCards[0],
+			getPreferredCardRevealDirection(goodCards[0], preferredDirection) || "right",
+			riseDistanceMultiplier,
+		);
 		return;
 	}
 
@@ -788,6 +822,7 @@ const setGoodCardRevealDirections = (cards, preferredDirection) => {
 		setGoodCardRevealOffset(
 			card,
 			getPreferredCardRevealDirection(card, preferredDirection) || (cardCenter < rowCenter ? "left" : "right"),
+			riseDistanceMultiplier,
 		);
 	}
 };
@@ -805,9 +840,11 @@ const shouldAlternateStackedRows = (rows) => {
 const setGoodCardRevealDirectionsForRows = (rows) => {
 	if (!shouldAlternateStackedRows(rows)) {
 		for (const row of rows) {
+			const shouldRiseFarRow = row.cards.some((card) => shouldRiseFarAsBottomGreenCardRow(card));
 			setGoodCardRevealDirections(
 				row.cards,
-				row.cards.some((card) => shouldRiseAsTopLowerGreenCardRow(card)) ? "rise" : undefined,
+				row.cards.some((card) => shouldRiseAsNonBottomGreenCardRow(card)) || shouldRiseFarRow ? "rise" : undefined,
+				shouldRiseFarRow ? 3 : 1,
 			);
 		}
 
@@ -818,15 +855,20 @@ const setGoodCardRevealDirectionsForRows = (rows) => {
 
 	for (const row of rows) {
 		const goodCards = row.cards.filter((card) => isGoodRevealCard(card));
-		const shouldRiseRow = row.cards.some((card) => shouldRiseAsTopLowerGreenCardRow(card));
+		const shouldRiseRow = row.cards.some((card) => shouldRiseAsNonBottomGreenCardRow(card));
+		const shouldRiseFarRow = row.cards.some((card) => shouldRiseFarAsBottomGreenCardRow(card));
 
 		if (goodCards.length !== 1) {
-			setGoodCardRevealDirections(row.cards, shouldRiseRow ? "rise" : undefined);
+			setGoodCardRevealDirections(row.cards, shouldRiseRow || shouldRiseFarRow ? "rise" : undefined, shouldRiseFarRow ? 3 : 1);
 			continue;
 		}
 
-		if (shouldRiseRow) {
-			setGoodCardRevealOffset(goodCards[0], getPreferredCardRevealDirection(goodCards[0], "rise") || "rise");
+		if (shouldRiseRow || shouldRiseFarRow) {
+			setGoodCardRevealOffset(
+				goodCards[0],
+				getPreferredCardRevealDirection(goodCards[0], "rise") || "rise",
+				shouldRiseFarRow ? 3 : 1,
+			);
 			goodCardIndex += 1;
 			continue;
 		}

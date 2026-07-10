@@ -149,7 +149,7 @@ const ctaActions = [
 
 	<section class="section section--green institutions-publisher-intro institutions-benefits-section section--two-column section-continuation">
 		<div class="institutions-publisher-copy">
-			<h2>Publish on the web without losing control. Keep your audience.</h2>
+			<h2>Publish on the web without losing control. <span class="green-heading-white">Keep your audience</span>.</h2>
 			<p class="lede institutions-publisher-lede">
 				Launch catalogs, excerpts, and controlled reading programs on a public platform built for discovery — with secure, account-based access and a delivery model designed to reduce file leakage risk.
 			</p>
@@ -336,7 +336,8 @@ const ctaActions = [
 		</CardGrid>
 	</Section>
 
-	<Section tone="green" title="Who benefits from web-native institutional publishing?">
+	<Section tone="green">
+		<Fragment slot="title">Who benefits from <span class="green-heading-white">web-native institutional publishing</span>?</Fragment>
 		<CardGrid columns="2" class="institutions-benefit-grid">
 			{benefitCards.map((card) => <Card {...card} />)}
 		</CardGrid>
@@ -369,7 +370,7 @@ const ctaActions = [
 	}
 
 	:global(.network-hero-lede) {
-		color: var(--accent) !important;
+		color: var(--accent-copy) !important;
 		font-size: 19.5px !important;
 		line-height: var(--line-height-body) !important;
 		margin: 0;
