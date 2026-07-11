@@ -65,9 +65,9 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	<section class="section section--white home-tech-heading-section" aria-labelledby="home-tech-title">
 		<h2 id="home-tech-title" class="home-tech-title">
-			<span class="home-tech-title-line home-tech-title-line-primary"><span class="home-tech-title-prefix">The solution:&nbsp;&nbsp;</span><span class="home-tech-title-readerpub" style="color: var(--accent);"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span></span>
-			<span class="home-tech-title-line home-tech-title-line-solution">Browser-based eReader <span class="home-tech-title-plus">+</span> web-native publishing network.</span>
+			<span class="home-tech-title-line home-tech-title-line-primary"><span class="home-tech-title-prefix">The solution:</span><span class="home-tech-title-readerpub" style="color: var(--accent);"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span></span>
 		</h2>
+		<h3 class="home-tech-title-line home-tech-title-line-solution">Browser-based eReader <span class="home-tech-title-plus">+</span> web-native publishing network.</h3>
 		<div class="home-reader-frame" data-video-player>
 			<a class="home-reader-video-link" href="https://reader.pub/books/reader/?id=90000120" target="_blank" rel="noopener noreferrer" aria-label="Open Treasure Island in WeRead">
 				<video
@@ -84,8 +84,8 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			</button>
 		</div>
 		<div class="home-tech-reader-cta">
-			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2">Guess what? It’s not an app. It is <span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
-			<h2 class="home-tech-reader-subtitle heading--center-full heading--center-full-h2">Read this thrilling story along with...</h2>
+			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2"><em class="home-tech-guess">Guess what<span class="home-tech-guess-question">?</span></em>It’s not an app. It is <span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
+			<h3 class="home-tech-reader-subtitle">Read this thrilling story along with...</h3>
 			<div class="home-tech-reader-actions">
 				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">60K+ books in WeRead</a>
 				<span class="home-tech-reader-actions-separator">or</span>
@@ -342,7 +342,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	:global(.home-tech-heading-section) {
-		gap: 34px;
+		gap: 0;
 		justify-items: center;
 		padding-top: calc(var(--section-padding) * 0.8);
 		padding-bottom: var(--section-padding);
@@ -357,7 +357,8 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		margin-top: calc(var(--section-stack-gap) * 0.8);
 	}
 
-	:global(body .page .content > .home-tech-heading-section + .home-tech-visual-section) {
+	:global(body .page .content > .home-tech-heading-section + .home-tech-visual-section),
+	:global(body .page .content > .home-tech-heading-section + script + .home-tech-visual-section) {
 		margin-top: var(--section-stack-gap) !important;
 	}
 
@@ -378,6 +379,12 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		font-style: italic;
 	}
 
+	.home-tech-title-prefix::after {
+		content: "";
+		display: inline-block;
+		width: 0.58em;
+	}
+
 	.home-tech-title-line {
 		display: block;
 		margin: 0;
@@ -395,11 +402,15 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	.home-tech-title-line-solution {
+		justify-self: stretch;
+		width: 100%;
+		margin-top: clamp(10px, 1vw, 16px);
 		color: var(--accent);
 		font-family: var(--font-heading);
-		font-size: inherit;
+		font-size: var(--card-heading-font-size);
 		font-weight: var(--font-weight-heading);
-		line-height: var(--line-height-heading);
+		line-height: var(--card-heading-line-height);
+		text-align: center;
 		white-space: nowrap;
 	}
 
@@ -453,6 +464,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		position: relative;
 		justify-self: stretch;
 		width: 100%;
+		margin-top: 34px;
 		aspect-ratio: 1272 / 798;
 		height: auto;
 		overflow: hidden;
@@ -491,12 +503,12 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		left: 50%;
 		display: grid;
 		place-items: center;
-		width: clamp(56px, 6vw, 86px);
+		width: clamp(37px, 4vw, 57px);
 		aspect-ratio: 1;
 		border: 0;
 		border-radius: 999px;
 		background: var(--accent-orange);
-		box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+		box-shadow: 0 7px 16px rgba(15, 23, 42, 0.18);
 		cursor: pointer;
 		opacity: 0;
 		pointer-events: none;
@@ -519,7 +531,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		border-top: 0.42em solid transparent;
 		border-bottom: 0.42em solid transparent;
 		border-left: 0.64em solid #ffffff;
-		font-size: clamp(30px, 3.1vw, 44px);
+		font-size: clamp(20px, 2.07vw, 29px);
 	}
 
 	.home-reader-frame--show-play .home-reader-play-button {
@@ -546,6 +558,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		gap: clamp(10px, 1vw, 16px);
 		justify-self: stretch;
 		width: 100%;
+		margin-top: 34px;
 	}
 
 	.home-tech-visual-title {
@@ -554,9 +567,26 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		text-align: center;
 	}
 
+	.home-tech-guess {
+		display: inline-block;
+		margin-right: 0.58em;
+		font-style: italic !important;
+		transform: skew(-8deg);
+		transform-origin: center;
+	}
+
+	.home-tech-guess-question {
+		color: var(--accent-orange) !important;
+	}
+
 	.home-tech-reader-subtitle {
+		justify-self: stretch;
+		width: 100%;
 		margin: 0;
 		color: var(--accent) !important;
+		font-size: var(--card-heading-font-size);
+		line-height: var(--card-heading-line-height);
+		text-align: center;
 	}
 
 	.home-tech-reader-actions {
@@ -871,6 +901,15 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			max-width: 100vw !important;
 			margin-right: 0 !important;
 			margin-left: 0 !important;
+			padding-right: calc(var(--section-padding) * 0.5);
+			padding-left: calc(var(--section-padding) * 0.5);
+		}
+
+		.home-tech-title-line-solution {
+			order: 1 !important;
+			box-sizing: border-box;
+			width: 100vw !important;
+			max-width: 100vw !important;
 			padding-right: calc(var(--section-padding) * 0.5);
 			padding-left: calc(var(--section-padding) * 0.5);
 		}

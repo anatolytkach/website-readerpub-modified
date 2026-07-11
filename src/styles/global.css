@@ -930,7 +930,7 @@ body .page .content .institutions-expanded-access-grid {
 }
 
 .section--dark :is(.cta-block-copy > p, .section-lead) {
-	color: #02ad9b;
+	color: #02cdb8;
 }
 
 .section {
@@ -1096,6 +1096,10 @@ h3.heading--center-full,
 .home-cta-body-accent {
 	color: var(--accent-orange) !important;
 	font-weight: inherit !important;
+}
+
+.cta-block.section--dark .home-cta-body-accent {
+	color: #ff8441 !important;
 }
 
 .section.section--green
