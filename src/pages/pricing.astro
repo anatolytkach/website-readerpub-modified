@@ -246,6 +246,11 @@ const ctaActions = [
 
 	:global(.pricing-hero .pricing-hero-paths-title) {
 		color: var(--accent);
+		font-family: var(--font-heading);
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
 	}
 
 	.pricing-hero-paths-list {
@@ -283,9 +288,6 @@ const ctaActions = [
 			width: 100%;
 		}
 
-		:global(.pricing-hero .pricing-hero-paths-title) {
-			white-space: nowrap;
-		}
 	}
 
 	.pricing-copy-stack p {
