@@ -1809,10 +1809,10 @@ h3.heading--center-full,
 }
 
 .site-footer .site-footer-meta {
-	color: var(--muted);
+	color: var(--text);
 }
 
-.site-footer .site-footer-meta-accent {
+.site-footer .site-footer-meta-separator {
 	color: var(--accent-orange);
 }
 
