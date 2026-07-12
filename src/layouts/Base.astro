@@ -9,6 +9,8 @@ const {
 	title = `${SITE_NAME} - Web-Native Publishing Network`,
 	description = `${SITE_NAME} is a web-native publishing network for readers, authors, publishers and institutions.`,
 	canonical,
+	ogTitle,
+	ogDescription,
 } = Astro.props;
 
 const canonicalUrl = canonical
@@ -33,6 +35,8 @@ const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		{ogTitle && <meta property="og:title" content={ogTitle} />}
+		{ogDescription && <meta property="og:description" content={ogDescription} />}
 		<meta name="application-name" content={SITE_NAME} />
 		<meta name="author" content={SITE_NAME} />
 		<meta name="hostname" content={SITE_DOMAIN} />

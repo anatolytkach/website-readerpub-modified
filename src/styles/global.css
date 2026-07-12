@@ -488,7 +488,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	transform: translate(-50%, 0);
 }
 
-.nav-dropdown.nav-dropdown--dismissed .nav-dropdown-menu {
+.nav-dropdown.nav-dropdown--dismissed:not(:hover):not(:focus-within):not(.nav-dropdown--open) .nav-dropdown-menu {
 	opacity: 0;
 	pointer-events: none;
 	transform: translate(-50%, -6px);

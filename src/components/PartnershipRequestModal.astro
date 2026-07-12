@@ -1,0 +1,273 @@
+<div class="partnership-request-modal" id="partnership-request-modal" aria-hidden="true">
+	<div class="partnership-request-modal-backdrop" data-partnership-modal-close></div>
+	<div class="partnership-request-modal-content" role="dialog" aria-modal="true" aria-labelledby="partnership-request-modal-title">
+		<button class="partnership-request-modal-close" type="button" aria-label="Close" data-partnership-modal-close>x</button>
+		<div class="partnership-request-modal-inner">
+			<h3 id="partnership-request-modal-title">Request for Partnership</h3>
+			<form class="partnership-request-form" method="POST" action="/api/onboarding">
+				<label for="partnership-your-name">Your name</label>
+				<input id="partnership-your-name" name="your_name" type="text" autocomplete="name" required />
+
+				<label for="partnership-email">Email</label>
+				<input id="partnership-email" name="email" type="email" autocomplete="email" required />
+
+				<label for="partnership-organization">Organization</label>
+				<input id="partnership-organization" name="organization" type="text" autocomplete="organization" />
+
+				<label for="partnership-category">What are you interested in?</label>
+				<select id="partnership-category" name="category" required>
+					<option value="">Select one</option>
+					<option value="Strategic partnership">Strategic partnership</option>
+					<option value="Investment opportunity">Investment opportunity</option>
+				</select>
+
+				<label for="partnership-notes">Describe your expectations</label>
+				<textarea id="partnership-notes" name="notes" rows="4"></textarea>
+
+				<p class="partnership-request-form-error" hidden></p>
+
+				<div class="cta-row partnership-request-modal-actions">
+					<button class="button" type="submit">Send a message</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	const setupPartnershipRequestModal = () => {
+		const modal = document.querySelector("#partnership-request-modal");
+		const form = document.querySelector(".partnership-request-form");
+
+		if (!modal || !form || modal.getAttribute("data-partnership-modal-ready") === "true") {
+			return;
+		}
+
+		modal.setAttribute("data-partnership-modal-ready", "true");
+
+		const openButtons = Array.from(document.querySelectorAll('[data-modal-open="#partnership-request-modal"]'));
+		const formError = form.querySelector(".partnership-request-form-error");
+		const submitButton = form.querySelector('button[type="submit"]');
+		const firstInput = form.querySelector("#partnership-your-name");
+		let lastTrigger = null;
+
+		const closeModal = () => {
+			modal.classList.remove("is-open");
+			modal.setAttribute("aria-hidden", "true");
+			lastTrigger?.focus();
+		};
+
+		const openModal = (trigger) => {
+			lastTrigger = trigger;
+			modal.classList.add("is-open");
+			modal.setAttribute("aria-hidden", "false");
+			window.requestAnimationFrame(() => firstInput?.focus());
+		};
+
+		const clearError = () => {
+			if (formError) {
+				formError.textContent = "";
+				formError.hidden = true;
+			}
+		};
+
+		closeModal();
+
+		openButtons.forEach((button) => {
+			button.addEventListener("click", (event) => {
+				event.preventDefault();
+				clearError();
+				openModal(button);
+			});
+		});
+
+		modal.querySelectorAll("[data-partnership-modal-close]").forEach((button) => {
+			button.addEventListener("click", closeModal);
+		});
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+
+			const formData = new FormData(form);
+			const action = form.getAttribute("action");
+			const originalButtonText = submitButton?.textContent || "";
+
+			clearError();
+			if (submitButton) {
+				submitButton.disabled = true;
+				submitButton.textContent = "Sending...";
+			}
+
+			try {
+				if (!action) {
+					throw new Error("The request endpoint is not configured.");
+				}
+
+				const response = await fetch(action, {
+					method: "POST",
+					body: formData,
+					headers: { Accept: "application/json" },
+				});
+				const payload = await response.json().catch(() => null);
+
+				if (!response.ok || !payload?.ok) {
+					throw new Error(payload?.error || "Could not submit. Try again.");
+				}
+
+				form.reset();
+				closeModal();
+				alert("Thank you, your message has been sent. We will get back to you soon.");
+			} catch (error) {
+				if (formError) {
+					formError.textContent = error instanceof Error ? error.message : "Could not submit. Try again.";
+					formError.hidden = false;
+				}
+			} finally {
+				if (submitButton) {
+					submitButton.disabled = false;
+					submitButton.textContent = originalButtonText;
+				}
+			}
+		});
+
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && modal.classList.contains("is-open")) {
+				closeModal();
+			}
+		});
+	};
+
+	setupPartnershipRequestModal();
+	document.addEventListener("astro:page-load", setupPartnershipRequestModal);
+</script>
+
+<style>
+	.partnership-request-modal {
+		position: fixed;
+		inset: 0;
+		z-index: 1100;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		padding: 24px;
+	}
+
+	.partnership-request-modal.is-open {
+		display: flex;
+	}
+
+	.partnership-request-modal-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(20, 23, 31, 0.35);
+	}
+
+	.partnership-request-modal-content {
+		position: relative;
+		z-index: 1;
+		width: min(520px, calc(100vw - 32px));
+		max-height: calc(100dvh - 48px);
+		padding: 40px;
+		overflow: auto;
+		border: 1px solid var(--border);
+		border-radius: 16px;
+		background: var(--card-bg);
+		box-shadow: 0 24px 70px rgba(20, 23, 31, 0.22);
+	}
+
+	.partnership-request-modal-close {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 1;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		padding: 0;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		background: #ffffff;
+		color: var(--text);
+		font: inherit;
+		font-size: 20px;
+		line-height: 1;
+		box-shadow: 0 8px 20px rgba(20, 23, 31, 0.15);
+		cursor: pointer;
+	}
+
+	.partnership-request-modal-inner {
+		display: grid;
+		gap: 18px;
+	}
+
+	.partnership-request-modal-inner h3 {
+		margin: 0;
+		text-align: center;
+	}
+
+	.partnership-request-form {
+		display: grid;
+		gap: 10px;
+	}
+
+	.partnership-request-form label {
+		color: var(--text);
+		font-size: 15px;
+		font-weight: 700;
+	}
+
+	.partnership-request-form input,
+	.partnership-request-form select,
+	.partnership-request-form textarea {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 12px 14px;
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		background: #ffffff;
+		color: var(--text);
+		font: inherit;
+	}
+
+	.partnership-request-form textarea {
+		min-height: 120px;
+		resize: vertical;
+	}
+
+	.partnership-request-form input:focus,
+	.partnership-request-form select:focus,
+	.partnership-request-form textarea:focus {
+		border-color: var(--accent);
+		box-shadow: 0 0 0 3px rgba(2, 143, 128, 0.12);
+		outline: none;
+	}
+
+	.partnership-request-form-error {
+		margin: 0;
+		color: #b42318;
+		font-size: 14px;
+	}
+
+	.partnership-request-modal-actions {
+		margin-top: 8px;
+	}
+
+	.partnership-request-form .button:disabled {
+		opacity: 0.68;
+		cursor: progress;
+	}
+
+	@media (max-width: 640px) {
+		.partnership-request-modal {
+			padding: 16px;
+		}
+
+		.partnership-request-modal-content {
+			width: min(520px, calc(100vw - 32px));
+			max-height: calc(100dvh - 32px);
+			padding: 34px 22px 24px;
+		}
+	}
+</style>

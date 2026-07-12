@@ -3,24 +3,28 @@ import { PUBLISH_URL, SITE_NAME } from "../consts";
 
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isActive = (href: string) => pathname === href;
-const solutionLinks = [
-	{ href: "/platform", label: "Platform" },
+const platformLinks = [
+	{ href: "/platform", label: "Ecosystem" },
 	{ href: "/wepub", label: "WePub" },
 	{ href: "/weread", label: "WeRead" },
 	{ href: "/webuzz", label: "WeBuzz" },
 	{ href: "/wetalk", label: "WeTalk" },
 	{ href: "/booktree", label: "BookTree" },
 	{ href: "/scribe", label: "Scribe" },
+	{ href: "/security", label: "Security" },
+];
+const solutionLinks = [
+	{ href: "/weread", label: "Readers" },
+	{ href: "/authors", label: "Publishers" },
+	{ href: "/institutions", label: "Institutions" },
 ];
 const primaryLinks = [
-	{ href: "/weread", label: "Readers" },
-	{ href: "/authors", label: "Authors" },
-	{ href: "/institutions", label: "Institutions" },
-	{ href: "/security", label: "Security" },
 	{ href: "/pricing", label: "Pricing" },
+	{ href: "/growth", label: "Growth" },
 	{ href: "/about", label: "About" },
 ];
 const hasActivePrimaryLink = primaryLinks.some((link) => isActive(link.href));
+const isPlatformActive = !hasActivePrimaryLink && platformLinks.some((link) => isActive(link.href));
 const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => isActive(link.href));
 ---
 
@@ -31,13 +35,20 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 	</div>
 
 	<ul class="nav-links">
-		{primaryLinks.slice(0, 3).map((link) => (
-			<li>
-				<a href={link.href} class:list={[isActive(link.href) && "is-active"]} aria-current={isActive(link.href) ? "page" : undefined}>
-					{link.label}
-				</a>
-			</li>
-		))}
+		<li class:list={["nav-dropdown", isPlatformActive && "nav-dropdown--active"]}>
+			<button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-current={isPlatformActive ? "page" : undefined}>
+				Platform
+			</button>
+			<ul class="nav-dropdown-menu">
+				{platformLinks.map((link) => (
+					<li>
+						<a href={link.href} class:list={[isActive(link.href) && "is-active"]} aria-current={isActive(link.href) ? "page" : undefined}>
+							{link.label}
+						</a>
+					</li>
+				))}
+			</ul>
+		</li>
 		<li class:list={["nav-dropdown", isSolutionActive && "nav-dropdown--active"]}>
 			<button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-current={isSolutionActive ? "page" : undefined}>
 				Solution
@@ -52,7 +63,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 				))}
 			</ul>
 		</li>
-		{primaryLinks.slice(3).map((link) => (
+		{primaryLinks.map((link) => (
 			<li>
 				<a href={link.href} class:list={[isActive(link.href) && "is-active"]} aria-current={isActive(link.href) ? "page" : undefined}>
 					{link.label}
@@ -81,9 +92,14 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 		</button>
 	</div>
 	<ul class="nav-overlay-links">
-		{primaryLinks.slice(0, 3).map((link) => (
-			<li><a href={link.href} class:list={[isActive(link.href) && "is-active"]}>{link.label}</a></li>
-		))}
+		<li class="nav-overlay-group">
+			<span>Platform</span>
+			<ul>
+				{platformLinks.map((link) => (
+					<li><a href={link.href} class:list={[isActive(link.href) && "is-active"]}>{link.label}</a></li>
+				))}
+			</ul>
+		</li>
 		<li class="nav-overlay-group">
 			<span>Solution</span>
 			<ul>
@@ -92,7 +108,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 				))}
 			</ul>
 		</li>
-		{primaryLinks.slice(3).map((link) => (
+		{primaryLinks.map((link) => (
 			<li><a href={link.href} class:list={[isActive(link.href) && "is-active"]}>{link.label}</a></li>
 		))}
 		<li class="nav-overlay-divider" aria-hidden="true"></li>
@@ -166,8 +182,6 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 			const toggle = document.querySelector(".nav-toggle");
 			const overlay = document.querySelector(".nav-overlay");
 			const close = document.querySelector(".nav-close");
-			const dropdownToggle = document.querySelector(".nav-dropdown-toggle");
-			const dropdown = document.querySelector(".nav-dropdown");
 
 			if (toggle && toggle.getAttribute("data-nav-ready") !== "true") {
 				toggle.setAttribute("data-nav-ready", "true");
@@ -191,12 +205,21 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 				});
 			}
 
-			if (dropdownToggle && dropdownToggle.getAttribute("data-nav-ready") !== "true") {
+			for (const dropdownToggle of document.querySelectorAll(".nav-dropdown-toggle")) {
+				const dropdown = dropdownToggle.closest(".nav-dropdown");
+
+				if (dropdownToggle.getAttribute("data-nav-ready") === "true") continue;
+
 				dropdownToggle.setAttribute("data-nav-ready", "true");
 				dropdownToggle.addEventListener("click", () => {
+					const shouldOpen = !dropdown?.classList.contains("nav-dropdown--open");
+
+					closeDropdown();
+					if (!shouldOpen) return;
+
 					dropdown?.classList.remove("nav-dropdown--dismissed");
-					const isOpen = dropdown?.classList.toggle("nav-dropdown--open");
-					dropdownToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+					dropdown?.classList.add("nav-dropdown--open");
+					dropdownToggle.setAttribute("aria-expanded", "true");
 				});
 			}
 
