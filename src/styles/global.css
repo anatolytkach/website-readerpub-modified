@@ -440,16 +440,6 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	position: relative;
 }
 
-.nav-dropdown::after {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	width: 190px;
-	height: 12px;
-	transform: translateX(-50%);
-}
-
 .nav-dropdown-toggle::after {
 	content: "";
 	width: 6px;
@@ -461,7 +451,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 
 .nav-dropdown-menu {
 	position: absolute;
-	top: calc(100% + 8px);
+	top: 100%;
 	left: 50%;
 	z-index: 950;
 	display: grid;
@@ -474,6 +464,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	border-radius: 0;
 	background: var(--surface);
 	box-shadow: var(--shadow-soft);
+	visibility: hidden;
 	opacity: 0;
 	pointer-events: none;
 	transform: translate(-50%, -6px);
@@ -483,12 +474,14 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 .nav-dropdown:hover .nav-dropdown-menu,
 .nav-dropdown:focus-within .nav-dropdown-menu,
 .nav-dropdown.nav-dropdown--open .nav-dropdown-menu {
+	visibility: visible;
 	opacity: 1;
 	pointer-events: auto;
 	transform: translate(-50%, 0);
 }
 
 .nav-dropdown.nav-dropdown--dismissed:not(:hover):not(:focus-within):not(.nav-dropdown--open) .nav-dropdown-menu {
+	visibility: hidden;
 	opacity: 0;
 	pointer-events: none;
 	transform: translate(-50%, -6px);
