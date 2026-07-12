@@ -11,15 +11,43 @@ const {
 	canonical,
 	ogTitle,
 	ogDescription,
+	ogImage = "/images/tech.webp",
 } = Astro.props;
 
+const siteUrl = `https://${SITE_DOMAIN}`;
 const canonicalUrl = canonical
 	? canonical.startsWith("http")
 		? canonical
-		: `https://${SITE_DOMAIN}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
-	: undefined;
+		: `${siteUrl}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
+	: `${siteUrl}${Astro.url.pathname}`;
+const resolvedOgTitle = ogTitle || title;
+const resolvedOgDescription = ogDescription || description;
+const resolvedOgImage = ogImage.startsWith("http")
+	? ogImage
+	: `${siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`;
 const routeSlug = Astro.url.pathname.replace(/^\/+|\/+$/g, "").split("/")[0] || "home";
 const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`;
+const homeStructuredData =
+	routeSlug === "home"
+		? {
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "WebSite",
+						name: SITE_NAME,
+						url: siteUrl,
+						inLanguage: "en",
+					},
+					{
+						"@type": "Organization",
+						name: SITE_NAME,
+						url: siteUrl,
+						logo: `${siteUrl}/images/logo.svg`,
+					},
+				],
+			}
+		: undefined;
+const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructuredData).replace(/</g, "\\u003c") : undefined;
 ---
 
 <html lang="en" class="no-js">
@@ -35,12 +63,21 @@ const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		{ogTitle && <meta property="og:title" content={ogTitle} />}
-		{ogDescription && <meta property="og:description" content={ogDescription} />}
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:title" content={resolvedOgTitle} />
+		<meta property="og:description" content={resolvedOgDescription} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={resolvedOgImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={resolvedOgTitle} />
+		<meta name="twitter:description" content={resolvedOgDescription} />
+		<meta name="twitter:image" content={resolvedOgImage} />
 		<meta name="application-name" content={SITE_NAME} />
 		<meta name="author" content={SITE_NAME} />
 		<meta name="hostname" content={SITE_DOMAIN} />
-		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		<link rel="canonical" href={canonicalUrl} />
+		{homeStructuredDataJson && <script type="application/ld+json" set:html={homeStructuredDataJson} />}
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
