@@ -31,7 +31,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 	</HeroSection>
 
 	<section class="section section--green contact-tips-section section--two-column" aria-labelledby="contact-tips-heading">
-		<h2 id="contact-tips-heading">Useful tips:</h2>
+		<h2 id="contact-tips-heading">Useful tips<span class="contact-tips-colon">:</span></h2>
 
 		<div class="contact-tips-grid">
 			<article class="card contact-tip-card">
@@ -398,6 +398,10 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 
 	.contact-tips-section h2 {
 		margin: 0;
+	}
+
+	.contact-tips-colon {
+		color: #ffffff;
 	}
 
 	.contact-tips-grid {

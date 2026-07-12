@@ -269,7 +269,8 @@ const finalCtaActions = [
 		<p class="growth-section-note">As adoption grows across one segment, the same foundation can support expansion into others.</p>
 	</Section>
 
-	<Section tone="green" class="growth-timing-section" title="Why now?">
+	<Section tone="green" class="growth-timing-section">
+		<Fragment slot="title">Why now<span class="growth-timing-heading-question">?</span></Fragment>
 		<CardGrid columns="2" class="growth-timing-grid">
 			{timingCards.map((card) => <Card {...card} />)}
 		</CardGrid>
@@ -558,6 +559,10 @@ const finalCtaActions = [
 
 	:global(.growth-final-cta-body-second-sentence) {
 		color: #ffffff !important;
+	}
+
+	.growth-timing-heading-question {
+		color: #ffffff;
 	}
 
 	@media (max-width: 1100px) {
