@@ -5,12 +5,13 @@ import CardGrid from "../components/CardGrid.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
+import SpecCardsSection from "../components/sections/SpecCardsSection.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import ProductName from "../components/ProductName.astro";
 import { PUBLISH_URL, SITE_NAME } from "../consts";
 
-const publishAction = { label: "Publish with WePub", href: PUBLISH_URL, external: true };
 const pricingAction = { label: "See pricing", href: "/pricing", variant: "secondary" as const };
+const finalPublishAction = { label: "Start publishing with WePub", href: PUBLISH_URL, external: true };
 const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	const number = index + 1;
 
@@ -23,46 +24,86 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 ---
 
 <Base
-	title={`WePub | ${SITE_NAME}`}
-	description="WePub helps authors and publishers create browser-readable books that remain connected to readers, discussion and discovery after release."
+	title={`WePub for Authors & Publishers | ${SITE_NAME}`}
+	description="Publish browser-readable books, sell directly, keep reader relationships connected and build long-term value with ReaderPub's web-native publishing infrastructure."
+	canonical="/wepub"
+	ogImage="/images/author1.webp"
 >
 	<HeroSection
-		eyebrow="WePub"
-		lead="Most publishing systems are built to distribute files through marketplaces, surrendering the book audience to the marketplace."
-		image="/images/wepub.webp"
-		imageAlt="WePub publishing workflow from manuscript to live book"
-		actions={[publishAction, pricingAction]}
-		spacerBackgroundPositionY="18%"
+		class="wepub-new-hero"
+		image="/images/author1.webp"
+		imageAlt="Author publishing on the web and staying connected to readers"
+		spacerBackgroundPositionY="54%"
 	>
-		<Fragment slot="title"><span style="color: var(--accent);">We<span class="hero-product-part-accent">Pub</span><span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">Publish to readers, you never lose.</span></Fragment>
-		<Fragment slot="body">ReaderPub turns books into living web assets: readable, searchable, discussable and connected, so authors and publishers achieve strategic distribution.</Fragment>
+		<Fragment slot="title"><span style="color: var(--accent);">We<span class="hero-product-part-accent">Pub</span><span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">You should own your readers' activity, not Amazon.</span></Fragment>
+		<Fragment slot="lead">Authors create audiences. Marketplaces own them, and charge up to <strong>35%</strong> platform fee.</Fragment>
+		<Fragment slot="body">We build your direct, long-term relationships with readers...</Fragment>
+		<p class="authors-hero-fee-line">...while charging you just <strong class="authors-hero-fee">5%</strong> sales commission.</p>
+		<div class="cta-row">
+			<a class="button" href="/wepub">Start publishing</a>
+			<a class="button button--secondary" href="/pricing">See pricing</a>
+			<a class="button button--secondary author-protection-button" href="/security#control-who-reads">
+				<span class="author-protection-button-label">We protect your book</span>
+				<span class="author-protection-icon" aria-hidden="true">
+					<SectionIcon type="security" title="Protection icon" />
+				</span>
+			</a>
+		</div>
 	</HeroSection>
 
-	<Section
-		tone="gray"
-		class="wepub-old-model-section"
-		body="A file-based model can distribute a book, but it usually separates the author from the reader."
-	>
-		<Fragment slot="title"><span class="section-title-rest">The old model</span> <span class="section-title-accent">just creates book files for download</span></Fragment>
-		<CardGrid columns="2">
-			<Card
-				title="Problem"
-				body="Books are packaged as files and handed to marketplaces that own discovery, customer access and most of the data."
-			/>
-			<Card
-				title="Why it fails"
-				body="The sale ends the relationship. The author gets distribution, but the platform keeps the audience."
-			/>
-		</CardGrid>
-	</Section>
+	<section class="section section--gray wepub-new-old-model-section">
+		<section class="wepub-new-source-gray-block wepub-new-source-wepub-block">
+			<header class="section-header">
+				<h2><span class="section-title-rest">The old publishing model</span> <span class="section-title-accent">creates files, not lasting reader relationships</span></h2>
+				<p class="section-lead">Current publishing systems are built to distribute files through marketplaces, surrendering the relationship between authors and readers.</p>
+			</header>
+			<CardGrid columns="2">
+				<Card
+					title="Problem"
+					body="Books are packaged as files and handed to marketplaces that own discovery, customer access and most of the data."
+				/>
+				<Card
+					title="Why it fails"
+					body="The sale ends the relationship. The author gets distribution, but the platform keeps the audience."
+				/>
+			</CardGrid>
+		</section>
 
-	<Section
-		tone="white"
-		class="wepub-solution-section"
-	>
-		<Fragment slot="title"><em class="wepub-solution-title-prefix">The solution:</em><ProductName name="WePub" /> builds direct web presence</Fragment>
-		<h3 class="wepub-solution-lede">WePub treats a book as a web publication that can be read, found, discussed and connected to the author over time.</h3>
-		<CardGrid columns="3" class="wepub-source-icon-grid">
+		<section class="wepub-new-source-gray-block wepub-new-source-authors-block">
+			<header class="section-header">
+				<h2><span class="section-title-accent">What</span> <span class="section-title-rest">authors lose today</span></h2>
+				<p class="section-lead">The dominant publishing model gives authors distribution, but takes away the relationship.</p>
+			</header>
+			<div class="card-grid wepub-new-source-authors-loss-grid">
+				<div class="card">
+					<h3>Audience ownership</h3>
+					<p>You sell books. The platform owns the customer.</p>
+				</div>
+				<div class="card">
+					<h3>Reader relationships</h3>
+					<p>You rarely know who your readers are, what they finish, what they discuss or what brings them back.</p>
+				</div>
+				<div class="card">
+					<h3>Community</h3>
+					<p>Discussion happens somewhere else, disconnected from your book and your author presence.</p>
+				</div>
+				<div class="card">
+					<h3>Economics</h3>
+					<p>High commissions and marketplace dependency reduce author control.</p>
+				</div>
+				<div class="card">
+					<h3>Context</h3>
+					<p>Reader reactions disappear into reviews, star ratings and external social feeds.</p>
+				</div>
+			</div>
+		</section>
+
+	</section>
+
+	<Section tone="white" class="wepub-new-source-solution-section">
+		<Fragment slot="title"><em class="wepub-new-source-solution-title-prefix">The solution:</em><ProductName name="WePub" /> builds direct web presence</Fragment>
+		<h3 class="wepub-new-source-solution-lede">WePub treats a book as a web publication that can be read, found, discussed and connected to the author over time.</h3>
+		<CardGrid columns="3" class="wepub-new-source-icon-grid">
 			<article class="card icon-grid-card">
 				<SectionIcon type="publisher" title="Web-native book pages" />
 				<div class="icon-grid-card-copy">
@@ -168,7 +209,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		</div>
 	</section>
 
-		<Section tone="white" class="wepub-path-section section--two-column" title="What changes when you publish on ReaderPub">
+	<Section tone="white" class="wepub-path-section section--two-column" title="What changes when you publish on ReaderPub">
 		<div class="wepub-comparison-grid">
 			<article class="comparison-text-panel wepub-list-card wepub-old-path-card">
 				<div class="card-copy">
@@ -192,6 +233,17 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 					</ul>
 				</div>
 			</article>
+		</div>
+		<div class="wepub-path-workflow-image" data-media-reveal-origin="bottom">
+			<img
+				class="image-block wepub-path-workflow-image-asset"
+				src="/images/wepub.webp"
+				alt="WePub publishing workflow from manuscript to live book"
+				loading="lazy"
+				decoding="async"
+				width="1024"
+				height="900"
+			/>
 		</div>
 		<div class="wepub-start-grid">
 			<article class="card wepub-start-card">
@@ -226,8 +278,109 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		</div>
 	</Section>
 
+	<SpecCardsSection tone="green" class="authors-source-section authors-model-section section--two-column">
+		<h2><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> changes the author model</h2>
+		<div class="model-grid">
+			<div class="comparison-text-panel model-card marketplace-model-card">
+				<h3>Marketplace publishing</h3>
+				<ul class="comparison-list">
+					<li>High commission</li>
+					<li>Platform owns the customer</li>
+					<li>Reviews replace conversation</li>
+					<li>Discovery is controlled by marketplace algorithms</li>
+					<li>Readers leave after purchase</li>
+				</ul>
+			</div>
+			<div class="card card--good model-card readerpub-model-card">
+				<h3><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> publishing</h3>
+				<ul class="comparison-list">
+					<li>5% platform commission</li>
+					<li>Author-centered web presence</li>
+					<li>Reader relationships stay connected</li>
+					<li>Discussion stays attached to books and authors</li>
+					<li>Books remain active after publication</li>
+				</ul>
+			</div>
+		</div>
+	</SpecCardsSection>
+
+	<SpecCardsSection class="authors-source-section authors-benefits-section section--two-column section-continuation">
+		<div class="authors-living-layout">
+			<div class="authors-living-copy">
+				<h2>From one-time sale to living audience</h2>
+				<p class="lede">
+					ReaderPub turns every book into a long‑term web asset — easy to read, easy to find, easy to discuss, and always connected to future work.
+				</p>
+			</div>
+			<div class="card-grid authors-living-grid">
+				<div class="card author-benefit-card">
+					<div class="author-benefit-heading">
+						<SectionIcon type="dollars" title="Monetize your catalog" />
+						<h2>Monetize your catalog</h2>
+					</div>
+					<p class="author-benefit-lede">Publish on the web - with optional EPUB output when you need it.</p>
+					<ul class="bullets">
+						<li>Direct sales</li>
+						<li>Bundles and promotions (optional)</li>
+						<li>Fan clubs and memberships</li>
+						<li>Web edition plus optional production-ready EPUB delivery.</li>
+					</ul>
+					<p class="author-benefit-note">
+						Save on <strong class="author-save-highlight">5%</strong> commission versus Amazon's 35%. Use your freed-up resources to promote your books on ReaderPub.
+					</p>
+				</div>
+				<div class="card author-benefit-card">
+					<div class="author-benefit-heading">
+						<SectionIcon type="readerBook" title="Sell directly to your readers" />
+						<h2>Sell directly and communicate with your readers.</h2>
+					</div>
+					<p class="author-benefit-lede">Keep your audience, keep your data, and keep more of each sale.</p>
+					<ul class="bullets">
+						<li>Sell web editions and ebooks directly on ReaderPub.</li>
+						<li>5% sales commission, far below Amazon's take.</li>
+						<li>See sales and reader engagement analytics in one place.</li>
+						<li>Receive context-rich reader notes attached to exact passages - not generic comments.</li>
+					</ul>
+				</div>
+				<div class="card author-benefit-card">
+					<div class="author-benefit-heading">
+						<SectionIcon type="author" title="Author benefits" />
+						<h2>Author benefits</h2>
+					</div>
+					<p class="author-benefit-lede">Everything you need to publish, manage, and grow your work.</p>
+					<ul class="bullets">
+						<li>Organize sources, annotations, and drafts in one place.</li>
+						<li>Publish to a public audience or private collaborators.</li>
+						<li>Build authority with transparent references and updates.</li>
+						<li>Keep work structured across projects and editions.</li>
+					</ul>
+				</div>
+				<div class="card author-benefit-card">
+					<div class="author-benefit-heading">
+						<SectionIcon type="research" title="Make your research legible" />
+						<h2>Make your research legible</h2>
+					</div>
+					<p class="author-benefit-lede">Show readers where ideas come from and where they lead.</p>
+					<ul class="bullets">
+						<li>Show sources, references, and context alongside your texts.</li>
+						<li>Present evolving ideas transparently, not as static PDFs.</li>
+						<li>Invite readers, collaborators, and institutions into your work.</li>
+						<li>Turn research and writing into a readable public record.</li>
+					</ul>
+				</div>
+				<div class="card author-benefit-card author-benefit-card--scribe">
+					<div class="author-benefit-heading">
+						<SectionIcon type="program" title="Writing and publishing companion" />
+						<h2>Writing and publishing companion</h2>
+					</div>
+					<p class="author-benefit-lede">Scribe gives authors a focused AI companion for developing ideas, shaping drafts, comparing publishing options, planning launches, and clarifying ReaderPub workflows across writing, editing, and long-term audience work.</p>
+				</div>
+			</div>
+		</div>
+	</SpecCardsSection>
+
 	<Section tone="green" class="wepub-economics-section">
-		<Fragment slot="title">Better economics, stronger connections, <span class="green-heading-white">longer-lasting value</span></Fragment>
+		<Fragment slot="title">Better economics, stronger connections,<br /> <span class="green-heading-white">longer-lasting value</span></Fragment>
 		<CardGrid columns="3">
 			<Card title="Lower commission" body="ReaderPub uses a 5% platform commission for direct sales." />
 			<Card
@@ -243,41 +396,193 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 
 	<Section
 		tone="white"
-		class="wepub-infrastructure-section"
+		class="wepub-new-infrastructure-section"
 		title="Publishing infrastructure built for the web"
 		body="WePub combines secure publishing, browser delivery, direct sales and audience visibility inside a single publishing workflow."
 	>
 		<CardGrid columns="3">
-			<Card title="Web-native publishing" body="Publish books as web destinations rather than isolated downloads." />
-			<Card title="Reader visibility" body="Maintain visibility into publication activity after release." />
-			<Card title="Anti-piracy" body="Protect access through obfuscated web delivery." />
-			<Card title="Direct sales" body="Build direct commercial relationships with readers." />
-			<Card title="EPUB generation" body="Generate EPUB editions when external distribution requires them." />
-			<Card title="Long-term engagement" body="Keep publications connected to readers after launch." />
+			<Card icon="webReader" title="Web-native publishing" body="Publish books as web destinations rather than isolated downloads." />
+			<Card icon="reader" title="Reader visibility" body="Maintain visibility into publication activity after release." />
+			<Card icon="security" title="Anti-piracy" body="Protect access through obfuscated web delivery." />
+			<Card icon="sale" title="Direct sales" body="Build direct commercial relationships with readers." />
+			<Card icon="epubFile" title="EPUB generation" body="Generate EPUB editions whenever external distribution requires them." />
+			<Card icon="fan" title="Long-term engagement" body="Keep publications connected to readers after launch." />
 		</CardGrid>
 	</Section>
 
 	<Section
 		tone="green"
-		body="ReaderPub helps publishers transform books and knowledge publications into living web assets that remain active after release."
-		>
-			<Fragment slot="title">From digital files <span class="green-heading-white">to living web assets</span></Fragment>
-			<CardGrid columns="4">
-				<Card icon="readerBook" title="Readers" body="Continue engaging with the publication." />
-				<Card icon="author" title="Authors" body="Maintain stronger reader relationships." />
-				<Card icon="publisher" title="Publishers" body="Gain visibility beyond the moment of sale." />
-				<Card icon="library" title="Institutions" body="Publish knowledge that remains discoverable and useful over time." />
-			</CardGrid>
-		</Section>
+		class="wepub-new-relationship-section"
+		body="A web-native publication continues generating discovery, engagement and discussion after release. It remains part of an ongoing relationship rather than becoming a completed transaction."
+	>
+		<Fragment slot="title">From digital files <span class="green-heading-white">to living web assets</span></Fragment>
+		<CardGrid columns="4">
+			<Card title="Visibility" body="Reader activity remains visible." />
+			<Card title="Engagement" body="Discussion continues after publication." />
+			<Card title="Discovery" body="New readers continue finding the work." />
+			<Card title="Continuity" body="Publications remain active over time." />
+		</CardGrid>
+		<p class="section-lead">
+			ReaderPub helps publishers transform books and knowledge publications into living web assets that remain active after release.
+		</p>
+		<CardGrid columns="4">
+			<Card icon="readerBook" title="Readers" body="Continue engaging with the publication." />
+			<Card icon="author" title="Authors" body="Maintain stronger reader relationships." />
+			<Card icon="publisher" title="Publishers" body="Gain visibility beyond the moment of sale." />
+			<Card icon="library" title="Institutions" body="Publish knowledge that remains discoverable and useful over time." />
+		</CardGrid>
+	</Section>
 
 	<CtaBlock
-		title="Publish living web assets."
-		body="Move beyond file delivery and build publications that remain alive after release."
-		actions={[publishAction, pricingAction]}
+		title="Stop renting your audience."
+		body="Publish browser-readable books that remain discoverable, discussable and connected to readers long after release."
+		actions={[finalPublishAction, pricingAction]}
 	/>
 </Base>
 
 <style>
+	:global(.wepub-new-hero .hero-copy) {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	:global(.wepub-new-hero .hero-copy > *) {
+		margin: 0;
+	}
+
+	:global(.wepub-new-hero h1) {
+		line-height: var(--line-height-heading);
+	}
+
+	:global(.wepub-new-hero .hero-lead) {
+		color: var(--text) !important;
+		font-size: 19.5px !important;
+		line-height: var(--line-height-body) !important;
+	}
+
+	:global(.wepub-new-hero .hero-lead strong) {
+		color: inherit;
+		font-weight: 700;
+	}
+
+	:global(.wepub-new-hero .hero-body) {
+		max-width: 720px;
+		color: var(--accent) !important;
+		font-family: var(--font-heading);
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
+	}
+
+	:global(.wepub-new-hero .authors-hero-fee-line) {
+		max-width: 760px;
+		color: var(--text);
+		font-size: 22.425px;
+		line-height: var(--line-height-body);
+	}
+
+	:global(.wepub-new-hero .authors-hero-fee) {
+		color: var(--accent);
+		font-weight: 700;
+	}
+
+	:global(.wepub-new-hero .button) {
+		min-height: 0;
+		padding: 10px 18px;
+		font-size: 14px;
+		font-weight: 500;
+	}
+
+	:global(.wepub-new-hero .button--secondary) {
+		background: var(--accent);
+		color: #ffffff;
+		border-color: transparent;
+	}
+
+	:global(.wepub-new-hero .button--secondary:hover) {
+		background: var(--text);
+		color: #ffffff;
+		border-color: transparent;
+	}
+
+	:global(.wepub-new-hero .author-protection-button) {
+		--author-protection-shield-fill: var(--accent);
+		display: inline-flex !important;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		padding-top: 6px;
+		padding-bottom: 6px;
+	}
+
+	:global(.wepub-new-hero .author-protection-button:hover) {
+		--author-protection-shield-fill: var(--text);
+	}
+
+	:global(.wepub-new-hero .author-protection-icon) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 23.8px;
+		height: 23.8px;
+		flex-shrink: 0;
+	}
+
+	:global(.wepub-new-hero .author-protection-icon .section-icon) {
+		display: block;
+		width: 100% !important;
+		height: 100% !important;
+		stroke: #ffffff;
+	}
+
+	:global(.wepub-new-hero .author-protection-icon .section-icon [fill]) {
+		fill: var(--author-protection-shield-fill) !important;
+	}
+
+	.wepub-new-source-gray-block {
+		display: grid;
+		gap: 28px;
+	}
+
+	.wepub-new-source-authors-block {
+		margin-top: calc(var(--section-stack-gap) - 28px);
+	}
+
+	:global(.wepub-new-source-solution-section > .section-header) {
+		justify-self: stretch;
+		width: 100%;
+		max-width: none;
+		text-align: center;
+	}
+
+	:global(.wepub-new-source-solution-section > .section-header h2) {
+		text-align: center;
+	}
+
+	:global(.wepub-economics-section .card) {
+		min-height: 0;
+	}
+
+	.wepub-new-source-solution-title-prefix {
+		font-style: italic;
+	}
+
+	.wepub-new-source-solution-title-prefix::after {
+		content: "\00a0\00a0";
+	}
+
+	.wepub-new-source-solution-lede {
+		justify-self: center;
+		width: min(100%, 980px);
+		margin: 0;
+		color: var(--accent);
+		font-size: clamp(1.25rem, 2.1vw, 1.8rem);
+		line-height: var(--line-height-heading);
+		text-align: center;
+	}
+
 	.wepub-comparison-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -285,16 +590,10 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		width: 100%;
 	}
 
-	@media (min-width: 901px) {
-		:global(.wepub-old-model-section .section-header h2) {
-			font-size: clamp(1.71rem, 2.7vw, 1.872rem);
-			white-space: normal;
-		}
-
-		:global(.wepub-old-model-section .section-lead) {
-			font-size: clamp(1rem, 1.55vw, 1.08rem);
-			white-space: normal;
-		}
+	.wepub-path-workflow-image {
+		display: flex;
+		justify-content: center;
+		width: 100%;
 	}
 
 	.wepub-start-grid {
@@ -365,20 +664,6 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		padding-top: calc(var(--section-padding) * 0.4375) !important;
 	}
 
-	@media (orientation: portrait) {
-		:global(.section.wepub-path-section) {
-			padding-top: var(--section-padding) !important;
-		}
-	}
-
-	:global(.wepub-economics-section .card) {
-		min-height: 0;
-	}
-
-	:global(.wepub-infrastructure-section .card) {
-		min-height: 0;
-	}
-
 	.wepub-model-list {
 		display: grid;
 		gap: 10px;
@@ -392,39 +677,211 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		color: var(--accent);
 	}
 
-	.wepub-supporting-text {
+	:global(.authors-source-section.section--white) {
+		--card-bg: #ffffff;
+		--card-tint: #fcfaf8;
+		--section-bg: transparent;
+	}
+
+	:global(.authors-source-section.section--white)::before {
+		content: none;
+	}
+
+	:global(.authors-source-section) {
+		gap: 18px;
+	}
+
+	:global(.authors-source-section.section-continue-next) {
+		padding-bottom: 12px !important;
+	}
+
+	:global(.authors-source-section.section-continuation) {
+		padding-top: 58px !important;
+		padding-bottom: 58px !important;
+		margin-top: var(--section-stack-gap) !important;
+	}
+
+	:global(.authors-source-section.section-continuation.section-continue-next) {
+		padding-bottom: 12px !important;
+	}
+
+	:global(.authors-source-section) :is(h2, h3, h4) {
+		line-height: var(--line-height-heading);
+	}
+
+	:global(.authors-source-section) > h2,
+	.authors-living-copy > h2 {
+		font-size: clamp(21.6px, 2.7vw, 30.6px);
+	}
+
+	:global(.authors-source-section) p {
+		font-size: 16px;
+		line-height: 1.28;
+	}
+
+	:global(.authors-source-section) > .lede,
+	.authors-living-copy > .lede {
 		color: var(--accent-copy);
-		font-size: 1.125rem;
+		font-size: 18px;
 		line-height: var(--line-height-body);
 	}
 
-	:global(.wepub-solution-section > .section-header) {
-		justify-self: stretch;
-		width: 100%;
-		max-width: none;
-		text-align: center;
+	.authors-living-layout {
+		display: grid;
+		gap: 18px;
 	}
 
-	:global(.wepub-solution-section > .section-header h2) {
-		text-align: center;
+	.authors-living-copy {
+		display: grid;
+		gap: 18px;
 	}
 
-	.wepub-solution-title-prefix {
-		font-style: italic;
-	}
-
-	.wepub-solution-title-prefix::after {
-		content: "\00a0\00a0";
-	}
-
-	.wepub-solution-lede {
-		justify-self: center;
-		width: min(100%, 980px);
+	.authors-living-copy > * {
 		margin: 0;
+	}
+
+	.authors-living-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-auto-rows: auto;
+	}
+
+	.authors-living-grid .author-benefit-card {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+		width: 100%;
+		height: 100%;
+		min-height: 0;
+	}
+
+	.authors-living-grid .author-benefit-heading {
+		display: grid;
+		grid-template-columns: var(--card-inline-icon-size) minmax(0, 1fr);
+		column-gap: var(--card-icon-gap);
+		align-items: center;
+	}
+
+	.authors-living-grid .author-benefit-heading :global(.section-icon) {
+		width: var(--card-inline-icon-size) !important;
+		height: var(--card-inline-icon-size) !important;
+	}
+
+	.authors-living-grid .author-benefit-card h2 {
+		min-height: var(--card-inline-icon-size);
+		margin: 0;
+		color: var(--text);
+		font-size: var(--card-heading-font-size);
+		line-height: var(--card-heading-line-height);
+	}
+
+	.authors-living-grid .author-benefit-card :is(.author-benefit-lede, .author-benefit-note, .bullets) {
+		margin: 0;
+	}
+
+	.authors-living-grid .author-benefit-card--scribe {
+		grid-column: 1 / -1;
+		justify-self: center;
+		width: calc((100% - 18px) / 2);
+	}
+
+	.authors-living-grid .author-benefit-card--scribe .author-benefit-lede {
+		color: var(--text) !important;
+	}
+
+	.author-benefit-lede,
+	.author-benefit-note {
+		color: var(--accent-copy) !important;
+	}
+
+	.author-save-highlight {
+		display: inline-block;
+		font-size: 1.35em;
+		font-weight: 900;
+		line-height: 1;
+		vertical-align: baseline;
+	}
+
+	.bullets {
+		list-style: disc;
+		display: grid;
+		gap: 6px;
+		max-width: 720px;
+		padding-left: 18px;
+	}
+
+	.bullets li {
+		color: var(--muted);
+		font-size: 16px;
+		line-height: var(--line-height-body);
+		list-style: disc;
+	}
+
+	.bullets li::marker {
 		color: var(--accent);
-		font-size: clamp(1.25rem, 2.1vw, 1.8rem);
-		line-height: var(--line-height-heading);
-		text-align: center;
+	}
+
+	.card .bullets {
+		max-width: none;
+		padding-left: 18px;
+	}
+
+	.model-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--card-grid-gap);
+		width: 100%;
+	}
+
+	.model-card {
+		min-height: 0;
+	}
+
+	:global(.readerpub-model-card.readerpub-model-card) {
+		background: var(--card-bg) !important;
+	}
+
+	:global(.readerpub-model-card h3 > .readerpub-heading-word) {
+		color: var(--accent) !important;
+	}
+
+	.comparison-list {
+		list-style: none;
+		display: grid;
+		gap: 10px;
+		padding: 0;
+		margin: 0;
+	}
+
+	.comparison-list li {
+		position: relative;
+		padding-left: 18px;
+		color: var(--muted);
+		font-size: 16px;
+		line-height: var(--line-height-body);
+	}
+
+	.comparison-list li::before {
+		content: "";
+		position: absolute;
+		top: 0.58em;
+		left: 0;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--accent);
+	}
+
+	:global(.marketplace-model-card .comparison-list li::before) {
+		background: var(--accent-orange) !important;
+	}
+
+	:global(.authors-model-section.section--green) .marketplace-model-card h3,
+	:global(.authors-model-section.section--green) .marketplace-model-card .comparison-list li {
+		color: #ffffff !important;
+	}
+
+	:global(.authors-model-section.section--green) .marketplace-model-card .comparison-list li::before {
+		background: var(--accent-orange) !important;
 	}
 
 	.wepub-flow-slider-section {
@@ -635,7 +1092,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		white-space: nowrap;
 	}
 
-	:global(.wepub-source-icon-grid .card.icon-grid-card) {
+	:global(.wepub-new-source-icon-grid .card.icon-grid-card) {
 		display: grid !important;
 		grid-template-columns: var(--card-icon-column) minmax(0, 1fr) !important;
 		column-gap: var(--card-icon-gap) !important;
@@ -644,11 +1101,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		width: 100%;
 	}
 
-	:global(.wepub-source-icon-grid .icon-grid-card-copy) {
+	:global(.wepub-new-source-icon-grid .icon-grid-card-copy) {
 		display: contents;
 	}
 
-	:global(.wepub-source-icon-grid .icon-grid-card > .section-icon) {
+	:global(.wepub-new-source-icon-grid .icon-grid-card > .section-icon) {
 		grid-column: 1;
 		grid-row: 1;
 		align-self: center;
@@ -656,18 +1113,70 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		height: var(--card-inline-icon-size) !important;
 	}
 
-	:global(.wepub-source-icon-grid .icon-grid-card .icon-grid-card-copy > h3) {
+	:global(.wepub-new-source-icon-grid .icon-grid-card .icon-grid-card-copy > h3) {
 		grid-column: 2;
 		grid-row: 1;
 		align-self: center;
 		margin: 0;
 	}
 
-	:global(.wepub-source-icon-grid .icon-grid-card .icon-grid-card-copy > p) {
+	:global(.wepub-new-source-icon-grid .icon-grid-card .icon-grid-card-copy > p) {
 		grid-column: 1 / -1;
 	}
 
+	@media (min-width: 901px) {
+		.wepub-new-source-wepub-block .section-lead {
+			font-size: clamp(1rem, 1.55vw, 1.08rem);
+			white-space: normal;
+		}
+	}
+
+	.wepub-new-source-authors-loss-grid {
+		display: grid !important;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		grid-auto-rows: 1fr;
+		align-items: stretch;
+		gap: var(--card-grid-gap);
+	}
+
+	.wepub-new-source-authors-loss-grid > .card {
+		grid-column: span 2;
+		height: 100%;
+		min-height: 0;
+		align-self: stretch;
+	}
+
+	.wepub-new-source-authors-loss-grid > .card:nth-child(4) {
+		grid-column: 2 / span 2;
+	}
+
+	.wepub-new-source-authors-loss-grid > .card:nth-child(5) {
+		grid-column: 4 / span 2;
+	}
+
+	.wepub-path-workflow-image-asset {
+		max-width: 540px;
+	}
+
 	@media (max-width: 900px) {
+		:global(.wepub-new-hero .hero-lead) {
+			font-size: 17.94px !important;
+		}
+
+		:global(.wepub-new-hero .authors-hero-fee-line) {
+			font-size: 17.94px !important;
+			order: 7;
+		}
+
+		.wepub-new-source-authors-loss-grid > .card {
+			grid-column: 1 / -1;
+			width: 100%;
+		}
+
+		:global(.wepub-new-source-icon-grid .icon-grid-card-copy) {
+			display: contents;
+		}
+
 		.wepub-comparison-grid,
 		.wepub-start-grid {
 			grid-template-columns: 1fr;
@@ -678,8 +1187,40 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 			text-align: left;
 		}
 
-		:global(.wepub-source-icon-grid .icon-grid-card-copy) {
-			display: contents;
+		.model-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.authors-living-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.authors-living-copy,
+		.authors-living-grid,
+		.authors-living-grid .author-benefit-card {
+			min-width: 0;
+			max-width: 100%;
+		}
+
+		.authors-living-grid .author-benefit-card--scribe {
+			grid-column: auto;
+			justify-self: stretch;
+			width: 100%;
+		}
+
+		.authors-living-copy > h2 {
+			justify-self: center;
+			margin-right: auto;
+			margin-left: auto;
+			text-align: center;
+		}
+
+		.authors-living-copy > h2,
+		.authors-living-copy > .lede,
+		.authors-living-grid .author-benefit-card :is(h2, p, li) {
+			max-width: 100%;
+			white-space: normal;
+			overflow-wrap: break-word;
 		}
 
 		.wepub-flow-slider-arrow {
@@ -696,9 +1237,23 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		.wepub-flow-slider-arrow--next {
 			right: -52px;
 		}
+
 	}
 
 	@media (orientation: portrait) {
+		:global(.authors-source-section.section-continuation) {
+			padding-top: var(--section-padding) !important;
+			padding-bottom: var(--section-padding) !important;
+		}
+
+		:global(.authors-source-section.section-continuation.section-continue-next) {
+			padding-bottom: 12px !important;
+		}
+
+		:global(.section.wepub-path-section) {
+			padding-top: var(--section-padding) !important;
+		}
+
 		.wepub-flow-slider-frame {
 			display: grid;
 			grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -735,6 +1290,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 			right: auto;
 			left: auto;
 		}
+
 	}
 </style>
 

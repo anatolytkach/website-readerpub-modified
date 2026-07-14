@@ -49,7 +49,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				body="Reading is digital, but discussion and discovery are fragmented across apps, stores and social networks."
 			/>
 			<Card
-				href="/authors"
+				href="/wepub"
 				icon="author"
 				title="Authors & Publishers"
 				body="Authors publish books, but marketplaces often control visibility, readers and the customer relationship."
@@ -162,6 +162,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				/>
 			</picture>
 		</a>
+		<h2 class="home-tech-reader-activity-note">This is what your reader activity would look like on <span>ReaderPub</span>.</h2>
 		<a class="button home-tech-visual-button home-tech-platform-button" href="/platform">Explore ReaderPub</a>
 	</section>
 
@@ -305,7 +306,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 <style>
 	.home-cta-body-accent {
-		color: var(--accent-orange);
+		color: var(--accent-orange) !important;
 	}
 
 	.home-hero-statement {
@@ -406,7 +407,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		margin-top: clamp(10px, 1vw, 16px);
 		color: var(--accent);
 		font-family: var(--font-heading);
-		font-size: var(--card-heading-font-size);
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
 		font-weight: var(--font-weight-heading);
 		line-height: var(--card-heading-line-height);
 		text-align: center;
@@ -446,6 +447,20 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	.home-tech-picture {
 		display: block;
 		width: 100%;
+	}
+
+	.home-tech-reader-activity-note {
+		margin: 0;
+		color: var(--accent-orange);
+		font-family: var(--font-heading);
+		font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+		font-weight: var(--font-weight-heading);
+		line-height: var(--line-height-heading);
+		text-align: center;
+	}
+
+	.home-tech-reader-activity-note span {
+		color: #ffffff !important;
 	}
 
 	.home-tech-picture-link {
@@ -563,15 +578,15 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	.home-tech-visual-title {
 		margin: 0;
 		color: var(--text) !important;
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
 		text-align: center;
 	}
 
 	.home-tech-guess {
 		display: inline-block;
 		margin-right: 0.58em;
-		font-style: italic !important;
-		transform: skew(-8deg);
-		transform-origin: center;
+		color: var(--accent-orange) !important;
+		font-style: normal !important;
 	}
 
 	.home-tech-guess-question {
@@ -583,7 +598,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		width: 100%;
 		margin: 0;
 		color: var(--accent) !important;
-		font-size: var(--card-heading-font-size);
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
 		line-height: var(--card-heading-line-height);
 		text-align: center;
 	}
@@ -941,9 +956,13 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			order: 2 !important;
 		}
 
+		.home-tech-visual-section > .home-tech-reader-activity-note {
+			order: 3 !important;
+		}
+
 		.home-tech-visual-section > .home-tech-platform-button,
 		.home-tech-visual-section > .home-tech-platform-button:visited {
-			order: 3 !important;
+			order: 4 !important;
 		}
 
 		:global(.content .hero-section.home-hero.section--with-media .home-hero-strategy) {

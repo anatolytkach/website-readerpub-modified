@@ -121,7 +121,7 @@ export const pages = {
 					{
 						title: "For Authors & Publishers",
 						body: "Publishing becomes a direct web presence with lower marketplace dependency.",
-						href: "/authors",
+						href: "/wepub",
 					},
 					{
 						title: "For Institutions",
