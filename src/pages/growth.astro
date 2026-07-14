@@ -59,7 +59,7 @@ const products = [
 	{ title: "WeBuzz", body: "Literary community and public discussion." },
 	{ title: "WeTalk", body: "Controlled institutional discussion environments." },
 	{ title: "BookTree", body: "Research, notes and structured knowledge workflows." },
-	{ title: "Scribe", body: "AI conversation for books, writing, publishing and platform guidance." },
+	{ title: "Scribe", body: "AI conversation for books & publishing." },
 ];
 
 const customerMarkets = [
@@ -411,9 +411,9 @@ const finalCtaActions = [
 		justify-content: center;
 		justify-self: center;
 		min-height: 0;
-		width: 50%;
+		width: fit-content;
 		max-width: 100%;
-		padding: 20px 28px;
+		padding: 28px;
 		text-align: center;
 	}
 
@@ -429,7 +429,7 @@ const finalCtaActions = [
 	}
 
 	:global(.growth-foundation-card > p:last-child) {
-		max-width: 700px;
+		max-width: 24rem;
 		margin: 0;
 		color: var(--accent) !important;
 		text-align: center;
@@ -478,7 +478,8 @@ const finalCtaActions = [
 
 	:global(.growth-architecture-grid) {
 		grid-template-columns: repeat(6, minmax(0, 1fr));
-		gap: var(--card-grid-gap);
+		row-gap: var(--card-grid-gap);
+		column-gap: calc(var(--card-grid-gap) * 0.8);
 	}
 
 	:global(.growth-architecture-card) {
@@ -517,25 +518,18 @@ const finalCtaActions = [
 
 	:global(.growth-product-grid .growth-architecture-card) {
 		display: grid;
-		grid-template-rows: auto 3em;
+		grid-template-rows: 2em auto;
 		justify-items: center;
-		align-content: center;
+		align-content: start;
 	}
 
 	:global(.growth-product-grid .growth-architecture-card p) {
 		align-self: start;
 	}
 
-	:global(.growth-product-grid) {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-
-	:global(.growth-customer-market-grid) {
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-	}
-
-	:global(.growth-customer-market-grid > :nth-child(5)) {
-		grid-column: 2;
+	:global(.growth-product-grid.card-grid--3),
+	:global(.growth-customer-market-grid.card-grid--3) {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
 	}
 
 	:global(.growth-product-grid .growth-product-card--wetalk) {
@@ -547,6 +541,10 @@ const finalCtaActions = [
 		grid-template-rows: 42px 2.7em;
 		justify-items: center;
 		align-content: center;
+	}
+
+	:global(.growth-customer-market-grid .growth-architecture-card h4) {
+		font-size: 1rem;
 	}
 
 	:global(.growth-product-title--scribe) {
@@ -570,11 +568,8 @@ const finalCtaActions = [
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 
-		:global(.growth-architecture-grid) {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-		}
-
-		:global(.growth-customer-market-grid) {
+		:global(.growth-product-grid.card-grid--3),
+		:global(.growth-customer-market-grid.card-grid--3) {
 			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
 
@@ -582,9 +577,6 @@ const finalCtaActions = [
 			grid-column: auto;
 		}
 
-		:global(.growth-product-grid .growth-architecture-card) {
-			grid-template-rows: auto 4.5em;
-		}
 	}
 
 	@media (max-width: 900px) {
@@ -600,16 +592,13 @@ const finalCtaActions = [
 			max-width: none;
 		}
 
-		:global(.growth-architecture-grid) {
-			grid-template-columns: 1fr;
-		}
-
-		:global(.growth-customer-market-grid) {
+		:global(.growth-product-grid.card-grid--3),
+		:global(.growth-customer-market-grid.card-grid--3) {
 			grid-template-columns: 1fr;
 		}
 
 		:global(.growth-product-grid .growth-architecture-card) {
-			grid-template-rows: auto auto;
+			grid-template-rows: 2em auto;
 		}
 
 		:global(.growth-foundation-card),
