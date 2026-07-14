@@ -9,11 +9,6 @@ const readerPubBooksProxy = {
 
 // https://astro.build/config
 export default defineConfig({
-	redirects: {
-		"/contacts": "/contact",
-		"/technology": "/platform",
-		"/platform1": "/platform",
-	},
 	vite: {
 		server: {
 			proxy: {
