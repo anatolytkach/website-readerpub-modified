@@ -804,12 +804,12 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	:global(.home-product-grid .home-product-link:hover .home-product-name-base),
 	:global(.home-product-grid .home-product-link:focus-visible .home-product-name-base) {
-		color: var(--accent) !important;
+		color: #ffffff !important;
 	}
 
 	:global(.home-product-grid .home-product-link:hover .home-product-name-accent),
 	:global(.home-product-grid .home-product-link:focus-visible .home-product-name-accent) {
-		color: var(--accent-orange) !important;
+		color: #ffffff !important;
 	}
 
 	:global(.home-product-grid .card:hover .home-product-link:hover),
@@ -838,10 +838,21 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	@media (min-width: 901px) {
-		:global(.home-product-grid > .card:last-child) {
-			grid-column: 1 / -1;
-			justify-self: center;
-			width: calc((100% - 18px) / 2);
+		:global(.home-product-grid.card-grid--2) {
+			grid-template-columns: repeat(6, minmax(0, 1fr));
+		}
+
+		:global(.home-product-grid.card-grid--2 > .card) {
+			grid-column: span 2;
+			width: auto;
+		}
+
+		:global(.home-product-grid.card-grid--2 > .card:nth-child(4)) {
+			grid-column: 2 / span 2;
+		}
+
+		:global(.home-product-grid.card-grid--2 > .card:nth-child(5)) {
+			grid-column: 4 / span 2;
 		}
 	}
 

@@ -55,6 +55,10 @@
 	--shadow-soft: 0 14px 32px rgba(15, 23, 42, 0.07);
 	--shadow-hover: 0 18px 38px rgba(15, 23, 42, 0.1);
 	--card-green-shadow: 0 0 18px rgba(2, 143, 128, 0.14);
+	--white-card-shape-shadow: 0 0 9px rgba(2, 143, 128, 0.14);
+	--card-gray-shadow: 0 0 18px rgba(78, 90, 106, 0.1);
+	--white-card-question-frame: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23ffffff%27%20stroke%3D%27%23d8e1ed%27%20stroke-width%3D%271%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M%200%20.5%20C%204%2025%204%2075%200%2099.5%20L%2096%2099.5%20C%20100%2075%20100%2025%2096%20.5%20Z%27/%3E%3C/svg%3E");
+	--white-card-question-frame-hover: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23ffffff%27%20stroke%3D%27%23ff5a00%27%20stroke-width%3D%271%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M%200%20.5%20C%204%2025%204%2075%200%2099.5%20L%2096%2099.5%20C%20100%2075%20100%2025%2096%20.5%20Z%27/%3E%3C/svg%3E");
 	--radius-card: 8px;
 	--radius-control: 0 999px 999px 0;
 	--section-gap: 18px;
@@ -461,7 +465,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	padding: 10px;
 	list-style: none;
 	border: 1px solid var(--border);
-	border-radius: 0;
+	border-radius: calc(var(--radius-card) / 1.5);
 	background: var(--surface);
 	box-shadow: var(--shadow-soft);
 	visibility: hidden;
@@ -2692,6 +2696,10 @@ h3.heading--center-full,
 		color: #ffffff !important;
 	}
 
+	.content .section--green .home-product-grid .card:hover :is(h2, h3, h4) .home-product-link:is(:hover, :focus-visible) * {
+		color: #ffffff !important;
+	}
+
 	:is(.card--good, .card--accent, .section--green .card):hover
 		:is(h2, h3, h4)
 		:is(.product-heading-base, .product-heading-colon, .readerpub-heading-reader),
@@ -2731,9 +2739,19 @@ h3.heading--center-full,
 
 .section--gray .card {
 	border-color: var(--border);
-	box-shadow: none !important;
+	box-shadow: var(--card-gray-shadow) !important;
+	background: var(--card-bg) !important;
+	transform: skewX(6deg) !important;
 	transition: none !important;
 	will-change: auto;
+}
+
+.section--gray .card-grid {
+	overflow: visible;
+}
+
+.section--gray .card > * {
+	transform: skewX(-6deg);
 }
 
 .section--gray .card .section-icon {
@@ -2768,9 +2786,10 @@ h3.heading--center-full,
 .section--gray .card--link:hover,
 .section--gray .card--link:focus-visible,
 .animation-pass-ready .section--gray [data-hover-card]:hover {
-	transform: none !important;
+	transform: skewX(6deg) !important;
 	border-color: #000000 !important;
-	box-shadow: none !important;
+	background: var(--card-bg) !important;
+	box-shadow: var(--card-gray-shadow) !important;
 }
 
 .animation-pass-ready .section--gray [data-hover-card]:hover :is(.section-icon, .card-icon-heading > svg) {
@@ -2805,7 +2824,154 @@ body .page .content
 	box-shadow: var(--card-green-shadow) !important;
 }
 
+body .page .content .section--white .card:is(
+		.card--accent,
+		.card--good,
+		.home-readerpub-model-card,
+		.home-readerpub-publishing-card,
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.authors-living-card,
+		.wepub-readerpub-path-card,
+		.booktree-with-card,
+		.pricing-readerpub-model-card,
+		.security-readerpub-solution-card,
+		.webuzz-living-card,
+		.webuzz-legacy-solution-card,
+		.webuzz-overview-card--green
+	) {
+	position: relative;
+	isolation: isolate;
+	padding-inline: calc(28px + 4%);
+	border: 0 !important;
+	border-radius: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+body .page .content .section--white .card:is(
+		.card--accent,
+		.card--good,
+		.home-readerpub-model-card,
+		.home-readerpub-publishing-card,
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.authors-living-card,
+		.wepub-readerpub-path-card,
+		.booktree-with-card,
+		.pricing-readerpub-model-card,
+		.security-readerpub-solution-card,
+		.webuzz-living-card,
+		.webuzz-legacy-solution-card,
+		.webuzz-overview-card--green
+	)::before,
+body .page .content .section--white .card:is(
+		.card--accent,
+		.card--good,
+		.home-readerpub-model-card,
+		.home-readerpub-publishing-card,
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.authors-living-card,
+		.wepub-readerpub-path-card,
+		.booktree-with-card,
+		.pricing-readerpub-model-card,
+		.security-readerpub-solution-card,
+		.webuzz-living-card,
+		.webuzz-legacy-solution-card,
+		.webuzz-overview-card--green
+	)::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+body .page .content .section--white .card:is(
+		.card--accent,
+		.card--good,
+		.home-readerpub-model-card,
+		.home-readerpub-publishing-card,
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.authors-living-card,
+		.wepub-readerpub-path-card,
+		.booktree-with-card,
+		.pricing-readerpub-model-card,
+		.security-readerpub-solution-card,
+		.webuzz-living-card,
+		.webuzz-legacy-solution-card,
+	.webuzz-overview-card--green
+	)::before {
+	background-image: var(--white-card-question-frame);
+	filter: drop-shadow(var(--white-card-shape-shadow));
+}
+
+body .page .content .section--white .card:is(
+		.card--accent,
+		.card--good,
+		.home-readerpub-model-card,
+		.home-readerpub-publishing-card,
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.authors-living-card,
+		.wepub-readerpub-path-card,
+		.booktree-with-card,
+		.pricing-readerpub-model-card,
+		.security-readerpub-solution-card,
+		.webuzz-living-card,
+		.webuzz-legacy-solution-card,
+		.webuzz-overview-card--green
+	)::after {
+	background-image: var(--white-card-question-frame-hover);
+	opacity: 0;
+	transition: opacity var(--motion-quick) var(--motion-ease);
+}
+
+body .page .content .section--white .card:is(
+		.card--accent,
+		.card--good,
+		.home-readerpub-model-card,
+		.home-readerpub-publishing-card,
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.authors-living-card,
+		.wepub-readerpub-path-card,
+		.booktree-with-card,
+		.pricing-readerpub-model-card,
+		.security-readerpub-solution-card,
+		.webuzz-living-card,
+		.webuzz-legacy-solution-card,
+		.webuzz-overview-card--green
+	) > * {
+	position: relative;
+	z-index: 1;
+}
+
 @media (hover: hover) and (pointer: fine) {
+	body .page .content .section--white .card:is(
+			.card--accent,
+			.card--good,
+			.home-readerpub-model-card,
+			.home-readerpub-publishing-card,
+			.platform-readerpub-model-card,
+			.readerpub-model-card,
+			.authors-living-card,
+			.wepub-readerpub-path-card,
+			.booktree-with-card,
+			.pricing-readerpub-model-card,
+			.security-readerpub-solution-card,
+			.webuzz-living-card,
+			.webuzz-legacy-solution-card,
+			.webuzz-overview-card--green
+		):hover::after {
+		opacity: 1;
+	}
+
 	body .page .content
 		:is(
 			.section--green .card,

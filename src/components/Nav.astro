@@ -208,6 +208,21 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 			for (const dropdownToggle of document.querySelectorAll(".nav-dropdown-toggle")) {
 				const dropdown = dropdownToggle.closest(".nav-dropdown");
 
+				if (dropdown && dropdown.getAttribute("data-nav-dropdown-ready") !== "true") {
+					dropdown.setAttribute("data-nav-dropdown-ready", "true");
+					dropdown.addEventListener("pointerenter", () => {
+						document.querySelectorAll(".nav-dropdown.nav-dropdown--open").forEach((openDropdown) => {
+							if (openDropdown === dropdown) return;
+
+							openDropdown.classList.remove("nav-dropdown--open");
+							openDropdown.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+
+							const activeElement = document.activeElement;
+							if (activeElement instanceof HTMLElement && openDropdown.contains(activeElement)) activeElement.blur();
+						});
+					});
+				}
+
 				if (dropdownToggle.getAttribute("data-nav-ready") === "true") continue;
 
 				dropdownToggle.setAttribute("data-nav-ready", "true");
