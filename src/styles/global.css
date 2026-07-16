@@ -2140,6 +2140,12 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 		font-size: 18px;
 	}
 
+	.section.section--green,
+	.institutions-expanded-access-grid {
+		--green-edge-top-wave-width: 1100px;
+		--green-edge-bottom-wave-width: 1100px;
+	}
+
 	.section.section--gray,
 	.section.section--green {
 		width: 100vw !important;

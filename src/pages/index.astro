@@ -13,18 +13,23 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	title={`Web-Native Publishing & Digital Reading Platform | ${SITE_NAME}`}
 	description="ReaderPub is a web-native publishing and digital reading platform that keeps books and readers connected—without apps, downloads, or platform lock-in."
 >
-	<div class="home-video-stage" data-home-video-stage>
+	<div class="home-video-stage is-green-intro" data-home-video-stage>
 		<section class="home-video-intro" data-home-video-intro aria-label="ReaderPub video introduction">
 			<video
 				class="home-video-intro-media"
 				src="/videos/treasure_island-1.mp4"
 				title="Treasure Island in WeRead"
 				muted
-				autoplay
 				playsinline
 				preload="auto"
 			></video>
 		</section>
+		<div class="home-video-green-shutters" aria-hidden="true">
+			<span class="home-video-green-panel home-video-green-panel--top-left"></span>
+			<span class="home-video-green-panel home-video-green-panel--top-right"></span>
+			<span class="home-video-green-panel home-video-green-panel--bottom-left"></span>
+			<span class="home-video-green-panel home-video-green-panel--bottom-right"></span>
+		</div>
 		<div class="home-video-green-layer" aria-hidden="true"></div>
 		<div class="home-video-intro-content">
 			<p class="home-video-teaser" aria-live="polite">
@@ -145,8 +150,11 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			</article>
 		</div>
 
-		<p class="home-file-model-summary">
-			<span class="home-file-model-summary-problem">The old file-first publishing model ends when a file is delivered, and breaks the relationships.</span>
+		<p class="home-file-model-summary home-file-model-summary-problem-copy">
+			<span class="home-file-model-summary-problem">The old file-first publishing model ends when a file is delivered.</span>
+			<span class="home-file-model-summary-problem home-file-model-summary-break">The relationship is broken!</span>
+		</p>
+		<p class="home-file-model-summary home-file-model-summary-solution" style="margin-top: var(--section-gap) !important;">
 			<span>ReaderPub keeps publications alive and connected after delivery.</span>
 		</p>
 	</Section>
@@ -193,61 +201,100 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 					}
 				};
 
-				let completionTimer;
-				let revealTimer;
-				let teaserTimer;
+				const introTimers = new Set();
 				let playbackAttempt = 0;
 				let hasLeftPageTop = window.scrollY > 1;
 				let scrollFrame = 0;
 
 				const clearIntroTimers = () => {
-					window.clearTimeout(completionTimer);
-					window.clearTimeout(revealTimer);
-					window.clearTimeout(teaserTimer);
+					introTimers.forEach((timer) => window.clearTimeout(timer));
+					introTimers.clear();
 				};
 
-				const completeIntro = () => {
-					if (stage.classList.contains("is-darkening")) return;
-					window.clearTimeout(completionTimer);
+				const scheduleIntroStep = (callback, delay) => {
+					const timer = window.setTimeout(() => {
+						introTimers.delete(timer);
+						callback();
+					}, delay);
+					introTimers.add(timer);
+					return timer;
+				};
+
+				const showFinalMessage = (attempt) => {
+					if (attempt !== playbackAttempt || stage.classList.contains("is-darkening")) return;
+					stage.classList.remove("is-playing", "is-video-wait");
 					stage.classList.add("is-darkening");
-					revealTimer = window.setTimeout(() => {
-						stage.classList.add("is-teasing");
-						teaserTimer = window.setTimeout(() => {
-							stage.classList.remove("is-teasing");
-							stage.classList.add("is-complete");
-						}, 5000);
-					}, 550);
+					scheduleIntroStep(() => {
+						if (attempt === playbackAttempt) stage.classList.add("is-final");
+					}, 850);
 				};
 
-				const playVideoOnce = (resetImmediately = false) => {
+				const startVideo = (attempt) => {
+					if (attempt !== playbackAttempt) return;
+					stage.classList.remove("is-video-wait");
+					stage.classList.add("is-playing");
+					const playPromise = video.play();
+					const fallbackDuration = Number.isFinite(video.duration) && video.duration > 0
+						? Math.ceil(video.duration * 1000) + 1500
+						: 15000;
+
+					scheduleIntroStep(() => showFinalMessage(attempt), fallbackDuration);
+					playPromise?.catch(() => {
+						if (attempt !== playbackAttempt) return;
+						scheduleIntroStep(() => showFinalMessage(attempt), 1200);
+					});
+				};
+
+				const openGreenIntro = (attempt) => {
+					if (attempt !== playbackAttempt) return;
+					video.pause();
+					video.currentTime = 0;
+					stage.classList.remove("is-green-intro");
+					stage.classList.add("is-opened");
+					scheduleIntroStep(() => {
+						if (attempt !== playbackAttempt) return;
+						stage.classList.add("is-video-wait");
+						scheduleIntroStep(() => startVideo(attempt), 2000);
+					}, 1600);
+				};
+
+				const startExperience = (resetImmediately = false) => {
 					const attempt = ++playbackAttempt;
 					clearIntroTimers();
 					if (resetImmediately) stage.classList.add("is-resetting");
-					stage.classList.remove("is-darkening", "is-teasing", "is-complete");
+					stage.classList.remove(
+						"is-sequence-started",
+						"is-opened",
+						"is-video-wait",
+						"is-playing",
+						"is-darkening",
+						"is-final",
+					);
+					stage.classList.add("is-green-intro");
 					video.loop = false;
+					video.pause();
 					video.currentTime = 0;
 					if (resetImmediately) {
 						void stage.offsetWidth;
 						stage.classList.remove("is-resetting");
 					}
-					const playPromise = video.play();
 
-					completionTimer = window.setTimeout(() => {
-						if (attempt === playbackAttempt) completeIntro();
-					}, 13000);
-
-					playPromise?.catch(() => {
+					window.requestAnimationFrame(() => {
 						if (attempt !== playbackAttempt) return;
-						window.clearTimeout(completionTimer);
-						completionTimer = window.setTimeout(completeIntro, 900);
+						stage.classList.add("is-sequence-started");
+						scheduleIntroStep(() => openGreenIntro(attempt), 10000);
 					});
 				};
 
 				video.addEventListener("ended", () => {
 					video.pause();
-					completeIntro();
+					showFinalMessage(playbackAttempt);
 				});
-				video.addEventListener("loadedmetadata", syncIntroGeometry);
+				video.addEventListener("loadedmetadata", () => {
+					video.pause();
+					video.currentTime = 0;
+					syncIntroGeometry();
+				});
 				scrollButton.addEventListener("click", () => {
 					if (!(hero instanceof HTMLElement)) return;
 					const navHeight = nav instanceof HTMLElement ? nav.getBoundingClientRect().height : 0;
@@ -258,8 +305,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 					});
 				});
 				replayButton.addEventListener("click", () => {
-					video.pause();
-					playVideoOnce(true);
+					startExperience(true);
 				});
 				window.addEventListener(
 					"scroll",
@@ -277,8 +323,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 							if (hasLeftPageTop) {
 								hasLeftPageTop = false;
-								video.pause();
-								playVideoOnce(true);
+								startExperience(true);
 							}
 						});
 					},
@@ -287,7 +332,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				window.addEventListener("resize", syncIntroGeometry, { passive: true });
 
 				syncIntroGeometry();
-				requestAnimationFrame(playVideoOnce);
+				startExperience();
 			};
 
 			setupHomeVideoIntro();
@@ -469,6 +514,95 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		background: #000000;
 	}
 
+	.home-video-green-shutters {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		overflow: hidden;
+		pointer-events: none;
+	}
+
+	.home-video-green-panel {
+		position: absolute;
+		width: 50%;
+		height: 50%;
+		overflow: hidden;
+		transition: transform 1500ms cubic-bezier(0.7, 0, 0.2, 1);
+		will-change: transform;
+	}
+
+	.home-video-green-panel::before {
+		content: "";
+		position: absolute;
+		width: 200%;
+		height: 200%;
+		background: var(--home-video-green-background);
+		pointer-events: none;
+	}
+
+	.home-video-green-panel--top-left {
+		top: 0;
+		left: 0;
+	}
+
+	.home-video-green-panel--top-left::before {
+		top: 0;
+		left: 0;
+	}
+
+	.home-video-green-panel--top-right {
+		top: 0;
+		right: 0;
+	}
+
+	.home-video-green-panel--top-right::before {
+		top: 0;
+		right: 0;
+	}
+
+	.home-video-green-panel--bottom-left {
+		bottom: 0;
+		left: 0;
+	}
+
+	.home-video-green-panel--bottom-left::before {
+		bottom: 0;
+		left: 0;
+	}
+
+	.home-video-green-panel--bottom-right {
+		right: 0;
+		bottom: 0;
+	}
+
+	.home-video-green-panel--bottom-right::before {
+		right: 0;
+		bottom: 0;
+	}
+
+	.home-video-green-panel--bottom-left::after,
+	.home-video-green-panel--bottom-right::after {
+		content: "";
+		position: absolute;
+		bottom: -1px;
+		width: 200%;
+		height: var(--home-video-wave-height);
+		background-image: var(--green-edge-air-bottom-wave-scroll);
+		background-position: calc(var(--green-edge-bottom-wave-x) + var(--green-edge-wave-scroll-x)) bottom;
+		background-repeat: repeat-x;
+		background-size: var(--green-edge-bottom-wave-width) 100%;
+		pointer-events: none;
+		will-change: background-position;
+	}
+
+	.home-video-green-panel--bottom-left::after {
+		left: 0;
+	}
+
+	.home-video-green-panel--bottom-right::after {
+		right: 0;
+	}
+
 	.home-video-green-layer {
 		position: absolute;
 		inset: 0;
@@ -498,14 +632,14 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		position: relative;
 		z-index: 0;
 		width: 100%;
-		height: 0;
+		height: var(--home-video-wave-height);
 		transition: height 1700ms ease-in-out;
 	}
 
 	.home-video-intro-content {
 		position: absolute;
 		inset: 0 0 auto;
-		z-index: 2;
+		z-index: 3;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -581,6 +715,11 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		display: block;
 		width: clamp(86px, 9.2vw, 140px);
 		aspect-ratio: 3900 / 3500;
+		opacity: 0;
+		transform: translate3d(0, 14px, 0) scale(0.96);
+		transition:
+			opacity 900ms var(--motion-ease),
+			transform 900ms var(--motion-ease);
 	}
 
 	.home-video-brand-mark img {
@@ -601,6 +740,11 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		letter-spacing: var(--letter-spacing-heading);
 		line-height: 1;
 		text-align: center;
+		opacity: 0;
+		transform: translate3d(0, 14px, 0);
+		transition:
+			opacity 900ms var(--motion-ease),
+			transform 900ms var(--motion-ease);
 	}
 
 	.home-video-wordmark > span:last-child {
@@ -623,7 +767,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		margin-left: 0 !important;
 		padding: 0 !important;
 		text-align: center;
-		transition-delay: 1050ms;
 	}
 
 	.home-video-slogan {
@@ -665,7 +808,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		line-height: 1.2;
 		text-align: center !important;
 		white-space: nowrap;
-		transition-delay: 1900ms;
 	}
 
 	.home-video-strategy-line {
@@ -693,7 +835,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		cursor: pointer;
 		pointer-events: none;
 		transform: translate3d(-50%, 24px, 0);
-		transition-delay: 2750ms;
 	}
 
 	.home-video-scroll::before {
@@ -740,7 +881,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		color: var(--section-green-orange);
 		cursor: pointer;
 		pointer-events: none;
-		transition-delay: 3350ms;
 	}
 
 	.home-video-replay svg {
@@ -772,35 +912,107 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	.home-video-stage.is-darkening .home-video-green-layer,
-	.home-video-stage.is-complete .home-video-green-layer {
+	.home-video-stage.is-final .home-video-green-layer {
 		opacity: 1;
 	}
 
+	.home-video-stage.is-opened .home-video-green-panel--top-left {
+		transform: translate3d(-105%, -105%, 0);
+	}
+
+	.home-video-stage.is-opened .home-video-green-panel--top-right {
+		transform: translate3d(105%, -105%, 0);
+	}
+
+	.home-video-stage.is-opened .home-video-green-panel--bottom-left {
+		transform: translate3d(-105%, 105%, 0);
+	}
+
+	.home-video-stage.is-opened .home-video-green-panel--bottom-right {
+		transform: translate3d(105%, 105%, 0);
+	}
+
 	.home-video-stage.is-resetting .home-video-green-layer,
+	.home-video-stage.is-resetting .home-video-green-panel,
 	.home-video-stage.is-resetting .home-video-wave-space,
 	.home-video-stage.is-resetting .home-video-teaser,
 	.home-video-stage.is-resetting
-		:is(.home-video-brand, .home-video-slogan-block, .home-video-strategy, .home-video-scroll, .home-video-replay) {
+		:is(
+			.home-video-brand,
+			.home-video-brand-mark,
+			.home-video-wordmark,
+			.home-video-slogan-block,
+			.home-video-strategy,
+			.home-video-scroll,
+			.home-video-replay
+		) {
 		transition: none;
 	}
 
+	.home-video-stage.is-opened:not(.is-darkening, .is-final) .home-video-wave-space {
+		height: 0;
+	}
+
 	.home-video-stage.is-darkening .home-video-wave-space,
-	.home-video-stage.is-complete .home-video-wave-space {
+	.home-video-stage.is-final .home-video-wave-space {
 		height: var(--home-video-wave-height);
 	}
 
-	.home-video-stage.is-complete
-		:is(.home-video-brand, .home-video-slogan-block, .home-video-strategy, .home-video-replay) {
+	.home-video-stage.is-sequence-started .home-video-brand,
+	.home-video-stage.is-sequence-started .home-video-slogan-block,
+	.home-video-stage.is-sequence-started .home-video-strategy {
 		opacity: 1;
 		transform: translate3d(0, 0, 0) scale(1);
 	}
 
-	.home-video-stage.is-teasing .home-video-teaser {
+	.home-video-stage.is-sequence-started .home-video-brand {
+		transition-delay: 0ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-brand-mark {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+		transition-delay: 250ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-wordmark {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+		transition-delay: 1050ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-slogan-block {
+		transition-delay: 1850ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-strategy {
+		transition-delay: 2950ms;
+	}
+
+	.home-video-stage.is-opened .home-video-brand {
+		opacity: 0;
+		transform: translate3d(-55vw, -55vh, 0) scale(0.88);
+		transition-delay: 0ms;
+	}
+
+	.home-video-stage.is-opened .home-video-slogan-block {
+		opacity: 0;
+		transform: translate3d(55vw, -55vh, 0) scale(0.88);
+		transition-delay: 0ms;
+	}
+
+	.home-video-stage.is-opened .home-video-strategy {
+		opacity: 0;
+		transform: translate3d(-55vw, 55vh, 0) scale(0.88);
+		transition-delay: 0ms;
+	}
+
+	.home-video-stage.is-final .home-video-teaser {
 		opacity: 1;
 		transform: translate3d(0, -50%, 0) scale(1);
 	}
 
-	.home-video-stage.is-complete .home-video-scroll {
+	.home-video-stage.is-final .home-video-scroll {
 		opacity: 1;
 		transform: translate3d(-50%, 0, 0);
 		pointer-events: auto;
@@ -808,8 +1020,11 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		animation: home-video-arrow-float 2400ms ease-in-out infinite;
 	}
 
-	.home-video-stage.is-complete .home-video-replay {
+	.home-video-stage.is-final .home-video-replay {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
 		pointer-events: auto;
+		transition-delay: 0ms;
 	}
 
 	@keyframes home-video-arrow-float {
@@ -853,7 +1068,9 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	@media (orientation: portrait) {
 		.home-video-stage {
-			--home-video-final-height: clamp(500px, 72vw, 560px);
+			--home-video-initial-height: clamp(500px, 72vw, 560px);
+			--home-video-outro-height: clamp(340px, 78vw, 460px);
+			--green-edge-bottom-wave-width: 1100px;
 			width: 100vw;
 			max-width: none;
 			margin-right: calc(50% - 50vw);
@@ -864,9 +1081,14 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			transition: height 1700ms ease-in-out;
 		}
 
+		.home-video-stage.is-green-intro .home-video-intro {
+			height: var(--home-video-initial-height) !important;
+			aspect-ratio: auto;
+		}
+
 		.home-video-stage.is-darkening .home-video-intro,
-		.home-video-stage.is-complete .home-video-intro {
-			height: var(--home-video-final-height) !important;
+		.home-video-stage.is-final .home-video-intro {
+			height: var(--home-video-outro-height) !important;
 			aspect-ratio: auto;
 		}
 
@@ -886,9 +1108,13 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			font-size: clamp(1.45rem, 5.4vw, 2.25rem);
 		}
 
+		.home-video-stage.is-green-intro .home-video-intro-content {
+			height: var(--home-video-initial-height);
+		}
+
 		.home-video-stage.is-darkening .home-video-intro-content,
-		.home-video-stage.is-complete .home-video-intro-content {
-			height: var(--home-video-final-height);
+		.home-video-stage.is-final .home-video-intro-content {
+			height: var(--home-video-outro-height);
 		}
 
 		.home-video-brand-mark {
@@ -982,7 +1208,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.home-video-stage.is-complete .home-video-scroll {
+		.home-video-stage.is-final .home-video-scroll {
 			animation: none;
 		}
 	}
@@ -1576,6 +1802,16 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		text-align: center;
 	}
 
+	@media (orientation: landscape) {
+		:global(.home-file-model-section > .home-comparison-grid) {
+			margin-top: clamp(48px, 5.25vw, 72px) !important;
+		}
+
+		:global(body .page .content .section.home-file-model-section > p.home-file-model-summary) {
+			margin-top: clamp(48px, 5.25vw, 72px) !important;
+		}
+	}
+
 	:global(.home-file-model-summary > span) {
 		display: block;
 	}
@@ -1583,6 +1819,14 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	:global(body .page .content .home-file-model-summary > .home-file-model-summary-problem) {
 		color: rgb(105, 115, 128) !important;
 		font-size: clamp(1.25rem, 1.8vw, 1.55rem) !important;
+	}
+
+	:global(body .page .content .home-file-model-summary > .home-file-model-summary-break) {
+		color: var(--accent-orange) !important;
+	}
+
+	:global(body .page .content .section.home-file-model-section > p.home-file-model-summary-solution) {
+		margin-top: var(--section-gap) !important;
 	}
 
 	:global(.home-file-model-section) {
