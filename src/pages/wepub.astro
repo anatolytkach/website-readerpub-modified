@@ -1105,6 +1105,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		display: contents;
 	}
 
+	:global(.wepub-new-source-icon-grid .icon-grid-card-copy > :is(h2, h3, h4, p)) {
+		position: relative;
+		z-index: 1;
+	}
+
 	:global(.wepub-new-source-icon-grid .icon-grid-card > .section-icon) {
 		grid-column: 1;
 		grid-row: 1;
