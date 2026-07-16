@@ -2953,6 +2953,67 @@ body .page .content .section--gray .card.card {
 		--gray-card-outline-angle: 3.5deg;
 		--gray-card-row-drop: var(--gray-card-row-slope);
 	}
+
+	/* Give a second row its own rhythm instead of copying the angles above it. */
+	.section--gray .card-grid--2 > .card:nth-child(4n + 3),
+	.section--gray .security-steps-grid > .card:nth-child(4n + 3) {
+		--gray-card-outline-angle: -2deg;
+	}
+
+	.section--gray .card-grid--2 > .card:nth-child(4n),
+	.section--gray .security-steps-grid > .card:nth-child(4n) {
+		--gray-card-outline-angle: 2.5deg;
+	}
+
+	.section--gray .card-grid--3 > .card:nth-child(6n + 4),
+	.section--gray .institutions-top-problem-grid > .card:nth-child(4),
+	.section--gray .wepub-new-source-authors-loss-grid > .card:nth-child(4) {
+		--gray-card-outline-angle: 2deg;
+	}
+
+	.section--gray .card-grid--3 > .card:nth-child(6n + 5),
+	.section--gray .institutions-top-problem-grid > .card:nth-child(5),
+	.section--gray .wepub-new-source-authors-loss-grid > .card:nth-child(5) {
+		--gray-card-outline-angle: -2.6deg;
+	}
+
+	.section--gray .card-grid--3 > .card:nth-child(6n) {
+		--gray-card-outline-angle: 2.3deg;
+	}
+
+	@media (max-width: 1100px) {
+		.section--gray .card-grid--4:not(.institutions-top-problem-grid) > .card:nth-child(4n + 3) {
+			--gray-card-outline-angle: -2deg;
+		}
+
+		.section--gray .card-grid--4:not(.institutions-top-problem-grid) > .card:nth-child(4n) {
+			--gray-card-outline-angle: 2.5deg;
+		}
+	}
+
+	@media (max-width: 1180px) {
+		.section--gray .webuzz-comparison-grid > .card:nth-child(4n + 3) {
+			--gray-card-outline-angle: -2deg;
+		}
+
+		.section--gray .webuzz-comparison-grid > .card:nth-child(4n) {
+			--gray-card-outline-angle: 2.5deg;
+		}
+	}
+}
+
+/* Keep the established-media cards together; the Books card remains unchanged. */
+@media (min-width: 901px) {
+	.section--gray .webuzz-comparison-grid > .card:nth-child(-n + 3) {
+		--gray-card-outline-angle: 0deg;
+		--gray-card-outline-shadow: 7.5px 9.5px 24px rgb(2 143 128 / 18%);
+	}
+}
+
+@media (min-width: 1181px) {
+	.section--gray .webuzz-comparison-grid > .card:nth-child(-n + 3) {
+		--gray-card-row-drop: 0px;
+	}
 }
 
 @media (max-width: 900px) {
@@ -3181,6 +3242,69 @@ body .page .content .section--white .card:is(
 	z-index: 1;
 }
 
+/* Use the same curved paper frame for the three green comparison cards. */
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	) {
+	position: relative;
+	isolation: isolate;
+	padding-inline: calc(28px + 4%);
+	border: 0 !important;
+	border-radius: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	)::before,
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	)::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	)::before {
+	background-image: var(--white-card-question-frame);
+	filter: drop-shadow(var(--white-card-shape-shadow));
+}
+
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	)::after {
+	background-image: var(--white-card-question-frame-hover);
+	opacity: 0;
+	transition: opacity var(--motion-quick) var(--motion-ease);
+}
+
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	) > * {
+	position: relative;
+	z-index: 1;
+}
+
 @media (hover: hover) and (pointer: fine) {
 	body .page .content .section--white .card:is(
 			.card--accent,
@@ -3197,6 +3321,14 @@ body .page .content .section--white .card:is(
 			.webuzz-living-card,
 			.webuzz-legacy-solution-card,
 			.webuzz-overview-card--green
+		):hover::after {
+		opacity: 1;
+	}
+
+	body .page .content .section--green .card:is(
+			.platform-readerpub-model-card,
+			.readerpub-model-card,
+			.booktree-with-card
 		):hover::after {
 		opacity: 1;
 	}

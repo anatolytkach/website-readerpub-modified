@@ -208,11 +208,11 @@ const benefitCards = [
 				body="Each layer supports a different stage of the publication lifecycle while remaining connected within one platform."
 			>
 				<ol class="platform-flow" aria-label="ReaderPub publication lifecycle">
-					<li class="card"><ProductName name="WePub" /></li>
-					<li class="card"><ProductName name="WeRead" /></li>
-					<li class="card"><ProductName name="BookTree" /></li>
-					<li class="card"><span class="platform-flow-product-pair"><ProductName name="WeBuzz" /> / <ProductName name="WeTalk" /></span></li>
-					<li class="card">Scribe</li>
+					<li class="card"><ProductName name="WePub" /><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
+					<li class="card"><ProductName name="WeRead" /><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
+					<li class="card"><ProductName name="BookTree" /><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
+					<li class="card"><span class="platform-flow-product-pair"><ProductName name="WeBuzz" /> / <ProductName name="WeTalk" /></span><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
+					<li class="card"><span class="platform-flow-scribe">Scribe</span></li>
 				</ol>
 				<p class="platform-flow-note">
 					Instead of moving readers and content between disconnected systems, ReaderPub keeps these activities connected within one publishing environment.
@@ -585,6 +585,10 @@ const benefitCards = [
 		grid-template-rows: auto minmax(0, 1fr);
 		gap: var(--section-flow-gap);
 		min-width: 0;
+	}
+
+	.platform-source-section .platform-onboarding-grid {
+		gap: var(--card-grid-gap);
 	}
 
 	.platform-source-section .platform-onboarding-grid .platform-onboarding-heading {
@@ -1085,13 +1089,14 @@ const benefitCards = [
 		grid-column: 4 / span 2;
 	}
 
-	.platform-flow li:not(:last-child)::after {
-		content: "\2192";
-		position: absolute;
+	.platform-flow-arrow {
+		position: absolute !important;
 		top: 50%;
 		right: -27px;
 		transform: translateY(-50%);
-		color: var(--platform-flow-heading-color);
+		z-index: 2 !important;
+		pointer-events: none;
+		color: var(--accent-orange) !important;
 		font-size: 1.35rem;
 		font-weight: 700;
 	}
@@ -1100,6 +1105,30 @@ const benefitCards = [
 		border-color: var(--accent-orange) !important;
 		box-shadow: none !important;
 		color: var(--accent-orange) !important;
+	}
+
+	.platform-flow-scribe {
+		color: var(--accent) !important;
+	}
+
+	:global(body .page .content .section--green.platform-flow-section .card.platform-onboarding-card) {
+		padding-inline: 28px !important;
+		border: 1px solid transparent !important;
+		border-radius: calc(var(--radius-card) * 3) !important;
+		background: var(--card-bg) !important;
+		box-shadow: var(--card-green-shadow) !important;
+	}
+
+	:global(body .page .content .section--green.platform-flow-section .card.platform-onboarding-card)::before,
+	:global(body .page .content .section--green.platform-flow-section .card.platform-onboarding-card)::after {
+		content: none !important;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		:global(body .page .content .section--green.platform-flow-section .card.platform-onboarding-card):hover {
+			border-color: var(--accent-orange) !important;
+			box-shadow: none !important;
+		}
 	}
 
 	.platform-flow-note {
@@ -1204,18 +1233,17 @@ const benefitCards = [
 		}
 
 		.platform-flow {
-			gap: 16px;
+			row-gap: 56px;
 		}
 
-		.platform-flow li:not(:last-child)::after {
-			content: "\2193";
+		.platform-flow-arrow {
 			display: block;
-			top: auto;
+			top: calc(100% + 18px);
 			right: auto;
-			bottom: -18px;
+			bottom: auto;
 			left: 50%;
-			transform: translateX(-50%);
-			font-size: 1.1rem;
+			transform: translateX(-50%) rotate(90deg);
+			font-size: 1.3rem;
 		}
 
 		.platform-flow-note {
@@ -1253,6 +1281,14 @@ const benefitCards = [
 	}
 
 	@media (orientation: landscape) {
+		.platform-source-section .platform-reading-cards .card {
+			padding-inline: 28px;
+		}
+
+		.platform-source-section .platform-reading-cards .card > h3 {
+			white-space: nowrap;
+		}
+
 		.platform-source-section.platform-capabilities-section .platform-capability-card {
 			align-items: stretch !important;
 			text-align: left !important;
