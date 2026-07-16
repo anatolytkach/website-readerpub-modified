@@ -510,8 +510,10 @@ export const pages = {
 		},
 	},
 	contact: {
-		metaTitle: `${SITE_NAME} Contact`,
-		description: "Contact ReaderPub about web-native publishing for authors, publishers and institutions.",
+		metaTitle: `Contact ${SITE_NAME} | Publishing, Pilots & Support`,
+		description: "Contact ReaderPub about publishing, live pilots, institutional collections, catalog migration, EPUB, analytics, Scribe, security, pricing, or support.",
+		ogTitle: "Contact ReaderPub",
+		ogDescription: "Contact ReaderPub about publishing, pilots, institutional collections, catalog migration, analytics, Scribe, security, pricing, or support.",
 		eyebrow: "Get started",
 		heroTitle: "Tell us what you’re publishing.",
 		heroLead:
@@ -520,7 +522,7 @@ export const pages = {
 			"Our knowledge base outlines the ReaderPub's way of reading, distributing, discussing, and selling books. Ask our team for additional info or simply request a live Pilot.",
 		heroSpacerBackgroundPositionY: "90%",
 		image: "/images/contact.webp",
-		imageAlt: "ReaderPub onboarding",
+		imageAlt: "ReaderPub contact and project-request illustration",
 		actions: [
 			{ label: "Knowledge base", href: "/kb", variant: "secondary" },
 			{ label: "Ask us a question", href: "#kb-help-modal", variant: "secondary", modalTarget: "#kb-help-modal" },
@@ -534,14 +536,16 @@ export const pages = {
 		},
 	},
 	kb: {
-		metaTitle: `${SITE_NAME} Knowledge Base`,
-		description: "ReaderPub knowledge base for web-native publishing, reading and distribution.",
+		metaTitle: `${SITE_NAME} Knowledge Base: Products, Publishing & Support`,
+		description: "Find answers about ReaderPub, WeRead, WePub, WeBuzz, WeTalk, BookTree, Scribe, security, pricing, institutional publishing, and support.",
+		ogTitle: "ReaderPub Knowledge Base",
+		ogDescription: "ReaderPub knowledge base for web-native publishing, reading, distribution, security, pricing, communities, AI, and support.",
 		eyebrow: "Knowledge base",
 		heroTitle: "Short answers about ReaderPub.",
 		heroLead: "",
 		heroSpacerBackgroundPositionY: "50%",
 		image: "/images/kb.webp",
-		imageAlt: "ReaderPub knowledge base",
+		imageAlt: "ReaderPub knowledge base and product support illustration",
 		actions: [
 			{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" },
 			{
@@ -574,7 +578,7 @@ export const pages = {
 		],
 		cta: {
 			title: "Need a direct answer?",
-			body: "If you haven't found a suitable answer here, ask our team.",
+			body: "If you haven’t found the answer you need here, ask our team.",
 			actions: [
 				{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" },
 				{

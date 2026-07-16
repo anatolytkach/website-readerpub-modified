@@ -10,15 +10,15 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 ---
 
 <Base
-	title={`Transforming the world of books. | ${SITE_NAME}`}
-	description="We make your books readable online and keep your readers connected. No apps, downloads, or platform lock-in."
+	title={`Web-Native Publishing & Digital Reading Platform | ${SITE_NAME}`}
+	description="ReaderPub is a web-native publishing and digital reading platform that keeps books and readers connected—without apps, downloads, or platform lock-in."
 >
 	<HeroSection
 		class="home-hero"
 		title="Transforming the world of books."
-		lead="E-books are still delivered as files detached from authors, publishers, discussions, and communities."
+		lead="Ebooks are still delivered as standalone files, detached from authors, publishers, discussions, and communities."
 		image="/images/home.webp"
-		imageAlt=""
+		imageAlt="Illustration of ReaderPub connecting a reader with an author, publisher, library, and university"
 		actions={[
 			{ label: "Explore the solution", href: "/platform" },
 			{ label: "Read 60K+ books in WeRead", href: BOOKS_URL, external: true, variant: "secondary" },
@@ -26,7 +26,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		spacerBackgroundPositionY="0%"
 	>
 		<p class="home-hero-statement hero-body">
-			We make your books readable online and keep your readers connected.
+			ReaderPub is a web-native publishing platform that makes books readable online and keeps readers connected.
 		</p>
 		<p class="home-hero-strategy">
 			Read instantly. Publish securely. Distribute strategically.
@@ -39,26 +39,26 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	<Section
 		tone="gray"
 		title="The challenge:"
-		body="Digital publishing made distribution easier, but it did not keep books connected to readers, discussion or long-term discovery."
+		body="Digital publishing made distribution easier, but it still leaves books disconnected from readers, discussion, and long-term discovery."
 	>
 		<CardGrid columns="3" class="home-problem-grid">
 			<Card
 				href="/weread"
 				icon="readerBook"
 				title="Readers"
-				body="Reading is digital, but discussion and discovery are fragmented across apps, stores and social networks."
+				body="Reading is digital, yet discussion and discovery remain fragmented across apps, stores, and social networks."
 			/>
 			<Card
 				href="/wepub"
 				icon="author"
 				title="Authors & Publishers"
-				body="Authors publish books, but marketplaces often control visibility, readers and the customer relationship."
+				body="Authors and publishers release books, yet marketplaces often control visibility, access to readers, and the customer relationship."
 			/>
 			<Card
 				href="/institutions"
 				icon="library"
 				title="Institutions"
-				body="Libraries, universities and public organizations publish knowledge that remains hard to find, read and discuss."
+				body="Libraries, universities, and public organizations publish knowledge that remains difficult to find, read, and discuss online."
 			/>
 		</CardGrid>
 	</Section>
@@ -67,7 +67,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		<h2 id="home-tech-title" class="home-tech-title">
 			<span class="home-tech-title-line home-tech-title-line-primary"><span class="home-tech-title-prefix">The solution:</span><span class="home-tech-title-readerpub" style="color: var(--accent);"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span></span>
 		</h2>
-		<h3 class="home-tech-title-line home-tech-title-line-solution">Browser-based eReader <span class="home-tech-title-plus">+</span> web-native publishing network.</h3>
+		<h3 class="home-tech-title-line home-tech-title-line-solution">A browser-based eReader <span class="home-tech-title-plus">+</span> a web-native publishing network.</h3>
 		<div class="home-reader-frame" data-video-player>
 			<a class="home-reader-video-link" href="https://reader.pub/books/reader/?id=90000120" target="_blank" rel="noopener noreferrer" aria-label="Open Treasure Island in WeRead">
 				<video
@@ -84,8 +84,8 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			</button>
 		</div>
 		<div class="home-tech-reader-cta">
-			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2"><em class="home-tech-guess">Guess what<span class="home-tech-guess-question">?</span></em>It’s not an app. It is <span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
-			<h3 class="home-tech-reader-subtitle">Read this thrilling story along with...</h3>
+			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2"><em class="home-tech-guess">Guess what<span class="home-tech-guess-question">?</span></em>It’s not an app. It’s a <span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
+			<h3 class="home-tech-reader-subtitle">Read this thrilling story, then explore more in WeRead.</h3>
 			<div class="home-tech-reader-actions">
 				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">60K+ books in WeRead</a>
 				<a class="button home-tech-visual-button home-tech-reader-button" href="/weread">Explore WeRead</a>
@@ -147,14 +147,14 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	<section class="section section--green home-tech-visual-section" aria-label="Explore ReaderPub platform">
 		<h2 class="home-tech-container-title">
 			<span class="home-tech-container-title-primary">ReaderPub is end-to-end:</span>
-			<span class="home-tech-container-title-secondary">from creating to publishing and engagement</span>
+			<span class="home-tech-container-title-secondary">from creation and publishing to reading and engagement</span>
 		</h2>
 		<a class="home-tech-picture-link" href="/platform" aria-label="Explore the ReaderPub platform">
 			<picture class="home-tech-picture">
 				<source media="(orientation: portrait)" srcset="/images/tech_mobile.webp" width="823" height="1743" />
 				<img
 					src="/images/tech.webp"
-					alt="ReaderPub connects web publishing, reading, discussion and knowledge tools"
+					alt="ReaderPub dashboard connecting publishing, browser reading, discussion, and reader activity"
 					loading="lazy"
 					decoding="async"
 					width="1663"
@@ -162,23 +162,23 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				/>
 			</picture>
 		</a>
-		<h2 class="home-tech-reader-activity-note">This is what your reader activity would look like on <span>ReaderPub</span>.</h2>
+		<h2 class="home-tech-reader-activity-note">This is what reader activity looks like on <span>ReaderPub</span>.</h2>
 		<a class="button home-tech-visual-button home-tech-platform-button" href="/platform">Explore ReaderPub</a>
 	</section>
 
 	<Section
 		tone="white"
 		class="home-file-model-section section--two-column"
-		title="The old file-first model breaks the relationship"
-		body="The old publishing model ends when a file is delivered. ReaderPub helps publications remain alive and connected after delivery."
+		title="The old file-first model breaks the reader relationship"
+		body="The old file-first publishing model ends when a file is delivered. ReaderPub keeps publications alive and connected after delivery."
 		>
 			<div class="home-comparison-grid">
 				<article class="comparison-text-panel home-list-card home-old-model-card">
 					<div class="card-copy">
 						<h3>Old model</h3>
 						<ul class="home-model-list" style="--home-model-marker-color: var(--text);">
-							<li>File uploaded</li>
-							<li>Reader downloads</li>
+							<li>File is uploaded</li>
+							<li>Reader downloads the file</li>
 							<li>Discussion moves elsewhere</li>
 						<li>Audience becomes invisible</li>
 						<li>Relationship ends</li>
@@ -190,7 +190,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 						<h3><span class="home-title-accent readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> model</h3>
 						<ul class="home-model-list">
 							<li>Book is published online</li>
-							<li>Reader opens instantly in web eReader</li>
+							<li>Reader opens it instantly in the web eReader</li>
 							<li>Comments stay connected</li>
 							<li>Audience remains visible</li>
 							<li>Relationship continues</li>
@@ -206,7 +206,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				<div class="card-copy">
 					<h3>Traditional publishing</h3>
 					<p class="home-flow home-flow--dark">Publish → Download → Relationship ends</p>
-					<p>The old model delivers a file and loses the reader relationship after access begins.</p>
+					<p>The traditional model delivers a file and loses the reader relationship once access begins.</p>
 				</div>
 			</article>
 			<article class="card card--good home-comparison-card home-readerpub-publishing-card">
@@ -216,7 +216,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 						Publish <span class="home-flow-arrow">→</span> Discover <span class="home-flow-arrow">→</span> Read <span class="home-flow-arrow">→</span>
 						Share &amp; Discuss <span class="home-flow-arrow">→</span> Follow &amp; Engage
 					</p>
-					<p>ReaderPub keeps the publication alive on the web, connected to readers, discussion and long-term discovery.</p>
+					<p>ReaderPub keeps the publication alive on the web, connected to readers, discussion, and long-term discovery.</p>
 				</div>
 			</article>
 		</div>
@@ -226,7 +226,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		id="solution"
 		tone="green"
 		title="How ReaderPub creates live web publications"
-		body="ReaderPub combines web reading, secure publishing, public discussion and structured knowledge tools so books and publications remain alive after launch."
+		body="ReaderPub combines browser-based reading, secure web-native publishing, public and private discussion, and structured knowledge tools so books and publications remain alive after launch."
 	>
 		<CardGrid columns="2" class="home-product-grid">
 			<article class="card">
@@ -238,7 +238,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			<article class="card">
 				<div class="card-copy">
 					<h3><a class="home-product-link" href="/wepub"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Pub</span></a></h3>
-					<p>Authors and publishers release secure web-native publications while keeping audience relationships.</p>
+					<p>Authors and publishers release secure web-native publications while keeping their audience relationships.</p>
 				</div>
 			</article>
 			<article class="card">
@@ -248,19 +248,19 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 						<span class="home-product-divider">/</span>
 						<a class="home-product-link" href="/wetalk"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Talk</span></a>
 					</h3>
-					<p>Social and private discussions stay connected to books, authors, researchers, and ideas.</p>
+					<p>Social, public, and private discussions stay connected to books, authors, researchers, and ideas.</p>
 				</div>
 			</article>
 			<article class="card">
 				<div class="card-copy">
 					<h3><a class="home-product-link" href="/booktree"><span class="home-product-name-base">Book</span><span class="home-product-name-accent">Tree</span></a></h3>
-					<p>Serious readers connect books, notes and projects into durable knowledge structures.</p>
+					<p>Serious readers connect books, notes, and projects into durable knowledge structures.</p>
 				</div>
 			</article>
 			<article class="card">
 				<div class="card-copy">
 					<h3><a class="home-product-link" href="/scribe">Scribe</a></h3>
-					<p>A specialized AI companion for literature, writing, publishing and ReaderPub.</p>
+					<p>A specialized AI companion for literature, writing, publishing, and ReaderPub.</p>
 				</div>
 			</article>
 		</CardGrid>
@@ -268,24 +268,24 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	<Section
 		tone="white"
-		title="ReaderPub is not yet another ebook platform"
+		title="ReaderPub is not just another ebook platform"
 	>
 		<Fragment slot="body">
 			ReaderPub is a web-native publishing network where books and knowledge publications become <span class="home-cta-body-accent">living web assets</span>.
 		</Fragment>
 		<CardGrid columns="4">
 			<Card title="Readable" body="Readers open publications instantly in the browser." />
-			<Card title="Discoverable" body="Books and publications have web presence, metadata and shareable URLs." />
-			<Card title="Discussable" body="Conversation stays attached to books, authors, fragments and ideas." />
-			<Card title="Connected" body="Authors, publishers and institutions can see and engage with their reading audience." />
+			<Card title="Discoverable" body="Books and publications have a web presence, metadata, and shareable URLs." />
+			<Card title="Discussable" body="Conversation stays attached to books, authors, fragments, and ideas." />
+			<Card title="Connected" body="Authors, publishers, and institutions can see and engage with their reading audiences." />
 		</CardGrid>
 	</Section>
 
 	<Section tone="green">
 		<Fragment slot="title">Who benefits from <span class="green-heading-white">web-native reading</span>?</Fragment>
 		<CardGrid columns="4">
-			<Card icon="readerBook" title="Readers" body="They get instant access, context, discussion and better discovery." />
-			<Card icon="author" title="Authors" body="They keep more revenue, more audience visibility and more long-term reader connection." />
+			<Card icon="readerBook" title="Readers" body="They get instant access, richer context, connected discussion, and better discovery." />
+			<Card icon="author" title="Authors" body="They keep more revenue, gain greater audience visibility, and build a longer-term reader connection." />
 			<Card icon="publisher" title="Publishers" body="They launch books as active web assets, not isolated product files." />
 			<Card icon="library" title="Institutions" body="They turn collections and research into visible public knowledge infrastructure." />
 		</CardGrid>
@@ -299,7 +299,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		]}
 	>
 		<Fragment slot="body">
-			ReaderPub helps books and knowledge publications remain <span class="home-cta-body-accent">living web assets</span> — readable, searchable, shareable, discussable and connected.
+			ReaderPub helps books and knowledge publications remain <span class="home-cta-body-accent">living web assets</span>—readable, searchable, shareable, discussable, and connected.
 		</Fragment>
 	</CtaBlock>
 </Base>

@@ -18,19 +18,19 @@ const institutionHeroActions = [
 const fragmentationCards = [
 	{
 		title: "Conversations happen elsewhere",
-		body: "Discussion often moves into email, chat, learning systems or public platforms that sit outside the publication.",
+		body: "Discussion often moves to email, chat, learning systems, or public platforms that sit outside the publication.",
 	},
 	{
 		title: "Materials lose context",
-		body: "When discussion is separated from the work, comments and decisions become harder to understand later.",
+		body: "When discussion is separated from the work, comments, decisions, and their context become harder to understand later.",
 	},
 	{
 		title: "Access is difficult to manage",
-		body: "Organizations need participation rules that match courses, cohorts, collections, teams and restricted programs.",
+		body: "Organizations need participation rules that align with courses, cohorts, collections, teams, and restricted programs.",
 	},
 	{
 		title: "Knowledge becomes harder to reuse",
-		body: "Useful discussion can disappear into disconnected threads instead of remaining attached to the material.",
+		body: "Valuable discussion can disappear into disconnected threads instead of remaining attached to the material.",
 	},
 ];
 
@@ -42,17 +42,17 @@ const discussionLayerCards = [
 	},
 	{
 		title: "Publication-centered discussion",
-		body: "Conversation stays close to books, archives, educational materials, reports and other institutional publications.",
+		body: "Conversation stays close to books, archives, educational materials, reports, and other institutional publications.",
 		icon: "readerBook" as const,
 	},
 	{
 		title: "Professional communities",
-		body: "Organizations can support discussion around knowledge without sending it into public social channels.",
+		body: "Organizations can support discussion around knowledge without moving it into public social channels.",
 		icon: "library" as const,
 	},
 	{
 		title: "Permission-based participation",
-		body: "Readers, students, researchers, members and partners can participate according to role and access level.",
+		body: "Readers, students, researchers, members, and partners can participate according to their roles and access levels.",
 		icon: "security" as const,
 	},
 ];
@@ -60,60 +60,60 @@ const discussionLayerCards = [
 const workflowCards = [
 	{
 		title: "Course materials",
-		body: "Give classes and cohorts a controlled place to discuss assigned reading and educational materials.",
+		body: "Give classes and cohorts a controlled space to discuss assigned reading and educational materials.",
 	},
 	{
 		title: "Library collections",
-		body: "Support reader groups, programs and collection-centered conversation inside a managed environment.",
+		body: "Support reader groups, programs, and collection-centered conversations inside a managed environment.",
 	},
 	{
 		title: "Research publications",
-		body: "Keep discussion attached to papers, reports, editions, archives and research collections.",
+		body: "Keep discussion attached to papers, reports, editions, archives, and research collections.",
 	},
 	{
 		title: "Controlled releases",
-		body: "Open selected publications or excerpts for approved groups without making discussion public.",
+		body: "Open selected publications or excerpts for approved groups without making the discussion public.",
 	},
 	{
 		title: "Membership access",
-		body: "Connect membership, course, department or partner access to publication-centered discussion.",
+		body: "Connect membership, course, department, or partner access to publication-centered discussion.",
 	},
 	{
 		title: "Community analytics",
-		body: "Track discussion, access and engagement activity around controlled-access content.",
+		body: "Track discussion, access, and engagement activity around controlled-access content.",
 	},
 ];
 
 const organizationCards = [
-	{ title: "Universities", body: "Support classroom, research and departmental discussion around published materials.", icon: "university" as const },
-	{ title: "Libraries", body: "Create managed discussion spaces around collections, programs and reading rooms.", icon: "library" as const },
-	{ title: "Research organizations", body: "Keep research conversations attached to publications, archives and shared references.", icon: "research" as const },
-	{ title: "Public institutions", body: "Host controlled conversations around reports, guides, policies and public knowledge materials.", icon: "government" as const },
+	{ title: "Universities", body: "Support classroom, research, and departmental discussion around published materials.", icon: "university" as const },
+	{ title: "Libraries", body: "Create managed discussion spaces around collections, programs, and reading rooms.", icon: "library" as const },
+	{ title: "Research organizations", body: "Keep research conversations attached to publications, archives, and shared references.", icon: "research" as const },
+	{ title: "Public institutions", body: "Host controlled conversations around reports, guides, policies, and public knowledge materials.", icon: "government" as const },
 	{ title: "Membership organizations", body: "Give approved members access to publications and related discussion spaces.", icon: "public" as const },
-	{ title: "Educational programs", body: "Run program-based discussion around course content, reading lists and learning materials.", icon: "program" as const },
+	{ title: "Educational programs", body: "Run program-based discussions around course content, reading lists, and learning materials.", icon: "program" as const },
 ];
 
 const audienceCards = [
 	{ title: "Organizations", body: "Manage publication-centered discussion without exposing materials to public channels.", icon: "library" as const },
-	{ title: "Educators", body: "Keep class and cohort discussion close to assigned materials.", icon: "university" as const },
-	{ title: "Libraries", body: "Support programs and reading communities with managed participation.", icon: "readerBook" as const },
-	{ title: "Readers", body: "Discuss materials where they read them, inside the access rules set by the organization.", icon: "reader" as const },
-	{ title: "Researchers", body: "Preserve context around publications, notes, archives and shared references.", icon: "research" as const },
-	{ title: "Administrators", body: "Control access, roles and visibility across publication-centered discussion spaces.", icon: "access" as const },
+	{ title: "Educators", body: "Keep class and cohort discussions close to assigned materials.", icon: "university" as const },
+	{ title: "Libraries", body: "Support programs and reading communities through managed participation.", icon: "readerBook" as const },
+	{ title: "Readers", body: "Discuss materials where you read them, within the access rules set by the organization.", icon: "reader" as const },
+	{ title: "Researchers", body: "Preserve context around publications, notes, archives, and shared references.", icon: "research" as const },
+	{ title: "Administrators", body: "Control access, roles, and visibility across publication-centered discussion spaces.", icon: "access" as const },
 ];
 ---
 
 <Base
-	title={`WeTalk — Private Discussion Spaces for Institutional Knowledge | ${SITE_NAME}`}
-	description="WeTalk helps organizations create controlled-access discussion environments around educational materials, archives, collections and institutional publications."
+	title={`WeTalk: Private Institutional Discussion Spaces | ${SITE_NAME}`}
+	description="Create private, controlled-access discussion spaces around courses, collections, research, archives, and institutional publications with WeTalk."
 	canonical="/wetalk/"
 >
 	<HeroSection
 		eyebrow="WeTalk"
-		lead="Universities, libraries and organizations publish valuable materials that need discussion, but not always public exposure."
-		body="WeTalk creates controlled discussion space for the materials published and managed by an organization."
+		lead="Universities, libraries, and organizations publish valuable materials that invite discussion—but not always public exposure."
+		body="WeTalk creates controlled discussion spaces around the materials an organization publishes and manages."
 		image="/images/wetalk.webp"
-		imageAlt="WeTalk private discussion spaces for institutional knowledge"
+		imageAlt="WeTalk private discussion spaces for institutional publications, courses, collections, and research"
 		actions={institutionHeroActions}
 		spacerBackgroundPositionY="100%"
 		class="wetalk-hero"
@@ -123,7 +123,7 @@ const audienceCards = [
 
 	<Section
 		tone="gray"
-		body="Organizations often publish useful materials, but discussion happens in separate systems where access, context and long-term value are harder to preserve."
+		body="Organizations often publish valuable materials, but discussion takes place in separate systems where access, context, and long-term value are harder to preserve."
 	>
 		<Fragment slot="title"><span class="section-title-rest">Institutional discussion</span> <span class="section-title-accent">is fragmented</span></Fragment>
 		<CardGrid columns="2">
@@ -140,7 +140,7 @@ const audienceCards = [
 
 	<Section tone="green" class="wetalk-discussion-layer-section">
 		<h3 class="wetalk-discussion-layer-lede">
-			<span class="wetalk-discussion-layer-product">WeTalk</span> keeps discussion close to the publications an organization controls, with participation rules that match institutional access needs.
+			<span class="wetalk-discussion-layer-product">WeTalk</span> keeps discussion close to the publications an organization controls, with participation rules aligned with institutional access needs.
 		</h3>
 		<CardGrid columns="2" class="wetalk-icon-card-grid">
 			{discussionLayerCards.map((card) => <Card {...card} />)}
@@ -151,7 +151,7 @@ const audienceCards = [
 		tone="white"
 		class="wetalk-workflow-section"
 		title="How WeTalk works"
-		body="WeTalk supports membership-based access to discussions around course materials, research, restricted releases and more."
+		body="WeTalk supports membership-based access to discussions around course materials, research, restricted releases, and more."
 	>
 		<CardGrid columns="3">
 			{workflowCards.map((card) => <Card {...card} />)}
@@ -168,12 +168,12 @@ const audienceCards = [
 		tone="white"
 		class="wetalk-comparison-section section--two-column"
 		title="WeTalk and WeBuzz"
-		body="ReaderPub supports both public literary conversation and private institutional discussion, but they serve different needs."
+		body="ReaderPub supports both public literary conversation and private institutional discussion, but each serves a different need."
 	>
 		<div class="model-grid wetalk-comparison-grid">
 			<article class="card wetalk-comparison-card">
 				<h3><ProductName name="WeBuzz" /></h3>
-				<p>Public literary community for books, authors, passages and reader discovery.</p>
+				<p>A public literary community for books, authors, passages, and reader discovery.</p>
 				<ul class="bullets">
 					<li>Public conversation</li>
 					<li>Reader discovery</li>
@@ -183,7 +183,7 @@ const audienceCards = [
 			</article>
 			<article class="card wetalk-comparison-card">
 				<h3><ProductName name="WeTalk" /></h3>
-				<p>Private discussion environment for controlled-access institutional content.</p>
+				<p>A private discussion environment for controlled-access institutional content.</p>
 				<ul class="bullets">
 					<li>Managed participation</li>
 					<li>Institutional access rules</li>
@@ -202,7 +202,7 @@ const audienceCards = [
 
 	<CtaBlock
 		title="Knowledge is more valuable when people can discuss it."
-		body="WeTalk helps organizations create controlled discussion environments around the materials they publish."
+		body="WeTalk helps organizations create controlled discussion environments around the materials they publish and manage."
 		actions={[institutionHeroActions[0]]}
 	/>
 </Base>

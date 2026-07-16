@@ -126,8 +126,12 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 						return next;
 					};
 
-					for (const textBlock of textBlocks) {
-						if (textBlock.matches("p") && textBlock.closest(".card")) {
+			for (const textBlock of textBlocks) {
+				if (textBlock.classList.contains("security-books-heading")) {
+					continue;
+				}
+
+				if (textBlock.matches("p") && textBlock.closest(".card")) {
 							continue;
 						}
 
