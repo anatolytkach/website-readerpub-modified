@@ -20,6 +20,7 @@ interface Props {
 	spacerBackgroundPositionY?: string;
 	showSpacer?: boolean;
 	class?: string;
+	id?: string;
 }
 
 const {
@@ -39,6 +40,7 @@ const {
 	spacerBackgroundPositionY,
 	showSpacer = true,
 	class: className = "",
+	id,
 } = Astro.props;
 
 const spacerBackgroundPositionPercent = spacerBackgroundPositionY?.endsWith("%")
@@ -61,7 +63,7 @@ const hasLeadSlot = Astro.slots.has("lead");
 const hasBodySlot = Astro.slots.has("body");
 ---
 
-<section class:list={["hero-section", "section--white", image && "section--with-media", mediaPosition === "start" && "hero-section--media-start", className]}>
+<section id={id} class:list={["hero-section", "section--white", image && "section--with-media", mediaPosition === "start" && "hero-section--media-start", className]}>
 	<div class:list={["hero-copy", copyClass]}>
 		{(eyebrow || hasEyebrowSlot) && (
 			<p class="section-kicker">
