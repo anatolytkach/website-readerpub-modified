@@ -240,6 +240,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: var(--card-grid-gap);
 		width: 100%;
+		margin-top: 56px !important;
 	}
 
 	.booktree-source-model-card {
@@ -247,8 +248,30 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	}
 
 	.booktree-without-card {
-		background: transparent;
+		--booktree-without-paper-angle: 6deg;
+
+		position: relative;
+		isolation: isolate;
+		z-index: 0;
+		box-sizing: border-box;
+		min-height: 100%;
+		padding: 28px calc(28px + 4%) !important;
+		border: 0 !important;
+		background: transparent !important;
+		box-shadow: none !important;
 		color: var(--accent-orange);
+	}
+
+	.booktree-without-card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		outline: 1px solid var(--accent-orange);
+		transform: rotate(var(--booktree-without-paper-angle));
+		transform-origin: center;
+		transition: none;
 	}
 
 	.booktree-without-card h3 {
@@ -256,7 +279,7 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 	}
 
 	.booktree-green-white {
-		color: #ffffff !important;
+		color: var(--accent-orange) !important;
 	}
 
 	.booktree-with-card h3 span {
@@ -378,9 +401,29 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 		grid-column: 4 / span 2;
 	}
 
+	@media (min-width: 901px) {
+		.booktree-without-card {
+			width: 70%;
+			justify-self: center;
+		}
+	}
+
+	@media (orientation: portrait) {
+		.booktree-source-model-grid {
+			margin-top: 0 !important;
+		}
+	}
+
 	@media (max-width: 900px) {
 		.booktree-source-model-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.booktree-without-card {
+			--booktree-without-paper-angle: 2.5deg;
+
+			width: 100%;
+			padding: 24px !important;
 		}
 
 		.booktree-flow-chain {

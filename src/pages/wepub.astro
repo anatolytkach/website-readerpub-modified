@@ -832,6 +832,10 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		width: 100%;
 	}
 
+	:global(.authors-model-section .model-grid) {
+		margin-top: 56px !important;
+	}
+
 	.model-card {
 		min-height: 0;
 	}
@@ -871,11 +875,40 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		background: var(--accent);
 	}
 
+	.marketplace-model-card {
+		--marketplace-paper-angle: 6deg;
+
+		position: relative;
+		isolation: isolate;
+		z-index: 0;
+		box-sizing: border-box;
+		min-height: 100%;
+		padding: 28px calc(28px + 4%) !important;
+		border: 0 !important;
+		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	.marketplace-model-card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		outline: 1px solid var(--accent-orange);
+		transform: rotate(var(--marketplace-paper-angle));
+		transform-origin: center;
+		transition: none;
+	}
+
 	:global(.marketplace-model-card .comparison-list li::before) {
 		background: var(--accent-orange) !important;
 	}
 
-	:global(.authors-model-section.section--green) .marketplace-model-card h3,
+	:global(.authors-model-section.section--green) .marketplace-model-card h3 {
+		color: var(--accent-orange) !important;
+	}
+
 	:global(.authors-model-section.section--green) .marketplace-model-card .comparison-list li {
 		color: #ffffff !important;
 	}
@@ -1130,6 +1163,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	@media (min-width: 901px) {
+		.marketplace-model-card {
+			width: 70%;
+			justify-self: center;
+		}
+
 		.wepub-new-source-wepub-block .section-lead {
 			font-size: clamp(1rem, 1.55vw, 1.08rem);
 			white-space: normal;
@@ -1196,6 +1234,13 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 			grid-template-columns: 1fr;
 		}
 
+		.marketplace-model-card {
+			--marketplace-paper-angle: 2.5deg;
+
+			width: 100%;
+			padding: 24px !important;
+		}
+
 		.authors-living-grid {
 			grid-template-columns: 1fr;
 		}
@@ -1246,6 +1291,10 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	@media (orientation: portrait) {
+		:global(.authors-model-section .model-grid) {
+			margin-top: 0 !important;
+		}
+
 		:global(.authors-source-section.section-continuation) {
 			padding-top: var(--section-padding) !important;
 			padding-bottom: var(--section-padding) !important;

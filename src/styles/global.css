@@ -1652,6 +1652,19 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 	}
 }
 
+/* Portrait layouts keep the original, compact spacing above comparison cards. */
+@media (orientation: portrait) {
+	body
+		.page
+		.content
+		.section--white
+		:is(.home-comparison-grid, .wepub-comparison-grid, .model-grid):has(
+			> .comparison-text-panel + .card--good
+		) {
+		margin-top: 0 !important;
+	}
+}
+
 @media (min-width: 901px) {
 	:is(
 			.home-comparison-grid,

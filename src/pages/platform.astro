@@ -467,6 +467,10 @@ const benefitCards = [
 		width: 100%;
 	}
 
+	.platform-source-section.platform-source-problem-section .model-grid {
+		margin-top: 28px !important;
+	}
+
 	.platform-source-section .comparison-list {
 		display: grid;
 		gap: 10px;
@@ -495,7 +499,29 @@ const benefitCards = [
 	}
 
 	.platform-source-section .platform-old-model-card {
+		--platform-old-model-angle: 6deg;
+
+		position: relative;
+		isolation: isolate;
+		z-index: 0;
+		box-sizing: border-box;
+		min-height: 100%;
+		padding: 28px calc(28px + 4%) !important;
+		border: 0 !important;
 		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	.platform-source-section .platform-old-model-card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		outline: 1px solid var(--accent-orange);
+		transform: rotate(var(--platform-old-model-angle));
+		transform-origin: center;
+		transition: none;
 	}
 
 	.platform-source-section .platform-old-model-card .comparison-list li::before {
@@ -659,6 +685,10 @@ const benefitCards = [
 	}
 
 	@media (orientation: portrait) {
+		.platform-source-section.platform-source-problem-section .model-grid {
+			margin-top: 0 !important;
+		}
+
 		.platform-source-section.section-continue-next {
 			padding-bottom: var(--section-padding) !important;
 		}
@@ -805,6 +835,11 @@ const benefitCards = [
 	}
 
 	@media (min-width: 901px) {
+		.platform-source-section .platform-old-model-card {
+			width: 70%;
+			justify-self: center;
+		}
+
 		.platform-source-section.platform-capabilities-section .platform-three-grid {
 			grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
 		}
@@ -815,6 +850,13 @@ const benefitCards = [
 		.platform-source-section .platform-two-grid,
 		.platform-source-section .platform-three-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.platform-source-section .platform-old-model-card {
+			--platform-old-model-angle: 2.5deg;
+
+			width: 100%;
+			padding: 24px !important;
 		}
 
 		.platform-source-section.platform-products-section .platform-products-grid {
