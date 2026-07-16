@@ -182,7 +182,7 @@ const featuredBooks = [
 		<div class="security-books-layout">
 			<div class="security-books-copy">
 				<h2 class="security-books-heading">
-					<SectionIcon type="security" title="Protected publication" />
+					<img class="section-icon security-books-heading-icon" src="/images/card-icons/security.png" alt="" aria-hidden="true" />
 					<span>Protected books remain browser-readable web assets.</span>
 				</h2>
 				<p>
@@ -200,7 +200,7 @@ const featuredBooks = [
 								<p>{b.author}</p>
 								<div class="book-card-protected">
 									<span>Protected by<br /><strong class="indie-theft-guard-name">WeRead Theft Guard</strong></span>
-									<svg class="section-icon" viewBox="0 0 48 48" role="img" aria-label="WeRead Theft Guard">
+									<svg class="section-icon" viewBox="0 0 48 48" role="img" aria-label="WeRead Theft Guard" style="--section-icon-color: var(--accent-orange);">
 										<path d="M10 14c4-1.8 7.5-1.8 11 0v22c-3.5-1.8-7-1.8-11 0z"></path>
 										<path d="M32 14c-4-1.8-7.5-1.8-11 0v22c3.5-1.8 7-1.8 11 0z"></path>
 										<line x1="21" y1="14" x2="21" y2="36"></line>
@@ -651,8 +651,8 @@ const featuredBooks = [
 	}
 
 	.security-source-theft-guard-action :global(.section-icon) {
-		width: 41px;
-		height: 41px;
+		width: 53.3px !important;
+		height: 53.3px !important;
 	}
 
 	:global(.security-source-theft-guard-action .button) {
@@ -732,8 +732,8 @@ const featuredBooks = [
 	}
 
 	.security-callout-card :global(.section-icon) {
-		width: 52px;
-		height: 52px;
+		width: 67.6px !important;
+		height: 67.6px !important;
 	}
 
 	.security-callout-card h3,
@@ -788,10 +788,11 @@ const featuredBooks = [
 		text-align: center;
 	}
 
-	.security-books-heading :global(.section-icon) {
-		width: 48px;
-		height: 48px;
+	.security-books-heading-icon {
+		width: 86.4px;
+		height: 86.4px;
 		flex: 0 0 auto;
+		object-fit: contain;
 	}
 
 	.security-books-note {
@@ -864,6 +865,17 @@ const featuredBooks = [
 		box-shadow: var(--card-green-shadow) !important;
 	}
 
+	:global(#protected-books .security-protected-book-card) {
+		border: 1px solid var(--border) !important;
+		border-radius: calc(var(--radius-card) * 3) !important;
+		background: var(--card-bg) !important;
+	}
+
+	:global(#protected-books .security-protected-book-card)::before,
+	:global(#protected-books .security-protected-book-card)::after {
+		content: none !important;
+	}
+
 	:global(#protected-books .book-cover-placeholder) {
 		display: block;
 		width: var(--protected-book-card-cover-width);
@@ -927,6 +939,7 @@ const featuredBooks = [
 		width: 31.2px !important;
 		height: 31.2px !important;
 		flex-shrink: 0;
+		--section-icon-color: var(--accent-orange) !important;
 		color: var(--accent-orange) !important;
 		stroke: var(--accent-orange) !important;
 	}

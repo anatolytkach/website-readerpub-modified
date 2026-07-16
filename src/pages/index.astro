@@ -889,6 +889,18 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		justify-self: start;
 	}
 
+	/* Keep the three challenge cards on the original black outline icon set. */
+	:global(.home-problem-grid .card--link .section-icon--raster) {
+		display: none !important;
+	}
+
+	:global(.home-problem-grid .card--link .section-icon--original) {
+		display: block !important;
+		--section-icon-color: #000000 !important;
+		color: #000000 !important;
+		stroke: #000000 !important;
+	}
+
 	:global(.home-problem-grid .card--link > .card-icon-heading > h3) {
 		grid-column: 2;
 		max-width: none;

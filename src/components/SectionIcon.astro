@@ -27,6 +27,29 @@ interface Props {
 
 const { type, title } = Astro.props;
 
+const cardIconSources: Partial<Record<Props["type"], string>> = {
+	publisher: "/images/card-icons/publisher.png",
+	library: "/images/card-icons/library.png",
+	university: "/images/card-icons/university.png",
+	government: "/images/card-icons/government.png",
+	public: "/images/card-icons/public.png",
+	reader: "/images/card-icons/reader.png",
+	webReader: "/images/card-icons/web-reader.png",
+	readerBook: "/images/card-icons/reader-book.png",
+	author: "/images/card-icons/author.png",
+	research: "/images/card-icons/research.png",
+	program: "/images/card-icons/program.png",
+	sale: "/images/card-icons/sale.png",
+	charity: "/images/card-icons/charity.png",
+	dollars: "/images/card-icons/dollars.png",
+	fan: "/images/card-icons/fan.png",
+	security: "/images/card-icons/security.png",
+	access: "/images/card-icons/access.png",
+	noAds: "/images/card-icons/no-ads.png",
+};
+
+const cardIconSource = cardIconSources[type];
+
 const iconViewBoxes: Record<Props["type"], string> = {
 	publisher: "6 7 36 34",
 	library: "5 7 38 34",
@@ -76,7 +99,8 @@ const iconColors: Record<Props["type"], string> = {
 };
 ---
 
-<svg class="section-icon" viewBox={iconViewBoxes[type]} role="img" aria-label={title} style={`--section-icon-color: ${iconColors[type]};`}>
+{cardIconSource && <img class="section-icon section-icon--raster" src={cardIconSource} alt="" aria-hidden="true" />}
+<svg class="section-icon section-icon--original" viewBox={iconViewBoxes[type]} role="img" aria-label={title} style={`--section-icon-color: ${iconColors[type]};`}>
 	{type === "publisher" && (
 		<>
 			<rect x="7" y="8" width="34" height="32" rx="4"></rect>
@@ -283,5 +307,18 @@ const iconColors: Record<Props["type"], string> = {
 		stroke-linecap: round;
 		stroke-linejoin: round;
 		flex-shrink: 0;
+	}
+
+	.section-icon--raster {
+		display: none !important;
+		object-fit: contain;
+	}
+
+	:global(.card) .section-icon--original {
+		display: none !important;
+	}
+
+	:global(.card) .section-icon--raster {
+		display: block !important;
 	}
 </style>
