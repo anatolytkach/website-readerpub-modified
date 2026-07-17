@@ -61,6 +61,7 @@
 	--card-gray-shadow: 0 0 18px rgba(78, 90, 106, 0.1);
 	--white-card-question-frame: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23ffffff%27%20stroke%3D%27%23d8e1ed%27%20stroke-width%3D%271%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M%200%20.5%20C%204%2025%204%2075%200%2099.5%20L%2096%2099.5%20C%20100%2075%20100%2025%2096%20.5%20Z%27/%3E%3C/svg%3E");
 	--white-card-question-frame-hover: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23ffffff%27%20stroke%3D%27%23ff5a00%27%20stroke-width%3D%271%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M%200%20.5%20C%204%2025%204%2075%200%2099.5%20L%2096%2099.5%20C%20100%2075%20100%2025%2096%20.5%20Z%27/%3E%3C/svg%3E");
+	--comparison-solution-frame: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23ffffff%27%20stroke%3D%27%2322b7a7%27%20stroke-width%3D%271%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M%200%20.5%20C%204%2025%204%2075%200%2099.5%20L%2096%2099.5%20C%20100%2075%20100%2025%2096%20.5%20Z%27/%3E%3C/svg%3E");
 	--radius-card: 8px;
 	--radius-control: 0 999px 999px 0;
 	--section-gap: 18px;
@@ -3270,6 +3271,11 @@ body .page .content .section--white .card:is(
 	) > * {
 	position: relative;
 	z-index: 1;
+}
+
+/* Use the primary button green by default; retain the orange hover frame. */
+body .page .content .section--white .comparison-text-panel + .card--good::before {
+	background-image: var(--comparison-solution-frame);
 }
 
 /* Use the same curved paper frame for the three green comparison cards. */
