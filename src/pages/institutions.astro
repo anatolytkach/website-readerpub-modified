@@ -76,8 +76,8 @@ const benefitCards: PageCard[] = [
 ];
 
 const ctaActions = [
-	{ label: "Build an institutional library", href: "/contact?topic=institution" },
-	{ label: "See pricing", href: "/pricing", variant: "secondary" as const },
+	{ label: "Build an institutional library", href: "/contact/?topic=institution" },
+	{ label: "See pricing", href: "/pricing/", variant: "secondary" as const },
 ];
 ---
 
@@ -107,8 +107,8 @@ const ctaActions = [
 			With ReaderPub, institutions create web publications that stay visible and useful over time.
 		</p>
 		<div class="cta-row">
-			<a class="button" href="/contact?topic=institution">Build an institutional library</a>
-			<a class="button secondary" href="/pricing">See pricing</a>
+			<a class="button" href="/contact/?topic=institution">Build an institutional library</a>
+			<a class="button secondary" href="/pricing/">See pricing</a>
 		</div>
 	</HeroSection>
 
@@ -189,18 +189,6 @@ const ctaActions = [
 				</div>
 			</div>
 			<div class="card icon-grid-card">
-				<SectionIcon type="fan" title="WeBuzz communities" />
-				<div class="icon-grid-card-copy">
-					<h3>Build <ProductName name="WeBuzz" /> communities around protected knowledge collections.</h3>
-					<p>Create active discussion about authors, archives, research collections, educational materials, and special-access publications while maintaining controlled access policies.</p>
-					<ul class="bullets">
-						<li>Support book-, author- and collection-level memberships with managed audience permissions.</li>
-						<li>Launch releases, excerpts, and limited-access content for approved audiences.</li>
-						<li>Track engagement, access activity, and sales through integrated community analytics.</li>
-					</ul>
-				</div>
-			</div>
-			<div class="card icon-grid-card">
 				<SectionIcon type="library" title="Libraries" />
 				<div class="icon-grid-card-copy">
 					<h3>Libraries extend their mission onto the public web.</h3>
@@ -265,6 +253,22 @@ const ctaActions = [
 					<p class="institutions-outcome-note">Deliver mission resources through a trusted public reading library.</p>
 				</div>
 			</div>
+			<div class="card icon-grid-card">
+				<SectionIcon type="manufacturer" title="Manufacturers" />
+				<div class="icon-grid-card-copy">
+					<h3>Manufacturers make product knowledge easy to use.</h3>
+					<p>Publish manuals and technical documentation for easy online access.</p>
+					<ul class="bullets">
+						<li>Product manuals</li>
+						<li>Technical specifications</li>
+						<li>Installation, maintenance, and service guides</li>
+						<li>Blueprints and engineering designs</li>
+						<li>Internal technical materials</li>
+						<li>Staff manuals</li>
+					</ul>
+					<p class="institutions-outcome-note">Ensure easy access to necessary materials for employees and customers.</p>
+				</div>
+			</div>
 		</div>
 		<div class="card-grid icon-grid institutions-expanded-access-grid">
 			<div class="card institutions-access-card">
@@ -282,7 +286,7 @@ const ctaActions = [
 						<li>Community participation</li>
 					</ul>
 				</div>
-				<a class="button" href="/webuzz">Explore WeBuzz Community</a>
+				<a class="button" href="/webuzz/">Explore WeBuzz Community</a>
 			</div>
 			<div class="card institutions-access-card">
 				<div class="institutions-access-card-heading">
@@ -298,7 +302,7 @@ const ctaActions = [
 						<li>Maintain oversight across your entire catalog</li>
 					</ul>
 				</div>
-				<a class="button button--secondary" href="/security#control-who-reads">Learn how access control works</a>
+				<a class="button button--secondary" href="/security/#control-who-reads">Learn how access control works</a>
 			</div>
 			<div class="card institutions-access-card">
 				<div class="institutions-access-card-heading">
@@ -309,7 +313,7 @@ const ctaActions = [
 					<p>In file-based systems, content can circulate beyond the platform after delivery. ReaderPub minimizes that risk by keeping primary reading access on the web instead of routinely distributing a complete downloadable book file.</p>
 					<p class="institutions-leakage-note">Traditional DRM tries to control a file after delivery. ReaderPub reduces risk earlier by avoiding routine end-user delivery of the primary reading file.</p>
 				</div>
-				<a class="button button--secondary" href="/security#control-who-reads">Read about our protection model</a>
+				<a class="button button--secondary" href="/security/#control-who-reads">Read about our protection model</a>
 			</div>
 			<div class="card institutions-access-card">
 				<div class="institutions-access-card-heading">
@@ -320,7 +324,7 @@ const ctaActions = [
 					<p>Organizations can offer Scribe, a specialized AI companion for controlled-access publications, collections, and educational materials.</p>
 					<p class="institutions-scribe-note">Scribe helps readers ask focused questions across approved materials while keeping the conversation tied to the institution’s collection, course context, and access rules. Exploration stays inside ReaderPub.</p>
 				</div>
-				<a class="button button--secondary" href="/scribe">Explore Scribe</a>
+				<a class="button button--secondary" href="/scribe/">Explore Scribe</a>
 			</div>
 		</div>
 	</section>

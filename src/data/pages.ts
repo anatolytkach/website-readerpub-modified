@@ -102,7 +102,7 @@ export const pages = {
 		imageAlt: "ReaderPub connected publishing network",
 		actions: [
 			{ label: "Start reading", href: BOOKS_URL, external: true, variant: "secondary" },
-			{ label: "Explore the platform", href: "/platform" },
+			{ label: "Explore the platform", href: "/platform/" },
 		],
 		sections: [
 			{
@@ -116,22 +116,22 @@ export const pages = {
 					{
 						title: "For Readers",
 						body: "Books open instantly in the browser and stay connected to notes, discovery and community.",
-						href: "/weread",
+						href: "/weread/",
 					},
 					{
 						title: "For Authors & Publishers",
 						body: "Publishing becomes a direct web presence with lower marketplace dependency.",
-						href: "/wepub",
+						href: "/wepub/",
 					},
 					{
 						title: "For Institutions",
 						body: "Libraries, universities and public organizations can publish readable web collections.",
-						href: "/institutions",
+						href: "/institutions/",
 					},
 					{
 						title: "For Discussion",
 						body: "Reader communities stay attached to books, authors, fragments and ideas.",
-						href: "/webuzz",
+						href: "/webuzz/",
 					},
 				],
 			},
@@ -173,8 +173,8 @@ export const pages = {
 			title: "Read instantly. Publish securely. Distribute strategically.",
 			body: "ReaderPub connects the full lifecycle of web-native books.",
 			actions: [
-				{ label: "Explore ReaderPub", href: "/platform" },
-				{ label: "Contact us", href: "/contact", variant: "secondary" },
+				{ label: "Explore ReaderPub", href: "/platform/" },
+				{ label: "Contact us", href: "/contact/", variant: "secondary" },
 			],
 		},
 	},
@@ -190,7 +190,7 @@ export const pages = {
 		heroSpacerBackgroundPositionY: "9%",
 		image: "/images/readers2.webp",
 		imageAlt: "ReaderPub browser reading and book discovery",
-		actions: [readAction, { label: "Explore WeBuzz", href: "/webuzz", variant: "secondary" }],
+		actions: [readAction, { label: "Explore WeBuzz", href: "/webuzz/", variant: "secondary" }],
 		sections: [
 			{
 				tone: "gray",
@@ -232,7 +232,7 @@ export const pages = {
 		heroSpacerBackgroundPositionY: "27%",
 		image: "/images/webuzz.webp",
 		imageAlt: "Readers discussing books through WeBuzz",
-		actions: [{ label: "Explore readers", href: "/weread" }, { label: "Contact us", href: "/contact", variant: "secondary" }],
+		actions: [{ label: "Explore readers", href: "/weread/" }, { label: "Contact us", href: "/contact/", variant: "secondary" }],
 		sections: [
 			{
 				tone: "gray",
@@ -259,7 +259,7 @@ export const pages = {
 		cta: {
 			title: "Build community around reading.",
 			body: "Connect publishing, reading and discussion in one web-native network.",
-			actions: [{ label: "Talk to ReaderPub", href: "/contact" }],
+			actions: [{ label: "Talk to ReaderPub", href: "/contact/" }],
 		},
 	},
 	booktree: {
@@ -315,7 +315,7 @@ export const pages = {
 		heroSpacerBackgroundPositionY: "45%",
 		image: "/images/home2.webp",
 		imageAlt: "ReaderPub platform overview",
-		actions: [{ label: "Explore ReaderPub", href: "/weread" }, { label: "Contact us", href: "/contact", variant: "secondary" }],
+		actions: [{ label: "Explore ReaderPub", href: "/weread/" }, { label: "Contact us", href: "/contact/", variant: "secondary" }],
 		sections: [
 			{
 				tone: "gray",
@@ -325,10 +325,10 @@ export const pages = {
 					"The source site already separates routes by audience and product. This base keeps that routing while consolidating presentation.",
 				columns: "4",
 				cards: [
-					{ title: "WeRead", body: "Browser-native reading and book access.", icon: "webReader", href: "/weread" },
-					{ title: "WePub", body: "Web-native publishing and direct distribution.", icon: "publisher", href: "/wepub" },
-					{ title: "WeBuzz", body: "Discussion, discovery and community.", icon: "fan", href: "/webuzz" },
-					{ title: "BookTree", body: "Structured notes and knowledge mapping.", icon: "research", href: "/booktree" },
+					{ title: "WeRead", body: "Browser-native reading and book access.", icon: "webReader", href: "/weread/" },
+					{ title: "WePub", body: "Web-native publishing and direct distribution.", icon: "publisher", href: "/wepub/" },
+					{ title: "WeBuzz", body: "Discussion, discovery and community.", icon: "fan", href: "/webuzz/" },
+					{ title: "BookTree", body: "Structured notes and knowledge mapping.", icon: "research", href: "/booktree/" },
 				],
 			},
 			{
@@ -342,7 +342,7 @@ export const pages = {
 		cta: {
 			title: "Build on the ReaderPub platform.",
 			body: "Use the platform pages as the base for the next content pass.",
-			actions: [{ label: "Get started", href: "/contact" }],
+			actions: [{ label: "Get started", href: "/contact/" }],
 		},
 	},
 	authors: {
@@ -357,7 +357,7 @@ export const pages = {
 		heroSpacerBackgroundPositionY: "54%",
 		image: "/images/author1.webp",
 		imageAlt: "Author publishing on the web and staying connected to readers",
-		actions: [{ label: "Start publishing", href: "/wepub" }, { label: "See pricing", href: "/pricing", variant: "secondary" }],
+		actions: [{ label: "Start publishing", href: "/wepub/" }, { label: "See pricing", href: "/pricing/", variant: "secondary" }],
 		sections: [
 			{
 				tone: "gray",
@@ -383,7 +383,7 @@ export const pages = {
 		cta: {
 			title: "Publish on your terms.",
 			body: "Use WePub to build a direct publishing presence on ReaderPub.",
-			actions: [{ label: "Start publishing", href: "/wepub" }],
+			actions: [{ label: "Start publishing", href: "/wepub/" }],
 		},
 	},
 	institutions: {
@@ -398,7 +398,7 @@ export const pages = {
 		heroSpacerBackgroundPositionY: "63%",
 		image: "/images/institutions.webp",
 		imageAlt: "Institutional publishing and web library access",
-		actions: [{ label: "Build a library", href: "/contact?topic=institution" }, { label: "See pricing", href: "/pricing", variant: "secondary" }],
+		actions: [{ label: "Build a library", href: "/contact/?topic=institution" }, { label: "See pricing", href: "/pricing/", variant: "secondary" }],
 		sections: [
 			{
 				tone: "gray",
@@ -425,7 +425,7 @@ export const pages = {
 		cta: {
 			title: "Bring collections back to the web.",
 			body: "Talk to ReaderPub about institutional publishing.",
-			actions: [{ label: "Contact us", href: "/contact?topic=institution" }],
+			actions: [{ label: "Contact us", href: "/contact/?topic=institution" }],
 		},
 	},
 	security: {
@@ -440,7 +440,7 @@ export const pages = {
 		heroSpacerBackgroundPositionY: "72%",
 		image: "/images/security.webp",
 		imageAlt: "Protected web reading and publishing security",
-		actions: [{ label: "Control who reads", href: "/security#access-control" }, { label: "Contact us", href: "/contact", variant: "secondary" }],
+		actions: [{ label: "Control who reads", href: "/security/#access-control" }, { label: "Contact us", href: "/contact/", variant: "secondary" }],
 		sections: [
 			{
 				tone: "gray",
@@ -466,7 +466,7 @@ export const pages = {
 		cta: {
 			title: "Distribute with control.",
 			body: "Use ReaderPub when access and protection matter.",
-			actions: [{ label: "Talk to ReaderPub", href: "/contact" }],
+			actions: [{ label: "Talk to ReaderPub", href: "/contact/" }],
 		},
 	},
 	pricing: {
@@ -481,7 +481,7 @@ export const pages = {
 		heroSpacerBackgroundPositionY: "81%",
 		image: "/images/pricing.webp",
 		imageAlt: "ReaderPub pricing and publishing plans",
-		actions: [{ label: "Contact us", href: "/contact" }, { label: "Open catalog", href: BOOKS_URL, external: true, variant: "secondary" }],
+		actions: [{ label: "Contact us", href: "/contact/" }, { label: "Open catalog", href: BOOKS_URL, external: true, variant: "secondary" }],
 		sections: [
 			{
 				tone: "gray",
@@ -506,7 +506,7 @@ export const pages = {
 		cta: {
 			title: "Choose a publishing path.",
 			body: "Contact ReaderPub for creator, publisher and institutional plans.",
-			actions: [{ label: "Contact us", href: "/contact" }],
+			actions: [{ label: "Contact us", href: "/contact/" }],
 		},
 	},
 	contact: {
@@ -524,7 +524,7 @@ export const pages = {
 		image: "/images/contact.webp",
 		imageAlt: "ReaderPub contact and project-request illustration",
 		actions: [
-			{ label: "Knowledge base", href: "/kb", variant: "secondary" },
+			{ label: "Knowledge base", href: "/kb/", variant: "secondary" },
 			{ label: "Ask us a question", href: "#kb-help-modal", variant: "secondary", modalTarget: "#kb-help-modal" },
 			{ label: "Request live Pilot", href: "#request-onboarding-modal", modalTarget: "#request-onboarding-modal" },
 		],
@@ -550,13 +550,13 @@ export const pages = {
 			{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" },
 			{
 				label: "Ask Scribe",
-				href: "/scribe",
+				href: "/scribe/",
 				variant: "secondary",
 				class: "button--scribe-demo",
 				iconSrc: "/images/scribe.svg",
 				iconAlt: "",
 			},
-			{ label: "Request ReaderPub Pilot", href: "/contact", variant: "secondary" },
+			{ label: "Request ReaderPub Pilot", href: "/contact/", variant: "secondary" },
 		],
 		sections: [
 			{
@@ -583,7 +583,7 @@ export const pages = {
 				{ label: "Ask us a question", href: "#kb-help-modal", modalTarget: "#kb-help-modal" },
 				{
 					label: "Ask Scribe",
-					href: "/scribe",
+					href: "/scribe/",
 					variant: "secondary",
 					class: "button--scribe-demo",
 					externalIconSrc: "/images/scribe-action-dark.svg",

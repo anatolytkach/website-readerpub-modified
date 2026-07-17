@@ -4,24 +4,24 @@ import { PUBLISH_URL, SITE_NAME } from "../consts";
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isActive = (href: string) => pathname === href;
 const platformLinks = [
-	{ href: "/platform", label: "Ecosystem" },
-	{ href: "/wepub", label: "WePub" },
-	{ href: "/weread", label: "WeRead" },
-	{ href: "/webuzz", label: "WeBuzz" },
-	{ href: "/wetalk", label: "WeTalk" },
-	{ href: "/booktree", label: "BookTree" },
-	{ href: "/scribe", label: "Scribe" },
-	{ href: "/security", label: "Security" },
+	{ href: "/platform/", label: "Ecosystem" },
+	{ href: "/wepub/", label: "WePub" },
+	{ href: "/weread/", label: "WeRead" },
+	{ href: "/webuzz/", label: "WeBuzz" },
+	{ href: "/wetalk/", label: "WeTalk" },
+	{ href: "/booktree/", label: "BookTree" },
+	{ href: "/scribe/", label: "Scribe" },
+	{ href: "/security/", label: "Security" },
 ];
 const solutionLinks = [
-	{ href: "/weread", label: "Readers" },
-	{ href: "/wepub", label: "Authors & Publishers" },
-	{ href: "/institutions", label: "Institutions" },
+	{ href: "/weread/", label: "Readers" },
+	{ href: "/wepub/", label: "Authors & Publishers" },
+	{ href: "/institutions/", label: "Institutions" },
 ];
 const primaryLinks = [
-	{ href: "/growth", label: "Market" },
-	{ href: "/pricing", label: "Pricing" },
-	{ href: "/about", label: "About" },
+	{ href: "/strategy/", label: "Strategy" },
+	{ href: "/pricing/", label: "Pricing" },
+	{ href: "/about/", label: "About" },
 ];
 const hasActivePrimaryLink = primaryLinks.some((link) => isActive(link.href));
 const isPlatformActive = !hasActivePrimaryLink && platformLinks.some((link) => isActive(link.href));
@@ -74,7 +74,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 
 	<div class="nav-actions">
 		<a class="button button--secondary nav-signin" href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Sign in</a>
-		<a class="button nav-cta" href="/contact">Request a Pilot</a>
+		<a class="button nav-cta" href="/contact/">Request a Pilot</a>
 		<button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
 			<span class="nav-toggle-bar"></span>
 			<span class="nav-toggle-bar"></span>
@@ -113,7 +113,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 		))}
 		<li class="nav-overlay-divider" aria-hidden="true"></li>
 		<li><a href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Sign in</a></li>
-		<li><a href="/contact">Get started</a></li>
+		<li><a href="/contact/">Get started</a></li>
 	</ul>
 </div>
 

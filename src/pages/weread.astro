@@ -11,7 +11,7 @@ import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const startReadingAction = { label: "Start reading", href: BOOKS_URL, external: true };
 const readLibraryAction = { label: "Read 60K+ books in WeRead", href: BOOKS_URL, external: true };
-const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", variant: "secondary" as const };
+const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/", variant: "secondary" as const };
 ---
 
 <Base
@@ -105,7 +105,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 			<h3 class="heading--center-full heading--center-full-h3">Read on the web, share the whole book or a single passage, make and share notes, and discuss it all on&#32;<span class="weread-solution-product-word"><span>We</span><span>Buzz</span></span>.</h3>
 			<div class="weread-solution-actions">
 				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">Read 60K+ books in WeRead</a>
-				<a class="button" href="/webuzz">Explore WeBuzz</a>
+				<a class="button" href="/webuzz/">Explore WeBuzz</a>
 			</div>
 		</div>
 	</section>
@@ -205,7 +205,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 					<li>Join literary communities</li>
 				</ul>
 				<div class="cta-row">
-					<a class="button" href="/webuzz">Join the Conversation</a>
+					<a class="button" href="/webuzz/">Join the Conversation</a>
 				</div>
 			</article>
 			<article class="card">
@@ -219,7 +219,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 					<li>Designed for sustained attention—not endless scrolling.</li>
 				</ul>
 				<div class="cta-row">
-					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
+					<a class="button button--secondary" href="/booktree/">Explore BookTree</a>
 				</div>
 			</article>
 			<article class="card">
@@ -232,7 +232,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 					<li>Continue Scribe conversations connected to your reading activity.</li>
 				</ul>
 				<div class="cta-row">
-					<a class="button button--secondary" href="/scribe">Explore Scribe</a>
+					<a class="button button--secondary" href="/scribe/">Explore Scribe</a>
 				</div>
 			</article>
 		</CardGrid>

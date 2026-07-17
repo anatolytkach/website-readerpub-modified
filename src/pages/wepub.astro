@@ -10,7 +10,7 @@ import SectionIcon from "../components/SectionIcon.astro";
 import ProductName from "../components/ProductName.astro";
 import { PUBLISH_URL, SITE_NAME } from "../consts";
 
-const pricingAction = { label: "See pricing", href: "/pricing", variant: "secondary" as const };
+const pricingAction = { label: "See pricing", href: "/pricing/", variant: "secondary" as const };
 const finalPublishAction = { label: "Start publishing with WePub", href: PUBLISH_URL, external: true };
 const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	const number = index + 1;
@@ -40,9 +40,9 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		<Fragment slot="body">We build your direct, long-term relationships with readers...</Fragment>
 		<p class="authors-hero-fee-line">...while charging just a <strong class="authors-hero-fee">5%</strong> sales commission.</p>
 		<div class="cta-row">
-			<a class="button" href="/wepub">Start publishing</a>
-			<a class="button button--secondary" href="/pricing">See pricing</a>
-			<a class="button button--secondary author-protection-button" href="/security#control-who-reads">
+			<a class="button" href="/wepub/">Start publishing</a>
+			<a class="button button--secondary" href="/pricing/">See pricing</a>
+			<a class="button button--secondary author-protection-button" href="/security/#control-who-reads">
 				<span class="author-protection-button-label">We protect your book</span>
 				<span class="author-protection-icon" aria-hidden="true">
 					<SectionIcon type="security" title="Protection icon" />

@@ -9,6 +9,7 @@ const readerPubBooksProxy = {
 
 // https://astro.build/config
 export default defineConfig({
+	trailingSlash: "always",
 	vite: {
 		server: {
 			proxy: {

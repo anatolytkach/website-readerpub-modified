@@ -21,7 +21,8 @@ interface Props {
 		| "fan"
 		| "security"
 		| "access"
-		| "noAds";
+		| "noAds"
+		| "manufacturer";
 	title: string;
 }
 
@@ -46,6 +47,7 @@ const cardIconSources: Partial<Record<Props["type"], string>> = {
 	security: "/images/card-icons/security.png",
 	access: "/images/card-icons/access.png",
 	noAds: "/images/card-icons/no-ads.png",
+	manufacturer: "/images/card-icons/manufacturers.png?v=2",
 };
 
 const cardIconSource = cardIconSources[type];
@@ -72,6 +74,7 @@ const iconViewBoxes: Record<Props["type"], string> = {
 	security: "9 13 34 31",
 	access: "9 10 32 25",
 	noAds: "7 7 34 34",
+	manufacturer: "0 0 128 128",
 };
 
 const iconColors: Record<Props["type"], string> = {
@@ -96,6 +99,7 @@ const iconColors: Record<Props["type"], string> = {
 	security: "var(--icon-security)",
 	access: "var(--icon-access)",
 	noAds: "var(--icon-no-ads)",
+	manufacturer: "var(--icon-publisher)",
 };
 ---
 
@@ -293,6 +297,9 @@ const iconColors: Record<Props["type"], string> = {
 			<path d="M28 21v7"></path>
 			<path d="M28 21h2.2c2.2 0 3.8 1.4 3.8 3.5S32.4 28 30.2 28H28"></path>
 		</>
+	)}
+	{type === "manufacturer" && (
+		<image href="/images/card-icons/manufacturers.png?v=2" x="0" y="0" width="128" height="128" preserveAspectRatio="xMidYMid meet" />
 	)}
 </svg>
 

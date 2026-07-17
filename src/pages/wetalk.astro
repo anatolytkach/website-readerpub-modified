@@ -8,11 +8,11 @@ import Section from "../components/sections/Section.astro";
 import ProductName from "../components/ProductName.astro";
 import { SITE_NAME } from "../consts";
 
-const requestPilotAction = { label: "Request a Pilot", href: "/contact?topic=wetalk" };
-const contactAction = { label: "Contact Us", href: "/contact", variant: "secondary" as const };
+const requestPilotAction = { label: "Request a Pilot", href: "/contact/?topic=wetalk" };
+const contactAction = { label: "Contact Us", href: "/contact/", variant: "secondary" as const };
 const institutionHeroActions = [
-	{ label: "Build an institutional library", href: "/contact?topic=institution" },
-	{ label: "See pricing", href: "/pricing", variant: "secondary" as const },
+	{ label: "Build an institutional library", href: "/contact/?topic=institution" },
+	{ label: "See pricing", href: "/pricing/", variant: "secondary" as const },
 ];
 
 const fragmentationCards = [

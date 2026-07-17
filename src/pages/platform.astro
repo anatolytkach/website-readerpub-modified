@@ -5,17 +5,18 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import ProductName from "../components/ProductName.astro";
+import SectionIcon from "../components/SectionIcon.astro";
 import Base from "../layouts/Base.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const heroActions = [
-	{ label: "Start publishing", href: "/wepub" },
+	{ label: "Start publishing", href: "/wepub/" },
 	{ label: "Explore security", href: "/security/", variant: "secondary" as const },
 ];
 
 const ctaActions = [
-	{ label: "Get started", href: "/contact" },
-	{ label: "See pricing", href: "/pricing", variant: "secondary" as const },
+	{ label: "Get started", href: "/contact/" },
+	{ label: "See pricing", href: "/pricing/", variant: "secondary" as const },
 ];
 
 const problemCards = [
@@ -124,7 +125,7 @@ const benefitCards = [
 						<li>Manage published titles</li>
 						<li>Generate optional EPUB editions</li>
 					</ul>
-					<a class="button button--secondary" href="/wepub">Explore WePub</a>
+					<a class="button button--secondary" href="/wepub/">Explore WePub</a>
 				</div>
 				<div class="card">
 					<h3><ProductName name="WeRead" /></h3>
@@ -150,7 +151,7 @@ const benefitCards = [
 						<li>Author participation</li>
 						<li>Publisher engagement</li>
 					</ul>
-					<a class="button button--secondary" href="/webuzz">Explore WeBuzz</a>
+					<a class="button button--secondary" href="/webuzz/">Explore WeBuzz</a>
 				</div>
 				<div class="card">
 					<h3><ProductName name="WeTalk" /></h3>
@@ -161,7 +162,7 @@ const benefitCards = [
 						<li>Collection and course communities</li>
 						<li>Institutional permissions</li>
 					</ul>
-					<a class="button button--secondary" href="/wetalk">Explore WeTalk</a>
+					<a class="button button--secondary" href="/wetalk/">Explore WeTalk</a>
 				</div>
 				<div class="card">
 					<h3><ProductName name="BookTree" /></h3>
@@ -172,7 +173,7 @@ const benefitCards = [
 						<li>Build personal knowledge maps from your reading</li>
 						<li>Consolidate notes from multiple books while working on your own manuscript</li>
 					</ul>
-					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
+					<a class="button button--secondary" href="/booktree/">Explore BookTree</a>
 				</div>
 				<div class="card">
 					<h3>Scribe</h3>
@@ -183,7 +184,7 @@ const benefitCards = [
 						<li>Get platform guidance without leaving ReaderPub</li>
 						<li>Continue saved WeBuzz conversations from My Activity</li>
 					</ul>
-					<a class="button button--secondary" href="/scribe">Explore Scribe</a>
+					<a class="button button--secondary" href="/scribe/">Explore Scribe</a>
 				</div>
 			</div>
 		</section>
@@ -229,7 +230,7 @@ const benefitCards = [
 								<li>Track reader engagement</li>
 							</ul>
 							<div class="cta-row">
-								<a class="button" href="/wepub">Start publishing</a>
+								<a class="button" href="/wepub/">Start publishing</a>
 								<a class="button button--secondary" href="/pricing/">See pricing</a>
 							</div>
 						</div>
@@ -257,24 +258,24 @@ const benefitCards = [
 		<section class="section section--white platform-source-section platform-audiences-section platform-first-white-section section--two-column section-continuation">
 			<h2>Audiences across the platform</h2>
 			<div class="card-grid platform-audiences-cards" data-card-reveal-origin="right" data-card-reveal-order="inner-first">
-				<div class="card"><h3>Authors</h3><p>Publish and sell directly, then analyze reader engagement.</p></div>
-				<div class="card"><h3>Publishers</h3><p>Manage titles, editions, catalogs, and controlled access.</p></div>
-				<div class="card"><h3>Schools</h3><p>Distribute course materials and monitor usage.</p></div>
-				<div class="card"><h3>Libraries</h3><p>Create active digital bookshelves for their communities.</p></div>
-				<div class="card"><h3>Organizations</h3><p>Publish reports, papers, and structured knowledge online.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="author" title="Authors" /><h3>Authors</h3></div><p>Publish and sell directly, then analyze reader engagement.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="publisher" title="Publishers" /><h3>Publishers</h3></div><p>Manage titles, editions, catalogs, and controlled access.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="university" title="Schools" /><h3>Schools</h3></div><p>Distribute course materials and monitor usage.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="library" title="Libraries" /><h3>Libraries</h3></div><p>Create active digital bookshelves for their communities.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="public" title="Organizations" /><h3>Organizations</h3></div><p>Publish reports, papers, and structured knowledge online.</p></div>
 				<div class="card">
-					<h3>Manufacturers</h3>
+					<div class="card-icon-heading"><SectionIcon type="manufacturer" title="Manufacturers" /><h3>Manufacturers</h3></div>
 					<p>Publish manuals and technical documentation for easy online access.</p>
 				</div>
 			</div>
 			<img
 				class="image-block platform-audiences-image"
 				src="/images/audience.webp"
-				alt="Illustration of readers, authors, publishers, libraries, universities, and organizations connected through ReaderPub"
+				alt="Illustration representing ReaderPub audiences"
 				loading="lazy"
 				decoding="async"
-				width="1024"
-				height="841"
+				width="1210"
+				height="1218"
 			/>
 		</section>
 

@@ -15,11 +15,10 @@ const {
 } = Astro.props;
 
 const siteUrl = `https://${SITE_DOMAIN}`;
-const canonicalUrl = canonical
-	? canonical.startsWith("http")
-		? canonical
-		: `${siteUrl}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
-	: `${siteUrl}${Astro.url.pathname}`;
+const canonicalUrl = new URL(canonical || Astro.url.pathname, siteUrl);
+canonicalUrl.pathname = canonicalUrl.pathname === "/" ? "/" : `${canonicalUrl.pathname.replace(/\/+$/, "")}/`;
+canonicalUrl.search = "";
+canonicalUrl.hash = "";
 const resolvedOgTitle = ogTitle || title;
 const resolvedOgDescription = ogDescription || description;
 const resolvedOgImage = ogImage.startsWith("http")
@@ -67,7 +66,7 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={resolvedOgTitle} />
 		<meta property="og:description" content={resolvedOgDescription} />
-		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:url" content={canonicalUrl.href} />
 		<meta property="og:image" content={resolvedOgImage} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={resolvedOgTitle} />
@@ -76,7 +75,7 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 		<meta name="application-name" content={SITE_NAME} />
 		<meta name="author" content={SITE_NAME} />
 		<meta name="hostname" content={SITE_DOMAIN} />
-		<link rel="canonical" href={canonicalUrl} />
+		<link rel="canonical" href={canonicalUrl.href} />
 		{homeStructuredDataJson && <script type="application/ld+json" set:html={homeStructuredDataJson} />}
 		<link
 			rel="stylesheet"
@@ -92,7 +91,7 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 			</main>
 			<Footer />
 		</div>
-		<a href="/kb" class="kb-fab" title="Knowledge Base" aria-label="Knowledge Base" transition:persist>?</a>
+		<a href="/kb/" class="kb-fab" title="Knowledge Base" aria-label="Knowledge Base" transition:persist>?</a>
 		<script is:inline>
 			(() => {
 				const fab = document.querySelector(".kb-fab");
@@ -100,8 +99,8 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 				const updateFab = () => {
 					if (!fab) return;
 
-					const isKb = window.location.pathname === "/kb" || window.location.pathname === "/kb/";
-					fab.href = isKb ? "/" : "/kb";
+					const isKb = window.location.pathname === "/kb/";
+					fab.href = isKb ? "/" : "/kb/";
 					fab.title = isKb ? "Home" : "Knowledge Base";
 					fab.setAttribute("aria-label", isKb ? "Home" : "Knowledge Base");
 					fab.textContent = isKb ? "✕" : "?";

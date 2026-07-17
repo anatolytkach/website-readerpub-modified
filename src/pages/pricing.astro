@@ -10,13 +10,13 @@ import ProductName from "../components/ProductName.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const heroActions = [
-	{ label: "Contact us", href: "/contact" },
+	{ label: "Contact us", href: "/contact/" },
 	{ label: "Open catalog", href: BOOKS_URL, external: true, variant: "secondary" as const },
 ];
 
 const ctaActions = [
-	{ label: "Publish with ReaderPub", href: "/wepub" },
-	{ label: "Contact us", href: "/contact", variant: "secondary" as const },
+	{ label: "Publish with ReaderPub", href: "/wepub/" },
+	{ label: "Contact us", href: "/contact/", variant: "secondary" as const },
 ];
 ---
 
@@ -171,7 +171,7 @@ const ctaActions = [
 			</article>
 			<article class="card">
 				<h3>Enterprise</h3>
-				<a class="button button--secondary pricing-enterprise-contact-button" href="/contact">Talk to us</a>
+				<a class="button button--secondary pricing-enterprise-contact-button" href="/contact/">Talk to us</a>
 				<ul class="pricing-bullets">
 					<li>For university systems and public agencies</li>
 					<li>100,000+ titles</li>
