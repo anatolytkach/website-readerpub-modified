@@ -7,6 +7,8 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
+
+const homeVideoDoorSides = ["left", "right"] as const;
 ---
 
 <Base
@@ -25,33 +27,38 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			></video>
 		</section>
 		<div class="home-video-green-shutters" aria-hidden="true">
-			<span class="home-video-green-panel home-video-green-panel--top-left"></span>
-			<span class="home-video-green-panel home-video-green-panel--top-right"></span>
-			<span class="home-video-green-panel home-video-green-panel--bottom-left"></span>
-			<span class="home-video-green-panel home-video-green-panel--bottom-right"></span>
+			{homeVideoDoorSides.map((side) => (
+				<div class={`home-video-green-panel home-video-green-panel--${side}`}>
+					<div class="home-video-intro-content home-video-intro-content--door">
+						<div class="home-video-brand" data-home-video-reveal="brand">
+							<span class="home-video-brand-mark">
+								<img src="/images/logo_white.svg" alt="" />
+							</span>
+							<span class="home-video-wordmark"><span>Reader</span><span>Pub</span></span>
+						</div>
+						<div class="home-video-slogan-block" data-home-video-reveal="slogan">
+							<span class="home-video-slogan">Transforming the world of books</span>
+						</div>
+						<p class="home-video-strategy" data-home-video-reveal="strategy">
+							<span class="home-video-strategy-line">READ INSTANTLY</span>
+							<span class="home-video-period">•</span>
+							<span class="home-video-strategy-line">PUBLISH SECURELY</span>
+							<span class="home-video-period">•</span>
+							<span class="home-video-strategy-line">DISTRIBUTE STRATEGICALLY</span>
+						</p>
+					</div>
+				</div>
+			))}
 		</div>
 		<div class="home-video-green-layer" aria-hidden="true"></div>
-		<div class="home-video-intro-content">
+		<div class="home-video-intro-content home-video-intro-content--controls">
 			<p class="home-video-teaser" aria-live="polite">
 				<span class="home-video-teaser-line home-video-teaser-accent">Guess what?</span>
 				<span class="home-video-teaser-line">This is not an app, but a web page<span class="home-video-teaser-accent">!</span></span>
 			</p>
-			<div class="home-video-brand" data-home-video-reveal="brand">
-				<span class="home-video-brand-mark" aria-hidden="true">
-					<img src="/images/logo_white.svg" alt="" />
-				</span>
-				<span class="home-video-wordmark" aria-label="ReaderPub"><span>Reader</span><span>Pub</span></span>
+			<div class="home-video-accessible-intro">
+				ReaderPub. Transforming the world of books. Read instantly. Publish securely. Distribute strategically.
 			</div>
-			<div class="home-video-slogan-block" data-home-video-reveal="slogan">
-				<span class="home-video-slogan">Transforming the world of books</span>
-			</div>
-			<p class="home-video-strategy" data-home-video-reveal="strategy">
-				<span class="home-video-strategy-line">READ INSTANTLY</span>
-				<span class="home-video-period">•</span>
-				<span class="home-video-strategy-line">PUBLISH SECURELY</span>
-				<span class="home-video-period">•</span>
-				<span class="home-video-strategy-line">DISTRIBUTE STRATEGICALLY</span>
-			</p>
 			<button class="home-video-scroll" type="button" data-home-video-scroll aria-label="Scroll to the ReaderPub introduction"></button>
 			<button class="home-video-replay" type="button" data-home-video-replay aria-label="Replay the ReaderPub introduction">
 				<svg viewBox="0 0 24 24" aria-hidden="true">
@@ -519,69 +526,41 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		inset: 0;
 		z-index: 2;
 		overflow: hidden;
+		perspective: clamp(900px, 105vw, 1800px);
+		perspective-origin: 50% 50%;
 		pointer-events: none;
 	}
 
 	.home-video-green-panel {
 		position: absolute;
+		top: 0;
 		width: 50%;
-		height: 50%;
+		height: 100%;
 		overflow: hidden;
-		transition: transform 1500ms cubic-bezier(0.7, 0, 0.2, 1);
+		backface-visibility: hidden;
+		opacity: 1;
+		transform: rotateY(0deg);
+		transform-style: preserve-3d;
+		transition:
+			transform 1600ms linear,
+			box-shadow 1600ms linear,
+			opacity 700ms ease-in 900ms,
+			visibility 0ms linear 1600ms;
+		visibility: visible;
 		will-change: transform;
 	}
 
 	.home-video-green-panel::before {
 		content: "";
 		position: absolute;
+		top: 0;
 		width: 200%;
-		height: 200%;
+		height: 100%;
 		background: var(--home-video-green-background);
 		pointer-events: none;
 	}
 
-	.home-video-green-panel--top-left {
-		top: 0;
-		left: 0;
-	}
-
-	.home-video-green-panel--top-left::before {
-		top: 0;
-		left: 0;
-	}
-
-	.home-video-green-panel--top-right {
-		top: 0;
-		right: 0;
-	}
-
-	.home-video-green-panel--top-right::before {
-		top: 0;
-		right: 0;
-	}
-
-	.home-video-green-panel--bottom-left {
-		bottom: 0;
-		left: 0;
-	}
-
-	.home-video-green-panel--bottom-left::before {
-		bottom: 0;
-		left: 0;
-	}
-
-	.home-video-green-panel--bottom-right {
-		right: 0;
-		bottom: 0;
-	}
-
-	.home-video-green-panel--bottom-right::before {
-		right: 0;
-		bottom: 0;
-	}
-
-	.home-video-green-panel--bottom-left::after,
-	.home-video-green-panel--bottom-right::after {
+	.home-video-green-panel::after {
 		content: "";
 		position: absolute;
 		bottom: -1px;
@@ -595,11 +574,33 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		will-change: background-position;
 	}
 
-	.home-video-green-panel--bottom-left::after {
+	.home-video-green-panel--left {
+		left: 0;
+		transform-origin: left center;
+	}
+
+	.home-video-green-panel--left::before,
+	.home-video-green-panel--left::after {
 		left: 0;
 	}
 
-	.home-video-green-panel--bottom-right::after {
+	.home-video-green-panel--right {
+		right: 0;
+		transform-origin: right center;
+	}
+
+	.home-video-green-panel--right::before,
+	.home-video-green-panel--right::after {
+		right: 0;
+	}
+
+	.home-video-green-panel--left .home-video-intro-content--door {
+		left: 0;
+		right: auto;
+	}
+
+	.home-video-green-panel--right .home-video-intro-content--door {
+		left: auto;
 		right: 0;
 	}
 
@@ -652,6 +653,24 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		margin: 0 auto;
 		padding: clamp(24px, 4vh, 48px) 24px;
 		pointer-events: none;
+	}
+
+	.home-video-intro-content--door {
+		width: 200%;
+		max-width: none;
+		margin: 0;
+	}
+
+	.home-video-accessible-intro {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+		border: 0;
 	}
 
 	.home-video-teaser {
@@ -916,20 +935,18 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		opacity: 1;
 	}
 
-	.home-video-stage.is-opened .home-video-green-panel--top-left {
-		transform: translate3d(-105%, -105%, 0);
+	.home-video-stage.is-opened .home-video-green-panel--left {
+		box-shadow: 18px 0 34px rgba(0, 35, 31, 0.32);
+		opacity: 0;
+		transform: rotateY(88deg);
+		visibility: hidden;
 	}
 
-	.home-video-stage.is-opened .home-video-green-panel--top-right {
-		transform: translate3d(105%, -105%, 0);
-	}
-
-	.home-video-stage.is-opened .home-video-green-panel--bottom-left {
-		transform: translate3d(-105%, 105%, 0);
-	}
-
-	.home-video-stage.is-opened .home-video-green-panel--bottom-right {
-		transform: translate3d(105%, 105%, 0);
+	.home-video-stage.is-opened .home-video-green-panel--right {
+		box-shadow: -18px 0 34px rgba(0, 35, 31, 0.32);
+		opacity: 0;
+		transform: rotateY(-88deg);
+		visibility: hidden;
 	}
 
 	.home-video-stage.is-resetting .home-video-green-layer,
@@ -987,24 +1004,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-video-stage.is-sequence-started .home-video-strategy {
 		transition-delay: 2950ms;
-	}
-
-	.home-video-stage.is-opened .home-video-brand {
-		opacity: 0;
-		transform: translate3d(-55vw, -55vh, 0) scale(0.88);
-		transition-delay: 0ms;
-	}
-
-	.home-video-stage.is-opened .home-video-slogan-block {
-		opacity: 0;
-		transform: translate3d(55vw, -55vh, 0) scale(0.88);
-		transition-delay: 0ms;
-	}
-
-	.home-video-stage.is-opened .home-video-strategy {
-		opacity: 0;
-		transform: translate3d(-55vw, 55vh, 0) scale(0.88);
-		transition-delay: 0ms;
 	}
 
 	.home-video-stage.is-final .home-video-teaser {
