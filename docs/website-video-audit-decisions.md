@@ -82,9 +82,15 @@ The following was directly designed through user instructions before the audit d
 
 **Decision:** Manufacturers are a real target segment and remain in the platform audience list.
 
-**Rationale:** Manufacturers produce substantial documentation for their products, making ReaderPub’s publishing, access-control, and knowledge capabilities relevant to this segment.
+**Rationale:** Manufacturers issue substantial product documentation. Their core use case is making manuals, technical specifications, engineering designs, internal technical materials, and staff manuals easily accessible to employees and customers.
+
+**Confirmation:** This positioning was reconfirmed on 2026-07-17; it is not an open audit question.
 
 ### 6. Publishable proof and compliance facts — pending
+
+**Approved team wording:** On the About page, use: “ReaderPub is built by top software engineers and industry professionals with decades of experience in technology innovations.” The related solution paragraph begins: “Our team is focused on …”
+
+**Approved team disclosure:** The About page may publish the selected team members’ names, roles, profile photographs, and LinkedIn links. The initial approved list is Anatoly Tkach, Yury Arane, Dmitry Tkach, Nataliia Kupianska, Dinora Yususpova, Mikhail Lenskikh, Alex Berezkin, and Alex Melnik.
 
 **Question:** Which real names, roles, profiles, corporate information, support details, pilots, metrics, partners, patent references, catalog facts, and compliance/accessibility statements may be published?
 
