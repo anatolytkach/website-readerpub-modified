@@ -590,9 +590,9 @@ const ctaActions = [
 		--section-bg: repeating-radial-gradient(
 			circle at var(--section-green-circle-x) calc(var(--section-green-circle-y) + var(--section-bg-parallax-y)),
 			var(--section-green-wide-stripe) 0,
-			var(--section-green-wide-stripe) 46.4px,
-			var(--section-green-narrow-stripe) 46.4px,
-			var(--section-green-narrow-stripe) 51.733px
+			var(--section-green-wide-stripe) var(--section-green-wide-stripe-size),
+			var(--section-green-narrow-stripe) var(--section-green-wide-stripe-size),
+			var(--section-green-narrow-stripe) var(--section-green-stripe-period)
 		);
 		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
 		grid-auto-rows: auto;

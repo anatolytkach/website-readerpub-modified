@@ -15,61 +15,6 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	title={`Web-Native Publishing & Digital Reading Platform | ${SITE_NAME}`}
 	description="ReaderPub is a web-native publishing and digital reading platform that keeps books and readers connected—without apps, downloads, or platform lock-in."
 >
-	<div class="home-video-stage is-green-intro" data-home-video-stage>
-		<section class="home-video-intro" data-home-video-intro aria-label="ReaderPub video introduction">
-			<video
-				class="home-video-intro-media"
-				src="/videos/treasure_island-1.mp4"
-				title="Treasure Island in WeRead"
-				muted
-				playsinline
-				preload="auto"
-			></video>
-		</section>
-		<div class="home-video-green-shutters" aria-hidden="true">
-			{homeVideoDoorSides.map((side) => (
-				<div class={`home-video-green-panel home-video-green-panel--${side}`}>
-					<div class="home-video-intro-content home-video-intro-content--door">
-						<div class="home-video-brand" data-home-video-reveal="brand">
-							<span class="home-video-brand-mark">
-								<img src="/images/logo_white.svg" alt="" />
-							</span>
-							<span class="home-video-wordmark"><span>Reader</span><span>Pub</span></span>
-						</div>
-						<div class="home-video-slogan-block" data-home-video-reveal="slogan">
-							<span class="home-video-slogan">Transforming the world of books</span>
-						</div>
-						<p class="home-video-strategy" data-home-video-reveal="strategy">
-							<span class="home-video-strategy-line">READ INSTANTLY</span>
-							<span class="home-video-period">•</span>
-							<span class="home-video-strategy-line">PUBLISH SECURELY</span>
-							<span class="home-video-period">•</span>
-							<span class="home-video-strategy-line">DISTRIBUTE STRATEGICALLY</span>
-						</p>
-					</div>
-				</div>
-			))}
-		</div>
-		<div class="home-video-green-layer" aria-hidden="true"></div>
-		<div class="home-video-intro-content home-video-intro-content--controls">
-			<p class="home-video-teaser" aria-live="polite">
-				<span class="home-video-teaser-line home-video-teaser-accent">Guess what?</span>
-				<span class="home-video-teaser-line">This is not an app, but a web page<span class="home-video-teaser-accent">!</span></span>
-			</p>
-			<div class="home-video-accessible-intro">
-				ReaderPub. Transforming the world of books. Read instantly. Publish securely. Distribute strategically.
-			</div>
-			<button class="home-video-scroll" type="button" data-home-video-scroll aria-label="Scroll to the ReaderPub introduction"></button>
-			<button class="home-video-replay" type="button" data-home-video-replay aria-label="Replay the ReaderPub introduction">
-				<svg viewBox="0 0 24 24" aria-hidden="true">
-					<path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
-					<path d="M3 3v5h5"></path>
-				</svg>
-			</button>
-		</div>
-		<div class="home-video-wave-space" aria-hidden="true"></div>
-	</div>
-
 	<HeroSection
 		id="home-main-hero"
 		class="home-hero"
@@ -95,6 +40,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	</HeroSection>
 
 	<Section
+		id="home-challenge"
 		tone="gray"
 		title="The challenge:"
 		body="Digital publishing made distribution easier, but it still leaves books disconnected from readers, discussion, and long-term discovery."
@@ -121,13 +67,69 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		</CardGrid>
 	</Section>
 
+	<div class="home-video-stage is-green-intro" data-home-video-stage>
+		<section class="home-video-intro" data-home-video-intro aria-label="ReaderPub video introduction">
+			<video
+				class="home-video-intro-media"
+				src="/videos/treasure_island-1.mp4"
+				title="Treasure Island in WeRead"
+				muted
+				playsinline
+				preload="auto"
+			></video>
+		</section>
+		<div class="home-video-green-shutters" aria-hidden="true">
+			{homeVideoDoorSides.map((side) => (
+				<div class={`home-video-green-panel home-video-green-panel--${side}`}>
+					<div class="home-video-intro-content home-video-intro-content--door">
+						<p class="home-video-solution-label" data-home-video-reveal="solution">
+							<span>The solution</span><span class="home-video-solution-colon">:</span>
+						</p>
+						<div class="home-video-brand" data-home-video-reveal="brand">
+							<span class="home-video-brand-mark">
+								<img src="/images/logo_white.svg" alt="" />
+							</span>
+							<span class="home-video-wordmark"><span>Reader</span><span>Pub</span></span>
+						</div>
+						<div class="home-video-slogan-block" data-home-video-reveal="slogan">
+							<span class="home-video-slogan">Web-native Publishing Network</span>
+						</div>
+						<p class="home-video-strategy" data-home-video-reveal="strategy">
+							<span class="home-video-strategy-line">READ INSTANTLY</span>
+							<span class="home-video-period">•</span>
+							<span class="home-video-strategy-line">PUBLISH SECURELY</span>
+							<span class="home-video-period">•</span>
+							<span class="home-video-strategy-line">DISTRIBUTE STRATEGICALLY</span>
+						</p>
+					</div>
+				</div>
+			))}
+		</div>
+		<div class="home-video-green-layer" aria-hidden="true"></div>
+		<div class="home-video-intro-content home-video-intro-content--controls">
+			<div class="home-video-final-content">
+				<p class="home-video-teaser" aria-live="polite">
+					<span class="home-video-teaser-line home-video-teaser-accent">Guess what<span class="home-video-teaser-question">?</span></span>
+					<span class="home-video-teaser-line home-video-teaser-line--detail"><span class="home-video-teaser-accent">This is not an app,</span><span class="home-video-teaser-detail-rest"> but a web page<span class="home-video-teaser-accent">!</span></span></span>
+				</p>
+				<button class="home-video-replay" type="button" data-home-video-replay aria-label="Replay the ReaderPub introduction">
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
+						<path d="M3 3v5h5"></path>
+					</svg>
+				</button>
+			</div>
+			<div class="home-video-accessible-intro">
+				The solution:  ReaderPub. Web-native Publishing Network. Read instantly. Publish securely. Distribute strategically.
+			</div>
+		</div>
+		<div class="home-video-wave-space" aria-hidden="true"></div>
+	</div>
+
 	<Section
 		tone="white"
-		class="home-tech-heading-section home-file-model-section section--two-column"
+		class="home-file-model-section section--two-column"
 	>
-		<h2 id="home-tech-title" class="home-tech-title">
-			<span class="home-tech-title-line home-tech-title-line-primary"><span class="home-tech-title-prefix">The solution:</span><span class="home-tech-title-readerpub" style="color: var(--accent);"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span></span>
-		</h2>
 		<h3 class="home-tech-title-line home-tech-title-line-solution">A browser-based eReader <span class="home-tech-title-plus">+</span> a web-native publishing network.</h3>
 
 		<div class="home-comparison-grid">
@@ -161,7 +163,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 			<span class="home-file-model-summary-problem">The old file-first publishing model ends when a file is delivered.</span>
 			<span class="home-file-model-summary-problem home-file-model-summary-break">The relationship is broken!</span>
 		</p>
-		<p class="home-file-model-summary home-file-model-summary-solution" style="margin-top: var(--section-gap) !important;">
+		<p class="home-file-model-summary home-file-model-summary-solution">
 			<span>ReaderPub keeps publications alive and connected after delivery.</span>
 		</p>
 	</Section>
@@ -177,15 +179,12 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 				const intro = stage.querySelector("[data-home-video-intro]");
 				const video = intro instanceof HTMLElement ? intro.querySelector("video") : null;
-				const scrollButton = stage.querySelector("[data-home-video-scroll]");
 				const replayButton = stage.querySelector("[data-home-video-replay]");
-				const hero = document.querySelector("#home-main-hero");
 				const nav = document.querySelector(".nav");
 
 				if (
 					!(intro instanceof HTMLElement) ||
 					!(video instanceof HTMLVideoElement) ||
-					!(scrollButton instanceof HTMLButtonElement) ||
 					!(replayButton instanceof HTMLButtonElement)
 				) {
 					return;
@@ -210,8 +209,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 				const introTimers = new Set();
 				let playbackAttempt = 0;
-				let hasLeftPageTop = window.scrollY > 1;
-				let scrollFrame = 0;
+				let hasPlayedDuringVisit = false;
 
 				const clearIntroTimers = () => {
 					introTimers.forEach((timer) => window.clearTimeout(timer));
@@ -262,10 +260,10 @@ const homeVideoDoorSides = ["left", "right"] as const;
 						if (attempt !== playbackAttempt) return;
 						stage.classList.add("is-video-wait");
 						scheduleIntroStep(() => startVideo(attempt), 2000);
-					}, 1600);
+					}, 1360);
 				};
 
-				const startExperience = (resetImmediately = false) => {
+				const startExperience = (resetImmediately = false, shouldRun = true) => {
 					const attempt = ++playbackAttempt;
 					clearIntroTimers();
 					if (resetImmediately) stage.classList.add("is-resetting");
@@ -286,10 +284,12 @@ const homeVideoDoorSides = ["left", "right"] as const;
 						stage.classList.remove("is-resetting");
 					}
 
+					if (!shouldRun) return;
+
 					window.requestAnimationFrame(() => {
 						if (attempt !== playbackAttempt) return;
 						stage.classList.add("is-sequence-started");
-						scheduleIntroStep(() => openGreenIntro(attempt), 10000);
+						scheduleIntroStep(() => openGreenIntro(attempt), 8500);
 					});
 				};
 
@@ -302,44 +302,36 @@ const homeVideoDoorSides = ["left", "right"] as const;
 					video.currentTime = 0;
 					syncIntroGeometry();
 				});
-				scrollButton.addEventListener("click", () => {
-					if (!(hero instanceof HTMLElement)) return;
-					const navHeight = nav instanceof HTMLElement ? nav.getBoundingClientRect().height : 0;
-					const heroTop = hero.getBoundingClientRect().top + window.scrollY;
-					window.scrollTo({
-						top: Math.max(0, heroTop - navHeight),
-						behavior: "smooth",
-					});
-				});
 				replayButton.addEventListener("click", () => {
+					hasPlayedDuringVisit = true;
 					startExperience(true);
 				});
-				window.addEventListener(
-					"scroll",
-					() => {
-						if (scrollFrame) return;
 
-						scrollFrame = window.requestAnimationFrame(() => {
-							scrollFrame = 0;
-							const isAtPageTop = window.scrollY <= 1;
+				if ("IntersectionObserver" in window) {
+					const stageObserver = new IntersectionObserver(
+						(entries) => {
+							const entry = entries[0];
 
-							if (!isAtPageTop) {
-								hasLeftPageTop = true;
-								return;
-							}
-
-							if (hasLeftPageTop) {
-								hasLeftPageTop = false;
+							if (entry?.isIntersecting && entry.intersectionRatio >= 0.35 && !hasPlayedDuringVisit) {
+								hasPlayedDuringVisit = true;
 								startExperience(true);
+							} else if (!entry?.isIntersecting && hasPlayedDuringVisit) {
+								hasPlayedDuringVisit = false;
+								startExperience(true, false);
 							}
-						});
-					},
-					{ passive: true },
-				);
+						},
+						{ threshold: [0, 0.35] },
+					);
+
+					stageObserver.observe(stage);
+				} else {
+					hasPlayedDuringVisit = true;
+					startExperience();
+				}
 				window.addEventListener("resize", syncIntroGeometry, { passive: true });
 
 				syncIntroGeometry();
-				startExperience();
+				startExperience(false, false);
 			};
 
 			setupHomeVideoIntro();
@@ -481,12 +473,14 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		--home-video-green-background: repeating-radial-gradient(
 			circle at 25% 75%,
 			var(--section-green-wide-stripe) 0,
-			var(--section-green-wide-stripe) 46.4px,
-			var(--section-green-narrow-stripe) 46.4px,
-			var(--section-green-narrow-stripe) 51.733px
+			var(--section-green-wide-stripe) var(--section-green-wide-stripe-size),
+			var(--section-green-narrow-stripe) var(--section-green-wide-stripe-size),
+			var(--section-green-narrow-stripe) var(--section-green-stripe-period)
 		);
 		--home-video-wave-height: clamp(72px, 8.2vw, 150px);
+		--green-edge-top-wave-x: 0px;
 		--green-edge-bottom-wave-x: 0px;
+		--green-edge-top-wave-width: 2200px;
 		--green-edge-bottom-wave-width: 2200px;
 		position: relative;
 		width: 100%;
@@ -495,7 +489,11 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		isolation: isolate;
 	}
 
-	:global(.content > .home-video-stage + .hero-section.home-hero) {
+	:global(.content > .home-video-stage + .section) {
+		margin-top: var(--section-stack-gap) !important;
+	}
+
+	:global(.content > .section + .home-video-stage) {
 		margin-top: var(--section-stack-gap) !important;
 	}
 
@@ -513,12 +511,21 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	.home-video-intro-media {
 		position: absolute;
 		inset: 0;
+		z-index: 0;
 		width: 100%;
 		height: 100%;
 		display: block;
 		border: 0;
 		object-fit: contain;
-		background: #000000;
+		background: #ffffff;
+		visibility: hidden;
+	}
+
+	/* Do not reveal the video until the green doors and their edge waves have
+	 * completely cleared the frame.  On mobile this prevents either wave from
+	 * ever covering the top or bottom of the video. */
+	.home-video-stage:is(.is-video-wait, .is-playing, .is-darkening, .is-final) .home-video-intro-media {
+		visibility: visible;
 	}
 
 	.home-video-green-shutters {
@@ -526,9 +533,17 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		inset: 0;
 		z-index: 2;
 		overflow: hidden;
+		background: #ffffff;
 		perspective: clamp(900px, 105vw, 1800px);
 		perspective-origin: 50% 50%;
 		pointer-events: none;
+	}
+
+	/* Make the reset cover track the stage itself, including every video-height
+	 * change, and overscan it by one pixel to remove exposed video seams. */
+	.home-video-stage.is-green-intro .home-video-green-shutters {
+		inset: -1px;
+		height: auto;
 	}
 
 	.home-video-green-panel {
@@ -542,10 +557,9 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		transform: rotateY(0deg);
 		transform-style: preserve-3d;
 		transition:
-			transform 1600ms linear,
-			box-shadow 1600ms linear,
-			opacity 700ms ease-in 900ms,
-			visibility 0ms linear 1600ms;
+			transform 1360ms linear,
+			opacity 595ms ease-in 765ms,
+			visibility 0ms linear 1360ms;
 		visibility: visible;
 		will-change: transform;
 	}
@@ -556,8 +570,27 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		top: 0;
 		width: 200%;
 		height: 100%;
-		background: var(--home-video-green-background);
+		background: var(--home-video-green-background) center / auto no-repeat;
+		-webkit-mask-image: linear-gradient(#000 0 0), var(--green-edge-air-top-wave-scroll);
+		-webkit-mask-position:
+			0 0,
+			calc(var(--green-edge-top-wave-x) + var(--green-edge-wave-scroll-x)) top;
+		-webkit-mask-repeat: no-repeat, repeat-x;
+		-webkit-mask-size:
+			100% 100%,
+			var(--green-edge-top-wave-width) var(--home-video-wave-height);
+		-webkit-mask-composite: xor;
+		mask-image: linear-gradient(#000 0 0), var(--green-edge-air-top-wave-scroll);
+		mask-position:
+			0 0,
+			calc(var(--green-edge-top-wave-x) + var(--green-edge-wave-scroll-x)) top;
+		mask-repeat: no-repeat, repeat-x;
+		mask-size:
+			100% 100%,
+			var(--green-edge-top-wave-width) var(--home-video-wave-height);
+		mask-composite: exclude;
 		pointer-events: none;
+		will-change: background-position;
 	}
 
 	.home-video-green-panel::after {
@@ -608,7 +641,14 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		position: absolute;
 		inset: 0;
 		z-index: 1;
-		background: var(--home-video-green-background);
+		background-image: var(--green-edge-air-top-wave-scroll), var(--home-video-green-background);
+		background-position:
+			calc(var(--green-edge-top-wave-x) + var(--green-edge-wave-scroll-x)) top,
+			center;
+		background-repeat: repeat-x, no-repeat;
+		background-size:
+			var(--green-edge-top-wave-width) var(--home-video-wave-height),
+			auto;
 		opacity: 0;
 		transition: opacity 1700ms ease-in-out;
 		pointer-events: none;
@@ -639,7 +679,13 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-video-intro-content {
 		position: absolute;
-		inset: 0 0 auto;
+		/* This is the straight central rectangle of the green panel.  The
+		 * matching top and bottom wave bands are deliberately outside it, so
+		 * neither one participates in vertical centring. */
+		top: var(--home-video-wave-height);
+		right: 0;
+		bottom: var(--home-video-wave-height);
+		left: 0;
 		z-index: 3;
 		display: flex;
 		flex-direction: column;
@@ -648,7 +694,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		gap: 0;
 		box-sizing: border-box;
 		width: 100%;
-		height: var(--home-video-intro-height, 100%);
+		height: auto;
 		max-width: var(--page-max);
 		margin: 0 auto;
 		padding: clamp(24px, 4vh, 48px) 24px;
@@ -659,6 +705,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		width: 200%;
 		max-width: none;
 		margin: 0;
+		transform: none;
 	}
 
 	.home-video-accessible-intro {
@@ -673,13 +720,21 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		border: 0;
 	}
 
-	.home-video-teaser {
+	.home-video-final-content {
 		position: absolute;
 		top: 50%;
 		right: 24px;
 		left: 24px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: clamp(48px, 5vh, 72px);
+		transform: translateY(-50%);
+	}
+
+	.home-video-teaser {
 		display: block;
-		width: auto;
+		width: 100%;
 		max-width: none;
 		margin: 0;
 		padding: 0;
@@ -691,7 +746,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		line-height: 1.2;
 		text-align: center;
 		opacity: 0;
-		transform: translate3d(0, calc(-50% + 16px), 0) scale(0.96);
+		transform: translate3d(0, 16px, 0) scale(0.96);
 		transition:
 			opacity 1100ms var(--motion-ease) 100ms,
 			transform 1100ms var(--motion-ease) 100ms;
@@ -701,10 +756,19 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		color: var(--section-green-orange);
 	}
 
+	.home-video-teaser-question {
+		color: #ffffff;
+	}
+
 	.home-video-teaser-line {
 		display: block;
 	}
 
+	.home-video-teaser-line--detail {
+		margin-top: clamp(10px, 1.3vw, 20px);
+	}
+
+	.home-video-solution-label,
 	.home-video-brand,
 	.home-video-slogan-block,
 	.home-video-strategy,
@@ -715,6 +779,21 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		transition:
 			opacity 900ms var(--motion-ease),
 			transform 900ms var(--motion-ease);
+	}
+
+	.home-video-solution-label {
+		margin: 0 0 clamp(48px, 6.5vh, 78px);
+		color: var(--section-green-orange);
+		font-family: var(--font-heading);
+		font-size: clamp(1.55rem, 2.75vw, 2.5rem);
+		font-style: italic;
+		font-weight: var(--font-weight-heading);
+		line-height: 1;
+		text-align: center;
+	}
+
+	.home-video-solution-colon {
+		color: #ffffff;
 	}
 
 	.home-video-brand {
@@ -886,9 +965,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	.home-video-replay {
-		position: absolute;
-		right: clamp(18px, 2.4vw, 36px);
-		bottom: clamp(18px, 2.4vw, 36px);
+		position: static;
 		display: grid;
 		place-items: center;
 		width: clamp(42px, 4vw, 58px);
@@ -936,14 +1013,18 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	.home-video-stage.is-opened .home-video-green-panel--left {
-		box-shadow: 18px 0 34px rgba(0, 35, 31, 0.32);
+		box-shadow: none;
 		opacity: 0;
 		transform: rotateY(88deg);
 		visibility: hidden;
 	}
 
+	.home-video-stage.is-opened .home-video-green-shutters {
+		background: transparent;
+	}
+
 	.home-video-stage.is-opened .home-video-green-panel--right {
-		box-shadow: -18px 0 34px rgba(0, 35, 31, 0.32);
+		box-shadow: none;
 		opacity: 0;
 		transform: rotateY(-88deg);
 		visibility: hidden;
@@ -955,6 +1036,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	.home-video-stage.is-resetting .home-video-teaser,
 	.home-video-stage.is-resetting
 		:is(
+			.home-video-solution-label,
 			.home-video-brand,
 			.home-video-brand-mark,
 			.home-video-wordmark,
@@ -975,6 +1057,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		height: var(--home-video-wave-height);
 	}
 
+	.home-video-stage.is-sequence-started .home-video-solution-label,
 	.home-video-stage.is-sequence-started .home-video-brand,
 	.home-video-stage.is-sequence-started .home-video-slogan-block,
 	.home-video-stage.is-sequence-started .home-video-strategy {
@@ -982,33 +1065,37 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		transform: translate3d(0, 0, 0) scale(1);
 	}
 
-	.home-video-stage.is-sequence-started .home-video-brand {
+	.home-video-stage.is-sequence-started .home-video-solution-label {
 		transition-delay: 0ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-brand {
+		transition-delay: 350ms;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-brand-mark {
 		opacity: 1;
 		transform: translate3d(0, 0, 0) scale(1);
-		transition-delay: 250ms;
+		transition-delay: 600ms;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-wordmark {
 		opacity: 1;
 		transform: translate3d(0, 0, 0);
-		transition-delay: 1050ms;
+		transition-delay: 1350ms;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-slogan-block {
-		transition-delay: 1850ms;
+		transition-delay: 2200ms;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-strategy {
-		transition-delay: 2950ms;
+		transition-delay: 3150ms;
 	}
 
 	.home-video-stage.is-final .home-video-teaser {
 		opacity: 1;
-		transform: translate3d(0, -50%, 0) scale(1);
+		transform: translate3d(0, 0, 0) scale(1);
 	}
 
 	.home-video-stage.is-final .home-video-scroll {
@@ -1066,9 +1153,24 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	@media (orientation: portrait) {
+		/* Overlap the two door leaves by one pixel.  At portrait widths their
+		 * separate composited backgrounds can otherwise leave a hairline at the
+		 * centre before the doors begin to open.  Keep their pseudo-backgrounds
+		 * one full-stage width so the pattern remains continuous through the
+		 * overlap. */
+		.home-video-green-panel {
+			width: calc(50% + 1px);
+		}
+
+		.home-video-green-panel::before,
+		.home-video-green-panel::after {
+			width: calc(200% - 2px);
+		}
+
 		.home-video-stage {
 			--home-video-initial-height: clamp(500px, 72vw, 560px);
 			--home-video-outro-height: clamp(340px, 78vw, 460px);
+			--green-edge-top-wave-width: 1100px;
 			--green-edge-bottom-wave-width: 1100px;
 			width: 100vw;
 			max-width: none;
@@ -1101,19 +1203,18 @@ const homeVideoDoorSides = ["left", "right"] as const;
 			padding-inline: 18px;
 		}
 
+		.home-video-solution-label {
+			margin-bottom: clamp(26px, 3.5vh, 36px);
+		}
+
 		.home-video-teaser {
 			right: 6%;
 			left: 6%;
 			font-size: clamp(1.45rem, 5.4vw, 2.25rem);
 		}
 
-		.home-video-stage.is-green-intro .home-video-intro-content {
-			height: var(--home-video-initial-height);
-		}
-
-		.home-video-stage.is-darkening .home-video-intro-content,
-		.home-video-stage.is-final .home-video-intro-content {
-			height: var(--home-video-outro-height);
+		.home-video-teaser-detail-rest {
+			display: block;
 		}
 
 		.home-video-brand-mark {
@@ -1801,16 +1902,6 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		text-align: center;
 	}
 
-	@media (orientation: landscape) {
-		:global(.home-file-model-section > .home-comparison-grid) {
-			margin-top: clamp(48px, 5.25vw, 72px) !important;
-		}
-
-		:global(body .page .content .section.home-file-model-section > p.home-file-model-summary) {
-			margin-top: clamp(48px, 5.25vw, 72px) !important;
-		}
-	}
-
 	:global(.home-file-model-summary > span) {
 		display: block;
 	}
@@ -1825,7 +1916,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	:global(body .page .content .section.home-file-model-section > p.home-file-model-summary-solution) {
-		margin-top: var(--section-gap) !important;
+		margin-top: 0 !important;
 	}
 
 	:global(.home-file-model-section) {

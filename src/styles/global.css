@@ -15,6 +15,8 @@
 	--accent-soft: #e2f3f1;
 	--section-green-wide-stripe: #00564c;
 	--section-green-narrow-stripe: #006457;
+	--section-green-wide-stripe-size: 46.4px;
+	--section-green-stripe-period: 51.733px;
 	--section-green-orange: #ff5d15;
 	--icon-reader-book: #009b8a;
 	--icon-author: #d0186a;
@@ -699,10 +701,19 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	--section-bg: repeating-radial-gradient(
 		circle at var(--section-green-circle-x) calc(var(--section-green-circle-y) + var(--section-bg-parallax-y)),
 		var(--section-green-wide-stripe) 0,
-		var(--section-green-wide-stripe) 46.4px,
-		var(--section-green-narrow-stripe) 46.4px,
-		var(--section-green-narrow-stripe) 51.733px
+		var(--section-green-wide-stripe) var(--section-green-wide-stripe-size),
+		var(--section-green-narrow-stripe) var(--section-green-wide-stripe-size),
+		var(--section-green-narrow-stripe) var(--section-green-stripe-period)
 	);
+}
+
+@media (orientation: portrait) {
+	:root {
+		/* Keep the two colour bands in the same proportion while making each
+		 * circular stripe one and a half times tighter on vertical screens. */
+		--section-green-wide-stripe-size: 30.933333px;
+		--section-green-stripe-period: 34.488667px;
+	}
 }
 
 .content > .section--green:nth-child(4n + 1 of .section--green) {
