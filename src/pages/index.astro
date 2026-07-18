@@ -18,7 +18,10 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	<section id="home-main-hero" class="section section--green home-hero">
 		<div class="home-hero-content">
-			<h1><span>Transforming</span><span>the world of books</span></h1>
+			<div class="home-hero-title" role="heading" aria-level="1">
+				<div class="home-hero-title-line home-hero-title-line--accent">Transforming</div>
+				<div class="home-hero-title-line">the world of books</div>
+			</div>
 			<p class="home-hero-statement">
 				ReaderPub is a web-native publishing network that makes books readable online and keeps readers connected.
 			</p>
@@ -88,7 +91,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		id="home-challenge"
 		tone="gray"
 		title="The challenge:"
-		body="Digital publishing made distribution easier, but it still leaves books disconnected from readers, discussion, and long-term discovery."
+		body="Ebooks are still delivered as standalone files, detached from authors, publishers, discussions, and communities."
 	>
 		<CardGrid columns="3" class="home-problem-grid">
 			<Card
@@ -138,15 +141,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 							<span class="home-video-wordmark"><span>Reader</span><span>Pub</span></span>
 						</div>
 						<div class="home-video-slogan-block" data-home-video-reveal="slogan">
-							<span class="home-video-slogan">Web-native Publishing Network</span>
+							<span class="home-video-slogan"><span class="home-video-slogan-lead">Direct web access.</span><br />No downloads or platform lock-in.</span>
 						</div>
-						<p class="home-video-strategy" data-home-video-reveal="strategy">
-							<span class="home-video-strategy-line">READ INSTANTLY</span>
-							<span class="home-video-period">•</span>
-							<span class="home-video-strategy-line">PUBLISH SECURELY</span>
-							<span class="home-video-period">•</span>
-							<span class="home-video-strategy-line">DISTRIBUTE STRATEGICALLY</span>
-						</p>
 					</div>
 				</div>
 			))}
@@ -166,7 +162,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 				</button>
 			</div>
 			<div class="home-video-accessible-intro">
-				The solution:  ReaderPub. Web-native Publishing Network. Read instantly. Publish securely. Distribute strategically.
+				The solution:  ReaderPub. Direct web access. No downloads or platform lock-in.
 			</div>
 		</div>
 		<div class="home-video-wave-space" aria-hidden="true"></div>
@@ -243,12 +239,12 @@ const homeVideoDoorSides = ["left", "right"] as const;
 					const navHeight = nav instanceof HTMLElement ? nav.getBoundingClientRect().height : 0;
 					const videoWidth = video.videoWidth || 1272;
 					const videoHeight = video.videoHeight || 798;
-					const stageWidth = stage.getBoundingClientRect().width;
+					const introWidth = intro.getBoundingClientRect().width;
 
 					document.documentElement.style.setProperty("--home-video-nav-height", `${Math.round(navHeight)}px`);
 
-					if (stageWidth > 0 && videoWidth > 0 && videoHeight > 0) {
-						const introHeight = stageWidth * (videoHeight / videoWidth);
+					if (introWidth > 0 && videoWidth > 0 && videoHeight > 0) {
+						const introHeight = introWidth * (videoHeight / videoWidth);
 						stage.style.setProperty("--home-video-intro-height", `${introHeight}px`);
 						intro.style.height = `${introHeight}px`;
 					}
@@ -518,36 +514,33 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		--green-edge-air: clamp(72px, 8.2vw, 150px);
 		--green-edge-bottom-inset: var(--green-edge-air);
 		--green-section-safe-offset: clamp(57.2px, 6.82vw, 114.4px);
-		--green-section-padding-top: calc(var(--green-section-safe-offset) * 1.21);
-		--green-section-padding-bottom: calc((var(--green-section-safe-offset) + var(--green-edge-bottom-inset)) * 1.089);
+		--green-section-padding-top: calc(var(--green-section-safe-offset) * 1.331);
+		--green-section-padding-bottom: calc((var(--green-section-safe-offset) + var(--green-edge-bottom-inset)) * 0.9801);
 		container-type: inline-size;
 		margin-top: 0 !important;
 		margin-bottom: 0 !important;
 	}
 
 	:global(body.page-home) {
-		--home-hero-illustration-surface: linear-gradient(to bottom, #dff5ef 0%, #f5fbf9 20%, #ffffff 52%);
-		--home-hero-illustration-wave: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202200%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22%23dff5ef%22%20d%3D%22M0%20520%20C120%20500%20190%20552%20306%20486%20C432%20414%20500%20230%20620%20310%20C748%20396%20820%20212%20942%20268%20C1068%20326%201130%2092%201252%20158%20C1376%20224%201446%20336%201568%20218%20C1688%20102%201756%20290%201878%20222%20C1998%20156%202054%20540%202200%20520%20V560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
-		--home-hero-illustration-blur:
-			radial-gradient(22% 17% at 32% 17%, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.3) 42%, transparent 76%),
-			radial-gradient(18% 16% at 71% 29%, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.25) 42%, transparent 76%),
-			radial-gradient(24% 20% at 12% 17%, rgba(0, 143, 128, 0.17) 0%, rgba(0, 143, 128, 0.06) 42%, transparent 74%),
-			radial-gradient(20% 18% at 87% 34%, rgba(0, 143, 128, 0.14) 0%, rgba(0, 143, 128, 0.05) 42%, transparent 74%),
-			radial-gradient(24% 20% at 28% 30%, rgba(255, 90, 0, 0.18) 0%, rgba(255, 90, 0, 0.06) 42%, transparent 74%),
-			radial-gradient(21% 18% at 74% 16%, rgba(255, 90, 0, 0.16) 0%, rgba(255, 90, 0, 0.05) 42%, transparent 74%),
-			radial-gradient(17% 15% at 51% 37%, rgba(255, 90, 0, 0.12) 0%, transparent 74%),
-			var(--home-hero-illustration-surface);
+		--home-hero-illustration-surface: linear-gradient(to bottom, #fff9f5 0%, #fffdfb 34%, #ffffff 62%);
+		--home-hero-illustration-wave: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202200%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff9f5%22%20d%3D%22M0%20520%20C120%20500%20190%20552%20306%20486%20C432%20414%20500%20230%20620%20310%20C748%20396%20820%20212%20942%20268%20C1068%20326%201130%2092%201252%20158%20C1376%20224%201446%20336%201568%20218%20C1688%20102%201756%20290%201878%20222%20C1998%20156%202054%20540%202200%20520%20V560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+		--home-hero-illustration-spots:
+			radial-gradient(15% 16% at 10% 5%, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.3) 43%, transparent 78%),
+			radial-gradient(17% 16% at 35% 4%, rgba(0, 143, 128, 0.16) 0%, rgba(0, 143, 128, 0.04) 46%, transparent 80%),
+			radial-gradient(15% 15% at 59% 6%, rgba(255, 91, 0, 0.18) 0%, rgba(255, 91, 0, 0.04) 46%, transparent 80%),
+			radial-gradient(16% 15% at 82% 4%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.3) 44%, transparent 80%),
+			radial-gradient(16% 17% at 96% 12%, rgba(0, 143, 128, 0.15) 0%, rgba(0, 143, 128, 0.04) 45%, transparent 80%),
+			radial-gradient(17% 18% at 17% 25%, rgba(255, 91, 0, 0.16) 0%, rgba(255, 91, 0, 0.04) 45%, transparent 78%),
+			radial-gradient(15% 16% at 44% 20%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.25) 43%, transparent 78%),
+			radial-gradient(16% 18% at 71% 25%, rgba(0, 143, 128, 0.16) 0%, rgba(0, 143, 128, 0.04) 45%, transparent 80%),
+			radial-gradient(15% 16% at 89% 30%, rgba(255, 91, 0, 0.14) 0%, rgba(255, 91, 0, 0.04) 44%, transparent 78%),
+			radial-gradient(17% 18% at 31% 43%, rgba(0, 143, 128, 0.13) 0%, rgba(0, 143, 128, 0.03) 45%, transparent 80%),
+			radial-gradient(14% 15% at 56% 39%, rgba(255, 255, 255, 0.74) 0%, rgba(255, 255, 255, 0.2) 42%, transparent 78%),
+			radial-gradient(16% 17% at 76% 45%, rgba(255, 91, 0, 0.12) 0%, rgba(255, 91, 0, 0.03) 44%, transparent 78%);
 	}
 
 	:global(.section.section--green.home-hero)::after {
-		content: "";
-		top: auto;
-		bottom: -2px;
-		height: var(--green-edge-air);
-		background-image: var(--home-hero-illustration-wave);
-		background-position: calc(var(--green-edge-bottom-wave-x) + var(--green-edge-wave-scroll-x)) bottom;
-		background-repeat: repeat-x;
-		background-size: var(--green-edge-bottom-wave-width) var(--green-edge-air);
+		content: none;
 	}
 
 	.home-hero-content {
@@ -560,37 +553,56 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		display: grid;
 		justify-items: center;
 		gap: var(--home-hero-copy-gap);
-		width: 100vw;
-		margin-left: calc(50% - 50vw);
+		width: 100%;
+		box-sizing: border-box;
+		margin-left: 0;
 		padding: 0 clamp(18px, 3vw, 56px);
 		text-align: center;
 	}
 
-	.home-hero-content h1 {
+	.home-hero-title {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		/* Reduce the full line-to-line vertical distance by 8%, not merely
+		 * a one-pixel slice of the empty gap. */
+		gap: 0.0446em;
 		width: var(--home-hero-copy-width);
 		max-width: none;
 		margin: 0;
 		color: #ffffff !important;
-		font-family: "Inter", system-ui, sans-serif;
+		font-family: var(--font-heading);
 		font-size: clamp(3rem, 7.1vw, 5.75rem);
-		font-weight: 900;
-		line-height: 0.936;
-		text-wrap: balance;
-	}
-
-	.home-hero-content h1 > span {
-		display: block;
-		width: 100%;
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: var(--letter-spacing-heading);
 		text-align: center;
 	}
 
-	.home-hero-content h1 > span:first-child {
-		color: var(--accent-orange);
+	.home-hero-title-line {
+		display: block;
+		min-width: 0;
+		width: max-content !important;
+		max-width: none !important;
+		margin: 0;
+		color: inherit;
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		text-align: center;
 	}
 
-	.home-hero-content h1 > span:last-child {
-		/* The visible glyphs in this line are optically right-heavy. */
-		transform: translateX(-0.14em);
+	/* Keep the white title line within its fixed landscape width while using
+	 * the explicitly requested word spacing. The shared title size below keeps
+	 * the orange line exactly the same size. */
+	.home-hero-title-line:not(.home-hero-title-line--accent) {
+		word-spacing: 0.11em;
+	}
+
+	.home-hero-title .home-hero-title-line--accent {
+		color: var(--accent-orange) !important;
 	}
 
 	.home-cta-body-accent {
@@ -598,8 +610,15 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	.home-video-stage {
+		--home-video-icon-gap: clamp(48px, 6.5vh, 78px);
+		--home-video-content-padding-block: clamp(27.6px, 4.6vh, 55.2px);
+		--home-video-green-extra-height: 120px;
+		--home-video-open-stage-height: calc(
+			var(--home-video-intro-height) + var(--home-video-green-extra-height) + var(--home-video-wave-height)
+		);
+		--section-bg-parallax-y: 0px;
 		--home-video-green-background: repeating-radial-gradient(
-			circle at 25% 75%,
+			circle at 25% calc(75% + var(--section-bg-parallax-y)),
 			var(--section-green-wide-stripe) 0,
 			var(--section-green-wide-stripe) var(--section-green-wide-stripe-size),
 			var(--section-green-narrow-stripe) var(--section-green-wide-stripe-size),
@@ -611,7 +630,10 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		--green-edge-top-wave-width: 2200px;
 		--green-edge-bottom-wave-width: 2200px;
 		position: relative;
-		width: 100%;
+		width: 100vw;
+		max-width: 100vw;
+		margin-right: calc(50% - 50vw);
+		margin-left: calc(50% - 50vw);
 		overflow: hidden;
 		background: transparent;
 		isolation: isolate;
@@ -628,7 +650,9 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	.home-video-intro {
 		position: relative;
 		z-index: 0;
-		width: 100%;
+		width: 90%;
+		max-width: 1018.8px; /* 90% of the 1132px page container */
+		margin-inline: auto;
 		height: var(--home-video-intro-height, auto);
 		min-height: 0;
 		aspect-ratio: 1272 / 798;
@@ -636,15 +660,25 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		background: transparent;
 	}
 
+	/* The closed-door state needs more real height, not extra padding on the
+	 * centered content. */
+	.home-video-stage.is-green-intro .home-video-intro {
+		height: calc(var(--home-video-intro-height) + var(--home-video-green-extra-height)) !important;
+	}
+
 	.home-video-intro-media {
 		position: absolute;
-		inset: 0;
+		/* Slightly overscan the encoded frame so its one-pixel edge never reads
+		 * as a border around the video. The intro clips this overflow. */
+		inset: -1px;
 		z-index: 0;
-		width: 100%;
-		height: 100%;
+		width: calc(100% + 2px);
+		height: calc(100% + 2px);
 		display: block;
 		border: 0;
-		object-fit: contain;
+		outline: 0;
+		box-shadow: none;
+		object-fit: cover;
 		background: #ffffff;
 		visibility: hidden;
 	}
@@ -661,17 +695,33 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		inset: 0;
 		z-index: 2;
 		overflow: hidden;
-		background: #ffffff;
+		/* The continuous stage layer sits behind the doors. Keeping this
+		 * transparent prevents a visible seam at the two door boundaries. */
+		background: transparent;
 		perspective: clamp(900px, 105vw, 1800px);
 		perspective-origin: 50% 50%;
 		pointer-events: none;
 	}
 
-	/* Make the reset cover track the stage itself, including every video-height
-	 * change, and overscan it by one pixel to remove exposed video seams. */
-	.home-video-stage.is-green-intro .home-video-green-shutters {
-		inset: -1px;
-		height: auto;
+	.home-video-stage.is-green-intro .home-video-green-layer {
+		opacity: 1;
+	}
+
+	/* Draw the white crest once, across the whole stage. It sits above the
+	 * two doors, so their inner boundaries cannot show through the white area. */
+	.home-video-stage.is-green-intro::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		z-index: 4;
+		height: var(--home-video-wave-height);
+		background-image: var(--green-edge-air-top-wave-scroll);
+		background-position: calc(var(--green-edge-top-wave-x) + var(--green-edge-wave-scroll-x)) top;
+		background-repeat: repeat-x;
+		background-size: var(--green-edge-top-wave-width) 100%;
+		pointer-events: none;
 	}
 
 	.home-video-green-panel {
@@ -698,7 +748,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		top: 0;
 		width: 200%;
 		height: 100%;
-		background: var(--home-video-green-background) center / auto no-repeat;
+		background: var(--home-video-green-background) center / 100vw 100% no-repeat;
 		-webkit-mask-image: linear-gradient(#000 0 0), var(--green-edge-air-top-wave-scroll);
 		-webkit-mask-position:
 			0 0,
@@ -825,7 +875,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		height: auto;
 		max-width: var(--page-max);
 		margin: 0 auto;
-		padding: clamp(24px, 4vh, 48px) 24px;
+		padding: var(--home-video-content-padding-block) 24px;
 		pointer-events: none;
 	}
 
@@ -834,6 +884,13 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		max-width: none;
 		margin: 0;
 		transform: none;
+	}
+
+	/* The final message uses the same full, fixed stage as the green intro and
+	 * the centred video. */
+	.home-video-intro-content--controls {
+		top: 0;
+		bottom: 0;
 	}
 
 	.home-video-accessible-intro {
@@ -850,19 +907,14 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-video-final-content {
 		position: absolute;
-		top: 50%;
-		right: 24px;
-		left: 24px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: clamp(48px, 5vh, 72px);
-		transform: translateY(-50%);
+		inset: 0;
+		display: grid;
+		place-items: center;
 	}
 
 	.home-video-teaser {
-		display: block;
-		width: 100%;
+		position: relative;
+		width: calc(100% - 48px);
 		max-width: none;
 		margin: 0;
 		padding: 0;
@@ -910,7 +962,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	.home-video-solution-label {
-		margin: 0 0 clamp(48px, 6.5vh, 78px);
+		margin: 0 0 var(--home-video-icon-gap);
 		color: var(--section-green-orange);
 		font-family: var(--font-heading);
 		font-size: clamp(1.55rem, 2.75vw, 2.5rem);
@@ -939,7 +991,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	.home-video-brand-mark {
 		position: relative;
 		display: block;
-		width: clamp(86px, 9.2vw, 140px);
+		width: clamp(98.9px, 10.58vw, 161px);
 		aspect-ratio: 3900 / 3500;
 		opacity: 0;
 		transform: translate3d(0, 14px, 0) scale(0.96);
@@ -961,7 +1013,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		min-width: 220px;
 		color: #ffffff;
 		font-family: var(--font-ui);
-		font-size: clamp(2rem, 3.4vw, 3.25rem);
+		font-size: clamp(2.3rem, 3.91vw, 3.7375rem);
 		font-weight: 500;
 		letter-spacing: var(--letter-spacing-heading);
 		line-height: 1;
@@ -988,7 +1040,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		width: 100% !important;
 		min-width: 100% !important;
 		max-width: none !important;
-		margin-top: clamp(36px, 4.4vh, 54px);
+		margin-top: var(--home-video-icon-gap);
 		margin-right: 0 !important;
 		margin-left: 0 !important;
 		padding: 0 !important;
@@ -998,9 +1050,9 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	.home-video-slogan {
 		display: block !important;
 		box-sizing: border-box;
-		width: max-content !important;
+		width: min(84%, 920px) !important;
 		min-width: 0 !important;
-		max-width: 100% !important;
+		max-width: 84% !important;
 		margin: 0 auto !important;
 		padding: 0 !important;
 		color: var(--section-green-orange);
@@ -1010,10 +1062,11 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		line-height: 1.08;
 		text-align: center !important;
 		text-indent: 0 !important;
-		white-space: nowrap;
+		white-space: normal;
+		text-wrap: balance;
 	}
 
-	.home-video-slogan > span {
+	.home-video-slogan-lead {
 		color: #ffffff;
 	}
 
@@ -1025,7 +1078,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		box-sizing: border-box;
 		width: 80% !important;
 		max-width: 80% !important;
-		margin: clamp(30px, 3.7vh, 46px) 0 0 -40% !important;
+		margin: var(--home-video-icon-gap) 0 0 -40% !important;
 		color: #ffffff;
 		font-family: var(--font-heading);
 		font-size: clamp(0.78rem, 1.55vw, 1.45rem);
@@ -1068,8 +1121,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		display: block !important;
 		width: clamp(28px, 3vw, 42px);
 		height: clamp(28px, 3vw, 42px);
-		border-right: 4px solid #ff5d15 !important;
-		border-bottom: 4px solid #ff5d15 !important;
+		border-right: 4px solid #ff5b00 !important;
+		border-bottom: 4px solid #ff5b00 !important;
 		transform: translateY(-8px) rotate(45deg);
 		transition:
 			border-right-color var(--motion-fast) ease,
@@ -1093,7 +1146,11 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	.home-video-replay {
-		position: static;
+		position: absolute;
+		/* The replay control follows the message visually, but is outside the
+		 * centred text block so it cannot pull the two lines upward. */
+		top: calc(50% + clamp(134px, 12vh, 164px));
+		left: 50%;
 		display: grid;
 		place-items: center;
 		width: clamp(42px, 4vw, 58px);
@@ -1105,6 +1162,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		color: var(--section-green-orange);
 		cursor: pointer;
 		pointer-events: none;
+		transform: translate3d(-50%, 24px, 0);
 	}
 
 	.home-video-replay svg {
@@ -1151,6 +1209,14 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		background: transparent;
 	}
 
+	/* Once the leaves begin to open, there must be no independent green
+	 * backdrop behind them.  The two panels therefore reveal the video across
+	 * the complete stage, rather than leaving a stationary green rim. */
+	.home-video-stage.is-opened:not(.is-darkening, .is-final) .home-video-green-layer {
+		opacity: 0;
+		transition: none;
+	}
+
 	.home-video-stage.is-opened .home-video-green-panel--right {
 		box-shadow: none;
 		opacity: 0;
@@ -1176,13 +1242,30 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		transition: none;
 	}
 
-	.home-video-stage.is-opened:not(.is-darkening, .is-final) .home-video-wave-space {
+	/* The stage keeps one fixed centring plane through the complete sequence.
+	 * In particular, the lower wave must not return to normal flow just before
+	 * the final panel appears: that was shrinking the stage and lifting the
+	 * video above the shared centre line. */
+	.home-video-stage:is(.is-opened, .is-darkening, .is-final) .home-video-wave-space {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
 		height: 0;
 	}
 
-	.home-video-stage.is-darkening .home-video-wave-space,
-	.home-video-stage.is-final .home-video-wave-space {
-		height: var(--home-video-wave-height);
+	/* Keep the green intro, the video, and the final green panel on the same
+	 * physical stage. The automatic flex margins split the free height equally
+	 * above and below the video in every state. */
+	.home-video-stage:is(.is-opened, .is-darkening, .is-final) {
+		display: flex;
+		flex-direction: column;
+		min-height: var(--home-video-open-stage-height);
+	}
+
+	.home-video-stage:is(.is-opened, .is-darkening, .is-final) .home-video-intro {
+		margin-top: auto;
+		margin-bottom: auto;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-solution-label,
@@ -1236,7 +1319,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-video-stage.is-final .home-video-replay {
 		opacity: 1;
-		transform: translate3d(0, 0, 0);
+		transform: translate3d(-50%, 0, 0);
 		pointer-events: auto;
 		transition-delay: 0ms;
 	}
@@ -1257,7 +1340,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-hero-statement {
 		width: var(--home-hero-copy-width);
-		max-width: none;
+		max-width: none !important;
 		margin-top: calc(var(--home-hero-statement-bottom-gap) + var(--home-hero-actions-offset));
 		margin-bottom: var(--home-hero-statement-bottom-gap);
 		color: #ffffff !important;
@@ -1265,21 +1348,27 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		font-size: clamp(1.25rem, 2.15vw, 1.7rem);
 		font-weight: 300;
 		letter-spacing: 0;
-		line-height: 1.28;
+		line-height: 1.408;
 		text-wrap: wrap;
+	}
+
+	/* The site-wide landscape paragraph rule is intentionally more specific.
+	 * Keep this Hero's copy at its own 70cqw width so it remains two lines. */
+	:global(body .page .content .section.home-hero .home-hero-statement) {
+		max-width: none !important;
 	}
 
 	.home-hero-strategy {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: clamp(8.4px, 0.98vw, 14px);
+		gap: 1.1131cqw;
 		width: var(--home-hero-copy-width);
 		max-width: none;
 		margin: calc(var(--home-hero-statement-bottom-gap) + var(--home-hero-actions-offset)) 0 0;
 		color: #ffffff !important;
 		font-family: var(--font-heading);
-		font-size: clamp(1.082rem, 1.577vw, 1.577rem);
+		font-size: 1.8207cqw;
 		font-weight: 500;
 		letter-spacing: 0.08em;
 		line-height: var(--line-height-heading);
@@ -1288,6 +1377,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-hero-strategy-dot {
 		color: var(--accent-orange);
+		font-size: 1.1em;
 	}
 
 	.home-hero-actions {
@@ -1310,17 +1400,64 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-hero-illustration-backdrop {
 		--home-hero-bookshelf-gap: 64px;
+		--home-hero-wave-height: clamp(72px, 8.2vw, 150px);
+		--home-hero-strip-pattern-width: max(2400px, 150vw);
+		--home-hero-wave-mask-images:
+			var(--green-edge-air-bottom-wave-scroll),
+			linear-gradient(to bottom, transparent 0 var(--home-hero-wave-height), #000 var(--home-hero-wave-height) 100%);
+		--home-hero-wave-mask-position: var(--green-edge-wave-scroll-x) top, 0 0;
+		--home-hero-wave-mask-repeat: repeat-x, no-repeat;
+		--home-hero-wave-mask-size: 2200px var(--home-hero-wave-height), 100% 100%;
+		position: relative;
 		isolation: isolate;
 		display: flow-root;
 		width: 100vw;
-		margin-inline: calc(50% - 50vw);
-		overflow: clip;
-		background: var(--home-hero-illustration-blur);
+		margin: 0 calc(50% - 50vw);
+		padding-top: 0;
+		overflow: visible;
+		background: transparent;
+	}
+
+	/* Both layers share one mask. The solid surface never repeats; the mobile
+	 * parallax layer above it is transparent at its edges, so no repeating tile
+	 * can form a vertical seam while it moves. */
+	.home-hero-illustration-backdrop::before,
+	.home-hero-illustration-backdrop::after {
+		content: "";
+		position: absolute;
+		z-index: 0;
+		top: calc(-1 * var(--home-hero-wave-height));
+		right: 0;
+		left: 0;
+		height: calc(100% + var(--home-hero-wave-height));
+		-webkit-mask-image: var(--home-hero-wave-mask-images);
+		-webkit-mask-position: var(--home-hero-wave-mask-position);
+		-webkit-mask-repeat: var(--home-hero-wave-mask-repeat);
+		-webkit-mask-size: var(--home-hero-wave-mask-size);
+		-webkit-mask-composite: source-over;
+		mask-image: var(--home-hero-wave-mask-images);
+		mask-position: var(--home-hero-wave-mask-position);
+		mask-repeat: var(--home-hero-wave-mask-repeat);
+		mask-size: var(--home-hero-wave-mask-size);
+		mask-composite: add;
+		pointer-events: none;
+	}
+
+	.home-hero-illustration-backdrop::before {
+		background: var(--home-hero-illustration-surface);
+	}
+
+	.home-hero-illustration-backdrop::after {
+		background-image: var(--home-hero-illustration-spots);
+		background-position: calc(50% + var(--home-hero-illustration-spot-x)) center;
+		background-repeat: no-repeat;
+		background-size: var(--home-hero-strip-pattern-width) 100%;
+		will-change: background-position, mask-position;
 	}
 
 	.home-hero-image-section {
 		position: relative;
-		z-index: 0;
+		z-index: 1;
 		width: min(100%, calc(var(--page-max) - 48px));
 		margin: var(--section-stack-gap) auto 0;
 		display: grid;
@@ -1333,7 +1470,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		/* Keep the illustration square.  On a narrow portrait screen its
 		 * available width is smaller than the desktop height calculation; an
 		 * explicit height there was stretching the image vertically. */
-		width: min(100%, calc(64dvh - 51.2px));
+		width: min(100%, calc((64dvh - 51.2px) * 1.1));
 		aspect-ratio: 1;
 		height: auto;
 		max-height: none;
@@ -1344,6 +1481,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		width: min(100%, calc(var(--page-max) - 48px)) !important;
 		max-width: min(100%, calc(var(--page-max) - 48px)) !important;
 		margin: var(--home-hero-bookshelf-gap, 64px) auto 0 !important;
+		position: relative;
+		z-index: 1;
 	}
 
 	:global(.content > .home-hero-illustration-backdrop + script + .section:is(.section--gray, .section--green)) {
@@ -1356,8 +1495,13 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	@media (min-width: 901px) and (orientation: landscape) {
-		.home-hero-content h1 {
+		.home-hero-title {
+			font-size: min(clamp(3rem, 7.1vw, 5.75rem), 7.239cqw);
 			white-space: nowrap;
+		}
+
+		.home-hero-strategy-dot {
+			font-size: 2.452cqw;
 		}
 	}
 
@@ -1373,6 +1517,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 		.home-hero-illustration-backdrop {
 			--home-hero-bookshelf-gap: 32px;
+			--home-hero-strip-pattern-width: max(1200px, 280vw);
+			--home-hero-wave-mask-size: 1100px var(--home-hero-wave-height), 100% 100%;
 		}
 
 		/* Match a one-column card's usable width in the surrounding green
@@ -1388,11 +1534,15 @@ const homeVideoDoorSides = ["left", "right"] as const;
 			margin-left: calc(50% - 50vw) !important;
 		}
 
-		.home-hero-content h1 {
+		.home-hero-title {
 			width: 100%;
 			max-width: none;
 			font-size: clamp(2.1rem, 9.2vw, 4.4rem);
 			white-space: normal;
+		}
+
+		.home-hero-title-line {
+			width: 100% !important;
 		}
 
 		.home-hero-statement {
@@ -1422,6 +1572,11 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		.home-video-stage {
 			--home-video-initial-height: clamp(500px, 72vw, 560px);
 			--home-video-outro-height: clamp(340px, 78vw, 460px);
+			--home-video-green-extra-height: 84px;
+			--home-video-open-stage-height: calc(
+				var(--home-video-initial-height) + var(--home-video-green-extra-height) + var(--home-video-wave-height)
+			);
+			--home-video-icon-gap: clamp(26px, 3.5vh, 36px);
 			--green-edge-top-wave-width: 1100px;
 			--green-edge-bottom-wave-width: 1100px;
 			width: 100vw;
@@ -1435,7 +1590,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		}
 
 		.home-video-stage.is-green-intro .home-video-intro {
-			height: var(--home-video-initial-height) !important;
+			height: calc(var(--home-video-initial-height) + var(--home-video-green-extra-height)) !important;
 			aspect-ratio: auto;
 		}
 
@@ -1456,12 +1611,11 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		}
 
 		.home-video-solution-label {
-			margin-bottom: clamp(26px, 3.5vh, 36px);
+			margin-bottom: var(--home-video-icon-gap);
 		}
 
 		.home-video-teaser {
-			right: 6%;
-			left: 6%;
+			width: 88%;
 			font-size: clamp(1.45rem, 5.4vw, 2.25rem);
 		}
 
@@ -1470,17 +1624,17 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		}
 
 		.home-video-brand-mark {
-			width: clamp(72px, 16vw, 104px);
+			width: clamp(82.8px, 18.4vw, 119.6px);
 		}
 
 		.home-video-wordmark {
 			width: 54%;
 			min-width: 0;
-			font-size: clamp(1.85rem, 7vw, 2.8rem);
+			font-size: clamp(2.1275rem, 8.05vw, 3.22rem);
 		}
 
 		.home-video-slogan-block {
-			margin-top: 22px;
+			margin-top: var(--home-video-icon-gap);
 		}
 
 		.home-video-slogan {
@@ -1501,7 +1655,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 			gap: clamp(2px, 0.55vw, 5px);
 			width: 88% !important;
 			max-width: 88% !important;
-			margin: 20px auto 0 !important;
+			margin: var(--home-video-icon-gap) auto 0 !important;
 			font-size: 5.25vw;
 			line-height: 1;
 			white-space: normal;
@@ -1543,19 +1697,19 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	@media (max-height: 680px) and (orientation: landscape) {
 		.home-video-intro-content {
-			padding-block: 16px;
+			padding-block: 18.4px;
 		}
 
 		.home-video-brand-mark {
-			width: 72px;
+			width: 82.8px;
 		}
 
 		.home-video-wordmark {
-			font-size: 2rem;
+			font-size: 2.3rem;
 		}
 
 		.home-video-slogan-block {
-			margin-top: 20px;
+			margin-top: var(--home-video-icon-gap);
 		}
 
 		.home-video-slogan {
@@ -1563,7 +1717,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		}
 
 		.home-video-strategy {
-			margin-top: 16px !important;
+			margin-top: var(--home-video-icon-gap) !important;
 			font-size: clamp(1rem, 1.8vw, 1.35rem);
 		}
 

@@ -10,3 +10,4 @@
 - A direct user instruction defines the required outcome. Do not let shared styles, existing abstractions, or general rules override it; verify the result itself, not merely that a code change was made.
 - For any request about geometry—spacing, size, alignment, or position—the required outcome is the rendered visual result. Verify it on the live page; a source-code change alone does not satisfy the request.
 - Before telling the user that any website change is ready or complete, verify the visible result in the browser at the local preview URL. For visual or interaction changes, source inspection, computed styles, and build output are not sufficient on their own.
+- For simple copy replacements and small CSS adjustments, use a quick browser verification and do not run a full production build unless it is needed to diagnose a problem. Reserve full builds for structural, responsive, animation, or otherwise complex changes.

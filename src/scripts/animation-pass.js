@@ -36,6 +36,7 @@ const heroMediaSelectors = [
 	".hero-section .hero-media",
 	".network-hero .institutions-network-media",
 	".network-hero > .image-block",
+	".home-hero-image-section",
 ];
 const mediaRevealSelector = [
 	".hero-media",
@@ -51,7 +52,7 @@ const mediaRevealContextSelector = ".hero-section, .network-hero, .section, .pro
 const mediaRevealReferenceSelector = ".hero-copy, .network-hero-copy, .proof-copy, .section-header";
 const revealExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .modal-content";
 const cardExcludedAreaSelector = ".nav, .nav-overlay, .site-footer, .hero-section, .network-hero, .cta-block, form, .modal-content";
-const backgroundParallaxSelector = ".section.section--gray, .section.section--green, .institutions-expanded-access-grid";
+const backgroundParallaxSelector = ".section.section--gray, .section.section--green, .institutions-expanded-access-grid, .home-video-stage";
 const goodCardSelector = [
 	".card--good",
 	".section--green .card",
@@ -335,7 +336,7 @@ const clearHeroRevealTimers = () => {
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 const isGreenParallaxTarget = (element) => {
-	return element.matches(".section--green, .institutions-expanded-access-grid");
+	return element.matches(".section--green, .institutions-expanded-access-grid, .home-video-stage");
 };
 
 const getScrollY = () => {
@@ -344,6 +345,11 @@ const getScrollY = () => {
 
 const setGreenWaveOffset = (offset) => {
 	document.documentElement.style.setProperty("--green-edge-wave-scroll-x", `${offset.toFixed(2)}px`);
+	/* The hero's coloured haze is a single, non-repeating layer.  Keep its
+	 * parallax movement within its overscan instead of letting a long page
+	 * scroll push the layer outside the viewport and expose a tiled seam. */
+	const homeHeroSpotOffset = Math.sin(offset / 360) * 160;
+	document.documentElement.style.setProperty("--home-hero-illustration-spot-x", `${homeHeroSpotOffset.toFixed(2)}px`);
 	animationPassState.greenWaveCurrentOffset = offset;
 };
 

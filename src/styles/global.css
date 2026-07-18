@@ -10,14 +10,14 @@
 	--muted: #4e5a6a;
 	--accent: #028f80;
 	--accent-copy: #027a6d;
-	--accent-orange: #ff5a00;
+	--accent-orange: #ff5b00;
 	--accent-dark: #006b68;
 	--accent-soft: #e2f3f1;
 	--section-green-wide-stripe: #00564c;
 	--section-green-narrow-stripe: #006457;
 	--section-green-wide-stripe-size: 46.4px;
 	--section-green-stripe-period: 51.733px;
-	--section-green-orange: #ff5d15;
+	--section-green-orange: #ff5b00;
 	--icon-reader-book: #009b8a;
 	--icon-author: #d0186a;
 	--icon-publisher: #1557e5;
@@ -31,13 +31,13 @@
 	--icon-research: #0089a8;
 	--icon-program: #8a1ee8;
 	--icon-sale: #5d8c00;
-	--icon-rental: #b87900;
+	--icon-rental: #ff5b00;
 	--icon-charity: #b11245;
-	--icon-coins: #a85c00;
-	--icon-dollars: #a04700;
+	--icon-coins: #ff5b00;
+	--icon-dollars: #ff5b00;
 	--icon-fan: #d41470;
 	--icon-security: #9b111e;
-	--icon-access: #b87900;
+	--icon-access: #ff5b00;
 	--icon-no-ads: #d0182f;
 	--border: #d8dee8;
 	--border-strong: #b8c3d1;
@@ -88,6 +88,7 @@
 	--green-edge-air-top-wave-scroll: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202200%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%200%20H2200%20V520%20C2108%20456%202060%20372%201988%20420%20C1888%20488%201824%20174%201710%20230%20C1618%20276%201570%2060%201470%20110%20C1364%20164%201310%20310%201194%20246%20C1070%20176%201012%20454%20890%20350%20C770%20248%20714%2092%20596%20168%20C482%20242%20424%20520%20304%20454%20C198%20394%20112%20552%200%20520%20Z%22%2F%3E%3C%2Fsvg%3E");
 	--green-edge-air-bottom-wave-scroll: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202200%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%20520%20C120%20500%20190%20552%20306%20486%20C432%20414%20500%20230%20620%20310%20C748%20396%20820%20212%20942%20268%20C1068%20326%201130%2092%201252%20158%20C1376%20224%201446%20336%201568%20218%20C1688%20102%201756%20290%201878%20222%20C1998%20156%202054%20540%202200%20520%20V560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
 	--green-edge-wave-scroll-x: 0px;
+	--home-hero-illustration-spot-x: 0px;
 	--green-edge-air-top-wave: var(--green-edge-air-top-wave-a);
 	--green-edge-air-bottom-wave: var(--green-edge-air-bottom-wave-a);
 	--green-edge-top-wave-width: 100%;
@@ -1115,7 +1116,7 @@ h3.heading--center-full,
 }
 
 .cta-block.section--dark .home-cta-body-accent {
-	color: #ff8441 !important;
+	color: #ff5b00 !important;
 }
 
 .section.section--green
@@ -1704,7 +1705,7 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 		.section--white
 		.comparison-text-panel:has(+ .card--good):is(:hover, :focus-within)::before {
 		outline-color: var(--text);
-		box-shadow: 0 0 30px rgb(255 123 72 / 42.32%);
+	box-shadow: 0 0 30px rgb(255 91 0 / 42.32%);
 	}
 }
 
@@ -2961,7 +2962,7 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 	--gray-card-outline-angle: -3.5deg;
 	--gray-card-row-drop: 0px;
 	--gray-card-row-slope: clamp(32px, 3.2vw, 56px);
-	--gray-card-outline-shadow: 15px 19px 24px rgba(255, 124, 72, 0.28);
+	--gray-card-outline-shadow: 15px 19px 24px rgba(255, 91, 0, 0.28);
 	position: relative;
 	z-index: 0;
 	isolation: isolate;
