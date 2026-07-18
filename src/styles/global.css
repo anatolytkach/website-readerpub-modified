@@ -301,7 +301,14 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	align-items: center;
 	justify-content: space-between;
 	gap: 0;
-	padding: 12px 0 20px;
+	/* The header surface is viewport-wide.  Its contents keep the same
+	 * alignment as the page's normal inner content column. */
+	width: 100vw;
+	max-width: 100vw;
+	margin-right: calc(50% - 50vw);
+	margin-left: calc(50% - 50vw);
+	padding-block: 12px 20px;
+	padding-inline: max(24px, calc((100vw - var(--page-max)) / 2 + 24px));
 	margin-bottom: 0;
 	background: var(--nav-bg);
 	backdrop-filter: blur(16px);
@@ -312,8 +319,8 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 .nav::after {
 	content: "";
 	position: absolute;
-	left: calc(50% - 50vw);
-	width: 100vw;
+	left: 0;
+	width: 100%;
 	z-index: -1;
 }
 
@@ -1505,6 +1512,13 @@ body .page .content
 	border-color: #ffffff;
 }
 
+/* CTA colors remain stable on dark sections, including page-specific buttons. */
+body .page .content .section--dark :is(.button, .button--secondary, .button.secondary):is(:hover, :focus-visible) {
+	background: var(--button-static-background) !important;
+	color: var(--button-static-color) !important;
+	border-color: var(--button-static-border-color) !important;
+}
+
 .cta-row {
 	display: flex;
 	flex-wrap: wrap;
@@ -2052,7 +2066,7 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 	}
 
 	.nav {
-		padding: 16px 0;
+		padding-block: 16px;
 	}
 
 	.nav-toggle {
@@ -2196,6 +2210,13 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 		width: 36px;
 		height: 36px;
 		font-size: 18px;
+	}
+
+	/* Keep the compact navigation controls aligned to the vertical page's
+	 * inner column while the header surface remains viewport-wide. */
+	body .page > .nav {
+		padding-right: calc(var(--section-padding) * 0.5);
+		padding-left: calc(var(--section-padding) * 0.5);
 	}
 
 	.section.section--green,
@@ -2494,6 +2515,37 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 		text-align: left;
 		white-space: normal;
 		overflow-wrap: anywhere;
+	}
+
+	/* Main media follows the same inline size as a one-column card on
+	 * portrait screens.  Icons and images that are part of buttons/cards are
+	 * deliberately excluded: they are not page media. */
+	body .page .content :is(
+		.hero-media,
+		.section-media,
+		.weread-solution-picture,
+		.home-tech-picture
+	) {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	body .page .content .weread-solution-picture {
+		margin-right: 0 !important;
+		margin-left: 0 !important;
+	}
+
+	body .page .content :is(
+		.hero-media > .hero-image,
+		.section-media > img,
+		.image-block,
+		.weread-solution-picture > img,
+		.home-tech-picture > img
+	) {
+		display: block;
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
 	}
 }
 

@@ -36,19 +36,53 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		</div>
 	</section>
 
-	<section class="home-hero-image-section" aria-label="ReaderPub audience illustration">
-		<img
-			class="home-hero-image"
-			src="/images/home.webp"
-			alt="Illustration of ReaderPub connecting a reader with an author, publisher, library, and university"
-			loading="eager"
-			decoding="async"
-			width="1400"
-			height="1400"
-		/>
-	</section>
+	<div class="home-hero-illustration-backdrop">
+		<section class="home-hero-image-section" aria-label="ReaderPub audience illustration">
+			<img
+				class="home-hero-image"
+				src="/images/home.webp?v=transparent-illustration"
+				alt="Illustration of ReaderPub connecting a reader with an author, publisher, library, and university"
+				loading="eager"
+				decoding="async"
+				width="1400"
+				height="1400"
+			/>
+		</section>
 
-	<section class="hero-background-spacer home-hero-bookshelf" aria-hidden="true"></section>
+		<section class="hero-background-spacer home-hero-bookshelf" aria-hidden="true"></section>
+	</div>
+
+	<script is:inline>
+		(() => {
+			const syncHomeHeroBookshelf = () => {
+				const image = document.querySelector(".home-hero-image");
+				const bookshelf = document.querySelector(".home-hero-bookshelf");
+
+				if (!(image instanceof HTMLImageElement) || !(bookshelf instanceof HTMLElement)) {
+					return;
+				}
+
+				const imageHeight = image.getBoundingClientRect().height;
+
+				if (imageHeight > 0) {
+					const bookshelfHeight = `${imageHeight * 0.25}px`;
+					bookshelf.style.setProperty("--hero-background-spacer-height", bookshelfHeight);
+					bookshelf.style.setProperty("height", bookshelfHeight, "important");
+				}
+			};
+
+			window.addEventListener("resize", syncHomeHeroBookshelf, { passive: true });
+			window.addEventListener("load", syncHomeHeroBookshelf, { once: true });
+			document.addEventListener("astro:page-load", syncHomeHeroBookshelf);
+			const image = document.querySelector(".home-hero-image");
+
+			if (image instanceof HTMLImageElement && "ResizeObserver" in window) {
+				new ResizeObserver(syncHomeHeroBookshelf).observe(image);
+			}
+
+			syncHomeHeroBookshelf();
+		})();
+	</script>
 
 	<Section
 		id="home-challenge"
@@ -489,6 +523,31 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		container-type: inline-size;
 		margin-top: 0 !important;
 		margin-bottom: 0 !important;
+	}
+
+	:global(body.page-home) {
+		--home-hero-illustration-surface: linear-gradient(to bottom, #dff5ef 0%, #f5fbf9 20%, #ffffff 52%);
+		--home-hero-illustration-wave: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202200%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22%23dff5ef%22%20d%3D%22M0%20520%20C120%20500%20190%20552%20306%20486%20C432%20414%20500%20230%20620%20310%20C748%20396%20820%20212%20942%20268%20C1068%20326%201130%2092%201252%20158%20C1376%20224%201446%20336%201568%20218%20C1688%20102%201756%20290%201878%20222%20C1998%20156%202054%20540%202200%20520%20V560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
+		--home-hero-illustration-blur:
+			radial-gradient(22% 17% at 32% 17%, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.3) 42%, transparent 76%),
+			radial-gradient(18% 16% at 71% 29%, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.25) 42%, transparent 76%),
+			radial-gradient(24% 20% at 12% 17%, rgba(0, 143, 128, 0.17) 0%, rgba(0, 143, 128, 0.06) 42%, transparent 74%),
+			radial-gradient(20% 18% at 87% 34%, rgba(0, 143, 128, 0.14) 0%, rgba(0, 143, 128, 0.05) 42%, transparent 74%),
+			radial-gradient(24% 20% at 28% 30%, rgba(255, 90, 0, 0.18) 0%, rgba(255, 90, 0, 0.06) 42%, transparent 74%),
+			radial-gradient(21% 18% at 74% 16%, rgba(255, 90, 0, 0.16) 0%, rgba(255, 90, 0, 0.05) 42%, transparent 74%),
+			radial-gradient(17% 15% at 51% 37%, rgba(255, 90, 0, 0.12) 0%, transparent 74%),
+			var(--home-hero-illustration-surface);
+	}
+
+	:global(.section.section--green.home-hero)::after {
+		content: "";
+		top: auto;
+		bottom: -2px;
+		height: var(--green-edge-air);
+		background-image: var(--home-hero-illustration-wave);
+		background-position: calc(var(--green-edge-bottom-wave-x) + var(--green-edge-wave-scroll-x)) bottom;
+		background-repeat: repeat-x;
+		background-size: var(--green-edge-bottom-wave-width) var(--green-edge-air);
 	}
 
 	.home-hero-content {
@@ -1249,23 +1308,51 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		color: var(--accent) !important;
 	}
 
+	.home-hero-illustration-backdrop {
+		--home-hero-bookshelf-gap: 64px;
+		isolation: isolate;
+		display: flow-root;
+		width: 100vw;
+		margin-inline: calc(50% - 50vw);
+		overflow: clip;
+		background: var(--home-hero-illustration-blur);
+	}
+
 	.home-hero-image-section {
 		position: relative;
 		z-index: 0;
 		width: min(100%, calc(var(--page-max) - 48px));
-		margin-inline: auto;
-		background: #ffffff;
+		margin: var(--section-stack-gap) auto 0;
+		display: grid;
+		place-items: center;
+		background: transparent;
 	}
 
 	.home-hero-image {
 		display: block;
-		width: 100%;
+		/* Keep the illustration square.  On a narrow portrait screen its
+		 * available width is smaller than the desktop height calculation; an
+		 * explicit height there was stretching the image vertically. */
+		width: min(100%, calc(64dvh - 51.2px));
+		aspect-ratio: 1;
 		height: auto;
+		max-height: none;
 	}
 
-	:global(.home-hero-bookshelf) {
-		width: 100vw;
-		margin-left: calc(50% - 50vw);
+	:global(.hero-background-spacer.home-hero-bookshelf) {
+		--hero-background-spacer-height: calc(16dvh - 12.8px);
+		width: min(100%, calc(var(--page-max) - 48px)) !important;
+		max-width: min(100%, calc(var(--page-max) - 48px)) !important;
+		margin: var(--home-hero-bookshelf-gap, 64px) auto 0 !important;
+	}
+
+	:global(.content > .home-hero-illustration-backdrop + script + .section:is(.section--gray, .section--green)) {
+		margin-top: 0;
+		padding-top: calc(var(--section-padding) * 2);
+	}
+
+	:global(.content > .home-hero-illustration-backdrop + script + .section.section--green) {
+		padding-top: var(--green-section-padding-top);
 	}
 
 	@media (min-width: 901px) and (orientation: landscape) {
@@ -1284,8 +1371,39 @@ const homeVideoDoorSides = ["left", "right"] as const;
 			padding-inline: 18px;
 		}
 
+		.home-hero-illustration-backdrop {
+			--home-hero-bookshelf-gap: 32px;
+		}
+
+		/* Match a one-column card's usable width in the surrounding green
+		 * sections. */
+		.home-hero-image-section {
+			width: calc(100% - var(--section-padding));
+		}
+
+		:global(.hero-background-spacer.home-hero-bookshelf) {
+			width: 100vw !important;
+			max-width: 100vw !important;
+			margin-right: calc(50% - 50vw) !important;
+			margin-left: calc(50% - 50vw) !important;
+		}
+
 		.home-hero-content h1 {
-			width: var(--home-hero-copy-width);
+			width: 100%;
+			max-width: none;
+			font-size: clamp(2.1rem, 9.2vw, 4.4rem);
+			white-space: normal;
+		}
+
+		.home-hero-statement {
+			width: 100%;
+		}
+
+		/* Main images occupy the complete usable card width on portrait
+		 * screens, while retaining their intrinsic square aspect ratio. */
+		.home-hero-image {
+			width: 100%;
+		}
 
 		/* Overlap the two door leaves by one pixel.  At portrait widths their
 		 * separate composited backgrounds can otherwise leave a hairline at the
@@ -1401,12 +1519,6 @@ const homeVideoDoorSides = ["left", "right"] as const;
 			height: 0.65em;
 			font-size: 1.05em;
 			line-height: 0.65;
-		}
-
-
-			max-width: none;
-			font-size: clamp(2.1rem, 9.2vw, 4.4rem);
-			white-space: normal;
 		}
 
 		.home-hero-statement {
