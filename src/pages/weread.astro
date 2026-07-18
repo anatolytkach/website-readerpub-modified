@@ -7,6 +7,7 @@ import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import ProductName from "../components/ProductName.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const startReadingAction = { label: "Start reading", href: BOOKS_URL, external: true };
@@ -17,7 +18,16 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/",
 <Base
 	title={`Browser-Based eReader & Online Book Reading | ${SITE_NAME}`}
 	description="Read 60K+ books online with WeRead, a browser-based eReader with notes, sharing, discussion, discovery, read-aloud, and connected reading tools."
+	ogImage="/images/readers2.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="WeRead"
+			description="Read 60K+ books online with WeRead, a browser-based eReader with notes, sharing, discussion, discovery, read-aloud, and connected reading tools."
+			url="/weread/"
+			image="/images/readers2.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		class="weread-source-hero"
 		eyebrow="READERS"

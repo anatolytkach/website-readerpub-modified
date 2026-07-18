@@ -86,6 +86,8 @@ The following was directly designed through user instructions before the audit d
 
 **Decision:** WeTalk remains a distinct product. Do not merge it into WeBuzz or present it as a private/access-controlled WeBuzz offering.
 
+**Further decision:** All six public products—WeRead, WePub, WeBuzz, WeTalk, BookTree, and Scribe—remain equal in public status. Do not reframe WeRead and WePub as the only primary pillars, subordinate the other products, or change their navigation presentation.
+
 ### 5. Manufacturers audience — resolved
 
 **Decision:** Manufacturers are a real target segment and remain in the platform audience list.

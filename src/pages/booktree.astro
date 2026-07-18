@@ -7,6 +7,7 @@ import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import ProductName from "../components/ProductName.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const tryBookTreeAction = { label: "Try BookTree on any book", href: BOOKS_URL, external: true };
@@ -16,7 +17,16 @@ const useBookTreeAction = { label: "Use BookTree with any book", href: BOOKS_URL
 <Base
 	title={`BookTree: Book Notes & Research Organization | ${SITE_NAME}`}
 	description="Use BookTree to connect books, excerpts, notes, references, projects, and manuscripts in a structured knowledge map for research, writing, and study."
+	ogImage="/images/booktree.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="BookTree"
+			description="Use BookTree to connect books, excerpts, notes, references, projects, and manuscripts in a structured knowledge map for research, writing, and study."
+			url="/booktree/"
+			image="/images/booktree.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		class="booktree-hero"
 		eyebrow="BookTree"

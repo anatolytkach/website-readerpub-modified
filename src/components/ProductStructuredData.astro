@@ -1,0 +1,34 @@
+---
+import { SITE_DOMAIN } from "../consts";
+
+interface Props {
+	name: string;
+	description: string;
+	url: string;
+	image: string;
+}
+
+const { name, description, url, image } = Astro.props;
+const siteUrl = `https://${SITE_DOMAIN}`;
+const productUrl = new URL(url, siteUrl).href;
+const productImage = image.startsWith("http") ? image : new URL(image, siteUrl).href;
+const productStructuredData = {
+	"@context": "https://schema.org",
+	"@type": "SoftwareApplication",
+	"@id": `${productUrl}#software-application`,
+	name,
+	description,
+	url: productUrl,
+	image: productImage,
+	applicationCategory: "WebApplication",
+	operatingSystem: "Web",
+	provider: {
+		"@id": `${siteUrl}/#organization`,
+		"@type": "Organization",
+		name: "ReaderPub Inc.",
+	},
+};
+const productStructuredDataJson = JSON.stringify(productStructuredData).replace(/</g, "\\u003c");
+---
+
+<script type="application/ld+json" set:html={productStructuredDataJson} />

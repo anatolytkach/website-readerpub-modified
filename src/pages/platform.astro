@@ -56,8 +56,8 @@ const benefitCards = [
 ---
 
 <Base
-	title={`Digital Publishing Platform & Connected Book Tools | ${SITE_NAME}`}
-	description="Explore ReaderPub's digital publishing platform for browser reading, direct sales, discussion, analytics, knowledge tools, AI, and institutional access."
+	title="ReaderPub Platform:  Publishing, Reading & Knowledge"
+	description="Explore ReaderPub’s six connected products:  WePub, WeRead, WeBuzz, WeTalk, BookTree, and Scribe for publishing, reading, discussion, and knowledge work."
 >
 	<HeroSection
 		eyebrow="Platform"
@@ -107,6 +107,10 @@ const benefitCards = [
 						<li>Extend the life of every publication</li>
 					</ul>
 				</div>
+			</div>
+			<div class="platform-model-comparison-summary">
+				<p class="platform-model-comparison-context">There are many platforms – <span>Kindle</span>, <span>Substack</span>, <span>Everand</span> – making a book available.</p>
+				<h2 class="platform-model-comparison-conclusion">Only <span>ReaderPub</span> keeps the book alive and connected after delivery.</h2>
 			</div>
 		</section>
 
@@ -470,6 +474,44 @@ const benefitCards = [
 
 	.platform-source-section.platform-source-problem-section .model-grid {
 		margin-top: 28px !important;
+	}
+
+	.platform-model-comparison-summary {
+		display: grid;
+		gap: 12px;
+		width: 100%;
+		text-align: left;
+	}
+
+	.platform-source-section.platform-source-problem-section > .platform-model-comparison-summary {
+		margin-top: 28px !important;
+	}
+
+	.platform-model-comparison-summary p {
+		margin: 0;
+	}
+
+	.platform-model-comparison-context {
+		color: #ffffff !important;
+		font-family: var(--font-body);
+		font-size: 18px;
+		line-height: var(--line-height-body);
+	}
+
+	:global(body .page .content .platform-source-problem-section.section--green .platform-model-comparison-context > span) {
+		color: var(--accent-orange) !important;
+	}
+
+	.platform-model-comparison-conclusion {
+		color: var(--accent-orange) !important;
+		font-family: var(--font-heading);
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
+	}
+
+	.platform-model-comparison-conclusion span {
+		color: #ffffff !important;
 	}
 
 	.platform-source-section .comparison-list {

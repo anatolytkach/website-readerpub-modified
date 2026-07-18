@@ -5,6 +5,7 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import Base from "../layouts/Base.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 
 const primaryActions = [
 	{
@@ -30,7 +31,16 @@ const ctaActions = [
 	title="Scribe: AI for Literature, Writing & Publishing | ReaderPub"
 	description="Explore Scribe, ReaderPub’s AI companion for literature, writing, publishing, specialized knowledge, persistent conversations, and platform guidance."
 	canonical="/scribe/"
+	ogImage="/images/scribe_hero.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="Scribe"
+			description="Explore Scribe, ReaderPub’s AI companion for literature, writing, publishing, specialized knowledge, persistent conversations, and platform guidance."
+			url="/scribe/"
+			image="/images/scribe_hero.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		class="scribe-hero"
 		image="/images/scribe_hero.webp"

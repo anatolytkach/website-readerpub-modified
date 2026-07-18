@@ -7,6 +7,7 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import ProductName from "../components/ProductName.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 import { SITE_NAME } from "../consts";
 
 const joinConversationAction = { label: "Join the conversation in WeBuzz", href: "https://webuzz.org/", external: true };
@@ -14,9 +15,18 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "https
 ---
 
 <Base
-	title={`WeBuzz: Literary Social Network & Book Discussion | ${SITE_NAME}`}
+	title={`WeBuzz:  Literary Social Network | ${SITE_NAME}`}
 	description="Explore WeBuzz, ReaderPub’s ad-free literary social network for book, author, and passage discussions, reader discovery, and connected communities."
+	ogImage="/images/webuzz.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="WeBuzz"
+			description="Explore WeBuzz, ReaderPub’s ad-free literary social network for book, author, and passage discussions, reader discovery, and connected communities."
+			url="/webuzz/"
+			image="/images/webuzz.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		class="webuzz-legacy-hero"
 		eyebrow="WeBuzz"

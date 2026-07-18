@@ -6,6 +6,7 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import ProductName from "../components/ProductName.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 import { SITE_NAME } from "../consts";
 
 const requestPilotAction = { label: "Request a Pilot", href: "/contact/?topic=wetalk" };
@@ -107,7 +108,16 @@ const audienceCards = [
 	title={`WeTalk: Private Institutional Discussion Spaces | ${SITE_NAME}`}
 	description="Create private, controlled-access discussion spaces around courses, collections, research, archives, and institutional publications with WeTalk."
 	canonical="/wetalk/"
+	ogImage="/images/wetalk.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="WeTalk"
+			description="Create private, controlled-access discussion spaces around courses, collections, research, archives, and institutional publications with WeTalk."
+			url="/wetalk/"
+			image="/images/wetalk.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		eyebrow="WeTalk"
 		lead="Universities, libraries, and organizations publish valuable materials that invite discussion—but not always public exposure."

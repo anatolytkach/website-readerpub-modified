@@ -26,7 +26,19 @@ const resolvedOgImage = ogImage.startsWith("http")
 	: `${siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`;
 const routeSlug = Astro.url.pathname.replace(/^\/+|\/+$/g, "").split("/")[0] || "home";
 const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`;
-const homeStructuredData =
+const organizationStructuredData = {
+	"@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
+  name: "ReaderPub Inc.",
+  description: "ReaderPub is a web-native publishing network for books, knowledge publications, and connected reading.",
+  url: siteUrl,
+	logo: `${siteUrl}/images/logo.svg`,
+	contactPoint: {
+		"@type": "ContactPoint",
+		url: `${siteUrl}/contact/`,
+	},
+};
+const structuredData =
 	routeSlug === "home"
 		? {
 				"@context": "https://schema.org",
@@ -37,16 +49,14 @@ const homeStructuredData =
 						url: siteUrl,
 						inLanguage: "en",
 					},
-					{
-						"@type": "Organization",
-						name: SITE_NAME,
-						url: siteUrl,
-						logo: `${siteUrl}/images/logo.svg`,
-					},
+					organizationStructuredData,
 				],
 			}
-		: undefined;
-const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructuredData).replace(/</g, "\\u003c") : undefined;
+		: {
+				"@context": "https://schema.org",
+				...organizationStructuredData,
+			};
+const structuredDataJson = JSON.stringify(structuredData).replace(/</g, "\\u003c");
 ---
 
 <html lang="en" class="no-js">
@@ -76,7 +86,10 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 		<meta name="author" content={SITE_NAME} />
 		<meta name="hostname" content={SITE_DOMAIN} />
 		<link rel="canonical" href={canonicalUrl.href} />
-		{homeStructuredDataJson && <script type="application/ld+json" set:html={homeStructuredDataJson} />}
+		<script type="application/ld+json" set:html={structuredDataJson} />
+		<slot name="head" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"

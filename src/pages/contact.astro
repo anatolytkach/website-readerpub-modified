@@ -13,7 +13,7 @@ const contactHeroBodySecondLine = "Ask our team for additional info or simply re
 const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecondLine}`, "");
 ---
 
-<Base title={page.metaTitle} description={page.description} ogTitle={page.ogTitle} ogDescription={page.ogDescription}>
+<Base title={page.metaTitle} description={page.description} ogTitle={page.ogTitle} ogDescription={page.ogDescription} ogImage={page.image}>
 	<HeroSection
 		class="contact-hero"
 		lead={page.heroLead}

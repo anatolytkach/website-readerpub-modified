@@ -7,7 +7,7 @@ import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SpecCardsSection from "../components/sections/SpecCardsSection.astro";
 import ProductName from "../components/ProductName.astro";
-import { BOOKS_URL, SITE_NAME } from "../consts";
+import { BOOKS_URL, SITE_DOMAIN, SITE_NAME } from "../consts";
 
 const heroActions = [
 	{ label: "Contact us", href: "/contact/" },
@@ -18,12 +18,60 @@ const ctaActions = [
 	{ label: "Publish with ReaderPub", href: "/wepub/" },
 	{ label: "Contact us", href: "/contact/", variant: "secondary" as const },
 ];
+
+const publicMonthlyPlans = [
+	{ name: "Free Indie", price: 0 },
+	{ name: "Creator", price: 9 },
+	{ name: "Publisher", price: 49 },
+	{ name: "Studio", price: 199 },
+	{ name: "Starter", price: 499 },
+	{ name: "Standard", price: 1499 },
+] as const;
+
+const pricingUrl = `https://${SITE_DOMAIN}/pricing/`;
+const pricingStructuredData = {
+	"@context": "https://schema.org",
+	"@type": "ItemList",
+	name: "ReaderPub monthly pricing plans",
+	url: pricingUrl,
+	itemListElement: publicMonthlyPlans.map((plan, index) => ({
+		"@type": "ListItem",
+		position: index + 1,
+		item: {
+			"@type": "Offer",
+			name: `ReaderPub ${plan.name} plan`,
+			url: pricingUrl,
+			price: plan.price,
+			priceCurrency: "USD",
+			priceSpecification: {
+				"@type": "UnitPriceSpecification",
+				price: plan.price,
+				priceCurrency: "USD",
+				billingDuration: "P1M",
+			},
+			itemOffered: {
+				"@type": "Service",
+				name: `ReaderPub ${plan.name} plan`,
+				provider: {
+					"@id": `https://${SITE_DOMAIN}/#organization`,
+					"@type": "Organization",
+					name: "ReaderPub Inc.",
+				},
+			},
+		},
+	})),
+};
+const pricingStructuredDataJson = JSON.stringify(pricingStructuredData).replace(/</g, "\\u003c");
 ---
 
 <Base
 	title={`Publishing Plans & Institutional Pricing | ${SITE_NAME}`}
 	description="Compare ReaderPub pricing for readers, authors, publishers, and institutions, including monthly plans, title limits, storage, and Scribe AI billing."
+	ogImage="/images/pricing.webp"
 >
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={pricingStructuredDataJson} />
+	</Fragment>
 	<HeroSection
 		class="pricing-hero"
 		eyebrow="Pricing"

@@ -14,6 +14,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 <Base
 	title={`Web-Native Publishing Network | ${SITE_NAME}`}
 	description="ReaderPub is a web-native publishing network that keeps books and readers connected—without apps, downloads, or platform lock-in."
+	ogImage="/images/home.webp"
 >
 	<HeroSection
 		id="home-main-hero"
@@ -165,7 +166,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 			<span class="home-file-model-summary-problem home-file-model-summary-break">The relationship is broken!</span>
 		</p>
 		<p class="home-file-model-summary home-file-model-summary-solution">
-			<span>ReaderPub keeps publications alive and connected after delivery.</span>
+			<span class="home-file-model-summary-solution-context">There are many platforms – Kindle, Substack, Everand – making a book available.</span>
+			<span>Only ReaderPub keeps the book alive and connected after delivery.</span>
 		</p>
 	</Section>
 
@@ -1907,12 +1909,20 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		display: block;
 	}
 
-	:global(body .page .content .home-file-model-summary > .home-file-model-summary-problem) {
-		color: rgb(105, 115, 128) !important;
+	:global(body .page .content .section.home-file-model-section > .home-file-model-summary > span) {
 		font-size: clamp(1.25rem, 1.8vw, 1.55rem) !important;
 	}
 
-	:global(body .page .content .home-file-model-summary > .home-file-model-summary-break) {
+	:global(body .page .content .section.home-file-model-section > .home-file-model-summary > .home-file-model-summary-problem) {
+		color: #000000 !important;
+		font-size: clamp(1.25rem, 1.8vw, 1.55rem) !important;
+	}
+
+	:global(body .page .content .section.home-file-model-section > .home-file-model-summary > .home-file-model-summary-solution-context) {
+		color: #000000 !important;
+	}
+
+	:global(body .page .content .section.home-file-model-section > .home-file-model-summary > .home-file-model-summary-break) {
 		color: var(--accent-orange) !important;
 	}
 

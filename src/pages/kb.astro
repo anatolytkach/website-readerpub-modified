@@ -234,9 +234,28 @@ const faqCategories = [
 		],
 	},
 ] as const;
+
+const faqStructuredData = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqCategories.flatMap(({ questions }) =>
+		questions.map(({ question, answer }) => ({
+			"@type": "Question",
+			name: question,
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: answer,
+			},
+		})),
+	),
+};
+const faqStructuredDataJson = JSON.stringify(faqStructuredData).replace(/</g, "\\u003c");
 ---
 
-<Base title={page.metaTitle} description={page.description} ogTitle={page.ogTitle} ogDescription={page.ogDescription}>
+<Base title={page.metaTitle} description={page.description} ogTitle={page.ogTitle} ogDescription={page.ogDescription} ogImage={page.image}>
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={faqStructuredDataJson} />
+	</Fragment>
 	<HeroSection
 		eyebrow={page.eyebrow}
 		lead={page.heroLead}

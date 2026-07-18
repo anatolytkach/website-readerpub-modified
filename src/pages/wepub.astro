@@ -8,6 +8,7 @@ import Section from "../components/sections/Section.astro";
 import SpecCardsSection from "../components/sections/SpecCardsSection.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import ProductName from "../components/ProductName.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 import { PUBLISH_URL, SITE_NAME } from "../consts";
 
 const pricingAction = { label: "See pricing", href: "/pricing/", variant: "secondary" as const };
@@ -17,18 +18,26 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 
 	return {
 		number,
-		top: `/images/wepub-publishing-flow/top_${number}.png`,
-		body: `/images/wepub-publishing-flow/body_${number}.png`,
+		top: `/images/wepub-publishing-flow/top_${number}.webp`,
+		body: `/images/wepub-publishing-flow/body_${number}.webp`,
 	};
 });
 ---
 
 <Base
-	title={`Web-Native Book Publishing for Authors & Publishers | ${SITE_NAME}`}
+	title={`Web-Native Book Publishing | ${SITE_NAME}`}
 	description="Publish web-native, browser-readable books with WePub. Sell directly, keep reader relationships and activity connected, and pay a 5% sales commission."
 	canonical="/wepub/"
 	ogImage="/images/author.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="WePub"
+			description="Publish web-native, browser-readable books with WePub. Sell directly, keep reader relationships and activity connected, and pay a 5% sales commission."
+			url="/wepub/"
+			image="/images/author.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		class="wepub-new-hero"
 		image="/images/author.webp"

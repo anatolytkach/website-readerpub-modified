@@ -77,7 +77,7 @@ The original six decisions are resolved and remain binding. The updated marketin
 4. **Pre-launch investor language — complete:** `/strategy` now uses the approved wording for initial pilots, partners, and financial collaboration; the user-approved `Strategy` name and market-ready product claim remain unchanged.
 5. **Investor discoverability — complete:** the `Partner inquiry` button in the Strategy, About, and Contact heroes opens the dedicated partnership form, which lets the visitor choose Strategic partnership or Investment opportunity.
 6. **New messaging, if approved:** competitive-comparison copy on `/` and `/platform`, and a public product-hierarchy story that preserves WeTalk as a distinct product.
-7. **SEO items already authorized separately:** retain the completed robots/sitemap, Terms footer link, canonical work, video preload/poster, and dead-blueprint cleanup; continue the remaining SEO backlog in its own documented order.
+7. **SEO items already authorized separately:** completed — robots/sitemap, Terms footer link, canonical work, video preload/poster, dead-blueprint cleanup, and the approved ReaderPub Inc. Organization description in structured data. Official corporate social-profile links (`sameAs`) are deferred until ReaderPub creates public company profiles.
 
 Do not add pricing-tier CTAs, rename `Strategy`, merge WeTalk into WeBuzz, add a public email address, or replace the staged homepage video without a new direct user decision; each conflicts with an existing decision.
 

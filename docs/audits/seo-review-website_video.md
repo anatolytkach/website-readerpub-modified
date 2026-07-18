@@ -31,7 +31,7 @@ The audit found conflicting slash formats between sitemap entries and page canon
 
 **Decision:** resolved by the user: use trailing slashes for all canonical URLs, sitemap entries, internal route links, and redirect targets, except `/`.
 
-**Current worktree state:** an uncommitted implementation has already been made: `trailingSlash: "always"` in Astro, normalized canonical/Open Graph URLs in `Base.astro`, and trailing-slash internal links.  Production build verification confirmed every current sitemap route matches its canonical.  This implementation was made prematurely during the decision phase; do not extend or commit it until the user says to begin the implementation phase.
+**Implementation 2026-07-17:** `trailingSlash: "always"` is set in Astro, canonical/Open Graph URLs are normalized in `Base.astro`, and internal links use trailing slashes. Production-build verification confirmed every sitemap route matches its canonical. The implementation remains uncommitted until the user requests a commit.
 
 ### 3. `/terms` is orphaned
 
@@ -48,6 +48,8 @@ Low-priority improvements:
 - shorten the titles for `/wepub`, `/platform`, and `/webuzz` by a few characters;
 - provide page-specific Open Graph images for the 15 pages that currently inherit `tech.webp`.
 
+**Implementation 2026-07-18:** The three titles have been shortened, and all 15 public pages now have individual Open Graph and Twitter images.
+
 ### 5. Structured data
 
 High-value recommendation: emit `FAQPage` JSON-LD from the existing 35-question `faqCategories` source in `/kb`.
@@ -58,6 +60,8 @@ Further recommendations requiring factual data:
 - add SoftwareApplication schema to six product pages;
 - add Offer/PriceSpecification data to pricing tiers.
 
+**Implementation 2026-07-18:** FAQPage JSON-LD now uses all 35 KB questions and answers. The Organization node includes the approved ReaderPub Inc. description and Contact-page URL. SoftwareApplication schema is present on each of the six product pages, and public pricing tiers have Offer/PriceSpecification data. Corporate social-profile links (`sameAs`) are deferred until ReaderPub creates public company profiles.
+
 Breadcrumb markup is optional and not recommended for this flat URL hierarchy.
 
 ### 6. Keyword ownership and cannibalization
@@ -65,6 +69,8 @@ Breadcrumb markup is optional and not recommended for this flat URL hierarchy.
 The report says `/`, `/platform`, and `/about` compete for overlapping “web-native publishing platform” terms.  It recommends one owner per query: homepage for the category term, `/platform` for product ecosystem/integration, and `/about` for company/entity intent.
 
 **Interaction with marketing decision:** the user has approved “web-native publishing network” as the public category name.  Before SEO copy is changed, reconcile that product-positioning rule with the report’s search-intent proposal; this belongs after the user’s agreed decision pack, not before it.
+
+**Implementation 2026-07-18:** Homepage, Platform, and About title/description metadata now distinguish category, product-ecosystem, and company/entity intent while preserving the user-approved visible Hero copy and category name.
 
 ### 7. Content and heading quality
 
@@ -76,7 +82,9 @@ Verified strengths: every route has exactly one H1, no heading-level skips, clea
 
 The report independently verified that no scaffolding phrase is rendered on any of the 16 routes or in the production build.  It recommends removing eight unused page blueprints from `src/data/pages.ts` to eliminate future accidental publication risk.
 
-**Status:** later maintenance task; no visible emergency.
+**Implementation verification 2026-07-18:** `src/data/pages.ts` contains only the `contact` and `kb` data objects, both used by their live routes. The eight unused page blueprints are no longer present.
+
+**Status:** complete.
 
 ### 9. Performance and Core Web Vitals
 
@@ -97,13 +105,19 @@ Recommended sequence:
 
 `public/images/background.webp` was measured at 506 KB and loaded on all routes.  Re-encoding/downscaling is expected to save roughly 450 KB per page.
 
+**Implementation 2026-07-18:** The shared background was optimized to approximately 155 KB.
+
 #### WePub PNGs — medium priority
 
 Three WePub publishing-flow PNG assets total about 1 MB.  Converting them to WebP should reduce the conversion page weight substantially.
 
+**Implementation 2026-07-18:** The WePub publishing-flow assets now use WebP files.
+
 #### Fonts — medium priority
 
 The Google Fonts stylesheet is render blocking without preconnect hints.  The report recommends self-hosting Manrope and Poppins or, if deferred, adding preconnect hints.
+
+**Implementation 2026-07-18:** Preconnect hints for `fonts.googleapis.com` and `fonts.gstatic.com` are present. Self-hosting remains optional and is not currently required.
 
 #### Measured positives
 
@@ -116,23 +130,23 @@ Verified positives: all 182 images have `alt` attributes, decorative icons use e
 ### 11. Internationalization, 404, and headers
 
 - No `hreflang` is needed while the site is English-only.
-- A branded `404.astro` would improve recovery UX but is low priority; current unknown routes correctly return 404.
+- **Implementation 2026-07-18:** A branded `404.astro` now provides a home-page recovery action; unknown routes still return 404.
 - Staging `noindex` headers are correctly scoped, production has no unwanted noindex, and current static caching is not a concern.
 
 ## SEO audit priority list
 
-1. Poster and safer preload for homepage video.
-2. `robots.txt` and sitemap discovery.
-3. Canonical slash consistency.
-4. Compress shared background.
-5. KB FAQPage JSON-LD.
-6. Convert WePub flow images to WebP.
-7. Self-host fonts or add preconnect.
-8. Resolve homepage/platform/about keyword ownership.
-9. Enrich Organization and product structured data.
-10. Link Terms in footer.
-11. Use per-page OG images.
-12. Delete dead page blueprints.
-13. Add branded 404 and trim overlong titles.
+1. Completed — poster and safer preload for the homepage video.
+2. Completed — `robots.txt` and sitemap discovery.
+3. Completed — canonical slash consistency.
+4. Completed — shared-background optimization.
+5. Completed — KB FAQPage JSON-LD.
+6. Completed — WePub flow-image conversion to WebP.
+7. Completed — font preconnects; self-hosting is optional.
+8. Completed — homepage, Platform, and About metadata distinguish their intended search roles without changing approved visible copy.
+9. Completed except deferred social profiles — Organization, product, and pricing structured data are present; `sameAs` awaits official ReaderPub profiles.
+10. Completed — Terms link in the footer.
+11. Completed — per-page Open Graph images.
+12. Completed — no unused page blueprints remain.
+13. Completed — branded 404 and shortened titles.
 
 Do not execute this priority list until the decision process in [`../audit-remediation-plan.md`](../audit-remediation-plan.md) is complete and the user authorizes implementation.
