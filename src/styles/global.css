@@ -1933,6 +1933,14 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 	color: var(--accent-orange);
 }
 
+.site-footer .site-footer-links {
+	color: var(--text);
+}
+
+.site-footer .site-footer-link-separator {
+	color: var(--accent-orange);
+}
+
 .site-footer a {
 	color: inherit;
 	font-size: 0.95rem;

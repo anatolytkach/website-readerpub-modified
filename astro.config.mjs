@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 const readerPubBooksProxy = {
 	target: "https://reader.pub",
@@ -9,7 +10,9 @@ const readerPubBooksProxy = {
 
 // https://astro.build/config
 export default defineConfig({
+	site: "https://reader.pub",
 	trailingSlash: "always",
+	integrations: [sitemap()],
 	vite: {
 		server: {
 			proxy: {

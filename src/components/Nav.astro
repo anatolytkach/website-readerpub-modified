@@ -25,7 +25,7 @@ const primaryLinks = [
 ];
 const hasActivePrimaryLink = primaryLinks.some((link) => isActive(link.href));
 const isPlatformActive = !hasActivePrimaryLink && platformLinks.some((link) => isActive(link.href));
-const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => isActive(link.href));
+const isSolutionActive = !hasActivePrimaryLink && !isPlatformActive && solutionLinks.some((link) => isActive(link.href));
 ---
 
 <nav class="nav" aria-label="Primary">
@@ -35,28 +35,28 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 	</div>
 
 	<ul class="nav-links">
-		<li class:list={["nav-dropdown", isPlatformActive && "nav-dropdown--active"]}>
+		<li class:list={["nav-dropdown", isPlatformActive && "nav-dropdown--active"]} data-nav-group="platform">
 			<button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-current={isPlatformActive ? "page" : undefined}>
 				Platform
 			</button>
 			<ul class="nav-dropdown-menu">
 				{platformLinks.map((link) => (
 					<li>
-						<a href={link.href} class:list={[isActive(link.href) && "is-active"]} aria-current={isActive(link.href) ? "page" : undefined}>
+						<a href={link.href} data-nav-origin="platform" class:list={[isActive(link.href) && "is-active"]} aria-current={isActive(link.href) ? "page" : undefined}>
 							{link.label}
 						</a>
 					</li>
 				))}
 			</ul>
 		</li>
-		<li class:list={["nav-dropdown", isSolutionActive && "nav-dropdown--active"]}>
+		<li class:list={["nav-dropdown", isSolutionActive && "nav-dropdown--active"]} data-nav-group="solution">
 			<button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-current={isSolutionActive ? "page" : undefined}>
 				Solution
 			</button>
 			<ul class="nav-dropdown-menu">
 				{solutionLinks.map((link) => (
 					<li>
-						<a href={link.href} class:list={[isActive(link.href) && "is-active"]} aria-current={isActive(link.href) ? "page" : undefined}>
+						<a href={link.href} data-nav-origin="solution" class:list={[isActive(link.href) && "is-active"]} aria-current={isActive(link.href) ? "page" : undefined}>
 							{link.label}
 						</a>
 					</li>
@@ -74,7 +74,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 
 	<div class="nav-actions">
 		<a class="button button--secondary nav-signin" href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Sign in</a>
-		<a class="button nav-cta" href="/contact/">Request a Pilot</a>
+		<a class="button nav-cta" href="/contact/">Connect with us</a>
 		<button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
 			<span class="nav-toggle-bar"></span>
 			<span class="nav-toggle-bar"></span>
@@ -96,7 +96,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 			<span>Platform</span>
 			<ul>
 				{platformLinks.map((link) => (
-					<li><a href={link.href} class:list={[isActive(link.href) && "is-active"]}>{link.label}</a></li>
+					<li><a href={link.href} data-nav-origin="platform" class:list={[isActive(link.href) && "is-active"]}>{link.label}</a></li>
 				))}
 			</ul>
 		</li>
@@ -104,7 +104,7 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 			<span>Solution</span>
 			<ul>
 				{solutionLinks.map((link) => (
-					<li><a href={link.href} class:list={[isActive(link.href) && "is-active"]}>{link.label}</a></li>
+					<li><a href={link.href} data-nav-origin="solution" class:list={[isActive(link.href) && "is-active"]}>{link.label}</a></li>
 				))}
 			</ul>
 		</li>
@@ -119,7 +119,23 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 
 <script is:inline>
 	(() => {
+		const navOriginStorageKey = "readerpub-nav-origin";
 		const normalizePath = (path) => path.replace(/\/+$/, "") || "/";
+		const dropdownGroups = new Set(["platform", "solution"]);
+
+		const getStoredDropdownOrigin = (currentPath) => {
+			try {
+				const rawOrigin = window.sessionStorage.getItem(navOriginStorageKey);
+				if (!rawOrigin) return null;
+
+				const origin = JSON.parse(rawOrigin);
+				if (origin.path !== currentPath || !dropdownGroups.has(origin.group)) return null;
+
+				return origin.group;
+			} catch {
+				return null;
+			}
+		};
 
 		const updateActiveLink = () => {
 			const currentPath = normalizePath(window.location.pathname);
@@ -127,6 +143,18 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 				const href = link.getAttribute("href");
 				return href && !href.startsWith("http") && normalizePath(href) === currentPath;
 			});
+			const matchingDropdownGroups = Array.from(document.querySelectorAll(".nav-dropdown")).flatMap((dropdown) => {
+				const group = dropdown.getAttribute("data-nav-group");
+				const hasMatchingLink = Array.from(dropdown.querySelectorAll("a[href]")).some((link) => {
+					const href = link.getAttribute("href");
+					return href && normalizePath(href) === currentPath;
+				});
+
+				return hasMatchingLink && group ? [group] : [];
+			});
+			const activeDropdownGroup = hasActivePrimaryLink
+				? null
+				: getStoredDropdownOrigin(currentPath) ?? matchingDropdownGroups[0] ?? null;
 
 			document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
 				dropdown.classList.remove("nav-dropdown--active");
@@ -139,13 +167,15 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 
 				const href = link.getAttribute("href");
 				if (!href || href.startsWith("http")) return;
+				const linkOrigin = link.getAttribute("data-nav-origin");
+				if (linkOrigin && linkOrigin !== activeDropdownGroup) return;
 
 				if (normalizePath(href) === currentPath) {
 					link.classList.add("is-active");
 					link.setAttribute("aria-current", "page");
 
 					const dropdown = link.closest(".nav-dropdown");
-					if (dropdown && !hasActivePrimaryLink) {
+					if (dropdown && !hasActivePrimaryLink && dropdown.getAttribute("data-nav-group") === activeDropdownGroup) {
 						dropdown.classList.add("nav-dropdown--active");
 						dropdown.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-current", "page");
 					}
@@ -246,6 +276,15 @@ const isSolutionActive = !hasActivePrimaryLink && solutionLinks.some((link) => i
 
 			document.addEventListener("click", (event) => {
 				if (!(event.target instanceof Element)) return;
+				const dropdownLink = event.target.closest("a[data-nav-origin]");
+				if (dropdownLink instanceof HTMLAnchorElement) {
+					const origin = dropdownLink.dataset.navOrigin;
+					const targetPath = normalizePath(new URL(dropdownLink.href, window.location.href).pathname);
+					if (origin && dropdownGroups.has(origin)) {
+						window.sessionStorage.setItem(navOriginStorageKey, JSON.stringify({ group: origin, path: targetPath }));
+					}
+				}
+
 				const openOverlay = document.querySelector(".nav-overlay.nav-overlay--open");
 				if (openOverlay && !event.target.closest(".nav-overlay") && !event.target.closest(".nav-toggle")) {
 					closeMenu();

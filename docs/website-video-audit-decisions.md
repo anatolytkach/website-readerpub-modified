@@ -1,5 +1,9 @@
 # Website video — audit decisions and conflict log
 
+### Strategy pre-launch wording
+
+**Decision:** The `/strategy/` hero uses: “The product is ready. We are focused on launching initial pilot projects and attracting partners, and we are open to financial collaboration.”
+
 ## Purpose and sources
 
 This is the source of truth for user decisions made while reviewing:
@@ -11,7 +15,7 @@ Detailed summaries are in [`audits/`](audits/), and the working sequence is in [
 
 ## Governing workflow
 
-**Status:** resolved
+**Status:** resolved.
 
 1. Treat both audits as recommendations, not automatic instructions.
 2. First resolve every strategy, product, factual, legal, and cross-audit conflict in the agreed decision-pack order.
@@ -22,6 +26,10 @@ Detailed summaries are in [`audits/`](audits/), and the working sequence is in [
 This wording replaces the earlier, incorrect interpretation that every approved point should immediately be implemented.
 
 ## Resolved decisions
+
+### Partner and investor inquiries
+
+**Decision:** The dedicated partnership form remains separate from the pilot form. The green `Partner inquiry` buttons on About and Contact, and the orange `Partner inquiry` button on Strategy, open that same form.
 
 ### A. “Who benefits from” card icons
 
@@ -86,14 +94,44 @@ The following was directly designed through user instructions before the audit d
 
 **Confirmation:** This positioning was reconfirmed on 2026-07-17; it is not an open audit question.
 
-### 6. Publishable proof and compliance facts — pending
+### 6. Publishable proof and compliance facts — resolved
 
 **Approved team wording:** On the About page, use: “ReaderPub is built by top software engineers and industry professionals with decades of experience in technology innovations.” The related solution paragraph begins: “Our team is focused on …”
 
 **Approved team disclosure:** The About page may publish the selected team members’ names, roles, profile photographs, and LinkedIn links. The initial approved list is Anatoly Tkach, Yury Arane, Dmitry Tkach, Nataliia Kupianska, Dinora Yususpova, Mikhail Lenskikh, Alex Berezkin, and Alex Melnik.
 
-**Question:** Which real names, roles, profiles, corporate information, support details, pilots, metrics, partners, patent references, catalog facts, and compliance/accessibility statements may be published?
+**Approved corporate identity:** The company may be identified on the website as ReaderPub Inc.
 
-## Next question for the new session
+**Approved contact approach:** Direct enquiries to the website’s Contact page.
 
-Start with decision-pack item **1: homepage video strategy**.  Do not begin implementation and do not ask about canonical URLs again.
+**Approved pilots and metrics:** ReaderPub has no test projects. Its catalogue contains more than 60,000 books. About three weeks after the social network opened, it has approximately 800 users discussing classic books. The observed growth rate is approximately 1,000 additional users per month.
+
+**Approved catalogue wording:** As of today, every book in the catalogue is in the public domain and originates from Project Gutenberg.
+
+**Approved patent reference:** ReaderPub may refer to patent application no. 63/975,429, filed in February 2026. Do not publish a link to the application.
+
+**Approved accessibility and compliance wording:** The web reader supports text-to-speech and may be described as aligned with WCAG in that respect. The website itself has no equivalent built-in accessibility feature; its content can be read aloud through the user’s device-level assistive technology. Other compliance information is provided on the Terms page.
+
+**Approved compliance placement:** Statements regarding GDPR, accessibility, SOC 2, data residency, and security documentation belong on the Terms page, not the Security page, because the Security page concerns protection of books. The Security page should link to the Terms page.
+
+**Status:** The approved factual inputs above complete this decision-pack item. No audit recommendation based on these facts may be implemented without approval of a scoped implementation backlog.
+
+### 6a. WeBuzz activity clarification — resolved
+
+**Replacement-audit premise:** The revised marketing audit says that ReaderPub is pre-launch, has no real authors, readers, or investors, and that WeBuzz activity consists only of synthetic seed content plus friends-and-family activity.
+
+**Decision:** WeBuzz is currently populated with synthetic content. The previously recorded growth figure is a projection, not current observed organic growth.
+
+**Implementation boundary:** This clarification authorizes no site changes. Do not change the existing About wording, add a preview/seed label, alter WeBuzz, or make any other audit-driven site revision because of it unless the user directly instructs that specific change.
+
+## Current state
+
+All decision-pack questions are resolved. Any remaining item in the implementation backlog requires explicit user approval or a direct scoped instruction before site code changes begin.
+
+### Platform publishing actions
+
+**Decision:** Both `/platform` actions labelled “Start publishing” open `https://reader.pub/publish/` in a new tab.
+
+### WeBuzz community action
+
+**Decision:** The final `/webuzz/` action labelled “Join WeBuzz community” opens `https://webuzz.org/` in a new tab.

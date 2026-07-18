@@ -1,6 +1,7 @@
 ---
 import Card from "../components/Card.astro";
 import CardGrid from "../components/CardGrid.astro";
+import PartnershipRequestModal from "../components/PartnershipRequestModal.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
@@ -9,6 +10,7 @@ import Base from "../layouts/Base.astro";
 const heroActions = [
 	{ label: "Explore the platform", href: "/platform/" },
 	{ label: "Request a pilot", href: "/contact/", variant: "secondary" as const },
+	{ label: "Partner inquiry", href: "#partnership-request-modal", variant: "secondary" as const, modalTarget: "#partnership-request-modal" },
 ];
 
 const finalActions = [
@@ -138,10 +140,10 @@ const teamMembers = [
 	<Section tone="white" class="about-section" title="Current focus">
 		<div class="about-copy-stack">
 			<p>
-				We have already launched a WeRead catalog of 60K+ public-domain books accessible in the browser. In addition, our literature-focused WeBuzz social network is rapidly gaining momentum.
+				ReaderPub has launched a WeRead catalog of more than 60,000 public-domain books from Project Gutenberg, accessible in the browser. Our literature-focused WeBuzz social network started it in June 2026 is rapidly gaining momentum.
 			</p>
 			<p>
-				ReaderPub is currently focused on pilot projects with authors, publishers, universities, libraries, and organizations seeking better ways to publish, protect, read, and discuss digital materials.
+				ReaderPub is ready for pilot projects with authors, publishers, universities, libraries, and organizations seeking better ways to publish, protect, read, and discuss digital materials.
 			</p>
 			<p class="about-copy-accent">
 				Our goal is to work with partners who want to test web-native publishing, controlled access, community discussion, and institutional knowledge workflows in real-world use cases.
@@ -175,6 +177,8 @@ const teamMembers = [
 		body="ReaderPub is available for pilot projects, institutional conversations, and strategic partnership discussions."
 		actions={finalActions}
 	/>
+
+	<PartnershipRequestModal />
 </Base>
 
 <style>

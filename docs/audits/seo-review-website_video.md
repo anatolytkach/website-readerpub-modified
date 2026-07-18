@@ -23,7 +23,7 @@ The report’s five headline points are:
 
 The audit found `/robots.txt` and `/sitemap.xml` returning 404 while a valid hand-maintained sitemap exists at `/sitemap-website.xml`.  It recommends `public/robots.txt` with a `Sitemap:` directive and preferably `site: "https://reader.pub"` plus `@astrojs/sitemap`.
 
-**Status:** pending later implementation.  The user has not yet chosen whether to retain the hand-maintained sitemap or adopt generated sitemap tooling.
+**Implementation 2026-07-17:** Replaced the hand-maintained `sitemap-website.xml` with Astro-generated `sitemap-index.xml` and `sitemap-0.xml`, based on the static routes at every build. Added `public/robots.txt` with a directive to the generated sitemap index.
 
 ### 2. Canonical URL format
 
@@ -37,7 +37,7 @@ The audit found conflicting slash formats between sitemap entries and page canon
 
 The report found no inbound internal links to `/terms`.  It recommends a sitewide footer Terms link.
 
-**Status:** implementation backlog.  Footer expansion also depends on factual/legal decisions about contact details and company information.
+**Implementation 2026-07-17:** A sitewide footer link to `/terms/` has been added. The footer also links to `/contact/`.
 
 ### 4. Metadata
 
@@ -91,7 +91,7 @@ Recommended sequence:
 3. re-encode and offer a modern video source;
 4. respect `prefers-reduced-motion` and viewport intersection.
 
-**Status:** do not alter until the video-strategy decision is resolved; the video’s loading model must support the chosen experience.
+**Implementation 2026-07-17:** The retained staged video experience now uses a 1272×798 WebP poster captured from the video and `preload="metadata"` instead of `preload="auto"`. This changes loading behavior only; it does not change the video sequence, its copy, or its calls to action.
 
 #### Shared background — medium priority
 

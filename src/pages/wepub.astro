@@ -27,11 +27,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	title={`Web-Native Book Publishing for Authors & Publishers | ${SITE_NAME}`}
 	description="Publish web-native, browser-readable books with WePub. Sell directly, keep reader relationships and activity connected, and pay a 5% sales commission."
 	canonical="/wepub/"
-	ogImage="/images/author1.webp"
+	ogImage="/images/author.webp"
 >
 	<HeroSection
 		class="wepub-new-hero"
-		image="/images/author1.webp"
+		image="/images/author.webp"
 		imageAlt="Illustration of an author using WePub to publish books online and stay connected with readers"
 		spacerBackgroundPositionY="54%"
 	>
@@ -40,7 +40,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		<Fragment slot="body">We build your direct, long-term relationships with readers...</Fragment>
 		<p class="authors-hero-fee-line">...while charging just a <strong class="authors-hero-fee">5%</strong> sales commission.</p>
 		<div class="cta-row">
-			<a class="button" href="/wepub/">Start publishing</a>
+			<a class="button" href="https://reader.pub/publish/" target="_blank" rel="noopener noreferrer">Start publishing</a>
 			<a class="button button--secondary" href="/pricing/">See pricing</a>
 			<a class="button button--secondary author-protection-button" href="/security/#control-who-reads">
 				<span class="author-protection-button-label">We protect your book</span>
@@ -276,6 +276,9 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 				</div>
 			</article>
 		</div>
+		<div class="cta-row wepub-start-actions">
+			<a class="button" href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Publish your book with WePub</a>
+		</div>
 	</Section>
 
 	<SpecCardsSection tone="green" class="authors-source-section authors-model-section section--two-column">
@@ -484,8 +487,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	:global(.wepub-new-hero .authors-hero-fee) {
-		color: var(--accent);
+		color: var(--accent-orange);
+		display: inline-block;
+		font-size: 1.4em;
 		font-weight: 700;
+		line-height: 1;
 	}
 
 	:global(.wepub-new-hero .button) {
@@ -602,6 +608,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: var(--card-grid-gap);
 		width: 100%;
+	}
+
+	.wepub-start-actions {
+		justify-content: center;
+		margin-top: calc(var(--card-grid-gap) * 0.8);
 	}
 
 	.wepub-start-card {

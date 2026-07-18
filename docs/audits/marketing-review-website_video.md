@@ -1,123 +1,107 @@
-# Marketing and positioning audit — working record
+# Marketing and positioning audit — pre-launch working record
 
 ## Source and scope
 
 - Source report: `/Users/anatoly/Dropbox/production/reader.pub/marketing-review-website_video.html`
-- Branch reviewed by the report: `website_video`
-- Audit method: all 16 rendered routes at desktop (1440×900) and mobile (390×844), using investor, author, and reader lenses.
-- This file is a faithful working summary of the report, not a replacement for its source HTML.
+- This pre-launch revision replaces the earlier marketing audit as the source of truth for marketing findings.
+- Audit method stated by the report: rendered review at `localhost:4325`, desktop 1440px and mobile 390px, cross-checked against source.
+- Active implementation worktree is served at `http://127.0.0.1:4322/`. Where the report cites an old route or source line that differs from this worktree, verify the live implementation before acting.
 
-## Overall assessment
+## Pre-launch framing
 
-The report judges the underlying product substance to be stronger than its packaging.  It highlights specific pricing, unusually candid security copy, credible institutional detail, a workable investor page, and a focused WeRead page.  Its main concerns are sequencing, proof, conversion plumbing, and product-scope presentation.
+The report assumes that ReaderPub has not launched; it treats the absence of customers, testimonials, logos, funding badges, metrics, and case studies as normal at this stage. It evaluates whether the site can win the first investor conversation, first author, and first reader. It treats any implication that synthetic seed content is organic traction as a critical credibility problem.
 
-## Findings
+## Findings and current plan status
 
-### F1 — Homepage video delays the value proposition
+### F1 — Homepage thesis and demo sequencing
 
-The audit measured an approximately 27-second path before the line “Guess what? This is not an app, but a web page!” appears.  In the reviewed version, the first homepage H1 and CTA were below the 1440×900 fold.  The report recommends a ~2-second pre-roll, immediate explanatory hero copy, and audience CTAs visible beside the video.
+The audit reports that, on its desktop review, the value proposition, H1, and CTAs appeared only after the 27-second staged video sequence. It recommends showing the thesis and CTAs from the first viewport, retaining the product video as proof, and adding a visible Skip control.
 
-**Decision status:** pending.  The homepage video has since been heavily redesigned at the user’s direction, but the strategic audit decision—retain the long scene or replace it with a fast value-first version—has not been explicitly made.
+**Existing decision:** retain the extended staged video experience; the user has already moved the video away from the top of the homepage so relevant CTAs are visible immediately. The report’s geometry was measured on `localhost:4325`, not the active preview.
 
-### F2 — Proof, named team, and factual claims
+**Plan:** do not replace or shorten the staged experience. A Skip control is a separate, optional accessibility/UX task and needs explicit approval. Revalidate the desktop layout on the active preview before considering any further change.
 
-`/about` names no people and includes the unsupported phrase “rapidly gaining momentum.”  The report notes that “60K+ books” is a Project Gutenberg public-domain corpus rather than traction, while “25,000+” describes market size rather than customers.  It recommends named people and roles, quantified claims only where factual, transparent Gutenberg framing, and a visible patent-pending milestone.
+### F2 — Pre-launch truthfulness and WeBuzz seed framing
 
-**Decision status:** pending factual input from the user.  No names, metrics, pilot counts, legal claims, or compliance claims may be invented.
+The report identifies two credibility risks: `/about` says WeBuzz is “rapidly gaining momentum,” and the WeBuzz embed is not visibly labelled as an early seeded preview. It recommends removing the organic-growth implication and adding an explicit preview label.
 
-### F3 — The investor page is hidden behind “Market”
+**Decision:** WeBuzz is currently populated with synthetic content, and the previously recorded growth figure is a projection rather than observed organic growth. The user explicitly declined any site changes as a consequence: do not change the existing About wording, add a preview label, or alter WeBuzz unless directly instructed.
 
-The report finds `/growth` useful for investors, but says the navigation label “Market” makes the page hard to discover.  It recommends “Company” or “Partners & Investors,” stronger sourced market sizing, and confident language about the use of investment.
+### F3 — Real publisher logos in the WePub hero
 
-**Decision status:** pending.  The current nav label is `Market`, following an earlier user request unrelated to this audit.
+The audit finds that `/wepub` hero asset `author1.webp` contains identifiable logos for Penguin Random House, Hachette, Allen & Unwin, HarperCollins, Pan Macmillan, and Simon & Schuster. It says this can imply partnerships or endorsements and creates trademark risk.
 
-### F4 — Six products appear unfocused
+**Implementation 2026-07-17:** Replaced the hero and WePub social-preview image with the approved `author.webp` illustration. It contains no identifiable third-party publisher marks. The WePub copy, CTA, and layout are unchanged.
 
-The report says that WePub, WeRead, WeBuzz, WeTalk, BookTree, and Scribe appear as six separate products without a sufficiently clear compounding story.  It recommends:
+### F4 — First-author conversion path
 
-- treat WePub and WeRead as the two core products;
-- present WeBuzz, BookTree, and Scribe as connective capabilities;
-- merge WeTalk into WeBuzz as private/access-controlled spaces;
-- remove “Manufacturers” from audiences unless it represents a real customer segment;
-- change the platform introduction to emphasize one network rather than six products.
+The report flags a self-linking WePub CTA and calls for actions on every pricing tier.
 
-**Decision status:** pending product-positioning decision.  Product consolidation cannot be assumed from a marketing recommendation.
+**Current implementation:** the primary `/wepub` “Start publishing” action already opens `https://reader.pub/publish/` in a new tab. The report’s WePub source-line evidence predates that fix. On 17 July 2026, both `/platform` “Start publishing” actions were also set to open `https://reader.pub/publish/` in a new tab.
 
-### F5 — Author conversion path is broken or missing
+**Existing decision:** pricing-tier buttons are not to be added because plan-specific prices must be discussed with ReaderPub. Do not implement the audit’s pricing-CTA recommendation.
 
-- The primary “Start publishing” action on `/wepub` points back to `/wepub` instead of `PUBLISH_URL`.
-- Pricing tiers lack plan-level CTAs, except for enterprise contact.
-- The strongest self-service publishing message is on `/contact` instead of `/wepub` and `/pricing`.
-- The homepage gives readers an earlier CTA than authors.
+### F5 — Investor reachability
 
-**Decision status:** implementation backlog after the decision pack.  The intended destination of self-service author actions needs to remain `PUBLISH_URL`.
+The audit recommends renaming the investor navigation item to “Investors & Partners,” adding “Investor” to the contact-form role selector, and adding an investor route from `/about`.
 
-### F6 — Repeated old-versus-new argument
+**Existing decision:** the public navigation label and the page are both `Strategy`; this supersedes the requested navigation rename. The remaining two ideas — an Investor contact role and an `/about` investor link — are separate, unapproved changes and require a scoped decision.
 
-The report counts several old/new comparison blocks across the site and four on `/wepub`.  It recommends no more than one comparison per page, retaining the canonical comparison on the homepage and using the recovered space for onboarding, pricing, migration, and catalog information.
+### F6 — Team visibility
 
-**Decision status:** pending content-scope decision after product positioning is settled.
+The audit asks for named founders, faces, roles, and short track records on `/about`.
 
-### F7 — “60K+ books” may create the wrong expectation
+**Current implementation:** the approved eight-person team block, square photos, roles, and LinkedIn links are already on `/about`. No further audit action is planned without new approved biographical wording.
 
-The report says visitors may expect current commercial titles.  It recommends plain wording such as “Read 60,000+ public-domain classics free” with the no-app/no-download benefit.
+### F7 — Pre-launch wording on `/strategy`
 
-**Decision status:** depends on the factual-claims decision in F2.
+The audit accepts “market-ready” but says “scaling adoption” implies existing customer adoption. It recommends forward-looking language about winning first authors, publishers, and institutional pilots, and seeking capital and partnerships.
 
-### F8 — Footer lacks trust and discovery paths
+**Implementation 2026-07-17:** Replaced the adoption claim with the user-approved forward-looking wording: “The product is ready. We are focused on launching initial pilot projects and attracting partners, and we are open to financial collaboration.” The user-approved page name `Strategy` and market-ready product claim are unchanged.
 
-The report says the footer should provide product, solution, company, legal, and contact links; surface `support@reader.pub`; link `/terms`; and, if public, link the patent-pending reference to a filing.
+### F8 — Product-brand scope
 
-**Decision status:** pending factual/legal input for contact and corporate details.  A basic `/terms` link is also a separate SEO task.
+The audit recommends folding WeTalk into WeBuzz and presenting Read (WeRead) and Publish (WePub) as the two public pillars, with other capabilities subordinate.
 
-### F9 — Security copy lacks procurement and accessibility facts
+**Existing decision:** WeTalk remains a distinct product. Do not merge it, redirect it, or remove the route. The separate question of how to present the product hierarchy externally remains unapproved.
 
-The report praises the security page’s candour but asks for accurate disclosures regarding GDPR posture, accessibility/screen-reader behaviour, SOC 2 status, data residency, and security documentation.  It specifically warns against claiming an accessible text layer unless it is true.
+### F9 — WeBuzz preview and incorrect CTA
 
-**Decision status:** pending factual/legal/compliance input.  No compliance assertion may be added without verification.
+The audit recommends a visible early-preview/seed label beside the WeBuzz embed. It also finds the final “Join WeBuzz community” CTA routes to `/wetalk/` rather than `https://webuzz.org/`.
 
-### F10 — Inconsistent category noun and homepage copy typo
+**Implementation 2026-07-17:** The user approved the standalone CTA correction. The final “Join WeBuzz community” action now opens `https://webuzz.org/` in a new tab. No preview wording was added.
 
-The report found “network,” “platform,” and “infrastructure” used as competing category nouns.  It recommends `network` as the main positioning term and identifies an awkward homepage line about “Direct web access.”
+### F10 — Explicit competitive differentiation
 
-**Decision status:** category rule resolved: use **web-native publishing network** as the public category name; use “platform” only when describing technical capabilities.  The remaining copy implementation belongs to the later backlog.
+The audit proposes a compact “Unlike Kindle/KDP/Substack/Scribd…” block on `/` and `/platform`, using ReaderPub’s browser-readability, ownership, discussion, and 5%-versus-up-to-35% message.
 
-### F11 — Mobile video legibility
+**Plan:** this is new comparative marketing copy, not a factual correction. It requires separate approval of the exact public wording and claims before implementation.
 
-The report says a two-page book spread is illegible on narrow screens.  It recommends either showing a legible single-page crop or a static annotated image below 768px.
+### F11 — Footer and visible email
 
-**Decision status:** linked to the pending video strategy decision.
+The audit asks for broader footer navigation, a visible support email, and a Terms link.
 
-### F12 — Placeholder copy is not live, but stale data is risky
+**Current implementation and decision:** the footer links to Terms and Contact. The user explicitly chose Contact-page enquiries rather than publishing an email address. Do not add an email address unless that decision changes.
 
-The report verifies that scaffolding text in `src/data/pages.ts` is not rendered on any live route.  It identifies unused page blueprints as a future risk and recommends deleting unused blueprints while retaining only data still used by contact and KB.
+### F12 — Mobile
 
-**Decision status:** a low-risk maintenance task for the later implementation backlog; no visitor-facing emergency.
+The audit reports no mobile blockers and says the desktop sequencing issue is the priority. No mobile change is planned from this report.
 
 ## Strengths to preserve
 
-- Specific and legible pricing, including real price points and the 5% commission.
-- Honest security language: no digital system can prevent every form of copying.
-- WePub’s direct-relationship positioning.
-- Detailed institutional workflows on `/contact`.
-- The institutions hook and the disciplined WeRead page.
-- The KB’s direct answers and the real product-demo video itself.
+- The real WeRead demo is strong proof that the product exists.
+- The WePub message about direct reader relationships and the 5% commission is specific and memorable.
+- The WeRead route provides a clear direct path to the catalogue.
+- `/strategy` has a useful investor thesis: markets, shared foundation, revenue logic, use of capital, and why-now framing.
+- A pre-launch site does not need invented traction, testimonials, customer logos, or case studies.
 
-## Audit’s own prioritised backlog
+## Updated implementation order
 
-1. Fix the WePub self-link.
-2. Standardise the category term and correct homepage copy.
-3. Add pricing-tier CTAs.
-4. Create a functional footer with Terms and discoverable contact.
-5. Shorten video pre-roll and show the value proposition/CTAs early.
-6. Add a homepage author CTA and relocate the self-service publishing explanation.
-7. Name the team; remove or quantify growth claims.
-8. Reframe the Gutenberg corpus honestly.
-9. Rename `Market` and improve growth-page investor language.
-10. Add verified compliance and accessibility information.
-11. Delete dead blueprints.
-12. Resolve WeTalk/WeBuzz, Manufacturers, and the two-core-product story.
-13. Reduce duplicate comparison blocks.
-14. Make the mobile video legible.
+1. **Do not alter WeBuzz or its current About wording** because of the audit’s seed-content recommendation; the user expressly declined that change.
+2. **Remove real publisher marks** from the `/wepub` hero asset.
+3. **Correct remaining low-risk route semantics:** decide the `/platform` “Start publishing” label/target and authorize the final WeBuzz CTA correction.
+4. **Apply approved pre-launch copy:** soften `/strategy` adoption language, strictly using approved facts.
+5. **Consider investor discoverability additions:** Investor in the Contact selector and a direct investor link on `/about`, while preserving the approved `Strategy` navigation.
+6. **Consider new comparative and hierarchy messaging** only after exact copy and scope approval.
 
-Do not execute this priority list until the decision pack in [`../audit-remediation-plan.md`](../audit-remediation-plan.md) is completed and the user authorizes implementation.
+The report’s recommendations to replace the staged video, rename `Strategy`, add pricing-tier CTAs, merge WeTalk into WeBuzz, or expose an email conflict with existing direct user decisions and are not implementation tasks.

@@ -12,8 +12,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 ---
 
 <Base
-	title={`Web-Native Publishing & Digital Reading Platform | ${SITE_NAME}`}
-	description="ReaderPub is a web-native publishing and digital reading platform that keeps books and readers connected—without apps, downloads, or platform lock-in."
+	title={`Web-Native Publishing Network | ${SITE_NAME}`}
+	description="ReaderPub is a web-native publishing network that keeps books and readers connected—without apps, downloads, or platform lock-in."
 >
 	<HeroSection
 		id="home-main-hero"
@@ -23,19 +23,19 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		image="/images/home.webp"
 		imageAlt="Illustration of ReaderPub connecting a reader with an author, publisher, library, and university"
 		actions={[
-			{ label: "Explore the solution", href: "/platform/" },
-			{ label: "Read 60K+ books in WeRead", href: BOOKS_URL, external: true, variant: "secondary" },
+			{ label: "Publish with WePub", href: PUBLISH_URL, external: true },
+			{ label: "Read 60K+ PD books in WeRead", href: BOOKS_URL, external: true, variant: "secondary" },
 		]}
 		spacerBackgroundPositionY="0%"
 	>
 		<p class="home-hero-statement hero-body">
-			ReaderPub is a web-native publishing platform that makes books readable online and keeps readers connected.
+			ReaderPub is a web-native publishing network that makes books readable online and keeps readers connected.
 		</p>
 		<p class="home-hero-strategy">
 			Read instantly. Publish securely. Distribute strategically.
 		</p>
 		<p class="home-hero-lockin hero-lead">
-			Direct web access, No downloads or platform lock-in
+			Direct web access. No downloads or platform lock-in
 		</p>
 	</HeroSection>
 
@@ -72,10 +72,11 @@ const homeVideoDoorSides = ["left", "right"] as const;
 			<video
 				class="home-video-intro-media"
 				src="/videos/treasure_island-1.mp4"
+				poster="/images/treasure-island-video-poster.webp"
 				title="Treasure Island in WeRead"
 				muted
 				playsinline
-				preload="auto"
+				preload="metadata"
 			></video>
 		</section>
 		<div class="home-video-green-shutters" aria-hidden="true">
@@ -455,7 +456,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		title="Books should live on the web."
 		actions={[
 			{ label: "Publish with WePub", href: PUBLISH_URL, external: true },
-			{ label: "60K+ books in Catalog", href: BOOKS_URL, external: true, variant: "secondary" },
+			{ label: "60K+ PD books in Catalog", href: BOOKS_URL, external: true, variant: "secondary" },
 		]}
 	>
 		<Fragment slot="body">

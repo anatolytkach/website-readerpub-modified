@@ -7,10 +7,10 @@ import Section from "../components/sections/Section.astro";
 import ProductName from "../components/ProductName.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import Base from "../layouts/Base.astro";
-import { BOOKS_URL, SITE_NAME } from "../consts";
+import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 const heroActions = [
-	{ label: "Start publishing", href: "/wepub/" },
+	{ label: "Start publishing", href: PUBLISH_URL, external: true },
 	{ label: "Explore security", href: "/security/", variant: "secondary" as const },
 ];
 
@@ -230,7 +230,7 @@ const benefitCards = [
 								<li>Track reader engagement</li>
 							</ul>
 							<div class="cta-row">
-								<a class="button" href="/wepub/">Start publishing</a>
+								<a class="button" href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Start publishing</a>
 								<a class="button button--secondary" href="/pricing/">See pricing</a>
 							</div>
 						</div>
