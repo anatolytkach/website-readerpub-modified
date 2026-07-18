@@ -21,11 +21,36 @@ interface Props {
 		| "fan"
 		| "security"
 		| "access"
-		| "noAds";
+		| "noAds"
+		| "manufacturer";
 	title: string;
 }
 
 const { type, title } = Astro.props;
+
+const cardIconSources: Partial<Record<Props["type"], string>> = {
+	publisher: "/images/card-icons/publisher.png",
+	library: "/images/card-icons/library.png",
+	university: "/images/card-icons/university.png",
+	government: "/images/card-icons/government.png",
+	public: "/images/card-icons/public.png",
+	reader: "/images/card-icons/reader.png",
+	webReader: "/images/card-icons/web-reader.png",
+	readerBook: "/images/card-icons/reader-book.png",
+	author: "/images/card-icons/author.png",
+	research: "/images/card-icons/research.png",
+	program: "/images/card-icons/program.png",
+	sale: "/images/card-icons/sale.png",
+	charity: "/images/card-icons/charity.png",
+	dollars: "/images/card-icons/dollars.png",
+	fan: "/images/card-icons/fan.png",
+	security: "/images/card-icons/security.png",
+	access: "/images/card-icons/access.png",
+	noAds: "/images/card-icons/no-ads.png",
+	manufacturer: "/images/card-icons/manufacturers.png?v=2",
+};
+
+const cardIconSource = cardIconSources[type];
 
 const iconViewBoxes: Record<Props["type"], string> = {
 	publisher: "6 7 36 34",
@@ -49,6 +74,7 @@ const iconViewBoxes: Record<Props["type"], string> = {
 	security: "9 13 34 31",
 	access: "9 10 32 25",
 	noAds: "7 7 34 34",
+	manufacturer: "0 0 128 128",
 };
 
 const iconColors: Record<Props["type"], string> = {
@@ -73,10 +99,12 @@ const iconColors: Record<Props["type"], string> = {
 	security: "var(--icon-security)",
 	access: "var(--icon-access)",
 	noAds: "var(--icon-no-ads)",
+	manufacturer: "var(--icon-publisher)",
 };
 ---
 
-<svg class="section-icon" viewBox={iconViewBoxes[type]} role="img" aria-label={title} style={`--section-icon-color: ${iconColors[type]};`}>
+{cardIconSource && <img class="section-icon section-icon--raster" src={cardIconSource} alt="" aria-hidden="true" />}
+<svg class="section-icon section-icon--original" viewBox={iconViewBoxes[type]} role="img" aria-label={title} style={`--section-icon-color: ${iconColors[type]};`}>
 	{type === "publisher" && (
 		<>
 			<rect x="7" y="8" width="34" height="32" rx="4"></rect>
@@ -270,6 +298,9 @@ const iconColors: Record<Props["type"], string> = {
 			<path d="M28 21h2.2c2.2 0 3.8 1.4 3.8 3.5S32.4 28 30.2 28H28"></path>
 		</>
 	)}
+	{type === "manufacturer" && (
+		<image href="/images/card-icons/manufacturers.png?v=2" x="0" y="0" width="128" height="128" preserveAspectRatio="xMidYMid meet" />
+	)}
 </svg>
 
 <style>
@@ -283,5 +314,18 @@ const iconColors: Record<Props["type"], string> = {
 		stroke-linecap: round;
 		stroke-linejoin: round;
 		flex-shrink: 0;
+	}
+
+	.section-icon--raster {
+		display: none !important;
+		object-fit: contain;
+	}
+
+	:global(.card) .section-icon--original {
+		display: none !important;
+	}
+
+	:global(.card) .section-icon--raster {
+		display: block !important;
 	}
 </style>

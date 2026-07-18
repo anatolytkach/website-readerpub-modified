@@ -1,0 +1,57 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE_NAME } from "../consts";
+---
+
+<Base
+	title={`Page Not Found | ${SITE_NAME}`}
+	description="The requested ReaderPub page could not be found."
+>
+	<section class="not-found-section">
+		<div class="not-found-copy">
+			<p class="not-found-code">404</p>
+			<h1>Page not found.</h1>
+			<p>The page you requested does not exist or may have moved.</p>
+			<a class="button" href="/">Back to home</a>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.not-found-section {
+		display: grid;
+		min-height: min(58vh, 640px);
+		place-items: center;
+		padding: clamp(72px, 10vw, 144px) var(--section-padding);
+		text-align: center;
+	}
+
+	.not-found-copy {
+		display: grid;
+		justify-items: center;
+		max-width: 640px;
+		gap: 20px;
+	}
+
+	.not-found-code {
+		color: var(--accent);
+		font-family: var(--font-heading);
+		font-size: clamp(3rem, 9vw, 6rem);
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.not-found-copy h1 {
+		color: var(--text);
+		font-size: clamp(2rem, 4vw, 3.5rem);
+	}
+
+	.not-found-copy p:not(.not-found-code) {
+		color: var(--muted);
+		font-size: clamp(1rem, 2vw, 1.2rem);
+	}
+
+	.not-found-copy .button {
+		margin-top: 12px;
+	}
+</style>

@@ -12,7 +12,8 @@ const heroActions = [
 ];
 
 const ctaActions = [
-	{ label: "Contact us for details", href: "/contact" },
+	{ label: "Check for compliance", href: "/terms/", variant: "secondary" as const },
+	{ label: "Contact us for details", href: "/contact/" },
 ];
 
 const featuredBooks = [
@@ -56,16 +57,17 @@ const featuredBooks = [
 ---
 
 <Base
-	title={`Security | ${SITE_NAME}`}
-	description="ReaderPub protects access to web-native publications before complete files are distributed."
+	title={`Ebook Security, Anti-Piracy & Access Control | ${SITE_NAME}`}
+	description="Protect web-native books with browser-based access, WeRead Theft Guard, glyph-based obfuscation, permissions, and controlled distribution from ReaderPub."
+	ogImage="/images/security.webp"
 >
 	<HeroSection
 		class="security-hero"
 		eyebrow="Security"
 		title="Protect access, not just files."
-		lead="Traditional ebook security focuses on DRM – the downloaded file is bound to the device."
+		lead="Traditional ebook security focuses on DRM—the downloaded file is bound to the device."
 		image="/images/security.webp"
-		imageAlt="ReaderPub security and controlled access"
+		imageAlt="Illustration of ReaderPub browser-based book security, controlled access, and protected reading"
 		actions={heroActions}
 		spacerBackgroundPositionY="78%"
 	>
@@ -74,15 +76,16 @@ const featuredBooks = [
 			<span>We protect access to the book.</span>
 		</Fragment>
 		<p class="security-hero-access-copy">
-			ReaderPub does not deliver any files.<br />Instead, we protect the book's text from copying.
+			ReaderPub does not deliver any files.<br />Instead, we protect the book’s text from copying.
 		</p>
 	</HeroSection>
 
 	<SpecCardsSection tone="gray" class="section-continue-next">
-		<h2><span class="section-title-rest">File-based piracy scales,</span> <span class="section-title-accent">bypassing the DRM</span></h2>
+		<h2><span class="section-title-rest">File-based piracy scales,</span> <span class="section-title-accent">bypassing DRM</span></h2>
 		<p class="section-lead security-mobile-left-text">
-			When complete files are distributed to readers, publishers lose much of their control over what happens next.<br />Once that file exists on a device, it becomes the starting point for extraction, conversion, and redistribution.
+			When complete files are distributed to readers, publishers lose much of their control over what happens next.<br />Once a file exists on a device, it becomes the starting point for extraction, conversion, and redistribution.
 		</p>
+		<p class="section-lead security-pattern-note" style="color: var(--text);">Here is the repeatable and automatable pattern widely used <strong class="security-pirates-highlight">by book pirates</strong> across the industry:</p>
 		<div class="card-grid security-steps-grid">
 			<div class="card security-step-card">
 				<h3 class="security-step-card-heading">
@@ -113,17 +116,16 @@ const featuredBooks = [
 				<p>Once a reusable file circulates, redistribution can scale quickly.</p>
 			</div>
 		</div>
-		<p class="section-lead security-pattern-note" style="color: var(--text);">This pattern is repeatable, automatable, and widely used <strong class="security-pirates-highlight">by book pirates</strong> across the industry!</p>
 	</SpecCardsSection>
 
 	<SpecCardsSection class="section-continuation section-continue-next security-source-section security-source-risk-reduction-section section--two-column">
 		<h2><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> reduces risk before the handoff</h2>
 		<p class="lede">
-			ReaderPub's primary model keeps reading on the web through controlled access rather than routinely delivering a complete downloadable book file to every reader.
+			ReaderPub’s primary model keeps reading on the web through controlled access rather than routinely delivering a complete downloadable book file to every reader.
 		</p>
 		<div class="model-grid">
 			<div class="comparison-text-panel security-traditional-problem-card" style="background: var(--card-bg) !important;">
-				<h3>Traditional security problem</h3>
+				<h3>Traditional file-security problem</h3>
 				<ul class="comparison-list security-traditional-list">
 					<li>Protection starts after the file is delivered</li>
 					<li>Access and possession become hard to separate</li>
@@ -131,7 +133,7 @@ const featuredBooks = [
 				</ul>
 			</div>
 			<div class="card card--good security-readerpub-solution-card">
-				<h3><span class="security-readerpub-title readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> solution</h3>
+				<h3><span class="security-readerpub-title readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> access-first solution</h3>
 				<ul class="comparison-list">
 					<li>Primary reading access stays on the web</li>
 					<li>Access is managed through accounts and permissions</li>
@@ -156,7 +158,7 @@ const featuredBooks = [
 					<li>Suitable for premium, private, course, and research editions</li>
 					<li>Permission-aware answers: when Scribe works with institutional collections, it follows the same access permissions that protect the underlying publications.</li>
 				</ul>
-				<p class="security-source-theft-guard-text">All your books are fully protected by the patent-pending <strong class="security-source-theft-guard-name">WeRead Theft Guard</strong> that employs glyph images instead of regular characters, so the text is not accessible to crawling robots.</p>
+				<p class="security-source-theft-guard-text">All your books are fully protected by the patent-pending <strong class="security-source-theft-guard-name">WeRead Theft Guard</strong>, which uses glyph images instead of regular characters, making the text inaccessible to crawling robots.</p>
 			</div>
 			<div class="card card--good security-source-inline-cta security-source-theft-guard-card" data-card-reveal-origin="right">
 				<h3>
@@ -181,12 +183,12 @@ const featuredBooks = [
 	<section id="protected-books" class="section section--white security-protected-books-section section--two-column">
 		<div class="security-books-layout">
 			<div class="security-books-copy">
-				<h3 class="security-books-heading">
-					<SectionIcon type="security" title="Protected publication" />
+				<h2 class="security-books-heading">
+					<img class="section-icon security-books-heading-icon" src="/images/card-icons/security.png" alt="" aria-hidden="true" />
 					<span>Protected books remain browser-readable web assets.</span>
-				</h3>
+				</h2>
 				<p>
-					We protect your books against downloading or copying by the patent-pending WeRead Theft Guard.
+					We protect your books against downloading or copying with the patent-pending WeRead Theft Guard.
 				</p>
 				<p class="security-books-note">Open a protected edition and try the reading experience directly.</p>
 			</div>
@@ -200,7 +202,7 @@ const featuredBooks = [
 								<p>{b.author}</p>
 								<div class="book-card-protected">
 									<span>Protected by<br /><strong class="indie-theft-guard-name">WeRead Theft Guard</strong></span>
-									<svg class="section-icon" viewBox="0 0 48 48" role="img" aria-label="WeRead Theft Guard">
+									<svg class="section-icon" viewBox="0 0 48 48" role="img" aria-label="WeRead Theft Guard" style="--section-icon-color: var(--accent-orange);">
 										<path d="M10 14c4-1.8 7.5-1.8 11 0v22c-3.5-1.8-7-1.8-11 0z"></path>
 										<path d="M32 14c-4-1.8-7.5-1.8-11 0v22c3.5-1.8 7-1.8 11 0z"></path>
 										<line x1="21" y1="14" x2="21" y2="36"></line>
@@ -220,14 +222,14 @@ const featuredBooks = [
 	<Section tone="green" class="security-control-section section--two-column">
 		<div class="security-control-layout">
 			<div class="security-copy-stack">
-				<h2>Control who reads and <span class="green-heading-white">monitor the activity</span></h2>
+				<h2>Control who reads and <span class="green-heading-white">monitor activity</span></h2>
 				<p>
-					ReaderPub gives institutions, publishers and organizations control over access to their publications. You decide who can read, under what conditions and at what level of visibility.
+					ReaderPub gives institutions, publishers, and organizations control over access to their publications. You decide who can read, under what conditions, and at what level of visibility.
 				</p>
 				<ul class="security-check-list">
 					<li>Define who can access each publication or collection</li>
 					<li>Use account-based access for controlled distribution</li>
-					<li>Manage teams, roles and permissions centrally</li>
+					<li>Manage teams, roles, and permissions centrally</li>
 					<li>Maintain visibility across published content</li>
 				</ul>
 			</div>
@@ -235,9 +237,9 @@ const featuredBooks = [
 				<SectionIcon type="library" title="Institutional access" />
 				<h3>Built for organizations.</h3>
 				<p>
-					Access-first publishing supports public collections, restricted programs, course materials and private institutional knowledge.
+					Access-first publishing supports public collections, restricted programs, course materials, and private institutional knowledge.
 				</p>
-				<a class="button" href="/contact">Talk to us</a>
+				<a class="button" href="/contact/">Talk to us</a>
 			</article>
 		</div>
 		<div class="security-position-section">
@@ -245,14 +247,14 @@ const featuredBooks = [
 				<div class="security-position-problem">
 					<h2>A practical, honest <span class="green-heading-white">security position</span></h2>
 					<h3 class="security-position-problem-callout">No digital system can prevent every form of copying.</h3>
-					<h3 class="security-position-problem-callout">Screenshots, manual capture, and other low-efficiency methods can still exist.</h3>
+					<h3 class="security-position-problem-callout">Screenshots, manual capture, and other low-efficiency methods can still occur.</h3>
 				</div>
 				<div class="security-position-solution">
 					<p>
-						ReaderPub removes the most scalable starting point for large-scale piracy:<br /><span class="security-position-solution-contrast">we don't deliver a complete, reusable ebook file to the end user.</span>
+						ReaderPub removes the most scalable starting point for large-scale piracy:<br /><span class="security-position-solution-contrast">we don’t deliver a complete, reusable ebook file to the end user.</span>
 					</p>
 					<p>
-						At that, our web-accessible book editions are fully protected against serial downloading or copying.
+						At the same time, our web-accessible book editions are fully protected against serial downloading or copying.
 					</p>
 				</div>
 			</div>
@@ -261,7 +263,7 @@ const featuredBooks = [
 
 	<CtaBlock
 		title="Publish securely with access control built in."
-		body="ReaderPub security is designed for web-native publications, direct publishing and institutional collections."
+		body="ReaderPub security is designed for web-native publications, direct publishing, and institutional collections."
 		actions={ctaActions}
 	/>
 </Base>
@@ -651,8 +653,8 @@ const featuredBooks = [
 	}
 
 	.security-source-theft-guard-action :global(.section-icon) {
-		width: 41px;
-		height: 41px;
+		width: 53.3px !important;
+		height: 53.3px !important;
 	}
 
 	:global(.security-source-theft-guard-action .button) {
@@ -732,8 +734,8 @@ const featuredBooks = [
 	}
 
 	.security-callout-card :global(.section-icon) {
-		width: 52px;
-		height: 52px;
+		width: 67.6px !important;
+		height: 67.6px !important;
 	}
 
 	.security-callout-card h3,
@@ -774,6 +776,11 @@ const featuredBooks = [
 	}
 
 	.security-books-heading {
+		font-family: var(--font-heading);
+		font-weight: var(--font-weight-heading);
+		line-height: var(--line-height-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		font-size: clamp(1.25rem, 1.8vw, 1.55rem);
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
@@ -783,10 +790,11 @@ const featuredBooks = [
 		text-align: center;
 	}
 
-	.security-books-heading :global(.section-icon) {
-		width: 48px;
-		height: 48px;
+	.security-books-heading-icon {
+		width: 86.4px;
+		height: 86.4px;
 		flex: 0 0 auto;
+		object-fit: contain;
 	}
 
 	.security-books-note {
@@ -859,6 +867,17 @@ const featuredBooks = [
 		box-shadow: var(--card-green-shadow) !important;
 	}
 
+	:global(#protected-books .security-protected-book-card) {
+		border: 1px solid var(--border) !important;
+		border-radius: calc(var(--radius-card) * 3) !important;
+		background: var(--card-bg) !important;
+	}
+
+	:global(#protected-books .security-protected-book-card)::before,
+	:global(#protected-books .security-protected-book-card)::after {
+		content: none !important;
+	}
+
 	:global(#protected-books .book-cover-placeholder) {
 		display: block;
 		width: var(--protected-book-card-cover-width);
@@ -922,6 +941,7 @@ const featuredBooks = [
 		width: 31.2px !important;
 		height: 31.2px !important;
 		flex-shrink: 0;
+		--section-icon-color: var(--accent-orange) !important;
 		color: var(--accent-orange) !important;
 		stroke: var(--accent-orange) !important;
 	}

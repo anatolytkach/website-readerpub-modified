@@ -5,49 +5,50 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import ProductName from "../components/ProductName.astro";
+import SectionIcon from "../components/SectionIcon.astro";
 import Base from "../layouts/Base.astro";
-import { BOOKS_URL, SITE_NAME } from "../consts";
+import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 const heroActions = [
-	{ label: "Start publishing", href: "/wepub" },
+	{ label: "Start publishing", href: PUBLISH_URL, external: true },
 	{ label: "Explore security", href: "/security/", variant: "secondary" as const },
 ];
 
 const ctaActions = [
-	{ label: "Get started", href: "/contact" },
-	{ label: "See pricing", href: "/pricing", variant: "secondary" as const },
+	{ label: "Get started", href: "/contact/" },
+	{ label: "See pricing", href: "/pricing/", variant: "secondary" as const },
 ];
 
 const problemCards = [
 	{
 		title: "Publishing is separate",
-		body: "Books are created and distributed through one set of tools.",
+		body: "Books are created and distributed through one set of tools, then handed off elsewhere.",
 	},
 	{
 		title: "Reading is separate",
-		body: "Readers move into isolated applications and ecosystems.",
+		body: "Readers move into isolated applications and closed ecosystems.",
 	},
 	{
 		title: "Discussion is separate",
-		body: "Conversations happen across many platforms disconnected from the publication.",
+		body: "Conversations happen across platforms that are disconnected from the publication.",
 	},
 	{
 		title: "Knowledge is separate",
-		body: "Notes, references and long-term work often live outside the publication ecosystem.",
+		body: "Notes, references, and long-term work often remain outside the publication ecosystem.",
 	},
 ];
 
 const benefitCards = [
-	{ title: "Authors", body: "Maintain stronger relationships with readers.", icon: "author" as const },
-	{ title: "Publishers", body: "Operate within a unified publishing ecosystem.", icon: "publisher" as const },
+	{ title: "Authors", body: "Build and maintain stronger relationships with readers.", icon: "author" as const },
+	{ title: "Publishers", body: "Operate across a unified publishing ecosystem.", icon: "publisher" as const },
 	{
 		title: "Institutions",
-		body: "Support publishing, learning and knowledge management in one environment.",
+		body: "Support publishing, learning, and knowledge management in one environment.",
 		icon: "library" as const,
 	},
 	{
 		title: "Readers",
-		body: "Access, discuss and organize publications within a connected system.",
+		body: "Access, discuss, and organize publications within a connected system.",
 		icon: "reader" as const,
 	},
 ];
@@ -55,27 +56,27 @@ const benefitCards = [
 ---
 
 <Base
-	title={`Platform | ${SITE_NAME}`}
-	description="ReaderPub combines publishing, reading, discussion and knowledge tools into one platform for publications immediately accessible online."
+	title="ReaderPub Platform:  Publishing, Reading & Knowledge"
+	description="Explore ReaderPub’s six connected products:  WePub, WeRead, WeBuzz, WeTalk, BookTree, and Scribe for publishing, reading, discussion, and knowledge work."
 >
 	<HeroSection
 		eyebrow="Platform"
-		lead="We combine publishing, reading, discussion and knowledge tools into a single platform so books stay active on the web after release."
+		lead="ReaderPub combines publishing, browser-based reading, discussion, and knowledge tools in one platform, keeping books active on the web after release."
 		image="/images/home2.webp"
-		imageAlt="ReaderPub platform connecting books, readers, authors and institutions"
+		imageAlt="Diagram showing a manuscript processed into a live digital book with publishing and market options"
 		actions={heroActions}
 		spacerBackgroundPositionY="45%"
 		class="platform-hero"
 	>
 		<Fragment slot="title"><span class="platform-hero-product">Reader<span class="hero-product-part-accent">Pub</span><span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">A web-native publishing network.</span></Fragment>
-		<Fragment slot="body">Publish securely to the web.<br />Listen to and retain your readers.</Fragment>
+		<Fragment slot="body">Publish securely to the web.<br />Listen to your readers—and retain them.</Fragment>
 	</HeroSection>
 
 	<Section
 		tone="gray"
-		body="Most digital publishing workflows rely on disconnected tools. Publishing, reading, discussion and knowledge management often happen in separate systems."
+		body="Most digital publishing workflows still rely on disconnected tools: publishing, reading, discussion, and knowledge management often happen in separate systems."
 	>
-		<Fragment slot="title"><span class="section-title-rest">Publishing systems</span> <span class="section-title-accent">are fragmented</span></Fragment>
+		<Fragment slot="title"><span class="section-title-rest">Publishing systems</span> <span class="section-title-accent">remain fragmented</span></Fragment>
 		<CardGrid columns="2" class="platform-problem-grid">
 			{problemCards.map((card) => <Card {...card} />)}
 		</CardGrid>
@@ -83,65 +84,69 @@ const benefitCards = [
 
 	<div class="platform-source-sections">
 		<section class="section section--green spec-cards-section platform-source-section platform-source-problem-section section--two-column">
-			<h2><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> exists because the old model breaks the relationship</h2>
+			<h2><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> exists because the old model breaks the reader relationship</h2>
 			<p class="lede">
-				File-first publishing can move a book from one place to another, but it cannot keep books connected to readers, authors, institutions and communities.
+				File-first publishing can move a book from one place to another, but it cannot keep that book connected to readers, authors, institutions, and communities.
 			</p>
 			<div class="model-grid">
 				<div class="comparison-text-panel platform-old-model-card">
 					<h3>Old publishing model</h3>
 					<ul class="comparison-list">
-						<li>Create a file</li>
+						<li>Create a standalone file</li>
 						<li>Upload it to a marketplace or archive</li>
-						<li>Lose the reader relationship</li>
+						<li>Lose the direct reader relationship</li>
 						<li>Move discussion to external platforms</li>
 					</ul>
 				</div>
 				<div class="card card--good platform-readerpub-model-card">
 					<h3><span class="platform-readerpub-word readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> model</h3>
 					<ul class="comparison-list">
-						<li>Publish the book as a web asset</li>
-						<li>Keep readers, authors and institutions connected</li>
-						<li>Attach discussion and discovery to the work</li>
+						<li>Publish the book as a living web asset</li>
+						<li>Keep readers, authors, and institutions connected</li>
+						<li>Keep discussion and discovery attached to the work</li>
 						<li>Extend the life of every publication</li>
 					</ul>
 				</div>
 			</div>
+			<div class="platform-model-comparison-summary">
+				<p class="platform-model-comparison-context">There are many platforms – <span>Kindle</span>, <span>Substack</span>, <span>Everand</span> – making a book available.</p>
+				<h2 class="platform-model-comparison-conclusion">Only <span>ReaderPub</span> keeps the book alive and connected after delivery.</h2>
+			</div>
 		</section>
 
 		<section id="platform-model" class="section section--white spec-cards-section platform-source-section platform-products-section section-continuation">
-			<h2 class="platform-products-heading">Six products in the unified ecosystem.</h2>
-			<p class="lede platform-products-lede">ReaderPub combines publishing, reading, discovery, and discussion into a single ecosystem.</p>
+			<h2 class="platform-products-heading">Six products in one unified ecosystem.</h2>
+			<p class="lede platform-products-lede">ReaderPub connects publishing, reading, discovery, public and private discussion, knowledge organization, and AI guidance in one ecosystem.</p>
 			<div class="card-grid platform-three-grid platform-products-grid">
 				<div class="card">
 					<h3><ProductName name="WePub" /></h3>
-					<p>Publishing workflow for authors and organizations.</p>
+					<p>Publishing workflows for authors, publishers, and organizations.</p>
 					<ul class="bullets">
-						<li>Upload Word or EPUB file for a single web edition production</li>
-						<li>Upload the entire catalogue through API for bulk publishing</li>
+						<li>Upload a Word or EPUB file to produce a single web edition</li>
+						<li>Upload an entire catalog through the API for bulk publishing</li>
 						<li>Preview web-accessible editions before publishing</li>
-						<li>Define pricing</li>
+						<li>Set pricing</li>
 						<li>Manage published titles</li>
-						<li>Generate optional EPUBs</li>
+						<li>Generate optional EPUB editions</li>
 					</ul>
-					<a class="button button--secondary" href="/wepub">Explore WePub</a>
+					<a class="button button--secondary" href="/wepub/">Explore WePub</a>
 				</div>
 				<div class="card">
 					<h3><ProductName name="WeRead" /></h3>
-					<p>Instant browser-based reading for long-form content.</p>
+					<p>Instant, browser-based reading for long-form content.</p>
 					<ul class="bullets">
 						<li>Read without downloading files</li>
 						<li>Use annotations and notes</li>
-						<li>Support native device text-to-speech</li>
+						<li>Use native device text-to-speech</li>
 						<li>Reduce unauthorized copying with Theft Guard</li>
-						<li>Share the book or it's content</li>
-						<li>Discuss the book or an author with the community</li>
+						<li>Share the book or its content</li>
+						<li>Discuss the book or its author with the community</li>
 					</ul>
 					<a class="button" href={BOOKS_URL} target="_blank" rel="noreferrer">60K+ books in Catalog</a>
 				</div>
 				<div class="card">
 					<h3><ProductName name="WeBuzz" /></h3>
-					<p>Discuss books, authors, and passages with readers around the world. Build literature communities, connect directly with authors and publishers, and turn reading into a shared experience.</p>
+					<p>Discuss books, authors, and passages with readers around the world. Build literary communities, connect directly with authors and publishers, and turn reading into a shared experience.</p>
 					<ul class="bullets">
 						<li>Book discussions</li>
 						<li>Author discussions</li>
@@ -150,78 +155,78 @@ const benefitCards = [
 						<li>Author participation</li>
 						<li>Publisher engagement</li>
 					</ul>
-					<a class="button button--secondary" href="/webuzz">Explore WeBuzz</a>
+					<a class="button button--secondary" href="/webuzz/">Explore WeBuzz</a>
 				</div>
 				<div class="card">
 					<h3><ProductName name="WeTalk" /></h3>
-					<p>Private discussion environments for organizations, educational programs, collections and controlled-access publications.</p>
+					<p>Private discussion environments for organizations, educational programs, collections, and controlled-access publications.</p>
 					<ul class="bullets">
 						<li>Private discussion spaces</li>
 						<li>Controlled-access participation</li>
 						<li>Collection and course communities</li>
 						<li>Institutional permissions</li>
 					</ul>
-					<a class="button button--secondary" href="/wetalk">Explore WeTalk</a>
+					<a class="button button--secondary" href="/wetalk/">Explore WeTalk</a>
 				</div>
 				<div class="card">
 					<h3><ProductName name="BookTree" /></h3>
-					<p>Structure for books, editions, metadata, catalogs, and collections.</p>
+					<p>A structure for books, editions, metadata, catalogs, and collections.</p>
 					<ul class="bullets">
 						<li>Organize books, excerpts, and references across projects</li>
-						<li>Keep context while reading long and complex materials</li>
-						<li>Build personal knowledge maps from what you read</li>
-						<li>Consolidate your notes from multiple books while working on your own manuscript</li>
+						<li>Preserve context while reading long, complex materials</li>
+						<li>Build personal knowledge maps from your reading</li>
+						<li>Consolidate notes from multiple books while working on your own manuscript</li>
 					</ul>
-					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
+					<a class="button button--secondary" href="/booktree/">Explore BookTree</a>
 				</div>
 				<div class="card">
 					<h3>Scribe</h3>
-					<p>A conversational AI layer for books, literature, writing, publishing and ReaderPub platform guidance.</p>
+					<p>A conversational AI layer for books, literature, writing, publishing, and ReaderPub platform guidance.</p>
 					<ul class="bullets">
-						<li>Ask focused questions about literature, books and authors</li>
-						<li>Discuss writing, editing and publishing workflows</li>
-						<li>Use platform guidance without leaving ReaderPub</li>
+						<li>Ask focused questions about literature, books, and authors</li>
+						<li>Discuss writing, editing, and publishing workflows</li>
+						<li>Get platform guidance without leaving ReaderPub</li>
 						<li>Continue saved WeBuzz conversations from My Activity</li>
 					</ul>
-					<a class="button button--secondary" href="/scribe">Explore Scribe</a>
+					<a class="button button--secondary" href="/scribe/">Explore Scribe</a>
 				</div>
 			</div>
 		</section>
 
 		<section class="section section--white spec-cards-section platform-source-section section-continuation platform-capabilities-section">
-			<h2>Platform Capabilities</h2>
+			<h2>Platform capabilities</h2>
 			<div class="card-grid platform-three-grid">
-				<div class="card platform-capability-card"><h3 class="platform-capability-title">Browser-based active reading</h3><p class="platform-capability-copy">Instant delivery through the web.</p></div>
-				<div class="card platform-capability-card"><h3 class="platform-capability-title">Protected web editions</h3><p class="platform-capability-copy">Web-native access instead of file handoff.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Browser-based active reading</h3><p class="platform-capability-copy">Deliver publications instantly through the web.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Protected web editions</h3><p class="platform-capability-copy">Use web-native access instead of handing off a reusable file.</p></div>
 				<div class="card platform-capability-card"><h3 class="platform-capability-title">Direct sales</h3><p class="platform-capability-copy">Sell books, courses, cohorts, and limited releases.</p></div>
-				<div class="card platform-capability-card"><h3 class="platform-capability-title">Low commission</h3><p class="platform-capability-copy">Direct-to-reader commerce with a low 5% platform fee.</p></div>
-				<div class="card platform-capability-card"><h3 class="platform-capability-title">Reader analytics</h3><p class="platform-capability-copy">Track engagement, feedback, and access patterns.</p></div>
-				<div class="card platform-capability-card"><h3 class="platform-capability-title">Collaboration</h3><p class="platform-capability-copy">Annotations, notes, and shared context for teams.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Low commission</h3><p class="platform-capability-copy">Sell directly to readers with a low 5% platform fee.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Reader analytics</h3><p class="platform-capability-copy">Track reader engagement, feedback, and access patterns.</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Collaboration</h3><p class="platform-capability-copy">Use annotations, notes, and shared context across teams.</p></div>
 				<div class="card platform-capability-card"><h3 class="platform-capability-title">Institutional access</h3><p class="platform-capability-copy">User, group, course, department, and role controls.</p></div>
 				<div class="card platform-capability-card"><h3 class="platform-capability-title">Catalog support</h3><p class="platform-capability-copy">Import and preserve structured metadata at scale.</p></div>
-				<div class="card platform-capability-card"><h3 class="platform-capability-title">Readers' community</h3><p class="platform-capability-copy">Readers discuss and promote books and knowledge content</p></div>
+				<div class="card platform-capability-card"><h3 class="platform-capability-title">Reader community</h3><p class="platform-capability-copy">Readers discuss and promote books and knowledge content.</p></div>
 			</div>
 			<Section
 				tone="green"
 				class="platform-flow-section"
 				title="How ReaderPub works"
-				body="Each layer supports a different stage of the publication lifecycle while remaining part of a unified platform."
+				body="Each layer supports a different stage of the publication lifecycle while remaining connected within one platform."
 			>
 				<ol class="platform-flow" aria-label="ReaderPub publication lifecycle">
-					<li class="card"><ProductName name="WePub" /></li>
-					<li class="card"><ProductName name="WeRead" /></li>
-					<li class="card"><ProductName name="BookTree" /></li>
-					<li class="card"><span class="platform-flow-product-pair"><ProductName name="WeBuzz" /> / <ProductName name="WeTalk" /></span></li>
-					<li class="card">Scribe</li>
+					<li class="card"><ProductName name="WePub" /><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
+					<li class="card"><ProductName name="WeRead" /><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
+					<li class="card"><ProductName name="BookTree" /><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
+					<li class="card"><span class="platform-flow-product-pair"><ProductName name="WeBuzz" /> / <ProductName name="WeTalk" /></span><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
+					<li class="card"><span class="platform-flow-scribe">Scribe</span></li>
 				</ol>
 				<p class="platform-flow-note">
-					Instead of moving readers and content between disconnected systems, ReaderPub keeps these activities within one publishing environment.
+					Instead of moving readers and content between disconnected systems, ReaderPub keeps these activities connected within one publishing environment.
 				</p>
 				<div class="card-grid platform-two-grid platform-onboarding-grid">
 					<section class="platform-onboarding-panel">
 						<h3 class="platform-onboarding-heading">For creators</h3>
 						<div class="card platform-onboarding-card" data-card-reveal-origin="left">
-							<p class="lede">Publish your book on ReaderPub.</p>
+							<p class="lede">Publish your book or catalog on ReaderPub.</p>
 							<ul class="bullets">
 								<li>Upload Word or EPUB files</li>
 								<li>Publish browser-based web editions</li>
@@ -229,7 +234,7 @@ const benefitCards = [
 								<li>Track reader engagement</li>
 							</ul>
 							<div class="cta-row">
-								<a class="button" href="/wepub">Start publishing</a>
+								<a class="button" href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Start publishing</a>
 								<a class="button button--secondary" href="/pricing/">See pricing</a>
 							</div>
 						</div>
@@ -237,11 +242,11 @@ const benefitCards = [
 					<section class="platform-onboarding-panel">
 						<h3 class="platform-onboarding-heading">For organizations</h3>
 						<div class="card platform-onboarding-card" data-card-reveal-origin="right">
-							<p class="lede">Bring your organization to ReaderPub.</p>
+							<p class="lede">Bring your organization's publishing and collections to ReaderPub.</p>
 							<ul class="bullets">
 								<li>Import from OPDS, MARC, ONIX, KBART, S3, or CSV</li>
 								<li>Manage users, groups, and permissions</li>
-								<li>Use ReaderPub or custom subdomain deployment</li>
+								<li>Deploy on a ReaderPub or custom subdomain</li>
 								<li>Track usage and engagement</li>
 							</ul>
 							<div class="cta-row">
@@ -255,38 +260,38 @@ const benefitCards = [
 		</section>
 
 		<section class="section section--white platform-source-section platform-audiences-section platform-first-white-section section--two-column section-continuation">
-			<h2>Audiences</h2>
+			<h2>Audiences across the platform</h2>
 			<div class="card-grid platform-audiences-cards" data-card-reveal-origin="right" data-card-reveal-order="inner-first">
-				<div class="card"><h3>Authors</h3><p>Publish and sell directly, then analyze reader engagement.</p></div>
-				<div class="card"><h3>Publishers</h3><p>Manage titles, editions, catalogs, and controlled access.</p></div>
-				<div class="card"><h3>Schools</h3><p>Distribute course materials and monitor usage.</p></div>
-				<div class="card"><h3>Libraries</h3><p>Create active digital book shelves for communities.</p></div>
-				<div class="card"><h3>Organizations</h3><p>Publish reports, papers, and structured knowledge online.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="author" title="Authors" /><h3>Authors</h3></div><p>Publish and sell directly, then analyze reader engagement.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="publisher" title="Publishers" /><h3>Publishers</h3></div><p>Manage titles, editions, catalogs, and controlled access.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="university" title="Schools" /><h3>Schools</h3></div><p>Distribute course materials and monitor usage.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="library" title="Libraries" /><h3>Libraries</h3></div><p>Create active digital bookshelves for their communities.</p></div>
+				<div class="card"><div class="card-icon-heading"><SectionIcon type="public" title="Organizations" /><h3>Organizations</h3></div><p>Publish reports, papers, and structured knowledge online.</p></div>
 				<div class="card">
-					<h3>Manufacturers</h3>
-					<p>Publish easily accessible manuals and technical documentation.</p>
+					<div class="card-icon-heading"><SectionIcon type="manufacturer" title="Manufacturers" /><h3>Manufacturers</h3></div>
+					<p>Publish manuals and technical documentation for easy online access.</p>
 				</div>
 			</div>
 			<img
 				class="image-block platform-audiences-image"
 				src="/images/audience.webp"
-				alt="Readers, authors, institutions, and publishers connected on ReaderPub"
+				alt="Illustration representing ReaderPub audiences"
 				loading="lazy"
 				decoding="async"
-				width="1024"
-				height="841"
+				width="1210"
+				height="1218"
 			/>
 		</section>
 
 		<section class="section section--white platform-source-section platform-reading-section section--two-column section-continuation">
-			<h2>Reading Experience</h2>
+			<h2>Reading experience</h2>
 			<div class="card-grid platform-reading-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
-				<div class="card"><h3>Annotations</h3><p>Highlights, notes, and preserved context.</p></div>
-				<div class="card"><h3>Shared context</h3><p>Discussion among readers, authors, and instructors.</p></div>
-				<div class="card"><h3>Read-aloud support</h3><p>Native device text-to-speech voices.</p></div>
-				<div class="card"><h3>Long-form navigation</h3><p>Clean typography for serious reading.</p></div>
-				<div class="card"><h3>Cross-device access</h3><p>Return to assigned or purchased titles anywhere.</p></div>
-				<div class="card"><h3>Structured reading</h3><p>Chapters, editions, and metadata stay connected.</p></div>
+				<div class="card"><h3>Annotations</h3><p>Create highlights and notes while preserving context.</p></div>
+				<div class="card"><h3>Shared context</h3><p>Keep discussion connected among readers, authors, and instructors.</p></div>
+				<div class="card"><h3>Read-aloud support</h3><p>Use native device text-to-speech voices.</p></div>
+				<div class="card"><h3>Long-form navigation</h3><p>Navigate long-form works with clean typography for serious reading.</p></div>
+				<div class="card"><h3>Cross-device access</h3><p>Return to assigned or purchased titles from any device.</p></div>
+				<div class="card"><h3>Structured reading</h3><p>Keep chapters, editions, and metadata connected.</p></div>
 			</div>
 			<img
 				class="image-block platform-reading-image"
@@ -300,7 +305,7 @@ const benefitCards = [
 		</section>
 
 		<section class="section section--white platform-source-section platform-commerce-section section--two-column section-continuation">
-			<h2 class="platform-commerce-heading">Commerce &amp; Analytics</h2>
+			<h2 class="platform-commerce-heading">Commerce &amp; analytics</h2>
 			<div class="platform-commerce-split">
 				<img
 					class="image-block platform-commerce-image"
@@ -314,21 +319,21 @@ const benefitCards = [
 				<div class="platform-commerce-cards">
 					<section class="card">
 						<h3>Manage sales and promotion</h3>
-						<p>Sell directly and keep the reader relationship.</p>
+						<p>Sell directly while keeping the reader relationship.</p>
 						<ul class="bullets">
-							<li>Sell web editions directly with low commission</li>
+							<li>Sell web editions directly with a low commission</li>
 							<li>Support books, courses, cohorts, and limited releases</li>
 							<li>Build fan clubs and reader communities</li>
-							<li>Connect sales to engagement analytics</li>
+							<li>Connect sales with engagement analytics</li>
 						</ul>
 					</section>
 					<section class="card">
-						<h3>Keep track on your readers' audience</h3>
+						<h3>Track your readers and audience</h3>
 						<p>Know what happens after publication.</p>
 						<ul class="bullets">
 							<li>Reader engagement and annotation activity</li>
 							<li>Title, collection, and institutional usage insights</li>
-							<li>First-party relationship with readers</li>
+							<li>A first-party relationship with readers</li>
 						</ul>
 					</section>
 				</div>
@@ -349,14 +354,14 @@ const benefitCards = [
 				/>
 				<div class="platform-control-copy">
 					<div class="card platform-control-info-card" data-card-reveal-origin="left">
-						<h3 class="platform-control-heading">Controlled access to internal publications</h3>
+						<h3 class="platform-control-heading">Control access to internal publications</h3>
 						<p class="lede platform-control-lede">
-							Access can be assigned by user, group, course, department, team, program, partner
+							Assign access by user, group, course, department, team, program, partner
 							organization, or custom permission.
 						</p>
 						<ul class="bullets platform-control-list">
 							<li>Public and private collections</li>
-							<li>Controlled access programs</li>
+							<li>Controlled-access programs</li>
 							<li>Course and cohort distribution</li>
 							<li>Team-based publishing workflows</li>
 							<li>Permission-based administration</li>
@@ -369,15 +374,15 @@ const benefitCards = [
 	</div>
 
 	<Section tone="green">
-		<Fragment slot="title">Who benefits from <span class="green-heading-white">ReaderPub web-native publishing network</span>?</Fragment>
+		<Fragment slot="title">Who benefits from the <span class="green-heading-white">ReaderPub web-native publishing network</span>?</Fragment>
 		<CardGrid columns="4">
 			{benefitCards.map((card) => <Card {...card} />)}
 		</CardGrid>
 	</Section>
 
 	<CtaBlock
-		title="A complete platform for web-native books publishing."
-		body="ReaderPub brings publishing, reading, discussion and knowledge management together in one system."
+		title="A complete platform for web-native book publishing."
+		body="ReaderPub brings publishing, reading, discussion, and knowledge management together in one system."
 		actions={ctaActions}
 	/>
 </Base>
@@ -467,6 +472,48 @@ const benefitCards = [
 		width: 100%;
 	}
 
+	.platform-source-section.platform-source-problem-section .model-grid {
+		margin-top: 28px !important;
+	}
+
+	.platform-model-comparison-summary {
+		display: grid;
+		gap: 12px;
+		width: 100%;
+		text-align: left;
+	}
+
+	.platform-source-section.platform-source-problem-section > .platform-model-comparison-summary {
+		margin-top: 28px !important;
+	}
+
+	.platform-model-comparison-summary p {
+		margin: 0;
+	}
+
+	.platform-model-comparison-context {
+		color: #ffffff !important;
+		font-family: var(--font-body);
+		font-size: 18px;
+		line-height: var(--line-height-body);
+	}
+
+	:global(body .page .content .platform-source-problem-section.section--green .platform-model-comparison-context > span) {
+		color: var(--accent-orange) !important;
+	}
+
+	.platform-model-comparison-conclusion {
+		color: var(--accent-orange) !important;
+		font-family: var(--font-heading);
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: var(--line-height-heading);
+	}
+
+	.platform-model-comparison-conclusion span {
+		color: #ffffff !important;
+	}
+
 	.platform-source-section .comparison-list {
 		display: grid;
 		gap: 10px;
@@ -495,7 +542,29 @@ const benefitCards = [
 	}
 
 	.platform-source-section .platform-old-model-card {
+		--platform-old-model-angle: 6deg;
+
+		position: relative;
+		isolation: isolate;
+		z-index: 0;
+		box-sizing: border-box;
+		min-height: 100%;
+		padding: 28px calc(28px + 4%) !important;
+		border: 0 !important;
 		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	.platform-source-section .platform-old-model-card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		outline: 1px solid var(--accent-orange);
+		transform: rotate(var(--platform-old-model-angle));
+		transform-origin: center;
+		transition: none;
 	}
 
 	.platform-source-section .platform-old-model-card .comparison-list li::before {
@@ -587,6 +656,10 @@ const benefitCards = [
 		min-width: 0;
 	}
 
+	.platform-source-section .platform-onboarding-grid {
+		gap: var(--card-grid-gap);
+	}
+
 	.platform-source-section .platform-onboarding-grid .platform-onboarding-heading {
 		margin: 0;
 		color: var(--accent-orange);
@@ -655,6 +728,10 @@ const benefitCards = [
 	}
 
 	@media (orientation: portrait) {
+		.platform-source-section.platform-source-problem-section .model-grid {
+			margin-top: 0 !important;
+		}
+
 		.platform-source-section.section-continue-next {
 			padding-bottom: var(--section-padding) !important;
 		}
@@ -801,6 +878,11 @@ const benefitCards = [
 	}
 
 	@media (min-width: 901px) {
+		.platform-source-section .platform-old-model-card {
+			width: 70%;
+			justify-self: center;
+		}
+
 		.platform-source-section.platform-capabilities-section .platform-three-grid {
 			grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
 		}
@@ -811,6 +893,13 @@ const benefitCards = [
 		.platform-source-section .platform-two-grid,
 		.platform-source-section .platform-three-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.platform-source-section .platform-old-model-card {
+			--platform-old-model-angle: 2.5deg;
+
+			width: 100%;
+			padding: 24px !important;
 		}
 
 		.platform-source-section.platform-products-section .platform-products-grid {
@@ -1085,13 +1174,14 @@ const benefitCards = [
 		grid-column: 4 / span 2;
 	}
 
-	.platform-flow li:not(:last-child)::after {
-		content: "\2192";
-		position: absolute;
+	.platform-flow-arrow {
+		position: absolute !important;
 		top: 50%;
 		right: -27px;
 		transform: translateY(-50%);
-		color: var(--platform-flow-heading-color);
+		z-index: 2 !important;
+		pointer-events: none;
+		color: var(--accent-orange) !important;
 		font-size: 1.35rem;
 		font-weight: 700;
 	}
@@ -1100,6 +1190,30 @@ const benefitCards = [
 		border-color: var(--accent-orange) !important;
 		box-shadow: none !important;
 		color: var(--accent-orange) !important;
+	}
+
+	.platform-flow-scribe {
+		color: var(--accent) !important;
+	}
+
+	:global(body .page .content .section--green.platform-flow-section .card.platform-onboarding-card) {
+		padding-inline: 28px !important;
+		border: 1px solid transparent !important;
+		border-radius: calc(var(--radius-card) * 3) !important;
+		background: var(--card-bg) !important;
+		box-shadow: var(--card-green-shadow) !important;
+	}
+
+	:global(body .page .content .section--green.platform-flow-section .card.platform-onboarding-card)::before,
+	:global(body .page .content .section--green.platform-flow-section .card.platform-onboarding-card)::after {
+		content: none !important;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		:global(body .page .content .section--green.platform-flow-section .card.platform-onboarding-card):hover {
+			border-color: var(--accent-orange) !important;
+			box-shadow: none !important;
+		}
 	}
 
 	.platform-flow-note {
@@ -1204,18 +1318,17 @@ const benefitCards = [
 		}
 
 		.platform-flow {
-			gap: 16px;
+			row-gap: 56px;
 		}
 
-		.platform-flow li:not(:last-child)::after {
-			content: "\2193";
+		.platform-flow-arrow {
 			display: block;
-			top: auto;
+			top: calc(100% + 18px);
 			right: auto;
-			bottom: -18px;
+			bottom: auto;
 			left: 50%;
-			transform: translateX(-50%);
-			font-size: 1.1rem;
+			transform: translateX(-50%) rotate(90deg);
+			font-size: 1.3rem;
 		}
 
 		.platform-flow-note {
@@ -1253,6 +1366,14 @@ const benefitCards = [
 	}
 
 	@media (orientation: landscape) {
+		.platform-source-section .platform-reading-cards .card {
+			padding-inline: 28px;
+		}
+
+		.platform-source-section .platform-reading-cards .card > h3 {
+			white-space: nowrap;
+		}
+
 		.platform-source-section.platform-capabilities-section .platform-capability-card {
 			align-items: stretch !important;
 			text-align: left !important;

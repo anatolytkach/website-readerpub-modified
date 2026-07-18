@@ -7,36 +7,46 @@ import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import ProductName from "../components/ProductName.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 import { BOOKS_URL, SITE_NAME } from "../consts";
 
 const startReadingAction = { label: "Start reading", href: BOOKS_URL, external: true };
 const readLibraryAction = { label: "Read 60K+ books in WeRead", href: BOOKS_URL, external: true };
-const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", variant: "secondary" as const };
+const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/", variant: "secondary" as const };
 ---
 
 <Base
-	title={`WeRead | ${SITE_NAME}`}
-	description="WeRead is the browser-native reading layer for books and knowledge publications on ReaderPub."
+	title={`Browser-Based eReader & Online Book Reading | ${SITE_NAME}`}
+	description="Read 60K+ books online with WeRead, a browser-based eReader with notes, sharing, discussion, discovery, read-aloud, and connected reading tools."
+	ogImage="/images/readers2.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="WeRead"
+			description="Read 60K+ books online with WeRead, a browser-based eReader with notes, sharing, discussion, discovery, read-aloud, and connected reading tools."
+			url="/weread/"
+			image="/images/readers2.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		class="weread-source-hero"
 		eyebrow="READERS"
-		lead="Books, discussions, notes and recommendations are scattered across disconnected platforms."
+		lead="Books, discussions, notes, and recommendations are scattered across disconnected platforms."
 		image="/images/readers2.webp"
-		imageAlt="ReaderPub browser reading and book discovery"
+		imageAlt="Illustration of the WeRead browser reader with book discovery, notes, discussion, and read-aloud controls across devices"
 		actions={[readLibraryAction]}
 		spacerBackgroundPositionY="9%"
 		>
 			<Fragment slot="title">
 				<span class="readers-hero-product" style="color: var(--accent);">We<span class="hero-product-part-accent">Read</span><span class="hero-title-colon">:</span></span><br />
-				<span class="readers-hero-title-small hero-title-rest">Genuine eReader.<br />Right in your browser.</span>
+				<span class="readers-hero-title-small hero-title-rest">A genuine eReader.<br />Right in your browser.</span>
 			</Fragment>
-			<Fragment slot="body">We bring all around books together.</Fragment>
+			<Fragment slot="body">We bring everything around books together.</Fragment>
 		</HeroSection>
 
 	<Section
 		tone="gray"
-		body="The problem is not access. Readers already have access to more books than they can finish. The problem is isolation."
+		body="The problem isn't access. Readers already have more books than they can finish. The problem is isolation."
 	>
 		<Fragment slot="title"><span class="section-title-accent">Why</span> <span class="section-title-rest">readers abandon books</span></Fragment>
 		<CardGrid columns="2" class="weread-source-icon-grid">
@@ -44,40 +54,40 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 				<SectionIcon type="readerBook" title="Reading is isolated" />
 				<div class="icon-grid-card-copy">
 					<h3>Reading is isolated</h3>
-					<p>Most reading platforms stop at access. They give readers a file, not a living reading environment.</p>
+					<p>Most reading platforms stop at access: they give readers a file, not a living reading environment.</p>
 				</div>
 			</article>
 			<article class="card icon-grid-card">
 				<SectionIcon type="research" title="Discovery is broken" />
 				<div class="icon-grid-card-copy">
 					<h3>Discovery is broken</h3>
-					<p>Recommendations are driven by marketplaces and algorithms, not by real literary communities.</p>
+					<p>Recommendations are driven by marketplaces and algorithms rather than real literary communities.</p>
 				</div>
 			</article>
 			<article class="card icon-grid-card">
 				<SectionIcon type="fan" title="Discussions disappear" />
 				<div class="icon-grid-card-copy">
 					<h3>Discussions disappear</h3>
-					<p>Important conversations happen on Reddit, Facebook, Discord and private groups, disconnected from the books themselves.</p>
+					<p>Important conversations happen on Reddit, Facebook, Discord, and in private groups—disconnected from the books themselves.</p>
 				</div>
 			</article>
 			<article class="card icon-grid-card">
 				<SectionIcon type="reader" title="Notes stay private" />
 				<div class="icon-grid-card-copy">
 					<h3>Notes stay private</h3>
-					<p>A reader's thoughts often remain trapped in one device or app instead of becoming part of a larger literary context.</p>
+					<p>A reader's thoughts often remain trapped on one device or in one app instead of becoming part of a larger literary context.</p>
 				</div>
 			</article>
 		</CardGrid>
 		<div class="weread-combined-subsection weread-app-problem-subsection">
 			<header class="section-header">
 				<h2>The problem <span class="section-title-rest">with app-based reading</span></h2>
-				<p class="section-lead">App-based reading gave books digital access, but it kept reading isolated from the web.</p>
+				<p class="section-lead">App-based reading gave books digital access, but kept reading isolated from the web.</p>
 			</header>
 			<CardGrid columns="3">
-				<Card title="Problem" body="Readers move between apps, stores, social networks and private notes with no shared context." />
-				<Card title="Why it fails" body="The book becomes a closed object. Discovery, discussion and long-term engagement happen somewhere else." />
-				<Card title="Outcome" body="Reading becomes easier to start but harder to connect to people, ideas and future books." />
+				<Card title="Fragmented reading" body="Readers move among apps, stores, social networks, and private notes without a shared context." />
+				<Card title="Why the model fails" body="The book becomes a closed object, while discovery, discussion, and long-term engagement happen somewhere else." />
+				<Card title="The outcome" body="Reading becomes easier to start but harder to connect with people, ideas, and future books." />
 			</CardGrid>
 		</div>
 	</Section>
@@ -86,7 +96,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 		<header class="weread-solution-showcase-header">
 			<h2 id="weread-solution-showcase-title" class="heading--center-full heading--center-full-h2">
 				<span class="weread-solution-title-prefix">The solution:&nbsp;&nbsp;</span><span class="weread-solution-product-word"><span>We</span><span>Read</span></span>
-				browser-based eReader
+				, a browser-based eReader
 			</h2>
 		</header>
 		<picture class="weread-solution-picture" data-reveal>
@@ -101,11 +111,11 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 			/>
 		</picture>
 		<div class="weread-solution-cta">
-			<h2 class="heading--center-full heading--center-full-h2">Again, it's not an app, but just a&#32;<span class="weread-solution-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
-			<h3 class="heading--center-full heading--center-full-h3">Read on the web, share the whole book or just a passage, make and share your notes, discuss it all on&#32;<span class="weread-solution-product-word"><span>We</span><span>Buzz</span></span>.</h3>
+			<h2 class="heading--center-full heading--center-full-h2">Again, it's not an app—it's a&#32;<span class="weread-solution-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
+			<h3 class="heading--center-full heading--center-full-h3">Read on the web, share the whole book or a single passage, make and share notes, and discuss it all on&#32;<span class="weread-solution-product-word"><span>We</span><span>Buzz</span></span>.</h3>
 			<div class="weread-solution-actions">
 				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">Read 60K+ books in WeRead</a>
-				<a class="button" href="/webuzz">Explore WeBuzz</a>
+				<a class="button" href="/webuzz/">Explore WeBuzz</a>
 			</div>
 		</div>
 	</section>
@@ -113,19 +123,19 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 	<Section
 		tone="white"
 		title="ReaderPub reconnects reading"
-		body="WeRead turns books into browser-based active reading experiences connected to notes, discussion, discovery and community."
+		body="WeRead turns books into active, browser-based reading experiences connected to notes, discussion, discovery, and community."
 	>
 		<CardGrid columns="4">
 			<Card title="Read in the browser" body="Open books instantly without installing another isolated app." />
-			<Card title="Discuss books and authors" body="Join conversations connected to books, authors, fragments and ideas." />
-			<Card title="Discover through people" body="Find books through communities and readers, not just bestseller lists." />
-			<Card title="Keep context alive" body="Notes, comments and discussions stay connected to the work." />
+			<Card title="Discuss books and authors" body="Join conversations connected to books, authors, passages, and ideas." />
+			<Card title="Discover through people" body="Find books through readers and communities—not only bestseller lists." />
+			<Card title="Keep context alive" body="Keep notes, comments, and discussions connected to the work." />
 		</CardGrid>
 	</Section>
 
 	<Section
 		tone="green"
-		body="WeRead makes the browser the reading environment, so a book can open from a link and remain part of the public web."
+		body="WeRead turns the browser into the reading environment, so a book can open from a link and remain part of the public web."
 	>
 		<Fragment slot="title">Browser-based <span class="green-heading-white">active reading</span></Fragment>
 		<CardGrid columns="3" class="weread-source-icon-grid">
@@ -133,21 +143,21 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 				<SectionIcon type="readerBook" title="Open from a link" />
 				<div class="icon-grid-card-copy">
 					<h3>Open from a link</h3>
-					<p>Readers can start without installing another isolated app.</p>
+					<p>Readers can start from a link without installing another isolated app.</p>
 				</div>
 			</article>
 			<article class="card icon-grid-card">
 				<SectionIcon type="research" title="Searchable context" />
 				<div class="icon-grid-card-copy">
 					<h3>Searchable context</h3>
-					<p>Books become easier to find, return to and connect with related work.</p>
+					<p>Books become easier to find, revisit, and connect with related work.</p>
 				</div>
 			</article>
 			<article class="card icon-grid-card">
 				<SectionIcon type="fan" title="Attached discussion" />
 				<div class="icon-grid-card-copy">
-					<h3>Attached discussion</h3>
-					<p>Conversation can stay connected to the book, author, fragment and idea.</p>
+					<h3>Discussion stays attached</h3>
+					<p>Conversation can stay connected to the book, author, passage, and idea.</p>
 				</div>
 			</article>
 		</CardGrid>
@@ -158,13 +168,13 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 			<div class="weread-web-reading-copy">
 				<header class="section-header">
 					<h2>Why web reading wins</h2>
-					<p class="section-lead">The fastest way to start reading, with a full reader experience - no downloads required.</p>
+					<p class="section-lead">The fastest way to start reading, with a full eReader experience—no download required.</p>
 				</header>
 				<ul class="weread-source-bullets">
 					<li>Most major book libraries still don't offer a true web reader that matches the quality of native apps.</li>
 					<li>Many readers don't want to install another app or struggle with device-specific readers.</li>
-					<li>With WeRead, a simple link is enough - click and start reading instantly.</li>
-					<li>You get the same long-form reading comfort without setup or friction.</li>
+					<li>With WeRead, one link is enough—click and start reading instantly.</li>
+					<li>Get the same long-form reading comfort without setup or friction.</li>
 				</ul>
 			</div>
 			<article class="card weread-ad-free-card">
@@ -173,7 +183,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 					<h3>Ad-free public-domain reading</h3>
 				</div>
 				<p>
-					ReaderPub's WeRead catalog provides browser-based access to public-domain books without advertising around the reading experience.
+					ReaderPub's WeRead catalog gives readers browser-based access to public-domain books without advertising around the reading experience.
 				</p>
 			</article>
 		</div>
@@ -183,11 +193,11 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 				<p>A personal reading space built for discovery and continuity.</p>
 				<ul class="weread-source-bullets">
 					<li>Curated shelves, reading plans, and discovery lists.</li>
-					<li>One library across personal, academic, and professional reading.</li>
+					<li>One library for personal, academic, and professional reading.</li>
 					<li>Follow authors, series, and institutions in one feed.</li>
-					<li>Add private or shared notes while reading.</li>
+					<li>Add private or shared notes as you read.</li>
 					<li>Send a book with your notes to another reader or directly to the author.</li>
-					<li>Switch to read-aloud instantly with voices available on your device.</li>
+					<li>Switch instantly to read-aloud using voices available on your device.</li>
 				</ul>
 				<div class="cta-row">
 					<a class="button button--secondary" href="https://reader.pub/books/protected/?id=90000074" target="_blank" rel="noopener noreferrer">Read sample book with WeRead</a>
@@ -195,8 +205,8 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 			</article>
 			<article class="card">
 				<h3><ProductName name="WeBuzz" colon /><br />Reading is better together.</h3>
-				<p>Books become more meaningful when they are discussed.</p>
-				<p>With WeBuzz, readers can talk about books, authors, and specific passages. Follow readers whose insights you value and discover new books through conversation.</p>
+				<p>Books become more meaningful when readers discuss them.</p>
+				<p>With WeBuzz, readers can discuss books, authors, and specific passages. Follow readers whose insights you value, and discover new books through conversation.</p>
 				<ul class="weread-source-bullets">
 					<li>Discuss books and authors</li>
 					<li>Comment on specific passages</li>
@@ -205,7 +215,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 					<li>Join literary communities</li>
 				</ul>
 				<div class="cta-row">
-					<a class="button" href="/webuzz">Join the Conversation</a>
+					<a class="button" href="/webuzz/">Join the Conversation</a>
 				</div>
 			</article>
 			<article class="card">
@@ -215,11 +225,11 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 					<li>Organize books, excerpts, and references across projects.</li>
 					<li>Keep context while reading long and complex materials.</li>
 					<li>Build personal knowledge maps from what you read.</li>
-					<li>Consolidate your notes from multiple books while working on your own manuscript.</li>
-					<li>Designed for sustained attention, not endless scrolling.</li>
+					<li>Consolidate notes from multiple books while working on your own manuscript.</li>
+					<li>Designed for sustained attention—not endless scrolling.</li>
 				</ul>
 				<div class="cta-row">
-					<a class="button button--secondary" href="/booktree">Explore BookTree</a>
+					<a class="button button--secondary" href="/booktree/">Explore BookTree</a>
 				</div>
 			</article>
 			<article class="card">
@@ -232,7 +242,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 					<li>Continue Scribe conversations connected to your reading activity.</li>
 				</ul>
 				<div class="cta-row">
-					<a class="button button--secondary" href="/scribe">Explore Scribe</a>
+					<a class="button button--secondary" href="/scribe/">Explore Scribe</a>
 				</div>
 			</article>
 		</CardGrid>
@@ -246,12 +256,12 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 			<ProductName name="WeRead" colon />&nbsp;&nbsp;<span class="weread-network-title-line">A richer catalog with connected context</span>
 		</Fragment>
 		<Fragment slot="body">
-			<span class="weread-network-black-copy">The WeRead catalog includes tens of thousands of books with annotations and author biographies, helping readers understand what a book is about before they begin reading.</span>
-			<span>Notes, comments, recommendations and discussions become part of the reading environment instead of disappearing into separate products.</span>
+			<span class="weread-network-black-copy">The WeRead catalog includes tens of thousands of books with annotations and author biographies, helping readers understand a book before they begin.</span>
+			<span>Notes, comments, recommendations, and discussions become part of the reading environment instead of disappearing into separate products.</span>
 		</Fragment>
 		<CardGrid columns="3" data-card-reveal-origin="rise">
-			<Card title="Books connect to readers" body="Reading activity can point people toward communities and conversations about the work." />
-			<Card title="Readers connect to books" body="Discovery can come through people and communities, not only store rankings." />
+			<Card title="Books connect to readers" body="Reading activity can guide people toward communities and conversations about the work." />
+			<Card title="Readers connect to books" body="Discovery can come through people and communities—not only store rankings." />
 			<Card title="Books connect to future work" body="A title can remain active on the web after the first sale or download." />
 		</CardGrid>
 		<div class="weread-combined-subsection">
@@ -293,7 +303,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform", 
 
 	<CtaBlock
 		title="Reading should not begin with a download."
-		body="WeRead helps web books and knowledge publications stay accessible, discoverable and active after release."
+		body="WeRead helps web books and knowledge publications remain accessible, discoverable, and active after release."
 		actions={[startReadingAction, exploreReaderPubAction]}
 	/>
 </Base>

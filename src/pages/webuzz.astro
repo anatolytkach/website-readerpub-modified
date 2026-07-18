@@ -7,71 +7,81 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import ProductName from "../components/ProductName.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 import { SITE_NAME } from "../consts";
 
 const joinConversationAction = { label: "Join the conversation in WeBuzz", href: "https://webuzz.org/", external: true };
-const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/wetalk" };
+const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "https://webuzz.org/", external: true };
 ---
 
 <Base
-	title={`WeBuzz | ${SITE_NAME}`}
-	description="WeBuzz is the discussion layer for live web publications on ReaderPub."
+	title={`WeBuzz:  Literary Social Network | ${SITE_NAME}`}
+	description="Explore WeBuzz, ReaderPub’s ad-free literary social network for book, author, and passage discussions, reader discovery, and connected communities."
+	ogImage="/images/webuzz.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="WeBuzz"
+			description="Explore WeBuzz, ReaderPub’s ad-free literary social network for book, author, and passage discussions, reader discovery, and connected communities."
+			url="/webuzz/"
+			image="/images/webuzz.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		class="webuzz-legacy-hero"
 		eyebrow="WeBuzz"
 		lead="Every major form of media has a social network. Books largely do not. WeBuzz fills that gap."
 		image="/images/webuzz.webp"
-		imageAlt="Readers discussing books, authors, and highlighted passages inside a modern literary social network"
+		imageAlt="Readers discussing books, authors, and highlighted passages within the WeBuzz literary social network"
 		actions={[joinConversationAction]}
 		spacerBackgroundPositionY="27%"
 	>
-		<Fragment slot="title"><span class="webuzz-legacy-product">We<span class="hero-product-part-accent">Buzz</span><span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">The missing layer of the book industry</span></Fragment>
+		<Fragment slot="title"><span class="webuzz-legacy-product">We<span class="hero-product-part-accent">Buzz</span><span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">The book industry’s missing social layer</span></Fragment>
 		<Fragment slot="body">WeBuzz is ReaderPub's integrated literary social network, connecting readers, authors, and publishers through discussions, reactions, and shared reading experiences around every book.</Fragment>
 	</HeroSection>
 
 	<section class="section section--gray spec-cards-section webuzz-problem-section">
-		<h2><span class="section-title-rest">Books are the last major medium</span> <span class="section-title-accent">without a native social layer</span></h2>
+		<h2><span class="section-title-rest">Books remain the last major medium</span> <span class="section-title-accent">without a native social layer</span></h2>
 		<div class="card-grid webuzz-comparison-grid">
 			<div class="card webuzz-check-card">
 				<h3>Video</h3>
-				<p>YouTube, TikTok and creator communities</p>
+				<p>YouTube, TikTok, and creator communities</p>
 			</div>
 			<div class="card webuzz-check-card">
 				<h3>Music</h3>
-				<p>Spotify, playlists and social sharing</p>
+				<p>Spotify, playlists, and social sharing</p>
 			</div>
 			<div class="card webuzz-check-card">
 				<h3>Gaming</h3>
-				<p>Twitch, Discord and live communities</p>
+				<p>Twitch, Discord, and live communities</p>
 			</div>
 			<div class="card webuzz-books-card">
 				<h3>Books</h3>
-				<p>Fragmented discussions across Reddit, Facebook, Discord, reviews and private groups</p>
+				<p>Fragmented discussions across Reddit, Facebook, Discord, reviews, and private groups</p>
 			</div>
 		</div>
 		<div class="webuzz-fragmented-subsection">
 			<header class="section-header">
-				<h2><span class="section-title-rest">Book discussions</span> <span class="section-title-accent">are fragmented</span></h2>
+				<h2><span class="section-title-rest">Book discussions remain</span> <span class="section-title-accent">fragmented</span></h2>
 				<p class="section-lead">
-					Most conversations about books happen away from the book itself. Discussions become scattered across platforms, communities and private spaces.
+					Most conversations about books happen away from the book itself. Discussion scatters across platforms, communities, and private spaces.
 				</p>
 			</header>
 			<CardGrid columns="2" class="webuzz-fragmented-grid">
-				<Card title="Reviews are too limited" body="Ratings and reviews rarely capture the depth of real discussion." />
+				<Card title="Reviews are too limited" body="Ratings and reviews rarely capture the depth, context, and nuance of real discussion." />
 				<Card
 					title="Communities are disconnected"
 					body="Readers gather in many places, but the publication itself is often absent from the conversation."
 				/>
-				<Card title="Authors lose visibility" body="Reader reactions frequently happen outside the author's reach." />
-				<Card title="Discovery becomes fragmented" body="Valuable conversations are difficult for new readers to find." />
+				<Card title="Authors lose visibility" body="Reader reactions frequently happen beyond the author’s reach." />
+				<Card title="Discovery becomes fragmented" body="Valuable conversations remain difficult for new readers to find." />
 			</CardGrid>
 		</div>
 	</section>
 
 	<section class="section section--white webuzz-community-heading-section section-continuation">
 		<h2 class="webuzz-community-heading">
-			<em>The solution:</em><span class="webuzz-community-heading-gap">&nbsp;&nbsp;</span><ProductName name="WeBuzz" /> creates a community around books
+			<em>The solution:</em><span class="webuzz-community-heading-gap">&nbsp;&nbsp;</span><ProductName name="WeBuzz" /> creates a literary community around books
 		</h2>
 	</section>
 
@@ -92,16 +102,16 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 			<div class="webuzz-legacy-intro-grid">
 				<div class="webuzz-legacy-copy">
 					<p class="lede">
-						Current platforms separate reading from discussion.
+						Most platforms still separate reading from discussion.
 					</p>
 					<p class="lede">
-						Readers talk about books on social networks, forums and messaging platforms, while the publication itself remains disconnected from the conversation.
+						Readers discuss books on social networks, forums, and messaging platforms, while the publication itself remains disconnected from the conversation.
 					</p>
 				</div>
 				<div class="card webuzz-legacy-solution-card">
 					<p>
 						ReaderPub combines publishing, reading, discovery, and discussion in one ecosystem.<br />
-						Through WeBuzz, readers can discuss books, follow thoughtful readers, engage with authors, and participate in literary communities.
+						Through WeBuzz, readers can discuss books and passages, follow thoughtful readers, engage with authors, and participate in literary communities.
 					</p>
 				</div>
 			</div>
@@ -122,7 +132,7 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 						</li>
 						<li>
 							<strong>Passage Discussions</strong>
-							<span>Start conversations across specific excerpts and quotations.</span>
+							<span>Start conversations around specific excerpts and quotations.</span>
 						</li>
 					</ul>
 				</div>
@@ -132,10 +142,10 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 						<h2>No ads in discussion</h2>
 					</div>
 					<p class="webuzz-overview-note">
-						WeBuzz is built for literary conversation, not advertising feeds.
+						WeBuzz is built for literary conversation—not advertising feeds.
 					</p>
 					<p class="webuzz-overview-note">
-						Discussions around books, authors and passages are not interrupted or shaped by ad-driven social media mechanics.
+						Discussions around books, authors, and passages are not interrupted or shaped by ad-driven social media mechanics.
 					</p>
 				</div>
 			</div>
@@ -148,22 +158,22 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	>
 		<Fragment slot="title">Lively publications need <span class="green-heading-white">lively discussion</span></Fragment>
 		<Fragment slot="body">
-			WeBuzz is not yet another social network.<br />
-			It is a discussion board for web-living books and publixations.
+			WeBuzz is not just another social network.<br />
+			It is a discussion board for web-living books and publications.
 		</Fragment>
 		<CardGrid columns="4">
-			<Card title="Discussion" body="Conversation remains connected to the publication." />
-			<Card title="Discovery" body="Readers find books through readers." />
+			<Card title="Discussion" body="Conversation stays connected to the publication." />
+			<Card title="Discovery" body="Readers discover books through other readers." />
 			<Card title="Community" body="Books become gathering points for ongoing engagement." />
-			<Card title="Visibility" body="Publishers and authors can see activity inspired by their publications." />
+			<Card title="Visibility" body="Publishers and authors can see the activity their publications inspire." />
 		</CardGrid>
 		<div class="webuzz-lifecycle-subsection">
 			<header class="section-header">
 				<h2>Discussion extends the <span class="green-heading-white">life of a publication</span></h2>
-				<p class="section-lead">A publication becomes more valuable when readers continue engaging with it after release.</p>
+				<p class="section-lead">A publication becomes more valuable when readers continue to engage with it after release.</p>
 			</header>
 			<CardGrid columns="4">
-				<Card icon="readerBook" title="Readers" body="Gain places to discuss ideas and recommendations." />
+				<Card icon="readerBook" title="Readers" body="Gain dedicated places to discuss ideas and recommendations." />
 				<Card icon="author" title="Authors" body="Maintain visibility into audience engagement." />
 				<Card icon="publisher" title="Publishers" body="Keep books active beyond launch." />
 				<Card icon="library" title="Institutions" body="Support learning and discussion across collections." />
@@ -175,20 +185,20 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		tone="white"
 		hasMedia
 		class="webuzz-image-section webuzz-readers-section"
-		title="Readers need discussion that stays with the book"
-		body="WeBuzz gives readers a place to discuss books, passages, recommendations and ideas without sending the publication out of view."
+		title="Readers need discussion that stays connected to the book"
+		body="WeBuzz gives readers a place to discuss books, passages, recommendations, and ideas without losing sight of the publication itself."
 	>
 		<div class="webuzz-image-split">
 			<CardGrid columns="2" class="webuzz-image-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
-				<Card title="Book discussion" body="Readers can respond to the complete work in one shared context." />
-				<Card title="Passage discussion" body="Specific ideas and fragments can start focused conversations." />
+				<Card title="Book discussion" body="Readers can respond to the complete work within one shared context." />
+				<Card title="Passage discussion" body="Specific ideas and fragments can spark focused conversations." />
 				<Card title="Recommendations" body="Readers can discover books through people and communities." />
-				<Card title="Community activity" body="Discussion becomes part of the publication's visible life." />
+				<Card title="Community activity" body="Discussion becomes part of the publication’s visible life." />
 			</CardGrid>
 			<img
 				class="image-block webuzz-section-image"
 				src="/images/readers_webuzz.webp"
-				alt="Readers discussing the same book while highlighting passages"
+				alt="Readers discussing the same book and highlighting passages in WeBuzz"
 				loading="lazy"
 				decoding="async"
 				width="950"
@@ -201,20 +211,20 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		tone="white"
 		hasMedia
 		class="webuzz-image-section webuzz-authors-section"
-		title="Authors need visibility into real reader response"
-		body="Reviews are only one signal. WeBuzz helps authors see discussion about books, scenes, ideas and passages after publication."
+		title="Authors need visibility into real reader responses"
+		body="Reviews are only one signal. WeBuzz helps authors see discussions about books, scenes, ideas, and passages after publication."
 	>
 		<div class="webuzz-image-split">
 			<CardGrid columns="2" class="webuzz-image-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
-				<Card title="Reader reactions" body="Audience response remains connected to the work that sparked it." />
+				<Card title="Reader reactions" body="Audience responses stay connected to the work that sparked them." />
 				<Card title="Questions and context" body="Authors can understand what readers are asking and debating." />
-				<Card title="Ongoing presence" body="The author remains visible after the launch window closes." />
-				<Card title="Deeper engagement" body="Conversation can move beyond ratings into meaning and interpretation." />
+				<Card title="Ongoing presence" body="Authors remain visible after the launch window closes." />
+				<Card title="Deeper engagement" body="Conversation can move beyond ratings toward meaning and interpretation." />
 			</CardGrid>
 			<img
 				class="image-block webuzz-section-image"
-				src="/images/author_webuzz.webp"
-				alt="Author participating in a discussion with readers around a book"
+				src="/images/webuzz_author.webp"
+				alt="Author participating in a WeBuzz discussion with readers around a book"
 				loading="lazy"
 				decoding="async"
 				width="1024"
@@ -227,20 +237,20 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		tone="white"
 		hasMedia
 		class="webuzz-image-section webuzz-publishers-section"
-		title="Publishers need books to remain active"
-		body="WeBuzz keeps conversation, discovery and audience activity attached to titles instead of scattering them across separate channels."
+		title="Publishers need books to stay active"
+		body="WeBuzz keeps conversation, discovery, and audience activity connected to titles instead of scattering them across separate channels."
 	>
 		<div class="webuzz-image-split">
 			<CardGrid columns="2" class="webuzz-image-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
-				<Card title="Beyond launch" body="Books can keep accumulating reader activity after release." />
-				<Card title="Community discovery" body="New readers can find titles through discussion and recommendation." />
-				<Card title="Portfolio visibility" body="Publishers can see where attention is forming across publications." />
-				<Card title="Long-term engagement" body="Discussion helps publications stay useful and visible over time." />
+				<Card title="Beyond launch" body="Books can continue accumulating reader activity after release." />
+				<Card title="Community discovery" body="New readers can discover titles through discussion and recommendations." />
+				<Card title="Portfolio visibility" body="Publishers can see where attention is forming across their publications." />
+				<Card title="Long-term engagement" body="Discussion helps publications remain useful and visible over time." />
 			</CardGrid>
 			<img
 				class="image-block webuzz-section-image"
 				src="/images/publisher_webuzz.webp"
-				alt="Publisher observing active discussions around multiple books"
+				alt="Publisher viewing active WeBuzz discussions across multiple books"
 				loading="lazy"
 				decoding="async"
 				width="950"
@@ -254,19 +264,19 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 		hasMedia
 		class="webuzz-image-section webuzz-libraries-section"
 		title="Institutions need shared spaces for knowledge"
-		body="Universities, libraries and organizations can use WeBuzz to support learning, programs and community discussion connected to collections."
+		body="Universities, libraries, and organizations can use WeBuzz to support learning, programs, and community discussion connected to their collections."
 	>
 		<div class="webuzz-image-split">
 			<CardGrid columns="2" class="webuzz-image-cards" data-card-reveal-origin="left" data-card-reveal-order="inner-first">
 				<Card title="Courses" body="Discussion can continue alongside assigned texts and research materials." />
-				<Card title="Library programs" body="Collections can become active places for engagement." />
+				<Card title="Library programs" body="Collections can become active spaces for engagement." />
 				<Card title="Book clubs" body="Groups form more easily around instantly accessible books than around files." />
 				<Card title="Knowledge communities" body="Researchers and colleagues can explore ideas together within access-controlled publications." />
 			</CardGrid>
 			<img
 				class="image-block webuzz-section-image"
 				src="/images/libraries_webuzz.webp"
-				alt="University students discussing books in a collaborative reading environment"
+				alt="University students discussing books in a collaborative WeBuzz reading environment"
 				loading="lazy"
 				decoding="async"
 				width="950"
@@ -278,23 +288,23 @@ const joinWeBuzzCommunityAction = { label: "Join WeBuzz community", href: "/weta
 	<Section
 		tone="green"
 		class="webuzz-benefits-section"
-		body="WeBuzz connects books, authors, readers, fragments and literary ideas in one network."
+		body="WeBuzz connects books, authors, readers, fragments, and literary ideas in one network."
 	>
 		<Fragment slot="title">Who benefits from <span class="green-heading-white">live book discussions</span>?</Fragment>
 		<CardGrid columns="3" class="webuzz-matters-grid">
-			<Card icon="readerBook" title="Readers" body="Discovery becomes social and discussion stays attached to books." />
+			<Card icon="readerBook" title="Readers" body="Discovery becomes social, and discussion stays connected to books." />
 			<Card
 				icon="author"
 				title="Authors & Publishers"
-				body="Audience activity no longer disappears after the sale. Books gain a longer public life after launch."
+				body="Audience activity no longer disappears after the sale, and books gain a longer public life after launch."
 			/>
-			<Card icon="library" title="Institutions" body="Controlled collections become part of active research and educational workflow." />
+			<Card icon="library" title="Institutions" body="Controlled collections become part of active research and educational workflows." />
 		</CardGrid>
 	</Section>
 
 	<CtaBlock
 		title="Books deserve more than reviews."
-		body="WeBuzz keeps a book persistently connected to its discussion, discovery and community."
+		body="WeBuzz keeps each book persistently connected to its discussion, discovery, and community."
 		actions={[joinWeBuzzCommunityAction]}
 	/>
 </Base>

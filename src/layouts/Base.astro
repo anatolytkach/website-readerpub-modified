@@ -15,11 +15,10 @@ const {
 } = Astro.props;
 
 const siteUrl = `https://${SITE_DOMAIN}`;
-const canonicalUrl = canonical
-	? canonical.startsWith("http")
-		? canonical
-		: `${siteUrl}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
-	: `${siteUrl}${Astro.url.pathname}`;
+const canonicalUrl = new URL(canonical || Astro.url.pathname, siteUrl);
+canonicalUrl.pathname = canonicalUrl.pathname === "/" ? "/" : `${canonicalUrl.pathname.replace(/\/+$/, "")}/`;
+canonicalUrl.search = "";
+canonicalUrl.hash = "";
 const resolvedOgTitle = ogTitle || title;
 const resolvedOgDescription = ogDescription || description;
 const resolvedOgImage = ogImage.startsWith("http")
@@ -27,7 +26,19 @@ const resolvedOgImage = ogImage.startsWith("http")
 	: `${siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`;
 const routeSlug = Astro.url.pathname.replace(/^\/+|\/+$/g, "").split("/")[0] || "home";
 const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`;
-const homeStructuredData =
+const organizationStructuredData = {
+	"@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
+  name: "ReaderPub Inc.",
+  description: "ReaderPub is a web-native publishing network for books, knowledge publications, and connected reading.",
+  url: siteUrl,
+	logo: `${siteUrl}/images/logo.svg`,
+	contactPoint: {
+		"@type": "ContactPoint",
+		url: `${siteUrl}/contact/`,
+	},
+};
+const structuredData =
 	routeSlug === "home"
 		? {
 				"@context": "https://schema.org",
@@ -38,16 +49,14 @@ const homeStructuredData =
 						url: siteUrl,
 						inLanguage: "en",
 					},
-					{
-						"@type": "Organization",
-						name: SITE_NAME,
-						url: siteUrl,
-						logo: `${siteUrl}/images/logo.svg`,
-					},
+					organizationStructuredData,
 				],
 			}
-		: undefined;
-const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructuredData).replace(/</g, "\\u003c") : undefined;
+		: {
+				"@context": "https://schema.org",
+				...organizationStructuredData,
+			};
+const structuredDataJson = JSON.stringify(structuredData).replace(/</g, "\\u003c");
 ---
 
 <html lang="en" class="no-js">
@@ -67,7 +76,7 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={resolvedOgTitle} />
 		<meta property="og:description" content={resolvedOgDescription} />
-		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:url" content={canonicalUrl.href} />
 		<meta property="og:image" content={resolvedOgImage} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={resolvedOgTitle} />
@@ -76,8 +85,11 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 		<meta name="application-name" content={SITE_NAME} />
 		<meta name="author" content={SITE_NAME} />
 		<meta name="hostname" content={SITE_DOMAIN} />
-		<link rel="canonical" href={canonicalUrl} />
-		{homeStructuredDataJson && <script type="application/ld+json" set:html={homeStructuredDataJson} />}
+		<link rel="canonical" href={canonicalUrl.href} />
+		<script type="application/ld+json" set:html={structuredDataJson} />
+		<slot name="head" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -92,7 +104,7 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 			</main>
 			<Footer />
 		</div>
-		<a href="/kb" class="kb-fab" title="Knowledge Base" aria-label="Knowledge Base" transition:persist>?</a>
+		<a href="/kb/" class="kb-fab" title="Knowledge Base" aria-label="Knowledge Base" transition:persist>?</a>
 		<script is:inline>
 			(() => {
 				const fab = document.querySelector(".kb-fab");
@@ -100,8 +112,8 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 				const updateFab = () => {
 					if (!fab) return;
 
-					const isKb = window.location.pathname === "/kb" || window.location.pathname === "/kb/";
-					fab.href = isKb ? "/" : "/kb";
+					const isKb = window.location.pathname === "/kb/";
+					fab.href = isKb ? "/" : "/kb/";
 					fab.title = isKb ? "Home" : "Knowledge Base";
 					fab.setAttribute("aria-label", isKb ? "Home" : "Knowledge Base");
 					fab.textContent = isKb ? "✕" : "?";
@@ -126,8 +138,12 @@ const homeStructuredDataJson = homeStructuredData ? JSON.stringify(homeStructure
 						return next;
 					};
 
-					for (const textBlock of textBlocks) {
-						if (textBlock.matches("p") && textBlock.closest(".card")) {
+			for (const textBlock of textBlocks) {
+				if (textBlock.classList.contains("security-books-heading")) {
+					continue;
+				}
+
+				if (textBlock.matches("p") && textBlock.closest(".card")) {
 							continue;
 						}
 

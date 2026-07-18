@@ -6,12 +6,16 @@ import CardGrid from "../components/CardGrid.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import Section from "../components/sections/Section.astro";
 import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
+
+const homeVideoDoorSides = ["left", "right"] as const;
 ---
 
 <Base
-	title={`Transforming the world of books. | ${SITE_NAME}`}
-	description="We make your books readable online and keep your readers connected. No apps, downloads, or platform lock-in."
->
+	title={`Web-Native Publishing Network | ${SITE_NAME}`}
+	description="ReaderPub is a web-native publishing network that keeps books and readers connected—without apps, downloads, or platform lock-in."
+	ogImage="/images/home.webp"
+	>
+
 	<section id="home-main-hero" class="section section--green home-hero">
 		<div class="home-hero-content">
 			<h1><span>Transforming</span><span>the world of books</span></h1>
@@ -47,124 +51,317 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	<section class="hero-background-spacer home-hero-bookshelf" aria-hidden="true"></section>
 
 	<Section
+		id="home-challenge"
 		tone="gray"
 		title="The challenge:"
-		body="Digital publishing made distribution easier, but it did not keep books connected to readers, discussion or long-term discovery."
+		body="Digital publishing made distribution easier, but it still leaves books disconnected from readers, discussion, and long-term discovery."
 	>
 		<CardGrid columns="3" class="home-problem-grid">
 			<Card
-				href="/weread"
+				href="/weread/"
 				icon="readerBook"
 				title="Readers"
-				body="Reading is digital, but discussion and discovery are fragmented across apps, stores and social networks."
+				body="Reading is digital, yet discussion and discovery remain fragmented across apps, stores, and social networks."
 			/>
 			<Card
-				href="/wepub"
+				href="/wepub/"
 				icon="author"
 				title="Authors & Publishers"
-				body="Authors publish books, but marketplaces often control visibility, readers and the customer relationship."
+				body="Authors and publishers release books, yet marketplaces often control visibility, access to readers, and the customer relationship."
 			/>
 			<Card
-				href="/institutions"
+				href="/institutions/"
 				icon="library"
 				title="Institutions"
-				body="Libraries, universities and public organizations publish knowledge that remains hard to find, read and discuss."
+				body="Libraries, universities, and public organizations publish knowledge that remains difficult to find, read, and discuss online."
 			/>
 		</CardGrid>
 	</Section>
 
-	<section class="section section--white home-tech-heading-section" aria-labelledby="home-tech-title">
-		<h2 id="home-tech-title" class="home-tech-title">
-			<span class="home-tech-title-line home-tech-title-line-primary"><span class="home-tech-title-prefix">The solution:</span><span class="home-tech-title-readerpub" style="color: var(--accent);"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span></span>
-		</h2>
-		<h3 class="home-tech-title-line home-tech-title-line-solution">Browser-based eReader <span class="home-tech-title-plus">+</span> web-native publishing network.</h3>
-		<div class="home-reader-frame" data-video-player>
-			<a class="home-reader-video-link" href="https://reader.pub/books/reader/?id=90000120" target="_blank" rel="noopener noreferrer" aria-label="Open Treasure Island in WeRead">
-				<video
-					src="/videos/treasure_island-1.mp4"
-					title="Treasure Island in WeRead"
-					muted
-					autoplay
-					playsinline
-					preload="auto"
-				></video>
-			</a>
-			<button class="home-reader-play-button" type="button" aria-label="Play Treasure Island demo">
-				<span aria-hidden="true"></span>
-			</button>
+	<div class="home-video-stage is-green-intro" data-home-video-stage>
+		<section class="home-video-intro" data-home-video-intro aria-label="ReaderPub video introduction">
+			<video
+				class="home-video-intro-media"
+				src="/videos/treasure_island-1.mp4"
+				poster="/images/treasure-island-video-poster.webp"
+				title="Treasure Island in WeRead"
+				muted
+				playsinline
+				preload="metadata"
+			></video>
+		</section>
+		<div class="home-video-green-shutters" aria-hidden="true">
+			{homeVideoDoorSides.map((side) => (
+				<div class={`home-video-green-panel home-video-green-panel--${side}`}>
+					<div class="home-video-intro-content home-video-intro-content--door">
+						<p class="home-video-solution-label" data-home-video-reveal="solution">
+							<span>The solution</span><span class="home-video-solution-colon">:</span>
+						</p>
+						<div class="home-video-brand" data-home-video-reveal="brand">
+							<span class="home-video-brand-mark">
+								<img src="/images/logo_white.svg" alt="" />
+							</span>
+							<span class="home-video-wordmark"><span>Reader</span><span>Pub</span></span>
+						</div>
+						<div class="home-video-slogan-block" data-home-video-reveal="slogan">
+							<span class="home-video-slogan">Web-native Publishing Network</span>
+						</div>
+						<p class="home-video-strategy" data-home-video-reveal="strategy">
+							<span class="home-video-strategy-line">READ INSTANTLY</span>
+							<span class="home-video-period">•</span>
+							<span class="home-video-strategy-line">PUBLISH SECURELY</span>
+							<span class="home-video-period">•</span>
+							<span class="home-video-strategy-line">DISTRIBUTE STRATEGICALLY</span>
+						</p>
+					</div>
+				</div>
+			))}
 		</div>
-		<div class="home-tech-reader-cta">
-			<h2 class="home-tech-visual-title heading--center-full heading--center-full-h2"><em class="home-tech-guess">Guess what<span class="home-tech-guess-question">?</span></em>It’s not an app. It is <span class="home-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
-			<h3 class="home-tech-reader-subtitle">Read this thrilling story along with...</h3>
-			<div class="home-tech-reader-actions">
-				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">60K+ books in WeRead</a>
-				<a class="button home-tech-visual-button home-tech-reader-button" href="/weread">Explore WeRead</a>
+		<div class="home-video-green-layer" aria-hidden="true"></div>
+		<div class="home-video-intro-content home-video-intro-content--controls">
+			<div class="home-video-final-content">
+				<p class="home-video-teaser" aria-live="polite">
+					<span class="home-video-teaser-line home-video-teaser-accent">Guess what<span class="home-video-teaser-question">?</span></span>
+					<span class="home-video-teaser-line home-video-teaser-line--detail"><span class="home-video-teaser-accent">This is not an app,</span><span class="home-video-teaser-detail-rest"> but a web page<span class="home-video-teaser-accent">!</span></span></span>
+				</p>
+				<button class="home-video-replay" type="button" data-home-video-replay aria-label="Replay the ReaderPub introduction">
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
+						<path d="M3 3v5h5"></path>
+					</svg>
+				</button>
+			</div>
+			<div class="home-video-accessible-intro">
+				The solution:  ReaderPub. Web-native Publishing Network. Read instantly. Publish securely. Distribute strategically.
 			</div>
 		</div>
-	</section>
+		<div class="home-video-wave-space" aria-hidden="true"></div>
+	</div>
+
+	<Section
+		tone="white"
+		class="home-file-model-section section--two-column"
+	>
+		<h3 class="home-tech-title-line home-tech-title-line-solution">A browser-based eReader <span class="home-tech-title-plus">+</span> a web-native publishing network.</h3>
+
+		<div class="home-comparison-grid">
+			<article class="comparison-text-panel home-list-card home-old-model-card">
+				<div class="card-copy">
+					<h3>Old model</h3>
+					<ul class="home-model-list" style="--home-model-marker-color: var(--text);">
+						<li>File is uploaded</li>
+						<li>Reader downloads the file</li>
+						<li>Discussion moves elsewhere</li>
+						<li>Audience becomes invisible</li>
+						<li>Relationship ends</li>
+					</ul>
+				</div>
+			</article>
+			<article class="card card--good home-list-card home-readerpub-model-card">
+				<div class="card-copy">
+					<h3><span class="home-title-accent readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> model</h3>
+					<ul class="home-model-list">
+						<li>Book is published online</li>
+						<li>Reader opens it instantly in the web eReader</li>
+						<li>Comments stay connected</li>
+						<li>Audience remains visible</li>
+						<li>Relationship continues</li>
+					</ul>
+				</div>
+			</article>
+		</div>
+
+		<p class="home-file-model-summary home-file-model-summary-problem-copy">
+			<span class="home-file-model-summary-problem">The old file-first publishing model ends when a file is delivered.</span>
+			<span class="home-file-model-summary-problem home-file-model-summary-break">The relationship is broken!</span>
+		</p>
+		<p class="home-file-model-summary home-file-model-summary-solution">
+			<span class="home-file-model-summary-solution-context">There are many platforms – Kindle, Substack, Everand – making a book available.</span>
+			<span>Only ReaderPub keeps the book alive and connected after delivery.</span>
+		</p>
+	</Section>
 
 	<script is:inline>
 		(() => {
-			const setupHomeReaderVideo = () => {
-				const frame = document.querySelector("[data-video-player]");
+			const setupHomeVideoIntro = () => {
+				const stage = document.querySelector("[data-home-video-stage]");
 
-				if (!(frame instanceof HTMLElement) || frame.dataset.videoReady === "true") {
+				if (!(stage instanceof HTMLElement) || stage.dataset.videoReady === "true") {
 					return;
 				}
 
-				const video = frame.querySelector("video");
-				const playButton = frame.querySelector("button");
+				const intro = stage.querySelector("[data-home-video-intro]");
+				const video = intro instanceof HTMLElement ? intro.querySelector("video") : null;
+				const replayButton = stage.querySelector("[data-home-video-replay]");
+				const nav = document.querySelector(".nav");
 
-				if (!(video instanceof HTMLVideoElement) || !(playButton instanceof HTMLButtonElement)) {
+				if (
+					!(intro instanceof HTMLElement) ||
+					!(video instanceof HTMLVideoElement) ||
+					!(replayButton instanceof HTMLButtonElement)
+				) {
 					return;
 				}
 
-				frame.dataset.videoReady = "true";
+				stage.dataset.videoReady = "true";
 
-				const showPlayButton = () => {
-					frame.classList.add("home-reader-frame--show-play");
-				};
+				const syncIntroGeometry = () => {
+					const navHeight = nav instanceof HTMLElement ? nav.getBoundingClientRect().height : 0;
+					const videoWidth = video.videoWidth || 1272;
+					const videoHeight = video.videoHeight || 798;
+					const stageWidth = stage.getBoundingClientRect().width;
 
-				const hidePlayButton = () => {
-					frame.classList.remove("home-reader-frame--show-play");
-				};
+					document.documentElement.style.setProperty("--home-video-nav-height", `${Math.round(navHeight)}px`);
 
-				const playVideo = () => {
-					hidePlayButton();
-					video.currentTime = 0;
-					const playAttempt = video.play();
-
-					if (playAttempt && typeof playAttempt.catch === "function") {
-						playAttempt.catch(showPlayButton);
+					if (stageWidth > 0 && videoWidth > 0 && videoHeight > 0) {
+						const introHeight = stageWidth * (videoHeight / videoWidth);
+						stage.style.setProperty("--home-video-intro-height", `${introHeight}px`);
+						intro.style.height = `${introHeight}px`;
 					}
 				};
 
-				video.addEventListener("play", hidePlayButton);
-				video.addEventListener("ended", () => {
+				const introTimers = new Set();
+				let playbackAttempt = 0;
+				let hasPlayedDuringVisit = false;
+
+				const clearIntroTimers = () => {
+					introTimers.forEach((timer) => window.clearTimeout(timer));
+					introTimers.clear();
+				};
+
+				const scheduleIntroStep = (callback, delay) => {
+					const timer = window.setTimeout(() => {
+						introTimers.delete(timer);
+						callback();
+					}, delay);
+					introTimers.add(timer);
+					return timer;
+				};
+
+				const showFinalMessage = (attempt) => {
+					if (attempt !== playbackAttempt || stage.classList.contains("is-darkening")) return;
+					stage.classList.remove("is-playing", "is-video-wait");
+					stage.classList.add("is-darkening");
+					scheduleIntroStep(() => {
+						if (attempt === playbackAttempt) stage.classList.add("is-final");
+					}, 850);
+				};
+
+				const startVideo = (attempt) => {
+					if (attempt !== playbackAttempt) return;
+					stage.classList.remove("is-video-wait");
+					stage.classList.add("is-playing");
+					const playPromise = video.play();
+					const fallbackDuration = Number.isFinite(video.duration) && video.duration > 0
+						? Math.ceil(video.duration * 1000) + 1500
+						: 15000;
+
+					scheduleIntroStep(() => showFinalMessage(attempt), fallbackDuration);
+					playPromise?.catch(() => {
+						if (attempt !== playbackAttempt) return;
+						scheduleIntroStep(() => showFinalMessage(attempt), 1200);
+					});
+				};
+
+				const openGreenIntro = (attempt) => {
+					if (attempt !== playbackAttempt) return;
 					video.pause();
 					video.currentTime = 0;
-					showPlayButton();
-				});
-				playButton.addEventListener("click", playVideo);
+					stage.classList.remove("is-green-intro");
+					stage.classList.add("is-opened");
+					scheduleIntroStep(() => {
+						if (attempt !== playbackAttempt) return;
+						stage.classList.add("is-video-wait");
+						scheduleIntroStep(() => startVideo(attempt), 2000);
+					}, 340);
+				};
 
-				requestAnimationFrame(playVideo);
+				const startExperience = (resetImmediately = false, shouldRun = true) => {
+					const attempt = ++playbackAttempt;
+					clearIntroTimers();
+					if (resetImmediately) stage.classList.add("is-resetting");
+					stage.classList.remove(
+						"is-sequence-started",
+						"is-opened",
+						"is-video-wait",
+						"is-playing",
+						"is-darkening",
+						"is-final",
+					);
+					stage.classList.add("is-green-intro");
+					video.loop = false;
+					video.pause();
+					video.currentTime = 0;
+					if (resetImmediately) {
+						void stage.offsetWidth;
+						stage.classList.remove("is-resetting");
+					}
+
+					if (!shouldRun) return;
+
+					window.requestAnimationFrame(() => {
+						if (attempt !== playbackAttempt) return;
+						stage.classList.add("is-sequence-started");
+						scheduleIntroStep(() => openGreenIntro(attempt), 8500);
+					});
+				};
+
+				video.addEventListener("ended", () => {
+					video.pause();
+					showFinalMessage(playbackAttempt);
+				});
+				video.addEventListener("loadedmetadata", () => {
+					video.pause();
+					video.currentTime = 0;
+					syncIntroGeometry();
+				});
+				replayButton.addEventListener("click", () => {
+					hasPlayedDuringVisit = true;
+					startExperience(true);
+				});
+
+				if ("IntersectionObserver" in window) {
+					const stageObserver = new IntersectionObserver(
+						(entries) => {
+							const entry = entries[0];
+
+							if (entry?.isIntersecting && entry.intersectionRatio >= 0.35 && !hasPlayedDuringVisit) {
+								hasPlayedDuringVisit = true;
+								startExperience(true);
+							} else if (!entry?.isIntersecting && hasPlayedDuringVisit) {
+								hasPlayedDuringVisit = false;
+								startExperience(true, false);
+							}
+						},
+						{ threshold: [0, 0.35] },
+					);
+
+					stageObserver.observe(stage);
+				} else {
+					hasPlayedDuringVisit = true;
+					startExperience();
+				}
+				window.addEventListener("resize", syncIntroGeometry, { passive: true });
+
+				syncIntroGeometry();
+				startExperience(false, false);
 			};
 
-			setupHomeReaderVideo();
-			document.addEventListener("astro:page-load", setupHomeReaderVideo);
+			setupHomeVideoIntro();
+			document.addEventListener("astro:page-load", setupHomeVideoIntro);
 		})();
 	</script>
 	<section class="section section--green home-tech-visual-section" aria-label="Explore ReaderPub platform">
 		<h2 class="home-tech-container-title">
 			<span class="home-tech-container-title-primary">ReaderPub is end-to-end:</span>
-			<span class="home-tech-container-title-secondary">from creating to publishing and engagement</span>
+			<span class="home-tech-container-title-secondary">from creation and publishing to reading and engagement</span>
 		</h2>
-		<a class="home-tech-picture-link" href="/platform" aria-label="Explore the ReaderPub platform">
+		<a class="home-tech-picture-link" href="/platform/" aria-label="Explore the ReaderPub platform">
 			<picture class="home-tech-picture">
 				<source media="(orientation: portrait)" srcset="/images/tech_mobile.webp" width="823" height="1743" />
 				<img
 					src="/images/tech.webp"
-					alt="ReaderPub connects web publishing, reading, discussion and knowledge tools"
+					alt="ReaderPub dashboard connecting publishing, browser reading, discussion, and reader activity"
 					loading="lazy"
 					decoding="async"
 					width="1663"
@@ -172,43 +369,9 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				/>
 			</picture>
 		</a>
-		<h2 class="home-tech-reader-activity-note">This is what your reader activity would look like on <span>ReaderPub</span>.</h2>
-		<a class="button home-tech-visual-button home-tech-platform-button" href="/platform">Explore ReaderPub</a>
+		<h2 class="home-tech-reader-activity-note">This is what reader activity looks like on <span>ReaderPub</span>.</h2>
+		<a class="button home-tech-visual-button home-tech-platform-button" href="/platform/">Explore ReaderPub</a>
 	</section>
-
-	<Section
-		tone="white"
-		class="home-file-model-section section--two-column"
-		title="The old file-first model breaks the relationship"
-		body="The old publishing model ends when a file is delivered. ReaderPub helps publications remain alive and connected after delivery."
-		>
-			<div class="home-comparison-grid">
-				<article class="comparison-text-panel home-list-card home-old-model-card">
-					<div class="card-copy">
-						<h3>Old model</h3>
-						<ul class="home-model-list" style="--home-model-marker-color: var(--text);">
-							<li>File uploaded</li>
-							<li>Reader downloads</li>
-							<li>Discussion moves elsewhere</li>
-						<li>Audience becomes invisible</li>
-						<li>Relationship ends</li>
-					</ul>
-					</div>
-				</article>
-				<article class="card card--good home-list-card home-readerpub-model-card">
-					<div class="card-copy">
-						<h3><span class="home-title-accent readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> model</h3>
-						<ul class="home-model-list">
-							<li>Book is published online</li>
-							<li>Reader opens instantly in web eReader</li>
-							<li>Comments stay connected</li>
-							<li>Audience remains visible</li>
-							<li>Relationship continues</li>
-						</ul>
-					</div>
-				</article>
-			</div>
-	</Section>
 
 	<Section tone="white" class="home-web-asset-section section--two-column" title="What changes when a book becomes a living web asset?">
 		<div class="home-comparison-grid">
@@ -216,7 +379,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				<div class="card-copy">
 					<h3>Traditional publishing</h3>
 					<p class="home-flow home-flow--dark">Publish → Download → Relationship ends</p>
-					<p>The old model delivers a file and loses the reader relationship after access begins.</p>
+					<p>The traditional model delivers a file and loses the reader relationship once access begins.</p>
 				</div>
 			</article>
 			<article class="card card--good home-comparison-card home-readerpub-publishing-card">
@@ -226,7 +389,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 						Publish <span class="home-flow-arrow">→</span> Discover <span class="home-flow-arrow">→</span> Read <span class="home-flow-arrow">→</span>
 						Share &amp; Discuss <span class="home-flow-arrow">→</span> Follow &amp; Engage
 					</p>
-					<p>ReaderPub keeps the publication alive on the web, connected to readers, discussion and long-term discovery.</p>
+					<p>ReaderPub keeps the publication alive on the web, connected to readers, discussion, and long-term discovery.</p>
 				</div>
 			</article>
 		</div>
@@ -236,41 +399,41 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		id="solution"
 		tone="green"
 		title="How ReaderPub creates live web publications"
-		body="ReaderPub combines web reading, secure publishing, public discussion and structured knowledge tools so books and publications remain alive after launch."
+		body="ReaderPub combines browser-based reading, secure web-native publishing, public and private discussion, and structured knowledge tools so books and publications remain alive after launch."
 	>
 		<CardGrid columns="2" class="home-product-grid">
 			<article class="card">
 				<div class="card-copy">
-					<h3><a class="home-product-link" href="/weread"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Read</span></a></h3>
+					<h3><a class="home-product-link" href="/weread/"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Read</span></a></h3>
 					<p>Books open instantly in the browser instead of being trapped inside apps or files.</p>
 				</div>
 			</article>
 			<article class="card">
 				<div class="card-copy">
-					<h3><a class="home-product-link" href="/wepub"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Pub</span></a></h3>
-					<p>Authors and publishers release secure web-native publications while keeping audience relationships.</p>
+					<h3><a class="home-product-link" href="/wepub/"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Pub</span></a></h3>
+					<p>Authors and publishers release secure web-native publications while keeping their audience relationships.</p>
 				</div>
 			</article>
 			<article class="card">
 				<div class="card-copy">
 					<h3 class="home-product-title-line">
-						<a class="home-product-link" href="/webuzz"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Buzz</span></a>
+						<a class="home-product-link" href="/webuzz/"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Buzz</span></a>
 						<span class="home-product-divider">/</span>
-						<a class="home-product-link" href="/wetalk"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Talk</span></a>
+						<a class="home-product-link" href="/wetalk/"><span class="home-product-name-base">We</span><span class="home-product-name-accent">Talk</span></a>
 					</h3>
-					<p>Social and private discussions stay connected to books, authors, researchers, and ideas.</p>
+					<p>Social, public, and private discussions stay connected to books, authors, researchers, and ideas.</p>
 				</div>
 			</article>
 			<article class="card">
 				<div class="card-copy">
-					<h3><a class="home-product-link" href="/booktree"><span class="home-product-name-base">Book</span><span class="home-product-name-accent">Tree</span></a></h3>
-					<p>Serious readers connect books, notes and projects into durable knowledge structures.</p>
+					<h3><a class="home-product-link" href="/booktree/"><span class="home-product-name-base">Book</span><span class="home-product-name-accent">Tree</span></a></h3>
+					<p>Serious readers connect books, notes, and projects into durable knowledge structures.</p>
 				</div>
 			</article>
 			<article class="card">
 				<div class="card-copy">
-					<h3><a class="home-product-link" href="/scribe">Scribe</a></h3>
-					<p>A specialized AI companion for literature, writing, publishing and ReaderPub.</p>
+					<h3><a class="home-product-link" href="/scribe/">Scribe</a></h3>
+					<p>A specialized AI companion for literature, writing, publishing, and ReaderPub.</p>
 				</div>
 			</article>
 		</CardGrid>
@@ -278,24 +441,24 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	<Section
 		tone="white"
-		title="ReaderPub is not yet another ebook platform"
+		title="ReaderPub is not just another ebook platform"
 	>
 		<Fragment slot="body">
 			ReaderPub is a web-native publishing network where books and knowledge publications become <span class="home-cta-body-accent">living web assets</span>.
 		</Fragment>
 		<CardGrid columns="4">
 			<Card title="Readable" body="Readers open publications instantly in the browser." />
-			<Card title="Discoverable" body="Books and publications have web presence, metadata and shareable URLs." />
-			<Card title="Discussable" body="Conversation stays attached to books, authors, fragments and ideas." />
-			<Card title="Connected" body="Authors, publishers and institutions can see and engage with their reading audience." />
+			<Card title="Discoverable" body="Books and publications have a web presence, metadata, and shareable URLs." />
+			<Card title="Discussable" body="Conversation stays attached to books, authors, fragments, and ideas." />
+			<Card title="Connected" body="Authors, publishers, and institutions can see and engage with their reading audiences." />
 		</CardGrid>
 	</Section>
 
 	<Section tone="green">
 		<Fragment slot="title">Who benefits from <span class="green-heading-white">web-native reading</span>?</Fragment>
 		<CardGrid columns="4">
-			<Card icon="readerBook" title="Readers" body="They get instant access, context, discussion and better discovery." />
-			<Card icon="author" title="Authors" body="They keep more revenue, more audience visibility and more long-term reader connection." />
+			<Card icon="readerBook" title="Readers" body="They get instant access, richer context, connected discussion, and better discovery." />
+			<Card icon="author" title="Authors" body="They keep more revenue, gain greater audience visibility, and build a longer-term reader connection." />
 			<Card icon="publisher" title="Publishers" body="They launch books as active web assets, not isolated product files." />
 			<Card icon="library" title="Institutions" body="They turn collections and research into visible public knowledge infrastructure." />
 		</CardGrid>
@@ -305,11 +468,11 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		title="Books should live on the web."
 		actions={[
 			{ label: "Publish with WePub", href: PUBLISH_URL, external: true },
-			{ label: "60K+ books in Catalog", href: BOOKS_URL, external: true, variant: "secondary" },
+			{ label: "60K+ PD books in Catalog", href: BOOKS_URL, external: true, variant: "secondary" },
 		]}
 	>
 		<Fragment slot="body">
-			ReaderPub helps books and knowledge publications remain <span class="home-cta-body-accent">living web assets</span> — readable, searchable, shareable, discussable and connected.
+			ReaderPub helps books and knowledge publications remain <span class="home-cta-body-accent">living web assets</span>—readable, searchable, shareable, discussable, and connected.
 		</Fragment>
 	</CtaBlock>
 </Base>
@@ -373,6 +536,664 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-cta-body-accent {
 		color: var(--accent-orange) !important;
+	}
+
+	.home-video-stage {
+		--home-video-green-background: repeating-radial-gradient(
+			circle at 25% 75%,
+			var(--section-green-wide-stripe) 0,
+			var(--section-green-wide-stripe) var(--section-green-wide-stripe-size),
+			var(--section-green-narrow-stripe) var(--section-green-wide-stripe-size),
+			var(--section-green-narrow-stripe) var(--section-green-stripe-period)
+		);
+		--home-video-wave-height: clamp(72px, 8.2vw, 150px);
+		--green-edge-top-wave-x: 0px;
+		--green-edge-bottom-wave-x: 0px;
+		--green-edge-top-wave-width: 2200px;
+		--green-edge-bottom-wave-width: 2200px;
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		background: transparent;
+		isolation: isolate;
+	}
+
+	:global(.content > .home-video-stage + .section) {
+		margin-top: var(--section-stack-gap) !important;
+	}
+
+	:global(.content > .section + .home-video-stage) {
+		margin-top: var(--section-stack-gap) !important;
+	}
+
+	.home-video-intro {
+		position: relative;
+		z-index: 0;
+		width: 100%;
+		height: var(--home-video-intro-height, auto);
+		min-height: 0;
+		aspect-ratio: 1272 / 798;
+		overflow: hidden;
+		background: transparent;
+	}
+
+	.home-video-intro-media {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+		border: 0;
+		object-fit: contain;
+		background: #ffffff;
+		visibility: hidden;
+	}
+
+	/* Do not reveal the video until the green doors and their edge waves have
+	 * completely cleared the frame.  On mobile this prevents either wave from
+	 * ever covering the top or bottom of the video. */
+	.home-video-stage:is(.is-video-wait, .is-playing, .is-darkening, .is-final) .home-video-intro-media {
+		visibility: visible;
+	}
+
+	.home-video-green-shutters {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		overflow: hidden;
+		background: #ffffff;
+		perspective: clamp(900px, 105vw, 1800px);
+		perspective-origin: 50% 50%;
+		pointer-events: none;
+	}
+
+	/* Make the reset cover track the stage itself, including every video-height
+	 * change, and overscan it by one pixel to remove exposed video seams. */
+	.home-video-stage.is-green-intro .home-video-green-shutters {
+		inset: -1px;
+		height: auto;
+	}
+
+	.home-video-green-panel {
+		position: absolute;
+		top: 0;
+		width: 50%;
+		height: 100%;
+		overflow: hidden;
+		backface-visibility: hidden;
+		opacity: 1;
+		transform: rotateY(0deg);
+		transform-style: preserve-3d;
+		transition:
+			transform 340ms linear,
+			opacity 149ms ease-in 191ms,
+			visibility 0ms linear 340ms;
+		visibility: visible;
+		will-change: transform;
+	}
+
+	.home-video-green-panel::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		width: 200%;
+		height: 100%;
+		background: var(--home-video-green-background) center / auto no-repeat;
+		-webkit-mask-image: linear-gradient(#000 0 0), var(--green-edge-air-top-wave-scroll);
+		-webkit-mask-position:
+			0 0,
+			calc(var(--green-edge-top-wave-x) + var(--green-edge-wave-scroll-x)) top;
+		-webkit-mask-repeat: no-repeat, repeat-x;
+		-webkit-mask-size:
+			100% 100%,
+			var(--green-edge-top-wave-width) var(--home-video-wave-height);
+		-webkit-mask-composite: xor;
+		mask-image: linear-gradient(#000 0 0), var(--green-edge-air-top-wave-scroll);
+		mask-position:
+			0 0,
+			calc(var(--green-edge-top-wave-x) + var(--green-edge-wave-scroll-x)) top;
+		mask-repeat: no-repeat, repeat-x;
+		mask-size:
+			100% 100%,
+			var(--green-edge-top-wave-width) var(--home-video-wave-height);
+		mask-composite: exclude;
+		pointer-events: none;
+		will-change: background-position;
+	}
+
+	.home-video-green-panel::after {
+		content: "";
+		position: absolute;
+		bottom: -1px;
+		width: 200%;
+		height: var(--home-video-wave-height);
+		background-image: var(--green-edge-air-bottom-wave-scroll);
+		background-position: calc(var(--green-edge-bottom-wave-x) + var(--green-edge-wave-scroll-x)) bottom;
+		background-repeat: repeat-x;
+		background-size: var(--green-edge-bottom-wave-width) 100%;
+		pointer-events: none;
+		will-change: background-position;
+	}
+
+	.home-video-green-panel--left {
+		left: 0;
+		transform-origin: left center;
+	}
+
+	.home-video-green-panel--left::before,
+	.home-video-green-panel--left::after {
+		left: 0;
+	}
+
+	.home-video-green-panel--right {
+		right: 0;
+		transform-origin: right center;
+	}
+
+	.home-video-green-panel--right::before,
+	.home-video-green-panel--right::after {
+		right: 0;
+	}
+
+	.home-video-green-panel--left .home-video-intro-content--door {
+		left: 0;
+		right: auto;
+	}
+
+	.home-video-green-panel--right .home-video-intro-content--door {
+		left: auto;
+		right: 0;
+	}
+
+	.home-video-green-layer {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background-image: var(--green-edge-air-top-wave-scroll), var(--home-video-green-background);
+		background-position:
+			calc(var(--green-edge-top-wave-x) + var(--green-edge-wave-scroll-x)) top,
+			center;
+		background-repeat: repeat-x, no-repeat;
+		background-size:
+			var(--green-edge-top-wave-width) var(--home-video-wave-height),
+			auto;
+		opacity: 0;
+		transition: opacity 1700ms ease-in-out;
+		pointer-events: none;
+	}
+
+	.home-video-green-layer::after {
+		content: "";
+		position: absolute;
+		right: 0;
+		bottom: -1px;
+		left: 0;
+		height: var(--home-video-wave-height);
+		background-image: var(--green-edge-air-bottom-wave-scroll);
+		background-position: calc(var(--green-edge-bottom-wave-x) + var(--green-edge-wave-scroll-x)) bottom;
+		background-repeat: repeat-x;
+		background-size: var(--green-edge-bottom-wave-width) 100%;
+		pointer-events: none;
+		will-change: background-position;
+	}
+
+	.home-video-wave-space {
+		position: relative;
+		z-index: 0;
+		width: 100%;
+		height: var(--home-video-wave-height);
+		transition: height 1700ms ease-in-out;
+	}
+
+	.home-video-intro-content {
+		position: absolute;
+		/* This is the straight central rectangle of the green panel.  The
+		 * matching top and bottom wave bands are deliberately outside it, so
+		 * neither one participates in vertical centring. */
+		top: var(--home-video-wave-height);
+		right: 0;
+		bottom: var(--home-video-wave-height);
+		left: 0;
+		z-index: 3;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0;
+		box-sizing: border-box;
+		width: 100%;
+		height: auto;
+		max-width: var(--page-max);
+		margin: 0 auto;
+		padding: clamp(24px, 4vh, 48px) 24px;
+		pointer-events: none;
+	}
+
+	.home-video-intro-content--door {
+		width: 200%;
+		max-width: none;
+		margin: 0;
+		transform: none;
+	}
+
+	.home-video-accessible-intro {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.home-video-final-content {
+		position: absolute;
+		top: 50%;
+		right: 24px;
+		left: 24px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: clamp(48px, 5vh, 72px);
+		transform: translateY(-50%);
+	}
+
+	.home-video-teaser {
+		display: block;
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		padding: 0;
+		color: #ffffff;
+		font-family: var(--font-heading);
+		font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+		font-style: normal;
+		font-weight: var(--font-weight-heading);
+		line-height: 1.2;
+		text-align: center;
+		opacity: 0;
+		transform: translate3d(0, 16px, 0) scale(0.96);
+		transition:
+			opacity 1100ms var(--motion-ease) 100ms,
+			transform 1100ms var(--motion-ease) 100ms;
+	}
+
+	.home-video-teaser-accent {
+		color: var(--section-green-orange);
+	}
+
+	.home-video-teaser-question {
+		color: #ffffff;
+	}
+
+	.home-video-teaser-line {
+		display: block;
+	}
+
+	.home-video-teaser-line--detail {
+		margin-top: clamp(10px, 1.3vw, 20px);
+	}
+
+	.home-video-solution-label,
+	.home-video-brand,
+	.home-video-slogan-block,
+	.home-video-strategy,
+	.home-video-scroll,
+	.home-video-replay {
+		opacity: 0;
+		transform: translate3d(0, 24px, 0);
+		transition:
+			opacity 900ms var(--motion-ease),
+			transform 900ms var(--motion-ease);
+	}
+
+	.home-video-solution-label {
+		margin: 0 0 clamp(48px, 6.5vh, 78px);
+		color: var(--section-green-orange);
+		font-family: var(--font-heading);
+		font-size: clamp(1.55rem, 2.75vw, 2.5rem);
+		font-style: italic;
+		font-weight: var(--font-weight-heading);
+		line-height: 1;
+		text-align: center;
+	}
+
+	.home-video-solution-colon {
+		color: #ffffff;
+	}
+
+	.home-video-brand {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: clamp(12px, 1.4vh, 18px);
+		width: 100%;
+		transform: translate3d(0, 16px, 0) scale(0.96);
+		transition:
+			opacity 1100ms var(--motion-ease) 100ms,
+			transform 1100ms var(--motion-ease) 100ms;
+	}
+
+	.home-video-brand-mark {
+		position: relative;
+		display: block;
+		width: clamp(86px, 9.2vw, 140px);
+		aspect-ratio: 3900 / 3500;
+		opacity: 0;
+		transform: translate3d(0, 14px, 0) scale(0.96);
+		transition:
+			opacity 900ms var(--motion-ease),
+			transform 900ms var(--motion-ease);
+	}
+
+	.home-video-brand-mark img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.home-video-wordmark {
+		display: block;
+		width: 25%;
+		min-width: 220px;
+		color: #ffffff;
+		font-family: var(--font-ui);
+		font-size: clamp(2rem, 3.4vw, 3.25rem);
+		font-weight: 500;
+		letter-spacing: var(--letter-spacing-heading);
+		line-height: 1;
+		text-align: center;
+		opacity: 0;
+		transform: translate3d(0, 14px, 0);
+		transition:
+			opacity 900ms var(--motion-ease),
+			transform 900ms var(--motion-ease);
+	}
+
+	.home-video-wordmark > span:last-child {
+		color: var(--accent-orange);
+	}
+
+	.home-video-slogan-block {
+		display: flex !important;
+		flex-direction: column;
+		flex: 0 0 auto;
+		align-items: center !important;
+		justify-content: center !important;
+		align-self: stretch !important;
+		box-sizing: border-box;
+		width: 100% !important;
+		min-width: 100% !important;
+		max-width: none !important;
+		margin-top: clamp(36px, 4.4vh, 54px);
+		margin-right: 0 !important;
+		margin-left: 0 !important;
+		padding: 0 !important;
+		text-align: center;
+	}
+
+	.home-video-slogan {
+		display: block !important;
+		box-sizing: border-box;
+		width: max-content !important;
+		min-width: 0 !important;
+		max-width: 100% !important;
+		margin: 0 auto !important;
+		padding: 0 !important;
+		color: var(--section-green-orange);
+		font-family: var(--font-heading);
+		font-size: clamp(2rem, 3.4vw, 3rem) !important;
+		font-weight: var(--font-weight-heading);
+		line-height: 1.08;
+		text-align: center !important;
+		text-indent: 0 !important;
+		white-space: nowrap;
+	}
+
+	.home-video-slogan > span {
+		color: #ffffff;
+	}
+
+	.home-video-strategy {
+		position: relative;
+		left: 50%;
+		display: block;
+		align-self: flex-start;
+		box-sizing: border-box;
+		width: 80% !important;
+		max-width: 80% !important;
+		margin: clamp(30px, 3.7vh, 46px) 0 0 -40% !important;
+		color: #ffffff;
+		font-family: var(--font-heading);
+		font-size: clamp(0.78rem, 1.55vw, 1.45rem);
+		font-weight: var(--font-weight-heading);
+		letter-spacing: 0.08em;
+		line-height: 1.2;
+		text-align: center !important;
+		white-space: nowrap;
+	}
+
+	.home-video-strategy-line {
+		display: inline;
+	}
+
+	.home-video-period {
+		color: var(--section-green-orange);
+	}
+
+	.home-video-scroll {
+		position: absolute;
+		z-index: 3;
+		bottom: clamp(18px, 2.3vw, 34px);
+		left: 50%;
+		display: grid;
+		place-items: center;
+		width: 72px;
+		height: 48px;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		box-shadow: none;
+		cursor: pointer;
+		pointer-events: none;
+		transform: translate3d(-50%, 24px, 0);
+	}
+
+	.home-video-scroll::before {
+		content: "";
+		display: block !important;
+		width: clamp(28px, 3vw, 42px);
+		height: clamp(28px, 3vw, 42px);
+		border-right: 4px solid #ff5d15 !important;
+		border-bottom: 4px solid #ff5d15 !important;
+		transform: translateY(-8px) rotate(45deg);
+		transition:
+			border-right-color var(--motion-fast) ease,
+			border-bottom-color var(--motion-fast) ease;
+	}
+
+	.home-video-scroll:hover,
+	.home-video-scroll:focus-visible {
+		background: transparent;
+		box-shadow: none;
+	}
+
+	.home-video-stage .home-video-scroll:is(:hover, :focus-visible)::before {
+		border-right-color: #ffffff !important;
+		border-bottom-color: #ffffff !important;
+	}
+
+	.home-video-scroll:focus-visible {
+		outline: 2px solid #ffffff;
+		outline-offset: 3px;
+	}
+
+	.home-video-replay {
+		position: static;
+		display: grid;
+		place-items: center;
+		width: clamp(42px, 4vw, 58px);
+		height: clamp(42px, 4vw, 58px);
+		padding: 0;
+		border: 0;
+		background: transparent;
+		box-shadow: none;
+		color: var(--section-green-orange);
+		cursor: pointer;
+		pointer-events: none;
+	}
+
+	.home-video-replay svg {
+		width: 76%;
+		height: 76%;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 3px;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		transform: scaleY(-1);
+		transform-origin: center;
+	}
+
+	.home-video-replay path {
+		vector-effect: non-scaling-stroke;
+	}
+
+	.home-video-replay:hover,
+	.home-video-replay:focus-visible {
+		background: transparent;
+		box-shadow: none;
+		color: #ffffff;
+	}
+
+	.home-video-replay:focus-visible {
+		outline: 2px solid #ffffff;
+		outline-offset: 3px;
+	}
+
+	.home-video-stage.is-darkening .home-video-green-layer,
+	.home-video-stage.is-final .home-video-green-layer {
+		opacity: 1;
+	}
+
+	.home-video-stage.is-opened .home-video-green-panel--left {
+		box-shadow: none;
+		opacity: 0;
+		transform: rotateY(88deg);
+		visibility: hidden;
+	}
+
+	.home-video-stage.is-opened .home-video-green-shutters {
+		background: transparent;
+	}
+
+	.home-video-stage.is-opened .home-video-green-panel--right {
+		box-shadow: none;
+		opacity: 0;
+		transform: rotateY(-88deg);
+		visibility: hidden;
+	}
+
+	.home-video-stage.is-resetting .home-video-green-layer,
+	.home-video-stage.is-resetting .home-video-green-panel,
+	.home-video-stage.is-resetting .home-video-wave-space,
+	.home-video-stage.is-resetting .home-video-teaser,
+	.home-video-stage.is-resetting
+		:is(
+			.home-video-solution-label,
+			.home-video-brand,
+			.home-video-brand-mark,
+			.home-video-wordmark,
+			.home-video-slogan-block,
+			.home-video-strategy,
+			.home-video-scroll,
+			.home-video-replay
+		) {
+		transition: none;
+	}
+
+	.home-video-stage.is-opened:not(.is-darkening, .is-final) .home-video-wave-space {
+		height: 0;
+	}
+
+	.home-video-stage.is-darkening .home-video-wave-space,
+	.home-video-stage.is-final .home-video-wave-space {
+		height: var(--home-video-wave-height);
+	}
+
+	.home-video-stage.is-sequence-started .home-video-solution-label,
+	.home-video-stage.is-sequence-started .home-video-brand,
+	.home-video-stage.is-sequence-started .home-video-slogan-block,
+	.home-video-stage.is-sequence-started .home-video-strategy {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+
+	.home-video-stage.is-sequence-started .home-video-solution-label {
+		transition-delay: 0ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-brand {
+		transition-delay: 350ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-brand-mark {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+		transition-delay: 600ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-wordmark {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+		transition-delay: 1350ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-slogan-block {
+		transition-delay: 2200ms;
+	}
+
+	.home-video-stage.is-sequence-started .home-video-strategy {
+		transition-delay: 3150ms;
+	}
+
+	.home-video-stage.is-final .home-video-teaser {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+
+	.home-video-stage.is-final .home-video-scroll {
+		opacity: 1;
+		transform: translate3d(-50%, 0, 0);
+		pointer-events: auto;
+		transition-delay: 0ms;
+		animation: home-video-arrow-float 2400ms ease-in-out infinite;
+	}
+
+	.home-video-stage.is-final .home-video-replay {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+		pointer-events: auto;
+		transition-delay: 0ms;
+	}
+
+	@keyframes home-video-arrow-float {
+		0%,
+		100% {
+			transform: translate3d(-50%, -5px, 0);
+		}
+		50% {
+			transform: translate3d(-50%, 8px, 0);
+		}
+	}
+
+	:global(.home-hero) {
+		scroll-margin-top: calc(var(--home-video-nav-height, 76px) + 1px);
 	}
 
 	.home-hero-statement {
@@ -465,6 +1286,124 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 		.home-hero-content h1 {
 			width: var(--home-hero-copy-width);
+
+		/* Overlap the two door leaves by one pixel.  At portrait widths their
+		 * separate composited backgrounds can otherwise leave a hairline at the
+		 * centre before the doors begin to open.  Keep their pseudo-backgrounds
+		 * one full-stage width so the pattern remains continuous through the
+		 * overlap. */
+		.home-video-green-panel {
+			width: calc(50% + 1px);
+		}
+
+		.home-video-green-panel::before,
+		.home-video-green-panel::after {
+			width: calc(200% - 2px);
+		}
+
+		.home-video-stage {
+			--home-video-initial-height: clamp(500px, 72vw, 560px);
+			--home-video-outro-height: clamp(340px, 78vw, 460px);
+			--green-edge-top-wave-width: 1100px;
+			--green-edge-bottom-wave-width: 1100px;
+			width: 100vw;
+			max-width: none;
+			margin-right: calc(50% - 50vw);
+			margin-left: calc(50% - 50vw);
+		}
+
+		.home-video-intro {
+			transition: height 1700ms ease-in-out;
+		}
+
+		.home-video-stage.is-green-intro .home-video-intro {
+			height: var(--home-video-initial-height) !important;
+			aspect-ratio: auto;
+		}
+
+		.home-video-stage.is-darkening .home-video-intro,
+		.home-video-stage.is-final .home-video-intro {
+			height: var(--home-video-outro-height) !important;
+			aspect-ratio: auto;
+		}
+
+		.home-video-stage.is-resetting .home-video-intro {
+			transition: none;
+		}
+
+		.home-video-intro-content {
+			width: 100vw;
+			max-width: none;
+			padding-inline: 18px;
+		}
+
+		.home-video-solution-label {
+			margin-bottom: clamp(26px, 3.5vh, 36px);
+		}
+
+		.home-video-teaser {
+			right: 6%;
+			left: 6%;
+			font-size: clamp(1.45rem, 5.4vw, 2.25rem);
+		}
+
+		.home-video-teaser-detail-rest {
+			display: block;
+		}
+
+		.home-video-brand-mark {
+			width: clamp(72px, 16vw, 104px);
+		}
+
+		.home-video-wordmark {
+			width: 54%;
+			min-width: 0;
+			font-size: clamp(1.85rem, 7vw, 2.8rem);
+		}
+
+		.home-video-slogan-block {
+			margin-top: 22px;
+		}
+
+		.home-video-slogan {
+			width: 88% !important;
+			max-width: 88% !important;
+			font-size: clamp(1.35rem, 5.4vw, 2.35rem);
+			white-space: normal;
+		}
+
+		.home-video-strategy {
+			position: static;
+			left: auto;
+			display: flex;
+			flex-direction: column;
+			align-self: stretch;
+			align-items: center;
+			justify-content: center;
+			gap: clamp(2px, 0.55vw, 5px);
+			width: 88% !important;
+			max-width: 88% !important;
+			margin: 20px auto 0 !important;
+			font-size: 5.25vw;
+			line-height: 1;
+			white-space: normal;
+		}
+
+		.home-video-strategy-line {
+			display: block;
+			width: max-content;
+			max-width: 100%;
+			white-space: nowrap;
+		}
+
+		.home-video-period {
+			display: block;
+			height: 0.65em;
+			font-size: 1.05em;
+			line-height: 0.65;
+		}
+
+
 			max-width: none;
 			font-size: clamp(2.1rem, 9.2vw, 4.4rem);
 			white-space: normal;
@@ -487,6 +1426,44 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			height: 0.7em;
 			line-height: 0.7;
 			text-align: center;
+		}
+	}
+
+	@media (max-height: 680px) and (orientation: landscape) {
+		.home-video-intro-content {
+			padding-block: 16px;
+		}
+
+		.home-video-brand-mark {
+			width: 72px;
+		}
+
+		.home-video-wordmark {
+			font-size: 2rem;
+		}
+
+		.home-video-slogan-block {
+			margin-top: 20px;
+		}
+
+		.home-video-slogan {
+			font-size: clamp(1.55rem, 2.8vw, 2.2rem) !important;
+		}
+
+		.home-video-strategy {
+			margin-top: 16px !important;
+			font-size: clamp(1rem, 1.8vw, 1.35rem);
+		}
+
+		.home-video-scroll {
+			height: 38px;
+			bottom: 12px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.home-video-stage.is-final .home-video-scroll {
+			animation: none;
 		}
 	}
 
@@ -1038,6 +2015,18 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		justify-self: start;
 	}
 
+	/* Keep the three challenge cards on the original black outline icon set. */
+	:global(.home-problem-grid .card--link .section-icon--raster) {
+		display: none !important;
+	}
+
+	:global(.home-problem-grid .card--link .section-icon--original) {
+		display: block !important;
+		--section-icon-color: #000000 !important;
+		color: #000000 !important;
+		stroke: #000000 !important;
+	}
+
 	:global(.home-problem-grid .card--link > .card-icon-heading > h3) {
 		grid-column: 2;
 		max-width: none;
@@ -1048,8 +2037,56 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		--card-tint: #fbfaf8;
 	}
 
+	:global(.home-file-model-section > .home-comparison-grid) {
+		margin-top: clamp(32px, 3.5vw, 48px) !important;
+	}
+
+	:global(body .page .content .section.home-file-model-section > p.home-file-model-summary) {
+		grid-column: 1 / -1;
+		justify-self: stretch;
+		box-sizing: border-box;
+		width: 100% !important;
+		max-width: none !important;
+		margin: clamp(32px, 3.5vw, 48px) 0 0 !important;
+		color: var(--accent);
+		font-family: var(--font-heading);
+		font-size: clamp(22.1px, 2.72vw, 32.3px);
+		font-weight: var(--font-weight-heading);
+		line-height: var(--card-heading-line-height);
+		text-align: center;
+	}
+
+	:global(.home-file-model-summary > span) {
+		display: block;
+	}
+
+	:global(body .page .content .section.home-file-model-section > .home-file-model-summary > span) {
+		font-size: clamp(1.25rem, 1.8vw, 1.55rem) !important;
+	}
+
+	:global(body .page .content .section.home-file-model-section > .home-file-model-summary > .home-file-model-summary-problem) {
+		color: #000000 !important;
+		font-size: clamp(1.25rem, 1.8vw, 1.55rem) !important;
+	}
+
+	:global(body .page .content .section.home-file-model-section > .home-file-model-summary > .home-file-model-summary-solution-context) {
+		color: #000000 !important;
+	}
+
+	:global(body .page .content .section.home-file-model-section > .home-file-model-summary > .home-file-model-summary-break) {
+		color: var(--accent-orange) !important;
+	}
+
+	:global(body .page .content .section.home-file-model-section > p.home-file-model-summary-solution) {
+		margin-top: 0 !important;
+	}
+
 	:global(.home-file-model-section) {
 		padding-bottom: calc(var(--section-padding) * 0.6667);
+	}
+
+	:global(.home-file-model-section + script + .home-tech-visual-section) {
+		margin-top: var(--section-stack-gap) !important;
 	}
 
 	:global(.home-web-asset-section) {
@@ -1058,10 +2095,10 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	@media (orientation: portrait) {
 		:global(.home-tech-heading-section) {
-			width: 100vw !important;
-			max-width: 100vw !important;
-			margin-right: calc(50% - 50vw) !important;
-			margin-left: calc(50% - 50vw) !important;
+			width: 100% !important;
+			max-width: 100% !important;
+			margin-right: 0 !important;
+			margin-left: 0 !important;
 			padding-right: 0 !important;
 			padding-left: 0 !important;
 			overflow: visible;
@@ -1071,21 +2108,30 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			order: 1 !important;
 			justify-self: stretch;
 			box-sizing: border-box;
-			width: 100vw !important;
-			max-width: 100vw !important;
+			width: 100% !important;
+			max-width: 100% !important;
 			margin-right: 0 !important;
 			margin-left: 0 !important;
-			padding-right: calc(var(--section-padding) * 0.5);
-			padding-left: calc(var(--section-padding) * 0.5);
+			padding-right: 0;
+			padding-left: 0;
 		}
 
 		.home-tech-title-line-solution {
-			order: 1 !important;
+			order: 2 !important;
 			box-sizing: border-box;
-			width: 100vw !important;
-			max-width: 100vw !important;
-			padding-right: calc(var(--section-padding) * 0.5);
-			padding-left: calc(var(--section-padding) * 0.5);
+			width: 100% !important;
+			max-width: 100% !important;
+			padding-right: 0;
+			padding-left: 0;
+		}
+
+		:global(body .page .content .section.section--white.home-file-model-section > .home-comparison-grid) {
+			order: 3 !important;
+			margin-top: clamp(32px, 3.5vw, 48px) !important;
+		}
+
+		:global(.home-file-model-section > .home-file-model-summary) {
+			order: 4 !important;
 		}
 
 		.home-tech-title-line {

@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import KbHelpModal from "../components/KbHelpModal.astro";
+import PartnershipRequestModal from "../components/PartnershipRequestModal.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
@@ -12,7 +13,7 @@ const contactHeroBodySecondLine = "Ask our team for additional info or simply re
 const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecondLine}`, "");
 ---
 
-<Base title={page.metaTitle} description={page.description}>
+<Base title={page.metaTitle} description={page.description} ogTitle={page.ogTitle} ogDescription={page.ogDescription} ogImage={page.image}>
 	<HeroSection
 		class="contact-hero"
 		lead={page.heroLead}
@@ -87,6 +88,7 @@ const contactHeroBodyFirstLine = page.heroBody?.replace(` ${contactHeroBodySecon
 	{page.cta && <CtaBlock {...page.cta} />}
 
 	<KbHelpModal />
+	<PartnershipRequestModal />
 
 	<div class="modal onboarding-modal" id="request-onboarding-modal" aria-hidden="true">
 		<div class="modal-backdrop" data-modal-close></div>

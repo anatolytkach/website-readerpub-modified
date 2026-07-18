@@ -5,6 +5,7 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import Base from "../layouts/Base.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 
 const primaryActions = [
 	{
@@ -27,23 +28,32 @@ const ctaActions = [
 ---
 
 <Base
-	title="Scribe — AI Companion for Literature, Writing and Publishing | ReaderPub"
-	description="Scribe is ReaderPub’s specialized AI companion for conversations about books, authors, literature, writing, publishing and ReaderPub platform workflows."
+	title="Scribe: AI for Literature, Writing & Publishing | ReaderPub"
+	description="Explore Scribe, ReaderPub’s AI companion for literature, writing, publishing, specialized knowledge, persistent conversations, and platform guidance."
 	canonical="/scribe/"
+	ogImage="/images/scribe_hero.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="Scribe"
+			description="Explore Scribe, ReaderPub’s AI companion for literature, writing, publishing, specialized knowledge, persistent conversations, and platform guidance."
+			url="/scribe/"
+			image="/images/scribe_hero.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		class="scribe-hero"
 		image="/images/scribe_hero.webp"
-		imageAlt="Scribe AI Companion for ReaderPub literature and publishing conversations"
+		imageAlt="Illustration of Scribe, ReaderPub’s AI companion for literature, writing, publishing, and platform conversations"
 		spacerBackgroundPositionY="90%"
 	>
-		<Fragment slot="title"><span class="scribe-hero-product">Scribe<span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">All things literature AI companion.</span></Fragment>
+		<Fragment slot="title"><span class="scribe-hero-product">Scribe<span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">The AI companion for all things literature.</span></Fragment>
 		<div class="scribe-hero-copy">
 			<p class="scribe-hero-problem">
-				General-purpose AI can answer almost anything. However, its answers often lack specificity and are full of platitudes.
+				General-purpose AI can answer almost anything, but its responses often lack specificity and fall back on familiar platitudes.
 			</p>
 			<p class="scribe-hero-solution">
-				Scribe combines modern language models with specialized knowledge about literature, books, authors, writing, publishing and ReaderPub platform capabilities to support focused conversation.
+				Scribe combines modern language models with specialized knowledge of literature, books, authors, writing, and publishing to support focused, relevant conversations.
 			</p>
 		</div>
 		<div class="scribe-hero-actions">
@@ -63,15 +73,15 @@ const ctaActions = [
 
 	<Section
 		tone="gray"
-		body="Readers, authors, publishers and institutions often move between books, search engines, documentation, online discussions and general-purpose AI assistants to find answers. Each source knows only part of the picture."
+		body="Readers, authors, publishers, and institutions often move among books, search engines, documentation, online discussions, and general-purpose AI assistants to find answers. Each source holds only part of the picture."
 	>
 		<Fragment slot="title"><span class="section-title-rest">Literary and research knowledge</span> <span class="section-title-accent">is scattered across too many places</span></Fragment>
 		<CardGrid columns="3" class="scribe-problem-grid scribe-centered-card-grid">
-			<Card title="Books" body="Books provide knowledge but cannot answer questions." />
-			<Card title="Search" body="Search engines return links rather than conversations." />
-			<Card title="General AI" body="General AI lacks focused literary and publishing context." />
-			<Card title="Community discussion" body="Community discussions are valuable but difficult to search." />
-			<Card title="Educational knowledge" body="Educational and research knowledge is often buried in documents, forums and workflows." />
+			<Card title="Books" body="Books contain knowledge, but they cannot answer questions." />
+			<Card title="Search" body="Search engines return links, not conversations." />
+			<Card title="General AI" body="General-purpose AI lacks focused literary and publishing context." />
+			<Card title="Community discussion" body="Community discussions are valuable, but difficult to search." />
+			<Card title="Educational knowledge" body="Educational and research knowledge is often buried in documents, forums, and workflows." />
 		</CardGrid>
 	</Section>
 
@@ -90,47 +100,47 @@ const ctaActions = [
 
 	<Section
 		tone="green"
-		body="Scribe gives ReaderPub users a conversational way to explore books, authors, literary ideas, writing questions, publishing workflows and platform guidance. Instead of switching between many tools, users can ask questions in one place and continue the conversation over time."
+		body="Scribe gives ReaderPub users a conversational way to explore books, authors, literary ideas, writing questions, publishing workflows, and platform guidance. Instead of switching among tools, users can ask questions in one place and continue the conversation over time."
 	>
-		<Fragment slot="title"><span class="green-heading-white">A specialized AI</span> for literature, writing and publishing</Fragment>
+		<Fragment slot="title"><span class="green-heading-white">A specialized AI</span> for literature, writing, and publishing</Fragment>
 		<CardGrid columns="3" class="scribe-centered-card-grid">
-			<Card title="Literature" body="Discuss books, authors, genres, literary history and ideas." />
-			<Card title="Writing" body="Explore storytelling, editing, structure, style and writing techniques." />
-			<Card title="Publishing" body="Ask about publishing workflows, distribution, copyright, pricing and industry practices." />
-			<Card title="ReaderPub" body="Get guidance about ReaderPub features, publishing tools and platform workflows." />
-			<Card title="WeBuzz" body="Continue conversations that connect with book discussion and community activity." />
+			<Card title="Literature" body="Discuss books, authors, genres, literary history, and ideas." />
+			<Card title="Writing" body="Explore storytelling, editing, structure, style, and writing techniques." />
+			<Card title="Publishing" body="Ask about publishing workflows, distribution, copyright, pricing, and industry practices." />
+			<Card title="ReaderPub" body="Get guidance on ReaderPub features, publishing tools, and platform workflows." />
+			<Card title="WeBuzz" body="Continue conversations connected to book discussions and community activity." />
 		</CardGrid>
 	</Section>
 
 	<Section
 		tone="white"
 		title="How Scribe works"
-		body="Scribe combines modern language models with specialized sources and platform context to support focused conversations about literature, writing and publishing."
+		body="Scribe combines modern language models with specialized sources and ReaderPub platform context to support focused conversations about literature, writing, and publishing."
 	>
 		<CardGrid columns="3" class="scribe-centered-card-grid">
-			<Card title="Specialized knowledge" body="Uses information about books, authors, literature, writing, publishing and ReaderPub." />
+			<Card title="Specialized knowledge" body="Uses information about books, authors, literature, writing, publishing, and ReaderPub." />
 			<Card title="Conversational AI" body="Supports natural conversations instead of isolated searches." />
-			<Card title="Persistent conversations" body="Discussions with Scribe can be saved and continued later." />
-			<Card title="Available across ReaderPub" body="Scribe can be opened from the website, WeRead catalog and WeBuzz." />
-			<Card title="Context-aware answers" body="Answers can use platform materials, discussions, documentation and publishing resources when relevant." />
+			<Card title="Persistent conversations" body="Conversations with Scribe can be saved and continued later." />
+			<Card title="Available across ReaderPub" body="Scribe can be opened from the ReaderPub website, the WeRead catalog, and WeBuzz." />
+			<Card title="Context-aware answers" body="When relevant, answers can use platform materials, discussions, documentation, and publishing resources." />
 		</CardGrid>
 	</Section>
 
 	<Section tone="green">
 		<Fragment slot="title">Who benefits from <span class="green-heading-white">Scribe</span>?</Fragment>
 		<CardGrid columns="3" class="scribe-centered-card-grid">
-			<Card icon="readerBook" title="Readers" body="Understand books, authors, references and literary context more deeply." />
-			<Card icon="author" title="Authors" body="Discuss writing, research, editing and publishing questions." />
-			<Card icon="publisher" title="Publishers" body="Get immediate guidance about publishing workflows and platform features." />
-			<Card icon="library" title="Institutions" body="Support readers, staff and communities with a specialized literary and publishing assistant." />
-			<Card icon="fan" title="WeBuzz users" body="Continue saved conversations with Scribe from My Activity." />
+			<Card icon="readerBook" title="Readers" body="Understand books, authors, references, and literary context more deeply." />
+			<Card icon="author" title="Authors" body="Discuss writing, research, editing, and publishing questions." />
+			<Card icon="publisher" title="Publishers" body="Get immediate guidance on publishing workflows and ReaderPub platform features." />
+			<Card icon="library" title="Institutions" body="Support readers, staff, and communities with a specialized literary and publishing assistant." />
+			<Card icon="fan" title="WeBuzz users" body="Continue saved Scribe conversations from My Activity." />
 		</CardGrid>
 	</Section>
 
 	<CtaBlock
 		class="scribe-final-cta"
 		title="Knowledge is more useful when you can have a conversation with it."
-		body="Scribe helps readers, authors, publishers and institutions explore literature, writing and publishing through focused AI-powered conversation."
+		body="Scribe helps readers, authors, publishers, and institutions explore literature, writing, and publishing through focused, AI-powered conversation."
 		actions={ctaActions}
 	/>
 </Base>

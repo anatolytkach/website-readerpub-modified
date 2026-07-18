@@ -15,6 +15,8 @@
 	--accent-soft: #e2f3f1;
 	--section-green-wide-stripe: #00564c;
 	--section-green-narrow-stripe: #006457;
+	--section-green-wide-stripe-size: 46.4px;
+	--section-green-stripe-period: 51.733px;
 	--section-green-orange: #ff5d15;
 	--icon-reader-book: #009b8a;
 	--icon-author: #d0186a;
@@ -54,12 +56,12 @@
 	--card-good-reveal-offset: clamp(36px, 4.5vw, 72px);
 	--shadow-soft: 0 14px 32px rgba(15, 23, 42, 0.07);
 	--shadow-hover: 0 18px 38px rgba(15, 23, 42, 0.1);
-	--card-green-border: #d5f1e8;
-	--card-green-shadow: -4px 7px 12px -9px rgba(2, 143, 128, 0.1);
-	--white-card-shape-shadow: -4px 7px 4px rgba(2, 143, 128, 0.1);
+	--card-green-shadow: 0 0 18px rgba(2, 143, 128, 0.18515);
+	--white-card-shape-shadow: 0 0 9px rgba(2, 143, 128, 0.18515);
 	--card-gray-shadow: 0 0 18px rgba(78, 90, 106, 0.1);
 	--white-card-question-frame: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23ffffff%27%20stroke%3D%27%23d5f1e8%27%20stroke-width%3D%271%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M%200%20.5%20C%204%2025%204%2075%200%2099.5%20L%2096%2099.5%20C%20100%2075%20100%2025%2096%20.5%20Z%27/%3E%3C/svg%3E");
 	--white-card-question-frame-hover: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23ffffff%27%20stroke%3D%27%23ff5a00%27%20stroke-width%3D%271%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M%200%20.5%20C%204%2025%204%2075%200%2099.5%20L%2096%2099.5%20C%20100%2075%20100%2025%2096%20.5%20Z%27/%3E%3C/svg%3E");
+	--comparison-solution-frame: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20fill%3D%27%23ffffff%27%20stroke%3D%27%2322b7a7%27%20stroke-width%3D%271%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M%200%20.5%20C%204%2025%204%2075%200%2099.5%20L%2096%2099.5%20C%20100%2075%20100%2025%2096%20.5%20Z%27/%3E%3C/svg%3E");
 	--radius-card: 8px;
 	--radius-control: 0 999px 999px 0;
 	--section-gap: 18px;
@@ -700,10 +702,19 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	--section-bg: repeating-radial-gradient(
 		circle at var(--section-green-circle-x) calc(var(--section-green-circle-y) + var(--section-bg-parallax-y)),
 		var(--section-green-wide-stripe) 0,
-		var(--section-green-wide-stripe) 46.4px,
-		var(--section-green-narrow-stripe) 46.4px,
-		var(--section-green-narrow-stripe) 51.733px
+		var(--section-green-wide-stripe) var(--section-green-wide-stripe-size),
+		var(--section-green-narrow-stripe) var(--section-green-wide-stripe-size),
+		var(--section-green-narrow-stripe) var(--section-green-stripe-period)
 	);
+}
+
+@media (orientation: portrait) {
+	:root {
+		/* Keep the two colour bands in the same proportion while making each
+		 * circular stripe one and a half times tighter on vertical screens. */
+		--section-green-wide-stripe-size: 30.933333px;
+		--section-green-stripe-period: 34.488667px;
+	}
 }
 
 .content > .section--green:nth-child(4n + 1 of .section--green) {
@@ -1600,6 +1611,110 @@ body .page .content
 	text-decoration: none;
 }
 
+/*
+ * In the five white comparison sections, the "old" side is also a card.
+ * The paper surface rotates independently, so the copy stays easy to read.
+ */
+body .page .content .section--white .comparison-text-panel:has(+ .card--good) {
+	--comparison-paper-angle: 6deg;
+	--comparison-paper-shadow: 0 0 28px rgb(21 31 43 / 15.87%);
+
+	position: relative;
+	isolation: isolate;
+	z-index: 0;
+	box-sizing: border-box;
+	min-height: 100%;
+	padding: 28px calc(28px + 4%) !important;
+	border: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+/* The parent section's 28px grid gap plus this margin doubles the space above the pair. */
+body
+	.page
+	.content
+	.section--white
+	:is(.home-comparison-grid, .wepub-comparison-grid, .model-grid):has(
+		> .comparison-text-panel + .card--good
+	) {
+	margin-top: 28px;
+}
+
+@media (min-width: 901px) {
+	body
+		.page
+		.content
+		.section--white
+		:is(.home-comparison-grid, .wepub-comparison-grid, .model-grid):has(
+			> .comparison-text-panel + .card--good
+		) {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+	}
+
+	body .page .content .section--white .comparison-text-panel:has(+ .card--good) {
+		width: 70%;
+		justify-self: center;
+	}
+}
+
+body .page .content .section--white .comparison-text-panel:has(+ .card--good)::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background: var(--card-bg);
+	box-shadow: var(--comparison-paper-shadow);
+	transform: rotate(var(--comparison-paper-angle));
+	transform-origin: center;
+	outline: 1px solid transparent;
+	transition:
+		outline-color var(--motion-fast) ease,
+		box-shadow var(--motion-fast) ease;
+}
+
+body .page .content .section--white .comparison-text-panel:has(+ .card--good) > * {
+	position: relative;
+	z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	body .page .content .section--white .comparison-text-panel:has(+ .card--good):is(:hover, :focus-within) {
+		z-index: 2;
+	}
+
+	body
+		.page
+		.content
+		.section--white
+		.comparison-text-panel:has(+ .card--good):is(:hover, :focus-within)::before {
+		outline-color: var(--text);
+		box-shadow: 0 0 30px rgb(255 123 72 / 42.32%);
+	}
+}
+
+@media (max-width: 900px) {
+	body .page .content .section--white .comparison-text-panel:has(+ .card--good) {
+		--comparison-paper-angle: 2.5deg;
+		width: 100%;
+		padding: 24px !important;
+	}
+}
+
+/* Portrait layouts keep the original, compact spacing above comparison cards. */
+@media (orientation: portrait) {
+	body
+		.page
+		.content
+		.section--white
+		:is(.home-comparison-grid, .wepub-comparison-grid, .model-grid):has(
+			> .comparison-text-panel + .card--good
+		) {
+		margin-top: 0 !important;
+	}
+}
+
 @media (min-width: 901px) {
 	:is(
 			.home-comparison-grid,
@@ -1856,6 +1971,14 @@ body .page .content
 	color: var(--accent-orange);
 }
 
+.site-footer .site-footer-links {
+	color: var(--text);
+}
+
+.site-footer .site-footer-link-separator {
+	color: var(--accent-orange);
+}
+
 .site-footer a {
 	color: inherit;
 	font-size: 0.95rem;
@@ -2073,6 +2196,12 @@ body .page .content
 		width: 36px;
 		height: 36px;
 		font-size: 18px;
+	}
+
+	.section.section--green,
+	.institutions-expanded-access-grid {
+		--green-edge-top-wave-width: 1100px;
+		--green-edge-bottom-wave-width: 1100px;
 	}
 
 	.section.section--gray,
@@ -2777,20 +2906,210 @@ body .page .content
 }
 
 .section--gray .card {
-	border-color: var(--border);
-	box-shadow: var(--card-gray-shadow) !important;
-	background: var(--card-bg) !important;
-	transform: skewX(6deg) !important;
+	--gray-card-outline-angle: -3.5deg;
+	--gray-card-row-drop: 0px;
+	--gray-card-row-slope: clamp(32px, 3.2vw, 56px);
+	--gray-card-outline-shadow: 15px 19px 24px rgba(255, 124, 72, 0.28);
+	position: relative;
+	z-index: 0;
+	isolation: isolate;
+	border: 0 !important;
+	border-radius: 0 !important;
+	clip-path: none !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	transform: translateY(var(--gray-card-row-drop)) !important;
 	transition: none !important;
 	will-change: auto;
 }
 
+body .page .content .section--gray .card.card {
+	border: 0 !important;
+	border-radius: 0 !important;
+	clip-path: none !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+.section--gray .card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	border-radius: 0;
+	clip-path: none;
+	outline: 1px solid transparent;
+	background: var(--card-bg);
+	box-shadow: var(--gray-card-outline-shadow);
+	transform: rotate(var(--gray-card-outline-angle));
+	transform-origin: center;
+	transition: outline-color var(--motion-fast) ease;
+	pointer-events: none;
+}
+
 .section--gray .card-grid {
+	row-gap: calc(var(--card-grid-gap) + var(--gray-card-row-slope) + 12px);
 	overflow: visible;
 }
 
-.section--gray .card > * {
-	transform: skewX(-6deg);
+@media (min-width: 901px) {
+	.section--gray .card-grid--2 > .card:nth-child(odd),
+	.section--gray .security-steps-grid > .card:nth-child(odd) {
+		--gray-card-outline-angle: -3.5deg;
+		--gray-card-row-drop: 0px;
+	}
+
+	.section--gray .card-grid--2 > .card:nth-child(even),
+	.section--gray .security-steps-grid > .card:nth-child(even) {
+		--gray-card-outline-angle: 3.5deg;
+		--gray-card-row-drop: var(--gray-card-row-slope);
+	}
+
+	.section--gray .card-grid--3 > .card:nth-child(3n + 1) {
+		--gray-card-outline-angle: -3.5deg;
+		--gray-card-row-drop: 0px;
+	}
+
+	.section--gray .card-grid--3 > .card:nth-child(3n + 2) {
+		--gray-card-outline-angle: 3.5deg;
+		--gray-card-row-drop: calc(var(--gray-card-row-slope) / 2);
+	}
+
+	.section--gray .card-grid--3 > .card:nth-child(3n) {
+		--gray-card-outline-angle: -3.5deg;
+		--gray-card-row-drop: var(--gray-card-row-slope);
+	}
+
+	.section--gray .card-grid--4 > .card:nth-child(4n + 1),
+	.section--gray .webuzz-comparison-grid > .card:nth-child(4n + 1) {
+		--gray-card-outline-angle: -3.5deg;
+		--gray-card-row-drop: 0px;
+	}
+
+	.section--gray .card-grid--4 > .card:nth-child(4n + 2),
+	.section--gray .webuzz-comparison-grid > .card:nth-child(4n + 2) {
+		--gray-card-outline-angle: 3.5deg;
+		--gray-card-row-drop: calc(var(--gray-card-row-slope) / 3);
+	}
+
+	.section--gray .card-grid--4 > .card:nth-child(4n + 3),
+	.section--gray .webuzz-comparison-grid > .card:nth-child(4n + 3) {
+		--gray-card-outline-angle: -3.5deg;
+		--gray-card-row-drop: calc(var(--gray-card-row-slope) * 2 / 3);
+	}
+
+	.section--gray .card-grid--4 > .card:nth-child(4n),
+	.section--gray .webuzz-comparison-grid > .card:nth-child(4n) {
+		--gray-card-outline-angle: 3.5deg;
+		--gray-card-row-drop: var(--gray-card-row-slope);
+	}
+
+	.section--gray .institutions-top-problem-grid > .card:nth-child(1),
+	.section--gray .institutions-top-problem-grid > .card:nth-child(4),
+	.section--gray .wepub-new-source-authors-loss-grid > .card:nth-child(1),
+	.section--gray .wepub-new-source-authors-loss-grid > .card:nth-child(4) {
+		--gray-card-outline-angle: -3.5deg;
+		--gray-card-row-drop: 0px;
+	}
+
+	.section--gray .institutions-top-problem-grid > .card:nth-child(2),
+	.section--gray .wepub-new-source-authors-loss-grid > .card:nth-child(2) {
+		--gray-card-outline-angle: 3.5deg;
+		--gray-card-row-drop: calc(var(--gray-card-row-slope) / 2);
+	}
+
+	.section--gray .institutions-top-problem-grid > .card:nth-child(3),
+	.section--gray .wepub-new-source-authors-loss-grid > .card:nth-child(3) {
+		--gray-card-outline-angle: -3.5deg;
+		--gray-card-row-drop: var(--gray-card-row-slope);
+	}
+
+	.section--gray .institutions-top-problem-grid > .card:nth-child(5),
+	.section--gray .scribe-centered-card-grid > .card:nth-child(5),
+	.section--gray .wepub-new-source-authors-loss-grid > .card:nth-child(5) {
+		--gray-card-outline-angle: 3.5deg;
+		--gray-card-row-drop: var(--gray-card-row-slope);
+	}
+
+	/* Give a second row its own rhythm instead of copying the angles above it. */
+	.section--gray .card-grid--2 > .card:nth-child(4n + 3),
+	.section--gray .security-steps-grid > .card:nth-child(4n + 3) {
+		--gray-card-outline-angle: -2deg;
+	}
+
+	.section--gray .card-grid--2 > .card:nth-child(4n),
+	.section--gray .security-steps-grid > .card:nth-child(4n) {
+		--gray-card-outline-angle: 2.5deg;
+	}
+
+	.section--gray .card-grid--3 > .card:nth-child(6n + 4),
+	.section--gray .institutions-top-problem-grid > .card:nth-child(4),
+	.section--gray .wepub-new-source-authors-loss-grid > .card:nth-child(4) {
+		--gray-card-outline-angle: 2deg;
+	}
+
+	.section--gray .card-grid--3 > .card:nth-child(6n + 5),
+	.section--gray .institutions-top-problem-grid > .card:nth-child(5),
+	.section--gray .wepub-new-source-authors-loss-grid > .card:nth-child(5) {
+		--gray-card-outline-angle: -2.6deg;
+	}
+
+	.section--gray .card-grid--3 > .card:nth-child(6n) {
+		--gray-card-outline-angle: 2.3deg;
+	}
+
+	@media (max-width: 1100px) {
+		.section--gray .card-grid--4:not(.institutions-top-problem-grid) > .card:nth-child(4n + 3) {
+			--gray-card-outline-angle: -2deg;
+		}
+
+		.section--gray .card-grid--4:not(.institutions-top-problem-grid) > .card:nth-child(4n) {
+			--gray-card-outline-angle: 2.5deg;
+		}
+	}
+
+	@media (max-width: 1180px) {
+		.section--gray .webuzz-comparison-grid > .card:nth-child(4n + 3) {
+			--gray-card-outline-angle: -2deg;
+		}
+
+		.section--gray .webuzz-comparison-grid > .card:nth-child(4n) {
+			--gray-card-outline-angle: 2.5deg;
+		}
+	}
+}
+
+/* Keep the established-media cards together; the Books card remains unchanged. */
+@media (min-width: 901px) {
+	.section--gray .webuzz-comparison-grid > .card:nth-child(-n + 3) {
+		--gray-card-outline-angle: 0deg;
+		--gray-card-outline-shadow: 7.5px 9.5px 24px rgb(2 143 128 / 18%);
+	}
+}
+
+@media (min-width: 1181px) {
+	.section--gray .webuzz-comparison-grid > .card:nth-child(-n + 3) {
+		--gray-card-row-drop: 0px;
+	}
+}
+
+@media (max-width: 900px) {
+	.section--gray .card {
+		--gray-card-outline-angle: -2.25deg;
+		--gray-card-row-drop: 0px;
+	}
+
+	.section--gray .card-grid {
+		row-gap: calc(var(--card-grid-gap) + 20px);
+	}
+
+	.section--gray .card-grid > .card:nth-child(odd) {
+		--gray-card-outline-angle: -2.25deg;
+	}
+
+	.section--gray .card-grid > .card:nth-child(even) {
+		--gray-card-outline-angle: 2.25deg;
+	}
 }
 
 .section--gray .card .section-icon {
@@ -2825,10 +3144,19 @@ body .page .content
 .section--gray .card--link:hover,
 .section--gray .card--link:focus-visible,
 .animation-pass-ready .section--gray [data-hover-card]:hover {
-	transform: skewX(6deg) !important;
-	border-color: #000000 !important;
-	background: var(--card-bg) !important;
-	box-shadow: var(--card-gray-shadow) !important;
+	border: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	transform: translateY(var(--gray-card-row-drop)) !important;
+	z-index: 2;
+}
+
+.section--gray .card:hover::before,
+.section--gray .card:focus-visible::before,
+.section--gray .card--link:hover::before,
+.section--gray .card--link:focus-visible::before,
+.animation-pass-ready .section--gray [data-hover-card]:hover::before {
+	outline-color: #000000;
 }
 
 .animation-pass-ready .section--gray [data-hover-card]:hover :is(.section-icon, .card-icon-heading > svg) {
@@ -2991,6 +3319,74 @@ body .page .content .section--white .card:is(
 	z-index: 1;
 }
 
+/* Use the primary button green by default; retain the orange hover frame. */
+body .page .content .section--white .comparison-text-panel + .card--good::before {
+	background-image: var(--comparison-solution-frame);
+}
+
+/* Use the same curved paper frame for the three green comparison cards. */
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	) {
+	position: relative;
+	isolation: isolate;
+	padding-inline: calc(28px + 4%);
+	border: 0 !important;
+	border-radius: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	)::before,
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	)::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	)::before {
+	background-image: var(--white-card-question-frame);
+	filter: drop-shadow(var(--white-card-shape-shadow));
+}
+
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	)::after {
+	background-image: var(--white-card-question-frame-hover);
+	opacity: 0;
+	transition: opacity var(--motion-quick) var(--motion-ease);
+}
+
+body .page .content .section--green .card:is(
+		.platform-readerpub-model-card,
+		.readerpub-model-card,
+		.booktree-with-card
+	) > * {
+	position: relative;
+	z-index: 1;
+}
+
 @media (hover: hover) and (pointer: fine) {
 	body .page .content .section--white .card:is(
 			.card--accent,
@@ -3007,6 +3403,14 @@ body .page .content .section--white .card:is(
 			.webuzz-living-card,
 			.webuzz-legacy-solution-card,
 			.webuzz-overview-card--green
+		):hover::after {
+		opacity: 1;
+	}
+
+	body .page .content .section--green .card:is(
+			.platform-readerpub-model-card,
+			.readerpub-model-card,
+			.booktree-with-card
 		):hover::after {
 		opacity: 1;
 	}

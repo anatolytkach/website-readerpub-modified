@@ -8,41 +8,50 @@ import Section from "../components/sections/Section.astro";
 import SpecCardsSection from "../components/sections/SpecCardsSection.astro";
 import SectionIcon from "../components/SectionIcon.astro";
 import ProductName from "../components/ProductName.astro";
+import ProductStructuredData from "../components/ProductStructuredData.astro";
 import { PUBLISH_URL, SITE_NAME } from "../consts";
 
-const pricingAction = { label: "See pricing", href: "/pricing", variant: "secondary" as const };
+const pricingAction = { label: "See pricing", href: "/pricing/", variant: "secondary" as const };
 const finalPublishAction = { label: "Start publishing with WePub", href: PUBLISH_URL, external: true };
 const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	const number = index + 1;
 
 	return {
 		number,
-		top: `/images/wepub-publishing-flow/top_${number}.png`,
-		body: `/images/wepub-publishing-flow/body_${number}.png`,
+		top: `/images/wepub-publishing-flow/top_${number}.webp`,
+		body: `/images/wepub-publishing-flow/body_${number}.webp`,
 	};
 });
 ---
 
 <Base
-	title={`WePub for Authors & Publishers | ${SITE_NAME}`}
-	description="Publish browser-readable books, sell directly, keep reader relationships connected and build long-term value with ReaderPub's web-native publishing infrastructure."
-	canonical="/wepub"
-	ogImage="/images/author1.webp"
+	title={`Web-Native Book Publishing | ${SITE_NAME}`}
+	description="Publish web-native, browser-readable books with WePub. Sell directly, keep reader relationships and activity connected, and pay a 5% sales commission."
+	canonical="/wepub/"
+	ogImage="/images/author.webp"
 >
+	<Fragment slot="head">
+		<ProductStructuredData
+			name="WePub"
+			description="Publish web-native, browser-readable books with WePub. Sell directly, keep reader relationships and activity connected, and pay a 5% sales commission."
+			url="/wepub/"
+			image="/images/author.webp"
+		/>
+	</Fragment>
 	<HeroSection
 		class="wepub-new-hero"
-		image="/images/author1.webp"
-		imageAlt="Author publishing on the web and staying connected to readers"
+		image="/images/author.webp"
+		imageAlt="Illustration of an author using WePub to publish books online and stay connected with readers"
 		spacerBackgroundPositionY="54%"
 	>
-		<Fragment slot="title"><span style="color: var(--accent);">We<span class="hero-product-part-accent">Pub</span><span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">You should own your readers' activity, not Amazon.</span></Fragment>
-		<Fragment slot="lead">Authors create audiences. Marketplaces own them, and charge up to <strong>35%</strong> platform fee.</Fragment>
+		<Fragment slot="title"><span style="color: var(--accent);">We<span class="hero-product-part-accent">Pub</span><span class="hero-title-colon">:</span></span><br /><span class="hero-title-rest">No platform lock-ins.<br />You own your readers' activity—not Amazon.</span></Fragment>
+		<Fragment slot="lead">Authors build audiences. Marketplaces own access to them and charge platform fees of up to <strong>35%</strong>.</Fragment>
 		<Fragment slot="body">We build your direct, long-term relationships with readers...</Fragment>
-		<p class="authors-hero-fee-line">...while charging you just <strong class="authors-hero-fee">5%</strong> sales commission.</p>
+		<p class="authors-hero-fee-line">...while charging just a <strong class="authors-hero-fee">5%</strong> sales commission.</p>
 		<div class="cta-row">
-			<a class="button" href="/wepub">Start publishing</a>
-			<a class="button button--secondary" href="/pricing">See pricing</a>
-			<a class="button button--secondary author-protection-button" href="/security#control-who-reads">
+			<a class="button" href="https://reader.pub/publish/" target="_blank" rel="noopener noreferrer">Start publishing</a>
+			<a class="button button--secondary" href="/pricing/">See pricing</a>
+			<a class="button button--secondary author-protection-button" href="/security/#control-who-reads">
 				<span class="author-protection-button-label">We protect your book</span>
 				<span class="author-protection-icon" aria-hidden="true">
 					<SectionIcon type="security" title="Protection icon" />
@@ -54,17 +63,17 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	<section class="section section--gray wepub-new-old-model-section">
 		<section class="wepub-new-source-gray-block wepub-new-source-wepub-block">
 			<header class="section-header">
-				<h2><span class="section-title-rest">The old publishing model</span> <span class="section-title-accent">creates files, not lasting reader relationships</span></h2>
-				<p class="section-lead">Current publishing systems are built to distribute files through marketplaces, surrendering the relationship between authors and readers.</p>
+				<h2><span class="section-title-rest">The old publishing model</span> <span class="section-title-accent">creates files—not lasting reader relationships</span></h2>
+				<p class="section-lead">Most publishing systems distribute files through marketplaces, surrendering the direct relationship between authors and readers.</p>
 			</header>
 			<CardGrid columns="2">
 				<Card
-					title="Problem"
-					body="Books are packaged as files and handed to marketplaces that own discovery, customer access and most of the data."
+					title="Marketplace control"
+					body="Books are packaged as files and handed to marketplaces that own discovery, customer access, and most of the data."
 				/>
 				<Card
-					title="Why it fails"
-					body="The sale ends the relationship. The author gets distribution, but the platform keeps the audience."
+					title="Why the old model fails"
+					body="The author gets distribution, but the sale ends the relationship while the platform keeps the audience."
 				/>
 			</CardGrid>
 		</section>
@@ -72,28 +81,28 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		<section class="wepub-new-source-gray-block wepub-new-source-authors-block">
 			<header class="section-header">
 				<h2><span class="section-title-accent">What</span> <span class="section-title-rest">authors lose today</span></h2>
-				<p class="section-lead">The dominant publishing model gives authors distribution, but takes away the relationship.</p>
+				<p class="section-lead">The dominant publishing model gives authors distribution while taking away the direct reader relationship.</p>
 			</header>
 			<div class="card-grid wepub-new-source-authors-loss-grid">
 				<div class="card">
 					<h3>Audience ownership</h3>
-					<p>You sell books. The platform owns the customer.</p>
+					<p>You sell the books. The platform owns the customer.</p>
 				</div>
 				<div class="card">
 					<h3>Reader relationships</h3>
-					<p>You rarely know who your readers are, what they finish, what they discuss or what brings them back.</p>
+					<p>You rarely know who your readers are, what they finish, what they discuss, or what brings them back.</p>
 				</div>
 				<div class="card">
 					<h3>Community</h3>
-					<p>Discussion happens somewhere else, disconnected from your book and your author presence.</p>
+					<p>Discussion happens elsewhere, disconnected from your book and your author presence.</p>
 				</div>
 				<div class="card">
 					<h3>Economics</h3>
-					<p>High commissions and marketplace dependency reduce author control.</p>
+					<p>High commissions and marketplace dependence reduce author control.</p>
 				</div>
 				<div class="card">
 					<h3>Context</h3>
-					<p>Reader reactions disappear into reviews, star ratings and external social feeds.</p>
+					<p>Reader reactions disappear into reviews, star ratings, and external social feeds.</p>
 				</div>
 			</div>
 		</section>
@@ -101,28 +110,28 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	</section>
 
 	<Section tone="white" class="wepub-new-source-solution-section">
-		<Fragment slot="title"><em class="wepub-new-source-solution-title-prefix">The solution:</em><ProductName name="WePub" /> builds direct web presence</Fragment>
-		<h3 class="wepub-new-source-solution-lede">WePub treats a book as a web publication that can be read, found, discussed and connected to the author over time.</h3>
+		<Fragment slot="title"><em class="wepub-new-source-solution-title-prefix">The solution:</em><ProductName name="WePub" /> builds a direct web presence</Fragment>
+		<h3 class="wepub-new-source-solution-lede">WePub treats each book as a web publication that can be read, found, discussed, and connected to the author over time.</h3>
 		<CardGrid columns="3" class="wepub-new-source-icon-grid">
 			<article class="card icon-grid-card">
 				<SectionIcon type="publisher" title="Web-native book pages" />
 				<div class="icon-grid-card-copy">
 					<h3>Web-native book pages</h3>
-					<p>Each title can live as a readable web asset, not only as a downloadable package.</p>
+					<p>Each title can live as a readable web asset—not only as a downloadable package.</p>
 				</div>
 			</article>
 			<article class="card icon-grid-card">
 				<SectionIcon type="author" title="Author-centered publishing" />
 				<div class="icon-grid-card-copy">
 					<h3>Author-centered publishing</h3>
-					<p>The author's presence stays connected to the work and to the people reading it.</p>
+					<p>The author's presence stays connected to the work and the people reading it.</p>
 				</div>
 			</article>
 			<article class="card icon-grid-card">
 				<SectionIcon type="fan" title="Reader connection" />
 				<div class="icon-grid-card-copy">
 					<h3>Reader connection</h3>
-					<p>Discussion and activity remain attached to books and authors after publication.</p>
+					<p>Discussion and reader activity remain attached to books and authors after publication.</p>
 				</div>
 			</article>
 		</CardGrid>
@@ -209,24 +218,24 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		</div>
 	</section>
 
-	<Section tone="white" class="wepub-path-section section--two-column" title="What changes when you publish on ReaderPub">
+	<Section tone="white" class="wepub-path-section section--two-column" title="What changes when you publish with ReaderPub">
 		<div class="wepub-comparison-grid">
 			<article class="comparison-text-panel wepub-list-card wepub-old-path-card">
 				<div class="card-copy">
 					<h3>Old publishing path</h3>
 					<ul class="wepub-model-list">
-						<li>Prepare a file</li>
-						<li>Upload to a marketplace</li>
+						<li>Prepare a book file</li>
+						<li>Upload it to a marketplace</li>
 						<li>Let the platform own discovery and customer access</li>
-						<li>Watch reader activity disappear after purchase</li>
+						<li>Lose visibility into reader activity after purchase</li>
 					</ul>
 				</div>
 			</article>
 			<article class="card card--good wepub-list-card wepub-readerpub-path-card">
 				<div class="card-copy">
-					<h3><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> path</h3>
+					<h3><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> publishing path</h3>
 					<ul class="wepub-model-list">
-						<li>Create an active browser-based publication</li>
+						<li>Create an active, browser-based publication</li>
 						<li>Build an author-centered web presence</li>
 						<li>Keep reader relationships connected</li>
 						<li>Support discussion and future work around the book</li>
@@ -238,7 +247,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 			<img
 				class="image-block wepub-path-workflow-image-asset"
 				src="/images/wepub.webp"
-				alt="WePub publishing workflow from manuscript to live book"
+				alt="Four-step WePub workflow: upload, adjust, price, then sell and engage"
 				loading="lazy"
 				decoding="async"
 				width="1024"
@@ -248,15 +257,15 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		<div class="wepub-start-grid">
 			<article class="card wepub-start-card">
 				<div class="card-copy">
-					<h3>What you get</h3>
+					<h3>What you get with WePub</h3>
 					<p class="wepub-start-lede">Everything you need to publish, monetize, and grow a direct audience.</p>
 					<ul class="wepub-start-list">
-						<li>A fast web edition readers can open instantly.</li>
+						<li>A fast web edition that readers can open instantly.</li>
 						<li>Direct sales to connected readers.</li>
-						<li>Low 5% commission on sales.</li>
+						<li>A low 5% commission on sales.</li>
 						<li>Fan clubs for every book and author.</li>
-						<li>Analytics for sales and engagement.</li>
-						<li>Optional production-ready EPUB output.</li>
+						<li>Sales and engagement analytics.</li>
+						<li>Optional, production-ready EPUB output.</li>
 					</ul>
 				</div>
 			</article>
@@ -265,16 +274,19 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 					<h3>How publishing works</h3>
 					<p class="wepub-start-lede">A simple workflow from manuscript to live web edition.</p>
 					<ol class="wepub-start-list">
-						<li>Share your manuscript (Word, or EPUB).</li>
+						<li>Share your manuscript (Word or EPUB).</li>
 						<li>We prepare your web edition and metadata.</li>
 						<li>You define sales and fan-club options.</li>
-						<li>Your book goes live &mdash; with analytics from day one.</li>
+						<li>Your book goes live&mdash;with analytics from day one.</li>
 					</ol>
 					<p class="wepub-start-lede wepub-compat-lede">
-						Compatible with WeRead for web reading and BookTree for organizing sources.
+						Works with WeRead for web reading and BookTree for organizing sources.
 					</p>
 				</div>
 			</article>
+		</div>
+		<div class="cta-row wepub-start-actions">
+			<a class="button" href={PUBLISH_URL} target="_blank" rel="noopener noreferrer">Publish your book with WePub</a>
 		</div>
 	</Section>
 
@@ -284,10 +296,10 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 			<div class="comparison-text-panel model-card marketplace-model-card">
 				<h3>Marketplace publishing</h3>
 				<ul class="comparison-list">
-					<li>High commission</li>
-					<li>Platform owns the customer</li>
+					<li>High commissions</li>
+					<li>The platform owns the customer</li>
 					<li>Reviews replace conversation</li>
-					<li>Discovery is controlled by marketplace algorithms</li>
+					<li>Marketplace algorithms control discovery</li>
 					<li>Readers leave after purchase</li>
 				</ul>
 			</div>
@@ -295,7 +307,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 				<h3><span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> publishing</h3>
 				<ul class="comparison-list">
 					<li>5% platform commission</li>
-					<li>Author-centered web presence</li>
+					<li>An author-centered web presence</li>
 					<li>Reader relationships stay connected</li>
 					<li>Discussion stays attached to books and authors</li>
 					<li>Books remain active after publication</li>
@@ -307,9 +319,9 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	<SpecCardsSection class="authors-source-section authors-benefits-section section--two-column section-continuation">
 		<div class="authors-living-layout">
 			<div class="authors-living-copy">
-				<h2>From one-time sale to living audience</h2>
+				<h2>From a one-time sale to a living audience</h2>
 				<p class="lede">
-					ReaderPub turns every book into a long‑term web asset — easy to read, easy to find, easy to discuss, and always connected to future work.
+					ReaderPub turns every book into a long-term web asset—easy to read, easy to find, easy to discuss, and always connected to future work.
 				</p>
 			</div>
 			<div class="card-grid authors-living-grid">
@@ -318,28 +330,28 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 						<SectionIcon type="dollars" title="Monetize your catalog" />
 						<h2>Monetize your catalog</h2>
 					</div>
-					<p class="author-benefit-lede">Publish on the web - with optional EPUB output when you need it.</p>
+					<p class="author-benefit-lede">Publish on the web—with optional EPUB output whenever you need it.</p>
 					<ul class="bullets">
 						<li>Direct sales</li>
 						<li>Bundles and promotions (optional)</li>
 						<li>Fan clubs and memberships</li>
-						<li>Web edition plus optional production-ready EPUB delivery.</li>
+						<li>A web edition plus optional, production-ready EPUB delivery.</li>
 					</ul>
 					<p class="author-benefit-note">
-						Save on <strong class="author-save-highlight">5%</strong> commission versus Amazon's 35%. Use your freed-up resources to promote your books on ReaderPub.
+						Save with a <strong class="author-save-highlight">5%</strong> commission versus Amazon's 35%. Use the resources you keep to promote your books on ReaderPub.
 					</p>
 				</div>
 				<div class="card author-benefit-card">
 					<div class="author-benefit-heading">
 						<SectionIcon type="readerBook" title="Sell directly to your readers" />
-						<h2>Sell directly and communicate with your readers.</h2>
+						<h2>Sell directly—and communicate with your readers.</h2>
 					</div>
-					<p class="author-benefit-lede">Keep your audience, keep your data, and keep more of each sale.</p>
+					<p class="author-benefit-lede">Keep your audience, keep your data, and keep more from every sale.</p>
 					<ul class="bullets">
-						<li>Sell web editions and ebooks directly on ReaderPub.</li>
-						<li>5% sales commission, far below Amazon's take.</li>
-						<li>See sales and reader engagement analytics in one place.</li>
-						<li>Receive context-rich reader notes attached to exact passages - not generic comments.</li>
+						<li>Sell web editions and ebooks directly through ReaderPub.</li>
+						<li>Pay a 5% sales commission—far below Amazon's take.</li>
+						<li>See sales and reader-engagement analytics in one place.</li>
+						<li>Receive context-rich reader notes attached to exact passages—not generic comments.</li>
 					</ul>
 				</div>
 				<div class="card author-benefit-card">
@@ -371,25 +383,25 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 				<div class="card author-benefit-card author-benefit-card--scribe">
 					<div class="author-benefit-heading">
 						<SectionIcon type="program" title="Writing and publishing companion" />
-						<h2>Writing and publishing companion</h2>
+						<h2>Scribe: Your writing and publishing companion</h2>
 					</div>
-					<p class="author-benefit-lede">Scribe gives authors a focused AI companion for developing ideas, shaping drafts, comparing publishing options, planning launches, and clarifying ReaderPub workflows across writing, editing, and long-term audience work.</p>
+					<p class="author-benefit-lede">Scribe gives authors a focused AI companion for developing ideas, shaping drafts, comparing publishing options, planning launches, and clarifying ReaderPub workflows across writing, editing, publishing, and long-term audience development.</p>
 				</div>
 			</div>
 		</div>
 	</SpecCardsSection>
 
 	<Section tone="green" class="wepub-economics-section">
-		<Fragment slot="title">Better economics, stronger connections,<br /> <span class="green-heading-white">longer-lasting value</span></Fragment>
+		<Fragment slot="title">Better economics, stronger connections, and<br /> <span class="green-heading-white">longer-lasting value</span></Fragment>
 		<CardGrid columns="3">
-			<Card title="Lower commission" body="ReaderPub uses a 5% platform commission for direct sales." />
+			<Card title="Lower commission" body="ReaderPub charges a 5% platform commission on direct sales." />
 			<Card
 				title="Better reader connection"
-				body="Reader relationships stay connected to the author instead of disappearing into a marketplace account."
+				body="Reader relationships stay connected to the author rather than disappearing into a marketplace account."
 			/>
 			<Card
 				title="Longer book lifecycle"
-				body="Books remain active as web assets through discovery, discussion and future author activity."
+				body="Books remain active as web assets through discovery, discussion, and future author activity."
 			/>
 		</CardGrid>
 	</Section>
@@ -398,10 +410,10 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		tone="white"
 		class="wepub-new-infrastructure-section"
 		title="Publishing infrastructure built for the web"
-		body="WePub combines secure publishing, browser delivery, direct sales and audience visibility inside a single publishing workflow."
+		body="WePub brings secure publishing, browser delivery, direct sales, and audience visibility into one publishing workflow."
 	>
 		<CardGrid columns="3">
-			<Card icon="webReader" title="Web-native publishing" body="Publish books as web destinations rather than isolated downloads." />
+			<Card icon="webReader" title="Web-native publishing" body="Publish books as web destinations instead of isolated downloads." />
 			<Card icon="reader" title="Reader visibility" body="Maintain visibility into publication activity after release." />
 			<Card icon="security" title="Anti-piracy" body="Protect access through obfuscated web delivery." />
 			<Card icon="sale" title="Direct sales" body="Build direct commercial relationships with readers." />
@@ -413,21 +425,21 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	<Section
 		tone="green"
 		class="wepub-new-relationship-section"
-		body="A web-native publication continues generating discovery, engagement and discussion after release. It remains part of an ongoing relationship rather than becoming a completed transaction."
+		body="A web-native publication keeps generating discovery, engagement, and discussion after release. It remains part of an ongoing relationship instead of becoming a completed transaction."
 	>
 		<Fragment slot="title">From digital files <span class="green-heading-white">to living web assets</span></Fragment>
 		<CardGrid columns="4">
 			<Card title="Visibility" body="Reader activity remains visible." />
 			<Card title="Engagement" body="Discussion continues after publication." />
-			<Card title="Discovery" body="New readers continue finding the work." />
-			<Card title="Continuity" body="Publications remain active over time." />
+			<Card title="Discovery" body="New readers continue discovering the work." />
+			<Card title="Continuity" body="Publications stay active over time." />
 		</CardGrid>
 		<p class="section-lead">
-			ReaderPub helps publishers transform books and knowledge publications into living web assets that remain active after release.
+			ReaderPub helps publishers turn books and knowledge publications into living web assets that stay active after release.
 		</p>
 		<CardGrid columns="4">
-			<Card icon="readerBook" title="Readers" body="Continue engaging with the publication." />
-			<Card icon="author" title="Authors" body="Maintain stronger reader relationships." />
+			<Card icon="readerBook" title="Readers" body="Keep engaging with the publication." />
+			<Card icon="author" title="Authors" body="Maintain stronger relationships with readers." />
 			<Card icon="publisher" title="Publishers" body="Gain visibility beyond the moment of sale." />
 			<Card icon="library" title="Institutions" body="Publish knowledge that remains discoverable and useful over time." />
 		</CardGrid>
@@ -435,7 +447,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 
 	<CtaBlock
 		title="Stop renting your audience."
-		body="Publish browser-readable books that remain discoverable, discussable and connected to readers long after release."
+		body="Publish browser-readable books that remain discoverable, discussable, and connected to readers long after release."
 		actions={[finalPublishAction, pricingAction]}
 	/>
 </Base>
@@ -484,8 +496,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	:global(.wepub-new-hero .authors-hero-fee) {
-		color: var(--accent);
+		color: var(--accent-orange);
+		display: inline-block;
+		font-size: 1.4em;
 		font-weight: 700;
+		line-height: 1;
 	}
 
 	:global(.wepub-new-hero .button) {
@@ -587,6 +602,7 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: var(--card-grid-gap);
+		margin-bottom: clamp(40px, 4vw, 64px);
 		width: 100%;
 	}
 
@@ -601,6 +617,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: var(--card-grid-gap);
 		width: 100%;
+	}
+
+	.wepub-start-actions {
+		justify-content: center;
+		margin-top: calc(var(--card-grid-gap) * 0.8);
 	}
 
 	.wepub-start-card {
@@ -832,6 +853,10 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		width: 100%;
 	}
 
+	:global(.authors-model-section .model-grid) {
+		margin-top: 56px !important;
+	}
+
 	.model-card {
 		min-height: 0;
 	}
@@ -871,11 +896,40 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		background: var(--accent);
 	}
 
+	.marketplace-model-card {
+		--marketplace-paper-angle: 6deg;
+
+		position: relative;
+		isolation: isolate;
+		z-index: 0;
+		box-sizing: border-box;
+		min-height: 100%;
+		padding: 28px calc(28px + 4%) !important;
+		border: 0 !important;
+		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	.marketplace-model-card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		outline: 1px solid var(--accent-orange);
+		transform: rotate(var(--marketplace-paper-angle));
+		transform-origin: center;
+		transition: none;
+	}
+
 	:global(.marketplace-model-card .comparison-list li::before) {
 		background: var(--accent-orange) !important;
 	}
 
-	:global(.authors-model-section.section--green) .marketplace-model-card h3,
+	:global(.authors-model-section.section--green) .marketplace-model-card h3 {
+		color: var(--accent-orange) !important;
+	}
+
 	:global(.authors-model-section.section--green) .marketplace-model-card .comparison-list li {
 		color: #ffffff !important;
 	}
@@ -1105,6 +1159,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 		display: contents;
 	}
 
+	:global(.wepub-new-source-icon-grid .icon-grid-card-copy > :is(h2, h3, h4, p)) {
+		position: relative;
+		z-index: 1;
+	}
+
 	:global(.wepub-new-source-icon-grid .icon-grid-card > .section-icon) {
 		grid-column: 1;
 		grid-row: 1;
@@ -1125,6 +1184,11 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	@media (min-width: 901px) {
+		.marketplace-model-card {
+			width: 70%;
+			justify-self: center;
+		}
+
 		.wepub-new-source-wepub-block .section-lead {
 			font-size: clamp(1rem, 1.55vw, 1.08rem);
 			white-space: normal;
@@ -1191,6 +1255,13 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 			grid-template-columns: 1fr;
 		}
 
+		.marketplace-model-card {
+			--marketplace-paper-angle: 2.5deg;
+
+			width: 100%;
+			padding: 24px !important;
+		}
+
 		.authors-living-grid {
 			grid-template-columns: 1fr;
 		}
@@ -1241,6 +1312,10 @@ const publishingFlowSlides = Array.from({ length: 6 }, (_, index) => {
 	}
 
 	@media (orientation: portrait) {
+		:global(.authors-model-section .model-grid) {
+			margin-top: 0 !important;
+		}
+
 		:global(.authors-source-section.section-continuation) {
 			padding-top: var(--section-padding) !important;
 			padding-bottom: var(--section-padding) !important;

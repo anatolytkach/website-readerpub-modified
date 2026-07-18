@@ -1,6 +1,7 @@
 ---
 import Card from "../components/Card.astro";
 import CardGrid from "../components/CardGrid.astro";
+import PartnershipRequestModal from "../components/PartnershipRequestModal.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
@@ -9,92 +10,176 @@ import Base from "../layouts/Base.astro";
 const heroActions = [
 	{ label: "Explore the platform", href: "/platform/" },
 	{ label: "Request a pilot", href: "/contact/", variant: "secondary" as const },
+	{ label: "Partner inquiry", href: "#partnership-request-modal", variant: "secondary" as const, modalTarget: "#partnership-request-modal" },
 ];
 
 const finalActions = [
 	{ label: "Request a pilot", href: "/contact/" },
 	{ label: "Explore the platform", href: "/platform/", variant: "secondary" as const },
 ];
+
+const teamMembers = [
+	{
+		name: "Anatoly Tkach",
+		role: "Founder, Operations",
+		image: "/images/team/anatoly-tkach.webp",
+		linkedin: "https://www.linkedin.com/in/anatolytkach/",
+	},
+	{
+		name: "Yury Arane",
+		role: "Founder, R&D",
+		image: "/images/team/yury-arane.webp",
+		linkedin: "https://www.linkedin.com/in/yury-arane-27758026/",
+	},
+	{
+		name: "Dmitry Tkach",
+		role: "Curator, BD",
+		image: "/images/team/dmitry-tkach.webp",
+		linkedin: "https://www.linkedin.com/in/dmitry-tkach-mba-50b41922/",
+	},
+	{
+		name: "Nataliia Kupianska",
+		role: "Curator, Creativity",
+		image: "/images/team/nataliia-kupianska.webp",
+		linkedin: "https://www.linkedin.com/in/nataliia-kupianska-4b249a276/",
+	},
+	{
+		name: "Dinora Yususpova",
+		role: "Social Advisor",
+		image: "/images/team/dinora-yususpova.webp",
+		linkedin: "https://www.linkedin.com/in/dinora-yusupova-93b4a648",
+	},
+	{
+		name: "Mikhail Lenskikh",
+		role: "Associate, DevOps",
+		image: "/images/team/mikhail-lenskikh.webp",
+		linkedin: "https://www.linkedin.com/in/lenskikh-mikhail-b2470a20/",
+	},
+	{
+		name: "Alex Berezkin",
+		role: "Curator, SEO",
+		image: "/images/team/alex-berezkin.webp",
+		linkedin: "https://www.linkedin.com/in/alex-berezkin/",
+	},
+	{
+		name: "Alex Melnik",
+		role: "Advisor, BD",
+		image: "/images/team/alex-melnik.webp",
+		linkedin: "https://www.linkedin.com/in/alexmelnik/",
+	},
+];
 ---
 
 <Base
-	title="About ReaderPub — Web-Native Publishing Infrastructure"
-	description="ReaderPub is building web-native publishing infrastructure for books, knowledge publications, controlled-access communities and live web assets."
+	title="About ReaderPub Inc. | Team & Web-Native Publishing"
+	description="Meet the team behind ReaderPub Inc., building a web-native publishing network for books, knowledge publications, and connected reading."
 	canonical="/about/"
+	ogImage="/images/about.webp"
 >
 	<HeroSection
 		class="about-hero"
-		title="Built by a team of product innovation enthusiasts."
+		title="Built by a team of product innovators."
 		image="/images/about.webp"
-		imageAlt="ReaderPub web-native publishing infrastructure"
+		imageAlt="Illustration of ReaderPub connecting web-native publishing, community discussion, controlled access, and lasting knowledge"
 		mediaRevealOrigin="left"
 		mediaPosition="start"
 		actions={heroActions}
 		spacerBackgroundPositionY="72%"
-		showSpacer={false}
 	>
 		<Fragment slot="body">
 			<p>
-				The ReaderPub project originated within the product development environment of <a href="https://julianassociates.net/" target="_blank" rel="noopener noreferrer">Julian Associates</a>, where new software product initiatives have been designed, developed and brought to market.
+				ReaderPub is built by top software engineers and industry professionals with decades of experience in technology innovations.
 			</p>
 			<p class="about-hero-solution">
-				ReaderPub Inc. is now focused on building a new model for web-native publishing, reading, discussion and institutional knowledge management.
+				Our team is focused on building a new model for web-native publishing, browser-based reading, connected discussion, and institutional knowledge management.
 			</p>
 		</Fragment>
 	</HeroSection>
 
-	<Section tone="green" class="about-section" title="Why ReaderPub exists">
+	<Section tone="white" class="about-section about-why-section" title="Why ReaderPub exists">
 		<div class="about-copy-stack">
 			<p>
-				Digital publishing made distribution easier, but it did not solve what happens after publication. Books and knowledge publications are still often treated as files to deliver rather than assets that can remain active on the web.
+				Digital publishing made distribution easier, but it did not solve what happens after publication. Books and knowledge publications are still often treated as files to deliver rather than assets that can remain active, connected, and useful on the web.
 			</p>
-			<p>ReaderPub was created to address that gap.</p>
+			<p class="about-copy-accent">ReaderPub was created to address that gap.</p>
 		</div>
-		<CardGrid columns="4" class="about-card-grid about-two-row-grid">
-			<Card title="File-first publishing" body="Traditional digital publishing often ends when a file is delivered." />
-			<Card title="Reader relationships" body="Authors, publishers and institutions often lose visibility after access begins." />
-			<Card title="Discussion and discovery" body="Conversation, discovery and reader activity frequently move away from the publication itself." />
-			<Card title="Web-native future" body="ReaderPub helps publications remain readable, searchable, discussable and useful after release." />
+		<CardGrid columns="3" class="about-card-grid about-why-card-grid">
+			<article class="comparison-text-panel about-why-paper-card">
+				<div class="card-copy">
+					<h3>File-first publishing</h3>
+					<p>Traditional digital publishing often ends with file delivery.</p>
+				</div>
+			</article>
+			<article class="comparison-text-panel about-why-paper-card">
+				<div class="card-copy">
+					<h3>Reader relationships</h3>
+					<p>Authors, publishers, and institutions often lose visibility into what happens after readers gain access.</p>
+				</div>
+			</article>
+			<article class="comparison-text-panel about-why-paper-card">
+				<div class="card-copy">
+					<h3>Discussion and discovery</h3>
+					<p>Conversation, discovery, and reader activity frequently move away from the publication itself.</p>
+				</div>
+			</article>
+			<Card class="about-why-card--centered" variant="good" title="Web-native Publishing" body="ReaderPub helps publications remain readable, searchable, discussable, and useful after release." />
 		</CardGrid>
 	</Section>
 
-	<Section tone="white" class="about-section about-building-section" title="What we are building">
+	<Section tone="green" class="about-section about-building-section" title="What we are building">
 		<CardGrid columns="3" class="about-card-grid about-building-grid">
-			<Card title="Web-native publishing" body="Tools for creating publications that can live on the web instead of ending as static files." />
+			<Card title="Web-native publishing" body="Tools for creating publications that live on the web instead of ending as static files." />
 			<Card title="Browser-based reading" body="A reading layer that lets books and publications open directly in the browser." />
-			<Card title="Connected discussions" body="Community and discussion boards for books, research and controlled-access materials." />
-			<Card title="Institutional publishing" body="Infrastructure for universities, libraries and organizations that publish and manage knowledge collections." />
-			<Card title="Security and access" body="A protection model focused on controlled access rather than routine file handoff." />
-			<Card title="Knowledge structure" body="Tools for connecting publications, notes, excerpts, references and long-term work." />
-			<Card title="AI-powered conversation" body="Scribe adds focused conversation for books, literature, writing, publishing and ReaderPub platform guidance." />
+			<Card title="Connected discussions" body="Community spaces and discussion boards for books, research, and controlled-access materials." />
+			<Card title="Institutional publishing" body="Infrastructure for universities, libraries, and organizations that publish and manage knowledge collections." />
+			<Card title="Security and access" body="A protection model centered on controlled access rather than routine file handoff." />
+			<Card title="Knowledge structure" body="Tools for connecting publications, notes, excerpts, references, and long-term work." />
+			<Card title="AI-powered conversation" body="Scribe adds focused AI conversation for books, literature, writing, publishing, and ReaderPub platform guidance." />
 		</CardGrid>
 	</Section>
 
-	<Section tone="green" class="about-section" title="Current focus">
+	<Section tone="white" class="about-section" title="Current focus">
 		<div class="about-copy-stack">
 			<p>
-				We have already launched a WeRead catalog of 60К+ public domain books accessible via the browser. In addition, our literature-focused WeBuzz social network is rapidly gaining momentum.
+				ReaderPub has launched a WeRead catalog of more than 60,000 public-domain books from Project Gutenberg, accessible in the browser. Our literature-focused WeBuzz social network started it in June 2026 is rapidly gaining momentum.
 			</p>
 			<p>
-				ReaderPub is currently focused on pilot projects with authors, publishers, universities, libraries and organizations that need better ways to publish, protect, read and discuss digital materials.
+				ReaderPub is ready for pilot projects with authors, publishers, universities, libraries, and organizations seeking better ways to publish, protect, read, and discuss digital materials.
 			</p>
-			<p>
-				The goal is to work with partners who want to test web-native publishing, controlled access, community discussion and institutional knowledge workflows in real use cases.
+			<p class="about-copy-accent">
+				Our goal is to work with partners who want to test web-native publishing, controlled access, community discussion, and institutional knowledge workflows in real-world use cases.
 			</p>
 		</div>
 		<CardGrid columns="4" class="about-card-grid about-two-row-grid">
-			<Card title="Authors and publishers" body="Create web-native publications and maintain stronger reader relationships." />
-			<Card title="Universities and libraries" body="Publish educational materials, archives and collections with controlled access and discussion." />
-			<Card title="Organizations" body="Build private discussion spaces and live web assets around institutional knowledge." />
-			<Card title="Strategic partners" body="Explore publishing, reading, community and knowledge infrastructure for new markets." />
+			<Card icon="publisher" title="Authors and publishers" body="Create web-native publications and maintain stronger reader relationships." />
+			<Card icon="university" title="Universities and libraries" body="Publish educational materials, archives, and collections with controlled access and discussion." />
+			<Card icon="library" title="Organizations" body="Build private discussion spaces and live web assets around institutional knowledge." />
+			<Card icon="program" title="Strategic partners" body="Explore publishing, reading, community, and knowledge infrastructure for new markets." />
 		</CardGrid>
+	</Section>
+
+	<Section tone="green" class="about-team-section" title="The team behind ReaderPub:">
+		<div class="about-team-grid">
+			{teamMembers.map((member) => (
+				<article class="about-team-member">
+					<img class="about-team-photo" src={member.image} alt={`Portrait of ${member.name}`} loading="lazy" />
+					<h3>{member.name}</h3>
+					<p>{member.role}</p>
+					<a href={member.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${member.name} on LinkedIn`}>
+						in
+					</a>
+				</article>
+			))}
+		</div>
 	</Section>
 
 	<CtaBlock
 		title="Interested in working with ReaderPub?"
-		body="ReaderPub is available for pilot projects, institutional conversations and strategic partnership discussions."
+		body="ReaderPub is available for pilot projects, institutional conversations, and strategic partnership discussions."
 		actions={finalActions}
 	/>
+
+	<PartnershipRequestModal />
 </Base>
 
 <style>
@@ -111,6 +196,95 @@ const finalActions = [
 		margin: 0;
 		font-size: 1.125rem;
 		line-height: var(--line-height-body);
+	}
+
+	.about-copy-stack .about-copy-accent {
+		color: var(--accent-copy) !important;
+	}
+
+	:global(.about-why-section .card h3) {
+		color: var(--accent-copy) !important;
+	}
+
+	:global(.about-why-section .about-why-paper-card h3) {
+		color: var(--text) !important;
+		font-size: 1.215rem !important;
+	}
+
+	:global(.about-why-card-grid.card-grid--3) {
+		grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+		grid-auto-rows: auto;
+		row-gap: clamp(72px, 6vw, 112px);
+		margin-top: clamp(38.4px, 4vw, 64px);
+	}
+
+	:global(.about-why-paper-card) {
+		--comparison-paper-angle: 6deg;
+		--comparison-paper-shadow: 0 0 28px rgb(21 31 43 / 15.87%);
+
+		position: relative;
+		isolation: isolate;
+		z-index: 0;
+		box-sizing: border-box;
+		justify-self: stretch !important;
+		width: 100% !important;
+		min-height: 100%;
+		padding: 28px calc(28px + 4%) !important;
+	}
+
+	:global(.about-why-paper-card:nth-child(even)) {
+		--comparison-paper-angle: -6deg;
+	}
+
+	:global(.about-why-paper-card::before) {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		background: var(--card-bg);
+		box-shadow: var(--comparison-paper-shadow);
+		transform: rotate(var(--comparison-paper-angle));
+		transform-origin: center;
+		outline: 1px solid transparent;
+		transition:
+			outline-color var(--motion-fast) ease,
+			box-shadow var(--motion-fast) ease;
+	}
+
+	:global(.about-why-paper-card > .card-copy) {
+		position: relative;
+		z-index: 1;
+	}
+
+	:global(body .page .content .section.about-why-section .about-why-paper-card .card-copy > p) {
+		max-width: none !important;
+		width: 100% !important;
+	}
+
+	:global(.about-why-card--centered) {
+		grid-column: 1 / -1;
+		justify-self: center;
+		width: min(100%, 560px);
+	}
+
+	:global(body .page .content .section.about-why-section .about-why-card--centered h3) {
+		font-size: 1.485rem !important;
+	}
+
+	:global(body .page .content .section.about-why-section .about-why-card--centered p) {
+		color: var(--accent-copy) !important;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		:global(.about-why-paper-card:hover) {
+			z-index: 2;
+		}
+
+		:global(.about-why-paper-card:hover::before) {
+			outline-color: var(--text);
+			box-shadow: 0 0 30px rgb(255 123 72 / 42.32%);
+		}
 	}
 
 	:global(.about-section.section--green > .about-copy-stack p) {
@@ -169,7 +343,6 @@ const finalActions = [
 	:global(.about-building-section > .section-header h2) {
 		margin-right: auto;
 		margin-left: auto;
-		color: var(--accent);
 		text-align: center;
 	}
 
@@ -214,7 +387,89 @@ const finalActions = [
 		font-size: 1rem;
 	}
 
+	:global(.about-team-section > .section-header) {
+		justify-self: center;
+		justify-items: center;
+		width: 100%;
+		text-align: center;
+	}
+
+	:global(.about-team-section) {
+		row-gap: 56px;
+	}
+
+	:global(body .page .content .about-team-section .about-team-grid) {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+		gap: clamp(40px, 5vw, 68px) clamp(28px, 5vw, 72px);
+		width: 100%;
+		max-width: none !important;
+	}
+
+	.about-team-member {
+		display: grid;
+		justify-items: center;
+		gap: 8px;
+		min-width: 0;
+		text-align: center;
+	}
+
+	.about-team-photo {
+		display: block;
+		width: clamp(132px, 15vw, 184px);
+		aspect-ratio: 1;
+		object-fit: cover;
+		border: 0 !important;
+		border-radius: 0 !important;
+		box-shadow: none !important;
+	}
+
+	.about-team-member:nth-child(4) .about-team-photo {
+		transform: scaleX(-1);
+	}
+
+	.about-team-member h3 {
+		margin-top: 6px;
+		color: #ffffff !important;
+		font-size: 1.25rem;
+	}
+
+	.about-team-member p {
+		margin: 0;
+		color: rgb(255 255 255 / 82%) !important;
+		font-size: 1rem;
+	}
+
+	.about-team-member a {
+		color: var(--accent-orange);
+		font-family: var(--font-heading);
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.about-team-member a:hover {
+		color: #ffffff;
+	}
+
 	@media (max-width: 900px) {
+		:global(.about-why-card-grid.card-grid--3) {
+			grid-template-columns: 1fr !important;
+		}
+
+		:global(.about-why-paper-card) {
+			--comparison-paper-angle: 2.5deg;
+			padding: 24px !important;
+		}
+
+		:global(.about-why-paper-card:nth-child(even)) {
+			--comparison-paper-angle: -2.5deg;
+		}
+
+		:global(.about-why-card--centered) {
+			grid-column: auto;
+		}
+
 		:global(.about-building-grid.card-grid--3) {
 			grid-template-columns: 1fr !important;
 		}
@@ -229,6 +484,10 @@ const finalActions = [
 
 		:global(.about-two-row-grid.card-grid--4) {
 			grid-template-columns: 1fr !important;
+		}
+
+		:global(body .page .content .about-team-section .about-team-grid) {
+			grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 		}
 
 		:global(.hero-section.about-hero) {
@@ -259,6 +518,13 @@ const finalActions = [
 
 		:global(.about-hero .hero-image) {
 			height: auto;
+		}
+	}
+
+	@media (max-width: 620px) {
+		:global(body .page .content .about-team-section .about-team-grid) {
+			grid-template-columns: 1fr !important;
+			gap: 40px;
 		}
 	}
 </style>

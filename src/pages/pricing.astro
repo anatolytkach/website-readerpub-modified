@@ -7,38 +7,86 @@ import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import SpecCardsSection from "../components/sections/SpecCardsSection.astro";
 import ProductName from "../components/ProductName.astro";
-import { BOOKS_URL, SITE_NAME } from "../consts";
+import { BOOKS_URL, SITE_DOMAIN, SITE_NAME } from "../consts";
 
 const heroActions = [
-	{ label: "Contact us", href: "/contact" },
+	{ label: "Contact us", href: "/contact/" },
 	{ label: "Open catalog", href: BOOKS_URL, external: true, variant: "secondary" as const },
 ];
 
 const ctaActions = [
-	{ label: "Publish with ReaderPub", href: "/wepub" },
-	{ label: "Contact us", href: "/contact", variant: "secondary" as const },
+	{ label: "Publish with ReaderPub", href: "/wepub/" },
+	{ label: "Contact us", href: "/contact/", variant: "secondary" as const },
 ];
+
+const publicMonthlyPlans = [
+	{ name: "Free Indie", price: 0 },
+	{ name: "Creator", price: 9 },
+	{ name: "Publisher", price: 49 },
+	{ name: "Studio", price: 199 },
+	{ name: "Starter", price: 499 },
+	{ name: "Standard", price: 1499 },
+] as const;
+
+const pricingUrl = `https://${SITE_DOMAIN}/pricing/`;
+const pricingStructuredData = {
+	"@context": "https://schema.org",
+	"@type": "ItemList",
+	name: "ReaderPub monthly pricing plans",
+	url: pricingUrl,
+	itemListElement: publicMonthlyPlans.map((plan, index) => ({
+		"@type": "ListItem",
+		position: index + 1,
+		item: {
+			"@type": "Offer",
+			name: `ReaderPub ${plan.name} plan`,
+			url: pricingUrl,
+			price: plan.price,
+			priceCurrency: "USD",
+			priceSpecification: {
+				"@type": "UnitPriceSpecification",
+				price: plan.price,
+				priceCurrency: "USD",
+				billingDuration: "P1M",
+			},
+			itemOffered: {
+				"@type": "Service",
+				name: `ReaderPub ${plan.name} plan`,
+				provider: {
+					"@id": `https://${SITE_DOMAIN}/#organization`,
+					"@type": "Organization",
+					name: "ReaderPub Inc.",
+				},
+			},
+		},
+	})),
+};
+const pricingStructuredDataJson = JSON.stringify(pricingStructuredData).replace(/</g, "\\u003c");
 ---
 
 <Base
-	title={`Pricing | ${SITE_NAME}`}
-	description="ReaderPub pricing supports readers, authors, publishers and institutions."
+	title={`Publishing Plans & Institutional Pricing | ${SITE_NAME}`}
+	description="Compare ReaderPub pricing for readers, authors, publishers, and institutions, including monthly plans, title limits, storage, and Scribe AI billing."
+	ogImage="/images/pricing.webp"
 >
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={pricingStructuredDataJson} />
+	</Fragment>
 	<HeroSection
 		class="pricing-hero"
 		eyebrow="Pricing"
-		lead="Effective Industry pricing should combine room for aggressive creator economics and fairness for unbound institutional publishing."
+		lead="Effective industry pricing must support aggressive creator economics and remove unnecessary constraints for institutional publishing."
 		image="/images/pricing.webp"
-		imageAlt="ReaderPub pricing and publishing plans"
+		imageAlt="Illustration comparing ReaderPub’s 5% commission with Amazon’s 35%, alongside digital publishing, sales growth, and books"
 		actions={heroActions}
 		spacerBackgroundPositionY="81%"
 	>
 		<Fragment slot="title"><span class="pricing-hero-free">Free</span> for indies.<br /><span class="pricing-hero-fair">Fair</span> for everyone else.</Fragment>
 		<Fragment slot="body">
-			<h2 class="pricing-hero-paths-title"><ProductName name="ReaderPub" /> matches both paths:</h2>
+			<h2 class="pricing-hero-paths-title"><ProductName name="ReaderPub" /> is built for both paths:</h2>
 		</Fragment>
 		<ul class="pricing-hero-paths-list">
-			<li>Authors and publishers sell directly to readers with low commission.</li>
+			<li>Authors and publishers sell directly to readers with a low commission.</li>
 			<li>Institutions maintain collections with adjustable storage fees.</li>
 		</ul>
 	</HeroSection>
@@ -50,41 +98,41 @@ const ctaActions = [
 		<div class="pricing-copy-stack">
 			<p>Different types of publishers use digital publishing platforms in very different ways.</p>
 			<p>Authors and publishers need efficient sales economics.</p>
-			<p>Universities, libraries and organizations need long-term infrastructure, storage and collection management.</p>
+			<p>Universities, libraries, and organizations need long-term infrastructure, storage, and collection management.</p>
 			<h3 class="pricing-problem-emphasis"><span>A single pricing model</span> does not fit both.</h3>
 		</div>
 	</Section>
 
 	<SpecCardsSection class="pricing-source-section pricing-source-model-change-section section--two-column section-continue-next">
-		<h2><ProductName name="ReaderPub" /> prices won't break the bank – they help you grow.</h2>
+		<h2><ProductName name="ReaderPub" /> pricing won’t break the bank—and it helps you grow.</h2>
 		<div class="model-grid">
 			<div class="comparison-text-panel pricing-marketplace-model-card">
 				<h3>Marketplace economics</h3>
 				<ul class="comparison-list">
 					<li>High commission</li>
-					<li>Platform owns the customer</li>
-					<li>Discovery controlled by marketplace ranking</li>
-					<li>Relationship ends after purchase</li>
+					<li>The platform owns the customer relationship</li>
+					<li>Discovery is controlled by marketplace ranking</li>
+					<li>The customer relationship ends after purchase</li>
 				</ul>
 			</div>
 			<div class="card card--good pricing-readerpub-model-card">
 				<h3><span class="pricing-readerpub-word readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> economics</h3>
 				<ul class="comparison-list">
 					<li>5% platform commission for direct sales</li>
-					<li>Reader relationship stays connected</li>
+					<li>The reader relationship stays connected</li>
 					<li>Books remain active as web assets</li>
-					<li>Institutions budget for visible public infrastructure</li>
+					<li>Institutions can budget for visible public infrastructure</li>
 				</ul>
 			</div>
 		</div>
 	</SpecCardsSection>
 
 	<Section tone="green" class="pricing-solution-section">
-		<Fragment slot="title"><span class="green-heading-white">Balanced pricing model</span> for all industry players</Fragment>
+		<Fragment slot="title"><span class="green-heading-white">A balanced pricing model</span> for every industry player</Fragment>
 		<div class="pricing-copy-stack pricing-solution-copy">
 			<p>ReaderPub separates publishing economics from infrastructure economics.</p>
 			<p>Authors and publishers get plans tailored to their publishing and sales activity.</p>
-			<p>Institutions get plans focused on long‑term collections, access management, and infrastructure needs.</p>
+			<p>Institutions get plans focused on long-term collections, access management, and infrastructure needs.</p>
 		</div>
 	</Section>
 
@@ -92,8 +140,8 @@ const ctaActions = [
 		<section class="pricing-source-section pricing-source-author-plans-section">
 			<h2>For authors and publishers</h2>
 			<p class="lede pricing-author-lede-lines">
-				<span>The old model charges high commissions while breaking the customer connection.</span>
-				<span>ReaderPub keeps the fee low and maintains the reader relationship with the author.</span>
+				<span>The old model charges high commissions and breaks the customer connection.</span>
+				<span>ReaderPub keeps the fee low while maintaining the reader relationship with the author.</span>
 			</p>
 			<div class="card-grid creator-plan-grid">
 				<div class="card creator-plan-card">
@@ -145,7 +193,7 @@ const ctaActions = [
 		tone="white"
 		class="pricing-institution-plans-section"
 		title="For institutions"
-		body="Institutions need more than storage. They need collections that can be found, read, searched and discussed on the web."
+		body="Institutions need more than storage. They need collections that can be found, read, searched, and discussed on the web."
 	>
 		<div class="card-grid institution-plan-grid">
 			<article class="card">
@@ -171,7 +219,7 @@ const ctaActions = [
 			</article>
 			<article class="card">
 				<h3>Enterprise</h3>
-				<a class="button button--secondary pricing-enterprise-contact-button" href="/contact">Talk to us</a>
+				<a class="button button--secondary pricing-enterprise-contact-button" href="/contact/">Talk to us</a>
 				<ul class="pricing-bullets">
 					<li>For university systems and public agencies</li>
 					<li>100,000+ titles</li>
@@ -184,23 +232,23 @@ const ctaActions = [
 	</Section>
 
 	<Section tone="green" class="pricing-benefits-section">
-		<Fragment slot="title">How <span class="green-heading-white">ReaderPub</span> pricing model works?</Fragment>
+		<Fragment slot="title">How does the <span class="green-heading-white">ReaderPub</span> pricing model work?</Fragment>
 		<CardGrid columns="2" class="pricing-benefits-grid">
 			<Card icon="author" title="For authors" body="Keep more revenue from publishing activity." />
 			<Card icon="publisher" title="For publishers" body="Scale catalogs without depending on marketplace economics." />
 			<Card icon="library" title="For institutions" body="Get predictable costs for long-term collections and infrastructure." />
-			<Card icon="readerBook" title="For readers" body="Interacting with authors and predictably lower book prices." />
+			<Card icon="readerBook" title="For readers" body="Interact with authors and benefit from predictably lower book prices." />
 			<Card
 				icon="program"
 				title="Scribe AI Companion"
-				body="Integrated Scribe AI Companion is free for readers. Tokenized billing applies for institutions."
+				body="The integrated Scribe AI Companion is free for readers. Tokenized billing applies to institutions."
 			/>
 		</CardGrid>
 	</Section>
 
 	<CtaBlock
 		title="Choose the model that keeps the relationship."
-		body="ReaderPub pricing is built for direct publishing, connected reading and institutional knowledge on the web."
+		body="ReaderPub pricing is built for direct publishing, connected reading, and institutional knowledge on the web."
 		actions={ctaActions}
 	/>
 </Base>
