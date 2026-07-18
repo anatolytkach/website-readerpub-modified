@@ -1402,6 +1402,19 @@ h3.heading--center-full,
 	border-color: transparent;
 }
 
+/* Buttons placed on green containers retain their established colours on hover. */
+body .page .content .section--green .button:hover {
+	background: var(--button-green-bg) !important;
+	color: #ffffff !important;
+	border-color: transparent !important;
+}
+
+body .page .content .section--green .button:is(.button--secondary, .secondary):hover {
+	background: var(--accent) !important;
+	color: #ffffff !important;
+	border-color: transparent !important;
+}
+
 :is(.hero-section, .network-hero, .section, .cta-block) .button:hover,
 :is(.hero-section, .network-hero, .section, .cta-block) .button--secondary:hover,
 :is(.hero-section, .network-hero, .section, .cta-block) .button.secondary:hover {
