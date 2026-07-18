@@ -261,7 +261,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 						if (attempt !== playbackAttempt) return;
 						stage.classList.add("is-video-wait");
 						scheduleIntroStep(() => startVideo(attempt), 2000);
-					}, 1360);
+					}, 340);
 				};
 
 				const startExperience = (resetImmediately = false, shouldRun = true) => {
@@ -558,9 +558,9 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		transform: rotateY(0deg);
 		transform-style: preserve-3d;
 		transition:
-			transform 1360ms linear,
-			opacity 595ms ease-in 765ms,
-			visibility 0ms linear 1360ms;
+			transform 340ms linear,
+			opacity 149ms ease-in 191ms,
+			visibility 0ms linear 340ms;
 		visibility: visible;
 		will-change: transform;
 	}
