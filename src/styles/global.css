@@ -284,7 +284,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 	width: 100%;
 	max-width: var(--page-max);
 	margin: 0 auto;
-	padding: 32px 24px 0;
+	padding: 0 24px;
 }
 
 .content {
@@ -316,8 +316,8 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 }
 
 .nav::before {
-	top: -32px;
-	height: calc(100% + 32px);
+	top: 0;
+	height: 100%;
 	background: var(--nav-bg);
 }
 
@@ -1331,6 +1331,9 @@ h3.heading--center-full,
 
 .button,
 .button:visited {
+	--button-static-background: var(--button-green-bg);
+	--button-static-color: #ffffff;
+	--button-static-border-color: transparent;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -1390,6 +1393,9 @@ h3.heading--center-full,
 .button--secondary:visited,
 .button.secondary,
 .button.secondary:visited {
+	--button-static-background: var(--accent);
+	--button-static-color: #ffffff;
+	--button-static-border-color: transparent;
 	background: var(--accent);
 	color: #ffffff;
 	border-color: transparent;
@@ -1402,17 +1408,33 @@ h3.heading--center-full,
 	border-color: transparent;
 }
 
-/* Buttons placed on green containers retain their established colours on hover. */
-body .page .content .section--green .button:hover {
-	background: var(--button-green-bg) !important;
-	color: #ffffff !important;
-	border-color: transparent !important;
-}
-
-body .page .content .section--green .button:is(.button--secondary, .secondary):hover {
-	background: var(--accent) !important;
-	color: #ffffff !important;
-	border-color: transparent !important;
+/*
+ * Buttons in green containers must be visually static on hover.  Store each
+ * variant's resting palette above, then reuse it here rather than relying on
+ * a shared hover palette.
+ */
+body .page .content
+	:is(
+		.section--green,
+		.card--accent,
+		.card--good,
+		.card.home-readerpub-model-card,
+		.card.home-readerpub-publishing-card,
+		.card.platform-readerpub-model-card,
+		.card.readerpub-model-card,
+		.card.authors-living-card,
+		.card.wepub-readerpub-path-card,
+		.card.booktree-with-card,
+		.card.pricing-readerpub-model-card,
+		.card.security-readerpub-solution-card,
+		.card.webuzz-living-card,
+		.card.webuzz-legacy-solution-card,
+		.card.webuzz-overview-card--green
+	)
+	.button:hover {
+	background: var(--button-static-background) !important;
+	color: var(--button-static-color) !important;
+	border-color: var(--button-static-border-color) !important;
 }
 
 :is(.hero-section, .network-hero, .section, .cta-block) .button:hover,
@@ -1425,6 +1447,9 @@ body .page .content .section--green .button:is(.button--secondary, .secondary):h
 
 .button--tertiary,
 .button--tertiary:visited {
+	--button-static-background: transparent;
+	--button-static-color: var(--text);
+	--button-static-border-color: transparent;
 	background: transparent;
 	color: var(--text);
 	border-color: transparent;
@@ -1952,7 +1977,7 @@ body .page .content .section--green .button:is(.button--secondary, .secondary):h
 	}
 
 	.page {
-		padding: 24px 18px 0;
+		padding: 0 18px;
 	}
 
 	.nav {
@@ -2456,7 +2481,7 @@ body .page .content .section--green .button:is(.button--secondary, .secondary):h
 	}
 
 	.page {
-		padding: 20px 14px 0;
+		padding: 0 14px;
 	}
 }
 

@@ -18,6 +18,10 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 			<p class="home-hero-statement">
 				ReaderPub is a web-native publishing network that makes books readable online and keeps readers connected.
 			</p>
+			<div class="cta-row home-hero-actions">
+				<ActionLink label="Publish your book" href={PUBLISH_URL} external class="home-hero-publish-button" />
+				<ActionLink label="60K+ PD books in Catalog" href={BOOKS_URL} external class="home-hero-catalog-button" />
+			</div>
 			<p class="home-hero-strategy" aria-label="Read instantly. Publish securely. Distribute strategically.">
 				<span class="home-hero-strategy-line">READ INSTANTLY</span>
 				<span class="home-hero-strategy-dot" aria-hidden="true">•</span>
@@ -25,10 +29,6 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 				<span class="home-hero-strategy-dot" aria-hidden="true">•</span>
 				<span class="home-hero-strategy-line">DISTRIBUTE STRATEGICALLY</span>
 			</p>
-			<div class="cta-row home-hero-actions">
-				<ActionLink label="Publish your book" href={PUBLISH_URL} external class="home-hero-publish-button" />
-				<ActionLink label="60K+ PD books in Catalog" href={BOOKS_URL} external class="home-hero-catalog-button" />
-			</div>
 		</div>
 	</section>
 
@@ -321,7 +321,8 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		--green-edge-air: clamp(72px, 8.2vw, 150px);
 		--green-edge-bottom-inset: var(--green-edge-air);
 		--green-section-safe-offset: clamp(57.2px, 6.82vw, 114.4px);
-		--green-section-padding-top: var(--green-section-safe-offset);
+		--green-section-padding-top: calc(var(--green-section-safe-offset) * 1.21);
+		--green-section-padding-bottom: calc((var(--green-section-safe-offset) + var(--green-edge-bottom-inset)) * 1.089);
 		container-type: inline-size;
 		margin-top: 0 !important;
 		margin-bottom: 0 !important;
@@ -329,11 +330,14 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-hero-content {
 		--home-hero-copy-width: 70cqw;
+		--home-hero-copy-gap: clamp(27.83px, 2.71975vw, 48.07px);
+		--home-hero-statement-bottom-gap: clamp(10.12px, 1.012vw, 15.18px);
+		--home-hero-actions-offset: clamp(2.53px, 0.6325vw, 10.12px);
 		position: relative;
 		z-index: 3;
 		display: grid;
 		justify-items: center;
-		gap: clamp(22px, 2.15vw, 38px);
+		gap: var(--home-hero-copy-gap);
 		width: 100vw;
 		margin-left: calc(50% - 50vw);
 		padding: 0 clamp(18px, 3vw, 56px);
@@ -343,16 +347,28 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	.home-hero-content h1 {
 		width: var(--home-hero-copy-width);
 		max-width: none;
+		margin: 0;
 		color: #ffffff !important;
 		font-family: "Inter", system-ui, sans-serif;
 		font-size: clamp(3rem, 7.1vw, 5.75rem);
 		font-weight: 900;
-		line-height: 1.04;
+		line-height: 0.936;
 		text-wrap: balance;
 	}
 
 	.home-hero-content h1 > span {
 		display: block;
+		width: 100%;
+		text-align: center;
+	}
+
+	.home-hero-content h1 > span:first-child {
+		color: var(--accent-orange);
+	}
+
+	.home-hero-content h1 > span:last-child {
+		/* The visible glyphs in this line are optically right-heavy. */
+		transform: translateX(-0.14em);
 	}
 
 	.home-cta-body-accent {
@@ -362,10 +378,12 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 	.home-hero-statement {
 		width: var(--home-hero-copy-width);
 		max-width: none;
-		color: var(--accent-orange) !important;
-		font-family: var(--font-body);
-		font-size: clamp(1.35rem, 2.3vw, 1.8125rem);
-		font-weight: 400;
+		margin-top: calc(var(--home-hero-statement-bottom-gap) + var(--home-hero-actions-offset));
+		margin-bottom: var(--home-hero-statement-bottom-gap);
+		color: #ffffff !important;
+		font-family: var(--font-heading);
+		font-size: clamp(1.25rem, 2.15vw, 1.7rem);
+		font-weight: 300;
 		letter-spacing: 0;
 		line-height: 1.28;
 		text-wrap: wrap;
@@ -375,13 +393,13 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: clamp(12px, 1.4vw, 20px);
+		gap: clamp(8.4px, 0.98vw, 14px);
 		width: var(--home-hero-copy-width);
 		max-width: none;
-		margin: 0;
+		margin: calc(var(--home-hero-statement-bottom-gap) + var(--home-hero-actions-offset)) 0 0;
 		color: #ffffff !important;
 		font-family: var(--font-heading);
-		font-size: clamp(1rem, 1.45vw, 1.45rem);
+		font-size: clamp(1.082rem, 1.577vw, 1.577rem);
 		font-weight: 500;
 		letter-spacing: 0.08em;
 		line-height: var(--line-height-heading);
@@ -394,18 +412,20 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
 	.home-hero-actions {
 		justify-content: center;
-		margin-top: clamp(2px, 0.5vw, 8px);
+		margin-top: var(--home-hero-actions-offset);
 	}
 
 	:global(.home-hero-catalog-button),
 	:global(.home-hero-catalog-button:visited) {
+		--button-static-background: #ffffff;
+		--button-static-color: var(--accent);
 		background: #ffffff;
-		color: var(--accent-orange);
+		color: var(--accent);
 	}
 
 	:global(.home-hero-catalog-button:hover) {
 		background: #ffffff !important;
-		color: var(--accent-orange) !important;
+		color: var(--accent) !important;
 	}
 
 	.home-hero-image-section {
@@ -439,7 +459,7 @@ import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 		}
 
 		.home-hero-content {
-			gap: clamp(20px, 5vw, 32px);
+			--home-hero-copy-gap: clamp(25.3px, 6.325vw, 40.48px);
 			padding-inline: 18px;
 		}
 
