@@ -40,6 +40,7 @@ const heroMediaSelectors = [
 ];
 const mediaRevealSelector = [
 	".hero-media",
+	".home-hero-image-section",
 	".institutions-network-media",
 	".section-media",
 	".proof-media",
@@ -87,6 +88,8 @@ const cardRiseRevealDelay = 140;
 const cardRevealThreshold = 0.65;
 const cardRowTopTolerance = 8;
 const cardRevealDirections = ["left", "right", "bottom", "fade", "rise"];
+const homeHeroContentRevealSelector = ".home-hero [data-home-hero-content-reveal]";
+const homeHeroContentRevealDelay = 150;
 const greenWaveScrollSpeed = 0.64;
 const greenWaveEase = 0.18;
 const greenWaveSettleDistance = 0.08;
@@ -100,6 +103,7 @@ let cardRevealObserver;
 let cardRevealRowsByTarget = new WeakMap();
 let cardNaturalRects = new WeakMap();
 let cardRevealTimers = [];
+let homeHeroContentRevealTimers = [];
 let cardRevealSentinels = [];
 let heroRevealTimers = [];
 let backgroundParallaxTargets = [];
@@ -331,6 +335,40 @@ const clearHeroRevealTimers = () => {
 	}
 
 	heroRevealTimers = [];
+};
+
+const clearHomeHeroContentRevealTimers = () => {
+	for (const timer of homeHeroContentRevealTimers) {
+		window.clearTimeout(timer);
+	}
+
+	homeHeroContentRevealTimers = [];
+};
+
+const setupHomeHeroContentReveal = () => {
+	clearHomeHeroContentRevealTimers();
+
+	const elements = [...document.querySelectorAll(homeHeroContentRevealSelector)].filter(
+		(element) => element instanceof HTMLElement,
+	);
+
+	for (const element of elements) {
+		element.classList.remove("is-home-hero-content-revealed");
+	}
+
+	if (reduceMotionQuery.matches) {
+		for (const element of elements) {
+			element.classList.add("is-home-hero-content-revealed");
+		}
+		return;
+	}
+
+	elements.forEach((element, index) => {
+		const timer = window.setTimeout(() => {
+			element.classList.add("is-home-hero-content-revealed");
+		}, index * homeHeroContentRevealDelay);
+		homeHeroContentRevealTimers.push(timer);
+	});
 };
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -1094,9 +1132,9 @@ const revealHeroMedia = (target, delay = 0) => {
 	heroRevealTimers.push(timer);
 };
 
-const setupHeroMedia = ({ delay = 0, targets = prepareHeroMedia() } = {}) => {
+const setupHeroMedia = ({ delay = 0, targets = prepareHeroMedia(), animate = false } = {}) => {
 	for (const target of targets) {
-		if (reduceMotionQuery.matches) {
+		if (!animate || reduceMotionQuery.matches) {
 			document.documentElement.classList.remove("animation-pass-hold-hero");
 			target.classList.add("is-hero-load-revealed");
 			continue;
@@ -1112,19 +1150,6 @@ const setupHeroMedia = ({ delay = 0, targets = prepareHeroMedia() } = {}) => {
 		image.addEventListener("load", () => revealHeroMedia(target, delay), { once: true });
 		image.addEventListener("error", () => revealHeroMedia(target, delay), { once: true });
 	}
-};
-
-const holdHeroMediaForPageExit = () => {
-	document.documentElement.classList.add("animation-pass-hold-hero");
-
-	for (const target of document.querySelectorAll("[data-hero-load-reveal]")) {
-		target.classList.remove("is-hero-load-revealed");
-		target.style.setProperty("opacity", "0", "important");
-		target.style.setProperty("transform", "translate3d(0, var(--card-good-reveal-offset), 0) scale(0.985)", "important");
-		target.style.setProperty("transition", "none", "important");
-	}
-
-	document.documentElement.getBoundingClientRect();
 };
 
 const markCards = () => {
@@ -1286,26 +1311,28 @@ const setupCardReveal = () => {
 	}
 };
 
-const setupAnimationPass = ({ heroDelay = 0 } = {}) => {
+const setupAnimationPass = ({ heroDelay = 0, animateHero = isClientNavigation } = {}) => {
 	clearHeroRevealTimers();
+	clearHomeHeroContentRevealTimers();
 	clearCardRevealTimers();
 	clearMediaRevealDirections();
 	document.documentElement.classList.add("animation-pass-preparing");
 	const heroTargets = prepareHeroMedia();
 	markCards();
 	setupReveal();
-	if (heroTargets.length > 0 && !reduceMotionQuery.matches) {
+	if (animateHero && heroTargets.length > 0 && !reduceMotionQuery.matches) {
 		document.documentElement.classList.add("animation-pass-hold-hero");
 	} else {
 		document.documentElement.classList.remove("animation-pass-hold-hero");
 	}
 	document.documentElement.classList.add("animation-pass-ready");
+	setupHomeHeroContentReveal();
 	setupCardReveal();
 	setupBackgroundParallax();
 	window.requestAnimationFrame(() => {
 		document.documentElement.classList.remove("animation-pass-preparing");
 	});
-	setupHeroMedia({ delay: heroDelay, targets: heroTargets });
+	setupHeroMedia({ delay: heroDelay, targets: heroTargets, animate: animateHero });
 };
 
 const runInitialSetup = () => {
@@ -1349,8 +1376,6 @@ if ("addEventListener" in reduceMotionQuery) {
 	reduceMotionQuery.addListener(setupAnimationPass);
 }
 
-window.addEventListener("beforeunload", holdHeroMediaForPageExit);
-window.addEventListener("pagehide", holdHeroMediaForPageExit);
 window.addEventListener("pageshow", (event) => {
 	if (event.persisted) {
 		setupAnimationPass();

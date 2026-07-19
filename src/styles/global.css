@@ -2693,6 +2693,23 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 	transform: translate3d(0, 0, 0);
 }
 
+/* Home Hero copy rises in three small, sequential steps: statement, actions,
+ * then strategy. Keeping the movement smaller than the cards preserves the
+ * Hero's calm opening while matching their reveal language. */
+.animation-pass-ready [data-home-hero-content-reveal] {
+	opacity: 0;
+	transform: translate3d(0, 24px, 0);
+	transition:
+		opacity var(--motion-reveal) var(--motion-ease),
+		transform var(--motion-reveal) var(--motion-ease);
+	will-change: opacity, transform;
+}
+
+.animation-pass-ready [data-home-hero-content-reveal].is-home-hero-content-revealed {
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+}
+
 .animation-pass-ready [data-reveal][data-media-reveal-direction].is-revealed {
 	transform: translate3d(0, 0, 0);
 }
@@ -2738,6 +2755,23 @@ body .page .content .section--white .comparison-text-panel:has(+ .card--good) > 
 
 .animation-pass-ready.animation-pass-hold-hero [data-hero-load-reveal][data-media-reveal-direction] {
 	transform: translate3d(0, var(--hero-media-reveal-start-y), 0) scale(0.985) !important;
+}
+
+/* The home audience illustration enters horizontally, from the right. Its
+ * persistent origin attribute lets the animation pass restore this direction
+ * after client-side navigation. */
+.animation-pass-ready .home-hero-image-section[data-hero-load-reveal][data-media-reveal-direction="right"] {
+	--hero-media-reveal-start-x: calc(100vw + 48px);
+	--hero-media-reveal-start-y: 0px;
+	transform: translate3d(var(--hero-media-reveal-start-x), var(--hero-media-reveal-start-y), 0) scale(0.985);
+}
+
+.animation-pass-ready.animation-pass-hold-hero .home-hero-image-section[data-hero-load-reveal][data-media-reveal-direction="right"] {
+	transform: translate3d(var(--hero-media-reveal-start-x), var(--hero-media-reveal-start-y), 0) scale(0.985) !important;
+}
+
+.animation-pass-ready .home-hero-image-section[data-hero-load-reveal][data-media-reveal-direction="right"].is-hero-load-revealed {
+	transform: translate3d(0, 0, 0) scale(1);
 }
 
 .animation-pass-ready .home-tech-picture[data-reveal],

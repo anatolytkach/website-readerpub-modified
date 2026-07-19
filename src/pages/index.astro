@@ -22,14 +22,14 @@ const homeVideoDoorSides = ["left", "right"] as const;
 				<div class="home-hero-title-line home-hero-title-line--accent">Transforming</div>
 				<div class="home-hero-title-line">the world of books</div>
 			</div>
-			<p class="home-hero-statement">
+			<p class="home-hero-statement" data-home-hero-content-reveal>
 				ReaderPub is a web-native publishing network that makes books readable online and keeps readers connected.
 			</p>
-			<div class="cta-row home-hero-actions">
+			<div class="cta-row home-hero-actions" data-home-hero-content-reveal>
 				<ActionLink label="Publish your book" href={PUBLISH_URL} external class="home-hero-publish-button" />
 				<ActionLink label="60K+ PD books in Catalog" href={BOOKS_URL} external class="home-hero-catalog-button" />
 			</div>
-			<p class="home-hero-strategy" aria-label="Read instantly. Publish securely. Distribute strategically.">
+			<p class="home-hero-strategy" data-home-hero-content-reveal aria-label="Read instantly. Publish securely. Distribute strategically.">
 				<span class="home-hero-strategy-line">READ INSTANTLY</span>
 				<span class="home-hero-strategy-dot" aria-hidden="true">•</span>
 				<span class="home-hero-strategy-line">PUBLISH SECURELY</span>
@@ -40,7 +40,11 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	</section>
 
 	<div class="home-hero-illustration-backdrop">
-		<section class="home-hero-image-section" aria-label="ReaderPub audience illustration">
+		<section
+			class="home-hero-image-section"
+			aria-label="ReaderPub audience illustration"
+			data-media-reveal-origin="right"
+		>
 			<img
 				class="home-hero-image"
 				src="/images/home.webp?v=transparent-illustration"
@@ -203,10 +207,10 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 		<p class="home-file-model-summary home-file-model-summary-problem-copy">
 			<span class="home-file-model-summary-problem">The old file-first publishing model ends when a file is delivered.</span>
-			<span class="home-file-model-summary-problem home-file-model-summary-break">The relationship is broken!</span>
+			<span class="home-file-model-summary-problem home-file-model-summary-break">The relationship is broken<span class="home-file-model-summary-break-punctuation">!</span></span>
 		</p>
 		<p class="home-file-model-summary home-file-model-summary-solution">
-			<span class="home-file-model-summary-solution-context">There are many platforms – Kindle, Substack, Everand – making a book available.</span>
+			<span class="home-file-model-summary-solution-context">There are many platforms – <span class="home-file-model-summary-platform">Kindle</span><span class="home-file-model-summary-platform-punctuation">,</span> <span class="home-file-model-summary-platform">Substack</span><span class="home-file-model-summary-platform-punctuation">,</span> <span class="home-file-model-summary-platform">Everand</span> – making a book available.</span>
 			<span>Only ReaderPub keeps the book alive and connected after delivery.</span>
 		</p>
 	</Section>
@@ -332,7 +336,9 @@ const homeVideoDoorSides = ["left", "right"] as const;
 					window.requestAnimationFrame(() => {
 						if (attempt !== playbackAttempt) return;
 						stage.classList.add("is-sequence-started");
-						scheduleIntroStep(() => openGreenIntro(attempt), 8500);
+						/* The final slogan finishes at 2.48 s. Keep it fully readable
+						 * for exactly three seconds before the doors open. */
+						scheduleIntroStep(() => openGreenIntro(attempt), 5480);
 					});
 				};
 
@@ -383,7 +389,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	</script>
 	<section class="section section--green home-tech-visual-section" aria-label="Explore ReaderPub platform">
 		<h2 class="home-tech-container-title">
-			<span class="home-tech-container-title-primary">ReaderPub is end-to-end:</span>
+			<span class="home-tech-container-title-primary">ReaderPub is end-to-end<span class="home-tech-container-title-primary-colon">:</span></span>
 			<span class="home-tech-container-title-secondary">from creation and publishing to reading and engagement</span>
 		</h2>
 		<a class="home-tech-picture-link" href="/platform/" aria-label="Explore the ReaderPub platform">
@@ -399,7 +405,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 				/>
 			</picture>
 		</a>
-		<h2 class="home-tech-reader-activity-note">This is what reader activity looks like on <span>ReaderPub</span>.</h2>
+		<h2 class="home-tech-reader-activity-note">This is what your readers' activity on <span>ReaderPub</span> will look like.</h2>
 		<a class="button home-tech-visual-button home-tech-platform-button" href="/platform/">Explore ReaderPub</a>
 	</section>
 
@@ -522,21 +528,12 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	:global(body.page-home) {
-		--home-hero-illustration-surface: linear-gradient(to bottom, #fff9f5 0%, #fffdfb 34%, #ffffff 62%);
+		--home-hero-illustration-surface: linear-gradient(to bottom, #ffffff 0%, #ffffff 54%, #ffffff 100%);
 		--home-hero-illustration-wave: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202200%20560%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff9f5%22%20d%3D%22M0%20520%20C120%20500%20190%20552%20306%20486%20C432%20414%20500%20230%20620%20310%20C748%20396%20820%20212%20942%20268%20C1068%20326%201130%2092%201252%20158%20C1376%20224%201446%20336%201568%20218%20C1688%20102%201756%20290%201878%20222%20C1998%20156%202054%20540%202200%20520%20V560%20H0%20Z%22%2F%3E%3C%2Fsvg%3E");
-		--home-hero-illustration-spots:
-			radial-gradient(15% 16% at 10% 5%, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.3) 43%, transparent 78%),
-			radial-gradient(17% 16% at 35% 4%, rgba(0, 143, 128, 0.16) 0%, rgba(0, 143, 128, 0.04) 46%, transparent 80%),
-			radial-gradient(15% 15% at 59% 6%, rgba(255, 91, 0, 0.18) 0%, rgba(255, 91, 0, 0.04) 46%, transparent 80%),
-			radial-gradient(16% 15% at 82% 4%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.3) 44%, transparent 80%),
-			radial-gradient(16% 17% at 96% 12%, rgba(0, 143, 128, 0.15) 0%, rgba(0, 143, 128, 0.04) 45%, transparent 80%),
-			radial-gradient(17% 18% at 17% 25%, rgba(255, 91, 0, 0.16) 0%, rgba(255, 91, 0, 0.04) 45%, transparent 78%),
-			radial-gradient(15% 16% at 44% 20%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.25) 43%, transparent 78%),
-			radial-gradient(16% 18% at 71% 25%, rgba(0, 143, 128, 0.16) 0%, rgba(0, 143, 128, 0.04) 45%, transparent 80%),
-			radial-gradient(15% 16% at 89% 30%, rgba(255, 91, 0, 0.14) 0%, rgba(255, 91, 0, 0.04) 44%, transparent 78%),
-			radial-gradient(17% 18% at 31% 43%, rgba(0, 143, 128, 0.13) 0%, rgba(0, 143, 128, 0.03) 45%, transparent 80%),
-			radial-gradient(14% 15% at 56% 39%, rgba(255, 255, 255, 0.74) 0%, rgba(255, 255, 255, 0.2) 42%, transparent 78%),
-			radial-gradient(16% 17% at 76% 45%, rgba(255, 91, 0, 0.12) 0%, rgba(255, 91, 0, 0.03) 44%, transparent 78%);
+		/* A single SVG layer allows every soft colour field to have its own
+		 * asymmetric silhouette and angle; it also stays seam-free while the
+		 * background shifts horizontally on scroll. */
+		--home-hero-illustration-spots: url("/images/home-background.webp");
 	}
 
 	:global(.section.section--green.home-hero)::after {
@@ -957,8 +954,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		opacity: 0;
 		transform: translate3d(0, 24px, 0);
 		transition:
-			opacity 900ms var(--motion-ease),
-			transform 900ms var(--motion-ease);
+			opacity 720ms var(--motion-ease),
+			transform 720ms var(--motion-ease);
 	}
 
 	.home-video-solution-label {
@@ -984,8 +981,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		width: 100%;
 		transform: translate3d(0, 16px, 0) scale(0.96);
 		transition:
-			opacity 1100ms var(--motion-ease) 100ms,
-			transform 1100ms var(--motion-ease) 100ms;
+			opacity 880ms var(--motion-ease) 80ms,
+			transform 880ms var(--motion-ease) 80ms;
 	}
 
 	.home-video-brand-mark {
@@ -996,8 +993,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		opacity: 0;
 		transform: translate3d(0, 14px, 0) scale(0.96);
 		transition:
-			opacity 900ms var(--motion-ease),
-			transform 900ms var(--motion-ease);
+			opacity 720ms var(--motion-ease),
+			transform 720ms var(--motion-ease);
 	}
 
 	.home-video-brand-mark img {
@@ -1021,8 +1018,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		opacity: 0;
 		transform: translate3d(0, 14px, 0);
 		transition:
-			opacity 900ms var(--motion-ease),
-			transform 900ms var(--motion-ease);
+			opacity 720ms var(--motion-ease),
+			transform 720ms var(--motion-ease);
 	}
 
 	.home-video-wordmark > span:last-child {
@@ -1281,27 +1278,27 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-brand {
-		transition-delay: 350ms;
+		transition-delay: 280ms;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-brand-mark {
 		opacity: 1;
 		transform: translate3d(0, 0, 0) scale(1);
-		transition-delay: 600ms;
+		transition-delay: 480ms;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-wordmark {
 		opacity: 1;
 		transform: translate3d(0, 0, 0);
-		transition-delay: 1350ms;
+		transition-delay: 1080ms;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-slogan-block {
-		transition-delay: 2200ms;
+		transition-delay: 1760ms;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-strategy {
-		transition-delay: 3150ms;
+		transition-delay: 2520ms;
 	}
 
 	.home-video-stage.is-final .home-video-teaser {
@@ -1845,7 +1842,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		margin: 0;
 		color: var(--accent-orange);
 		font-family: var(--font-heading);
-		font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+		font-size: clamp(1.8rem, 2.88vw, 2.88rem);
 		font-weight: var(--font-weight-heading);
 		line-height: var(--line-height-heading);
 		text-align: center;
@@ -1853,6 +1850,18 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-tech-reader-activity-note span {
 		color: #ffffff !important;
+	}
+
+	@media (max-width: 900px) {
+		.home-tech-reader-activity-note {
+			font-size: 1.665rem;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.home-tech-reader-activity-note {
+			font-size: 1.485rem;
+		}
 	}
 
 	.home-tech-picture-link {
@@ -2018,11 +2027,14 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	.home-tech-container-title {
-		margin: 0;
+		/* The section grid supplies the normal gap. Add one quarter of that
+		 * distance only below the two-line title, before the product image. */
+		margin: 0 0 calc(var(--section-padding) * 0.1125);
 		justify-self: center;
 		width: 100%;
 		max-width: 1120px;
 		color: var(--accent-orange) !important;
+		line-height: var(--card-heading-line-height);
 		text-align: center !important;
 	}
 
@@ -2032,6 +2044,10 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-tech-container-title-primary {
 		color: #ffffff !important;
+	}
+
+	.home-tech-container-title-primary-colon {
+		color: var(--accent-orange) !important;
 	}
 
 	.home-comparison-grid {
@@ -2318,7 +2334,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		font-family: var(--font-heading);
 		font-size: clamp(22.1px, 2.72vw, 32.3px);
 		font-weight: var(--font-weight-heading);
-		line-height: var(--card-heading-line-height);
+		line-height: 1.45;
 		text-align: center;
 	}
 
@@ -2339,8 +2355,20 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		color: #000000 !important;
 	}
 
+	:global(.home-file-model-summary-platform) {
+		color: var(--accent-orange) !important;
+	}
+
+	:global(.home-file-model-summary-platform-punctuation) {
+		color: #000000 !important;
+	}
+
 	:global(body .page .content .section.home-file-model-section > .home-file-model-summary > .home-file-model-summary-break) {
 		color: var(--accent-orange) !important;
+	}
+
+	:global(.home-file-model-summary-break-punctuation) {
+		color: #000000 !important;
 	}
 
 	:global(body .page .content .section.home-file-model-section > p.home-file-model-summary-solution) {
