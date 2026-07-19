@@ -47,12 +47,12 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		>
 			<img
 				class="home-hero-image"
-				src="/images/home.webp?v=transparent-illustration"
+				src="/images/home.webp?v=1876x968"
 				alt="Illustration of ReaderPub connecting a reader with an author, publisher, library, and university"
 				loading="eager"
 				decoding="async"
-				width="1400"
-				height="1400"
+				width="1876"
+				height="968"
 			/>
 		</section>
 
@@ -72,7 +72,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 				const imageHeight = image.getBoundingClientRect().height;
 
 				if (imageHeight > 0) {
-					const bookshelfHeight = `${imageHeight * 0.25}px`;
+					const bookshelfRatio = window.matchMedia("(orientation: portrait)").matches ? 0.4 : 0.25;
+					const bookshelfHeight = `${imageHeight * bookshelfRatio}px`;
 					bookshelf.style.setProperty("--hero-background-spacer-height", bookshelfHeight);
 					bookshelf.style.setProperty("height", bookshelfHeight, "important");
 				}
@@ -165,6 +166,9 @@ const homeVideoDoorSides = ["left", "right"] as const;
 					</svg>
 				</button>
 			</div>
+			<button class="button home-video-start-button" type="button" data-home-video-start>
+				Check it out
+			</button>
 			<div class="home-video-accessible-intro">
 				The solution:  ReaderPub. Direct web access. No downloads or platform lock-in.
 			</div>
@@ -227,17 +231,63 @@ const homeVideoDoorSides = ["left", "right"] as const;
 				const intro = stage.querySelector("[data-home-video-intro]");
 				const video = intro instanceof HTMLElement ? intro.querySelector("video") : null;
 				const replayButton = stage.querySelector("[data-home-video-replay]");
+				const startButton = stage.querySelector("[data-home-video-start]");
 				const nav = document.querySelector(".nav");
 
 				if (
 					!(intro instanceof HTMLElement) ||
 					!(video instanceof HTMLVideoElement) ||
-					!(replayButton instanceof HTMLButtonElement)
+					!(replayButton instanceof HTMLButtonElement) ||
+					!(startButton instanceof HTMLButtonElement)
 				) {
 					return;
 				}
 
 				stage.dataset.videoReady = "true";
+
+				const syncStartButtonPosition = () => {
+					const doorContents = Array.from(stage.querySelectorAll(".home-video-intro-content--door"));
+					const leftDoorContent = stage.querySelector(".home-video-green-panel--left .home-video-intro-content--door");
+					const solutionLabel = leftDoorContent?.querySelector(".home-video-solution-label");
+					const slogan = leftDoorContent?.querySelector(".home-video-slogan");
+
+					if (!(solutionLabel instanceof HTMLElement) || !(slogan instanceof HTMLElement)) return;
+
+					/* Measure the untransformed layout. The door panels contain two visual
+					 * copies, so the single interactive button stays in the controls layer
+					 * and joins their text as one vertically centred group. */
+					doorContents.forEach((content) => content.style.setProperty("--home-video-start-stack-shift", "0px"));
+					void stage.offsetHeight;
+
+					const stageRect = stage.getBoundingClientRect();
+					const contentRect = leftDoorContent.getBoundingClientRect();
+					/* offsetTop/offsetHeight ignore the entrance animation transforms, so
+					 * the measured centre stays exact while the text fades into place. */
+					const offsetFromContent = (element) => {
+						let offset = 0;
+						let current = element;
+						while (current instanceof HTMLElement && current !== leftDoorContent) {
+							offset += current.offsetTop;
+							current = current.offsetParent;
+						}
+						return offset;
+					};
+					const textTop = contentRect.top + offsetFromContent(solutionLabel);
+					const textBottom = contentRect.top + offsetFromContent(slogan) + slogan.offsetHeight;
+					const controlHeight = Number.parseFloat(
+						getComputedStyle(document.documentElement).getPropertyValue("--button-control-height"),
+					) || startButton.offsetHeight;
+					const standardGap = controlHeight * 0.6;
+					const textHeight = textBottom - textTop;
+					const combinedHeight = textHeight + standardGap + startButton.offsetHeight;
+					const groupTop = contentRect.top + (contentRect.height - combinedHeight) / 2;
+					const stackShift = groupTop - textTop;
+
+					doorContents.forEach((content) =>
+						content.style.setProperty("--home-video-start-stack-shift", `${stackShift}px`),
+					);
+					startButton.style.top = `${groupTop + textHeight + standardGap - stageRect.top}px`;
+				};
 
 				const syncIntroGeometry = () => {
 					const navHeight = nav instanceof HTMLElement ? nav.getBoundingClientRect().height : 0;
@@ -252,11 +302,12 @@ const homeVideoDoorSides = ["left", "right"] as const;
 						stage.style.setProperty("--home-video-intro-height", `${introHeight}px`);
 						intro.style.height = `${introHeight}px`;
 					}
+
+					syncStartButtonPosition();
 				};
 
 				const introTimers = new Set();
 				let playbackAttempt = 0;
-				let hasPlayedDuringVisit = false;
 
 				const clearIntroTimers = () => {
 					introTimers.forEach((timer) => window.clearTimeout(timer));
@@ -310,7 +361,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 					}, 340);
 				};
 
-				const startExperience = (resetImmediately = false, shouldRun = true) => {
+				const resetExperience = (resetImmediately = false) => {
 					const attempt = ++playbackAttempt;
 					clearIntroTimers();
 					if (resetImmediately) stage.classList.add("is-resetting");
@@ -331,15 +382,24 @@ const homeVideoDoorSides = ["left", "right"] as const;
 						stage.classList.remove("is-resetting");
 					}
 
-					if (!shouldRun) return;
+					return attempt;
+				};
+
+				const showGreenIntro = (resetImmediately = false) => {
+					const attempt = resetExperience(resetImmediately);
+					startButton.disabled = false;
 
 					window.requestAnimationFrame(() => {
 						if (attempt !== playbackAttempt) return;
 						stage.classList.add("is-sequence-started");
-						/* The final slogan finishes at 2.48 s. Keep it fully readable
-						 * for exactly three seconds before the doors open. */
-						scheduleIntroStep(() => openGreenIntro(attempt), 5480);
 					});
+				};
+
+				const beginPlayback = (resetImmediately = false) => {
+					const attempt = resetExperience(resetImmediately);
+					startButton.disabled = true;
+					stage.classList.add("is-sequence-started");
+					openGreenIntro(attempt);
 				};
 
 				video.addEventListener("ended", () => {
@@ -352,35 +412,15 @@ const homeVideoDoorSides = ["left", "right"] as const;
 					syncIntroGeometry();
 				});
 				replayButton.addEventListener("click", () => {
-					hasPlayedDuringVisit = true;
-					startExperience(true);
+					beginPlayback(true);
 				});
-
-				if ("IntersectionObserver" in window) {
-					const stageObserver = new IntersectionObserver(
-						(entries) => {
-							const entry = entries[0];
-
-							if (entry?.isIntersecting && entry.intersectionRatio >= 0.35 && !hasPlayedDuringVisit) {
-								hasPlayedDuringVisit = true;
-								startExperience(true);
-							} else if (!entry?.isIntersecting && hasPlayedDuringVisit) {
-								hasPlayedDuringVisit = false;
-								startExperience(true, false);
-							}
-						},
-						{ threshold: [0, 0.35] },
-					);
-
-					stageObserver.observe(stage);
-				} else {
-					hasPlayedDuringVisit = true;
-					startExperience();
-				}
+				startButton.addEventListener("click", () => {
+					beginPlayback();
+				});
 				window.addEventListener("resize", syncIntroGeometry, { passive: true });
 
 				syncIntroGeometry();
-				startExperience(false, false);
+				showGreenIntro();
 			};
 
 			setupHomeVideoIntro();
@@ -880,7 +920,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		width: 200%;
 		max-width: none;
 		margin: 0;
-		transform: none;
+		transform: translate3d(0, var(--home-video-start-stack-shift, 0px), 0);
 	}
 
 	/* The final message uses the same full, fixed stage as the green intro and
@@ -950,7 +990,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	.home-video-slogan-block,
 	.home-video-strategy,
 	.home-video-scroll,
-	.home-video-replay {
+	.home-video-replay,
+	.home-video-start-button {
 		opacity: 0;
 		transform: translate3d(0, 24px, 0);
 		transition:
@@ -1190,6 +1231,32 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		outline-offset: 3px;
 	}
 
+	.home-video-start-button {
+		--button-static-background: var(--accent-orange);
+		--button-static-color: #ffffff;
+		--button-static-border-color: transparent;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		/* This introductory control stays at its content width on narrow
+		 * screens; the site's generic mobile rule makes ordinary buttons full
+		 * width, which would turn this centred control into a full-width bar. */
+		width: auto !important;
+		background: var(--button-static-background);
+		color: var(--button-static-color);
+		white-space: nowrap;
+		pointer-events: none;
+		transform: translate3d(-50%, 24px, 0);
+	}
+
+	/* This control sits on the green video intro, where button colours stay
+	 * fixed on hover. The global button hover otherwise targets every section. */
+	.home-video-stage .home-video-start-button:is(:hover, :focus-visible) {
+		background: var(--button-static-background) !important;
+		color: var(--button-static-color) !important;
+		border-color: var(--button-static-border-color) !important;
+	}
+
 	.home-video-stage.is-darkening .home-video-green-layer,
 	.home-video-stage.is-final .home-video-green-layer {
 		opacity: 1;
@@ -1234,7 +1301,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 			.home-video-slogan-block,
 			.home-video-strategy,
 			.home-video-scroll,
-			.home-video-replay
+			.home-video-replay,
+			.home-video-start-button
 		) {
 		transition: none;
 	}
@@ -1298,6 +1366,13 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	.home-video-stage.is-sequence-started .home-video-strategy {
+		transition-delay: 2520ms;
+	}
+
+	.home-video-stage.is-sequence-started.is-green-intro .home-video-start-button:not(:disabled) {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translate3d(-50%, 0, 0);
 		transition-delay: 2520ms;
 	}
 
@@ -1396,7 +1471,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	}
 
 	.home-hero-illustration-backdrop {
-		--home-hero-bookshelf-gap: 64px;
+		--home-hero-bookshelf-gap: 0px;
 		--home-hero-wave-height: clamp(72px, 8.2vw, 150px);
 		--home-hero-strip-pattern-width: max(2400px, 150vw);
 		--home-hero-wave-mask-images:
@@ -1464,12 +1539,9 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-hero-image {
 		display: block;
-		/* Keep the illustration square.  On a narrow portrait screen its
-		 * available width is smaller than the desktop height calculation; an
-		 * explicit height there was stretching the image vertically. */
-		width: min(100%, calc((64dvh - 51.2px) * 1.1));
-		aspect-ratio: 1;
+		width: 100%;
 		height: auto;
+		aspect-ratio: auto !important;
 		max-height: none;
 	}
 
@@ -1513,15 +1585,17 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		}
 
 		.home-hero-illustration-backdrop {
-			--home-hero-bookshelf-gap: 32px;
+			--home-hero-bookshelf-gap: 0px;
 			--home-hero-strip-pattern-width: max(1200px, 280vw);
 			--home-hero-wave-mask-size: 1100px var(--home-hero-wave-height), 100% 100%;
 		}
 
-		/* Match a one-column card's usable width in the surrounding green
-		 * sections. */
+		/* The home illustration and its bookshelf span the full browser width
+		 * on portrait screens. */
 		.home-hero-image-section {
-			width: calc(100% - var(--section-padding));
+			width: 100vw;
+			margin-right: calc(50% - 50vw);
+			margin-left: calc(50% - 50vw);
 		}
 
 		:global(.hero-background-spacer.home-hero-bookshelf) {
@@ -1547,7 +1621,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		}
 
 		/* Main images occupy the complete usable card width on portrait
-		 * screens, while retaining their intrinsic square aspect ratio. */
+		 * screens while preserving their intrinsic aspect ratio. */
 		.home-hero-image {
 			width: 100%;
 		}
