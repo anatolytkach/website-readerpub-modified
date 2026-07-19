@@ -193,6 +193,9 @@ const homeVideoDoorSides = ["left", "right"] as const;
 						<li>Audience becomes invisible</li>
 						<li>Relationship ends</li>
 					</ul>
+					<p class="home-broken-relationship-problem">
+						There are many platforms – <span class="home-broken-relationship-platform">Kindle</span><span class="home-broken-relationship-platform-punctuation">,</span> <span class="home-broken-relationship-platform">Substack</span><span class="home-broken-relationship-platform-punctuation">,</span> <span class="home-broken-relationship-platform">Everand</span> – making a book available. But the actual life of their books ends when a file is delivered.
+					</p>
 				</div>
 			</article>
 			<article class="card card--good home-list-card home-readerpub-model-card">
@@ -205,18 +208,13 @@ const homeVideoDoorSides = ["left", "right"] as const;
 						<li>Audience remains visible</li>
 						<li>Relationship continues</li>
 					</ul>
+					<p class="home-broken-relationship-solution">
+						Only <span class="readerpub-heading-word"><span class="readerpub-heading-reader">Reader</span><span class="readerpub-heading-pub">Pub</span></span> keeps the book alive and connected after delivery.
+					</p>
 				</div>
 			</article>
 		</div>
 
-		<p class="home-file-model-summary home-file-model-summary-problem-copy">
-			<span class="home-file-model-summary-problem">The old file-first publishing model ends when a file is delivered.</span>
-			<span class="home-file-model-summary-problem home-file-model-summary-break">The relationship is broken<span class="home-file-model-summary-break-punctuation">!</span></span>
-		</p>
-		<p class="home-file-model-summary home-file-model-summary-solution">
-			<span class="home-file-model-summary-solution-context">There are many platforms – <span class="home-file-model-summary-platform">Kindle</span><span class="home-file-model-summary-platform-punctuation">,</span> <span class="home-file-model-summary-platform">Substack</span><span class="home-file-model-summary-platform-punctuation">,</span> <span class="home-file-model-summary-platform">Everand</span> – making a book available.</span>
-			<span>Only ReaderPub keeps the book alive and connected after delivery.</span>
-		</p>
 	</Section>
 
 	<script is:inline>
@@ -2129,6 +2127,50 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: var(--card-grid-gap);
 		width: 100%;
+	}
+
+	@media (min-width: 901px) {
+		:global(body.page-home .page .content .section.home-file-model-section > .home-comparison-grid) {
+			grid-template-columns: 11fr 9fr !important;
+		}
+	}
+
+	.home-broken-relationship-problem {
+		margin: 0;
+		color: var(--text);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.home-broken-relationship-platform {
+		color: var(--accent-orange);
+	}
+
+	.home-broken-relationship-platform-punctuation {
+		color: var(--text);
+	}
+
+	.home-broken-relationship-solution {
+		margin: 0;
+		color: var(--text) !important;
+		font-family: var(--font-heading);
+		font-size: var(--card-heading-font-size);
+		font-weight: var(--font-weight-heading);
+		line-height: var(--card-heading-line-height);
+	}
+
+	:global(body .page .content .section.home-file-model-section .comparison-text-panel.home-old-model-card) {
+		padding-right: 28px !important;
+	}
+
+	@media (max-width: 900px) {
+		:global(body .page .content .section.home-file-model-section .comparison-text-panel.home-old-model-card) {
+			padding-right: 24px !important;
+		}
+	}
+
+	:global(.home-file-model-section .home-readerpub-model-card) {
+		justify-content: center;
 	}
 
 	.home-comparison-card,
