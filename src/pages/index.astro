@@ -417,6 +417,28 @@ const homeVideoDoorSides = ["left", "right"] as const;
 				});
 				window.addEventListener("resize", syncIntroGeometry, { passive: true });
 
+				if ("IntersectionObserver" in window) {
+					let hasEnteredStage = false;
+					let stageWasLeft = false;
+					const stageObserver = new IntersectionObserver(
+						([entry]) => {
+							if (entry.isIntersecting) {
+								if (hasEnteredStage && stageWasLeft && !stage.classList.contains("is-green-intro")) {
+									showGreenIntro(true);
+								}
+								hasEnteredStage = true;
+								stageWasLeft = false;
+								return;
+							}
+
+							if (hasEnteredStage) stageWasLeft = true;
+						},
+						{ threshold: 0 },
+					);
+
+					stageObserver.observe(stage);
+				}
+
 				syncIntroGeometry();
 				showGreenIntro();
 			};
