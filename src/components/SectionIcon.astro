@@ -13,6 +13,7 @@ interface Props {
 		| "author"
 		| "research"
 		| "program"
+		| "scribe"
 		| "sale"
 		| "rental"
 		| "charity"
@@ -40,6 +41,7 @@ const cardIconSources: Partial<Record<Props["type"], string>> = {
 	author: "/images/card-icons/author.png",
 	research: "/images/card-icons/research.png",
 	program: "/images/card-icons/program.png",
+	scribe: "/images/scribe-action.svg",
 	sale: "/images/card-icons/sale.png",
 	charity: "/images/card-icons/charity.png",
 	dollars: "/images/card-icons/dollars.png",
@@ -65,6 +67,7 @@ const iconViewBoxes: Record<Props["type"], string> = {
 	author: "6 4 38 42",
 	research: "11 11 26 26",
 	program: "7 9 34 30",
+	scribe: "0 0 1453.17 1747.25",
 	sale: "8 8 26 26",
 	rental: "9 9 30 30",
 	charity: "8 12 32 25",
@@ -90,6 +93,7 @@ const iconColors: Record<Props["type"], string> = {
 	author: "var(--icon-author)",
 	research: "var(--icon-research)",
 	program: "var(--icon-program)",
+	scribe: "var(--icon-program)",
 	sale: "var(--icon-sale)",
 	rental: "var(--icon-rental)",
 	charity: "var(--icon-charity)",
@@ -103,7 +107,15 @@ const iconColors: Record<Props["type"], string> = {
 };
 ---
 
-{cardIconSource && <img class="section-icon section-icon--raster" src={cardIconSource} alt="" aria-hidden="true" />}
+{cardIconSource && (
+	<img
+		class:list={["section-icon", "section-icon--raster", type === "scribe" && "section-icon--scribe"]}
+		src={cardIconSource}
+		alt=""
+		aria-hidden="true"
+		style={type === "scribe" ? "transform: scale(0.711) !important; transform-origin: center;" : undefined}
+	/>
+)}
 <svg class="section-icon section-icon--original" viewBox={iconViewBoxes[type]} role="img" aria-label={title} style={`--section-icon-color: ${iconColors[type]};`}>
 	{type === "publisher" && (
 		<>

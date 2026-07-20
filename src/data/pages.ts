@@ -17,6 +17,7 @@ export type IconName =
 	| "author"
 	| "research"
 	| "program"
+	| "scribe"
 	| "sale"
 	| "rental"
 	| "charity"
