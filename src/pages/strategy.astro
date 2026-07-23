@@ -326,6 +326,13 @@ const finalCtaActions = [
 		justify-content: flex-start !important;
 	}
 
+	@media (orientation: landscape) and (min-width: 901px) {
+		:global(.growth-hero.hero-section.section--with-media.hero-section--media-start) {
+			grid-template-columns: minmax(0, 36%) minmax(0, 58%);
+			column-gap: 6%;
+		}
+	}
+
 	:global(.growth-market-grid.card-grid--3) {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}

@@ -28,10 +28,11 @@ const routeSlug = Astro.url.pathname.replace(/^\/+|\/+$/g, "").split("/")[0] || 
 const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`;
 const organizationStructuredData = {
 	"@type": "Organization",
-  "@id": `${siteUrl}/#organization`,
-  name: "ReaderPub Inc.",
-  description: "ReaderPub is a web-native publishing network for books, knowledge publications, and connected reading.",
-  url: siteUrl,
+	"@id": `${siteUrl}/#organization`,
+	name: "ReaderPub Inc.",
+	description: "ReaderPub is a web-native publishing network for books, knowledge publications, and connected reading.",
+	url: siteUrl,
+	sameAs: ["https://www.linkedin.com/company/readerpub/"],
 	logo: `${siteUrl}/images/logo.svg`,
 	contactPoint: {
 		"@type": "ContactPoint",
