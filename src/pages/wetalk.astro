@@ -222,6 +222,13 @@ const audienceCards = [
 		color: var(--accent);
 	}
 
+	@media (orientation: landscape) and (min-width: 901px) {
+		:global(body .page .content .wetalk-hero.hero-section.section--with-media) {
+			grid-template-columns: minmax(0, 58%) minmax(0, 40%);
+			column-gap: 2%;
+		}
+	}
+
 	.wetalk-solution-heading-section {
 		justify-items: center;
 		margin-bottom: 0 !important;
