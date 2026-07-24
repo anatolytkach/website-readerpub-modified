@@ -1594,6 +1594,12 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		}
 	}
 
+	@media (min-width: 901px) and (max-width: 1900px) and (orientation: landscape) {
+		.home-hero-title {
+			font-size: min(clamp(2.4rem, 5.68vw, 4.6rem), 5.7912cqw);
+		}
+	}
+
 	@media (orientation: portrait) {
 		:global(.section.section--green.home-hero) {
 			--green-section-safe-offset: clamp(46px, 10vw, 78px);

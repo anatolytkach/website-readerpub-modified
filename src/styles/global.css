@@ -153,6 +153,35 @@
 	}
 }
 
+/*
+ * A Retina desktop can have substantially fewer CSS pixels than a 1x screen
+ * with the same physical resolution. Keep the wide-screen composition above
+ * 1900px, but give every Hero more copy width and a proportionate title size
+ * below that point so text and illustration retain a balanced height.
+ */
+@media (min-width: 901px) and (max-width: 1900px) and (orientation: landscape) {
+	:root {
+		--hero-solution-copy-size: 1.3541667rem;
+		--hero-problem-copy-size: calc(var(--hero-solution-copy-size) * 0.9);
+	}
+
+	body .page .content .hero-section {
+		grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+	}
+
+	body .page .content .hero-copy h1 {
+		font-size: clamp(2.4rem, 2.53vw, 2.75rem);
+	}
+
+	body .page .content .hero-section .hero-lead {
+		font-size: var(--hero-problem-copy-size) !important;
+	}
+
+	body .page .content .hero-section :is(.hero-body, .contact-hero-solution, .home-hero-statement) {
+		font-size: var(--hero-solution-copy-size) !important;
+	}
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
