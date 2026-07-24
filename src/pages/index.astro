@@ -272,9 +272,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 					};
 					const textTop = contentRect.top + offsetFromContent(solutionLabel);
 					const textBottom = contentRect.top + offsetFromContent(slogan) + slogan.offsetHeight;
-					const controlHeight = Number.parseFloat(
-						getComputedStyle(document.documentElement).getPropertyValue("--button-control-height"),
-					) || startButton.offsetHeight;
+					const controlHeight = startButton.offsetHeight;
 					const standardGap = controlHeight * 0.6;
 					const textHeight = textBottom - textTop;
 					const combinedHeight = textHeight + standardGap + startButton.offsetHeight;
