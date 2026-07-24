@@ -1492,14 +1492,14 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	.home-hero-illustration-backdrop {
 		--home-hero-bookshelf-gap: 0px;
-		--home-hero-wave-height: clamp(72px, 8.2vw, 150px);
+		--home-hero-wave-height: clamp(4.5rem, 8.2vw, 9.375rem);
 		--home-hero-strip-pattern-width: max(2400px, 150vw);
 		--home-hero-wave-mask-images:
 			var(--green-edge-air-bottom-wave-scroll),
 			linear-gradient(to bottom, transparent 0 var(--home-hero-wave-height), #000 var(--home-hero-wave-height) 100%);
 		--home-hero-wave-mask-position: var(--green-edge-wave-scroll-x) top, 0 0;
 		--home-hero-wave-mask-repeat: repeat-x, no-repeat;
-		--home-hero-wave-mask-size: 2200px var(--home-hero-wave-height), 100% 100%;
+		--home-hero-wave-mask-size: 137.5rem var(--home-hero-wave-height), 100% 100%;
 		position: relative;
 		isolation: isolate;
 		display: flow-root;
@@ -1550,7 +1550,7 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	.home-hero-image-section {
 		position: relative;
 		z-index: 1;
-		width: min(100%, calc(var(--page-max) - 48px));
+		width: min(100%, calc(var(--page-max) - (var(--page-inline-padding) * 2)));
 		margin: var(--section-stack-gap) auto 0;
 		display: grid;
 		place-items: center;
@@ -1567,8 +1567,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	:global(.hero-background-spacer.home-hero-bookshelf) {
 		--hero-background-spacer-height: calc(16dvh - 12.8px);
-		width: min(100%, calc(var(--page-max) - 48px)) !important;
-		max-width: min(100%, calc(var(--page-max) - 48px)) !important;
+		width: min(100%, calc(var(--page-max) - (var(--page-inline-padding) * 2))) !important;
+		max-width: min(100%, calc(var(--page-max) - (var(--page-inline-padding) * 2))) !important;
 		margin: var(--home-hero-bookshelf-gap, 64px) auto 0 !important;
 		position: relative;
 		z-index: 1;
