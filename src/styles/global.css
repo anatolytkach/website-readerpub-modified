@@ -326,6 +326,7 @@ h2 {
 
 h3 {
 	font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+	line-height: var(--line-height-body) !important;
 }
 
 p {
@@ -1483,35 +1484,6 @@ h3.heading--center-full,
 	border-color: transparent;
 }
 
-/*
- * Buttons in green containers must be visually static on hover.  Store each
- * variant's resting palette above, then reuse it here rather than relying on
- * a shared hover palette.
- */
-body .page .content
-	:is(
-		.section--green,
-		.card--accent,
-		.card--good,
-		.card.home-readerpub-model-card,
-		.card.home-readerpub-publishing-card,
-		.card.platform-readerpub-model-card,
-		.card.readerpub-model-card,
-		.card.authors-living-card,
-		.card.wepub-readerpub-path-card,
-		.card.booktree-with-card,
-		.card.pricing-readerpub-model-card,
-		.card.security-readerpub-solution-card,
-		.card.webuzz-living-card,
-		.card.webuzz-legacy-solution-card,
-		.card.webuzz-overview-card--green
-	)
-	.button:hover {
-	background: var(--button-static-background) !important;
-	color: var(--button-static-color) !important;
-	border-color: var(--button-static-border-color) !important;
-}
-
 :is(.hero-section, .network-hero, .section, .cta-block) .button:hover,
 :is(.hero-section, .network-hero, .section, .cta-block) .button--secondary:hover,
 :is(.hero-section, .network-hero, .section, .cta-block) .button.secondary:hover {
@@ -1630,13 +1602,6 @@ body .page .content
 	background: #ffffff;
 	color: var(--text);
 	border-color: #ffffff;
-}
-
-/* CTA colors remain stable on dark sections, including page-specific buttons. */
-body .page .content .section--dark :is(.button, .button--secondary, .button.secondary):is(:hover, :focus-visible) {
-	background: var(--button-static-background) !important;
-	color: var(--button-static-color) !important;
-	border-color: var(--button-static-border-color) !important;
 }
 
 .cta-row {

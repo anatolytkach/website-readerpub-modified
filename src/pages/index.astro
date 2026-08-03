@@ -1267,14 +1267,6 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		transform: translate3d(-50%, 24px, 0);
 	}
 
-	/* This control sits on the green video intro, where button colours stay
-	 * fixed on hover. The global button hover otherwise targets every section. */
-	.home-video-stage .home-video-start-button:is(:hover, :focus-visible) {
-		background: var(--button-static-background) !important;
-		color: var(--button-static-color) !important;
-		border-color: var(--button-static-border-color) !important;
-	}
-
 	.home-video-stage.is-darkening .home-video-green-layer,
 	.home-video-stage.is-final .home-video-green-layer {
 		opacity: 1;

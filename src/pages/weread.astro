@@ -95,8 +95,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/",
 	<section class="section section--white weread-solution-showcase-section" aria-labelledby="weread-solution-showcase-title">
 		<header class="weread-solution-showcase-header">
 			<h2 id="weread-solution-showcase-title" class="heading--center-full heading--center-full-h2">
-				<span class="weread-solution-title-prefix">The solution:&nbsp;&nbsp;</span><span class="weread-solution-product-word"><span>We</span><span>Read</span></span>
-				, a browser-based eReader
+				<span class="weread-solution-title-prefix">The solution:&nbsp;&nbsp;</span><a class="weread-solution-product-word" href={BOOKS_URL} target="_blank" rel="noopener noreferrer"><span>We</span><span>Read</span></a>, a browser-based eReader
 			</h2>
 		</header>
 		<picture class="weread-solution-picture" data-reveal>
@@ -111,8 +110,8 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/",
 			/>
 		</picture>
 		<div class="weread-solution-cta">
-			<h2 class="heading--center-full heading--center-full-h2">Again, it's not an app—it's a&#32;<span class="weread-solution-product-word"><span>We</span><span>Read</span></span> webpage.</h2>
-			<h3 class="heading--center-full heading--center-full-h3">Read on the web, share the whole book or a single passage, make and share notes, and discuss it all on&#32;<span class="weread-solution-product-word"><span>We</span><span>Buzz</span></span>.</h3>
+			<h2 class="heading--center-full heading--center-full-h2">Again, it's not an app—it's a&#32;<a class="weread-solution-product-word" href="https://reader.pub/books/reader/?id=11" target="_blank" rel="noopener noreferrer"><span>We</span><span>Read</span></a> webpage.</h2>
+			<h3 class="heading--center-full heading--center-full-h3">Read on the web, share the whole book or a single passage, make and share notes, and discuss it all on&#32;<a class="weread-solution-product-word" href="https://webuzz.org/" target="_blank" rel="noopener noreferrer"><span>We</span><span>Buzz</span></a>.</h3>
 			<div class="weread-solution-actions">
 				<a class="button button--secondary" href={BOOKS_URL} target="_blank" rel="noopener noreferrer">Read 60K+ books in WeRead</a>
 				<a class="button" href="/webuzz/">Explore WeBuzz</a>
@@ -342,6 +341,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/",
 	.weread-solution-product-word {
 		display: inline-block;
 		color: var(--accent);
+		text-decoration: none !important;
 	}
 
 	.weread-solution-product-word > span:last-child {
