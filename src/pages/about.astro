@@ -6,6 +6,7 @@ import CtaBlock from "../components/sections/CtaBlock.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import Section from "../components/sections/Section.astro";
 import Base from "../layouts/Base.astro";
+import ProductName from "../components/ProductName.astro";
 
 const heroActions = [
 	{ label: "Explore the platform", href: "/platform/" },
@@ -88,7 +89,7 @@ const teamMembers = [
 	>
 		<Fragment slot="body">
 			<p>
-				ReaderPub is built by top software engineers and industry professionals with decades of experience in technology innovations.
+				READERPUB INC. is a Florida corporation built by top software engineers and industry professionals with decades of experience in technology innovations.
 			</p>
 			<p class="about-hero-solution">
 				Our team is focused on building a new model for web-native publishing, browser-based reading, connected discussion, and institutional knowledge management.
@@ -96,34 +97,22 @@ const teamMembers = [
 		</Fragment>
 	</HeroSection>
 
-	<Section tone="white" class="about-section about-why-section" title="Why ReaderPub exists">
+	<Section tone="gray" class="about-section about-why-section" title="Why ReaderPub exists">
 		<div class="about-copy-stack">
 			<p>
 				Digital publishing made distribution easier, but it did not solve what happens after publication. Books and knowledge publications are still often treated as files to deliver rather than assets that can remain active, connected, and useful on the web.
 			</p>
-			<p class="about-copy-accent">ReaderPub was created to address that gap.</p>
 		</div>
 		<CardGrid columns="3" class="about-card-grid about-why-card-grid">
-			<article class="comparison-text-panel about-why-paper-card">
-				<div class="card-copy">
-					<h3>File-first publishing</h3>
-					<p>Traditional digital publishing often ends with file delivery.</p>
-				</div>
-			</article>
-			<article class="comparison-text-panel about-why-paper-card">
-				<div class="card-copy">
-					<h3>Reader relationships</h3>
-					<p>Authors, publishers, and institutions often lose visibility into what happens after readers gain access.</p>
-				</div>
-			</article>
-			<article class="comparison-text-panel about-why-paper-card">
-				<div class="card-copy">
-					<h3>Discussion and discovery</h3>
-					<p>Conversation, discovery, and reader activity frequently move away from the publication itself.</p>
-				</div>
-			</article>
-			<Card class="about-why-card--centered" variant="good" title="Web-native Publishing" body="ReaderPub helps publications remain readable, searchable, discussable, and useful after release." />
+			<Card class="about-why-card" icon="epubFile" title="Week file-first publishing" body="Traditional digital publishing ends with the delivery of a file that is, moreover, poorly protected." />
+			<Card class="about-why-card" icon="readerBook" title="Broken reader relationships" body="Authors, publishers, and institutions often lose visibility into what happens after readers gain access." />
+			<Card class="about-why-card" icon="public" title="Poor discussion and discovery" body="Conversation, discovery, and reader activity frequently move away from the publication itself." />
 		</CardGrid>
+	</Section>
+
+	<Section tone="white" class="wepub-new-source-solution-section">
+		<Fragment slot="title"><ProductName name="ReaderPub" /> was created to address that gap</Fragment>
+		<h3 class="wepub-new-source-solution-lede">Web-native publishing helps publications remain readable, searchable, discussable, and useful after release.</h3>
 	</Section>
 
 	<Section tone="green" class="about-section about-building-section" title="What we are building">
@@ -202,89 +191,71 @@ const teamMembers = [
 		color: var(--accent-copy) !important;
 	}
 
-	:global(.about-why-section .card h3) {
-		color: var(--accent-copy) !important;
-	}
-
-	:global(.about-why-section .about-why-paper-card h3) {
+	:global(body .page .content .section.about-why-section > .section-header > h2) {
 		color: var(--text) !important;
-		font-size: 1.215rem !important;
 	}
 
 	:global(.about-why-card-grid.card-grid--3) {
-		grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
 		grid-auto-rows: auto;
-		row-gap: clamp(72px, 6vw, 112px);
-		margin-top: clamp(38.4px, 4vw, 64px);
+		margin-top: clamp(19.2px, 2vw, 32px);
 	}
 
-	:global(.about-why-paper-card) {
-		--comparison-paper-angle: 6deg;
-		--comparison-paper-shadow: 0 0 28px rgb(21 31 43 / 15.87%);
-
-		position: relative;
-		isolation: isolate;
-		z-index: 0;
-		box-sizing: border-box;
-		justify-self: stretch !important;
-		width: 100% !important;
-		min-height: 100%;
-		padding: 28px calc(28px + 4%) !important;
+	:global(.about-why-card > .card-icon-heading) {
+		--card-icon-heading-size: var(--card-inline-icon-size, 56px);
+		display: grid;
+		grid-template-columns: var(--card-icon-heading-size) minmax(0, 1fr) auto;
+		gap: var(--card-icon-gap);
+		align-items: center;
+		justify-content: stretch;
+		width: 100%;
+		text-align: left;
 	}
 
-	:global(.about-why-paper-card:nth-child(even)) {
-		--comparison-paper-angle: -6deg;
+	:global(.about-why-card > .card-icon-heading > .section-icon) {
+		grid-column: 1;
+		justify-self: start;
 	}
 
-	:global(.about-why-paper-card::before) {
-		content: "";
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		pointer-events: none;
-		background: var(--card-bg);
-		box-shadow: var(--comparison-paper-shadow);
-		transform: rotate(var(--comparison-paper-angle));
-		transform-origin: center;
-		outline: 1px solid transparent;
-		transition:
-			outline-color var(--motion-fast) ease,
-			box-shadow var(--motion-fast) ease;
+	:global(body .page .content .section.about-why-section .about-why-card .section-icon--raster) {
+		display: none !important;
 	}
 
-	:global(.about-why-paper-card > .card-copy) {
-		position: relative;
-		z-index: 1;
+	:global(body .page .content .section.about-why-section .about-why-card .section-icon--original) {
+		display: block !important;
+		--section-icon-color: #000000 !important;
+		color: #000000 !important;
+		stroke: #000000 !important;
 	}
 
-	:global(body .page .content .section.about-why-section .about-why-paper-card .card-copy > p) {
-		max-width: none !important;
-		width: 100% !important;
+	:global(.about-why-card > .card-icon-heading > h3) {
+		grid-column: 2;
+		max-width: none;
+		text-align: left;
 	}
 
-	:global(.about-why-card--centered) {
-		grid-column: 1 / -1;
+	:global(.about-why-card > p) {
+		text-align: left;
+	}
+
+	:global(.wepub-new-source-solution-section > .section-header) {
+		justify-self: stretch;
+		width: 100%;
+		max-width: none;
+		text-align: center;
+	}
+
+	:global(.wepub-new-source-solution-section > .section-header h2) {
+		text-align: center;
+	}
+
+	:global(.wepub-new-source-solution-lede) {
 		justify-self: center;
-		width: min(100%, 560px);
-	}
-
-	:global(body .page .content .section.about-why-section .about-why-card--centered h3) {
-		font-size: 1.485rem !important;
-	}
-
-	:global(body .page .content .section.about-why-section .about-why-card--centered p) {
-		color: var(--accent-copy) !important;
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		:global(.about-why-paper-card:hover) {
-			z-index: 2;
-		}
-
-		:global(.about-why-paper-card:hover::before) {
-			outline-color: var(--text);
-			box-shadow: 0 0 30px rgb(255 91 0 / 42.32%);
-		}
+		width: min(100%, 980px);
+		margin: 0;
+		color: var(--accent);
+		font-size: clamp(1.25rem, 2.1vw, 1.8rem);
+		line-height: var(--line-height-heading);
+		text-align: center;
 	}
 
 	:global(.about-section.section--green > .about-copy-stack p) {
@@ -453,23 +424,6 @@ const teamMembers = [
 	}
 
 	@media (max-width: 900px) {
-		:global(.about-why-card-grid.card-grid--3) {
-			grid-template-columns: 1fr !important;
-		}
-
-		:global(.about-why-paper-card) {
-			--comparison-paper-angle: 2.5deg;
-			padding: 24px !important;
-		}
-
-		:global(.about-why-paper-card:nth-child(even)) {
-			--comparison-paper-angle: -2.5deg;
-		}
-
-		:global(.about-why-card--centered) {
-			grid-column: auto;
-		}
-
 		:global(.about-building-grid.card-grid--3) {
 			grid-template-columns: 1fr !important;
 		}

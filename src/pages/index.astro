@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import Card from "../components/Card.astro";
 import CardGrid from "../components/CardGrid.astro";
 import CtaBlock from "../components/sections/CtaBlock.astro";
+import ProductName from "../components/ProductName.astro";
 import Section from "../components/sections/Section.astro";
 import { BOOKS_URL, PUBLISH_URL, SITE_NAME } from "../consts";
 
@@ -100,22 +101,22 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	>
 		<CardGrid columns="3" class="home-problem-grid">
 			<Card
-				href="/weread/"
-				icon="reader"
-				title="Readers"
-				body="Reading is digital, yet discussion and discovery remain fragmented across apps, stores, and social networks."
+				class="about-why-card"
+				icon="epubFile"
+				title="Week file-first publishing"
+				body="Traditional digital publishing ends with the delivery of a file that is, moreover, poorly protected."
 			/>
 			<Card
-				href="/wepub/"
-				icon="author"
-				title="Authors & Publishers"
-				body="Authors and publishers release books, yet marketplaces often control visibility, access to readers, and the customer relationship."
+				class="about-why-card"
+				icon="readerBook"
+				title="Broken reader relationships"
+				body="Authors, publishers, and institutions often lose visibility into what happens after readers gain access."
 			/>
 			<Card
-				href="/institutions/"
-				icon="library"
-				title="Institutions"
-				body="Libraries, universities, and public organizations publish knowledge that remains difficult to find, read, and discuss online."
+				class="about-why-card"
+				icon="public"
+				title="Poor discussion and discovery"
+				body="Conversation, discovery, and reader activity frequently move away from the publication itself."
 			/>
 		</CardGrid>
 	</Section>
@@ -180,8 +181,6 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		tone="white"
 		class="home-file-model-section section--two-column"
 	>
-		<h3 class="home-tech-title-line home-tech-title-line-solution">A browser-based eReader <span class="home-tech-title-plus">+</span> a web-native publishing network.</h3>
-
 		<div class="home-comparison-grid">
 			<article class="comparison-text-panel home-list-card home-old-model-card">
 				<div class="card-copy">
@@ -213,6 +212,43 @@ const homeVideoDoorSides = ["left", "right"] as const;
 					</p>
 				</div>
 			</article>
+		</div>
+
+		<h3 class="home-tech-title-line home-tech-title-line-solution">A browser-based eReader <span class="home-tech-title-plus">+</span> a web-native publishing network.</h3>
+
+		<div class="home-reader-groups-section">
+			<CardGrid columns="3" class="home-reader-groups-grid">
+				<Card
+					href="/weread/"
+					icon="reader"
+					title="Readers"
+					body="Reading is digital yet remains complicated, while discussion and discovery remain fragmented across apps, stores, and social networks. See how ReaderPub fixed this."
+					variant="good"
+					class="home-readerpub-model-card home-list-card home-reader-groups-card"
+				>
+					<Fragment slot="body">Reading is digital yet remains complicated, while discussion and discovery remain fragmented across apps, stores, and social networks.<br />See how <ProductName name="ReaderPub" class="home-reader-groups-readerpub" /> fixed this.</Fragment>
+				</Card>
+				<Card
+					href="/wepub/"
+					icon="author"
+					title="Authors & Publishers"
+					body="Authors and publishers release books, yet marketplaces control visibility, access to readers, and the customer relationship. Get back your audience with ReaderPub."
+					variant="good"
+					class="home-readerpub-model-card home-list-card home-reader-groups-card"
+				>
+					<Fragment slot="body">Authors and publishers release books, yet marketplaces control visibility, access to readers, and the customer relationship.<br />Get back your audience with <ProductName name="ReaderPub" class="home-reader-groups-readerpub" />.</Fragment>
+				</Card>
+				<Card
+					href="/institutions/"
+					icon="library"
+					title="Institutions"
+					body="Libraries, universities, and public organizations publish knowledge that remains difficult to find, read, and discuss online. With ReaderPub, it’s a total breeze."
+					variant="good"
+					class="home-readerpub-model-card home-list-card home-reader-groups-card"
+				>
+					<Fragment slot="body">Libraries, universities, and public organizations publish knowledge that remains difficult to find, read, and discuss online.<br />With <ProductName name="ReaderPub" class="home-reader-groups-readerpub" />, it’s a total breeze.</Fragment>
+				</Card>
+			</CardGrid>
 		</div>
 
 	</Section>
@@ -1893,6 +1929,11 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		white-space: nowrap;
 	}
 
+	:global(body.page-home .page .content .section.home-file-model-section > .home-tech-title-line-solution) {
+		/* The section grid contributes 28px; this makes the visible separation exactly twice as large. */
+		margin-top: calc(1.75rem + clamp(20px, 2vw, 32px)) !important;
+	}
+
 	.home-tech-title-plus {
 		color: var(--accent-orange);
 	}
@@ -2150,6 +2191,8 @@ const homeVideoDoorSides = ["left", "right"] as const;
 	@media (min-width: 901px) {
 		:global(body.page-home .page .content .section.home-file-model-section > .home-comparison-grid) {
 			grid-template-columns: 11fr 9fr !important;
+			/* Centre the two visible paper surfaces, including the rotated left card. */
+			transform: translateX(-3.3%);
 		}
 	}
 
@@ -2398,14 +2441,74 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		}
 	}
 
-	:global(.home-problem-grid .card--link:hover),
-	:global(.home-problem-grid .card--link:focus-visible) {
-		transform: none;
-		border-color: #000000;
-		box-shadow: none;
+	:global(.home-reader-groups-grid.card-grid--3) {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 
-	:global(.home-problem-grid .card--link > .card-icon-heading) {
+	:global(body.page-home .page .content .home-reader-groups-grid > .home-reader-groups-card::before) {
+		background-image: var(--comparison-solution-frame) !important;
+	}
+
+	:global(.home-file-model-section > .home-reader-groups-section) {
+		width: 100%;
+		margin-top: 0 !important;
+	}
+
+	:global(.home-reader-groups-grid > .home-reader-groups-card) {
+		--home-reader-groups-heading-height: calc(var(--card-heading-font-size) * var(--card-heading-line-height) * 2);
+
+		display: grid;
+		grid-template-rows: var(--home-reader-groups-heading-height) auto;
+		align-content: start;
+	}
+
+	:global(.home-reader-groups-grid .card--link > .card-icon-heading) {
+		--card-icon-heading-size: var(--card-inline-icon-size, 56px);
+		display: grid;
+		grid-template-columns: var(--card-icon-heading-size) minmax(0, 1fr) auto;
+		gap: var(--card-icon-gap);
+		align-items: center;
+		justify-content: stretch;
+		width: 100%;
+		height: var(--home-reader-groups-heading-height);
+		text-align: left;
+	}
+
+	:global(.home-reader-groups-grid .card--link > .card-icon-heading::after) {
+		content: "→";
+		justify-self: end;
+		color: var(--accent-orange);
+		font-family: var(--font-body);
+		font-size: calc(var(--card-heading-font-size) * 1.25);
+		font-weight: 400;
+		line-height: 1;
+	}
+
+	:global(.home-reader-groups-grid .card--link > .card-icon-heading > .section-icon) {
+		grid-column: 1;
+		justify-self: start;
+	}
+
+	:global(.home-reader-groups-grid .card--link .section-icon--raster) {
+		display: block !important;
+	}
+
+	:global(.home-reader-groups-grid .card--link .section-icon--original) {
+		display: none !important;
+	}
+
+	:global(.home-reader-groups-grid .card--link > .card-icon-heading > h3) {
+		grid-column: 2;
+		max-width: none;
+		text-align: left;
+	}
+
+	:global(.home-reader-groups-card .home-reader-groups-readerpub) {
+		font-family: var(--font-display);
+		font-weight: 500;
+	}
+
+	:global(.home-problem-grid .about-why-card > .card-icon-heading) {
 		--card-icon-heading-size: var(--card-inline-icon-size, 56px);
 		display: grid;
 		grid-template-columns: var(--card-icon-heading-size) minmax(0, 1fr) auto;
@@ -2416,36 +2519,29 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		text-align: left;
 	}
 
-	:global(.home-problem-grid .card--link > .card-icon-heading::after) {
-		content: "→";
-		justify-self: end;
-		color: var(--accent);
-		font-family: var(--font-body);
-		font-size: calc(var(--card-heading-font-size) * 1.25);
-		font-weight: 400;
-		line-height: 1;
-	}
-
-	:global(.home-problem-grid .card--link > .card-icon-heading > .section-icon) {
+	:global(.home-problem-grid .about-why-card > .card-icon-heading > .section-icon) {
 		grid-column: 1;
 		justify-self: start;
 	}
 
-	/* Keep the three challenge cards on the original black outline icon set. */
-	:global(.home-problem-grid .card--link .section-icon--raster) {
+	:global(.home-problem-grid .about-why-card .section-icon--raster) {
 		display: none !important;
 	}
 
-	:global(.home-problem-grid .card--link .section-icon--original) {
+	:global(.home-problem-grid .about-why-card .section-icon--original) {
 		display: block !important;
 		--section-icon-color: #000000 !important;
 		color: #000000 !important;
 		stroke: #000000 !important;
 	}
 
-	:global(.home-problem-grid .card--link > .card-icon-heading > h3) {
+	:global(.home-problem-grid .about-why-card > .card-icon-heading > h3) {
 		grid-column: 2;
 		max-width: none;
+		text-align: left;
+	}
+
+	:global(.home-problem-grid .about-why-card > p) {
 		text-align: left;
 	}
 
@@ -2455,6 +2551,10 @@ const homeVideoDoorSides = ["left", "right"] as const;
 
 	:global(.home-file-model-section > .home-comparison-grid) {
 		margin-top: clamp(32px, 3.5vw, 48px) !important;
+	}
+
+	:global(.home-file-model-section > .home-comparison-grid:first-child) {
+		margin-top: 0 !important;
 	}
 
 	:global(body .page .content .section.home-file-model-section > p.home-file-model-summary) {
@@ -2554,8 +2654,12 @@ const homeVideoDoorSides = ["left", "right"] as const;
 		}
 
 		:global(body .page .content .section.section--white.home-file-model-section > .home-comparison-grid) {
+			order: 1 !important;
+			margin-top: 0 !important;
+		}
+
+		:global(.home-file-model-section > .home-reader-groups-section) {
 			order: 3 !important;
-			margin-top: clamp(32px, 3.5vw, 48px) !important;
 		}
 
 		:global(.home-file-model-section > .home-file-model-summary) {

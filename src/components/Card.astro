@@ -20,12 +20,12 @@ const classes = ["card", `card--${variant}`, icon && "card--with-icon", classNam
 						<SectionIcon type={icon} title={`${title} icon`} />
 						<h3><ProductTitle text={title} /></h3>
 					</div>
-					<p>{body}</p>
+					<p><slot name="body">{body}</slot></p>
 				</>
 			) : (
 				<div class="card-copy">
 					<h3><ProductTitle text={title} /></h3>
-					<p>{body}</p>
+					<p><slot name="body">{body}</slot></p>
 				</div>
 			)}
 		</a>
@@ -37,12 +37,12 @@ const classes = ["card", `card--${variant}`, icon && "card--with-icon", classNam
 						<SectionIcon type={icon} title={`${title} icon`} />
 						<h3><ProductTitle text={title} /></h3>
 					</div>
-					<p>{body}</p>
+					<p><slot name="body">{body}</slot></p>
 				</>
 			) : (
 				<div class="card-copy">
 					<h3><ProductTitle text={title} /></h3>
-					<p>{body}</p>
+					<p><slot name="body">{body}</slot></p>
 				</div>
 			)}
 		</article>
