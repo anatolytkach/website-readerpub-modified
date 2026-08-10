@@ -3118,9 +3118,18 @@ body .page .content .section--gray .card.card {
 	pointer-events: none;
 }
 
-.section--gray .card-grid {
+.section--gray .card-grid,
+.section--gray [class*="-grid"]:has(> .card) {
+	grid-auto-rows: auto !important;
+	align-items: start !important;
 	row-gap: calc(var(--card-grid-gap) + var(--gray-card-row-slope) + 12px);
 	overflow: visible;
+}
+
+body .page .content .section--gray .card {
+	align-self: start !important;
+	height: auto !important;
+	min-height: 0 !important;
 }
 
 @media (min-width: 901px) {
