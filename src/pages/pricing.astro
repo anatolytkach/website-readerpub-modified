@@ -265,6 +265,10 @@ const pricingStructuredDataJson = JSON.stringify(pricingStructuredData).replace(
 		max-width: none;
 	}
 
+	:global(.pricing-problem-section) {
+		container-type: inline-size;
+	}
+
 	:global(.pricing-problem-section .pricing-copy-stack p) {
 		max-width: none !important;
 	}
@@ -358,6 +362,19 @@ const pricingStructuredDataJson = JSON.stringify(pricingStructuredData).replace(
 	.pricing-problem-emphasis span {
 		color: var(--accent-orange);
 	}
+
+	@media (min-width: 901px) {
+	.pricing-problem-emphasis {
+		display: inline-block;
+		transform: rotate(
+			atan2(
+				var(--gray-edge-air),
+				calc(100cqw + var(--section-padding) + var(--section-padding))
+			)
+		);
+		transform-origin: left center;
+	}
+}
 
 	.pricing-problem-title-nowrap {
 		white-space: normal;

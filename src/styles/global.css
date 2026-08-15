@@ -3121,13 +3121,13 @@ body .page .content .section--gray .card.card {
 .section--gray .card-grid,
 .section--gray [class*="-grid"]:has(> .card) {
 	grid-auto-rows: auto !important;
-	align-items: start !important;
+	align-items: end !important;
 	row-gap: calc(var(--card-grid-gap) + var(--gray-card-row-slope) + 12px);
 	overflow: visible;
 }
 
 body .page .content .section--gray .card {
-	align-self: start !important;
+	align-self: end !important;
 	height: auto !important;
 	min-height: 0 !important;
 }
