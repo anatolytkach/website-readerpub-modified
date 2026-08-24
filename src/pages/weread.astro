@@ -232,7 +232,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/",
 				</div>
 			</article>
 			<article class="card">
-				<h3><span class="weread-card-product">Scribe:</span><br />Ask while you read</h3>
+				<h3><span class="weread-card-product">Scribe<span class="weread-card-product-bang">!</span></span><br />Ask while you read</h3>
 				<p>A focused AI companion for books, authors, references, and literary context.</p>
 				<ul class="weread-source-bullets">
 					<li>Ask questions about unfamiliar references and ideas.</li>
@@ -543,6 +543,10 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/",
 		color: var(--accent-orange);
 	}
 
+	:global(body .page .content .weread-feature-cards .card h3 .weread-card-product-bang) {
+		color: var(--accent-orange) !important;
+	}
+
 	.weread-network-title-line {
 		display: inline-block;
 	}
@@ -654,6 +658,15 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/",
 		text-align: left;
 		white-space: normal;
 		overflow-wrap: anywhere;
+	}
+
+	@media (min-width: 901px) {
+		:global(body .page .content .weread-benefits-icon-grid .weread-benefit-card-heading > h3) {
+			font-size: clamp(1.25rem, 1.75vw, 1.55rem) !important;
+			white-space: nowrap !important;
+			overflow-wrap: normal !important;
+			word-break: normal !important;
+		}
 	}
 
 	:global(.weread-benefits-icon-grid .weread-benefit-card > p) {

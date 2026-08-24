@@ -180,7 +180,7 @@ const benefitCards = [
 					<a class="button button--secondary" href="/booktree/">Explore BookTree</a>
 				</div>
 				<div class="card">
-					<h3>Scribe</h3>
+					<h3>Scribe<span class="platform-scribe-bang">!</span></h3>
 					<p>A conversational AI layer for books, literature, writing, publishing, and ReaderPub platform guidance.</p>
 					<ul class="bullets">
 						<li>Ask focused questions about literature, books, and authors</li>
@@ -217,7 +217,7 @@ const benefitCards = [
 					<li class="card"><ProductName name="WeRead" /><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
 					<li class="card"><ProductName name="BookTree" /><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
 					<li class="card"><span class="platform-flow-product-pair"><ProductName name="WeBuzz" /> / <ProductName name="WeTalk" /></span><span class="platform-flow-arrow" aria-hidden="true">→</span></li>
-					<li class="card"><span class="platform-flow-scribe">Scribe</span></li>
+					<li class="card"><span class="platform-flow-scribe">Scribe<span class="platform-flow-scribe-bang">!</span></span></li>
 				</ol>
 				<p class="platform-flow-note">
 					Instead of moving readers and content between disconnected systems, ReaderPub keeps these activities connected within one publishing environment.
@@ -1194,6 +1194,11 @@ const benefitCards = [
 
 	.platform-flow-scribe {
 		color: var(--accent) !important;
+	}
+
+	:global(body .page .content .platform-products-grid .platform-scribe-bang),
+	:global(body .page .content .platform-flow-scribe .platform-flow-scribe-bang) {
+		color: var(--accent-orange) !important;
 	}
 
 	:global(body .page .content .section--green.platform-flow-section .card.platform-onboarding-card) {
