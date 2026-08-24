@@ -16,7 +16,7 @@
 	--section-green-wide-stripe: #00564c;
 	--section-green-narrow-stripe: #006457;
 	--section-green-wide-stripe-size: 46.4px;
-	--section-green-stripe-period: 51.733px;
+	--section-green-stripe-period: 49.0665px;
 	--section-green-orange: #ff5b00;
 	--icon-reader-book: #009b8a;
 	--icon-author: #d0186a;
@@ -148,7 +148,7 @@
 	:root {
 		--page-max: clamp(1100px, 68vw, 1920px);
 		--section-green-wide-stripe-size: 2.9rem;
-		--section-green-stripe-period: 3.2333125rem;
+		--section-green-stripe-period: 3.06665625rem;
 		--green-edge-top-wave-width: clamp(137.5rem, 126.6vw, 200rem);
 		--green-edge-bottom-wave-width: clamp(137.5rem, 126.6vw, 200rem);
 	}
@@ -778,7 +778,7 @@ body .content :is(ul, ol):not(.platform-flow):not(.flow-chain) li {
 		/* Keep the two colour bands in the same proportion while making each
 		 * circular stripe one and a half times tighter on vertical screens. */
 		--section-green-wide-stripe-size: 30.933333px;
-		--section-green-stripe-period: 34.488667px;
+		--section-green-stripe-period: 32.711px;
 	}
 }
 
