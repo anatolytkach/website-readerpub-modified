@@ -99,7 +99,7 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/",
 			</h2>
 		</header>
 		<picture class="weread-solution-picture" data-reveal>
-			<source media="(orientation: portrait)" srcset="/images/tech_mobile.webp" width="823" height="1743" />
+			<source media="(orientation: portrait)" srcset="/images/tablet_mobile.webp" width="699" height="1228" />
 			<img
 				src="/images/tablet.webp"
 				alt="WeRead browser-based eReader with sharing, notes and discussion"
@@ -745,11 +745,32 @@ const exploreReaderPubAction = { label: "Explore ReaderPub", href: "/platform/",
 	}
 
 	@media (orientation: portrait) {
-		.weread-solution-picture {
-			width: 100vw;
-			max-width: 100vw;
-			margin-right: calc(50% - 50vw);
-			margin-left: calc(50% - 50vw);
+		:global(body .page .content .weread-solution-showcase-section .weread-solution-showcase-header) {
+			order: 1 !important;
+		}
+
+		:global(body .page .content .weread-solution-showcase-section .weread-solution-picture) {
+			order: 2 !important;
+			width: 100vw !important;
+			max-width: 100vw !important;
+			margin-right: calc(50% - 50vw) !important;
+			margin-left: calc(50% - 50vw) !important;
+		}
+
+		:global(body .page .content .weread-solution-showcase-section .weread-solution-cta) {
+			order: 3 !important;
+		}
+
+		:global(body .page .content .weread-solution-showcase-section .weread-solution-cta h2) {
+			order: 1 !important;
+		}
+
+		:global(body .page .content .weread-solution-showcase-section .weread-solution-cta h3) {
+			order: 2 !important;
+		}
+
+		:global(body .page .content .weread-solution-showcase-section .weread-solution-actions) {
+			order: 3 !important;
 		}
 
 		.weread-solution-picture img {
