@@ -207,7 +207,7 @@ export const pages = {
 		],
 		cta: {
 			title: "Need a direct answer?",
-			body: "If you haven’t found the answer you need here, ask our team.",
+		body: "If\u00a0you haven’t found the\u00a0answer you\u00a0need, ask\u00a0our\u00a0team.",
 			actions: [
 				{
 					label: "Ask us a question",
