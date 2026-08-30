@@ -204,7 +204,7 @@ const faqCategories = [
 	},
 	{
 		title: "Scribe AI Companion",
-		icon: "program",
+		icon: "scribe",
 		questions: [
 			{
 				question: "What is Scribe?",
@@ -299,12 +299,14 @@ const faqStructuredDataJson = JSON.stringify(faqStructuredData).replace(/</g, "\
 					<h2 class="kb-faq-heading">
 						<SectionIcon type={category.icon} title={`${category.title} icon`} />
 						<span class="kb-faq-heading-label" aria-label={category.title}>
-							{category.title === "ReaderPub Security" ? (
+							{category.title === "ReaderPub Platform" ? (
+								<span><ProductName name="ReaderPub" /> Platform</span>
+							) : category.title === "ReaderPub Security" ? (
 								<span><ProductName name="ReaderPub" /> Security</span>
 							) : category.title === "WeBuzz Community" ? (
 								<span><ProductName name="WeBuzz" /> Community</span>
 							) : category.title === "Scribe AI Companion" ? (
-								<span><span class="kb-faq-product-scribe">Scribe</span> AI Companion</span>
+								<span><span class="kb-faq-product-scribe">Scribe</span><span class="kb-faq-product-scribe-exclamation">!</span> AI Companion</span>
 							) : category.titleLines ? category.titleLines.map((line) => <span>{line}</span>) : category.title}
 						</span>
 					</h2>
@@ -503,9 +505,21 @@ const faqStructuredDataJson = JSON.stringify(faqStructuredData).replace(/</g, "\
 		color: var(--accent);
 	}
 
+	.kb-faq-product-scribe-exclamation {
+		color: var(--accent-orange);
+	}
+
 	:global(.kb-faq-heading .section-icon) {
 		width: var(--kb-faq-icon-size) !important;
 		height: var(--kb-faq-icon-size) !important;
+	}
+
+	:global(.kb-faq-heading .section-icon--raster) {
+		display: block !important;
+	}
+
+	:global(.kb-faq-heading .section-icon--original) {
+		display: none !important;
 	}
 
 	.kb-faq-item {
