@@ -14,7 +14,7 @@ canonical: "https://reader.pub/blog/the-book-i-was-writing-was-not-the-product-i
 
 The first version of the product was a book. That was what I thought I was making, anyway.
 
-I had a manuscript that was far enough along to be read but not finished enough to be left alone. I wanted a few thoughtful people to go through it while I was still able to change it. I was not looking for applause. I wanted the kind of response that makes a book better: a question in the margin, a place where the argument loses its footing, a paragraph that seems clear to the writer but leaves a reader outside the room.
+I had a manuscript that was far enough along to read but not finished enough to leave alone. I wanted a few thoughtful people to go through it while I could still change it. I was not looking for applause. I wanted the kind of response that makes a book better: a question in the margin, a place where the argument loses its footing, a paragraph that seems clear to the writer but leaves a reader outside the room.
 
 I had reread the manuscript enough to become a poor judge of its first impression. I knew what I meant by every sentence, which made it harder to notice what a new reader could not know yet. Early readers could show me where their attention changed, where they paused, and where a recommendation would be more useful than a general reaction. The request sounded simple: read at your own pace and tell me what to change while the text was still changeable.
 
@@ -38,7 +38,7 @@ After messages like that arrived, I would keep the message open while searching 
 
 That small exchange changed how I understood the mobile problem. The phone was more than a smaller screen. It was where the reader was having the thought. At the exact moment when a response became possible, the file asked the reader to leave the reading context, remember where they were, and start again in another place.
 
-General reactions were easy to remember. Specific reactions were easy to lose. The problem was not a missing comment box. It was the distance between the thing being read and the place where a reader was expected to answer.
+General reactions were easy to remember. Specific reactions were easy to lose. The problem was not a missing comment box. It was the distance between what was being read and where a reader was expected to answer.
 
 ## The “simple” workflow kept adding steps
 
@@ -52,7 +52,7 @@ I was treating the book as a package of text and feedback as a separate activity
 
 Files are persuasive because they look complete. They have a name, a size, a cover, and a familiar icon. They can be moved from one place to another without asking much of anyone. A file gives you a strong feeling that the work has been delivered.
 
-But delivery is not the same as continuation. A manuscript being read by other people is also a conversation that has not yet finished forming.
+But delivery is not the same as continuation. A manuscript being read by other people is also a conversation that hasn't finished forming yet.
 
 ## I was solving for possession instead of participation
 
