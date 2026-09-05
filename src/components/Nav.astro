@@ -2,7 +2,8 @@
 import { PUBLISH_URL, SITE_NAME } from "../consts";
 
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
-const isActive = (href: string) => pathname === href;
+const isBlogPath = (path: string) => path === "/blog" || path.startsWith("/blog/");
+const isActive = (href: string) => (href === "/blog/" ? isBlogPath(pathname) : pathname === href);
 const platformLinks = [
 	{ href: "/platform/", label: "Ecosystem" },
 	{ href: "/wepub/", label: "WePub" },
@@ -22,6 +23,7 @@ const primaryLinks = [
 	{ href: "/strategy/", label: "Strategy" },
 	{ href: "/pricing/", label: "Pricing" },
 	{ href: "/about/", label: "About" },
+	{ href: "/blog/", label: "Blog" },
 ];
 const hasActivePrimaryLink = primaryLinks.some((link) => isActive(link.href));
 const isPlatformActive = !hasActivePrimaryLink && platformLinks.some((link) => isActive(link.href));
@@ -121,6 +123,11 @@ const isSolutionActive = !hasActivePrimaryLink && !isPlatformActive && solutionL
 	(() => {
 		const navOriginStorageKey = "readerpub-nav-origin";
 		const normalizePath = (path) => path.replace(/\/+$/, "") || "/";
+		const isBlogPath = (path) => path === "/blog" || path.startsWith("/blog/");
+		const matchesNavPath = (href, currentPath) => {
+			const normalizedHref = normalizePath(href);
+			return normalizedHref === currentPath || (normalizedHref === "/blog" && isBlogPath(currentPath));
+		};
 		const dropdownGroups = new Set(["platform", "solution"]);
 
 		const getStoredDropdownOrigin = (currentPath) => {
@@ -141,7 +148,7 @@ const isSolutionActive = !hasActivePrimaryLink && !isPlatformActive && solutionL
 			const currentPath = normalizePath(window.location.pathname);
 			const hasActivePrimaryLink = Array.from(document.querySelectorAll(".nav-links > li > a")).some((link) => {
 				const href = link.getAttribute("href");
-				return href && !href.startsWith("http") && normalizePath(href) === currentPath;
+				return href && !href.startsWith("http") && matchesNavPath(href, currentPath);
 			});
 			const matchingDropdownGroups = Array.from(document.querySelectorAll(".nav-dropdown")).flatMap((dropdown) => {
 				const group = dropdown.getAttribute("data-nav-group");
@@ -170,7 +177,7 @@ const isSolutionActive = !hasActivePrimaryLink && !isPlatformActive && solutionL
 				const linkOrigin = link.getAttribute("data-nav-origin");
 				if (linkOrigin && linkOrigin !== activeDropdownGroup) return;
 
-				if (normalizePath(href) === currentPath) {
+				if (matchesNavPath(href, currentPath)) {
 					link.classList.add("is-active");
 					link.setAttribute("aria-current", "page");
 

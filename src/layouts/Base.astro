@@ -5,6 +5,19 @@ import Nav from "../components/Nav.astro";
 import { SITE_DOMAIN, SITE_NAME } from "../consts";
 import { ViewTransitions } from "astro:transitions";
 
+interface Props {
+	title?: string;
+	description?: string;
+	canonical?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	ogImage?: string | null;
+	ogType?: "website" | "article";
+	author?: string;
+	publishedAt?: Date | string;
+	structuredData?: Record<string, unknown>;
+}
+
 const {
 	title = `${SITE_NAME} - Web-Native Publishing Network`,
 	description = `${SITE_NAME} is a web-native publishing network for readers, authors, publishers and institutions.`,
@@ -12,7 +25,11 @@ const {
 	ogTitle,
 	ogDescription,
 	ogImage = "/images/tech.webp",
-} = Astro.props;
+	ogType = "website",
+	author = SITE_NAME,
+	publishedAt,
+	structuredData: additionalStructuredData,
+} = Astro.props as Props;
 
 const siteUrl = `https://${SITE_DOMAIN}`;
 const canonicalUrl = new URL(canonical || Astro.url.pathname, siteUrl);
@@ -21,9 +38,13 @@ canonicalUrl.search = "";
 canonicalUrl.hash = "";
 const resolvedOgTitle = ogTitle || title;
 const resolvedOgDescription = ogDescription || description;
-const resolvedOgImage = ogImage.startsWith("http")
-	? ogImage
-	: `${siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`;
+const resolvedOgImage = ogImage
+	? ogImage.startsWith("http")
+		? ogImage
+		: `${siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`
+	: undefined;
+const twitterCard = resolvedOgImage ? "summary_large_image" : "summary";
+const resolvedPublishedAt = publishedAt instanceof Date ? publishedAt.toISOString() : publishedAt;
 const routeSlug = Astro.url.pathname.replace(/^\/+|\/+$/g, "").split("/")[0] || "home";
 const pageClass = `page-${routeSlug.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`;
 const organizationStructuredData = {
@@ -39,8 +60,12 @@ const organizationStructuredData = {
 		url: `${siteUrl}/contact/`,
 	},
 };
-const structuredData =
-	routeSlug === "home"
+const structuredData = additionalStructuredData
+	? {
+			"@context": "https://schema.org",
+			"@graph": [organizationStructuredData, additionalStructuredData],
+		}
+	: routeSlug === "home"
 		? {
 				"@context": "https://schema.org",
 				"@graph": [
@@ -72,19 +97,21 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, "\\u003c
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={resolvedOgTitle} />
 		<meta property="og:description" content={resolvedOgDescription} />
 		<meta property="og:url" content={canonicalUrl.href} />
-		<meta property="og:image" content={resolvedOgImage} />
-		<meta name="twitter:card" content="summary_large_image" />
+		{resolvedOgImage && <meta property="og:image" content={resolvedOgImage} />}
+		<meta name="twitter:card" content={twitterCard} />
 		<meta name="twitter:title" content={resolvedOgTitle} />
 		<meta name="twitter:description" content={resolvedOgDescription} />
-		<meta name="twitter:image" content={resolvedOgImage} />
+		{resolvedOgImage && <meta name="twitter:image" content={resolvedOgImage} />}
 		<meta name="application-name" content={SITE_NAME} />
-		<meta name="author" content={SITE_NAME} />
+		<meta name="author" content={author} />
 		<meta name="hostname" content={SITE_DOMAIN} />
+		{ogType === "article" && resolvedPublishedAt && <meta property="article:published_time" content={resolvedPublishedAt} />}
+		{ogType === "article" && <meta property="article:author" content={author} />}
 		<link rel="canonical" href={canonicalUrl.href} />
 		<script type="application/ld+json" set:html={structuredDataJson} />
 		<slot name="head" />

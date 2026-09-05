@@ -1,0 +1,70 @@
+---
+import Base from "../../layouts/Base.astro";
+import { BLOG_INDEX_PATH, blogArticleUrl, formatBlogDate, getPublishedBlogEntries } from "../../data/blog";
+import "../../styles/blog.css";
+
+const posts = await getPublishedBlogEntries();
+const blogDescription = "Notes and essays on building ReaderPub, web-native books, reading, publishing, and the problems that connect them.";
+const blogStructuredData = {
+	"@type": "Blog",
+	"@id": `${blogArticleUrl("").replace(/\/\/$/, "/")}#blog`,
+	name: "ReaderPub Blog",
+	description: blogDescription,
+	url: blogArticleUrl("").replace(/\/\/$/, "/"),
+	inLanguage: "en",
+	publisher: { "@id": "https://reader.pub/#organization" },
+	blogPost: posts.map((post) => ({
+		"@type": "BlogPosting",
+		headline: post.data.title,
+		url: post.data.canonical ?? blogArticleUrl(post.data.slug),
+		datePublished: post.data.publishedAt.toISOString(),
+		author: {
+			"@type": "Person",
+			name: post.data.author,
+			...(post.data.authorUrl ? { url: post.data.authorUrl } : {}),
+		},
+	})),
+};
+---
+
+<Base
+	title="Blog | ReaderPub"
+	description={blogDescription}
+	canonical={BLOG_INDEX_PATH}
+	ogImage={null}
+	structuredData={blogStructuredData}
+>
+	<section class="section section--white blog-index-section" aria-labelledby="blog-title">
+		<nav class="blog-breadcrumb blog-index-breadcrumb" aria-label="Breadcrumb">
+			<a href="/">HOME</a>
+			<span aria-hidden="true">/</span>
+			<span aria-current="page">BLOG</span>
+		</nav>
+
+		<div class="blog-index-header">
+			<h1 id="blog-title">Ideas from inside the work.</h1>
+			<p class="blog-index-intro">
+				Notes and essays about how ReaderPub is built, and about web-native books, reading, publishing, and the problems that connect them.
+			</p>
+		</div>
+
+		<div class="blog-post-list" aria-label="Published articles">
+			{posts.map((post) => (
+				<article class="card card--good card--link blog-card">
+					<div class="blog-card-meta">
+						<time datetime={post.data.publishedAt.toISOString().slice(0, 10)}>{formatBlogDate(post.data.publishedAt)}</time>
+						<span aria-hidden="true">•</span>
+						{post.data.authorUrl ? (
+							<a href={post.data.authorUrl} target="_blank" rel="noopener noreferrer">{post.data.author}</a>
+						) : (
+							<span>{post.data.author}</span>
+						)}
+					</div>
+					<h2><a href={`/blog/${post.data.slug}/`}>{post.data.title}</a></h2>
+					<p>{post.data.excerpt ?? post.data.subtitle}</p>
+					<a class="blog-card-link" href={`/blog/${post.data.slug}/`}>Read article <span aria-hidden="true">↗</span></a>
+				</article>
+			))}
+		</div>
+	</section>
+</Base>

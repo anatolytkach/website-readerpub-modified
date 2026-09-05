@@ -1,0 +1,82 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { blogArticleUrl, formatBlogDate, getPublishedBlogEntries } from "../../data/blog";
+import "../../styles/blog.css";
+
+type Props = { post: CollectionEntry<"blog"> };
+
+export async function getStaticPaths() {
+	const posts = await getPublishedBlogEntries();
+
+	return posts.map((post) => ({
+		params: { slug: post.data.slug },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props as Props;
+const { Content } = await render(post);
+const canonical = post.data.canonical ?? blogArticleUrl(post.data.slug);
+const description = post.data.description;
+const publishedAt = post.data.publishedAt.toISOString();
+const articleStructuredData = {
+	"@type": "BlogPosting",
+	"@id": `${canonical}#article`,
+	headline: post.data.title,
+	description,
+	datePublished: publishedAt,
+	author: {
+		"@type": "Person",
+		name: post.data.author,
+		...(post.data.authorUrl ? { url: post.data.authorUrl } : {}),
+	},
+	publisher: { "@id": "https://reader.pub/#organization" },
+	mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+	url: canonical,
+	inLanguage: "en",
+};
+---
+
+<Base
+	title={`${post.data.title} | ReaderPub`}
+	description={description}
+	canonical={canonical}
+	ogTitle={post.data.title}
+	ogDescription={description}
+	ogType="article"
+	ogImage={post.data.socialImage ?? null}
+	author={post.data.author}
+	publishedAt={publishedAt}
+	structuredData={articleStructuredData}
+>
+	<section class="section section--white blog-article-section" aria-labelledby="article-title">
+		<div class="blog-article-shell">
+			<nav class="blog-breadcrumb" aria-label="Breadcrumb">
+				<a href="/">HOME</a>
+				<span aria-hidden="true">/</span>
+				<a href="/blog/">BLOG</a>
+				<span aria-hidden="true">/</span>
+				<span aria-current="page">{post.data.breadcrumb ?? post.data.title}</span>
+			</nav>
+
+			<header class="blog-article-header">
+				<h1 id="article-title">{post.data.title}</h1>
+				<p class="blog-article-subtitle">{post.data.subtitle}</p>
+				<div class="blog-article-meta">
+					<span>By {post.data.authorUrl ? <a href={post.data.authorUrl} target="_blank" rel="noopener noreferrer">{post.data.author}</a> : post.data.author}</span>
+					<span aria-hidden="true">•</span>
+					<time datetime={publishedAt.slice(0, 10)}>{formatBlogDate(post.data.publishedAt)}</time>
+				</div>
+			</header>
+
+			<article class="blog-article-body">
+				<Content />
+			</article>
+
+			<footer class="blog-article-footer">
+				<a class="button button--tertiary" href="/blog/">←&nbsp;&nbsp;Back to Blog</a>
+			</footer>
+		</div>
+	</section>
+</Base>
