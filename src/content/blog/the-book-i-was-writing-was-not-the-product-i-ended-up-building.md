@@ -58,7 +58,7 @@ But delivery is not the same as continuation. A manuscript being read by other p
 
 The language I eventually used for the problem was possession versus participation.
 
-The traditional digital-book workflow is good at answering one question: how does a reader get a copy and open it later? I needed it to answer a different one: what happens around the book after the reader starts reading?
+The traditional digital-book workflow answers one question well: how does a reader get a copy and open it later? I needed it to answer a different one: what happens around the book after the reader starts reading?
 
 The file was optimized for possession. The feedback loop needed participation: a reader should be able to enter the same text, locate a thought, leave a useful response, and return to the work as it changed. That distinction came directly from the phone and the missing passage in the message. I had not started with a product philosophy.
 
