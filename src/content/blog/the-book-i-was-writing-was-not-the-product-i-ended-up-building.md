@@ -84,7 +84,7 @@ I did not begin by deciding that this deserved a company or a suite of products.
 
 ## The product appeared in the gap
 
-Eventually, the browser reader became the seed of ReaderPub.
+Eventually, the browser reader became the seed of [ReaderPub](https://reader.pub/).
 
 That name came later than the problem, and the problem stayed more useful than any early description of the solution. Whenever the work drifted toward building a general system, the original question pulled it back: what does a reader need in order to stay with a book and answer it well?
 
