@@ -11,10 +11,11 @@
     "build": "astro build",
     "deploy:staging-wetalk-router": "wrangler deploy --config workers/wrangler.staging-wetalk-router.toml",
     "ensure:staging-wetalk": "bash scripts/ensure-wetalk-pages-route.sh staging.reader.pub readerpub-website-staging-router",
+    "ensure:staging-scribe": "bash scripts/ensure-staging-scribe-route.sh",
     "ensure:production-wetalk": "bash scripts/ensure-wetalk-pages-route.sh reader.pub readerpub-website-router",
     "verify:staging": "bash scripts/verify-published-wetalk.sh https://staging.reader.pub",
     "verify:production": "bash scripts/verify-published-wetalk.sh https://reader.pub",
-    "deploy:staging": "npm run build && wrangler pages deploy dist --project-name readerpub-website-staging --branch develop && npm run deploy:staging-wetalk-router && npm run ensure:staging-wetalk && npm run verify:staging",
+    "deploy:staging": "npm run build && wrangler pages deploy dist --project-name readerpub-website-staging --branch develop && npm run deploy:staging-wetalk-router && npm run ensure:staging-wetalk && npm run ensure:staging-scribe && npm run verify:staging",
     "deploy:production": "npm run build && wrangler pages deploy dist --project-name readerpub-website --branch master && npm run ensure:production-wetalk && npm run verify:production",
     "preview": "astro preview",
     "astro": "astro"

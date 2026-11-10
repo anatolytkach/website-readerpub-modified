@@ -11,7 +11,7 @@ const platformLinks = [
 	{ href: "/webuzz/", label: "WeBuzz" },
 	{ href: "/wetalk/", label: "WeTalk" },
 	{ href: "/booktree/", label: "BookTree" },
-	{ href: "/scribe/", label: "Scribe" },
+	{ href: "/scribe!/", label: "Scribe" },
 	{ href: "/security/", label: "Security" },
 ];
 const solutionLinks = [
@@ -121,6 +121,13 @@ const isSolutionActive = !hasActivePrimaryLink && !isPlatformActive && solutionL
 
 <script is:inline>
 	(() => {
+		try {
+			const focusId = window.sessionStorage.getItem("scribe:return-focus");
+			if (focusId && /^[A-Za-z][A-Za-z0-9_-]{0,80}$/.test(focusId)) {
+				window.sessionStorage.removeItem("scribe:return-focus");
+				window.requestAnimationFrame(() => document.getElementById(focusId)?.focus({ preventScroll: true }));
+			}
+		} catch {}
 		const navOriginStorageKey = "readerpub-nav-origin";
 		const normalizePath = (path) => path.replace(/\/+$/, "") || "/";
 		const isBlogPath = (path) => path === "/blog" || path.startsWith("/blog/");
